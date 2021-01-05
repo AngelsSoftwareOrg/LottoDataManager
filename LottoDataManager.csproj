@@ -46,14 +46,36 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="Includes\Utilities\AppSettings.cs" />
+    <Compile Include="Includes\Database\DAO\LotteryScheduleDao.cs" />
+    <Compile Include="Includes\Database\DAO\LotteryScheduleDaoImpl.cs" />
+    <Compile Include="Includes\Database\DAO\LotteryTicketPanelDao.cs" />
+    <Compile Include="Includes\Database\DAO\LotteryTicketPanelDaoImpl.cs" />
+    <Compile Include="Includes\Database\Engine\ConnectionDetails.cs" />
+    <Compile Include="Includes\Database\Engine\DatabaseConnectionFactory.cs" />
+    <Compile Include="Includes\Database\Engine\DatabaseType.cs" />
+    <Compile Include="Includes\Model\Game\Game642.cs" />
+    <Compile Include="Includes\Model\Game\LotteryDetails.cs" />
+    <Compile Include="Includes\Model\Settings\LotterySchedule.cs" />
+    <Compile Include="Includes\Model\Settings\LotteryScheduleSetup.cs" />
+    <Compile Include="Includes\Model\Settings\LotteryTicketPanel.cs" />
+    <Compile Include="Includes\Model\Settings\LotteryTicketPanelSetup.cs" />
+    <Compile Include="Includes\Model\Settings\LotteryWinningCombination.cs" />
+    <Compile Include="Includes\Model\Settings\LotteryWinningCombinationSetup.cs" />
+    <Compile Include="Includes\Model\Structs\GameMode.cs" />
+    <Compile Include="Includes\Model\Structs\NumberDirection.cs" />
+    <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Forms\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Includes\Utilities\ConverterUtils.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -75,6 +97,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Includes\Classes\" />
+    <Folder Include="Includes\Session\" />
+    <Folder Include="Resources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DatabaseMain\Lotto_Main_DB.accdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
