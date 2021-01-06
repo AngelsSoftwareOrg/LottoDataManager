@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LottoDataManager.Includes.Database.DAO;
-using LottoDataManager.Includes.Model.Settings;
+using LottoDataManager.Includes.Model.Details;
 using LottoDataManager.Includes.Model.Structs;
 
 namespace LottoDataManager.Includes.Model
@@ -26,21 +26,21 @@ namespace LottoDataManager.Includes.Model
             SetupLotteryWinningCombination();
         }
 
-        private void SetupLotterySchedule()
+        internal void SetupLotterySchedule()
         {
             LotteryScheduleDao lotterySchedDao = LotteryScheduleDaoImpl.GetInstance();
             this.lotterySchedule = lotterySchedDao.GetLotterySchedule(GameCode);
         }
-        private void SetupLotteryTicketPanel()
+        internal void SetupLotteryTicketPanel()
         {
             LotteryTicketPanelDao lotteryTicketPanelDao = LotteryTicketPanelDaoImpl.GetInstance();
             this.lotteryTicketPanel = lotteryTicketPanelDao.GetLotteryTicketPanel(GameCode);
         }
-        private void SetupLotteryWinningCombination()
+        internal void SetupLotteryWinningCombination()
         {
-
+            LotteryWinningCombinationDao lotteryWinningCombinationDao = LotteryWinningCombinationDaoImpl.GetInstance();
+            this.lotteryWinningCombination = lotteryWinningCombinationDao.GetLotteryWinningCombination(GameCode);
         }
-
         protected void SetGameCode(GameMode gameCode) 
         { 
             this.gameCode = gameCode; 
@@ -51,5 +51,13 @@ namespace LottoDataManager.Includes.Model
         }
         public GameMode GameCode { get => gameCode; }
         public string Description { get => description; }
+
+        public List<LotteryDrawResult> GetAllLotteryDrawResults()
+        {
+            LotteryDrawResultDao drDao = LotteryDrawResultDaoImpl.GetInstance();
+            return drDao.GetAllDrawResults(GameCode);
+        }
+
+
     }
 }

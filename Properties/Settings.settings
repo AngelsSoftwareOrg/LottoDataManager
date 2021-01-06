@@ -8,5 +8,8 @@
     <Setting Name="db_type" Type="System.String" Scope="User">
       <Value Profile="(Default)">MSACCESS</Value>
     </Setting>
+    <Setting Name="currency_symbol" Type="System.String" Scope="User">
+      <Value Profile="(Default)">₱</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

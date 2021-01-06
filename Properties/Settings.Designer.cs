@@ -46,5 +46,17 @@ namespace LottoDataManager.Properties {
                 this["db_type"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("₱")]
+        public string currency_symbol {
+            get {
+                return ((string)(this["currency_symbol"]));
+            }
+            set {
+                this["currency_symbol"] = value;
+            }
+        }
     }
 }

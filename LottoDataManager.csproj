@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ObjectListView, Version=2.9.1.1072, Culture=neutral, PublicKeyToken=b1c5bf581481bcd4, processorArchitecture=MSIL">
+      <HintPath>packages\ObjectListView.Official.2.9.1\lib\net20\ObjectListView.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -46,6 +49,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Includes\Database\DAO\LotteryDrawResultDao.cs" />
+    <Compile Include="Includes\Database\DAO\LotteryDrawResultDaoImpl.cs" />
+    <Compile Include="Includes\Database\DAO\LotteryWinningCombinationDao.cs" />
+    <Compile Include="Includes\Database\DAO\LotteryWinningCombinationDaoImpl.cs" />
+    <Compile Include="Includes\Model\Details\LotteryDrawResult.cs" />
+    <Compile Include="Includes\Model\Details\LotteryDrawResultSetup.cs" />
     <Compile Include="Includes\Utilities\AppSettings.cs" />
     <Compile Include="Includes\Database\DAO\LotteryScheduleDao.cs" />
     <Compile Include="Includes\Database\DAO\LotteryScheduleDaoImpl.cs" />
@@ -56,12 +65,12 @@
     <Compile Include="Includes\Database\Engine\DatabaseType.cs" />
     <Compile Include="Includes\Model\Game\Game642.cs" />
     <Compile Include="Includes\Model\Game\LotteryDetails.cs" />
-    <Compile Include="Includes\Model\Settings\LotterySchedule.cs" />
-    <Compile Include="Includes\Model\Settings\LotteryScheduleSetup.cs" />
-    <Compile Include="Includes\Model\Settings\LotteryTicketPanel.cs" />
-    <Compile Include="Includes\Model\Settings\LotteryTicketPanelSetup.cs" />
-    <Compile Include="Includes\Model\Settings\LotteryWinningCombination.cs" />
-    <Compile Include="Includes\Model\Settings\LotteryWinningCombinationSetup.cs" />
+    <Compile Include="Includes\Model\Details\LotterySchedule.cs" />
+    <Compile Include="Includes\Model\Details\LotteryScheduleSetup.cs" />
+    <Compile Include="Includes\Model\Details\LotteryTicketPanel.cs" />
+    <Compile Include="Includes\Model\Details\LotteryTicketPanelSetup.cs" />
+    <Compile Include="Includes\Model\Details\LotteryWinningCombination.cs" />
+    <Compile Include="Includes\Model\Details\LotteryWinningCombinationSetup.cs" />
     <Compile Include="Includes\Model\Structs\GameMode.cs" />
     <Compile Include="Includes\Model\Structs\NumberDirection.cs" />
     <Compile Include="Forms\MainForm.cs">
@@ -71,6 +80,7 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Includes\Utilities\ConverterUtils.cs" />
+    <Compile Include="Includes\Utilities\DateTimeConverterUtils.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\MainForm.resx">
@@ -85,6 +95,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -107,6 +118,9 @@
     <Content Include="DatabaseMain\Lotto_Main_DB.accdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
