@@ -55,6 +55,10 @@
     <Compile Include="Includes\Database\DAO\LotteryWinningCombinationDaoImpl.cs" />
     <Compile Include="Includes\Model\Details\LotteryDrawResult.cs" />
     <Compile Include="Includes\Model\Details\LotteryDrawResultSetup.cs" />
+    <Compile Include="Includes\Model\Game\Game658.cs" />
+    <Compile Include="Includes\Model\Game\Game655.cs" />
+    <Compile Include="Includes\Model\Game\Game649.cs" />
+    <Compile Include="Includes\Model\Game\Game645.cs" />
     <Compile Include="Includes\Utilities\AppSettings.cs" />
     <Compile Include="Includes\Database\DAO\LotteryScheduleDao.cs" />
     <Compile Include="Includes\Database\DAO\LotteryScheduleDaoImpl.cs" />

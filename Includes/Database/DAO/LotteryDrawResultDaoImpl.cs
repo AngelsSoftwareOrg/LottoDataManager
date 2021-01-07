@@ -63,7 +63,9 @@ namespace LottoDataManager.Includes.Database.DAO
             using (OleDbCommand command = new OleDbCommand())
             {
                 command.CommandType = CommandType.Text;
-                command.CommandText = GetStandardSelectQuery();
+                //DEBUGGING - TOP 200
+                command.CommandText = "SELECT TOP 200 * FROM (" + GetStandardSelectQuery() + " ORDER BY draw_date DESC)";
+                //DEBUGGING END
                 command.Parameters.AddWithValue("@game_cd", gameMode);
                 command.Connection = conn;
                 conn.Open();
@@ -74,20 +76,23 @@ namespace LottoDataManager.Includes.Database.DAO
                         LotteryDrawResultSetup dr = new LotteryDrawResultSetup();
                         dr.DrawDate = DateTime.Parse(reader["draw_date"].ToString());
                         dr.GameCode = (int) gameMode;
-                        dr.Num1 = int.Parse(reader["num1"].ToString());
-                        dr.Num2 = int.Parse(reader["num2"].ToString());
-                        dr.Num3 = int.Parse(reader["num3"].ToString());
-                        dr.Num4 = int.Parse(reader["num4"].ToString());
-                        dr.Num5 = int.Parse(reader["num5"].ToString());
-                        dr.Num6 = int.Parse(reader["num6"].ToString());
+
+                        int[] winNumTmp = new int[] { int.Parse(reader["num1"].ToString()), 
+                                                    int.Parse(reader["num2"].ToString()), 
+                                                    int.Parse(reader["num3"].ToString()), 
+                                                    int.Parse(reader["num4"].ToString()), 
+                                                    int.Parse(reader["num5"].ToString()), 
+                                                    int.Parse(reader["num6"].ToString())};
+                        Array.Sort(winNumTmp);
+                        dr.Num1 = winNumTmp[0];
+                        dr.Num2 = winNumTmp[1];
+                        dr.Num3 = winNumTmp[2];
+                        dr.Num4 = winNumTmp[3];
+                        dr.Num5 = winNumTmp[4];
+                        dr.Num6 = winNumTmp[5];
                         dr.JackpotAmt = double.Parse(reader["jackpot_amt"].ToString());
                         dr.Winners = int.Parse(reader["winners"].ToString());
                         results.Add(dr);
-
-                        //DEBUGGING
-                        if (results.Count > 100) break;
-                        //DEBUGGING END
-
                     }
                 }
             }
