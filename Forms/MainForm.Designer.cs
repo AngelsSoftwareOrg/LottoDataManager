@@ -49,15 +49,26 @@ namespace LottoDataManager
             this.mainSplitContainer = new System.Windows.Forms.SplitContainer();
             this.mainLeftTabControl = new System.Windows.Forms.TabControl();
             this.tabDashboard = new System.Windows.Forms.TabPage();
-            this.lblLifetimeWinnins = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.objectLstVwLatestBet = new BrightIdeasSoftware.FastObjectListView();
+            this.olvColBetDrawDate = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColBetNum1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColBetNum2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColBetNum3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColBetNum4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColBetNum5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColBetNum6 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColBetResult = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.label2 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.lblWinningsThisMonth = new System.Windows.Forms.Label();
+            this.lblLifetimeWinnins = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.lblGameMode = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.lblNextDrawDate = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.lblGameMode = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.tabWinningNumbers = new System.Windows.Forms.TabPage();
             this.objListVwWinningNum = new BrightIdeasSoftware.FastObjectListView();
             this.olvColDrawDate = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -71,17 +82,6 @@ namespace LottoDataManager
             this.olvColWinners = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripBtnAddBet = new System.Windows.Forms.ToolStripButton();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.objectLstVwLatestBet = new BrightIdeasSoftware.FastObjectListView();
-            this.olvColBetDrawDate = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColBetNum1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColBetNum2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColBetNum3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColBetNum4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColBetNum5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColBetNum6 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColBetResult = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.mainMenuStrip.SuspendLayout();
             this.mainStatusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mainSplitContainer)).BeginInit();
@@ -89,12 +89,12 @@ namespace LottoDataManager
             this.mainSplitContainer.SuspendLayout();
             this.mainLeftTabControl.SuspendLayout();
             this.tabDashboard.SuspendLayout();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.objectLstVwLatestBet)).BeginInit();
+            this.panel1.SuspendLayout();
             this.tabWinningNumbers.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.objListVwWinningNum)).BeginInit();
             this.toolStrip1.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.objectLstVwLatestBet)).BeginInit();
             this.SuspendLayout();
             // 
             // mainMenuStrip
@@ -256,24 +256,115 @@ namespace LottoDataManager
             this.tabDashboard.Text = "Dashboard";
             this.tabDashboard.UseVisualStyleBackColor = true;
             // 
-            // lblLifetimeWinnins
+            // panel2
             // 
-            this.lblLifetimeWinnins.AutoSize = true;
-            this.lblLifetimeWinnins.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLifetimeWinnins.Location = new System.Drawing.Point(127, 56);
-            this.lblLifetimeWinnins.Name = "lblLifetimeWinnins";
-            this.lblLifetimeWinnins.Size = new System.Drawing.Size(146, 20);
-            this.lblLifetimeWinnins.TabIndex = 8;
-            this.lblLifetimeWinnins.Text = "P999,999,000.00";
+            this.panel2.Controls.Add(this.objectLstVwLatestBet);
+            this.panel2.Controls.Add(this.label2);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(3, 117);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(543, 352);
+            this.panel2.TabIndex = 11;
             // 
-            // label4
+            // objectLstVwLatestBet
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 56);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(127, 17);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "Lifetime Winnings: ";
+            this.objectLstVwLatestBet.AllColumns.Add(this.olvColBetDrawDate);
+            this.objectLstVwLatestBet.AllColumns.Add(this.olvColBetNum1);
+            this.objectLstVwLatestBet.AllColumns.Add(this.olvColBetNum2);
+            this.objectLstVwLatestBet.AllColumns.Add(this.olvColBetNum3);
+            this.objectLstVwLatestBet.AllColumns.Add(this.olvColBetNum4);
+            this.objectLstVwLatestBet.AllColumns.Add(this.olvColBetNum5);
+            this.objectLstVwLatestBet.AllColumns.Add(this.olvColBetNum6);
+            this.objectLstVwLatestBet.AllColumns.Add(this.olvColBetResult);
+            this.objectLstVwLatestBet.CellEditUseWholeCell = false;
+            this.objectLstVwLatestBet.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.olvColBetDrawDate,
+            this.olvColBetNum1,
+            this.olvColBetNum2,
+            this.olvColBetNum3,
+            this.olvColBetNum4,
+            this.olvColBetNum5,
+            this.olvColBetNum6,
+            this.olvColBetResult});
+            this.objectLstVwLatestBet.Cursor = System.Windows.Forms.Cursors.Default;
+            this.objectLstVwLatestBet.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.objectLstVwLatestBet.FullRowSelect = true;
+            this.objectLstVwLatestBet.GridLines = true;
+            this.objectLstVwLatestBet.HideSelection = false;
+            this.objectLstVwLatestBet.Location = new System.Drawing.Point(0, 17);
+            this.objectLstVwLatestBet.MultiSelect = false;
+            this.objectLstVwLatestBet.Name = "objectLstVwLatestBet";
+            this.objectLstVwLatestBet.ShowGroups = false;
+            this.objectLstVwLatestBet.Size = new System.Drawing.Size(543, 335);
+            this.objectLstVwLatestBet.TabIndex = 10;
+            this.objectLstVwLatestBet.UseCompatibleStateImageBehavior = false;
+            this.objectLstVwLatestBet.View = System.Windows.Forms.View.Details;
+            this.objectLstVwLatestBet.VirtualMode = true;
+            // 
+            // olvColBetDrawDate
+            // 
+            this.olvColBetDrawDate.AspectName = "GetTargetDrawDateFormatted";
+            this.olvColBetDrawDate.Text = "Draw Date";
+            // 
+            // olvColBetNum1
+            // 
+            this.olvColBetNum1.AspectName = "GetNum1";
+            this.olvColBetNum1.Text = "#1";
+            // 
+            // olvColBetNum2
+            // 
+            this.olvColBetNum2.AspectName = "GetNum2";
+            this.olvColBetNum2.Text = "#2";
+            // 
+            // olvColBetNum3
+            // 
+            this.olvColBetNum3.AspectName = "GetNum3";
+            this.olvColBetNum3.Text = "#3";
+            // 
+            // olvColBetNum4
+            // 
+            this.olvColBetNum4.AspectName = "GetNum4";
+            this.olvColBetNum4.Text = "#4";
+            // 
+            // olvColBetNum5
+            // 
+            this.olvColBetNum5.AspectName = "GetNum5";
+            this.olvColBetNum5.Text = "#5";
+            // 
+            // olvColBetNum6
+            // 
+            this.olvColBetNum6.AspectName = "GetNum6";
+            this.olvColBetNum6.Text = "#6";
+            // 
+            // olvColBetResult
+            // 
+            this.olvColBetResult.Text = "Result";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label2.Location = new System.Drawing.Point(0, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(80, 17);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Latest Bet: ";
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.lblWinningsThisMonth);
+            this.panel1.Controls.Add(this.lblLifetimeWinnins);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.label4);
+            this.panel1.Controls.Add(this.lblGameMode);
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.label5);
+            this.panel1.Controls.Add(this.lblNextDrawDate);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(3, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(543, 114);
+            this.panel1.TabIndex = 10;
             // 
             // lblWinningsThisMonth
             // 
@@ -284,6 +375,54 @@ namespace LottoDataManager
             this.lblWinningsThisMonth.Size = new System.Drawing.Size(146, 20);
             this.lblWinningsThisMonth.TabIndex = 6;
             this.lblWinningsThisMonth.Text = "P999,999,000.00";
+            // 
+            // lblLifetimeWinnins
+            // 
+            this.lblLifetimeWinnins.AutoSize = true;
+            this.lblLifetimeWinnins.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLifetimeWinnins.Location = new System.Drawing.Point(127, 56);
+            this.lblLifetimeWinnins.Name = "lblLifetimeWinnins";
+            this.lblLifetimeWinnins.Size = new System.Drawing.Size(146, 20);
+            this.lblLifetimeWinnins.TabIndex = 8;
+            this.lblLifetimeWinnins.Text = "P999,999,000.00";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 2);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(93, 17);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Game Mode: ";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(3, 56);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(127, 17);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "Lifetime Winnings: ";
+            // 
+            // lblGameMode
+            // 
+            this.lblGameMode.AutoSize = true;
+            this.lblGameMode.Font = new System.Drawing.Font("Calibri", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblGameMode.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.lblGameMode.Location = new System.Drawing.Point(94, -4);
+            this.lblGameMode.Name = "lblGameMode";
+            this.lblGameMode.Size = new System.Drawing.Size(128, 29);
+            this.lblGameMode.TabIndex = 1;
+            this.lblGameMode.Text = "6/42 - Lotto";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(3, 29);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(114, 17);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "Next Draw Date: ";
             // 
             // label5
             // 
@@ -304,52 +443,13 @@ namespace LottoDataManager
             this.lblNextDrawDate.TabIndex = 4;
             this.lblNextDrawDate.Text = "January 5, 2020 - Friday";
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 29);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(114, 17);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "Next Draw Date: ";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label2.Location = new System.Drawing.Point(0, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(80, 17);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Latest Bet: ";
-            // 
-            // lblGameMode
-            // 
-            this.lblGameMode.AutoSize = true;
-            this.lblGameMode.Font = new System.Drawing.Font("Calibri", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblGameMode.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.lblGameMode.Location = new System.Drawing.Point(94, -7);
-            this.lblGameMode.Name = "lblGameMode";
-            this.lblGameMode.Size = new System.Drawing.Size(128, 29);
-            this.lblGameMode.TabIndex = 1;
-            this.lblGameMode.Text = "6/42 - Lotto";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(1, 2);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(93, 17);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Game Mode: ";
-            // 
             // tabWinningNumbers
             // 
             this.tabWinningNumbers.Controls.Add(this.objListVwWinningNum);
             this.tabWinningNumbers.Location = new System.Drawing.Point(4, 25);
             this.tabWinningNumbers.Name = "tabWinningNumbers";
             this.tabWinningNumbers.Padding = new System.Windows.Forms.Padding(3);
-            this.tabWinningNumbers.Size = new System.Drawing.Size(520, 457);
+            this.tabWinningNumbers.Size = new System.Drawing.Size(549, 472);
             this.tabWinningNumbers.TabIndex = 1;
             this.tabWinningNumbers.Text = "Winning Numbers";
             this.tabWinningNumbers.UseVisualStyleBackColor = true;
@@ -386,7 +486,7 @@ namespace LottoDataManager
             this.objListVwWinningNum.MultiSelect = false;
             this.objListVwWinningNum.Name = "objListVwWinningNum";
             this.objListVwWinningNum.ShowGroups = false;
-            this.objListVwWinningNum.Size = new System.Drawing.Size(514, 451);
+            this.objListVwWinningNum.Size = new System.Drawing.Size(543, 466);
             this.objListVwWinningNum.TabIndex = 1;
             this.objListVwWinningNum.UseCompatibleStateImageBehavior = false;
             this.objListVwWinningNum.View = System.Windows.Forms.View.Details;
@@ -460,99 +560,6 @@ namespace LottoDataManager
             this.toolStripBtnAddBet.Size = new System.Drawing.Size(29, 24);
             this.toolStripBtnAddBet.Text = "Place A Bet";
             // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.lblWinningsThisMonth);
-            this.panel1.Controls.Add(this.lblLifetimeWinnins);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.label4);
-            this.panel1.Controls.Add(this.lblGameMode);
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.label5);
-            this.panel1.Controls.Add(this.lblNextDrawDate);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(3, 3);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(543, 114);
-            this.panel1.TabIndex = 10;
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.objectLstVwLatestBet);
-            this.panel2.Controls.Add(this.label2);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(3, 117);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(543, 352);
-            this.panel2.TabIndex = 11;
-            // 
-            // objectLstVwLatestBet
-            // 
-            this.objectLstVwLatestBet.AllColumns.Add(this.olvColBetDrawDate);
-            this.objectLstVwLatestBet.AllColumns.Add(this.olvColBetNum1);
-            this.objectLstVwLatestBet.AllColumns.Add(this.olvColBetNum2);
-            this.objectLstVwLatestBet.AllColumns.Add(this.olvColBetNum3);
-            this.objectLstVwLatestBet.AllColumns.Add(this.olvColBetNum4);
-            this.objectLstVwLatestBet.AllColumns.Add(this.olvColBetNum5);
-            this.objectLstVwLatestBet.AllColumns.Add(this.olvColBetNum6);
-            this.objectLstVwLatestBet.AllColumns.Add(this.olvColBetResult);
-            this.objectLstVwLatestBet.CellEditUseWholeCell = false;
-            this.objectLstVwLatestBet.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.olvColBetDrawDate,
-            this.olvColBetNum1,
-            this.olvColBetNum2,
-            this.olvColBetNum3,
-            this.olvColBetNum4,
-            this.olvColBetNum5,
-            this.olvColBetNum6,
-            this.olvColBetResult});
-            this.objectLstVwLatestBet.Cursor = System.Windows.Forms.Cursors.Default;
-            this.objectLstVwLatestBet.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.objectLstVwLatestBet.FullRowSelect = true;
-            this.objectLstVwLatestBet.GridLines = true;
-            this.objectLstVwLatestBet.HideSelection = false;
-            this.objectLstVwLatestBet.Location = new System.Drawing.Point(0, 17);
-            this.objectLstVwLatestBet.MultiSelect = false;
-            this.objectLstVwLatestBet.Name = "objectLstVwLatestBet";
-            this.objectLstVwLatestBet.ShowGroups = false;
-            this.objectLstVwLatestBet.Size = new System.Drawing.Size(543, 335);
-            this.objectLstVwLatestBet.TabIndex = 10;
-            this.objectLstVwLatestBet.UseCompatibleStateImageBehavior = false;
-            this.objectLstVwLatestBet.View = System.Windows.Forms.View.Details;
-            this.objectLstVwLatestBet.VirtualMode = true;
-            // 
-            // olvColBetDrawDate
-            // 
-            this.olvColBetDrawDate.Text = "Draw Date";
-            // 
-            // olvColBetNum1
-            // 
-            this.olvColBetNum1.Text = "#1";
-            // 
-            // olvColBetNum2
-            // 
-            this.olvColBetNum2.Text = "#2";
-            // 
-            // olvColBetNum3
-            // 
-            this.olvColBetNum3.Text = "#3";
-            // 
-            // olvColBetNum4
-            // 
-            this.olvColBetNum4.Text = "#4";
-            // 
-            // olvColBetNum5
-            // 
-            this.olvColBetNum5.Text = "#5";
-            // 
-            // olvColBetNum6
-            // 
-            this.olvColBetNum6.Text = "#6";
-            // 
-            // olvColBetResult
-            // 
-            this.olvColBetResult.Text = "Result";
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -576,15 +583,15 @@ namespace LottoDataManager
             this.mainSplitContainer.ResumeLayout(false);
             this.mainLeftTabControl.ResumeLayout(false);
             this.tabDashboard.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.objectLstVwLatestBet)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.tabWinningNumbers.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.objListVwWinningNum)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.objectLstVwLatestBet)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

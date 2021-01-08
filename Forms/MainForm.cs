@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
+using LottoDataManager.Includes.Classes;
 using LottoDataManager.Includes.Database.DAO;
 using LottoDataManager.Includes.Model;
 using LottoDataManager.Includes.Model.Details;
@@ -29,10 +30,17 @@ namespace LottoDataManager
         private void InitializesFormContent()
         {
             //debug
-            this.lotteryDetails = new Game658();
+            this.lotteryDetails = new Game655();
             //debug end
 
+            RefreshFieldDetails();
+            RefreshDrawResultListViewGridContent();
             RefreshBetListViewGridContent();
+
+            LotteryDataWorker ld = new LotteryDataWorker();
+            //ld.ProcessAdjustCorrectTargetDrawDate(lotteryDetails.GameCode);
+            ld.ProcessCheckingForWinningBets(lotteryDetails.GameCode);
+            
         }
 
         #region "Tab Dashboard"
@@ -53,6 +61,8 @@ namespace LottoDataManager
         }
         private void RefreshBetListViewGridContent()
         {
+            DateTime lastXDays = DateTime.Now.AddDays(-100);
+            objectLstVwLatestBet.SetObjects(lotteryDetails.GetLottoBets(lastXDays));
             this.olvColBetDrawDate.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
             this.olvColBetNum1.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
             this.olvColBetNum2.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
@@ -61,6 +71,28 @@ namespace LottoDataManager
             this.olvColBetNum5.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
             this.olvColBetNum6.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
             this.olvColBetResult.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+        }
+        private void RefreshDrawResultListViewGridContent()
+        {
+            this.olvColBetDrawDate.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+            this.olvColBetNum1.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+            this.olvColBetNum2.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+            this.olvColBetNum3.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+            this.olvColBetNum4.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+            this.olvColBetNum5.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+            this.olvColBetNum6.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+            this.olvColBetResult.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+        }
+        private void RefreshFieldDetails()
+        {
+            //Game642 Mode
+            lblGameMode.Text = this.lotteryDetails.Description;
+
+            //Schedule Date
+            lblNextDrawDate.Text = "";
+            DateTime nextScheduledDate = this.lotteryDetails.LotteryDataDerivation.GetNextDrawDate();
+            if (nextScheduledDate.Date == DateTime.Today) lblNextDrawDate.Text = "Today! ";
+            lblNextDrawDate.Text += nextScheduledDate.ToString(DateTimeConverterUtils.DATE_FORMAT_LONG);
         }
         private OLVColumn[] GenerateOLVColumnForHighlighting()
         {
@@ -79,9 +111,9 @@ namespace LottoDataManager
         {
             RefreshWinningNumbersGridContent();
         }
-
         #endregion
 
+        #region "Draw Result"
         private void objListVwWinningNum_SelectionChanged(object sender, EventArgs e)
         {
             if (objListVwWinningNum.SelectedObjects.Count <= 0) return;
@@ -107,6 +139,7 @@ namespace LottoDataManager
             this.objListVwWinningNum.DefaultRenderer = highlightTextRenderer;
             this.objListVwWinningNum.SelectedForeColor = Color.Black;
         }
+        #endregion
 
     }
 }

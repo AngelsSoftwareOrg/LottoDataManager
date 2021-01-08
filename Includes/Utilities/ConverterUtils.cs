@@ -71,13 +71,5 @@ namespace LottoDataManager.Includes.Utilities
             return int.Parse(result.ToString());
         }
 
-        public static NumberDirection ConvertToNumberDirection(int value)
-        {
-            foreach (int item in Enum.GetValues(typeof(NumberDirection)))
-            {
-                if (item == value) return (NumberDirection)item;
-            }
-            return NumberDirection.LEFT_TO_RIGHT;
-        }
     }
 }

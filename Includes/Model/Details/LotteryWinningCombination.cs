@@ -15,5 +15,6 @@ namespace LottoDataManager.Includes.Model.Details
         double GetMatch4();
         double GetMatch5();
         double GetMatch6();
+        double GetWinningAmount(int matchingCount);
     }
 }

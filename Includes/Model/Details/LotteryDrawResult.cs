@@ -1,24 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace LottoDataManager.Includes.Model.Details
 {
-    public interface LotteryDrawResult
+    public interface LotteryDrawResult: LotteryNumbersAndOperations
     {
         DateTime GetDrawDate();
         String GetDrawDateFormatted();
         int GetGameCode();
-        int GetNum1();
-        int GetNum2();
-        int GetNum3();
-        int GetNum4();
-        int GetNum5();
-        int GetNum6();
+        long GetID();
         double GetJackpotAmt();
         String GetJackpotAmtFormatted();
         int GetWinners();
+        bool isWithinDrawResult(int numberToLookFor);
+        bool isDrawResulDetailsEmpty();
+
     }
 }

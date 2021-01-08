@@ -49,32 +49,48 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Includes\Database\DAO\LotteryDrawResultDao.cs" />
-    <Compile Include="Includes\Database\DAO\LotteryDrawResultDaoImpl.cs" />
-    <Compile Include="Includes\Database\DAO\LotteryWinningCombinationDao.cs" />
-    <Compile Include="Includes\Database\DAO\LotteryWinningCombinationDaoImpl.cs" />
+    <Compile Include="Includes\Classes\LotteryDataWorker.cs" />
+    <Compile Include="Includes\Database\DAO\Impl\LotteryBetDaoImpl.cs" />
+    <Compile Include="Includes\Database\DAO\Impl\LotteryWinningBetDaoImpl.cs" />
+    <Compile Include="Includes\Database\DAO\Impl\LotteryDaoImpl.cs" />
+    <Compile Include="Includes\Database\DAO\Interface\LotteryBetDao.cs" />
+    <Compile Include="Includes\Database\DAO\Interface\LotteryWinningBetDao.cs" />
+    <Compile Include="Includes\Database\DAO\Interface\LotteryDao.cs" />
+    <Compile Include="Includes\Database\DAO\Interface\LotteryDrawResultDao.cs" />
+    <Compile Include="Includes\Database\DAO\Impl\LotteryDrawResultDaoImpl.cs" />
+    <Compile Include="Includes\Database\DAO\Interface\LotteryWinningCombinationDao.cs" />
+    <Compile Include="Includes\Database\DAO\Impl\LotteryWinningCombinationDaoImpl.cs" />
+    <Compile Include="Includes\Model\Details\Lottery.cs" />
+    <Compile Include="Includes\Model\Details\LotteryBet.cs" />
+    <Compile Include="Includes\Model\Details\LotteryDataDerivation.cs" />
+    <Compile Include="Includes\Model\Details\LotteryNumbersAndOperations.cs" />
+    <Compile Include="Includes\Model\Details\LotteryWinningBet.cs" />
+    <Compile Include="Includes\Model\Details\Setup\LotteryBetSetup.cs" />
     <Compile Include="Includes\Model\Details\LotteryDrawResult.cs" />
-    <Compile Include="Includes\Model\Details\LotteryDrawResultSetup.cs" />
+    <Compile Include="Includes\Model\Details\Setup\LotteryCommonSetup.cs" />
+    <Compile Include="Includes\Model\Details\Setup\LotteryDrawResultSetup.cs" />
+    <Compile Include="Includes\Model\Details\Setup\LotterySetup.cs" />
+    <Compile Include="Includes\Model\Details\Setup\LotteryWinningBetSetup.cs" />
     <Compile Include="Includes\Model\Game\Game658.cs" />
     <Compile Include="Includes\Model\Game\Game655.cs" />
     <Compile Include="Includes\Model\Game\Game649.cs" />
     <Compile Include="Includes\Model\Game\Game645.cs" />
     <Compile Include="Includes\Utilities\AppSettings.cs" />
-    <Compile Include="Includes\Database\DAO\LotteryScheduleDao.cs" />
-    <Compile Include="Includes\Database\DAO\LotteryScheduleDaoImpl.cs" />
-    <Compile Include="Includes\Database\DAO\LotteryTicketPanelDao.cs" />
-    <Compile Include="Includes\Database\DAO\LotteryTicketPanelDaoImpl.cs" />
+    <Compile Include="Includes\Database\DAO\Interface\LotteryScheduleDao.cs" />
+    <Compile Include="Includes\Database\DAO\Impl\LotteryScheduleDaoImpl.cs" />
+    <Compile Include="Includes\Database\DAO\Interface\LotteryTicketPanelDao.cs" />
+    <Compile Include="Includes\Database\DAO\Impl\LotteryTicketPanelDaoImpl.cs" />
     <Compile Include="Includes\Database\Engine\ConnectionDetails.cs" />
     <Compile Include="Includes\Database\Engine\DatabaseConnectionFactory.cs" />
     <Compile Include="Includes\Database\Engine\DatabaseType.cs" />
     <Compile Include="Includes\Model\Game\Game642.cs" />
     <Compile Include="Includes\Model\Game\LotteryDetails.cs" />
     <Compile Include="Includes\Model\Details\LotterySchedule.cs" />
-    <Compile Include="Includes\Model\Details\LotteryScheduleSetup.cs" />
+    <Compile Include="Includes\Model\Details\Setup\LotteryScheduleSetup.cs" />
     <Compile Include="Includes\Model\Details\LotteryTicketPanel.cs" />
-    <Compile Include="Includes\Model\Details\LotteryTicketPanelSetup.cs" />
+    <Compile Include="Includes\Model\Details\Setup\LotteryTicketPanelSetup.cs" />
     <Compile Include="Includes\Model\Details\LotteryWinningCombination.cs" />
-    <Compile Include="Includes\Model\Details\LotteryWinningCombinationSetup.cs" />
+    <Compile Include="Includes\Model\Details\Setup\LotteryWinningCombinationSetup.cs" />
     <Compile Include="Includes\Model\Structs\GameMode.cs" />
     <Compile Include="Includes\Model\Structs\NumberDirection.cs" />
     <Compile Include="Forms\MainForm.cs">
@@ -83,6 +99,7 @@
     <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Includes\Utilities\ClassReflectionUtil.cs" />
     <Compile Include="Includes\Utilities\ConverterUtils.cs" />
     <Compile Include="Includes\Utilities\DateTimeConverterUtils.cs" />
     <Compile Include="Program.cs" />
@@ -114,7 +131,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Includes\Classes\" />
     <Folder Include="Includes\Session\" />
     <Folder Include="Resources\" />
   </ItemGroup>

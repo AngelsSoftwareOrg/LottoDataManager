@@ -8,6 +8,7 @@ namespace LottoDataManager.Includes.Utilities
 {
     public class DateTimeConverterUtils
     {
+        public static readonly String DATE_FORMAT_LONG = "MMMM dd, yyyy - dddd";
         public static readonly String STANDARD_DATE_FORMAT = "yyyy-MM-dd";
         public static String ConvertToFormat(DateTime dateSource, String outputFormat)
         {
