@@ -12,9 +12,12 @@ namespace LottoDataManager.Includes.Model.Details.Setup
         private GameMode gameCode;
         private String description;
         private double pricePerBet;
+        private int webScrapeGameCode;
+
         public GameMode GameCode { get => gameCode; set => gameCode = value; }
         public string Description { get => description; set => description = value; }
         public double PricePerBet { get => pricePerBet; set => pricePerBet = value; }
+        public int WebScrapeGameCode { get => webScrapeGameCode; set => webScrapeGameCode = value; }
         public string GetDescription()
         {
             return Description ;
@@ -26,6 +29,10 @@ namespace LottoDataManager.Includes.Model.Details.Setup
         public double GetPricePerBet()
         {
             return PricePerBet;
+        }
+        public int GetWebScrapeGameCode()
+        {
+            return WebScrapeGameCode;
         }
     }
 }

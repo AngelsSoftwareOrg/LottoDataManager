@@ -94,5 +94,28 @@ namespace LottoDataManager.Includes.Model.Details.Setup
         {
             return (int[]) this.allNumbers.Clone();
         }
+        public void PutNumberSequence(String sequence)
+        {
+            try
+            {
+                if (String.IsNullOrWhiteSpace(sequence)) throw new Exception("Parameter should contain a sequence of number for parsing");
+                string[] sequenceDeliminator = new string[] { "-", "/" };
+                foreach (String del in sequenceDeliminator)
+                {
+                    String[] tokens = sequence.Split(del.ToCharArray());
+                    if (tokens.Length < 6) continue;
+                    for (int ctr = 0; ctr < tokens.Length; ctr++)
+                    {
+                        FillNumberBySeq(ctr + 1, int.Parse(tokens[ctr]));
+                    }
+                }
+                //test if sequence has been filled up
+                if(this.Num6 <=0) throw new Exception("Parameter should contain a sequence of number for parsing");
+            }
+            catch (Exception e) 
+            {
+                throw e;
+            }
+        }
     }
 }

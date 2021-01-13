@@ -58,5 +58,17 @@ namespace LottoDataManager.Properties {
                 this["currency_symbol"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://www.pcso.gov.ph/SearchLottoResult.aspx")]
+        public string lotto_scrape_site {
+            get {
+                return ((string)(this["lotto_scrape_site"]));
+            }
+            set {
+                this["lotto_scrape_site"] = value;
+            }
+        }
     }
 }

@@ -16,8 +16,9 @@ namespace LottoDataManager.Includes.Model.Details
         double GetJackpotAmt();
         String GetJackpotAmtFormatted();
         int GetWinners();
-        bool isWithinDrawResult(int numberToLookFor);
-        bool isDrawResulDetailsEmpty();
-
+        bool IsWithinDrawResult(int numberToLookFor);
+        bool IsDrawResulDetailsEmpty();
+        void PutNumberSequence(String sequence);
+        bool IsDrawResulSequenceEmpty();
     }
 }

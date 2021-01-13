@@ -30,17 +30,32 @@ namespace LottoDataManager
         private void InitializesFormContent()
         {
             //debug
-            this.lotteryDetails = new Game655();
+            this.lotteryDetails = new Game658();
             //debug end
 
             RefreshFieldDetails();
             RefreshDrawResultListViewGridContent();
             RefreshBetListViewGridContent();
 
-            LotteryDataWorker ld = new LotteryDataWorker();
+/*            LotteryDataWorker ld = new LotteryDataWorker();
             //ld.ProcessAdjustCorrectTargetDrawDate(lotteryDetails.GameCode);
             ld.ProcessCheckingForWinningBets(lotteryDetails.GameCode);
-            
+
+            this.lotteryDetails = new Game645();
+            //ld.ProcessAdjustCorrectTargetDrawDate(lotteryDetails.GameCode);
+            ld.ProcessCheckingForWinningBets(lotteryDetails.GameCode);
+
+            this.lotteryDetails = new Game649();
+            //ld.ProcessAdjustCorrectTargetDrawDate(lotteryDetails.GameCode);
+            ld.ProcessCheckingForWinningBets(lotteryDetails.GameCode);
+
+            this.lotteryDetails = new Game655();
+            //ld.ProcessAdjustCorrectTargetDrawDate(lotteryDetails.GameCode);
+            ld.ProcessCheckingForWinningBets(lotteryDetails.GameCode);
+
+            this.lotteryDetails = new Game658();
+            //ld.ProcessAdjustCorrectTargetDrawDate(lotteryDetails.GameCode);
+            ld.ProcessCheckingForWinningBets(lotteryDetails.GameCode);*/
         }
 
         #region "Tab Dashboard"
@@ -116,8 +131,8 @@ namespace LottoDataManager
         #region "Draw Result"
         private void objListVwWinningNum_SelectionChanged(object sender, EventArgs e)
         {
-            if (objListVwWinningNum.SelectedObjects.Count <= 0) return;
-            LotteryDrawResult lotteryDrawResult = (LotteryDrawResult) objListVwWinningNum.SelectedObjects[0];
+            if (this.objListVwWinningNum.SelectedObjects.Count <= 0) return;
+            LotteryDrawResult lotteryDrawResult = (LotteryDrawResult)objListVwWinningNum.SelectedObjects[0];
             TextMatchFilter filter = new TextMatchFilter(this.objListVwWinningNum);
             filter.Columns = GenerateOLVColumnForHighlighting();
 
@@ -132,14 +147,42 @@ namespace LottoDataManager
 
             HighlightTextRenderer highlightTextRenderer = new HighlightTextRenderer(filter);
             highlightTextRenderer.CornerRoundness = 1;
-            highlightTextRenderer.FramePen = new Pen(Color.White);
-            highlightTextRenderer.FillBrush = new SolidBrush(Color.Yellow);
-            highlightTextRenderer.CellPadding = new Rectangle(0,0,0,0);
+            highlightTextRenderer.FramePen = new Pen(Color.Empty);
+            highlightTextRenderer.FillBrush = new SolidBrush(Color.YellowGreen);
+            highlightTextRenderer.CellPadding = new Rectangle(0, 0, 0, 0);
+            highlightTextRenderer.Bounds = new Rectangle(2, 2, 2, 2);
             this.objListVwWinningNum.ModelFilter = filter;
             this.objListVwWinningNum.DefaultRenderer = highlightTextRenderer;
             this.objListVwWinningNum.SelectedForeColor = Color.Black;
         }
+
+        private void objectLstVwLatestBet_SelectionChanged(object sender, EventArgs e)
+        {
+            if (this.objectLstVwLatestBet.SelectedObjects.Count <= 0) return;
+            LotteryBet lotteryBet = (LotteryBet)objectLstVwLatestBet.SelectedObjects[0];
+            TextMatchFilter filter = new TextMatchFilter(this.objectLstVwLatestBet);
+
+            List<String> regex = new List<string>();
+            regex.Add("^" + lotteryBet.GetNum1().ToString() + "$");
+            regex.Add("^" + lotteryBet.GetNum2().ToString() + "$");
+            regex.Add("^" + lotteryBet.GetNum3().ToString() + "$");
+            regex.Add("^" + lotteryBet.GetNum4().ToString() + "$");
+            regex.Add("^" + lotteryBet.GetNum5().ToString() + "$");
+            regex.Add("^" + lotteryBet.GetNum6().ToString() + "$");
+            filter.RegexStrings = regex;
+
+            HighlightTextRenderer highlightTextRenderer = new HighlightTextRenderer(filter);
+            highlightTextRenderer.CornerRoundness = 1;
+            highlightTextRenderer.FramePen = new Pen(Color.Empty);
+            highlightTextRenderer.FillBrush = new SolidBrush(Color.YellowGreen);
+            highlightTextRenderer.CellPadding = new Rectangle(0, 0, 0, 0);
+            highlightTextRenderer.Bounds = new Rectangle(2, 2, 2, 2);
+            this.objectLstVwLatestBet.ModelFilter = filter;
+            this.objectLstVwLatestBet.DefaultRenderer = highlightTextRenderer;
+            this.objectLstVwLatestBet.SelectedForeColor = Color.Black;
+        }
         #endregion
+
 
     }
 }

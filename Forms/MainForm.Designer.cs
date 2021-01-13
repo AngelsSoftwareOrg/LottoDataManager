@@ -300,6 +300,7 @@ namespace LottoDataManager
             this.objectLstVwLatestBet.UseCompatibleStateImageBehavior = false;
             this.objectLstVwLatestBet.View = System.Windows.Forms.View.Details;
             this.objectLstVwLatestBet.VirtualMode = true;
+            this.objectLstVwLatestBet.SelectionChanged += new System.EventHandler(this.objectLstVwLatestBet_SelectionChanged);
             // 
             // olvColBetDrawDate
             // 
@@ -497,6 +498,7 @@ namespace LottoDataManager
             // 
             this.olvColDrawDate.AspectName = "GetDrawDateFormatted";
             this.olvColDrawDate.Text = "Draw Date";
+            this.olvColDrawDate.UseFiltering = false;
             // 
             // olvColNum1
             // 
@@ -530,8 +532,10 @@ namespace LottoDataManager
             // 
             // olvColJackpot
             // 
-            this.olvColJackpot.AspectName = "GetJackpotAmtFormatted";
+            this.olvColJackpot.AspectName = "GetJackpotAmt";
+            this.olvColJackpot.AspectToStringFormat = "{0:C}";
             this.olvColJackpot.Text = "Jackpot Amount";
+            this.olvColJackpot.UseFiltering = false;
             // 
             // olvColWinners
             // 

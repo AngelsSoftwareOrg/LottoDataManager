@@ -51,7 +51,7 @@ namespace LottoDataManager.Includes.Model.Details
         {
             return String.Format("{0:C}", this.JackpotAmt);
         }
-        public bool isWithinDrawResult(int numberToLookFor)
+        public bool IsWithinDrawResult(int numberToLookFor)
         {
             if (numberToLookFor == this.Num1) return true;
             if (numberToLookFor == this.Num2) return true;
@@ -61,12 +61,15 @@ namespace LottoDataManager.Includes.Model.Details
             if (numberToLookFor == this.Num6) return true;
             return false;
         }
-        public bool isDrawResulDetailsEmpty()
+        public bool IsDrawResulDetailsEmpty()
         {
             if (this.Id <= 0) return true;
             return false;
         }
-
+        public bool IsDrawResulSequenceEmpty()
+        {
+            return (this.Num1 <= 0 && this.Num2 <= 0 && this.Num3 <= 0 && this.Num4 <= 0 && this.Num5 <= 0 && this.Num6 <= 0);
+        }
         override
         public String ToString()
         {

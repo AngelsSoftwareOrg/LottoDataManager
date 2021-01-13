@@ -30,19 +30,14 @@ namespace LottoDataManager.Includes.Classes
                                             ClassReflectionUtil.FindGameMode(lotteryBet.GetGameCode()), 
                                             lotteryBet.GetTargetDrawDate());
                 LotteryWinningBetSetup lotteryWinningBet = new LotteryWinningBetSetup();
-                lotteryWinningBet.LotteryBetId = betDrawResult.GetID();
+                lotteryWinningBet.LotteryBetId = lotteryBet.GetId(); //betDrawResult.GetID();
 
-                if (betDrawResult.isDrawResulDetailsEmpty()) continue;
-
-                //debug
-                Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-                Console.WriteLine(lotteryBet.ToString());
-                Console.WriteLine(betDrawResult.ToString());
+                if (betDrawResult.IsDrawResulDetailsEmpty()) continue;
 
                 int matchingNumberCtr = 0;
                 foreach(int bet in lotteryBet.GetBetNumbersAsArray())
                 {
-                    if (betDrawResult.isWithinDrawResult(bet))
+                    if (betDrawResult.IsWithinDrawResult(bet))
                     {
                         matchingNumberCtr++;
                         lotteryWinningBet.FillNumberBySeq(matchingNumberCtr, bet);
@@ -57,10 +52,6 @@ namespace LottoDataManager.Includes.Classes
                     lotteryWinningBet.WinningAmount = lotteryWinningCombination.GetWinningAmount(matchingNumberCtr);
                 }
 
-                //debug
-                Console.WriteLine("Matching Number: " + matchingNumberCtr);
-                Console.WriteLine(lotteryWinningBet.ToString());
-
                 lotteryWinningBetDao.InsertWinningBet(lotteryWinningBet);
             }
         }
@@ -72,23 +63,14 @@ namespace LottoDataManager.Includes.Classes
             LotteryDrawResultDao lotteryDrawResultDao = LotteryDrawResultDaoImpl.GetInstance();
             List<LotteryBet> lotteryBetArr = lotteryBetDao.GetDashboardLatestBets(gameMode, DateTime.Now.AddDays(-9999));
 
-            int count = 0; //debug
             foreach(LotteryBet lotteryBet in lotteryBetArr)
             {
-/*                if (count <= 10)
-                {
-                    count++; //debug
-                    continue;
-                }*/
                 DateTime dt = lotteryDrawResultDao.GetNextDrawDate(gameMode, lotteryBet.GetTargetDrawDate());
 
                 if(!((DateTime.Now.Year - dt.Year) >= 12)){
                     lotteryBetDao.UpdateTargetDrawDate(lotteryBet.GetId(), dt);
                 }
-
             }
-
-            //GetNextDrawDate
         }
     }
 }

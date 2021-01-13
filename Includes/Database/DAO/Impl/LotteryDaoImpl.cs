@@ -45,6 +45,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                         lotterySetup.GameCode = gameCode;
                         lotterySetup.Description = reader["description"].ToString();
                         lotterySetup.PricePerBet = double.Parse(reader["price_per_bet"].ToString());
+                        lotterySetup.WebScrapeGameCode = int.Parse(reader["web_scrape_code"].ToString());
                     }
                 }
             }

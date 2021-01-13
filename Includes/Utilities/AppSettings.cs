@@ -18,6 +18,14 @@ namespace LottoDataManager.Includes
             }
         }
 
+        public static String GetLootoScrapeSite
+        {
+            get
+            {
+                return Properties.Settings.Default.lotto_scrape_site;
+            }
+        }
+
         public static DatabaseType GetDatabaseType()
         {
             String db = Properties.Settings.Default.db_type;

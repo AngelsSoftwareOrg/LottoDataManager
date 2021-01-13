@@ -57,7 +57,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
             using (OleDbCommand command = new OleDbCommand())
             {
                 command.CommandType = CommandType.Text;
-                command.CommandText = "SELECT TOP 10 a.* " +
+                command.CommandText = "SELECT a.* " + //TOP 10 
                                       "  FROM lottery_bet a " + 
                                       "  LEFT OUTER JOIN lottery_winning_bet b " +
                                       "    ON (a.ID = b.bet_id) " +

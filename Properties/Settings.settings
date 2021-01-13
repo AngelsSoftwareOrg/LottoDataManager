@@ -11,5 +11,8 @@
     <Setting Name="currency_symbol" Type="System.String" Scope="User">
       <Value Profile="(Default)">₱</Value>
     </Setting>
+    <Setting Name="lotto_scrape_site" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://www.pcso.gov.ph/SearchLottoResult.aspx</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -58,13 +58,12 @@ namespace LottoDataManager.Includes.Database.DAO
 
         public LotteryDrawResult GetLotteryDrawResultByDrawDate(GameMode gameMode, DateTime drawDate)
         {
-            LotteryDrawResultSetup lotteryDrawResult = new LotteryDrawResultSetup();
+            LotteryDrawResultSetup lotteryDrawResult = null;
             using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
             using (OleDbCommand command = new OleDbCommand())
             {
                 command.CommandType = CommandType.Text;
-                command.CommandText = GetStandardSelectQuery() + 
-                                      " AND draw_date = CDATE(@drawDate)";
+                command.CommandText = GetStandardSelectQuery() + " AND draw_date = CDATE(@drawDate)";
                 command.Parameters.AddWithValue("@game_cd", OleDbType.Integer).Value = (int)gameMode;
                 command.Parameters.AddWithValue("@drawDate", OleDbType.DBDate).Value = drawDate.ToString();
                 command.Connection = conn;
@@ -73,6 +72,7 @@ namespace LottoDataManager.Includes.Database.DAO
                 using (OleDbDataReader reader = command.ExecuteReader())
                 {
                     if (!reader.HasRows) return lotteryDrawResult;
+                    lotteryDrawResult = new LotteryDrawResultSetup();
                     while (reader.Read())
                     {
                         lotteryDrawResult.Id = long.Parse(reader["ID"].ToString());
@@ -160,6 +160,66 @@ namespace LottoDataManager.Includes.Database.DAO
             return DateTime.Now.AddDays(-13000);
         }
 
+        public void InsertDrawDate(LotteryDrawResult lotteryDrawResult)
+        {
+            using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
+            using (OleDbCommand command = new OleDbCommand())
+            {
+                command.CommandType = CommandType.Text;
+                command.CommandText = " INSERT INTO draw_results (draw_date,jackpot_amt,winners,game_cd,num1,num2,num3,num4,num5,num6) " +
+                                      " VALUES (@draw_date,@jackpot_amt,@winners,@game_cd,@num1,@num2,@num3,@num4,@num5,@num6)";
+                command.Parameters.AddWithValue("@draw_date", lotteryDrawResult.GetDrawDate());
+                command.Parameters.AddWithValue("@jackpot_amt", lotteryDrawResult.GetJackpotAmt());
+                command.Parameters.AddWithValue("@winners", lotteryDrawResult.GetWinners());
+                command.Parameters.AddWithValue("@game_cd", lotteryDrawResult.GetGameCode());
+                command.Parameters.AddWithValue("@num1", lotteryDrawResult.GetNum1());
+                command.Parameters.AddWithValue("@num2", lotteryDrawResult.GetNum2());
+                command.Parameters.AddWithValue("@num3", lotteryDrawResult.GetNum3());
+                command.Parameters.AddWithValue("@num4", lotteryDrawResult.GetNum4());
+                command.Parameters.AddWithValue("@num5", lotteryDrawResult.GetNum5());
+                command.Parameters.AddWithValue("@num6", lotteryDrawResult.GetNum6());
+                command.Connection = conn;
+                conn.Open();
+                OleDbTransaction transaction = conn.BeginTransaction();
+                command.Transaction = transaction;
+                int result = command.ExecuteNonQuery();
+
+                if (result < 0)
+                {
+                    transaction.Rollback();
+                    throw new Exception("Error inserting data into Lottery result database!");
+                }
+                transaction.Commit();
+            }
+        }
+
+        public DateTime GetLatestDrawDate(GameMode gameMode)
+        {
+            using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
+            using (OleDbCommand command = new OleDbCommand())
+            {
+                command.CommandType = CommandType.Text;
+                command.CommandText = " SELECT TOP 1 draw_date " +
+                                      "   FROM draw_results " +
+                                      "  WHERE game_cd = @game_cd" +
+                                      "  ORDER BY draw_date DESC ";
+                command.Parameters.AddWithValue("@game_cd", OleDbType.Integer).Value = (int)gameMode;
+                command.Connection = conn;
+                conn.Open();
+
+                using (OleDbDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            return DateTime.Parse(reader["draw_date"].ToString());
+                        }
+                    }
+                }
+            }
+            return DateTime.Now.AddDays(-13000);
+        }
 
         private OleDbCommand GetDrawResultCommandByRange(GameMode gameMode, DateTime fromDate, DateTime toDate)
         {

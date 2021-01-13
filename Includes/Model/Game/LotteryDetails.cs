@@ -13,7 +13,7 @@ namespace LottoDataManager.Includes.Model
 {
     public class LotteryDetails
     {
-        private GameMode gameCode;
+        private GameMode gameMode;
         private String description;
         private Lottery lottery;
         private LotterySchedule lotterySchedule;
@@ -42,44 +42,51 @@ namespace LottoDataManager.Includes.Model
         internal void SetupLottery()
         {
             LotteryDao lotteryDao = LotteryDaoImpl.GetInstance();
-            this.lottery = lotteryDao.GetLottery(gameCode);
+            this.lottery = lotteryDao.GetLottery(gameMode);
         }
         internal void SetupLotterySchedule()
         {
             LotteryScheduleDao lotterySchedDao = LotteryScheduleDaoImpl.GetInstance();
-            this.lotterySchedule = lotterySchedDao.GetLotterySchedule(GameCode);
+            this.lotterySchedule = lotterySchedDao.GetLotterySchedule(GameMode);
         }
         internal void SetupLotteryTicketPanel()
         {
             LotteryTicketPanelDao lotteryTicketPanelDao = LotteryTicketPanelDaoImpl.GetInstance();
-            this.lotteryTicketPanel = lotteryTicketPanelDao.GetLotteryTicketPanel(GameCode);
+            this.lotteryTicketPanel = lotteryTicketPanelDao.GetLotteryTicketPanel(GameMode);
         }
         internal void SetupLotteryWinningCombination()
         {
             LotteryWinningCombinationDao lotteryWinningCombinationDao = LotteryWinningCombinationDaoImpl.GetInstance();
-            this.lotteryWinningCombination = lotteryWinningCombinationDao.GetLotteryWinningCombination(GameCode);
+            this.lotteryWinningCombination = lotteryWinningCombinationDao.GetLotteryWinningCombination(GameMode);
         }
         protected void SetGameCode(GameMode gameCode) 
         { 
-            this.gameCode = gameCode; 
+            this.gameMode = gameCode; 
         }
         protected void SetDescription(String description)
         {
             this.description = description;
         }
-        public GameMode GameCode { get => gameCode; }
+        public GameMode GameMode { get => gameMode; }
+        public int GameCode { get => (int) GameMode; }
         public string Description { get => description; }
         public LotteryDataDerivation LotteryDataDerivation { get => lotteryDataDerivation; }
         public List<LotteryDrawResult> GetAllLotteryDrawResults()
         {
             LotteryDrawResultDao drDao = LotteryDrawResultDaoImpl.GetInstance();
-            return drDao.GetAllDrawResults(GameCode);
+            return drDao.GetAllDrawResults(GameMode);
         }
         public List<LotteryBet> GetLottoBets(DateTime sinceWhen)
         {
             LotteryBetDao betDao = LotteryBetDaoImpl.GetInstance();
-            return betDao.GetDashboardLatestBets(GameCode, sinceWhen);
+            return betDao.GetDashboardLatestBets(GameMode, sinceWhen);
         }
-
+        public Lottery Lottery
+        {
+            get
+            {
+                return this.lottery;
+            }
+        }
     }
 }

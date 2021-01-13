@@ -12,5 +12,6 @@ namespace LottoDataManager.Includes.Model.Details
         GameMode GetGameCode();
         String GetDescription();
         double GetPricePerBet();
+        int GetWebScrapeGameCode();
     }
 }
