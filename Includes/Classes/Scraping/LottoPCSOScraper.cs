@@ -18,18 +18,23 @@ using LottoDataManager.Includes.Utilities;
 
 namespace LottoDataManager.Includes.Classes.Scraping
 {
-    public class LottoScraper
+    public class LottoPCSOScraper: LottoWebScraper
     {
+        public event EventHandler<LottoWebScraperEvent> WebScrapingStatus;
+        private LottoWebScraperEvent lottoWebScraperEvent = new LottoWebScraperEvent();
         private List<LotteryDetails> lotteriesDetailsArr;
+        private LotteryDetails currentLotteryDetailsProcess;
         private DateTime sinceWhenToScrape;
         private readonly string webUrlToScrape = AppSettings.GetLootoScrapeSite;
-
+        
         public void StartScraping(List<LotteryDetails> lotteriesDetailsArr)
         {
             this.lotteriesDetailsArr = lotteriesDetailsArr;
             LotteryDrawResultDao lotteryDao = LotteryDrawResultDaoImpl.GetInstance();
             foreach (LotteryDetails lotteryDetails in this.lotteriesDetailsArr)
             {
+                this.currentLotteryDetailsProcess = lotteryDetails;
+                RaiseEvent(LottoWebScrapingStages.INIT);
                 this.sinceWhenToScrape = lotteryDao.GetLatestDrawDate(lotteryDetails.GameMode);
                 ScrapeWebsite(lotteryDetails, GenerateParameters(lotteryDetails));
             }
@@ -100,21 +105,27 @@ namespace LottoDataManager.Includes.Classes.Scraping
 
         internal async void ScrapeWebsite(LotteryDetails lotteryDetails, Dictionary<string, string> parameters)
         {
-            using (HttpClient httpClient = new HttpClient())
+            RaiseEvent(LottoWebScrapingStages.CONNECTING);
+            IHtmlDocument documentForSession = await GetWebsiteDOMAsync(GenerateParameters(lotteryDetails));
+            RaiseEvent(LottoWebScrapingStages.SESSION_CREATION);
+            Dictionary<string, string> sessionParam = GetSessionBasedParameters(lotteryDetails, documentForSession);
+            RaiseEvent(LottoWebScrapingStages.SEARCHING_DATA);
+            IHtmlDocument document = await GetWebsiteDOMAsync(sessionParam);
+            RaiseEvent(LottoWebScrapingStages.SCRAPING);
+            List<LotteryDrawResult> lotteryDrawResultArr = GetScrapeResults(lotteryDetails, document);
+
+            int countCtr = 1;
+            LotteryDrawResultDao lotteryDao = LotteryDrawResultDaoImpl.GetInstance();
+            foreach (LotteryDrawResult scrapeResult in lotteryDrawResultArr.ToList())
             {
-                IHtmlDocument documentForSession = await GetWebsiteDOMAsync(GenerateParameters(lotteryDetails));
-                IHtmlDocument document = await GetWebsiteDOMAsync(GetSessionBasedParameters(lotteryDetails, documentForSession));
-                List<LotteryDrawResult> lotteryDrawResultArr = GetScrapeResults(lotteryDetails, document);
-                LotteryDrawResultDao lotteryDao = LotteryDrawResultDaoImpl.GetInstance();
-                foreach (LotteryDrawResult scrapeResult in lotteryDrawResultArr.ToList())
+                LotteryDrawResult result = lotteryDao.GetLotteryDrawResultByDrawDate(lotteryDetails.GameMode, scrapeResult.GetDrawDate());
+                if (result == null && !scrapeResult.IsDrawResulSequenceEmpty())
                 {
-                    LotteryDrawResult result = lotteryDao.GetLotteryDrawResultByDrawDate(lotteryDetails.GameMode, scrapeResult.GetDrawDate());
-                    if (result == null && !scrapeResult.IsDrawResulSequenceEmpty())
-                    {
-                        lotteryDao.InsertDrawDate(scrapeResult);
-                    }
+                    lotteryDao.InsertDrawDate(scrapeResult);
                 }
+                RaiseEvent(LottoWebScrapingStages.INSERT, ConverterUtils.GetPercentageFloored(countCtr++, lotteryDrawResultArr.Count));
             }
+            RaiseEvent(LottoWebScrapingStages.FINISH);
         }
 
         private List<LotteryDrawResult> GetScrapeResults(LotteryDetails lotteryDetails, IHtmlDocument document)
@@ -145,6 +156,44 @@ namespace LottoDataManager.Includes.Classes.Scraping
                 }
             }
             return lotteryDrawResultArr;
+        }
+
+        private void RaiseEvent(LottoWebScrapingStages stage, int progress = 0)
+        {
+            lottoWebScraperEvent.LottoWebScrapingStage = stage;
+            lottoWebScraperEvent.GameMode = currentLotteryDetailsProcess.GameMode;
+            lottoWebScraperEvent.Progress = progress;
+
+            if (stage == LottoWebScrapingStages.INIT)
+            {
+                lottoWebScraperEvent.CustomStatusMessage = "*** Initializing Lotto Webscraper for " + currentLotteryDetailsProcess.Description + "...";
+            }
+            else if (stage == LottoWebScrapingStages.CONNECTING)
+            {
+                lottoWebScraperEvent.CustomStatusMessage = "*** Connecting to Lotto Website...";
+            }
+            else if (stage == LottoWebScrapingStages.SESSION_CREATION)
+            {
+                lottoWebScraperEvent.CustomStatusMessage = "*** Creating Dummy Session data for query purposes...";
+            }
+            else if (stage == LottoWebScrapingStages.SEARCHING_DATA)
+            {
+                lottoWebScraperEvent.CustomStatusMessage = "*** Querying for lotto draw result updates...";
+            }
+            else if (stage == LottoWebScrapingStages.SCRAPING)
+            {
+                lottoWebScraperEvent.CustomStatusMessage = "*** Scraping for lotto results draw updates...";
+            }
+            else if (stage == LottoWebScrapingStages.INSERT)
+            {
+                lottoWebScraperEvent.CustomStatusMessage = "*** Inserting scraped data...";
+            }
+            else if (stage == LottoWebScrapingStages.FINISH)
+            {
+                lottoWebScraperEvent.CustomStatusMessage = "*** Finished!";
+            }
+
+            WebScrapingStatus.Invoke(this, lottoWebScraperEvent);
         }
     }
 }

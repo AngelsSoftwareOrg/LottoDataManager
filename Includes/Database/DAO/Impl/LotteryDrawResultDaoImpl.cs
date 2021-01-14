@@ -99,9 +99,7 @@ namespace LottoDataManager.Includes.Database.DAO
             using (OleDbCommand command = new OleDbCommand())
             {
                 command.CommandType = CommandType.Text;
-                //DEBUGGING - TOP 200
-                command.CommandText = "SELECT TOP 200 * FROM (" + GetStandardSelectQuery() + " ORDER BY draw_date DESC)";
-                //DEBUGGING END
+                command.CommandText = "SELECT * FROM (" + GetStandardSelectQuery() + " ORDER BY draw_date DESC)";
                 command.Parameters.AddWithValue("@game_cd", gameMode);
                 command.Connection = conn;
                 conn.Open();
@@ -130,6 +128,47 @@ namespace LottoDataManager.Includes.Database.DAO
             }
             return results;
         }
+
+        public List<LotteryDrawResult> GetDrawResultsFromStartingDate(GameMode gameMode, DateTime startingDrawDate)
+        {
+            List<LotteryDrawResult> results = new List<LotteryDrawResult>();
+            using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
+            using (OleDbCommand command = new OleDbCommand())
+            {
+                command.CommandType = CommandType.Text;
+                command.CommandText = GetStandardSelectQuery() +
+                                      " AND draw_date >= CDATE(@startingDrawDate) " +
+                                      " ORDER BY draw_date DESC";
+                command.Parameters.AddWithValue("@game_cd", (int) gameMode);
+                command.Parameters.AddWithValue("@startingDrawDate", startingDrawDate.ToString());
+                command.Connection = conn;
+                conn.Open();
+                using (OleDbDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        LotteryDrawResultSetup dr = new LotteryDrawResultSetup();
+                        dr.DrawDate = DateTime.Parse(reader["draw_date"].ToString());
+                        dr.GameCode = (int)gameMode;
+                        dr.Id = long.Parse(reader["ID"].ToString());
+
+                        dr.Num1 = int.Parse(reader["num1"].ToString());
+                        dr.Num2 = int.Parse(reader["num2"].ToString());
+                        dr.Num3 = int.Parse(reader["num3"].ToString());
+                        dr.Num4 = int.Parse(reader["num4"].ToString());
+                        dr.Num5 = int.Parse(reader["num5"].ToString());
+                        dr.Num6 = int.Parse(reader["num6"].ToString());
+                        dr.SortNumbers();
+                        dr.JackpotAmt = double.Parse(reader["jackpot_amt"].ToString());
+                        dr.Winners = int.Parse(reader["winners"].ToString());
+                        dr.Id = long.Parse(reader["ID"].ToString());
+                        results.Add(dr);
+                    }
+                }
+            }
+            return results;
+        }
+
 
         public DateTime GetNextDrawDate(GameMode gameMode, DateTime betDate)
         {

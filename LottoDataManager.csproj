@@ -72,7 +72,11 @@
       <DependentUpon>LottoCheckLatestResult.cs</DependentUpon>
     </Compile>
     <Compile Include="Includes\Classes\LotteryDataWorker.cs" />
-    <Compile Include="Includes\Classes\Scraping\LottoScraper.cs" />
+    <Compile Include="Includes\Classes\Scraping\LottoWebScraper.cs" />
+    <Compile Include="Includes\Classes\Scraping\LottoPCSOScraper.cs" />
+    <Compile Include="Includes\Classes\Scraping\LottoWebScraperEvent.cs" />
+    <Compile Include="Includes\Classes\Scraping\LottoWebScrapingStages.cs" />
+    <Compile Include="Includes\Classes\Scraping\WebLottoScraperFactory.cs" />
     <Compile Include="Includes\Database\DAO\Impl\LotteryBetDaoImpl.cs" />
     <Compile Include="Includes\Database\DAO\Impl\LotteryWinningBetDaoImpl.cs" />
     <Compile Include="Includes\Database\DAO\Impl\LotteryDaoImpl.cs" />

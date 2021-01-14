@@ -24,7 +24,6 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
             }
             return lotteryWinningBetDaoImpl;
         }
-
         public LotteryWinningBet GetLotteryWinningBet(long lotteryBetID)
         {
             LotteryWinningBetSetup lotteryWinningBet = new LotteryWinningBetSetup();
@@ -85,5 +84,63 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                 transaction.Commit();
             }
         }
+        public double GetTotalWinningsAmount(GameMode gameMode)
+        {
+            LotteryWinningBetSetup lotteryWinningBet = new LotteryWinningBetSetup();
+            using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
+            using (OleDbCommand command = new OleDbCommand())
+            {
+                command.CommandType = CommandType.Text;
+                command.CommandText = "SELECT SUM(winning_amt) AS [WINNING_AMOUNT] " + 
+                                      "  FROM lottery_winning_bet a " +
+                                      " INNER JOIN lottery_bet b on a.bet_id = b.id " +
+                                      " WHERE a.active = true " +
+                                      "   AND b.game_cd = @game_cd";
+                command.Parameters.AddWithValue("@game_cd", (int) gameMode);
+                command.Connection = conn;
+                conn.Open();
+                using (OleDbDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            return double.Parse(reader["WINNING_AMOUNT"].ToString());
+                        }
+                    }
+                }
+            }
+            return 0.00;
+        }
+        public double GetTotalWinningsAmountThisMonth(GameMode gameMode)
+        {
+            LotteryWinningBetSetup lotteryWinningBet = new LotteryWinningBetSetup();
+            using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
+            using (OleDbCommand command = new OleDbCommand())
+            {
+                command.CommandType = CommandType.Text;
+                command.CommandText = "SELECT SUM(winning_amt) AS [WINNING_AMOUNT] " +
+                                      "  FROM lottery_winning_bet a " +
+                                      " INNER JOIN lottery_bet b on a.bet_id = b.id " +
+                                      " WHERE a.active = true " +
+                                      "   AND b.game_cd = @game_cd " +
+                                      "   AND MONTH(target_draw_date) = MONTH(NOW()) ";
+                command.Parameters.AddWithValue("@game_cd", (int)gameMode);
+                command.Connection = conn;
+                conn.Open();
+                using (OleDbDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            return double.Parse(reader["WINNING_AMOUNT"].ToString());
+                        }
+                    }
+                }
+            }
+            return 0.00;
+        }
+
     }
 }

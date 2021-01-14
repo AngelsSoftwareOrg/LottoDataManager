@@ -24,8 +24,6 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
             }
             return lotteryDaoImpl;
         }
-
-
         public Lottery GetLottery(GameMode gameCode)
         {
             LotterySetup lotterySetup = new LotterySetup();

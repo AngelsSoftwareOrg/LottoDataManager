@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LottoDataManager.Includes.Classes.Scraping;
 using LottoDataManager.Includes.Database.DAO;
 using LottoDataManager.Includes.Database.DAO.Impl;
 using LottoDataManager.Includes.Database.DAO.Interface;
@@ -19,8 +20,8 @@ namespace LottoDataManager.Includes.Model
         private LotterySchedule lotterySchedule;
         private LotteryTicketPanel lotteryTicketPanel;
         private LotteryWinningCombination lotteryWinningCombination;
-        private LotteryDataDerivation lotteryDataDerivation;
 
+        private LotteryDataDerivation lotteryDataDerivation;
         public LotteryDetails(GameMode gameCode, String description = "")
         {
             SetGameCode(gameCode);
@@ -38,7 +39,6 @@ namespace LottoDataManager.Includes.Model
                 SetDescription(lottery.GetDescription());
             }
         }
-
         internal void SetupLottery()
         {
             LotteryDao lotteryDao = LotteryDaoImpl.GetInstance();
@@ -71,13 +71,15 @@ namespace LottoDataManager.Includes.Model
         public int GameCode { get => (int) GameMode; }
         public string Description { get => description; }
         public LotteryDataDerivation LotteryDataDerivation { get => lotteryDataDerivation; }
-        public List<LotteryDrawResult> GetAllLotteryDrawResults()
+        public List<LotteryDrawResult> GetLotteryDrawResults(DateTime startingDate)
         {
+            if (startingDate >= DateTime.Now) throw new Exception("Date should be backdated when getting new Draw Results!");
             LotteryDrawResultDao drDao = LotteryDrawResultDaoImpl.GetInstance();
-            return drDao.GetAllDrawResults(GameMode);
+            return drDao.GetDrawResultsFromStartingDate(GameMode, startingDate);
         }
         public List<LotteryBet> GetLottoBets(DateTime sinceWhen)
         {
+            if (sinceWhen >= DateTime.Now) throw new Exception("Date should be backdated when getting new Draw Bets!");
             LotteryBetDao betDao = LotteryBetDaoImpl.GetInstance();
             return betDao.GetDashboardLatestBets(GameMode, sinceWhen);
         }
@@ -87,6 +89,16 @@ namespace LottoDataManager.Includes.Model
             {
                 return this.lottery;
             }
+        }
+        public double GetTotalWinningsAmount()
+        {
+            LotteryWinningBetDao lotteryWinningBetDao = LotteryWinningBetDaoImpl.GetInstance();
+            return lotteryWinningBetDao.GetTotalWinningsAmount(this.GameMode);
+        }
+        public double GetTotalWinningsAmountThisMonth()
+        {
+            LotteryWinningBetDao lotteryWinningBetDao = LotteryWinningBetDaoImpl.GetInstance();
+            return lotteryWinningBetDao.GetTotalWinningsAmountThisMonth(this.GameMode);
         }
     }
 }

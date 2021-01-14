@@ -11,7 +11,8 @@ namespace LottoDataManager.Includes.Database.DAO.Interface
     public interface LotteryWinningBetDao
     {
         LotteryWinningBet GetLotteryWinningBet(long lotteryBetID);
-
         void InsertWinningBet(LotteryWinningBet lotteryWinningBet);
+        double GetTotalWinningsAmount(GameMode gameMode);
+        double GetTotalWinningsAmountThisMonth(GameMode gameMode);
     }
 }

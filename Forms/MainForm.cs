@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
 using LottoDataManager.Includes.Classes;
+using LottoDataManager.Includes.Classes.Scraping;
 using LottoDataManager.Includes.Database.DAO;
 using LottoDataManager.Includes.Model;
 using LottoDataManager.Includes.Model.Details;
@@ -20,6 +21,7 @@ namespace LottoDataManager
     {
         private LotteryDetails lotteryDetails;
         private OLVColumn[] olvColumnTargetFilter;
+        private LottoWebScraper lottoWebScraper = WebLottoScraperFactory.GetLottoScraper();
 
         public MainForm()
         {
@@ -30,62 +32,82 @@ namespace LottoDataManager
         private void InitializesFormContent()
         {
             //debug
-            this.lotteryDetails = new Game658();
+            this.lotteryDetails = new Game645();
             //debug end
 
+            lottoWebScraper.WebScrapingStatus += LottoWebScraper_WebScrapingStatus;
+            toolStripStatusLblUpdater.Text = "";
+            toolStripStatusLblUpdater.Visible = false;
+            toolStripProgressBarUpdater.Value = 0;
+            toolStripProgressBarUpdater.Visible = false;
+
+            Application.DoEvents();
+            this.Show();
+            Application.DoEvents();
             RefreshFieldDetails();
-            RefreshDrawResultListViewGridContent();
-            RefreshBetListViewGridContent();
+            SetBetsAndResultDefaultList();
+            RefreshWinningNumbersGridContent();
+            DisplayStatusLabel();
 
-/*            LotteryDataWorker ld = new LotteryDataWorker();
-            //ld.ProcessAdjustCorrectTargetDrawDate(lotteryDetails.GameCode);
-            ld.ProcessCheckingForWinningBets(lotteryDetails.GameCode);
+            /*            LotteryDataWorker ld = new LotteryDataWorker();
+                        //ld.ProcessAdjustCorrectTargetDrawDate(lotteryDetails.GameCode);
+                        ld.ProcessCheckingForWinningBets(lotteryDetails.GameCode);
 
-            this.lotteryDetails = new Game645();
-            //ld.ProcessAdjustCorrectTargetDrawDate(lotteryDetails.GameCode);
-            ld.ProcessCheckingForWinningBets(lotteryDetails.GameCode);
-
-            this.lotteryDetails = new Game649();
-            //ld.ProcessAdjustCorrectTargetDrawDate(lotteryDetails.GameCode);
-            ld.ProcessCheckingForWinningBets(lotteryDetails.GameCode);
-
-            this.lotteryDetails = new Game655();
-            //ld.ProcessAdjustCorrectTargetDrawDate(lotteryDetails.GameCode);
-            ld.ProcessCheckingForWinningBets(lotteryDetails.GameCode);
-
-            this.lotteryDetails = new Game658();
-            //ld.ProcessAdjustCorrectTargetDrawDate(lotteryDetails.GameCode);
-            ld.ProcessCheckingForWinningBets(lotteryDetails.GameCode);*/
+                        this.lotteryDetails = new Game658();
+                        //ld.ProcessAdjustCorrectTargetDrawDate(lotteryDetails.GameCode);
+                        ld.ProcessCheckingForWinningBets(lotteryDetails.GameCode);*/
         }
 
         #region "Tab Dashboard"
         private void RefreshWinningNumbersGridContent()
         {
-            if (objListVwWinningNum.Items.Count > 0) return;
-            objListVwWinningNum.SetObjects(lotteryDetails.GetAllLotteryDrawResults());
-            this.olvColDrawDate.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
-            this.olvColNum1.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
-            this.olvColNum2.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
-            this.olvColNum3.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
-            this.olvColNum4.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
-            this.olvColNum5.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
-            this.olvColNum6.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
-            this.olvColJackpot.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
-            this.olvColWinners.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
-            //objListVwWinningNum.EnsureVisible(objListVwWinningNum.Items.Count - 1);
+            try
+            {
+                DisplayStatusLabel("Getting the listing of winning numbers");
+                objListVwWinningNum.SetObjects(lotteryDetails.GetLotteryDrawResults(dateTimePickerDrawResult.Value));
+                this.olvColDrawDate.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+                this.olvColNum1.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+                this.olvColNum2.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+                this.olvColNum3.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+                this.olvColNum4.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+                this.olvColNum5.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+                this.olvColNum6.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+                this.olvColJackpot.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+                this.olvColWinners.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+                //objListVwWinningNum.EnsureVisible(objListVwWinningNum.Items.Count - 1);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+            finally
+            {
+                DisplayStatusLabel();
+            }
         }
         private void RefreshBetListViewGridContent()
         {
-            DateTime lastXDays = DateTime.Now.AddDays(-100);
-            objectLstVwLatestBet.SetObjects(lotteryDetails.GetLottoBets(lastXDays));
-            this.olvColBetDrawDate.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
-            this.olvColBetNum1.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
-            this.olvColBetNum2.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
-            this.olvColBetNum3.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
-            this.olvColBetNum4.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
-            this.olvColBetNum5.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
-            this.olvColBetNum6.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
-            this.olvColBetResult.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+            try
+            {
+                DisplayStatusLabel("Getting the listing of your bets");
+                objectLstVwLatestBet.SetObjects(lotteryDetails.GetLottoBets(dateTimePickerBets.Value));
+                this.olvColBetDrawDate.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+                this.olvColBetNum1.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+                this.olvColBetNum2.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+                this.olvColBetNum3.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+                this.olvColBetNum4.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+                this.olvColBetNum5.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+                this.olvColBetNum6.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+                this.olvColBetResult.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+            finally
+            {
+                DisplayStatusLabel();
+            }
         }
         private void RefreshDrawResultListViewGridContent()
         {
@@ -104,10 +126,19 @@ namespace LottoDataManager
             lblGameMode.Text = this.lotteryDetails.Description;
 
             //Schedule Date
+            DisplayStatusLabel("Getting the next draw date");
             lblNextDrawDate.Text = "";
             DateTime nextScheduledDate = this.lotteryDetails.LotteryDataDerivation.GetNextDrawDate();
             if (nextScheduledDate.Date == DateTime.Today) lblNextDrawDate.Text = "Today! ";
             lblNextDrawDate.Text += nextScheduledDate.ToString(DateTimeConverterUtils.DATE_FORMAT_LONG);
+
+            //Total Winnings amount
+            DisplayStatusLabel("Getting your lifetime winnings for this game...");
+            lblLifetimeWinnins.Text = this.lotteryDetails.GetTotalWinningsAmount().ToString("C");
+
+            //Total Winnings amount this month
+            DisplayStatusLabel("Getting your winnings so far this month...");
+            lblWinningsThisMonth.Text = this.lotteryDetails.GetTotalWinningsAmountThisMonth().ToString("C");
         }
         private OLVColumn[] GenerateOLVColumnForHighlighting()
         {
@@ -121,10 +152,6 @@ namespace LottoDataManager
             tmpOLVColumns.Add(objListVwWinningNum.GetColumn(6));
             this.olvColumnTargetFilter = tmpOLVColumns.ToArray();
             return this.olvColumnTargetFilter;
-        }
-        private void tabWinningNumbers_Enter(object sender, EventArgs e)
-        {
-            RefreshWinningNumbersGridContent();
         }
         #endregion
 
@@ -183,6 +210,96 @@ namespace LottoDataManager
         }
         #endregion
 
+        #region "Status Strip"
+        private void DisplayStatusLabel(String status="")
+        {
+            if (String.IsNullOrWhiteSpace(status))
+            {
+                statusLabelLoading.Text = "";
+            }
+            else
+            {
+                statusLabelLoading.Text = "*** " + status;
+                Application.DoEvents();
+            }
+        }
+        #endregion
+
+        #region "Bets and Draw Result Side"
+        private void SetBetsAndResultDefaultList()
+        {
+            //Prepare the Dates
+            dateTimePickerDrawResult.Value = DateTime.Now.AddYears(-1);
+            dateTimePickerBets.Value = DateTime.Now.AddYears(-1);
+            RefreshWinningNumbersGridContent();
+            RefreshBetListViewGridContent();
+        }
+        private void linkFilterGoBet_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            RefreshBetListViewGridContent();
+        }
+        private void linkLabelFilterDraw_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            RefreshWinningNumbersGridContent();
+        }
+        private void toolStripBtnDefaultViewListing_Click(object sender, EventArgs e)
+        {
+            SetBetsAndResultDefaultList();
+        }
+        #endregion
+
+        #region "Lotto Scraper"
+
+        private void toolStripBtnDownloadResults_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                toolStripBtnDownloadResults.Enabled = false;
+                toolStripStatusLblUpdater.Text = "Lotto Draw Result Updater...";
+                toolStripStatusLblUpdater.Visible = true;
+                toolStripProgressBarUpdater.Value = 0;
+                Application.DoEvents();
+                List<LotteryDetails> lotteryArr = new List<LotteryDetails>();
+                lotteryArr.Add(this.lotteryDetails);
+                lottoWebScraper.StartScraping(lotteryArr);
+            }
+            catch (Exception ex)
+            {
+                toolStripBtnDownloadResults.Enabled = true;
+                MessageBox.Show(ex.Message);
+                Application.DoEvents();
+            }
+        }
+
+        private void LottoWebScraper_WebScrapingStatus(object sender, LottoWebScraperEvent e)
+        {
+            toolStripStatusLblUpdater.Text = e.CustomStatusMessage;
+            toolStripProgressBarUpdater.Value = e.Progress;
+            if (e.LottoWebScrapingStage == LottoWebScrapingStages.INSERT)
+            {
+                if(!toolStripProgressBarUpdater.Visible) toolStripProgressBarUpdater.Visible = true;
+            }
+            else if (e.LottoWebScrapingStage == LottoWebScrapingStages.FINISH)
+            {
+                toolStripBtnDownloadResults.Enabled = true;
+                toolStripStatusLblUpdater.Text = "";
+                toolStripStatusLblUpdater.Visible = false;
+                toolStripProgressBarUpdater.Value = 0;
+                toolStripProgressBarUpdater.Visible = false;
+            }
+            else
+            {
+                if (toolStripProgressBarUpdater.Visible) toolStripProgressBarUpdater.Visible = false;
+            }
+            Application.DoEvents();
+        }
+
+        #endregion
+
+        private void checkLotteryUpdatesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            toolStripBtnDownloadResults_Click(null, null);
+        }
 
     }
 }

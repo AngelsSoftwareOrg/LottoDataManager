@@ -31,7 +31,7 @@ namespace LottoDataManager.Forms
             lotteryDetailsArr.Add(new Game649());
             lotteryDetailsArr.Add(new Game645());
             lotteryDetailsArr.Add(new Game642());*/
-            LottoScraper c = new LottoScraper();
+            LottoPCSOScraper c = new LottoPCSOScraper();
             c.StartScraping(lotteryDetailsArr);
         }
     }
