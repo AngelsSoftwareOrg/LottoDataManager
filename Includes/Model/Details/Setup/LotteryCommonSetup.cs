@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LottoDataManager.Includes.Utilities;
 
 namespace LottoDataManager.Includes.Model.Details.Setup
 {
@@ -75,6 +76,12 @@ namespace LottoDataManager.Includes.Model.Details.Setup
         public void FillNumberBySeq(int seq, int number)
         {
             if (seq < 1 || seq > 6) throw new Exception("Sequence should be between 1-6.");
+
+            foreach(int n in allNumbers)
+            {
+                if (n > 0 && n == number) throw new Exception("Duplicate number is not valid.");
+            }
+
             allNumbers[seq - 1] = number;
         }
         public bool IsNumberSequenceMatchesAll(int[] toMatchNumSeq)
@@ -99,7 +106,7 @@ namespace LottoDataManager.Includes.Model.Details.Setup
             try
             {
                 if (String.IsNullOrWhiteSpace(sequence)) throw new Exception("Parameter should contain a sequence of number for parsing");
-                string[] sequenceDeliminator = new string[] { "-", "/" };
+                string[] sequenceDeliminator = StringUtils.COMMON_DELIMITERS;
                 foreach (String del in sequenceDeliminator)
                 {
                     String[] tokens = sequence.Split(del.ToCharArray());

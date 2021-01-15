@@ -17,19 +17,13 @@ namespace LottoDataManager.Includes.Model
         private GameMode gameMode;
         private String description;
         private Lottery lottery;
-        private LotterySchedule lotterySchedule;
-        private LotteryTicketPanel lotteryTicketPanel;
-        private LotteryWinningCombination lotteryWinningCombination;
 
-        private LotteryDataDerivation lotteryDataDerivation;
-        public LotteryDetails(GameMode gameCode, String description = "")
+        
+        public LotteryDetails(GameMode gameMode, String description = "")
         {
-            SetGameCode(gameCode);
-            SetupLottery();
-            SetupLotterySchedule();
-            SetupLotteryTicketPanel();
-            SetupLotteryWinningCombination();
-            lotteryDataDerivation = new LotteryDataDerivation(gameCode);
+            SetGameMode(gameMode);
+            LotteryDao lotteryDao = LotteryDaoImpl.GetInstance();
+            this.lottery = lotteryDao.GetLottery(gameMode);
             if (String.IsNullOrWhiteSpace(lottery.GetDescription()))
             {
                 SetDescription(description);
@@ -39,27 +33,7 @@ namespace LottoDataManager.Includes.Model
                 SetDescription(lottery.GetDescription());
             }
         }
-        internal void SetupLottery()
-        {
-            LotteryDao lotteryDao = LotteryDaoImpl.GetInstance();
-            this.lottery = lotteryDao.GetLottery(gameMode);
-        }
-        internal void SetupLotterySchedule()
-        {
-            LotteryScheduleDao lotterySchedDao = LotteryScheduleDaoImpl.GetInstance();
-            this.lotterySchedule = lotterySchedDao.GetLotterySchedule(GameMode);
-        }
-        internal void SetupLotteryTicketPanel()
-        {
-            LotteryTicketPanelDao lotteryTicketPanelDao = LotteryTicketPanelDaoImpl.GetInstance();
-            this.lotteryTicketPanel = lotteryTicketPanelDao.GetLotteryTicketPanel(GameMode);
-        }
-        internal void SetupLotteryWinningCombination()
-        {
-            LotteryWinningCombinationDao lotteryWinningCombinationDao = LotteryWinningCombinationDaoImpl.GetInstance();
-            this.lotteryWinningCombination = lotteryWinningCombinationDao.GetLotteryWinningCombination(GameMode);
-        }
-        protected void SetGameCode(GameMode gameCode) 
+        protected void SetGameMode(GameMode gameCode) 
         { 
             this.gameMode = gameCode; 
         }
@@ -70,19 +44,6 @@ namespace LottoDataManager.Includes.Model
         public GameMode GameMode { get => gameMode; }
         public int GameCode { get => (int) GameMode; }
         public string Description { get => description; }
-        public LotteryDataDerivation LotteryDataDerivation { get => lotteryDataDerivation; }
-        public List<LotteryDrawResult> GetLotteryDrawResults(DateTime startingDate)
-        {
-            if (startingDate >= DateTime.Now) throw new Exception("Date should be backdated when getting new Draw Results!");
-            LotteryDrawResultDao drDao = LotteryDrawResultDaoImpl.GetInstance();
-            return drDao.GetDrawResultsFromStartingDate(GameMode, startingDate);
-        }
-        public List<LotteryBet> GetLottoBets(DateTime sinceWhen)
-        {
-            if (sinceWhen >= DateTime.Now) throw new Exception("Date should be backdated when getting new Draw Bets!");
-            LotteryBetDao betDao = LotteryBetDaoImpl.GetInstance();
-            return betDao.GetDashboardLatestBets(GameMode, sinceWhen);
-        }
         public Lottery Lottery
         {
             get
@@ -90,15 +51,6 @@ namespace LottoDataManager.Includes.Model
                 return this.lottery;
             }
         }
-        public double GetTotalWinningsAmount()
-        {
-            LotteryWinningBetDao lotteryWinningBetDao = LotteryWinningBetDaoImpl.GetInstance();
-            return lotteryWinningBetDao.GetTotalWinningsAmount(this.GameMode);
-        }
-        public double GetTotalWinningsAmountThisMonth()
-        {
-            LotteryWinningBetDao lotteryWinningBetDao = LotteryWinningBetDaoImpl.GetInstance();
-            return lotteryWinningBetDao.GetTotalWinningsAmountThisMonth(this.GameMode);
-        }
+
     }
 }

@@ -13,7 +13,6 @@ namespace LottoDataManager.Includes.Classes.Scraping
         public GameMode GameMode { get; set; }
         public LottoWebScrapingStages LottoWebScrapingStage { get; set; }
         public int Progress { get; set; }
-    
         public String CustomStatusMessage { get; set; }
     }
 }

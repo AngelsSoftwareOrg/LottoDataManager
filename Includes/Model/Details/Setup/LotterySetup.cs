@@ -22,7 +22,7 @@ namespace LottoDataManager.Includes.Model.Details.Setup
         {
             return Description ;
         }
-        public GameMode GetGameCode()
+        public GameMode GetGameMode()
         {
             return GameCode;
         }

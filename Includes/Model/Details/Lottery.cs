@@ -9,7 +9,7 @@ namespace LottoDataManager.Includes.Model.Details
 {
     public interface Lottery
     {
-        GameMode GetGameCode();
+        GameMode GetGameMode();
         String GetDescription();
         double GetPricePerBet();
         int GetWebScrapeGameCode();

@@ -13,7 +13,6 @@ using AngleSharp.Html.Parser;
 using LottoDataManager.Includes.Database.DAO;
 using LottoDataManager.Includes.Model;
 using LottoDataManager.Includes.Model.Details;
-using LottoDataManager.Includes.Model.Structs;
 using LottoDataManager.Includes.Utilities;
 
 namespace LottoDataManager.Includes.Classes.Scraping

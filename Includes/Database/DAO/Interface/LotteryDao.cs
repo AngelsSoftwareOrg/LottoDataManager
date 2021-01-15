@@ -11,5 +11,6 @@ namespace LottoDataManager.Includes.Database.DAO.Interface
     public interface LotteryDao
     {
         Lottery GetLottery(GameMode gameCode);
+        List<Lottery> GetLotteries();
     }
 }

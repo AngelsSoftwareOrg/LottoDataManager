@@ -10,17 +10,17 @@ namespace LottoDataManager.Includes.Model.Details
 {
     public class LotteryDataDerivation
     {
-        private GameMode gameCode;
+        private GameMode gameMode;
         private LotteryScheduleDao lotteryScheduleDao;
-        public LotteryDataDerivation(GameMode gameCode)
+        public LotteryDataDerivation(GameMode gameMode)
         {
-            this.gameCode = gameCode;
+            this.gameMode = gameMode;
             this.lotteryScheduleDao = LotteryScheduleDaoImpl.GetInstance();
         }
         public DateTime GetNextDrawDate()
         {
             DateTime nextScheduledDate = DateTime.Now;
-            LotterySchedule lotterySchedule = this.lotteryScheduleDao.GetLotterySchedule(gameCode);
+            LotterySchedule lotterySchedule = this.lotteryScheduleDao.GetLotterySchedule(gameMode);
             int breaker = 0;
             while (true)
             {

@@ -9,12 +9,16 @@ using LottoDataManager.Includes.Database.DAO.Interface;
 using LottoDataManager.Includes.Model.Details;
 using LottoDataManager.Includes.Model.Details.Setup;
 using LottoDataManager.Includes.Model.Structs;
+using LottoDataManager.Includes.Utilities;
 
 namespace LottoDataManager.Includes.Database.DAO.Impl
 {
     public class LotteryDaoImpl : LotteryDao
     {
         private static LotteryDaoImpl lotteryDaoImpl;
+
+        public GameMode ClassReflection { get; private set; }
+
         private LotteryDaoImpl() { }
         public static LotteryDao GetInstance()
         {
@@ -48,6 +52,32 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                 }
             }
             return lotterySetup;
+        }
+        public List<Lottery> GetLotteries()
+        {
+            List <Lottery> lotterySetupArr = new List<Lottery>();
+            using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
+            using (OleDbCommand command = new OleDbCommand())
+            {
+                command.CommandType = CommandType.Text;
+                command.CommandText = "SELECT * FROM lottery WHERE active = true;";
+                command.Connection = conn;
+                conn.Open();
+
+                using (OleDbDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        LotterySetup lotterySetup = new LotterySetup();
+                        lotterySetup.GameCode = ClassReflectionUtil.FindGameMode(int.Parse(reader["game_cd"].ToString()));
+                        lotterySetup.Description = reader["description"].ToString();
+                        lotterySetup.PricePerBet = double.Parse(reader["price_per_bet"].ToString());
+                        lotterySetup.WebScrapeGameCode = int.Parse(reader["web_scrape_code"].ToString());
+                        lotterySetupArr.Add(lotterySetup);
+                    }
+                }
+            }
+            return lotterySetupArr;
         }
     }
 }

@@ -65,43 +65,58 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Forms\LottoCheckLatestResult.cs">
+    <Compile Include="Forms\AddBetFrm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\LottoCheckLatestResult.Designer.cs">
-      <DependentUpon>LottoCheckLatestResult.cs</DependentUpon>
+    <Compile Include="Forms\AddBetFrm.Designer.cs">
+      <DependentUpon>AddBetFrm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\LottoCheckLatestResultFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LottoCheckLatestResultFrm.Designer.cs">
+      <DependentUpon>LottoCheckLatestResultFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Includes\Classes\LotteryDataServices.cs" />
     <Compile Include="Includes\Classes\LotteryDataWorker.cs" />
     <Compile Include="Includes\Classes\Scraping\LottoWebScraper.cs" />
     <Compile Include="Includes\Classes\Scraping\LottoPCSOScraper.cs" />
     <Compile Include="Includes\Classes\Scraping\LottoWebScraperEvent.cs" />
     <Compile Include="Includes\Classes\Scraping\LottoWebScrapingStages.cs" />
     <Compile Include="Includes\Classes\Scraping\WebLottoScraperFactory.cs" />
+    <Compile Include="Includes\Classes\UserSettings.cs" />
     <Compile Include="Includes\Database\DAO\Impl\LotteryBetDaoImpl.cs" />
+    <Compile Include="Includes\Database\DAO\Impl\LotteryOutletDaoImpl.cs" />
     <Compile Include="Includes\Database\DAO\Impl\LotteryWinningBetDaoImpl.cs" />
     <Compile Include="Includes\Database\DAO\Impl\LotteryDaoImpl.cs" />
+    <Compile Include="Includes\Database\DAO\Impl\UserSettingDaoImpl.cs" />
     <Compile Include="Includes\Database\DAO\Interface\LotteryBetDao.cs" />
+    <Compile Include="Includes\Database\DAO\Interface\LotteryOutletDao.cs" />
     <Compile Include="Includes\Database\DAO\Interface\LotteryWinningBetDao.cs" />
     <Compile Include="Includes\Database\DAO\Interface\LotteryDao.cs" />
     <Compile Include="Includes\Database\DAO\Interface\LotteryDrawResultDao.cs" />
     <Compile Include="Includes\Database\DAO\Impl\LotteryDrawResultDaoImpl.cs" />
     <Compile Include="Includes\Database\DAO\Interface\LotteryWinningCombinationDao.cs" />
     <Compile Include="Includes\Database\DAO\Impl\LotteryWinningCombinationDaoImpl.cs" />
+    <Compile Include="Includes\Database\DAO\Interface\UserSettingDao.cs" />
     <Compile Include="Includes\Model\Details\Lottery.cs" />
     <Compile Include="Includes\Model\Details\LotteryBet.cs" />
     <Compile Include="Includes\Model\Details\LotteryDataDerivation.cs" />
     <Compile Include="Includes\Model\Details\LotteryNumbersAndOperations.cs" />
+    <Compile Include="Includes\Model\Details\LotteryOutlet.cs" />
     <Compile Include="Includes\Model\Details\LotteryWinningBet.cs" />
     <Compile Include="Includes\Model\Details\Setup\LotteryBetSetup.cs" />
     <Compile Include="Includes\Model\Details\LotteryDrawResult.cs" />
     <Compile Include="Includes\Model\Details\Setup\LotteryCommonSetup.cs" />
     <Compile Include="Includes\Model\Details\Setup\LotteryDrawResultSetup.cs" />
+    <Compile Include="Includes\Model\Details\Setup\LotteryOutletSetup.cs" />
     <Compile Include="Includes\Model\Details\Setup\LotterySetup.cs" />
     <Compile Include="Includes\Model\Details\Setup\LotteryWinningBetSetup.cs" />
     <Compile Include="Includes\Model\Game\Game658.cs" />
     <Compile Include="Includes\Model\Game\Game655.cs" />
     <Compile Include="Includes\Model\Game\Game649.cs" />
     <Compile Include="Includes\Model\Game\Game645.cs" />
+    <Compile Include="Includes\Model\Game\GameFactory.cs" />
     <Compile Include="Includes\Utilities\AppSettings.cs" />
     <Compile Include="Includes\Database\DAO\Interface\LotteryScheduleDao.cs" />
     <Compile Include="Includes\Database\DAO\Impl\LotteryScheduleDaoImpl.cs" />
@@ -120,22 +135,26 @@
     <Compile Include="Includes\Model\Details\Setup\LotteryWinningCombinationSetup.cs" />
     <Compile Include="Includes\Model\Structs\GameMode.cs" />
     <Compile Include="Includes\Model\Structs\NumberDirection.cs" />
-    <Compile Include="Forms\MainForm.cs">
+    <Compile Include="Forms\MainFrm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\MainForm.Designer.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
+    <Compile Include="Forms\MainFrm.Designer.cs">
+      <DependentUpon>MainFrm.cs</DependentUpon>
     </Compile>
     <Compile Include="Includes\Utilities\ClassReflectionUtil.cs" />
     <Compile Include="Includes\Utilities\ConverterUtils.cs" />
     <Compile Include="Includes\Utilities\DateTimeConverterUtils.cs" />
+    <Compile Include="Includes\Utilities\StringUtils.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Forms\LottoCheckLatestResult.resx">
-      <DependentUpon>LottoCheckLatestResult.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\AddBetFrm.resx">
+      <DependentUpon>AddBetFrm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\MainForm.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\LottoCheckLatestResultFrm.resx">
+      <DependentUpon>LottoCheckLatestResultFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MainFrm.resx">
+      <DependentUpon>MainFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

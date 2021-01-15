@@ -32,6 +32,7 @@ namespace LottoDataManager.Includes.Classes
                 LotteryWinningBetSetup lotteryWinningBet = new LotteryWinningBetSetup();
                 lotteryWinningBet.LotteryBetId = lotteryBet.GetId(); //betDrawResult.GetID();
 
+                if (betDrawResult == null) continue;
                 if (betDrawResult.IsDrawResulDetailsEmpty()) continue;
 
                 int matchingNumberCtr = 0;
