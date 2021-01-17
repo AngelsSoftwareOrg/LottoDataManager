@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
+using LottoDataManager.Forms;
 using LottoDataManager.Includes.Classes;
 using LottoDataManager.Includes.Classes.Scraping;
 using LottoDataManager.Includes.Database.DAO;
@@ -264,6 +265,11 @@ namespace LottoDataManager
            LotteryDataWorker ld = new LotteryDataWorker();
            ld.ProcessCheckingForWinningBets(this.lotteryDetails.GameMode);
         }
+        private void toolStripBtnNewBet_Click(object sender, EventArgs e)
+        {
+            AddBetFrm betForm = new AddBetFrm(this.lotteryDataServices);
+            betForm.ShowDialog();
+        }
         #endregion
 
         #region "Lotto Scraper"
@@ -354,6 +360,7 @@ namespace LottoDataManager
         {
             this.Close();
         }
+
         #endregion
 
 

@@ -14,6 +14,6 @@ namespace LottoDataManager.Includes.Model.Details
         int GetCols();
         int GetMin();
         int GetMax();
-
+        int GetGameDigitCount();
     }
 }

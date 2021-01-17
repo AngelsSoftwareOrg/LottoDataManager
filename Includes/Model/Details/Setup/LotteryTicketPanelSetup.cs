@@ -14,11 +14,14 @@ namespace LottoDataManager.Includes.Model.Details
         private int cols;
         private int min;
         private int max;
+        private int gameDigitCount;
         public NumberDirection NumberDirection { get => numberDirection; set => numberDirection = value; }
         public int Rows { get => rows; set => rows = value; }
         public int Cols { get => cols; set => cols = value; }
         public int Min { get => min; set => min = value; }
         public int Max { get => max; set => max = value; }
+        public int GameDigitCount { get => gameDigitCount; set => gameDigitCount = value; }
+
         public int GetCols()
         {
             return this.Cols;
@@ -48,6 +51,11 @@ namespace LottoDataManager.Includes.Model.Details
 #else
             return base.ToString();
 #endif
+        }
+
+        public int GetGameDigitCount()
+        {
+            return GameDigitCount;
         }
     }
 }

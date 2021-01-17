@@ -33,30 +33,33 @@ namespace LottoDataManager.Forms
             this.splitContainerMain = new System.Windows.Forms.SplitContainer();
             this.tabControlInputs = new System.Windows.Forms.TabControl();
             this.tabPageDelimiters = new System.Windows.Forms.TabPage();
-            this.tabPageClick = new System.Windows.Forms.TabPage();
-            this.textBoxInstruction = new System.Windows.Forms.TextBox();
             this.textBoxDelimitersInput = new System.Windows.Forms.TextBox();
-            this.groupDetails = new System.Windows.Forms.GroupBox();
-            this.groupBoxDateSelection = new System.Windows.Forms.GroupBox();
-            this.dtPickPreferredDate = new System.Windows.Forms.DateTimePicker();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.lblNextDrawDate = new System.Windows.Forms.Label();
-            this.lblGameDesc = new System.Windows.Forms.Label();
-            this.radioBtnPreferredDate = new System.Windows.Forms.RadioButton();
-            this.radioBtnNextDrawDate = new System.Windows.Forms.RadioButton();
-            this.btnExit = new System.Windows.Forms.Button();
-            this.btnAdd = new System.Windows.Forms.Button();
-            this.txtStatus = new System.Windows.Forms.TextBox();
-            this.checkBoxLuckyPick = new System.Windows.Forms.CheckBox();
-            this.cmbOutlet = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.panelTicketControls = new System.Windows.Forms.Panel();
+            this.textBoxInstruction = new System.Windows.Forms.TextBox();
+            this.tabPageClick = new System.Windows.Forms.TabPage();
             this.panelTicketNumbers = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
             this.groupBoxTicketPanel = new System.Windows.Forms.GroupBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tblLayoutPnl = new System.Windows.Forms.TableLayoutPanel();
+            this.panelTicketControls = new System.Windows.Forms.Panel();
+            this.linkLblClrSelNum = new System.Windows.Forms.LinkLabel();
+            this.lblSelectedNumber = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.checkBoxLuckyPick = new System.Windows.Forms.CheckBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cmbOutlet = new System.Windows.Forms.ComboBox();
+            this.txtStatus = new System.Windows.Forms.TextBox();
+            this.btnAdd = new System.Windows.Forms.Button();
+            this.btnExit = new System.Windows.Forms.Button();
+            this.groupBoxDateSelection = new System.Windows.Forms.GroupBox();
+            this.radioBtnNextDrawDate = new System.Windows.Forms.RadioButton();
+            this.radioBtnPreferredDate = new System.Windows.Forms.RadioButton();
+            this.dtPickPreferredDate = new System.Windows.Forms.DateTimePicker();
+            this.groupDetails = new System.Windows.Forms.GroupBox();
+            this.lblGameDesc = new System.Windows.Forms.Label();
+            this.lblNextDrawDate = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerMain)).BeginInit();
             this.splitContainerMain.Panel1.SuspendLayout();
             this.splitContainerMain.Panel2.SuspendLayout();
@@ -64,12 +67,13 @@ namespace LottoDataManager.Forms
             this.tabControlInputs.SuspendLayout();
             this.tabPageDelimiters.SuspendLayout();
             this.tabPageClick.SuspendLayout();
-            this.groupDetails.SuspendLayout();
-            this.groupBoxDateSelection.SuspendLayout();
-            this.panelTicketControls.SuspendLayout();
             this.panelTicketNumbers.SuspendLayout();
             this.groupBoxTicketPanel.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.panelTicketControls.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.groupBoxDateSelection.SuspendLayout();
+            this.groupDetails.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainerMain
@@ -85,6 +89,7 @@ namespace LottoDataManager.Forms
             // 
             // splitContainerMain.Panel2
             // 
+            this.splitContainerMain.Panel2.Controls.Add(this.groupBox1);
             this.splitContainerMain.Panel2.Controls.Add(this.txtStatus);
             this.splitContainerMain.Panel2.Controls.Add(this.btnAdd);
             this.splitContainerMain.Panel2.Controls.Add(this.btnExit);
@@ -112,10 +117,35 @@ namespace LottoDataManager.Forms
             this.tabPageDelimiters.Location = new System.Drawing.Point(4, 25);
             this.tabPageDelimiters.Name = "tabPageDelimiters";
             this.tabPageDelimiters.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageDelimiters.Size = new System.Drawing.Size(442, 620);
+            this.tabPageDelimiters.Size = new System.Drawing.Size(442, 567);
             this.tabPageDelimiters.TabIndex = 0;
             this.tabPageDelimiters.Text = "Input by Delimiters";
             this.tabPageDelimiters.UseVisualStyleBackColor = true;
+            // 
+            // textBoxDelimitersInput
+            // 
+            this.textBoxDelimitersInput.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBoxDelimitersInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxDelimitersInput.Location = new System.Drawing.Point(3, 95);
+            this.textBoxDelimitersInput.Multiline = true;
+            this.textBoxDelimitersInput.Name = "textBoxDelimitersInput";
+            this.textBoxDelimitersInput.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.textBoxDelimitersInput.Size = new System.Drawing.Size(436, 469);
+            this.textBoxDelimitersInput.TabIndex = 1;
+            // 
+            // textBoxInstruction
+            // 
+            this.textBoxInstruction.BackColor = System.Drawing.SystemColors.Window;
+            this.textBoxInstruction.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBoxInstruction.Dock = System.Windows.Forms.DockStyle.Top;
+            this.textBoxInstruction.Location = new System.Drawing.Point(3, 3);
+            this.textBoxInstruction.Multiline = true;
+            this.textBoxInstruction.Name = "textBoxInstruction";
+            this.textBoxInstruction.ReadOnly = true;
+            this.textBoxInstruction.Size = new System.Drawing.Size(436, 92);
+            this.textBoxInstruction.TabIndex = 0;
+            this.textBoxInstruction.Text = "Please input your 6 digits number in the textbox below per line, separated either" +
+    " with space, hypen or a tab";
             // 
             // tabPageClick
             // 
@@ -129,30 +159,223 @@ namespace LottoDataManager.Forms
             this.tabPageClick.Text = "Input By Ticket Layout";
             this.tabPageClick.UseVisualStyleBackColor = true;
             // 
-            // textBoxInstruction
+            // panelTicketNumbers
             // 
-            this.textBoxInstruction.BackColor = System.Drawing.SystemColors.Window;
-            this.textBoxInstruction.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBoxInstruction.Dock = System.Windows.Forms.DockStyle.Top;
-            this.textBoxInstruction.Location = new System.Drawing.Point(3, 3);
-            this.textBoxInstruction.Multiline = true;
-            this.textBoxInstruction.Name = "textBoxInstruction";
-            this.textBoxInstruction.ReadOnly = true;
-            this.textBoxInstruction.Size = new System.Drawing.Size(436, 101);
-            this.textBoxInstruction.TabIndex = 0;
-            this.textBoxInstruction.Text = "Please input your 6 digits number in the textbox below per line, separated either" +
-    " with space, hypen or a tab";
+            this.panelTicketNumbers.Controls.Add(this.groupBoxTicketPanel);
+            this.panelTicketNumbers.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelTicketNumbers.Location = new System.Drawing.Point(3, 109);
+            this.panelTicketNumbers.Name = "panelTicketNumbers";
+            this.panelTicketNumbers.Size = new System.Drawing.Size(436, 455);
+            this.panelTicketNumbers.TabIndex = 1;
             // 
-            // textBoxDelimitersInput
+            // groupBoxTicketPanel
             // 
-            this.textBoxDelimitersInput.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxDelimitersInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxDelimitersInput.Location = new System.Drawing.Point(3, 104);
-            this.textBoxDelimitersInput.Multiline = true;
-            this.textBoxDelimitersInput.Name = "textBoxDelimitersInput";
-            this.textBoxDelimitersInput.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBoxDelimitersInput.Size = new System.Drawing.Size(436, 513);
-            this.textBoxDelimitersInput.TabIndex = 1;
+            this.groupBoxTicketPanel.Controls.Add(this.panel1);
+            this.groupBoxTicketPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBoxTicketPanel.Location = new System.Drawing.Point(0, 0);
+            this.groupBoxTicketPanel.Name = "groupBoxTicketPanel";
+            this.groupBoxTicketPanel.Size = new System.Drawing.Size(436, 455);
+            this.groupBoxTicketPanel.TabIndex = 0;
+            this.groupBoxTicketPanel.TabStop = false;
+            this.groupBoxTicketPanel.Text = "Select number on this game ticket";
+            // 
+            // panel1
+            // 
+            this.panel1.AutoScroll = true;
+            this.panel1.Controls.Add(this.tblLayoutPnl);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(3, 18);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(430, 434);
+            this.panel1.TabIndex = 2;
+            // 
+            // tblLayoutPnl
+            // 
+            this.tblLayoutPnl.ColumnCount = 2;
+            this.tblLayoutPnl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tblLayoutPnl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tblLayoutPnl.Location = new System.Drawing.Point(5, 3);
+            this.tblLayoutPnl.Name = "tblLayoutPnl";
+            this.tblLayoutPnl.RowCount = 2;
+            this.tblLayoutPnl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tblLayoutPnl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tblLayoutPnl.Size = new System.Drawing.Size(480, 433);
+            this.tblLayoutPnl.TabIndex = 3;
+            // 
+            // panelTicketControls
+            // 
+            this.panelTicketControls.Controls.Add(this.linkLblClrSelNum);
+            this.panelTicketControls.Controls.Add(this.lblSelectedNumber);
+            this.panelTicketControls.Controls.Add(this.label2);
+            this.panelTicketControls.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelTicketControls.Location = new System.Drawing.Point(3, 3);
+            this.panelTicketControls.Name = "panelTicketControls";
+            this.panelTicketControls.Size = new System.Drawing.Size(436, 106);
+            this.panelTicketControls.TabIndex = 0;
+            // 
+            // linkLblClrSelNum
+            // 
+            this.linkLblClrSelNum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.linkLblClrSelNum.AutoSize = true;
+            this.linkLblClrSelNum.Location = new System.Drawing.Point(323, 80);
+            this.linkLblClrSelNum.Name = "linkLblClrSelNum";
+            this.linkLblClrSelNum.Size = new System.Drawing.Size(110, 17);
+            this.linkLblClrSelNum.TabIndex = 10;
+            this.linkLblClrSelNum.TabStop = true;
+            this.linkLblClrSelNum.Text = "Clear Selections";
+            this.linkLblClrSelNum.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLblClrSelNum_LinkClicked);
+            // 
+            // lblSelectedNumber
+            // 
+            this.lblSelectedNumber.AutoSize = true;
+            this.lblSelectedNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSelectedNumber.ForeColor = System.Drawing.Color.Green;
+            this.lblSelectedNumber.Location = new System.Drawing.Point(68, 32);
+            this.lblSelectedNumber.Name = "lblSelectedNumber";
+            this.lblSelectedNumber.Size = new System.Drawing.Size(295, 38);
+            this.lblSelectedNumber.TabIndex = 9;
+            this.lblSelectedNumber.Text = "11 10 20 30 40 50";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(5, 10);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(150, 17);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "You selected number: ";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.checkBoxLuckyPick);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.cmbOutlet);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.Location = new System.Drawing.Point(0, 145);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(771, 83);
+            this.groupBox1.TabIndex = 6;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Where did you buy the ticket?";
+            // 
+            // checkBoxLuckyPick
+            // 
+            this.checkBoxLuckyPick.AutoSize = true;
+            this.checkBoxLuckyPick.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBoxLuckyPick.Location = new System.Drawing.Point(16, 54);
+            this.checkBoxLuckyPick.Name = "checkBoxLuckyPick";
+            this.checkBoxLuckyPick.Size = new System.Drawing.Size(130, 21);
+            this.checkBoxLuckyPick.TabIndex = 11;
+            this.checkBoxLuckyPick.Text = "Is it Lucky Pick?";
+            this.checkBoxLuckyPick.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(13, 27);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(86, 17);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "Lotto Outlet:";
+            // 
+            // cmbOutlet
+            // 
+            this.cmbOutlet.BackColor = System.Drawing.SystemColors.Window;
+            this.cmbOutlet.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbOutlet.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbOutlet.ForeColor = System.Drawing.SystemColors.MenuText;
+            this.cmbOutlet.FormattingEnabled = true;
+            this.cmbOutlet.Location = new System.Drawing.Point(118, 24);
+            this.cmbOutlet.Name = "cmbOutlet";
+            this.cmbOutlet.Size = new System.Drawing.Size(407, 26);
+            this.cmbOutlet.Sorted = true;
+            this.cmbOutlet.TabIndex = 9;
+            // 
+            // txtStatus
+            // 
+            this.txtStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtStatus.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtStatus.Location = new System.Drawing.Point(4, 234);
+            this.txtStatus.Multiline = true;
+            this.txtStatus.Name = "txtStatus";
+            this.txtStatus.ReadOnly = true;
+            this.txtStatus.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtStatus.Size = new System.Drawing.Size(764, 283);
+            this.txtStatus.TabIndex = 5;
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAdd.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnAdd.Location = new System.Drawing.Point(487, 523);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(133, 61);
+            this.btnAdd.TabIndex = 4;
+            this.btnAdd.Text = "Add bets";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            // 
+            // btnExit
+            // 
+            this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExit.Location = new System.Drawing.Point(626, 523);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(133, 61);
+            this.btnExit.TabIndex = 3;
+            this.btnExit.Text = "Exit";
+            this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            // 
+            // groupBoxDateSelection
+            // 
+            this.groupBoxDateSelection.Controls.Add(this.radioBtnNextDrawDate);
+            this.groupBoxDateSelection.Controls.Add(this.radioBtnPreferredDate);
+            this.groupBoxDateSelection.Controls.Add(this.dtPickPreferredDate);
+            this.groupBoxDateSelection.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBoxDateSelection.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBoxDateSelection.Location = new System.Drawing.Point(0, 81);
+            this.groupBoxDateSelection.Name = "groupBoxDateSelection";
+            this.groupBoxDateSelection.Size = new System.Drawing.Size(771, 64);
+            this.groupBoxDateSelection.TabIndex = 2;
+            this.groupBoxDateSelection.TabStop = false;
+            this.groupBoxDateSelection.Text = "Select Draw Date for the inputted Numbers";
+            // 
+            // radioBtnNextDrawDate
+            // 
+            this.radioBtnNextDrawDate.AutoSize = true;
+            this.radioBtnNextDrawDate.Checked = true;
+            this.radioBtnNextDrawDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioBtnNextDrawDate.Location = new System.Drawing.Point(16, 29);
+            this.radioBtnNextDrawDate.Name = "radioBtnNextDrawDate";
+            this.radioBtnNextDrawDate.Size = new System.Drawing.Size(127, 21);
+            this.radioBtnNextDrawDate.TabIndex = 3;
+            this.radioBtnNextDrawDate.TabStop = true;
+            this.radioBtnNextDrawDate.Text = "Next Draw Date";
+            this.radioBtnNextDrawDate.UseVisualStyleBackColor = true;
+            // 
+            // radioBtnPreferredDate
+            // 
+            this.radioBtnPreferredDate.AutoSize = true;
+            this.radioBtnPreferredDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioBtnPreferredDate.Location = new System.Drawing.Point(155, 29);
+            this.radioBtnPreferredDate.Name = "radioBtnPreferredDate";
+            this.radioBtnPreferredDate.Size = new System.Drawing.Size(123, 21);
+            this.radioBtnPreferredDate.TabIndex = 2;
+            this.radioBtnPreferredDate.Text = "Preferred Date";
+            this.radioBtnPreferredDate.UseVisualStyleBackColor = true;
+            // 
+            // dtPickPreferredDate
+            // 
+            this.dtPickPreferredDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtPickPreferredDate.Location = new System.Drawing.Point(287, 29);
+            this.dtPickPreferredDate.Name = "dtPickPreferredDate";
+            this.dtPickPreferredDate.Size = new System.Drawing.Size(321, 24);
+            this.dtPickPreferredDate.TabIndex = 1;
             // 
             // groupDetails
             // 
@@ -169,49 +392,16 @@ namespace LottoDataManager.Forms
             this.groupDetails.TabStop = false;
             this.groupDetails.Text = "Current game: ";
             // 
-            // groupBoxDateSelection
+            // lblGameDesc
             // 
-            this.groupBoxDateSelection.Controls.Add(this.label1);
-            this.groupBoxDateSelection.Controls.Add(this.cmbOutlet);
-            this.groupBoxDateSelection.Controls.Add(this.checkBoxLuckyPick);
-            this.groupBoxDateSelection.Controls.Add(this.radioBtnNextDrawDate);
-            this.groupBoxDateSelection.Controls.Add(this.radioBtnPreferredDate);
-            this.groupBoxDateSelection.Controls.Add(this.dtPickPreferredDate);
-            this.groupBoxDateSelection.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBoxDateSelection.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBoxDateSelection.Location = new System.Drawing.Point(0, 81);
-            this.groupBoxDateSelection.Name = "groupBoxDateSelection";
-            this.groupBoxDateSelection.Size = new System.Drawing.Size(771, 162);
-            this.groupBoxDateSelection.TabIndex = 2;
-            this.groupBoxDateSelection.TabStop = false;
-            this.groupBoxDateSelection.Text = "Select Draw Date for the inputted Numbers";
-            // 
-            // dtPickPreferredDate
-            // 
-            this.dtPickPreferredDate.Location = new System.Drawing.Point(16, 56);
-            this.dtPickPreferredDate.Name = "dtPickPreferredDate";
-            this.dtPickPreferredDate.Size = new System.Drawing.Size(407, 22);
-            this.dtPickPreferredDate.TabIndex = 1;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(6, 25);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(93, 17);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "Game Mode: ";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(6, 50);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(114, 17);
-            this.label4.TabIndex = 4;
-            this.label4.Text = "Next Draw Date: ";
+            this.lblGameDesc.AutoSize = true;
+            this.lblGameDesc.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblGameDesc.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.lblGameDesc.Location = new System.Drawing.Point(95, 21);
+            this.lblGameDesc.Name = "lblGameDesc";
+            this.lblGameDesc.Size = new System.Drawing.Size(158, 24);
+            this.lblGameDesc.TabIndex = 6;
+            this.lblGameDesc.Text = "6/58 Mega Lotto";
             // 
             // lblNextDrawDate
             // 
@@ -224,171 +414,25 @@ namespace LottoDataManager.Forms
             this.lblNextDrawDate.TabIndex = 5;
             this.lblNextDrawDate.Text = "January 5, 2020 - Tuesday";
             // 
-            // lblGameDesc
+            // label4
             // 
-            this.lblGameDesc.AutoSize = true;
-            this.lblGameDesc.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblGameDesc.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.lblGameDesc.Location = new System.Drawing.Point(95, 21);
-            this.lblGameDesc.Name = "lblGameDesc";
-            this.lblGameDesc.Size = new System.Drawing.Size(158, 24);
-            this.lblGameDesc.TabIndex = 6;
-            this.lblGameDesc.Text = "6/58 Mega Lotto";
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(6, 50);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(114, 17);
+            this.label4.TabIndex = 4;
+            this.label4.Text = "Next Draw Date: ";
             // 
-            // radioBtnPreferredDate
+            // label3
             // 
-            this.radioBtnPreferredDate.AutoSize = true;
-            this.radioBtnPreferredDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioBtnPreferredDate.Location = new System.Drawing.Point(16, 29);
-            this.radioBtnPreferredDate.Name = "radioBtnPreferredDate";
-            this.radioBtnPreferredDate.Size = new System.Drawing.Size(123, 21);
-            this.radioBtnPreferredDate.TabIndex = 2;
-            this.radioBtnPreferredDate.Text = "Preferred Date";
-            this.radioBtnPreferredDate.UseVisualStyleBackColor = true;
-            // 
-            // radioBtnNextDrawDate
-            // 
-            this.radioBtnNextDrawDate.AutoSize = true;
-            this.radioBtnNextDrawDate.Checked = true;
-            this.radioBtnNextDrawDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioBtnNextDrawDate.Location = new System.Drawing.Point(145, 29);
-            this.radioBtnNextDrawDate.Name = "radioBtnNextDrawDate";
-            this.radioBtnNextDrawDate.Size = new System.Drawing.Size(127, 21);
-            this.radioBtnNextDrawDate.TabIndex = 3;
-            this.radioBtnNextDrawDate.TabStop = true;
-            this.radioBtnNextDrawDate.Text = "Next Draw Date";
-            this.radioBtnNextDrawDate.UseVisualStyleBackColor = true;
-            // 
-            // btnExit
-            // 
-            this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExit.Location = new System.Drawing.Point(626, 523);
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(133, 61);
-            this.btnExit.TabIndex = 3;
-            this.btnExit.Text = "Exit";
-            this.btnExit.UseVisualStyleBackColor = true;
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
-            // 
-            // btnAdd
-            // 
-            this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAdd.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnAdd.Location = new System.Drawing.Point(487, 523);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(133, 61);
-            this.btnAdd.TabIndex = 4;
-            this.btnAdd.Text = "Add bets";
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-            // 
-            // txtStatus
-            // 
-            this.txtStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtStatus.Location = new System.Drawing.Point(4, 249);
-            this.txtStatus.Multiline = true;
-            this.txtStatus.Name = "txtStatus";
-            this.txtStatus.ReadOnly = true;
-            this.txtStatus.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtStatus.Size = new System.Drawing.Size(764, 268);
-            this.txtStatus.TabIndex = 5;
-            // 
-            // checkBoxLuckyPick
-            // 
-            this.checkBoxLuckyPick.AutoSize = true;
-            this.checkBoxLuckyPick.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBoxLuckyPick.Location = new System.Drawing.Point(16, 135);
-            this.checkBoxLuckyPick.Name = "checkBoxLuckyPick";
-            this.checkBoxLuckyPick.Size = new System.Drawing.Size(105, 21);
-            this.checkBoxLuckyPick.TabIndex = 4;
-            this.checkBoxLuckyPick.Text = "Lucky Pick?";
-            this.checkBoxLuckyPick.UseVisualStyleBackColor = true;
-            // 
-            // cmbOutlet
-            // 
-            this.cmbOutlet.BackColor = System.Drawing.SystemColors.Window;
-            this.cmbOutlet.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbOutlet.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbOutlet.ForeColor = System.Drawing.SystemColors.MenuText;
-            this.cmbOutlet.FormattingEnabled = true;
-            this.cmbOutlet.Location = new System.Drawing.Point(16, 104);
-            this.cmbOutlet.Name = "cmbOutlet";
-            this.cmbOutlet.Size = new System.Drawing.Size(407, 24);
-            this.cmbOutlet.Sorted = true;
-            this.cmbOutlet.TabIndex = 6;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(13, 84);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(86, 17);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "Lotto Outlet:";
-            // 
-            // panelTicketControls
-            // 
-            this.panelTicketControls.Controls.Add(this.label2);
-            this.panelTicketControls.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelTicketControls.Location = new System.Drawing.Point(3, 3);
-            this.panelTicketControls.Name = "panelTicketControls";
-            this.panelTicketControls.Size = new System.Drawing.Size(436, 154);
-            this.panelTicketControls.TabIndex = 0;
-            // 
-            // panelTicketNumbers
-            // 
-            this.panelTicketNumbers.Controls.Add(this.groupBoxTicketPanel);
-            this.panelTicketNumbers.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelTicketNumbers.Location = new System.Drawing.Point(3, 157);
-            this.panelTicketNumbers.Name = "panelTicketNumbers";
-            this.panelTicketNumbers.Size = new System.Drawing.Size(436, 407);
-            this.panelTicketNumbers.TabIndex = 1;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(5, 12);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(193, 17);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Please choose number below";
-            // 
-            // groupBoxTicketPanel
-            // 
-            this.groupBoxTicketPanel.Controls.Add(this.panel1);
-            this.groupBoxTicketPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBoxTicketPanel.Location = new System.Drawing.Point(0, 0);
-            this.groupBoxTicketPanel.Name = "groupBoxTicketPanel";
-            this.groupBoxTicketPanel.Size = new System.Drawing.Size(436, 407);
-            this.groupBoxTicketPanel.TabIndex = 0;
-            this.groupBoxTicketPanel.TabStop = false;
-            this.groupBoxTicketPanel.Text = "Select number on this game ticket";
-            // 
-            // panel1
-            // 
-            this.panel1.AutoScroll = true;
-            this.panel1.Controls.Add(this.tblLayoutPnl);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(3, 18);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(430, 386);
-            this.panel1.TabIndex = 2;
-            // 
-            // tblLayoutPnl
-            // 
-            this.tblLayoutPnl.ColumnCount = 2;
-            this.tblLayoutPnl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tblLayoutPnl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tblLayoutPnl.Location = new System.Drawing.Point(5, 3);
-            this.tblLayoutPnl.Name = "tblLayoutPnl";
-            this.tblLayoutPnl.RowCount = 2;
-            this.tblLayoutPnl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tblLayoutPnl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tblLayoutPnl.Size = new System.Drawing.Size(480, 433);
-            this.tblLayoutPnl.TabIndex = 3;
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(6, 25);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(93, 17);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "Game Mode: ";
             // 
             // AddBetFrm
             // 
@@ -410,15 +454,17 @@ namespace LottoDataManager.Forms
             this.tabPageDelimiters.ResumeLayout(false);
             this.tabPageDelimiters.PerformLayout();
             this.tabPageClick.ResumeLayout(false);
-            this.groupDetails.ResumeLayout(false);
-            this.groupDetails.PerformLayout();
-            this.groupBoxDateSelection.ResumeLayout(false);
-            this.groupBoxDateSelection.PerformLayout();
-            this.panelTicketControls.ResumeLayout(false);
-            this.panelTicketControls.PerformLayout();
             this.panelTicketNumbers.ResumeLayout(false);
             this.groupBoxTicketPanel.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
+            this.panelTicketControls.ResumeLayout(false);
+            this.panelTicketControls.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBoxDateSelection.ResumeLayout(false);
+            this.groupBoxDateSelection.PerformLayout();
+            this.groupDetails.ResumeLayout(false);
+            this.groupDetails.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -443,14 +489,17 @@ namespace LottoDataManager.Forms
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.TextBox txtStatus;
-        private System.Windows.Forms.CheckBox checkBoxLuckyPick;
-        private System.Windows.Forms.ComboBox cmbOutlet;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panelTicketNumbers;
         private System.Windows.Forms.Panel panelTicketControls;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox groupBoxTicketPanel;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TableLayoutPanel tblLayoutPnl;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.CheckBox checkBoxLuckyPick;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox cmbOutlet;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblSelectedNumber;
+        private System.Windows.Forms.LinkLabel linkLblClrSelNum;
     }
 }

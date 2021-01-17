@@ -41,6 +41,7 @@ namespace LottoDataManager.Includes.Database.DAO
                         lotteryTicketPanel.Rows = int.Parse(reader["rows"].ToString());
                         lotteryTicketPanel.Max = int.Parse(reader["max"].ToString());
                         lotteryTicketPanel.Min = int.Parse(reader["min"].ToString());
+                        lotteryTicketPanel.GameDigitCount = int.Parse(reader["game_digit"].ToString());
                         lotteryTicketPanel.NumberDirection = ClassReflectionUtil.ConvertToNumberDirection(int.Parse(reader["num_dir"].ToString()));
                     }
                 }
