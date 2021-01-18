@@ -81,6 +81,7 @@ namespace LottoDataManager.Forms
             this.splitContainerMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainerMain.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.splitContainerMain.Location = new System.Drawing.Point(0, 0);
+            this.splitContainerMain.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.splitContainerMain.Name = "splitContainerMain";
             // 
             // splitContainerMain.Panel1
@@ -105,6 +106,7 @@ namespace LottoDataManager.Forms
             this.tabControlInputs.Controls.Add(this.tabPageClick);
             this.tabControlInputs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControlInputs.Location = new System.Drawing.Point(0, 0);
+            this.tabControlInputs.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabControlInputs.Name = "tabControlInputs";
             this.tabControlInputs.SelectedIndex = 0;
             this.tabControlInputs.Size = new System.Drawing.Size(450, 596);
@@ -115,8 +117,9 @@ namespace LottoDataManager.Forms
             this.tabPageDelimiters.Controls.Add(this.textBoxDelimitersInput);
             this.tabPageDelimiters.Controls.Add(this.textBoxInstruction);
             this.tabPageDelimiters.Location = new System.Drawing.Point(4, 25);
+            this.tabPageDelimiters.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPageDelimiters.Name = "tabPageDelimiters";
-            this.tabPageDelimiters.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageDelimiters.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPageDelimiters.Size = new System.Drawing.Size(442, 567);
             this.tabPageDelimiters.TabIndex = 0;
             this.tabPageDelimiters.Text = "Input by Delimiters";
@@ -126,11 +129,12 @@ namespace LottoDataManager.Forms
             // 
             this.textBoxDelimitersInput.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBoxDelimitersInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxDelimitersInput.Location = new System.Drawing.Point(3, 95);
+            this.textBoxDelimitersInput.Location = new System.Drawing.Point(3, 94);
+            this.textBoxDelimitersInput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxDelimitersInput.Multiline = true;
             this.textBoxDelimitersInput.Name = "textBoxDelimitersInput";
             this.textBoxDelimitersInput.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBoxDelimitersInput.Size = new System.Drawing.Size(436, 469);
+            this.textBoxDelimitersInput.Size = new System.Drawing.Size(436, 471);
             this.textBoxDelimitersInput.TabIndex = 1;
             // 
             // textBoxInstruction
@@ -138,7 +142,8 @@ namespace LottoDataManager.Forms
             this.textBoxInstruction.BackColor = System.Drawing.SystemColors.Window;
             this.textBoxInstruction.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxInstruction.Dock = System.Windows.Forms.DockStyle.Top;
-            this.textBoxInstruction.Location = new System.Drawing.Point(3, 3);
+            this.textBoxInstruction.Location = new System.Drawing.Point(3, 2);
+            this.textBoxInstruction.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxInstruction.Multiline = true;
             this.textBoxInstruction.Name = "textBoxInstruction";
             this.textBoxInstruction.ReadOnly = true;
@@ -152,8 +157,9 @@ namespace LottoDataManager.Forms
             this.tabPageClick.Controls.Add(this.panelTicketNumbers);
             this.tabPageClick.Controls.Add(this.panelTicketControls);
             this.tabPageClick.Location = new System.Drawing.Point(4, 25);
+            this.tabPageClick.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPageClick.Name = "tabPageClick";
-            this.tabPageClick.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageClick.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPageClick.Size = new System.Drawing.Size(442, 567);
             this.tabPageClick.TabIndex = 1;
             this.tabPageClick.Text = "Input By Ticket Layout";
@@ -163,9 +169,10 @@ namespace LottoDataManager.Forms
             // 
             this.panelTicketNumbers.Controls.Add(this.groupBoxTicketPanel);
             this.panelTicketNumbers.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelTicketNumbers.Location = new System.Drawing.Point(3, 109);
+            this.panelTicketNumbers.Location = new System.Drawing.Point(3, 139);
+            this.panelTicketNumbers.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelTicketNumbers.Name = "panelTicketNumbers";
-            this.panelTicketNumbers.Size = new System.Drawing.Size(436, 455);
+            this.panelTicketNumbers.Size = new System.Drawing.Size(436, 426);
             this.panelTicketNumbers.TabIndex = 1;
             // 
             // groupBoxTicketPanel
@@ -173,8 +180,10 @@ namespace LottoDataManager.Forms
             this.groupBoxTicketPanel.Controls.Add(this.panel1);
             this.groupBoxTicketPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxTicketPanel.Location = new System.Drawing.Point(0, 0);
+            this.groupBoxTicketPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBoxTicketPanel.Name = "groupBoxTicketPanel";
-            this.groupBoxTicketPanel.Size = new System.Drawing.Size(436, 455);
+            this.groupBoxTicketPanel.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBoxTicketPanel.Size = new System.Drawing.Size(436, 426);
             this.groupBoxTicketPanel.TabIndex = 0;
             this.groupBoxTicketPanel.TabStop = false;
             this.groupBoxTicketPanel.Text = "Select number on this game ticket";
@@ -184,9 +193,10 @@ namespace LottoDataManager.Forms
             this.panel1.AutoScroll = true;
             this.panel1.Controls.Add(this.tblLayoutPnl);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(3, 18);
+            this.panel1.Location = new System.Drawing.Point(3, 17);
+            this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(430, 434);
+            this.panel1.Size = new System.Drawing.Size(430, 407);
             this.panel1.TabIndex = 2;
             // 
             // tblLayoutPnl
@@ -194,7 +204,8 @@ namespace LottoDataManager.Forms
             this.tblLayoutPnl.ColumnCount = 2;
             this.tblLayoutPnl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tblLayoutPnl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tblLayoutPnl.Location = new System.Drawing.Point(5, 3);
+            this.tblLayoutPnl.Location = new System.Drawing.Point(5, 2);
+            this.tblLayoutPnl.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tblLayoutPnl.Name = "tblLayoutPnl";
             this.tblLayoutPnl.RowCount = 2;
             this.tblLayoutPnl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -208,16 +219,17 @@ namespace LottoDataManager.Forms
             this.panelTicketControls.Controls.Add(this.lblSelectedNumber);
             this.panelTicketControls.Controls.Add(this.label2);
             this.panelTicketControls.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelTicketControls.Location = new System.Drawing.Point(3, 3);
+            this.panelTicketControls.Location = new System.Drawing.Point(3, 2);
+            this.panelTicketControls.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelTicketControls.Name = "panelTicketControls";
-            this.panelTicketControls.Size = new System.Drawing.Size(436, 106);
+            this.panelTicketControls.Size = new System.Drawing.Size(436, 137);
             this.panelTicketControls.TabIndex = 0;
             // 
             // linkLblClrSelNum
             // 
             this.linkLblClrSelNum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.linkLblClrSelNum.AutoSize = true;
-            this.linkLblClrSelNum.Location = new System.Drawing.Point(323, 80);
+            this.linkLblClrSelNum.Location = new System.Drawing.Point(323, 114);
             this.linkLblClrSelNum.Name = "linkLblClrSelNum";
             this.linkLblClrSelNum.Size = new System.Drawing.Size(110, 17);
             this.linkLblClrSelNum.TabIndex = 10;
@@ -228,11 +240,11 @@ namespace LottoDataManager.Forms
             // lblSelectedNumber
             // 
             this.lblSelectedNumber.AutoSize = true;
-            this.lblSelectedNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSelectedNumber.ForeColor = System.Drawing.Color.Green;
-            this.lblSelectedNumber.Location = new System.Drawing.Point(68, 32);
+            this.lblSelectedNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSelectedNumber.ForeColor = System.Drawing.Color.Teal;
+            this.lblSelectedNumber.Location = new System.Drawing.Point(43, 51);
             this.lblSelectedNumber.Name = "lblSelectedNumber";
-            this.lblSelectedNumber.Size = new System.Drawing.Size(295, 38);
+            this.lblSelectedNumber.Size = new System.Drawing.Size(339, 44);
             this.lblSelectedNumber.TabIndex = 9;
             this.lblSelectedNumber.Text = "11 10 20 30 40 50";
             // 
@@ -253,8 +265,10 @@ namespace LottoDataManager.Forms
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(0, 145);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(771, 83);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox1.Size = new System.Drawing.Size(771, 95);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Where did you buy the ticket?";
@@ -263,7 +277,8 @@ namespace LottoDataManager.Forms
             // 
             this.checkBoxLuckyPick.AutoSize = true;
             this.checkBoxLuckyPick.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBoxLuckyPick.Location = new System.Drawing.Point(16, 54);
+            this.checkBoxLuckyPick.Location = new System.Drawing.Point(16, 61);
+            this.checkBoxLuckyPick.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkBoxLuckyPick.Name = "checkBoxLuckyPick";
             this.checkBoxLuckyPick.Size = new System.Drawing.Size(130, 21);
             this.checkBoxLuckyPick.TabIndex = 11;
@@ -274,7 +289,7 @@ namespace LottoDataManager.Forms
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(13, 27);
+            this.label1.Location = new System.Drawing.Point(14, 31);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(86, 17);
             this.label1.TabIndex = 10;
@@ -282,14 +297,17 @@ namespace LottoDataManager.Forms
             // 
             // cmbOutlet
             // 
+            this.cmbOutlet.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbOutlet.BackColor = System.Drawing.SystemColors.Window;
             this.cmbOutlet.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbOutlet.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbOutlet.ForeColor = System.Drawing.SystemColors.MenuText;
             this.cmbOutlet.FormattingEnabled = true;
-            this.cmbOutlet.Location = new System.Drawing.Point(118, 24);
+            this.cmbOutlet.Location = new System.Drawing.Point(117, 25);
+            this.cmbOutlet.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbOutlet.Name = "cmbOutlet";
-            this.cmbOutlet.Size = new System.Drawing.Size(407, 26);
+            this.cmbOutlet.Size = new System.Drawing.Size(491, 26);
             this.cmbOutlet.Sorted = true;
             this.cmbOutlet.TabIndex = 9;
             // 
@@ -300,32 +318,35 @@ namespace LottoDataManager.Forms
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtStatus.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtStatus.Location = new System.Drawing.Point(4, 234);
+            this.txtStatus.Location = new System.Drawing.Point(4, 244);
+            this.txtStatus.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtStatus.Multiline = true;
             this.txtStatus.Name = "txtStatus";
             this.txtStatus.ReadOnly = true;
             this.txtStatus.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtStatus.Size = new System.Drawing.Size(764, 283);
+            this.txtStatus.Size = new System.Drawing.Size(766, 273);
             this.txtStatus.TabIndex = 5;
             // 
             // btnAdd
             // 
             this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAdd.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnAdd.Location = new System.Drawing.Point(487, 523);
+            this.btnAdd.Location = new System.Drawing.Point(421, 523);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(133, 61);
+            this.btnAdd.Size = new System.Drawing.Size(201, 62);
             this.btnAdd.TabIndex = 4;
-            this.btnAdd.Text = "Add bets";
+            this.btnAdd.Text = "Save Sequence(s)";
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnExit
             // 
             this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExit.Location = new System.Drawing.Point(626, 523);
+            this.btnExit.Location = new System.Drawing.Point(629, 523);
+            this.btnExit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(133, 61);
+            this.btnExit.Size = new System.Drawing.Size(133, 62);
             this.btnExit.TabIndex = 3;
             this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = true;
@@ -339,7 +360,9 @@ namespace LottoDataManager.Forms
             this.groupBoxDateSelection.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBoxDateSelection.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBoxDateSelection.Location = new System.Drawing.Point(0, 81);
+            this.groupBoxDateSelection.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBoxDateSelection.Name = "groupBoxDateSelection";
+            this.groupBoxDateSelection.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBoxDateSelection.Size = new System.Drawing.Size(771, 64);
             this.groupBoxDateSelection.TabIndex = 2;
             this.groupBoxDateSelection.TabStop = false;
@@ -350,29 +373,34 @@ namespace LottoDataManager.Forms
             this.radioBtnNextDrawDate.AutoSize = true;
             this.radioBtnNextDrawDate.Checked = true;
             this.radioBtnNextDrawDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioBtnNextDrawDate.Location = new System.Drawing.Point(16, 29);
+            this.radioBtnNextDrawDate.Location = new System.Drawing.Point(16, 30);
+            this.radioBtnNextDrawDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.radioBtnNextDrawDate.Name = "radioBtnNextDrawDate";
             this.radioBtnNextDrawDate.Size = new System.Drawing.Size(127, 21);
             this.radioBtnNextDrawDate.TabIndex = 3;
             this.radioBtnNextDrawDate.TabStop = true;
             this.radioBtnNextDrawDate.Text = "Next Draw Date";
             this.radioBtnNextDrawDate.UseVisualStyleBackColor = true;
+            this.radioBtnNextDrawDate.CheckedChanged += new System.EventHandler(this.radioBtnNextDrawDate_CheckedChanged);
             // 
             // radioBtnPreferredDate
             // 
             this.radioBtnPreferredDate.AutoSize = true;
             this.radioBtnPreferredDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioBtnPreferredDate.Location = new System.Drawing.Point(155, 29);
+            this.radioBtnPreferredDate.Location = new System.Drawing.Point(155, 30);
+            this.radioBtnPreferredDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.radioBtnPreferredDate.Name = "radioBtnPreferredDate";
             this.radioBtnPreferredDate.Size = new System.Drawing.Size(123, 21);
             this.radioBtnPreferredDate.TabIndex = 2;
             this.radioBtnPreferredDate.Text = "Preferred Date";
             this.radioBtnPreferredDate.UseVisualStyleBackColor = true;
+            this.radioBtnPreferredDate.CheckedChanged += new System.EventHandler(this.radioBtnPreferredDate_CheckedChanged);
             // 
             // dtPickPreferredDate
             // 
             this.dtPickPreferredDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtPickPreferredDate.Location = new System.Drawing.Point(287, 29);
+            this.dtPickPreferredDate.Location = new System.Drawing.Point(287, 30);
+            this.dtPickPreferredDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtPickPreferredDate.Name = "dtPickPreferredDate";
             this.dtPickPreferredDate.Size = new System.Drawing.Size(321, 24);
             this.dtPickPreferredDate.TabIndex = 1;
@@ -386,7 +414,9 @@ namespace LottoDataManager.Forms
             this.groupDetails.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupDetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupDetails.Location = new System.Drawing.Point(0, 0);
+            this.groupDetails.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupDetails.Name = "groupDetails";
+            this.groupDetails.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupDetails.Size = new System.Drawing.Size(771, 81);
             this.groupDetails.TabIndex = 1;
             this.groupDetails.TabStop = false;
@@ -418,7 +448,7 @@ namespace LottoDataManager.Forms
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(6, 50);
+            this.label4.Location = new System.Drawing.Point(5, 50);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(114, 17);
             this.label4.TabIndex = 4;
@@ -428,7 +458,7 @@ namespace LottoDataManager.Forms
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(6, 25);
+            this.label3.Location = new System.Drawing.Point(5, 25);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(93, 17);
             this.label3.TabIndex = 3;
@@ -441,6 +471,7 @@ namespace LottoDataManager.Forms
             this.ClientSize = new System.Drawing.Size(1225, 596);
             this.Controls.Add(this.splitContainerMain);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "AddBetFrm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add Bet Template";

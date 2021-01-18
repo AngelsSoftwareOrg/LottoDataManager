@@ -104,13 +104,13 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                 transaction.Commit();
             }
         }
-        public void InsertLotteryBet(List<LotteryBet> lotteryBetArr)
+        public bool IsBetExisting(LotteryBet lotteryBet)
         {
             using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
             using (OleDbCommand command = new OleDbCommand())
             {
                 command.CommandType = CommandType.Text;
-                command.CommandText = "SELECT COUNT(ID) FROM lottery_bet " +
+                command.CommandText = "SELECT COUNT(ID) AS [DUPLICATE_COUNT] FROM lottery_bet " +
                                       " WHERE game_cd = @game_cd " +
                                       "   AND target_draw_date = CDATE(@draw_date) " +
                                       "   AND active = true " +
@@ -121,21 +121,60 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                                       " AND @num4 IN(num1, num2, num3, num4, num5, num6) " +
                                       " AND @num5 IN(num1, num2, num3, num4, num5, num6) " +
                                       " AND @num6 IN(num1, num2, num3, num4, num5, num6)) ";
+                command.Parameters.AddWithValue("@game_cd", lotteryBet.GetGameCode());
+                command.Parameters.AddWithValue("@draw_date", lotteryBet.GetTargetDrawDate().Date.ToString());
+                command.Parameters.AddWithValue("@num1", lotteryBet.GetNum1());
+                command.Parameters.AddWithValue("@num2", lotteryBet.GetNum2());
+                command.Parameters.AddWithValue("@num3", lotteryBet.GetNum3());
+                command.Parameters.AddWithValue("@num4", lotteryBet.GetNum4());
+                command.Parameters.AddWithValue("@num5", lotteryBet.GetNum5());
+                command.Parameters.AddWithValue("@num6", lotteryBet.GetNum6());
+                command.Connection = conn;
+                conn.Open();
+
+                using (OleDbDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        long duplicateCount= long.Parse(reader["DUPLICATE_COUNT"].ToString());
+                        return (duplicateCount > 0);
+                    }
+                }
+            }
+            return false;
+        }
+        public void InsertLotteryBet(List<LotteryBet> lotteryBetArr)
+        {
+            using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
+            using (OleDbCommand command = new OleDbCommand())
+            {
+                command.CommandType = CommandType.Text;
+                command.CommandText = " INSERT INTO lottery_bet (game_cd,target_draw_date, " +
+                                      "                          bet_amt,active,outlet_cd,luckypick, " +
+                                      "                          num1,num2,num3,num4,num5,num6) " +
+                                      " VALUES (@game_cda, CDATE(@target_draw_datea), " +
+                                      "         @bet_amta, 1, @outlet_cda, @luckypicka, " +
+                                      "         @num1a, @num2a, @num3a, @num4a, @num5a, @num6a) ";
                 command.Connection = conn;
                 conn.Open();
                 OleDbTransaction transaction = conn.BeginTransaction();
 
                 foreach (LotteryBet item in lotteryBetArr)
                 {
+                    if (IsBetExisting(item)) continue;
                     command.Parameters.Clear();
-                    command.Parameters.AddWithValue("@game_cd", item.GetGameCode());
-                    command.Parameters.AddWithValue("@draw_date", item.GetTargetDrawDate().ToString());
-                    command.Parameters.AddWithValue("@num1", item.GetNum1());
-                    command.Parameters.AddWithValue("@num2", item.GetNum2());
-                    command.Parameters.AddWithValue("@num3", item.GetNum3());
-                    command.Parameters.AddWithValue("@num4", item.GetNum4());
-                    command.Parameters.AddWithValue("@num5", item.GetNum5());
-                    command.Parameters.AddWithValue("@num6", item.GetNum6());
+                    command.Parameters.AddWithValue("@game_cda", item.GetGameCode());
+                    command.Parameters.AddWithValue("@target_draw_datea", item.GetTargetDrawDate().Date.ToString());
+                    command.Parameters.AddWithValue("@bet_amta", item.GetBetAmount());
+                    command.Parameters.AddWithValue("@outlet_cda", item.GetOutletCode());
+                    command.Parameters.AddWithValue("@luckypicka", item.IsLuckyPick());
+                    command.Parameters.AddWithValue("@num1a", item.GetNum1());
+                    command.Parameters.AddWithValue("@num2a", item.GetNum2());
+                    command.Parameters.AddWithValue("@num3a", item.GetNum3());
+                    command.Parameters.AddWithValue("@num4a", item.GetNum4());
+                    command.Parameters.AddWithValue("@num5a", item.GetNum5());
+                    command.Parameters.AddWithValue("@num6a", item.GetNum6());
+
                     command.Transaction = transaction;
                     int result = command.ExecuteNonQuery();
                     if (result < 0)
@@ -153,7 +192,6 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                 }
             }
         }
-
         private LotteryBetSetup GetInstanceDeriveLotteryBetSetup(OleDbDataReader reader)
         {
             LotteryBetSetup bet = new LotteryBetSetup();
@@ -168,9 +206,9 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
             bet.Num4 = int.Parse(reader["num4"].ToString());
             bet.Num5 = int.Parse(reader["num5"].ToString());
             bet.Num6 = int.Parse(reader["num6"].ToString());
+            bet.LuckyPick = bool.Parse(reader["luckypick"].ToString());
             bet.SortNumbers();
             return bet;
         }
-        
     }
 }

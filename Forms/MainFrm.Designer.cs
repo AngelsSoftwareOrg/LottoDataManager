@@ -44,6 +44,8 @@ namespace LottoDataManager
             System.Windows.Forms.ListViewItem listViewItem12 = new System.Windows.Forms.ListViewItem("Lowest Amount won");
             System.Windows.Forms.ListViewItem listViewItem13 = new System.Windows.Forms.ListViewItem("Number of claims");
             System.Windows.Forms.ListViewItem listViewItem14 = new System.Windows.Forms.ListViewItem("Number of not claims");
+            System.Windows.Forms.ListViewItem listViewItem15 = new System.Windows.Forms.ListViewItem("Lucky Pick Total Win");
+            System.Windows.Forms.ListViewItem listViewItem16 = new System.Windows.Forms.ListViewItem("Lucky Pick Total Loose");
             this.mainMenuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openLotteryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -361,7 +363,9 @@ namespace LottoDataManager
             listViewItem11,
             listViewItem12,
             listViewItem13,
-            listViewItem14});
+            listViewItem14,
+            listViewItem15,
+            listViewItem16});
             this.listViewOtherDetails.Location = new System.Drawing.Point(0, 0);
             this.listViewOtherDetails.MultiSelect = false;
             this.listViewOtherDetails.Name = "listViewOtherDetails";
@@ -545,6 +549,9 @@ namespace LottoDataManager
             this.objectLstVwLatestBet.Location = new System.Drawing.Point(0, 73);
             this.objectLstVwLatestBet.MultiSelect = false;
             this.objectLstVwLatestBet.Name = "objectLstVwLatestBet";
+            this.objectLstVwLatestBet.SelectedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.objectLstVwLatestBet.SelectedColumnTint = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.objectLstVwLatestBet.SelectedForeColor = System.Drawing.Color.White;
             this.objectLstVwLatestBet.ShowGroups = false;
             this.objectLstVwLatestBet.Size = new System.Drawing.Size(347, 358);
             this.objectLstVwLatestBet.TabIndex = 11;
@@ -675,6 +682,9 @@ namespace LottoDataManager
             this.objListVwWinningNum.Location = new System.Drawing.Point(0, 73);
             this.objListVwWinningNum.MultiSelect = false;
             this.objListVwWinningNum.Name = "objListVwWinningNum";
+            this.objListVwWinningNum.SelectedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.objListVwWinningNum.SelectedColumnTint = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.objListVwWinningNum.SelectedForeColor = System.Drawing.Color.White;
             this.objListVwWinningNum.ShowGroups = false;
             this.objListVwWinningNum.Size = new System.Drawing.Size(534, 358);
             this.objListVwWinningNum.TabIndex = 1;

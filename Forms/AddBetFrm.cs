@@ -48,6 +48,8 @@ namespace LottoDataManager.Forms
             lblNextDrawDate.Text = lotteryDataServices.GetNextDrawDateFormatted();
             cmbOutlet.Items.AddRange(lotteryOutletArr.ToArray());
             AddSelectedTicketPanelNumber();
+            radioBtnNextDrawDate.Checked = true;
+            dtPickPreferredDate.Visible = false;
         }
         private void btnExit_Click(object sender, EventArgs e)
         {
@@ -64,51 +66,84 @@ namespace LottoDataManager.Forms
                 txtStatus.Clear();
                 DisplayLog("Preparing to add your bet....");
                 Application.DoEvents();
-                InputDataValidation();
-                if(tabControlInputs.SelectedTab == tabPageDelimiters)
+                InputFormDataValidation();
+
+                DialogResult dr = MessageBox.Show("Check your inputs and hit ok to continue...", "Double check please!", MessageBoxButtons.OKCancel);
+                if (dr == DialogResult.OK)
                 {
                     DisplayLog("Compiling delimiter input bets...");
-                    List<LotteryBet> lotteryBetArr = CompileData();
+                    List<LotteryBet> lotteryBetArr = ValidateAndCompileData();
+                    DisplayLog("Saving your bets ...");
+                    this.Enabled = false;
+                    Application.DoEvents();
+                    this.lotteryDataServices.SaveLotteryBets(lotteryBetArr);
+                    DisplayLog("FINISH SAVING your bets!!!!");
+                    this.Enabled = true;
+                    Application.DoEvents();
                 }
                 else
                 {
-                    DisplayLog("Compiling selected input bets...");
+                    DisplayLog("Saving cancelled...");
                 }
             }
             catch (Exception ex)
             {
+                this.Enabled = true;
                 DisplayLog(ex.Message);
+                Application.DoEvents();
                 MessageBox.Show(ex.Message, "Error!");
             }
         }
-        private List<LotteryBet> CompileData()
+        private List<LotteryBet> ValidateAndCompileData()
         {
             List <LotteryBet> lotteryBetArr = new List<LotteryBet>();
             try
             {
-                foreach (string line in StringUtils.GetLines(textBoxDelimitersInput.Text))
+                if (tabControlInputs.SelectedTab == tabPageDelimiters)
                 {
-                    DisplayLog("Validating -> " + line);
-                    //validation
-                    String[] splitted = null;
-                    foreach (String delimiter in StringUtils.COMMON_DELIMITERS)
+                    foreach (string line in StringUtils.GetLines(textBoxDelimitersInput.Text))
                     {
-                        splitted = line.Split(delimiter.ToCharArray());
-                        if (splitted == null) continue;
-                        if (splitted.Length != 6) continue;
-                        if (IsNumberSequenceValid(splitted)) break;
+                        if (String.IsNullOrWhiteSpace(line)) continue;
+                        DisplayLog("Validating -> " + line);
+                        //validation
+                        String[] splitted = null;
+                        foreach (String delimiter in StringUtils.COMMON_DELIMITERS)
+                        {
+                            splitted = line.Split(delimiter.ToCharArray());
+                            if (splitted == null) continue;
+                            if (splitted.Length != 6) continue;
+                            if (IsNumberSequenceValid(splitted)) break;
+                        }
+                        LotteryBetSetup lotteryBet = new LotteryBetSetup();
+                        lotteryBet.PutNumberSequence(line);
+                        CompleteLotteryBetDetails(lotteryBet);
+                        lotteryBetArr.Add(lotteryBet);
                     }
+                    if (lotteryBetArr.Count <= 0) throw new Exception("Please put your bet in sequence");
+
+                }
+                else if (tabControlInputs.SelectedTab == tabPageClick)
+                {
+                    DisplayLog("Validating selected numbers... ");
                     LotteryBetSetup lotteryBet = new LotteryBetSetup();
-                    lotteryBet.PutNumberSequence(line);
+                    lotteryBet.PutNumberSequence(lblSelectedNumber.Text.Replace(" ",""));
+                    CompleteLotteryBetDetails(lotteryBet);
                     lotteryBetArr.Add(lotteryBet);
                 }
-                if (lotteryBetArr.Count <= 0) throw new Exception("Please put your bet in sequence");
             }
             catch (Exception ex)
             {
                 throw ex;
             }
             return lotteryBetArr;
+        }
+        private void CompleteLotteryBetDetails(LotteryBetSetup lotteryBet)
+        {
+            lotteryBet.GameCode = this.lotteryDataServices.LotteryDetails.GameCode;
+            lotteryBet.LuckyPick = this.checkBoxLuckyPick.Checked;
+            lotteryBet.TargetDrawDate = (radioBtnPreferredDate.Checked) ? dtPickPreferredDate.Value : lotteryDataServices.GetNextDrawDate();
+            lotteryBet.BetAmount = lotteryDataServices.LotteryDetails.Lottery.GetPricePerBet();
+            lotteryBet.OutletCode = ((LotteryOutlet)cmbOutlet.SelectedItem).GetOutletCode();
         }
         private bool IsNumberSequenceValid(String[] numberSequence)
         {
@@ -123,7 +158,7 @@ namespace LottoDataManager.Forms
             }
             return true;
         }
-        private bool InputDataValidation()
+        private bool InputFormDataValidation()
         {
             DateTime nextDrawDate = (radioBtnPreferredDate.Checked) ? dtPickPreferredDate.Value : 
                                 this.lotteryDataServices.GetNextDrawDate();
@@ -132,14 +167,18 @@ namespace LottoDataManager.Forms
             //RADIO BUTTON
             if (nextDrawDate.Date.CompareTo(DateTime.Now.Date) < 0)
             {
-                throw new Exception(String.Format("{0} should not be earlier than today.",
-                    ((radioBtnPreferredDate.Checked) ? "Preferred Date": "Next Draw Date")));
+                DisplayLog("Selected date is a backdated date. Please be careful when choosing the date");
             }
 
             DisplayLog("Checking lotto outlet.");
             if (cmbOutlet.SelectedItem == null || String.IsNullOrWhiteSpace(cmbOutlet.SelectedItem.ToString())) 
-                throw new Exception("Please select Lotto Outlet.");
+                throw new Exception("Please select the Lotto Outlet where you purchase the ticket.");
 
+            DisplayLog("Checking Lotto Draw Date selection...");
+            if (!radioBtnNextDrawDate.Checked && !radioBtnPreferredDate.Checked)
+            {
+                throw new Exception("Please select when your purchased ticket(s) draw date...");
+            }
             return true;
         }
         private void GenerateTicketPanelNumbers()
@@ -245,20 +284,18 @@ namespace LottoDataManager.Forms
                 AddSelectedTicketPanelNumber(btnNum);
             }
         }
-
         private void AddSelectedTicketPanelNumber(Button btnNumClicked=null)
         {
             if(btnNumClicked !=null) selTcktPnlNum.Add(btnNumClicked);
             String numSelected = "";
             for(int ctr=0; ctr<lotteryTicketPanel.GetGameDigitCount(); ctr++)
             {
-                if (ctr > 0) numSelected += " ";
+                if (ctr > 0) numSelected += " - ";
                 Button btn = ((selTcktPnlNum.Count) >= (ctr+1)) ? (Button)selTcktPnlNum[ctr] : null;
                 numSelected += (btn==null)? "00" : btn.Text.PadLeft(2, char.Parse("0"));
             }
             lblSelectedNumber.Text = numSelected;
         }
-
         private void linkLblClrSelNum_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             selTcktPnlNum.Clear();
@@ -270,6 +307,19 @@ namespace LottoDataManager.Forms
                     DecorateTicketPanelButtonNum((Button) control, false);
                 }
             }
+        }
+        private void radioBtnPreferredDate_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioBtnPreferredDate.Checked)
+            {
+                dtPickPreferredDate.Visible = true;
+                Application.DoEvents();
+            }
+        }
+        private void radioBtnNextDrawDate_CheckedChanged(object sender, EventArgs e)
+        {
+            dtPickPreferredDate.Visible = false;
+            Application.DoEvents();
         }
     }
 }

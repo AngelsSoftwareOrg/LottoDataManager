@@ -20,12 +20,15 @@ namespace LottoDataManager.Includes.Classes
         private UserSettingDao userSettingDao;
         private LotteryTicketPanelDao lotteryTicketPanelDao;
         private LotteryOutletDao lotteryOutletDao;
+        private LotteryBetDao lotteryBetDao;
+
         public LotteryDataServices(LotteryDetails lotteryDetails)
         {
             this.lotteryDetails = lotteryDetails;
             this.lotteryDataDerivation = new LotteryDataDerivation(this.LotteryDetails.GameMode);
             this.lotteryTicketPanelDao = LotteryTicketPanelDaoImpl.GetInstance();
             this.lotteryOutletDao = LotteryOutletDaoImpl.GetInstance();
+            this.lotteryBetDao = LotteryBetDaoImpl.GetInstance();
             userSettingDao = UserSettingDaoImpl.GetInstance();
         }
         private GameMode GameMode {
@@ -85,6 +88,10 @@ namespace LottoDataManager.Includes.Classes
         public List<LotteryOutlet> GetLotteryOutlets()
         {
             return lotteryOutletDao.GetLotteryOutlets();
+        }
+        public void SaveLotteryBets(List<LotteryBet> lotteryBets)
+        {
+            this.lotteryBetDao.InsertLotteryBet(lotteryBets);
         }
     }
 }

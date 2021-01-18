@@ -190,7 +190,7 @@ namespace LottoDataManager
             HighlightTextRenderer highlightTextRenderer = new HighlightTextRenderer(filter);
             highlightTextRenderer.CornerRoundness = 1;
             highlightTextRenderer.FramePen = new Pen(Color.Empty);
-            highlightTextRenderer.FillBrush = new SolidBrush(Color.YellowGreen);
+            highlightTextRenderer.FillBrush = new SolidBrush(Color.LightBlue);
             highlightTextRenderer.CellPadding = new Rectangle(0, 0, 0, 0);
             highlightTextRenderer.Bounds = new Rectangle(2, 2, 2, 2);
             this.objListVwWinningNum.ModelFilter = filter;
@@ -215,7 +215,7 @@ namespace LottoDataManager
             HighlightTextRenderer highlightTextRenderer = new HighlightTextRenderer(filter);
             highlightTextRenderer.CornerRoundness = 1;
             highlightTextRenderer.FramePen = new Pen(Color.Empty);
-            highlightTextRenderer.FillBrush = new SolidBrush(Color.YellowGreen);
+            highlightTextRenderer.FillBrush = new SolidBrush(Color.LightBlue);
             highlightTextRenderer.CellPadding = new Rectangle(0, 0, 0, 0);
             highlightTextRenderer.Bounds = new Rectangle(2, 2, 2, 2);
             this.objectLstVwLatestBet.ModelFilter = filter;
@@ -269,6 +269,7 @@ namespace LottoDataManager
         {
             AddBetFrm betForm = new AddBetFrm(this.lotteryDataServices);
             betForm.ShowDialog();
+            RefreshBetListViewGridContent();
         }
         #endregion
 

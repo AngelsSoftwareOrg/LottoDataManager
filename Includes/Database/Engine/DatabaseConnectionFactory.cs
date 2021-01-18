@@ -26,7 +26,22 @@ namespace LottoDataManager.Includes.Database
         }
         private static ConnectionDetails GetMsAccessConnDetails()
         {
-            return new ConnectionDetails("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + AppSettings.GetMsAccessDatabasePath);
+            /*
+                *** Connection Pooling ***
+                All services(the default)
+                OLE DB Services = -1;
+                All services except pooling
+                OLE DB Services = -2;
+                All services except pooling and auto-enlistment
+                OLE DB Services = -4;
+                All services except client cursor
+                OLE DB Services = -5;
+                All services except client cursor and pooling
+                OLE DB Services = -6;
+                No services
+                OLE DB Services = 0;
+            */
+            return new ConnectionDetails("Provider=Microsoft.ACE.OLEDB.12.0;OLE DB Services = -1;Data Source=" + AppSettings.GetMsAccessDatabasePath);
         }
     }
 }

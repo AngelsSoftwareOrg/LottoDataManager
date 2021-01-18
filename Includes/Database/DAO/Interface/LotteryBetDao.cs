@@ -13,5 +13,6 @@ namespace LottoDataManager.Includes.Database.DAO.Interface
         List<LotteryBet> GetDashboardLatestBets(GameMode gameMode, DateTime sinceWhen);
         List<LotteryBet> ExtractLotteryBetsCheckWinningNumber(GameMode gameMode);
         void UpdateTargetDrawDate(long id, DateTime newTargetDrawDate);
+        void InsertLotteryBet(List<LotteryBet> lotteryBetArr);
     }
 }

@@ -169,7 +169,6 @@ namespace LottoDataManager.Includes.Database.DAO
             return results;
         }
 
-
         public DateTime GetNextDrawDate(GameMode gameMode, DateTime betDate)
         {
             using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
