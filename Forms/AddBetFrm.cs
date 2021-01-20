@@ -21,18 +21,20 @@ namespace LottoDataManager.Forms
         private LotteryTicketPanel lotteryTicketPanel;
         private List<LotteryOutlet> lotteryOutletArr;
         private List<Button> selTcktPnlNum = new List<Button>();
-        public AddBetFrm(LotteryDataServices lotteryDataServices = null)
+        private LotterySchedule lotterySchedule;
+        public AddBetFrm(LotteryDataServices lotteryDataServices)
         {
             InitializeComponent();
             this.lotteryDataServices = lotteryDataServices;
 
             //Debugging
-            if(lotteryDataServices==null)
-                this.lotteryDataServices = new LotteryDataServices(new Game658());
+            //if(lotteryDataServices==null)
+            //    this.lotteryDataServices = new LotteryDataServices(new Game658());
             //end debugging
-
+            
             this.lotteryTicketPanel = this.lotteryDataServices.GetLotteryTicketPanel();
             this.lotteryOutletArr = this.lotteryDataServices.GetLotteryOutlets();
+            this.lotterySchedule = this.lotteryDataServices.GetLotterySchedule();
             GenerateTicketPanelNumbers();
         }
         private void AddBetFrm_Load(object sender, EventArgs e)
@@ -46,6 +48,7 @@ namespace LottoDataManager.Forms
 
             lblGameDesc.Text = lotteryDataServices.LotteryDetails.Description;
             lblNextDrawDate.Text = lotteryDataServices.GetNextDrawDateFormatted();
+            lblDrawDateEvery.Text = lotterySchedule.DrawDateEvery();
             cmbOutlet.Items.AddRange(lotteryOutletArr.ToArray());
             AddSelectedTicketPanelNumber();
             radioBtnNextDrawDate.Checked = true;
@@ -57,7 +60,7 @@ namespace LottoDataManager.Forms
         }
         private void DisplayLog(String log)
         {
-            txtStatus.AppendText(log + Environment.NewLine);
+            txtStatus.AppendText("> " + log + Environment.NewLine);
         }
         private void btnAdd_Click(object sender, EventArgs e)
         {
@@ -162,14 +165,12 @@ namespace LottoDataManager.Forms
         {
             DateTime nextDrawDate = (radioBtnPreferredDate.Checked) ? dtPickPreferredDate.Value : 
                                 this.lotteryDataServices.GetNextDrawDate();
-
             DisplayLog("Checking selected draw date...");
             //RADIO BUTTON
             if (nextDrawDate.Date.CompareTo(DateTime.Now.Date) < 0)
             {
                 DisplayLog("Selected date is a backdated date. Please be careful when choosing the date");
             }
-
             DisplayLog("Checking lotto outlet.");
             if (cmbOutlet.SelectedItem == null || String.IsNullOrWhiteSpace(cmbOutlet.SelectedItem.ToString())) 
                 throw new Exception("Please select the Lotto Outlet where you purchase the ticket.");
@@ -178,6 +179,17 @@ namespace LottoDataManager.Forms
             if (!radioBtnNextDrawDate.Checked && !radioBtnPreferredDate.Checked)
             {
                 throw new Exception("Please select when your purchased ticket(s) draw date...");
+            }
+            if (radioBtnPreferredDate.Checked)
+            {
+                if (!lotterySchedule.IsDrawDateMatchLotterySchedule(dtPickPreferredDate.Value))
+                {
+                    String msg = String.Format("Please select the date where it match its scheduled draw date. \n" +
+                        "You selected {0}, but the draw date is every {1}.", 
+                        dtPickPreferredDate.Value.Date.ToString("MMMM d - dddd"),
+                        this.lotterySchedule.DrawDateEvery());
+                    throw new Exception(msg);
+                }
             }
             return true;
         }
@@ -223,11 +235,6 @@ namespace LottoDataManager.Forms
                         btn.FlatAppearance.BorderColor = Color.Red;
                         btn.FlatAppearance.BorderSize = 1;
                         btn.ForeColor = Color.Black;
-                        /*                        
-                            btn.BackColor = Color.White;
-                            
-
-                        */
 
                         DecorateTicketPanelButtonNum(btn, false);
                         btn.Dock = System.Windows.Forms.DockStyle.Fill;

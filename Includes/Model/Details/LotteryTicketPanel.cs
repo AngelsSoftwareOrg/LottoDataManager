@@ -15,5 +15,6 @@ namespace LottoDataManager.Includes.Model.Details
         int GetMin();
         int GetMax();
         int GetGameDigitCount();
+        bool IsWithinMinMax(int num);
     }
 }

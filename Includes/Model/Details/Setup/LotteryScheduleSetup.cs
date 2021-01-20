@@ -22,33 +22,57 @@ namespace LottoDataManager.Includes.Model.Details
         public bool Friday { get => friday; set => friday = value; }
         public bool Saturday { get => saturday; set => saturday = value; }
         public bool Sunday { get => sunday; set => sunday = value; }
-        bool LotterySchedule.IsFriday()
+        public bool IsFriday()
         {
             return this.Friday;
         }
-        bool LotterySchedule.IsMonday()
+        public bool IsMonday()
         {
             return this.Monday;
         }
-        bool LotterySchedule.IsSaturday()
+        public bool IsSaturday()
         {
             return this.Saturday;
         }
-        bool LotterySchedule.IsSunday()
+        public bool IsSunday()
         {
             return this.Sunday;
         }
-        bool LotterySchedule.IsThursday()
+        public bool IsThursday()
         {
             return this.Thursday;
         }
-        bool LotterySchedule.IsTuesday()
+        public bool IsTuesday()
         {
             return this.Tuesday;
         }
-        bool LotterySchedule.IsWednesday()
+        public bool IsWednesday()
         {
             return this.Wednesday;
+        }
+        public bool IsDrawDateMatchLotterySchedule(DateTime drawDate)
+        {
+            DayOfWeek dow = drawDate.Date.DayOfWeek;
+            if (dow == DayOfWeek.Monday && IsMonday()) { return true; }
+            else if (dow == DayOfWeek.Tuesday && IsTuesday()) { return true; }
+            else if (dow == DayOfWeek.Wednesday && IsWednesday()) { return true; }
+            else if (dow == DayOfWeek.Thursday && IsThursday()) { return true; }
+            else if (dow == DayOfWeek.Friday && IsFriday()) { return true; }
+            else if (dow == DayOfWeek.Saturday && IsSaturday()) { return true; }
+            else if (dow == DayOfWeek.Sunday && IsSunday()) { return true; }
+            return false;
+        }
+        public String DrawDateEvery()
+        {
+            String concat = "";
+            if (IsMonday()) { concat += "Monday, "; }
+            if (IsTuesday()) { concat += "Tuesday, "; }
+            if (IsWednesday()) { concat += "Wednesday, "; }
+            if (IsThursday()) { concat += "Thursday, "; }
+            if (IsFriday()) { concat += "Friday, "; }
+            if (IsSaturday()) { concat += "Saturday, "; }
+            if (IsSunday()) { concat += "Sunday, "; }
+            return concat.Substring(0, concat.Length - 2);
         }
         override
         public String ToString()

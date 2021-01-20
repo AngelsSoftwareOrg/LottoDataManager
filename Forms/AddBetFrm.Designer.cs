@@ -60,6 +60,8 @@ namespace LottoDataManager.Forms
             this.lblNextDrawDate = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.lblDrawDateEvery = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerMain)).BeginInit();
             this.splitContainerMain.Panel1.SuspendLayout();
             this.splitContainerMain.Panel2.SuspendLayout();
@@ -264,7 +266,7 @@ namespace LottoDataManager.Forms
             this.groupBox1.Controls.Add(this.cmbOutlet);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(0, 145);
+            this.groupBox1.Location = new System.Drawing.Point(0, 177);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -318,13 +320,13 @@ namespace LottoDataManager.Forms
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtStatus.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtStatus.Location = new System.Drawing.Point(4, 244);
+            this.txtStatus.Location = new System.Drawing.Point(4, 276);
             this.txtStatus.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtStatus.Multiline = true;
             this.txtStatus.Name = "txtStatus";
             this.txtStatus.ReadOnly = true;
             this.txtStatus.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtStatus.Size = new System.Drawing.Size(766, 273);
+            this.txtStatus.Size = new System.Drawing.Size(766, 241);
             this.txtStatus.TabIndex = 5;
             // 
             // btnAdd
@@ -343,6 +345,7 @@ namespace LottoDataManager.Forms
             // btnExit
             // 
             this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExit.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnExit.Location = new System.Drawing.Point(629, 523);
             this.btnExit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnExit.Name = "btnExit";
@@ -359,11 +362,11 @@ namespace LottoDataManager.Forms
             this.groupBoxDateSelection.Controls.Add(this.dtPickPreferredDate);
             this.groupBoxDateSelection.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBoxDateSelection.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBoxDateSelection.Location = new System.Drawing.Point(0, 81);
+            this.groupBoxDateSelection.Location = new System.Drawing.Point(0, 111);
             this.groupBoxDateSelection.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBoxDateSelection.Name = "groupBoxDateSelection";
             this.groupBoxDateSelection.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBoxDateSelection.Size = new System.Drawing.Size(771, 64);
+            this.groupBoxDateSelection.Size = new System.Drawing.Size(771, 66);
             this.groupBoxDateSelection.TabIndex = 2;
             this.groupBoxDateSelection.TabStop = false;
             this.groupBoxDateSelection.Text = "Select Draw Date for the inputted Numbers";
@@ -407,6 +410,8 @@ namespace LottoDataManager.Forms
             // 
             // groupDetails
             // 
+            this.groupDetails.Controls.Add(this.lblDrawDateEvery);
+            this.groupDetails.Controls.Add(this.label5);
             this.groupDetails.Controls.Add(this.lblGameDesc);
             this.groupDetails.Controls.Add(this.lblNextDrawDate);
             this.groupDetails.Controls.Add(this.label4);
@@ -417,7 +422,7 @@ namespace LottoDataManager.Forms
             this.groupDetails.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupDetails.Name = "groupDetails";
             this.groupDetails.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupDetails.Size = new System.Drawing.Size(771, 81);
+            this.groupDetails.Size = new System.Drawing.Size(771, 111);
             this.groupDetails.TabIndex = 1;
             this.groupDetails.TabStop = false;
             this.groupDetails.Text = "Current game: ";
@@ -464,10 +469,32 @@ namespace LottoDataManager.Forms
             this.label3.TabIndex = 3;
             this.label3.Text = "Game Mode: ";
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(6, 76);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(121, 17);
+            this.label5.TabIndex = 7;
+            this.label5.Text = "Draw Date every: ";
+            // 
+            // lblDrawDateEvery
+            // 
+            this.lblDrawDateEvery.AutoSize = true;
+            this.lblDrawDateEvery.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDrawDateEvery.ForeColor = System.Drawing.Color.Green;
+            this.lblDrawDateEvery.Location = new System.Drawing.Point(124, 76);
+            this.lblDrawDateEvery.Name = "lblDrawDateEvery";
+            this.lblDrawDateEvery.Size = new System.Drawing.Size(237, 18);
+            this.lblDrawDateEvery.TabIndex = 8;
+            this.lblDrawDateEvery.Text = "Monday, Tuesday, Wednesday";
+            // 
             // AddBetFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnExit;
             this.ClientSize = new System.Drawing.Size(1225, 596);
             this.Controls.Add(this.splitContainerMain);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -532,5 +559,7 @@ namespace LottoDataManager.Forms
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblSelectedNumber;
         private System.Windows.Forms.LinkLabel linkLblClrSelNum;
+        private System.Windows.Forms.Label lblDrawDateEvery;
+        private System.Windows.Forms.Label label5;
     }
 }

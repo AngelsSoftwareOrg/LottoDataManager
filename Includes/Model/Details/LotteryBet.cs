@@ -17,5 +17,6 @@ namespace LottoDataManager.Includes.Model.Details
         int GetOutletCode();
         int[] GetBetNumbersAsArray();
         bool IsLuckyPick();
+        String GetSimpleContentDetails();
     }
 }

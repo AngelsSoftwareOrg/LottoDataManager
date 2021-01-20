@@ -21,7 +21,6 @@ namespace LottoDataManager.Includes.Model.Details
         public int Min { get => min; set => min = value; }
         public int Max { get => max; set => max = value; }
         public int GameDigitCount { get => gameDigitCount; set => gameDigitCount = value; }
-
         public int GetCols()
         {
             return this.Cols;
@@ -46,16 +45,20 @@ namespace LottoDataManager.Includes.Model.Details
         public String ToString()
         {
 #if DEBUG
-            return String.Format("Lottery Ticket Panel Setup: Max {0}, Min {1}, Col {2}, Rows {3}, Number Direction {4}",
-                this.Max, this.Min, this.Cols, this.Rows, this.NumberDirection.ToString());
+            return String.Format("Lottery Ticket Panel Setup: Max {0}, Min {1}, Col {2}, Rows {3}, Number Direction {4}, Game Digit Count {5}",
+                this.Max, this.Min, this.Cols, this.Rows, this.NumberDirection.ToString(), this.GameDigitCount);
 #else
             return base.ToString();
 #endif
         }
-
         public int GetGameDigitCount()
         {
             return GameDigitCount;
+        }
+        public bool IsWithinMinMax(int num)
+        {
+            if (num >= Min && num <= Max) return true;
+            return false;
         }
     }
 }

@@ -11,7 +11,7 @@ using LottoDataManager.Includes.Model.Structs;
 
 namespace LottoDataManager.Includes.Database.DAO.Impl
 {
-    public class LotteryBetDaoImpl : LotteryBetDao
+    public class LotteryBetDaoImpl : LotteryDaoImplCommon, LotteryBetDao
     {
         private static LotteryBetDaoImpl lotteryBetDaoImpl;
         private LotteryBetDaoImpl() { }
@@ -192,6 +192,48 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                 }
             }
         }
+        public int InsertLotteryBet(LotteryBet lotteryBet)
+        {
+            int modified = 0;
+            using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
+            using (OleDbCommand command = new OleDbCommand())
+            {
+                command.CommandType = CommandType.Text;
+                command.CommandText = " INSERT INTO lottery_bet (game_cd,target_draw_date, " +
+                                      "                          bet_amt,active,outlet_cd,luckypick, " +
+                                      "                          num1,num2,num3,num4,num5,num6) " +
+                                      " VALUES (@game_cda, CDATE(@target_draw_datea), " +
+                                      "         @bet_amta, 1, @outlet_cda, @luckypicka, " +
+                                      "         @num1a, @num2a, @num3a, @num4a, @num5a, @num6a) ";
+                command.Connection = conn;
+                command.Parameters.AddWithValue("@game_cda", lotteryBet.GetGameCode());
+                command.Parameters.AddWithValue("@target_draw_datea", lotteryBet.GetTargetDrawDate().Date.ToString());
+                command.Parameters.AddWithValue("@bet_amta", lotteryBet.GetBetAmount());
+                command.Parameters.AddWithValue("@outlet_cda", lotteryBet.GetOutletCode());
+                command.Parameters.AddWithValue("@luckypicka", lotteryBet.IsLuckyPick());
+                command.Parameters.AddWithValue("@num1a", lotteryBet.GetNum1());
+                command.Parameters.AddWithValue("@num2a", lotteryBet.GetNum2());
+                command.Parameters.AddWithValue("@num3a", lotteryBet.GetNum3());
+                command.Parameters.AddWithValue("@num4a", lotteryBet.GetNum4());
+                command.Parameters.AddWithValue("@num5a", lotteryBet.GetNum5());
+                command.Parameters.AddWithValue("@num6a", lotteryBet.GetNum6());
+                conn.Open();
+                OleDbTransaction transaction = conn.BeginTransaction();
+                command.Transaction = transaction;
+                int result = command.ExecuteNonQuery();
+                if (result < 0)
+                {
+                    transaction.Rollback();
+                    throw new Exception("Error in inserting data into Lottery Bet Database! ");
+                }
+                else
+                {
+                    transaction.Commit();
+                    modified = base.GetLastInsertedID(command);
+                }
+            }
+            return modified;
+        }
         private LotteryBetSetup GetInstanceDeriveLotteryBetSetup(OleDbDataReader reader)
         {
             LotteryBetSetup bet = new LotteryBetSetup();
@@ -209,6 +251,29 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
             bet.LuckyPick = bool.Parse(reader["luckypick"].ToString());
             bet.SortNumbers();
             return bet;
+        }
+        public void RemoveLotteryBet(long id)
+        {
+            using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
+            using (OleDbCommand command = new OleDbCommand())
+            {
+                command.CommandType = CommandType.Text;
+                command.CommandText = " UPDATE lottery_bet SET active = 0 " +
+                                      " WHERE ID = @id";
+                command.Parameters.AddWithValue("@id", OleDbType.BigInt).Value = (long)id;
+                command.Connection = conn;
+                conn.Open();
+                OleDbTransaction transaction = conn.BeginTransaction();
+                command.Transaction = transaction;
+                int result = command.ExecuteNonQuery();
+
+                if (result < 0)
+                {
+                    transaction.Rollback();
+                    throw new Exception("Removing Lottery Bet ID: " + id + " | Error updating data into Lottery Bet Database! ");
+                }
+                transaction.Commit();
+            }
         }
     }
 }

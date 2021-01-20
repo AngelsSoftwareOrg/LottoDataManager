@@ -141,6 +141,28 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
             }
             return 0.00;
         }
+        public void RemoveLotteryWinningBet(long betId)
+        {
+            using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
+            using (OleDbCommand command = new OleDbCommand())
+            {
+                command.CommandType = CommandType.Text;
+                command.CommandText = " UPDATE lottery_winning_bet SET active = 0 " +
+                                      " WHERE ID = @id";
+                command.Parameters.AddWithValue("@id", OleDbType.BigInt).Value = (long)betId;
+                command.Connection = conn;
+                conn.Open();
+                OleDbTransaction transaction = conn.BeginTransaction();
+                command.Transaction = transaction;
+                int result = command.ExecuteNonQuery();
 
+                if (result < 0)
+                {
+                    transaction.Rollback();
+                    throw new Exception("Removing Lottery Winning Bet ID: " + betId + " | Error updating data into Lottery Bet Database! ");
+                }
+                transaction.Commit();
+            }
+        }
     }
 }

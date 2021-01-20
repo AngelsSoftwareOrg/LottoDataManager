@@ -15,5 +15,7 @@ namespace LottoDataManager.Includes.Model.Details
         bool IsFriday();
         bool IsSaturday();
         bool IsSunday();
+        bool IsDrawDateMatchLotterySchedule(DateTime drawDate);
+        String DrawDateEvery();
     }
 }

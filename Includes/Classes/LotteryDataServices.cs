@@ -21,6 +21,9 @@ namespace LottoDataManager.Includes.Classes
         private LotteryTicketPanelDao lotteryTicketPanelDao;
         private LotteryOutletDao lotteryOutletDao;
         private LotteryBetDao lotteryBetDao;
+        private LotteryScheduleDao lotteryScheduleDao;
+        private LotteryWinningBetDao lotteryWinningBetDao;
+        private LotteryDataWorker lotteryDataWorker;
 
         public LotteryDataServices(LotteryDetails lotteryDetails)
         {
@@ -29,7 +32,10 @@ namespace LottoDataManager.Includes.Classes
             this.lotteryTicketPanelDao = LotteryTicketPanelDaoImpl.GetInstance();
             this.lotteryOutletDao = LotteryOutletDaoImpl.GetInstance();
             this.lotteryBetDao = LotteryBetDaoImpl.GetInstance();
-            userSettingDao = UserSettingDaoImpl.GetInstance();
+            this.userSettingDao = UserSettingDaoImpl.GetInstance();
+            this.lotteryScheduleDao = LotteryScheduleDaoImpl.GetInstance();
+            this.lotteryWinningBetDao = LotteryWinningBetDaoImpl.GetInstance();
+            this.lotteryDataWorker = LotteryDataWorker.GetInstance();
         }
         private GameMode GameMode {
 
@@ -92,6 +98,31 @@ namespace LottoDataManager.Includes.Classes
         public void SaveLotteryBets(List<LotteryBet> lotteryBets)
         {
             this.lotteryBetDao.InsertLotteryBet(lotteryBets);
+        }
+        public LotterySchedule GetLotterySchedule()
+        {
+            return this.lotteryScheduleDao.GetLotterySchedule(this.GameMode);
+        }
+        public void DeleteLotteryBet(List<LotteryBet> lotteryBets)
+        {
+            foreach(LotteryBet lotteryBet in lotteryBets)
+            {
+                DeleteLotteryBet(lotteryBet);
+            }
+        }
+        public void DeleteLotteryBet(LotteryBet lotteryBet)
+        {
+            this.lotteryBetDao.RemoveLotteryBet(lotteryBet.GetId());
+            this.lotteryWinningBetDao.RemoveLotteryWinningBet(lotteryBet.GetId());
+        }
+        public void SaveLotteryBetChange(LotteryBet lotteryBet)
+        {
+            if (lotteryBetDao.IsBetExisting(lotteryBet)) return;
+            DeleteLotteryBet(lotteryBet);
+            int newId = lotteryBetDao.InsertLotteryBet(lotteryBet);
+            LotteryBetSetup lotteryBetSetup = (LotteryBetSetup) lotteryBet;
+            lotteryBetSetup.Id = newId;
+            this.lotteryDataWorker.ProcessWinningBet(lotteryBetSetup);
         }
     }
 }

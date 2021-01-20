@@ -92,6 +92,7 @@
     <Compile Include="Includes\Classes\Scraping\WebLottoScraperFactory.cs" />
     <Compile Include="Includes\Classes\UserSettings.cs" />
     <Compile Include="Includes\Database\DAO\Impl\LotteryBetDaoImpl.cs" />
+    <Compile Include="Includes\Database\DAO\Impl\LotteryDaoImplCommon.cs" />
     <Compile Include="Includes\Database\DAO\Impl\LotteryOutletDaoImpl.cs" />
     <Compile Include="Includes\Database\DAO\Impl\LotteryWinningBetDaoImpl.cs" />
     <Compile Include="Includes\Database\DAO\Impl\LotteryDaoImpl.cs" />

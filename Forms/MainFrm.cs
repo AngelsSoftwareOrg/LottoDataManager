@@ -262,7 +262,7 @@ namespace LottoDataManager
         }
         private void toolStripBtnWinBets_Click(object sender, EventArgs e)
         {
-           LotteryDataWorker ld = new LotteryDataWorker();
+           LotteryDataWorker ld = LotteryDataWorker.GetInstance();
            ld.ProcessCheckingForWinningBets(this.lotteryDetails.GameMode);
         }
         private void toolStripBtnNewBet_Click(object sender, EventArgs e)
@@ -309,6 +309,7 @@ namespace LottoDataManager
                 toolStripStatusLblUpdater.Visible = false;
                 toolStripProgressBarUpdater.Value = 0;
                 toolStripProgressBarUpdater.Visible = false;
+                RefreshWinningNumbersGridContent();
             }
             else
             {
@@ -343,6 +344,20 @@ namespace LottoDataManager
         {
             toolStripBtnDownloadResults_Click(null, null);
         }
+        private void toolStripBtnModifyBet_Click(object sender, EventArgs e)
+        {
+            ShowModifyBets();
+        }
+        private void editYourBetsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowModifyBets();
+        }
+        private void ShowModifyBets()
+        {
+            ModifyBetFrm bet = new ModifyBetFrm(lotteryDataServices);
+            bet.ShowDialog();
+            RefreshBetListViewGridContent();
+        }
         #endregion
 
         #region "Main Form"
@@ -361,9 +376,7 @@ namespace LottoDataManager
         {
             this.Close();
         }
-
         #endregion
-
 
     }
 }

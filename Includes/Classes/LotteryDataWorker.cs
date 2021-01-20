@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using LottoDataManager.Includes.Database.DAO;
 using LottoDataManager.Includes.Database.DAO.Impl;
 using LottoDataManager.Includes.Database.DAO.Interface;
@@ -15,47 +12,65 @@ namespace LottoDataManager.Includes.Classes
 {
     public class LotteryDataWorker
     {
+        private static LotteryDataWorker lotteryDataWorker;
+        private LotteryDataWorker() { }
+        public static LotteryDataWorker GetInstance()
+        {
+            if (lotteryDataWorker == null)
+            {
+                lotteryDataWorker = new LotteryDataWorker();
+            }
+            return lotteryDataWorker;
+        }
+
         public void ProcessCheckingForWinningBets(GameMode gameMode)
         {
-            LotteryWinningCombinationDao lotteryWinningCombinationDao = LotteryWinningCombinationDaoImpl.GetInstance();
             LotteryBetDao lotteryBetDao = LotteryBetDaoImpl.GetInstance();
-            LotteryWinningBetDao lotteryWinningBetDao = LotteryWinningBetDaoImpl.GetInstance();
-            LotteryDrawResultDao lotteryDrawResultDao = LotteryDrawResultDaoImpl.GetInstance();
-            LotteryWinningCombination lotteryWinningCombination = lotteryWinningCombinationDao.GetLotteryWinningCombination(gameMode);
             List<LotteryBet> lotteryBetArr = lotteryBetDao.ExtractLotteryBetsCheckWinningNumber(gameMode);
-
             foreach (LotteryBet lotteryBet in lotteryBetArr)
             {
-                LotteryDrawResult betDrawResult = lotteryDrawResultDao.GetLotteryDrawResultByDrawDate(
-                                            ClassReflectionUtil.FindGameMode(lotteryBet.GetGameCode()), 
-                                            lotteryBet.GetTargetDrawDate());
-                LotteryWinningBetSetup lotteryWinningBet = new LotteryWinningBetSetup();
-                lotteryWinningBet.LotteryBetId = lotteryBet.GetId(); //betDrawResult.GetID();
-
-                if (betDrawResult == null) continue;
-                if (betDrawResult.IsDrawResulDetailsEmpty()) continue;
-
-                int matchingNumberCtr = 0;
-                foreach(int bet in lotteryBet.GetBetNumbersAsArray())
-                {
-                    if (betDrawResult.IsWithinDrawResult(bet))
-                    {
-                        matchingNumberCtr++;
-                        lotteryWinningBet.FillNumberBySeq(matchingNumberCtr, bet);
-                    }
-                }
-                
-                if (lotteryWinningBet.IsNumberSequenceMatchesAll(betDrawResult.GetAllNumberSequence())){
-                    lotteryWinningBet.WinningAmount = betDrawResult.GetJackpotAmt();
-                }
-                else
-                {
-                    lotteryWinningBet.WinningAmount = lotteryWinningCombination.GetWinningAmount(matchingNumberCtr);
-                }
-
-                lotteryWinningBetDao.InsertWinningBet(lotteryWinningBet);
+                ProcessWinningBet(lotteryBet);
             }
         }
+
+        public void ProcessWinningBet(LotteryBet lotteryBet)
+        {
+            GameMode gameMode = ClassReflectionUtil.FindGameMode(lotteryBet.GetGameCode());
+            LotteryWinningCombinationDao lotteryWinningCombinationDao = LotteryWinningCombinationDaoImpl.GetInstance();
+            LotteryWinningCombination lotteryWinningCombination = lotteryWinningCombinationDao.GetLotteryWinningCombination(gameMode);
+
+            LotteryWinningBetDao lotteryWinningBetDao = LotteryWinningBetDaoImpl.GetInstance();
+            LotteryDrawResultDao lotteryDrawResultDao = LotteryDrawResultDaoImpl.GetInstance();
+            LotteryDrawResult betDrawResult = lotteryDrawResultDao.GetLotteryDrawResultByDrawDate(
+                            gameMode, lotteryBet.GetTargetDrawDate());
+            LotteryWinningBetSetup lotteryWinningBet = new LotteryWinningBetSetup();
+            lotteryWinningBet.LotteryBetId = lotteryBet.GetId();
+
+            if (betDrawResult == null) return;
+            if (betDrawResult.IsDrawResulDetailsEmpty()) return;
+
+            int matchingNumberCtr = 0;
+            foreach (int bet in lotteryBet.GetBetNumbersAsArray())
+            {
+                if (betDrawResult.IsWithinDrawResult(bet))
+                {
+                    matchingNumberCtr++;
+                    lotteryWinningBet.FillNumberBySeq(matchingNumberCtr, bet);
+                }
+            }
+
+            if (lotteryWinningBet.IsNumberSequenceMatchesAll(betDrawResult.GetAllNumberSequence()))
+            {
+                lotteryWinningBet.WinningAmount = betDrawResult.GetJackpotAmt();
+            }
+            else
+            {
+                lotteryWinningBet.WinningAmount = lotteryWinningCombination.GetWinningAmount(matchingNumberCtr);
+            }
+
+            lotteryWinningBetDao.InsertWinningBet(lotteryWinningBet);
+        }
+
 
         public void ProcessAdjustCorrectTargetDrawDate(GameMode gameMode)
         {

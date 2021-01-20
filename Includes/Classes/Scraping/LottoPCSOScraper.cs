@@ -149,8 +149,8 @@ namespace LottoDataManager.Includes.Classes.Scraping
                             setup.JackpotAmt = double.Parse(tr.ChildNodes[4].TextContent);
                             setup.Winners = int.Parse(tr.ChildNodes[5].TextContent);
                             setup.GameCode = lotteryDetails.GameCode;
+                            lotteryDrawResultArr.Add(setup);
                         }
-                        lotteryDrawResultArr.Add(setup);
                     }
                 }
             }

@@ -18,6 +18,7 @@ namespace LottoDataManager
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());
+            //Application.Run(new ModifyBetFrm(null));
             //Application.Run(new AddBetFrm());
         }
     }
