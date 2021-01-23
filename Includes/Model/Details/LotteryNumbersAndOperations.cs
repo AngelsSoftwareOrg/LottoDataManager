@@ -20,5 +20,6 @@ namespace LottoDataManager.Includes.Model.Details
         void FillNumberBySeq(int seq, int number);
         bool IsNumberSequenceMatchesAll(int[] toMatchNumSeq);
         int[] GetAllNumberSequence();
+        int[] GetAllNumberSequenceSorted(ListSortDirection direction = ListSortDirection.Ascending);
     }
 }

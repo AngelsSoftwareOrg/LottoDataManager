@@ -83,15 +83,15 @@ namespace LottoDataManager
             {
                 DisplayStatusLabel("Getting the listing of winning numbers");
                 objListVwWinningNum.SetObjects(lotteryDataServices.GetLotteryDrawResults(dateTimePickerDrawResult.Value));
-                this.olvColDrawDate.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
-                this.olvColNum1.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
-                this.olvColNum2.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
-                this.olvColNum3.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
-                this.olvColNum4.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
-                this.olvColNum5.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
-                this.olvColNum6.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
-                this.olvColJackpot.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
-                this.olvColWinners.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+                this.olvColDrawDate.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
+                this.olvColNum1.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
+                this.olvColNum2.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
+                this.olvColNum3.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
+                this.olvColNum4.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
+                this.olvColNum5.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
+                this.olvColNum6.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
+                this.olvColJackpot.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
+                this.olvColWinners.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
                 //objListVwWinningNum.EnsureVisible(objListVwWinningNum.Items.Count - 1);
             }
             catch (Exception e)
@@ -109,14 +109,14 @@ namespace LottoDataManager
             {
                 DisplayStatusLabel("Getting the listing of your bets");
                 objectLstVwLatestBet.SetObjects(lotteryDataServices.GetLottoBets(dateTimePickerBets.Value));
-                this.olvColBetDrawDate.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
-                this.olvColBetNum1.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
-                this.olvColBetNum2.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
-                this.olvColBetNum3.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
-                this.olvColBetNum4.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
-                this.olvColBetNum5.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
-                this.olvColBetNum6.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
-                this.olvColBetResult.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+                this.olvColBetDrawDate.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
+                this.olvColBetNum1.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
+                this.olvColBetNum2.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
+                this.olvColBetNum3.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
+                this.olvColBetNum4.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
+                this.olvColBetNum5.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
+                this.olvColBetNum6.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
+                this.olvColBetResult.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
             }
             catch (Exception e)
             {
@@ -271,6 +271,43 @@ namespace LottoDataManager
             betForm.ShowDialog();
             RefreshBetListViewGridContent();
         }
+        private void compareDrawResultAndBetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SelectBetAndOpenMatchMakingForm();
+        }
+        private void objectLstVwLatestBet_DoubleClick(object sender, EventArgs e)
+        {
+            SelectBetAndOpenMatchMakingForm();
+        }
+        private void objListVwWinningNum_DoubleClick(object sender, EventArgs e)
+        {
+            SelectDrawResultAndOpenMatchMakingForm();
+        }
+        private void objectLstVwLatestBet_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter) SelectBetAndOpenMatchMakingForm();
+        }
+        private void objListVwWinningNum_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter) SelectDrawResultAndOpenMatchMakingForm();
+        }
+        private void SelectBetAndOpenMatchMakingForm()
+        {
+            LotteryBet bet = (LotteryBet)objectLstVwLatestBet.SelectedObject;
+            if (bet == null) return;
+            OpenBetsAndDrawResultMatchMakingForm(bet.GetTargetDrawDate());
+        }
+        private void SelectDrawResultAndOpenMatchMakingForm()
+        {
+            LotteryDrawResult drawResult = (LotteryDrawResult)objListVwWinningNum.SelectedObject;
+            if (drawResult == null) return;
+            OpenBetsAndDrawResultMatchMakingForm(drawResult.GetDrawDate());
+        }
+        private void OpenBetsAndDrawResultMatchMakingForm(DateTime dateRef)
+        {
+            DrawAndBetMatchFrm m = new DrawAndBetMatchFrm(this.lotteryDataServices, dateRef);
+            m.ShowDialog();
+        }
         #endregion
 
         #region "Lotto Scraper"
@@ -376,7 +413,13 @@ namespace LottoDataManager
         {
             this.Close();
         }
+
+
+
+
+
         #endregion
+
 
     }
 }

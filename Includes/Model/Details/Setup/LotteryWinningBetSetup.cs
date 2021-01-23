@@ -11,9 +11,12 @@ namespace LottoDataManager.Includes.Model.Details.Setup
     {
         private long lotteryBetId;
         private double winningAmount;
+        private bool claimStatus;
+
         public LotteryWinningBetSetup() : base(){}
         public long LotteryBetId { get => lotteryBetId; set => lotteryBetId = value; }
         public double WinningAmount { get => winningAmount; set => winningAmount = value; }
+        public bool ClaimStatus { get => claimStatus; set => claimStatus = value; }
         public long GetLotteryBetId()
         {
             return LotteryBetId;
@@ -21,6 +24,10 @@ namespace LottoDataManager.Includes.Model.Details.Setup
         public double GetWinningAmount()
         {
             return WinningAmount;
+        }
+        public bool IsClaimed()
+        {
+            return ClaimStatus;
         }
         override
         public String ToString()

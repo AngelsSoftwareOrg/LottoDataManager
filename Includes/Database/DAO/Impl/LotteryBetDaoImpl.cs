@@ -36,7 +36,34 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                                       "   AND active = true " +
                                       " ORDER BY target_draw_date DESC";
                 command.Parameters.AddWithValue("@game_cd", OleDbType.Integer).Value = gameMode;
-                command.Parameters.AddWithValue("@sinceWhen", OleDbType.DBDate).Value = sinceWhen.ToString();
+                command.Parameters.AddWithValue("@sinceWhen", OleDbType.DBDate).Value = sinceWhen.Date.ToString();
+                command.Connection = conn;
+                conn.Open();
+
+                using (OleDbDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        lotteryBet.Add(GetInstanceDeriveLotteryBetSetup(reader));
+                    }
+                }
+            }
+            return lotteryBet;
+        }
+        public List<LotteryBet> GetLotteryBets(GameMode gameMode, DateTime betDrawDate)
+        {
+            List<LotteryBet> lotteryBet = new List<LotteryBet>();
+            using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
+            using (OleDbCommand command = new OleDbCommand())
+            {
+                command.CommandType = CommandType.Text;
+                command.CommandText = "SELECT * FROM lottery_bet " +
+                                      " WHERE game_cd = @game_cd " +
+                                      "   AND target_draw_date = CDATE(@sinceWhen) " +
+                                      "   AND active = true " +
+                                      " ORDER BY target_draw_date DESC";
+                command.Parameters.AddWithValue("@game_cd", OleDbType.Integer).Value = gameMode;
+                command.Parameters.AddWithValue("@sinceWhen", OleDbType.DBDate).Value = betDrawDate.Date.ToString();
                 command.Connection = conn;
                 conn.Open();
 

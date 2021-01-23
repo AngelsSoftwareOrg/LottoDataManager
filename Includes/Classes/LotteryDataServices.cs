@@ -24,6 +24,7 @@ namespace LottoDataManager.Includes.Classes
         private LotteryScheduleDao lotteryScheduleDao;
         private LotteryWinningBetDao lotteryWinningBetDao;
         private LotteryDataWorker lotteryDataWorker;
+        private LotteryDrawResultDao lotteryDrawResultDao;
 
         public LotteryDataServices(LotteryDetails lotteryDetails)
         {
@@ -36,6 +37,7 @@ namespace LottoDataManager.Includes.Classes
             this.lotteryScheduleDao = LotteryScheduleDaoImpl.GetInstance();
             this.lotteryWinningBetDao = LotteryWinningBetDaoImpl.GetInstance();
             this.lotteryDataWorker = LotteryDataWorker.GetInstance();
+            this.lotteryDrawResultDao = LotteryDrawResultDaoImpl.GetInstance();
         }
         private GameMode GameMode {
 
@@ -48,14 +50,22 @@ namespace LottoDataManager.Includes.Classes
         public List<LotteryDrawResult> GetLotteryDrawResults(DateTime startingDate)
         {
             if (startingDate >= DateTime.Now) throw new Exception("Date should be backdated when getting new Draw Results!");
-            LotteryDrawResultDao drDao = LotteryDrawResultDaoImpl.GetInstance();
-            return drDao.GetDrawResultsFromStartingDate(GameMode, startingDate);
+            return lotteryDrawResultDao.GetDrawResultsFromStartingDate(GameMode, startingDate);
+        }
+        public LotteryDrawResult GetLotteryDrawResultByDrawDate(DateTime drawDate)
+        {
+            return lotteryDrawResultDao.GetLotteryDrawResultByDrawDate(GameMode, drawDate);
         }
         public List<LotteryBet> GetLottoBets(DateTime sinceWhen)
         {
             if (sinceWhen >= DateTime.Now) throw new Exception("Date should be backdated when getting new Draw Bets!");
             LotteryBetDao betDao = LotteryBetDaoImpl.GetInstance();
             return betDao.GetDashboardLatestBets(GameMode, sinceWhen);
+        }
+        public List<LotteryBet> GetLottoBetsByDrawDate(DateTime betDrawDate)
+        {
+            LotteryBetDao betDao = LotteryBetDaoImpl.GetInstance();
+            return betDao.GetLotteryBets(GameMode, betDrawDate);
         }
         public double GetTotalWinningsAmount()
         {

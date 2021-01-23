@@ -71,6 +71,12 @@
     <Compile Include="Forms\AddBetFrm.Designer.cs">
       <DependentUpon>AddBetFrm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\DrawAndBetMatchFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DrawAndBetMatchFrm.Designer.cs">
+      <DependentUpon>DrawAndBetMatchFrm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\LottoCheckLatestResultFrm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -157,6 +163,9 @@
     <EmbeddedResource Include="Forms\AddBetFrm.resx">
       <DependentUpon>AddBetFrm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DrawAndBetMatchFrm.resx">
+      <DependentUpon>DrawAndBetMatchFrm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\LottoCheckLatestResultFrm.resx">
       <DependentUpon>LottoCheckLatestResultFrm.cs</DependentUpon>
     </EmbeddedResource>
@@ -174,6 +183,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -191,12 +201,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Includes\Session\" />
-    <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="DatabaseMain\Lotto_Main_DB.accdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\Icons\torch_24x.png" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

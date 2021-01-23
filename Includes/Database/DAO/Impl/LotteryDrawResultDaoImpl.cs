@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using LottoDataManager.Includes.Model.Details;
 using LottoDataManager.Includes.Model.Structs;
+using LottoDataManager.Includes.Utilities;
 
 namespace LottoDataManager.Includes.Database.DAO
 {
@@ -195,7 +196,7 @@ namespace LottoDataManager.Includes.Database.DAO
                     }
                 }
             }
-            return DateTime.Now.AddDays(-13000);
+            return DateTimeConverterUtils.GetYear2000();
         }
 
         public void InsertDrawDate(LotteryDrawResult lotteryDrawResult)
@@ -256,7 +257,7 @@ namespace LottoDataManager.Includes.Database.DAO
                     }
                 }
             }
-            return DateTime.Now.AddDays(-13000);
+            return DateTimeConverterUtils.GetYear2000();
         }
 
         private OleDbCommand GetDrawResultCommandByRange(GameMode gameMode, DateTime fromDate, DateTime toDate)

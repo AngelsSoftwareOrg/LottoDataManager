@@ -11,5 +11,6 @@ namespace LottoDataManager.Includes.Model.Details
     {
         long GetLotteryBetId();
         double GetWinningAmount();
+        bool IsClaimed();
     }
 }

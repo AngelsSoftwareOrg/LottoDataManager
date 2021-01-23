@@ -13,6 +13,7 @@ namespace LottoDataManager.Includes.Model.Details
         long GetId();
         DateTime GetTargetDrawDate();
         String GetTargetDrawDateFormatted();
+        String GetTargetDrawDateLongFormat();
         double GetBetAmount();
         int GetOutletCode();
         int[] GetBetNumbersAsArray();

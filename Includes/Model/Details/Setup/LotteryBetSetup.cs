@@ -45,9 +45,13 @@ namespace LottoDataManager.Includes.Model.Details
         {
             return TargetDrawDate;
         }
-        public string GetTargetDrawDateFormatted()
+        public String GetTargetDrawDateFormatted()
         {
             return DateTimeConverterUtils.ConvertToFormat(this.TargetDrawDate, DateTimeConverterUtils.STANDARD_DATE_FORMAT);
+        }
+        public String GetTargetDrawDateLongFormat()
+        {
+            return DateTimeConverterUtils.ConvertToFormat(this.TargetDrawDate, DateTimeConverterUtils.DATE_FORMAT_LONG);
         }
         public int[] GetBetNumbersAsArray()
         {

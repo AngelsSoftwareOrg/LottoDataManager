@@ -47,6 +47,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                         lotteryWinningBet.Num4 = int.Parse(reader["num4"].ToString());
                         lotteryWinningBet.Num5 = int.Parse(reader["num5"].ToString());
                         lotteryWinningBet.Num6 = int.Parse(reader["num6"].ToString());
+                        lotteryWinningBet.ClaimStatus = bool.Parse(reader["claim_status"].ToString());
                     }
                 }
             }
@@ -59,8 +60,8 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
             {
                 
                 command.CommandType = CommandType.Text;
-                command.CommandText = " INSERT INTO lottery_winning_bet (bet_id, winning_amt, active, num1, num2, num3, num4, num5, num6) " +
-                                      " VALUES (@lotteryBetID,@winningAmt,true,@num1,@num2,@num3,@num4,@num5,@num6)";
+                command.CommandText = " INSERT INTO lottery_winning_bet (bet_id, winning_amt, active, claim_status,num1, num2, num3, num4, num5, num6) " +
+                                      " VALUES (@lotteryBetID,@winningAmt,true,@claimStatus,@num1,@num2,@num3,@num4,@num5,@num6)";
                 command.Parameters.AddWithValue("@lotteryBetID", lotteryWinningBet.GetLotteryBetId());
                 command.Parameters.AddWithValue("@winningAmt", lotteryWinningBet.GetWinningAmount());
                 command.Parameters.AddWithValue("@num1", lotteryWinningBet.GetNum1());
@@ -69,6 +70,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                 command.Parameters.AddWithValue("@num4", lotteryWinningBet.GetNum4());
                 command.Parameters.AddWithValue("@num5", lotteryWinningBet.GetNum5());
                 command.Parameters.AddWithValue("@num6", lotteryWinningBet.GetNum6());
+                command.Parameters.AddWithValue("@claimStatus", lotteryWinningBet.IsClaimed());
                 command.Connection = conn;
                 conn.Open();
                 OleDbTransaction transaction = conn.BeginTransaction();

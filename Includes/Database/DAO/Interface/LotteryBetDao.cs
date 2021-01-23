@@ -17,5 +17,6 @@ namespace LottoDataManager.Includes.Database.DAO.Interface
         void RemoveLotteryBet(long id);
         bool IsBetExisting(LotteryBet lotteryBet);
         int InsertLotteryBet(LotteryBet lotteryBet);
+        List<LotteryBet> GetLotteryBets(GameMode gameMode, DateTime betDrawDate);
     }
 }

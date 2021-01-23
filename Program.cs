@@ -20,6 +20,7 @@ namespace LottoDataManager
             Application.Run(new MainForm());
             //Application.Run(new ModifyBetFrm(null));
             //Application.Run(new AddBetFrm());
+            //Application.Run(new DrawAndBetMatchFrm(null, DateTime.Now));
         }
     }
 }

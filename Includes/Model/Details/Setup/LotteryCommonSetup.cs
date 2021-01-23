@@ -101,6 +101,14 @@ namespace LottoDataManager.Includes.Model.Details.Setup
         {
             return (int[]) this.allNumbers.Clone();
         }
+        public int[] GetAllNumberSequenceSorted(ListSortDirection direction = ListSortDirection.Ascending)
+        {
+            int[] seq = (int[])this.allNumbers.Clone();
+            Array.Sort(seq);
+            if (direction == ListSortDirection.Descending) Array.Reverse(seq);
+            return seq;
+        }
+
         public void PutNumberSequence(String sequence)
         {
             try

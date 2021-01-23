@@ -30,6 +30,7 @@ namespace LottoDataManager.Includes.Model.Details
                 else if (nextScheduledDate.DayOfWeek == DayOfWeek.Thursday && lotterySchedule.IsThursday()) { break; }
                 else if (nextScheduledDate.DayOfWeek == DayOfWeek.Friday && lotterySchedule.IsFriday()) { break; }
                 else if (nextScheduledDate.DayOfWeek == DayOfWeek.Saturday && lotterySchedule.IsSaturday()) { break; }
+                else if (nextScheduledDate.DayOfWeek == DayOfWeek.Sunday && lotterySchedule.IsSunday()) { break; }
                 if (breaker > 1000) break;
                 breaker++;
                 nextScheduledDate = nextScheduledDate.AddDays(1);

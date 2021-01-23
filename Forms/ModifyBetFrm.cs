@@ -27,8 +27,6 @@ namespace LottoDataManager.Forms
             InitializeComponent();
             this.lotteryDataServices = lotteryDataServices;
 
-
-
             //Debugging
             //if(lotteryDataServices==null)
             //    this.lotteryDataServices = new LotteryDataServices(new Game658());
@@ -40,12 +38,7 @@ namespace LottoDataManager.Forms
 
         private void InitializesForms()
         {
-            //dateTimePickerBets.Value = DateTime.Now.AddYears(-1);
-
-            //debug
-            dateTimePickerBets.Value = DateTime.Now.AddMonths(-2);
-            
-            
+            dateTimePickerBets.Value = DateTime.Now.AddYears(-1);
             FillUpBetList();
             ResizeColumnsBetList();
             objectListViewBets.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClickAlways;
@@ -222,6 +215,7 @@ namespace LottoDataManager.Forms
             this.olvColNum4.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
             this.olvColNum5.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
             this.olvColNum6.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
+            this.objectListViewBets.Refresh();
         }
         private void linkLabelFilterNow_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
