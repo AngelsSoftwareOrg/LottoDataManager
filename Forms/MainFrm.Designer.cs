@@ -95,6 +95,7 @@ namespace LottoDataManager
             this.olvColBetNum6 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColBetResult = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.ctxMenuBet = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.compareDrawResultAndBetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editYourBetsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel3 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -122,7 +123,8 @@ namespace LottoDataManager
             this.toolStripBtnWinBets = new System.Windows.Forms.ToolStripButton();
             this.toolStripBtnDownloadResults = new System.Windows.Forms.ToolStripButton();
             this.toolStripMain = new System.Windows.Forms.ToolStrip();
-            this.compareDrawResultAndBetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.editClaimStatusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenuStrip.SuspendLayout();
             this.mainStatusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mainSplitContainer)).BeginInit();
@@ -614,14 +616,22 @@ namespace LottoDataManager
             this.ctxMenuBet.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.ctxMenuBet.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.compareDrawResultAndBetToolStripMenuItem,
-            this.editYourBetsToolStripMenuItem});
+            this.editYourBetsToolStripMenuItem,
+            this.editClaimStatusToolStripMenuItem});
             this.ctxMenuBet.Name = "ctxMenuBet";
-            this.ctxMenuBet.Size = new System.Drawing.Size(278, 80);
+            this.ctxMenuBet.Size = new System.Drawing.Size(278, 76);
+            // 
+            // compareDrawResultAndBetToolStripMenuItem
+            // 
+            this.compareDrawResultAndBetToolStripMenuItem.Name = "compareDrawResultAndBetToolStripMenuItem";
+            this.compareDrawResultAndBetToolStripMenuItem.Size = new System.Drawing.Size(277, 24);
+            this.compareDrawResultAndBetToolStripMenuItem.Text = "Compare Draw Result and Bet";
+            this.compareDrawResultAndBetToolStripMenuItem.Click += new System.EventHandler(this.compareDrawResultAndBetToolStripMenuItem_Click);
             // 
             // editYourBetsToolStripMenuItem
             // 
             this.editYourBetsToolStripMenuItem.Name = "editYourBetsToolStripMenuItem";
-            this.editYourBetsToolStripMenuItem.Size = new System.Drawing.Size(178, 24);
+            this.editYourBetsToolStripMenuItem.Size = new System.Drawing.Size(277, 24);
             this.editYourBetsToolStripMenuItem.Text = "Edit your Bets...";
             this.editYourBetsToolStripMenuItem.Click += new System.EventHandler(this.editYourBetsToolStripMenuItem_Click);
             // 
@@ -640,7 +650,8 @@ namespace LottoDataManager
             this.groupBox1.Controls.Add(this.linkFilterGoBet);
             this.groupBox1.Controls.Add(this.dateTimePickerBets);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.ForeColor = System.Drawing.Color.Green;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(347, 73);
@@ -652,6 +663,7 @@ namespace LottoDataManager
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.SystemColors.ControlText;
             this.label2.Location = new System.Drawing.Point(7, 22);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(96, 17);
@@ -778,7 +790,8 @@ namespace LottoDataManager
             this.groupBox2.Controls.Add(this.linkLabelFilterDraw);
             this.groupBox2.Controls.Add(this.dateTimePickerDrawResult);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox2.ForeColor = System.Drawing.Color.Tomato;
             this.groupBox2.Location = new System.Drawing.Point(0, 0);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(534, 73);
@@ -790,6 +803,7 @@ namespace LottoDataManager
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.SystemColors.ControlText;
             this.label6.Location = new System.Drawing.Point(7, 22);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(96, 17);
@@ -824,6 +838,7 @@ namespace LottoDataManager
             this.toolStripBtnNewBet,
             this.toolStripBtnDefaultViewListing,
             this.toolStripBtnModifyBet,
+            this.toolStripButton1,
             this.toolStripBtnWinBets,
             this.toolStripBtnDownloadResults});
             this.toolStripBetsAndResults.Location = new System.Drawing.Point(0, 0);
@@ -892,12 +907,22 @@ namespace LottoDataManager
             this.toolStripMain.TabIndex = 3;
             this.toolStripMain.Text = "toolStrip1";
             // 
-            // compareDrawResultAndBetToolStripMenuItem
+            // toolStripButton1
             // 
-            this.compareDrawResultAndBetToolStripMenuItem.Name = "compareDrawResultAndBetToolStripMenuItem";
-            this.compareDrawResultAndBetToolStripMenuItem.Size = new System.Drawing.Size(277, 24);
-            this.compareDrawResultAndBetToolStripMenuItem.Text = "Compare Draw Result and Bet";
-            this.compareDrawResultAndBetToolStripMenuItem.Click += new System.EventHandler(this.compareDrawResultAndBetToolStripMenuItem_Click);
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(34, 34);
+            this.toolStripButton1.Text = "Edit Winning Bet Claim Status";
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+            // 
+            // editClaimStatusToolStripMenuItem
+            // 
+            this.editClaimStatusToolStripMenuItem.Name = "editClaimStatusToolStripMenuItem";
+            this.editClaimStatusToolStripMenuItem.Size = new System.Drawing.Size(277, 24);
+            this.editClaimStatusToolStripMenuItem.Text = "Edit Claim Status";
+            this.editClaimStatusToolStripMenuItem.Click += new System.EventHandler(this.editClaimStatusToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -1026,6 +1051,8 @@ namespace LottoDataManager
         private System.Windows.Forms.ContextMenuStrip ctxMenuBet;
         private System.Windows.Forms.ToolStripMenuItem editYourBetsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem compareDrawResultAndBetToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem editClaimStatusToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
     }
 }
 

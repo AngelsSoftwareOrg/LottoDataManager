@@ -15,5 +15,7 @@ namespace LottoDataManager.Includes.Database.DAO.Interface
         double GetTotalWinningsAmount(GameMode gameMode);
         double GetTotalWinningsAmountThisMonth(GameMode gameMode);
         void RemoveLotteryWinningBet(long betId);
+        List<LotteryWinningBet> GetLotteryWinningBet(GameMode gameMode, DateTime sinceWhen);
+        void UpdateClaimStatus(LotteryWinningBet winBet);
     }
 }

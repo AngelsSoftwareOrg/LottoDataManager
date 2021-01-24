@@ -69,14 +69,17 @@ namespace LottoDataManager.Includes.Classes
         }
         public double GetTotalWinningsAmount()
         {
-            LotteryWinningBetDao lotteryWinningBetDao = LotteryWinningBetDaoImpl.GetInstance();
             return lotteryWinningBetDao.GetTotalWinningsAmount(this.GameMode);
         }
         public double GetTotalWinningsAmountThisMonth()
         {
-            LotteryWinningBetDao lotteryWinningBetDao = LotteryWinningBetDaoImpl.GetInstance();
             return lotteryWinningBetDao.GetTotalWinningsAmountThisMonth(this.GameMode);
         }
+        public List<LotteryWinningBet> GetLotteryWinningBets(DateTime sinceWhen)
+        {
+            return lotteryWinningBetDao.GetLotteryWinningBet(this.GameMode, sinceWhen);
+        }
+        
         public List<Lottery> GetLotteries()
         {
             LotteryDao lotteryDao = LotteryDaoImpl.GetInstance();
@@ -133,6 +136,10 @@ namespace LottoDataManager.Includes.Classes
             LotteryBetSetup lotteryBetSetup = (LotteryBetSetup) lotteryBet;
             lotteryBetSetup.Id = newId;
             this.lotteryDataWorker.ProcessWinningBet(lotteryBetSetup);
+        }
+        public void UpdateClaimStatus(LotteryWinningBet winBet)
+        {
+            lotteryWinningBetDao.UpdateClaimStatus(winBet);
         }
     }
 }

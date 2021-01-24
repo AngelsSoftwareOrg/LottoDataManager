@@ -395,6 +395,20 @@ namespace LottoDataManager
             bet.ShowDialog();
             RefreshBetListViewGridContent();
         }
+        private void editClaimStatusToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowModifyClaimStatus();
+        }
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            ShowModifyClaimStatus();
+        }
+        private void ShowModifyClaimStatus()
+        {
+            ModifyClaimsFrm m = new ModifyClaimsFrm(this.lotteryDataServices);
+            m.ShowDialog();
+            RefreshFieldDetails();
+        }
         #endregion
 
         #region "Main Form"
@@ -413,6 +427,8 @@ namespace LottoDataManager
         {
             this.Close();
         }
+
+
 
 
 

@@ -101,6 +101,10 @@ namespace LottoDataManager.Includes.Model.Details.Setup
         {
             return (int[]) this.allNumbers.Clone();
         }
+        public String GetAllNumberSequenceStr()
+        {
+            return String.Join("-", GetAllNumberSequence());
+        }
         public int[] GetAllNumberSequenceSorted(ListSortDirection direction = ListSortDirection.Ascending)
         {
             int[] seq = (int[])this.allNumbers.Clone();
@@ -108,7 +112,6 @@ namespace LottoDataManager.Includes.Model.Details.Setup
             if (direction == ListSortDirection.Descending) Array.Reverse(seq);
             return seq;
         }
-
         public void PutNumberSequence(String sequence)
         {
             try

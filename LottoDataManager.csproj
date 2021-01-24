@@ -83,6 +83,12 @@
     <Compile Include="Forms\LottoCheckLatestResultFrm.Designer.cs">
       <DependentUpon>LottoCheckLatestResultFrm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ModifyClaimsFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ModifyClaimsFrm.Designer.cs">
+      <DependentUpon>ModifyClaimsFrm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ModifyBetFrm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -171,6 +177,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainFrm.resx">
       <DependentUpon>MainFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ModifyClaimsFrm.resx">
+      <DependentUpon>ModifyClaimsFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ModifyBetFrm.resx">
       <DependentUpon>ModifyBetFrm.cs</DependentUpon>
