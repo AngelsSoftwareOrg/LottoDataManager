@@ -97,6 +97,11 @@
     </Compile>
     <Compile Include="Includes\Classes\LotteryDataServices.cs" />
     <Compile Include="Includes\Classes\LotteryDataWorker.cs" />
+    <Compile Include="Includes\Classes\LotteryDataWorkerEvent.cs" />
+    <Compile Include="Includes\Classes\LotteryDataWorkerEventStages.cs" />
+    <Compile Include="Includes\Classes\Reports\DashboardReport.cs" />
+    <Compile Include="Includes\Classes\Reports\ReportAbstract.cs" />
+    <Compile Include="Includes\Classes\Reports\ReportDataServices.cs" />
     <Compile Include="Includes\Classes\Scraping\LottoWebScraper.cs" />
     <Compile Include="Includes\Classes\Scraping\LottoPCSOScraper.cs" />
     <Compile Include="Includes\Classes\Scraping\LottoWebScraperEvent.cs" />
@@ -163,6 +168,7 @@
     <Compile Include="Includes\Utilities\ClassReflectionUtil.cs" />
     <Compile Include="Includes\Utilities\ConverterUtils.cs" />
     <Compile Include="Includes\Utilities\DateTimeConverterUtils.cs" />
+    <Compile Include="Includes\Utilities\ResourcesUtils.cs" />
     <Compile Include="Includes\Utilities\StringUtils.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -204,6 +210,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Resources\messages_en.properties" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

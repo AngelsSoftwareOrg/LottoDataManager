@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using BrightIdeasSoftware;
 using LottoDataManager.Forms;
 using LottoDataManager.Includes.Classes;
+using LottoDataManager.Includes.Classes.Reports;
 using LottoDataManager.Includes.Classes.Scraping;
 using LottoDataManager.Includes.Database.DAO;
 using LottoDataManager.Includes.Model;
@@ -25,18 +26,26 @@ namespace LottoDataManager
         private OLVColumn[] olvColumnTargetFilter;
         private LottoWebScraper lottoWebScraper = WebLottoScraperFactory.GetLottoScraper();
         private LotteryDataServices lotteryDataServices;
+        private LotteryDataWorker lotteryDataWorker;
+        private DashboardReport dashboardReport;
 
         public MainForm()
         {
             InitializeComponent();
             this.lotteryDetails = GameFactory.GetPreviousOpenGameInstance();
-            this.lotteryDataServices = new LotteryDataServices(this.lotteryDetails);
+            ReinitateLotteryServices();
             GenerateLotteriesGameMenu();
             InitializesFormContent();
             lottoWebScraper.WebScrapingStatus += LottoWebScraper_WebScrapingStatus;
             Application.ApplicationExit += new EventHandler(this.OnApplicationExit);
+            lotteryDataWorker.LotteryDataWorkerProcessingStatus += LotteryDataWorker_LotteryDataWorkerProcessingStatus;
         }
-        
+        private void ReinitateLotteryServices()
+        {
+            this.lotteryDataServices = new LotteryDataServices(this.lotteryDetails);
+            this.lotteryDataWorker = new LotteryDataWorker();
+            this.dashboardReport = new DashboardReport(this.lotteryDetails);
+        }
         private void ClearAllForms()
         {
             toolStripStatusLblUpdater.Text = "";
@@ -64,10 +73,12 @@ namespace LottoDataManager
                 SetBetsAndResultDefaultList();
                 RefreshWinningNumbersGridContent();
                 DisplayStatusLabel();
+                RefreshDashboardReport();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageBox.Show("Error when initializes content.");
+                Console.WriteLine(ex.Message);
+                MessageBox.Show(ResourcesUtils.GetMessage("mainf_error1"));
             }
             finally
             {
@@ -81,7 +92,7 @@ namespace LottoDataManager
         {
             try
             {
-                DisplayStatusLabel("Getting the listing of winning numbers");
+                DisplayStatusLabel(ResourcesUtils.GetMessage("mainf_win_num_grid_cont"));
                 objListVwWinningNum.SetObjects(lotteryDataServices.GetLotteryDrawResults(dateTimePickerDrawResult.Value));
                 this.olvColDrawDate.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
                 this.olvColNum1.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
@@ -168,6 +179,18 @@ namespace LottoDataManager
             this.olvColumnTargetFilter = tmpOLVColumns.ToArray();
             return this.olvColumnTargetFilter;
         }
+        private void RefreshDashboardReport()
+        {
+            listViewOtherDetails.Items.Clear();
+            listViewOtherDetails.BeginUpdate();
+            foreach (KeyValuePair<String, String> kvp in dashboardReport.GetDashboardReport())
+            {
+                ListViewItem itm = new ListViewItem(kvp.Key);
+                itm.SubItems.Add(kvp.Value);
+                listViewOtherDetails.Items.Add(itm);
+            }
+            listViewOtherDetails.EndUpdate();
+        }
         #endregion
 
         #region "Draw Result"
@@ -234,8 +257,8 @@ namespace LottoDataManager
             else
             {
                 statusLabelLoading.Text = "*** " + status;
-                Application.DoEvents();
             }
+            Application.DoEvents();
         }
         #endregion
 
@@ -247,6 +270,7 @@ namespace LottoDataManager
             dateTimePickerBets.Value = DateTime.Now.AddYears(-1);
             RefreshWinningNumbersGridContent();
             RefreshBetListViewGridContent();
+            RefreshDashboardReport();
         }
         private void linkFilterGoBet_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -262,8 +286,15 @@ namespace LottoDataManager
         }
         private void toolStripBtnWinBets_Click(object sender, EventArgs e)
         {
-           LotteryDataWorker ld = LotteryDataWorker.GetInstance();
-           ld.ProcessCheckingForWinningBets(this.lotteryDetails.GameMode);
+            statusLabelLoading.Visible = true;
+            Application.DoEvents();
+            lotteryDataWorker.ProcessCheckingForWinningBets(this.lotteryDetails.GameMode);
+            statusLabelLoading.Text = "";
+        }
+        private void LotteryDataWorker_LotteryDataWorkerProcessingStatus(object sender, LotteryDataWorkerEvent e)
+        {
+            statusLabelLoading.Text = e.CustomStatusMessage;
+            Application.DoEvents();
         }
         private void toolStripBtnNewBet_Click(object sender, EventArgs e)
         {
@@ -373,7 +404,7 @@ namespace LottoDataManager
             ToolStripMenuItem lottoGameMenu = (ToolStripMenuItem) sender;
             Lottery lottery = (Lottery)lottoGameMenu.Tag;
             this.lotteryDetails = new LotteryDetails(lottery.GetGameMode());
-            this.lotteryDataServices = new LotteryDataServices(this.lotteryDetails);
+            ReinitateLotteryServices();
             Application.DoEvents();
             InitializesFormContent();
         }

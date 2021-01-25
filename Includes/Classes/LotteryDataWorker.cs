@@ -12,35 +12,34 @@ namespace LottoDataManager.Includes.Classes
 {
     public class LotteryDataWorker
     {
-        private static LotteryDataWorker lotteryDataWorker;
-        private LotteryDataWorker() { }
-        public static LotteryDataWorker GetInstance()
-        {
-            if (lotteryDataWorker == null)
-            {
-                lotteryDataWorker = new LotteryDataWorker();
-            }
-            return lotteryDataWorker;
-        }
+        public event EventHandler<LotteryDataWorkerEvent> LotteryDataWorkerProcessingStatus;
+        private LotteryDataWorkerEvent lotteryDataWorkerEvent;
 
+        public LotteryDataWorker() {
+            lotteryDataWorkerEvent = new LotteryDataWorkerEvent();
+        }
         public void ProcessCheckingForWinningBets(GameMode gameMode)
         {
+            RaiseEvent(LotteryDataWorkerEventStages.INIT, "Process Checking initialization...");
             LotteryBetDao lotteryBetDao = LotteryBetDaoImpl.GetInstance();
             List<LotteryBet> lotteryBetArr = lotteryBetDao.ExtractLotteryBetsCheckWinningNumber(gameMode);
             foreach (LotteryBet lotteryBet in lotteryBetArr)
             {
                 ProcessWinningBet(lotteryBet);
             }
+            RaiseEvent(LotteryDataWorkerEventStages.FINISH, "Finished");
         }
-
         public void ProcessWinningBet(LotteryBet lotteryBet)
         {
             GameMode gameMode = ClassReflectionUtil.FindGameMode(lotteryBet.GetGameCode());
             LotteryWinningCombinationDao lotteryWinningCombinationDao = LotteryWinningCombinationDaoImpl.GetInstance();
             LotteryWinningCombination lotteryWinningCombination = lotteryWinningCombinationDao.GetLotteryWinningCombination(gameMode);
 
+            RaiseEvent(LotteryDataWorkerEventStages.EXTRACTING, "Extracting your bets...");
             LotteryWinningBetDao lotteryWinningBetDao = LotteryWinningBetDaoImpl.GetInstance();
+            RaiseEvent(LotteryDataWorkerEventStages.EXTRACTING, "Extracting draw results...");
             LotteryDrawResultDao lotteryDrawResultDao = LotteryDrawResultDaoImpl.GetInstance();
+
             LotteryDrawResult betDrawResult = lotteryDrawResultDao.GetLotteryDrawResultByDrawDate(
                             gameMode, lotteryBet.GetTargetDrawDate());
             LotteryWinningBetSetup lotteryWinningBet = new LotteryWinningBetSetup();
@@ -68,10 +67,9 @@ namespace LottoDataManager.Includes.Classes
                 lotteryWinningBet.WinningAmount = lotteryWinningCombination.GetWinningAmount(matchingNumberCtr);
             }
 
+            RaiseEvent(LotteryDataWorkerEventStages.INSERT, "Inserting bets and draw match result");
             lotteryWinningBetDao.InsertWinningBet(lotteryWinningBet);
         }
-
-
         public void ProcessAdjustCorrectTargetDrawDate(GameMode gameMode)
         {
             LotteryWinningCombinationDao lotteryWinningCombinationDao = LotteryWinningCombinationDaoImpl.GetInstance();
@@ -87,6 +85,12 @@ namespace LottoDataManager.Includes.Classes
                     lotteryBetDao.UpdateTargetDrawDate(lotteryBet.GetId(), dt);
                 }
             }
+        }
+        private void RaiseEvent(LotteryDataWorkerEventStages stage, String message)
+        {
+            lotteryDataWorkerEvent.LotteryDataWorkerEventStages = stage;
+            lotteryDataWorkerEvent.CustomStatusMessage = message;
+            LotteryDataWorkerProcessingStatus.Invoke(this, lotteryDataWorkerEvent);
         }
     }
 }

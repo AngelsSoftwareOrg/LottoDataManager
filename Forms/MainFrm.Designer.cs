@@ -30,23 +30,23 @@ namespace LottoDataManager
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Total Money Betted: ");
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Total Money Last Year");
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("Money Yearly Average");
+            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("Win Money Yearly Average");
+            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("Spent Last 2020");
+            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem("X time won 1 digit");
+            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem("X time won 2 digit");
+            System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem("X time won 3 digit");
+            System.Windows.Forms.ListViewItem listViewItem9 = new System.Windows.Forms.ListViewItem("X time won 4 digit");
+            System.Windows.Forms.ListViewItem listViewItem10 = new System.Windows.Forms.ListViewItem("Last time you won");
+            System.Windows.Forms.ListViewItem listViewItem11 = new System.Windows.Forms.ListViewItem("Highest amt won");
+            System.Windows.Forms.ListViewItem listViewItem12 = new System.Windows.Forms.ListViewItem("Lowest Amount won");
+            System.Windows.Forms.ListViewItem listViewItem13 = new System.Windows.Forms.ListViewItem("Number of claims");
+            System.Windows.Forms.ListViewItem listViewItem14 = new System.Windows.Forms.ListViewItem("Number of not claims");
+            System.Windows.Forms.ListViewItem listViewItem15 = new System.Windows.Forms.ListViewItem("Lucky Pick Total Win");
+            System.Windows.Forms.ListViewItem listViewItem16 = new System.Windows.Forms.ListViewItem("Lucky Pick Total Loose");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.ListViewItem listViewItem49 = new System.Windows.Forms.ListViewItem("Total Money Betted: ");
-            System.Windows.Forms.ListViewItem listViewItem50 = new System.Windows.Forms.ListViewItem("Total Money Last Year");
-            System.Windows.Forms.ListViewItem listViewItem51 = new System.Windows.Forms.ListViewItem("Money Yearly Average");
-            System.Windows.Forms.ListViewItem listViewItem52 = new System.Windows.Forms.ListViewItem("Win Money Yearly Average");
-            System.Windows.Forms.ListViewItem listViewItem53 = new System.Windows.Forms.ListViewItem("Spent Last 2020");
-            System.Windows.Forms.ListViewItem listViewItem54 = new System.Windows.Forms.ListViewItem("X time won 1 digit");
-            System.Windows.Forms.ListViewItem listViewItem55 = new System.Windows.Forms.ListViewItem("X time won 2 digit");
-            System.Windows.Forms.ListViewItem listViewItem56 = new System.Windows.Forms.ListViewItem("X time won 3 digit");
-            System.Windows.Forms.ListViewItem listViewItem57 = new System.Windows.Forms.ListViewItem("X time won 4 digit");
-            System.Windows.Forms.ListViewItem listViewItem58 = new System.Windows.Forms.ListViewItem("Last time you won");
-            System.Windows.Forms.ListViewItem listViewItem59 = new System.Windows.Forms.ListViewItem("Highest amt won");
-            System.Windows.Forms.ListViewItem listViewItem60 = new System.Windows.Forms.ListViewItem("Lowest Amount won");
-            System.Windows.Forms.ListViewItem listViewItem61 = new System.Windows.Forms.ListViewItem("Number of claims");
-            System.Windows.Forms.ListViewItem listViewItem62 = new System.Windows.Forms.ListViewItem("Number of not claims");
-            System.Windows.Forms.ListViewItem listViewItem63 = new System.Windows.Forms.ListViewItem("Lucky Pick Total Win");
-            System.Windows.Forms.ListViewItem listViewItem64 = new System.Windows.Forms.ListViewItem("Lucky Pick Total Loose");
             this.mainMenuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openLotteryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -59,8 +59,6 @@ namespace LottoDataManager
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lotterySettingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.othersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.checkWinningBetsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.checkLotteryUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.mainStatusStrip = new System.Windows.Forms.StatusStrip();
             this.statusLabelLoading = new System.Windows.Forms.ToolStripStatusLabel();
@@ -97,6 +95,7 @@ namespace LottoDataManager
             this.ctxMenuBet = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.compareDrawResultAndBetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editYourBetsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editClaimStatusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel3 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -117,14 +116,15 @@ namespace LottoDataManager
             this.linkLabelFilterDraw = new System.Windows.Forms.LinkLabel();
             this.dateTimePickerDrawResult = new System.Windows.Forms.DateTimePicker();
             this.toolStripBetsAndResults = new System.Windows.Forms.ToolStrip();
+            this.toolStripMain = new System.Windows.Forms.ToolStrip();
             this.toolStripBtnNewBet = new System.Windows.Forms.ToolStripButton();
             this.toolStripBtnDefaultViewListing = new System.Windows.Forms.ToolStripButton();
             this.toolStripBtnModifyBet = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripBtnWinBets = new System.Windows.Forms.ToolStripButton();
             this.toolStripBtnDownloadResults = new System.Windows.Forms.ToolStripButton();
-            this.toolStripMain = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.editClaimStatusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.checkWinningBetsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.checkLotteryUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenuStrip.SuspendLayout();
             this.mainStatusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mainSplitContainer)).BeginInit();
@@ -246,21 +246,6 @@ namespace LottoDataManager
             this.othersToolStripMenuItem.Size = new System.Drawing.Size(66, 24);
             this.othersToolStripMenuItem.Text = "Others";
             // 
-            // checkWinningBetsToolStripMenuItem
-            // 
-            this.checkWinningBetsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("checkWinningBetsToolStripMenuItem.Image")));
-            this.checkWinningBetsToolStripMenuItem.Name = "checkWinningBetsToolStripMenuItem";
-            this.checkWinningBetsToolStripMenuItem.Size = new System.Drawing.Size(240, 26);
-            this.checkWinningBetsToolStripMenuItem.Text = "Check Winning Bets";
-            // 
-            // checkLotteryUpdatesToolStripMenuItem
-            // 
-            this.checkLotteryUpdatesToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("checkLotteryUpdatesToolStripMenuItem.Image")));
-            this.checkLotteryUpdatesToolStripMenuItem.Name = "checkLotteryUpdatesToolStripMenuItem";
-            this.checkLotteryUpdatesToolStripMenuItem.Size = new System.Drawing.Size(240, 26);
-            this.checkLotteryUpdatesToolStripMenuItem.Text = "Check Lottery Updates";
-            this.checkLotteryUpdatesToolStripMenuItem.Click += new System.EventHandler(this.checkLotteryUpdatesToolStripMenuItem_Click);
-            // 
             // aboutToolStripMenuItem1
             // 
             this.aboutToolStripMenuItem1.Name = "aboutToolStripMenuItem1";
@@ -356,24 +341,24 @@ namespace LottoDataManager
             this.listViewOtherDetails.FullRowSelect = true;
             this.listViewOtherDetails.GridLines = true;
             this.listViewOtherDetails.HideSelection = false;
-            listViewItem53.ToolTipText = "Spent Last 2019";
+            listViewItem5.ToolTipText = "Spent Last 2019";
             this.listViewOtherDetails.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem49,
-            listViewItem50,
-            listViewItem51,
-            listViewItem52,
-            listViewItem53,
-            listViewItem54,
-            listViewItem55,
-            listViewItem56,
-            listViewItem57,
-            listViewItem58,
-            listViewItem59,
-            listViewItem60,
-            listViewItem61,
-            listViewItem62,
-            listViewItem63,
-            listViewItem64});
+            listViewItem1,
+            listViewItem2,
+            listViewItem3,
+            listViewItem4,
+            listViewItem5,
+            listViewItem6,
+            listViewItem7,
+            listViewItem8,
+            listViewItem9,
+            listViewItem10,
+            listViewItem11,
+            listViewItem12,
+            listViewItem13,
+            listViewItem14,
+            listViewItem15,
+            listViewItem16});
             this.listViewOtherDetails.Location = new System.Drawing.Point(0, 0);
             this.listViewOtherDetails.MultiSelect = false;
             this.listViewOtherDetails.Name = "listViewOtherDetails";
@@ -635,6 +620,13 @@ namespace LottoDataManager
             this.editYourBetsToolStripMenuItem.Text = "Edit your Bets...";
             this.editYourBetsToolStripMenuItem.Click += new System.EventHandler(this.editYourBetsToolStripMenuItem_Click);
             // 
+            // editClaimStatusToolStripMenuItem
+            // 
+            this.editClaimStatusToolStripMenuItem.Name = "editClaimStatusToolStripMenuItem";
+            this.editClaimStatusToolStripMenuItem.Size = new System.Drawing.Size(277, 24);
+            this.editClaimStatusToolStripMenuItem.Text = "Edit Claim Status";
+            this.editClaimStatusToolStripMenuItem.Click += new System.EventHandler(this.editClaimStatusToolStripMenuItem_Click);
+            // 
             // panel3
             // 
             this.panel3.Controls.Add(this.groupBox1);
@@ -847,6 +839,15 @@ namespace LottoDataManager
             this.toolStripBetsAndResults.TabIndex = 15;
             this.toolStripBetsAndResults.Text = "toolStrip2";
             // 
+            // toolStripMain
+            // 
+            this.toolStripMain.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.toolStripMain.Location = new System.Drawing.Point(0, 28);
+            this.toolStripMain.Name = "toolStripMain";
+            this.toolStripMain.Size = new System.Drawing.Size(1233, 25);
+            this.toolStripMain.TabIndex = 3;
+            this.toolStripMain.Text = "toolStrip1";
+            // 
             // toolStripBtnNewBet
             // 
             this.toolStripBtnNewBet.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -877,6 +878,16 @@ namespace LottoDataManager
             this.toolStripBtnModifyBet.Text = "Modify Bets";
             this.toolStripBtnModifyBet.Click += new System.EventHandler(this.toolStripBtnModifyBet_Click);
             // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(34, 34);
+            this.toolStripButton1.Text = "Edit Winning Bet Claim Status";
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+            // 
             // toolStripBtnWinBets
             // 
             this.toolStripBtnWinBets.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -898,31 +909,20 @@ namespace LottoDataManager
             this.toolStripBtnDownloadResults.ToolTipText = "Download Draw Results";
             this.toolStripBtnDownloadResults.Click += new System.EventHandler(this.toolStripBtnDownloadResults_Click);
             // 
-            // toolStripMain
+            // checkWinningBetsToolStripMenuItem
             // 
-            this.toolStripMain.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.toolStripMain.Location = new System.Drawing.Point(0, 28);
-            this.toolStripMain.Name = "toolStripMain";
-            this.toolStripMain.Size = new System.Drawing.Size(1233, 25);
-            this.toolStripMain.TabIndex = 3;
-            this.toolStripMain.Text = "toolStrip1";
+            this.checkWinningBetsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("checkWinningBetsToolStripMenuItem.Image")));
+            this.checkWinningBetsToolStripMenuItem.Name = "checkWinningBetsToolStripMenuItem";
+            this.checkWinningBetsToolStripMenuItem.Size = new System.Drawing.Size(240, 26);
+            this.checkWinningBetsToolStripMenuItem.Text = "Check Winning Bets";
             // 
-            // toolStripButton1
+            // checkLotteryUpdatesToolStripMenuItem
             // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(34, 34);
-            this.toolStripButton1.Text = "Edit Winning Bet Claim Status";
-            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
-            // 
-            // editClaimStatusToolStripMenuItem
-            // 
-            this.editClaimStatusToolStripMenuItem.Name = "editClaimStatusToolStripMenuItem";
-            this.editClaimStatusToolStripMenuItem.Size = new System.Drawing.Size(277, 24);
-            this.editClaimStatusToolStripMenuItem.Text = "Edit Claim Status";
-            this.editClaimStatusToolStripMenuItem.Click += new System.EventHandler(this.editClaimStatusToolStripMenuItem_Click);
+            this.checkLotteryUpdatesToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("checkLotteryUpdatesToolStripMenuItem.Image")));
+            this.checkLotteryUpdatesToolStripMenuItem.Name = "checkLotteryUpdatesToolStripMenuItem";
+            this.checkLotteryUpdatesToolStripMenuItem.Size = new System.Drawing.Size(240, 26);
+            this.checkLotteryUpdatesToolStripMenuItem.Text = "Check Lottery Updates";
+            this.checkLotteryUpdatesToolStripMenuItem.Click += new System.EventHandler(this.checkLotteryUpdatesToolStripMenuItem_Click);
             // 
             // MainForm
             // 

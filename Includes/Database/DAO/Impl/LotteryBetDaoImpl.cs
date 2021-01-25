@@ -302,5 +302,69 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                 transaction.Commit();
             }
         }
+        public double GetTotalAmountBetted(GameMode gameMode, DateTime dateFrom, DateTime dateTo)
+        {
+            using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
+            using (OleDbCommand command = new OleDbCommand())
+            {
+                command.CommandType = CommandType.Text;
+                command.CommandText = "SELECT SUM(bet_amt) as [total_bet_amt] " +
+                                      "  FROM lottery_bet " +
+                                      " WHERE active = true " +
+                                      "   AND game_cd = @game_cd " +
+                                      "  AND target_draw_date BETWEEN CDATE(@from) AND CDATE(@to) ";
+                command.Parameters.AddWithValue("@game_cd", (int)gameMode);
+                command.Parameters.AddWithValue("@from", dateFrom.Date.ToString());
+                command.Parameters.AddWithValue("@to", dateTo.Date.ToString());
+                command.Connection = conn;
+                conn.Open();
+                using (OleDbDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            if (!String.IsNullOrEmpty(reader["total_bet_amt"].ToString()))
+                            {
+                                return double.Parse(reader["total_bet_amt"].ToString());
+                            }
+                        }
+                    }
+                }
+            }
+            return 0.00;
+        }
+        public int GetTotalYearsOfBetting(GameMode gameMode)
+        {
+            using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
+            using (OleDbCommand command = new OleDbCommand())
+            {
+                command.CommandType = CommandType.Text;
+                command.CommandText = "SELECT DATEDIFF('yyyy',a.min_date,a.max_date) AS YEARS_COUNT " +
+                                      "FROM (SELECT MIN(target_draw_date) as [min_date]," +
+                                      "             MAX (target_draw_date) as [max_date] " +
+                                      "        FROM lottery_bet " +
+                                      "       WHERE active = true " +
+                                      "         AND game_cd = @game_cd) a ";
+                command.Parameters.AddWithValue("@game_cd", (int)gameMode);
+                command.Connection = conn;
+                conn.Open();
+                using (OleDbDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            if (!String.IsNullOrEmpty(reader["YEARS_COUNT"].ToString()))
+                            {
+                                return int.Parse(reader["YEARS_COUNT"].ToString());
+                            }
+                        }
+                    }
+                }
+            }
+            return 0;
+        }
+
     }
 }

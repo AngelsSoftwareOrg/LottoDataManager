@@ -18,5 +18,7 @@ namespace LottoDataManager.Includes.Database.DAO.Interface
         bool IsBetExisting(LotteryBet lotteryBet);
         int InsertLotteryBet(LotteryBet lotteryBet);
         List<LotteryBet> GetLotteryBets(GameMode gameMode, DateTime betDrawDate);
+        double GetTotalAmountBetted(GameMode gameMode, DateTime dateFrom, DateTime dateTo);
+        int GetTotalYearsOfBetting(GameMode gameMode);
     }
 }

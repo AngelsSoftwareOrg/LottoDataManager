@@ -36,7 +36,7 @@ namespace LottoDataManager.Includes.Classes
             this.userSettingDao = UserSettingDaoImpl.GetInstance();
             this.lotteryScheduleDao = LotteryScheduleDaoImpl.GetInstance();
             this.lotteryWinningBetDao = LotteryWinningBetDaoImpl.GetInstance();
-            this.lotteryDataWorker = LotteryDataWorker.GetInstance();
+            this.lotteryDataWorker = new LotteryDataWorker();
             this.lotteryDrawResultDao = LotteryDrawResultDaoImpl.GetInstance();
         }
         private GameMode GameMode {
@@ -79,7 +79,6 @@ namespace LottoDataManager.Includes.Classes
         {
             return lotteryWinningBetDao.GetLotteryWinningBet(this.GameMode, sinceWhen);
         }
-        
         public List<Lottery> GetLotteries()
         {
             LotteryDao lotteryDao = LotteryDaoImpl.GetInstance();
