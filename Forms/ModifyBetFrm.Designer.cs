@@ -276,7 +276,7 @@ namespace LottoDataManager.Forms
             // 
             // btnRestoreBack
             // 
-            this.btnRestoreBack.Location = new System.Drawing.Point(464, 17);
+            this.btnRestoreBack.Location = new System.Drawing.Point(464, 12);
             this.btnRestoreBack.Name = "btnRestoreBack";
             this.btnRestoreBack.Size = new System.Drawing.Size(171, 56);
             this.btnRestoreBack.TabIndex = 9;
@@ -286,17 +286,17 @@ namespace LottoDataManager.Forms
             // 
             // btnDeleteChecked
             // 
-            this.btnDeleteChecked.Location = new System.Drawing.Point(6, 41);
+            this.btnDeleteChecked.Image = ((System.Drawing.Image)(resources.GetObject("btnDeleteChecked.Image")));
+            this.btnDeleteChecked.Location = new System.Drawing.Point(12, 21);
             this.btnDeleteChecked.Name = "btnDeleteChecked";
-            this.btnDeleteChecked.Size = new System.Drawing.Size(164, 32);
+            this.btnDeleteChecked.Size = new System.Drawing.Size(50, 39);
             this.btnDeleteChecked.TabIndex = 8;
-            this.btnDeleteChecked.Text = "Delete Checked Items";
             this.btnDeleteChecked.UseVisualStyleBackColor = true;
             this.btnDeleteChecked.Click += new System.EventHandler(this.btnDeleteChecked_Click);
             // 
             // btnSaveChanges
             // 
-            this.btnSaveChanges.Location = new System.Drawing.Point(641, 17);
+            this.btnSaveChanges.Location = new System.Drawing.Point(641, 12);
             this.btnSaveChanges.Name = "btnSaveChanges";
             this.btnSaveChanges.Size = new System.Drawing.Size(146, 56);
             this.btnSaveChanges.TabIndex = 7;
@@ -307,7 +307,7 @@ namespace LottoDataManager.Forms
             // btnExit
             // 
             this.btnExit.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnExit.Location = new System.Drawing.Point(793, 17);
+            this.btnExit.Location = new System.Drawing.Point(793, 12);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(146, 56);
             this.btnExit.TabIndex = 6;

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using LottoDataManager.Includes.Database.DAO.Interface;
 using LottoDataManager.Includes.Model.Details;
 using LottoDataManager.Includes.Model.Structs;
+using LottoDataManager.Includes.Utilities;
 
 namespace LottoDataManager.Includes.Database.DAO.Impl
 {
@@ -334,6 +335,107 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
             }
             return 0.00;
         }
+        public int GetTotalBetMade(GameMode gameMode)
+        {
+            using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
+            using (OleDbCommand command = new OleDbCommand())
+            {
+                command.CommandType = CommandType.Text;
+                command.CommandText = "SELECT COUNT(ID) AS[total_bet] " +
+                                      "  FROM lottery_bet " +
+                                      " WHERE game_cd = @game_cd " +
+                                      "   AND active = true";
+                command.Parameters.AddWithValue("@game_cd", (int)gameMode);
+                command.Connection = conn;
+                conn.Open();
+                using (OleDbDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            if (!String.IsNullOrEmpty(reader["total_bet"].ToString()))
+                            {
+                                return int.Parse(reader["total_bet"].ToString());
+                            }
+                        }
+                    }
+                }
+            }
+            return 0;
+        }
+        public int[] GetTotalNumberOfClaims(GameMode gameMode)
+        {
+            int[] result = new int[2];
+            using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
+            using (OleDbCommand command = new OleDbCommand())
+            {
+                command.CommandType = CommandType.Text;
+                command.CommandText =" SELECT SUM(IIF(b.claim_status = true, 1, 0)) AS[claimed_count], " +
+                                     "        SUM(IIF(b.claim_status = false, 1, 0)) AS[not_claimed_count] " +
+                                     "   FROM lottery_bet a " +
+                                     "  INNER JOIN lottery_winning_bet b " +
+                                     "     ON a.ID = b.bet_ID " +
+                                     "  WHERE a.game_cd = @game_cd " +
+                                     "    AND a.active = true " +
+                                     "    AND b.active = true " +
+                                     "    AND b.winning_amt > 0 ";
+                command.Parameters.AddWithValue("@game_cd", (int)gameMode);
+                command.Connection = conn;
+                conn.Open();
+                using (OleDbDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            if (!String.IsNullOrEmpty(reader["claimed_count"].ToString()))
+                            {
+                                result[0] = int.Parse(reader["claimed_count"].ToString());
+                                result[1] = int.Parse(reader["not_claimed_count"].ToString());
+                            }
+                        }
+                    }
+                }
+            }
+            return result;
+        }
+        public double[] GetTotalLuckyPickWinAndLoose(GameMode gameMode)
+        {
+            double[] result = new double[2];
+            using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
+            using (OleDbCommand command = new OleDbCommand())
+            {
+                command.CommandType = CommandType.Text;
+                command.CommandText = " SELECT SUM(b.winning_amt) AS [lp_win], " +
+                                      "        SUM(a.bet_amt) AS [lp_loose] " +
+                                      "   FROM lottery_bet a " +
+                                      "  INNER JOIN lottery_winning_bet b " +
+                                      "     ON a.ID = b.bet_ID " +
+                                      "  WHERE a.game_cd = @game_cd " +
+                                      "    AND a.active = true " +
+                                      "    AND b.active = true " +
+                                      "    AND a.luckypick = true ";
+                command.Parameters.AddWithValue("@game_cd", (int)gameMode);
+                command.Connection = conn;
+                conn.Open();
+                using (OleDbDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            if (!String.IsNullOrEmpty(reader["lp_win"].ToString()))
+                            {
+                                result[0] = double.Parse(reader["lp_win"].ToString());
+                                result[1] = double.Parse(reader["lp_loose"].ToString());
+                            }
+                        }
+                    }
+                }
+            }
+            return result;
+        }
         public int GetTotalYearsOfBetting(GameMode gameMode)
         {
             using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
@@ -365,6 +467,40 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
             }
             return 0;
         }
+        public DateTime GetLastTimeWon(GameMode gameMode)
+        {
+            using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
+            using (OleDbCommand command = new OleDbCommand())
+            {
+                command.CommandType = CommandType.Text;
+                command.CommandText = "SELECT TOP 1 a.target_draw_date " +
+                                      "  FROM lottery_bet a " +
+                                      " INNER JOIN lottery_winning_bet b " +
+                                      "    ON a.ID = b.bet_id " +
+                                      " WHERE a.active = true " +
+                                      "   AND b.active = true " +
+                                      "   AND a.game_cd = @game_cd " +
+                                      "   AND b.winning_amt > 0 " +
+                                      " ORDER BY a.target_draw_date DESC ";
 
+                command.Parameters.AddWithValue("@game_cd", (int)gameMode);
+                command.Connection = conn;
+                conn.Open();
+                using (OleDbDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            if (!String.IsNullOrEmpty(reader["target_draw_date"].ToString()))
+                            {
+                                return DateTime.Parse(reader["target_draw_date"].ToString());
+                            }
+                        }
+                    }
+                }
+            }
+            return DateTimeConverterUtils.GetYear2000();
+        }
     }
 }

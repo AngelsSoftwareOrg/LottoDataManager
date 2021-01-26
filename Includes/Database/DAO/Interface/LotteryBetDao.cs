@@ -20,5 +20,9 @@ namespace LottoDataManager.Includes.Database.DAO.Interface
         List<LotteryBet> GetLotteryBets(GameMode gameMode, DateTime betDrawDate);
         double GetTotalAmountBetted(GameMode gameMode, DateTime dateFrom, DateTime dateTo);
         int GetTotalYearsOfBetting(GameMode gameMode);
+        DateTime GetLastTimeWon(GameMode gameMode);
+        int GetTotalBetMade(GameMode gameMode);
+        int[] GetTotalNumberOfClaims(GameMode gameMode);
+        double[] GetTotalLuckyPickWinAndLoose(GameMode gameMode);
     }
 }

@@ -154,6 +154,14 @@ namespace LottoDataManager.Forms
                 toolStripProgBar.Visible = false;
             }
         }
+        private void linkCheckAll_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            SetCheckListViewBets(true);
+        }
+        private void linkUnCheckAll_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            SetCheckListViewBets(false);
+        }
         #endregion
 
         #region "List View Bets"
@@ -228,8 +236,8 @@ namespace LottoDataManager.Forms
             SaveLotteryBetsChanges();
         }
 
-        #endregion
 
+        #endregion
 
     }
 }

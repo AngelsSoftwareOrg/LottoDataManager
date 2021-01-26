@@ -36,6 +36,10 @@ namespace LottoDataManager
             ReinitateLotteryServices();
             GenerateLotteriesGameMenu();
             InitializesFormContent();
+            RefreshSubscription();
+        }
+        private void RefreshSubscription()
+        {
             lottoWebScraper.WebScrapingStatus += LottoWebScraper_WebScrapingStatus;
             Application.ApplicationExit += new EventHandler(this.OnApplicationExit);
             lotteryDataWorker.LotteryDataWorkerProcessingStatus += LotteryDataWorker_LotteryDataWorkerProcessingStatus;
@@ -73,7 +77,6 @@ namespace LottoDataManager
                 SetBetsAndResultDefaultList();
                 RefreshWinningNumbersGridContent();
                 DisplayStatusLabel();
-                RefreshDashboardReport();
             }
             catch (Exception ex)
             {
@@ -190,6 +193,7 @@ namespace LottoDataManager
                 listViewOtherDetails.Items.Add(itm);
             }
             listViewOtherDetails.EndUpdate();
+            Application.DoEvents();
         }
         #endregion
 
@@ -269,8 +273,14 @@ namespace LottoDataManager
             dateTimePickerDrawResult.Value = DateTime.Now.AddYears(-1);
             dateTimePickerBets.Value = DateTime.Now.AddYears(-1);
             RefreshWinningNumbersGridContent();
+            RefreshBets();
+        }
+        private void RefreshBets()
+        {
+            RefreshFieldDetails();
             RefreshBetListViewGridContent();
             RefreshDashboardReport();
+            Application.DoEvents();
         }
         private void linkFilterGoBet_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -288,8 +298,10 @@ namespace LottoDataManager
         {
             statusLabelLoading.Visible = true;
             Application.DoEvents();
+            RefreshSubscription();
             lotteryDataWorker.ProcessCheckingForWinningBets(this.lotteryDetails.GameMode);
             statusLabelLoading.Text = "";
+            RefreshBets();
         }
         private void LotteryDataWorker_LotteryDataWorkerProcessingStatus(object sender, LotteryDataWorkerEvent e)
         {
@@ -300,7 +312,7 @@ namespace LottoDataManager
         {
             AddBetFrm betForm = new AddBetFrm(this.lotteryDataServices);
             betForm.ShowDialog();
-            RefreshBetListViewGridContent();
+            RefreshBets();
         }
         private void compareDrawResultAndBetToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -354,6 +366,7 @@ namespace LottoDataManager
                 List<LotteryDetails> lotteryArr = new List<LotteryDetails>();
                 lotteryArr.Add(this.lotteryDetails);
                 lottoWebScraper.StartScraping(lotteryArr);
+                RefreshBets();
             }
             catch (Exception ex)
             {
@@ -400,13 +413,21 @@ namespace LottoDataManager
         }
         private void LottoGameMenu_Click(object sender, EventArgs e)
         {
-            ClearAllForms();
-            ToolStripMenuItem lottoGameMenu = (ToolStripMenuItem) sender;
-            Lottery lottery = (Lottery)lottoGameMenu.Tag;
-            this.lotteryDetails = new LotteryDetails(lottery.GetGameMode());
-            ReinitateLotteryServices();
-            Application.DoEvents();
-            InitializesFormContent();
+            try
+            {
+                ClearAllForms();
+                ToolStripMenuItem lottoGameMenu = (ToolStripMenuItem) sender;
+                Lottery lottery = (Lottery)lottoGameMenu.Tag;
+                this.lotteryDetails = new LotteryDetails(lottery.GetGameMode());
+                ReinitateLotteryServices();
+                Application.DoEvents();
+                InitializesFormContent();
+                this.lotteryDataServices.SaveLastOpenedLottery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
         private void checkLotteryUpdatesToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -424,7 +445,7 @@ namespace LottoDataManager
         {
             ModifyBetFrm bet = new ModifyBetFrm(lotteryDataServices);
             bet.ShowDialog();
-            RefreshBetListViewGridContent();
+            RefreshBets();
         }
         private void editClaimStatusToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -438,7 +459,7 @@ namespace LottoDataManager
         {
             ModifyClaimsFrm m = new ModifyClaimsFrm(this.lotteryDataServices);
             m.ShowDialog();
-            RefreshFieldDetails();
+            RefreshBets();
         }
         #endregion
 
@@ -466,7 +487,6 @@ namespace LottoDataManager
 
 
         #endregion
-
 
     }
 }

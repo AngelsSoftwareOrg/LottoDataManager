@@ -35,6 +35,7 @@ namespace LottoDataManager.Forms
             this.objectListViewWinningBets = new BrightIdeasSoftware.ObjectListView();
             this.olvColChkbox = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColDrawDate = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColWinAmt = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColNum1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColNum2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColNum3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -59,7 +60,8 @@ namespace LottoDataManager.Forms
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripProgBar = new System.Windows.Forms.ToolStripProgressBar();
             this.toolStripStatusLbl = new System.Windows.Forms.ToolStripStatusLabel();
-            this.olvColWinAmt = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.linkCheckAll = new System.Windows.Forms.LinkLabel();
+            this.linkUnCheckAll = new System.Windows.Forms.LinkLabel();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.objectListViewWinningBets)).BeginInit();
             this.ctxMenuLvBet.SuspendLayout();
@@ -130,6 +132,14 @@ namespace LottoDataManager.Forms
             this.olvColDrawDate.IsEditable = false;
             this.olvColDrawDate.Text = "Target Draw Date";
             this.olvColDrawDate.Width = 152;
+            // 
+            // olvColWinAmt
+            // 
+            this.olvColWinAmt.AspectName = "GetWinningAmount";
+            this.olvColWinAmt.AspectToStringFormat = "{0:C}";
+            this.olvColWinAmt.IsEditable = false;
+            this.olvColWinAmt.Text = "Win Amount";
+            this.olvColWinAmt.Width = 120;
             // 
             // olvColNum1
             // 
@@ -272,6 +282,8 @@ namespace LottoDataManager.Forms
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.linkUnCheckAll);
+            this.panel3.Controls.Add(this.linkCheckAll);
             this.panel3.Controls.Add(this.btnRestoreBack);
             this.panel3.Controls.Add(this.btnSaveChanges);
             this.panel3.Controls.Add(this.btnExit);
@@ -283,7 +295,7 @@ namespace LottoDataManager.Forms
             // 
             // btnRestoreBack
             // 
-            this.btnRestoreBack.Location = new System.Drawing.Point(464, 17);
+            this.btnRestoreBack.Location = new System.Drawing.Point(464, 13);
             this.btnRestoreBack.Name = "btnRestoreBack";
             this.btnRestoreBack.Size = new System.Drawing.Size(171, 56);
             this.btnRestoreBack.TabIndex = 9;
@@ -293,7 +305,7 @@ namespace LottoDataManager.Forms
             // 
             // btnSaveChanges
             // 
-            this.btnSaveChanges.Location = new System.Drawing.Point(641, 17);
+            this.btnSaveChanges.Location = new System.Drawing.Point(641, 13);
             this.btnSaveChanges.Name = "btnSaveChanges";
             this.btnSaveChanges.Size = new System.Drawing.Size(146, 56);
             this.btnSaveChanges.TabIndex = 7;
@@ -304,7 +316,7 @@ namespace LottoDataManager.Forms
             // btnExit
             // 
             this.btnExit.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnExit.Location = new System.Drawing.Point(793, 17);
+            this.btnExit.Location = new System.Drawing.Point(793, 13);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(146, 56);
             this.btnExit.TabIndex = 6;
@@ -336,13 +348,27 @@ namespace LottoDataManager.Forms
             this.toolStripStatusLbl.Size = new System.Drawing.Size(89, 20);
             this.toolStripStatusLbl.Text = "Hello World";
             // 
-            // olvColWinAmt
+            // linkCheckAll
             // 
-            this.olvColWinAmt.AspectName = "GetWinningAmount";
-            this.olvColWinAmt.AspectToStringFormat = "{0:C}";
-            this.olvColWinAmt.IsEditable = false;
-            this.olvColWinAmt.Text = "Win Amount";
-            this.olvColWinAmt.Width = 120;
+            this.linkCheckAll.AutoSize = true;
+            this.linkCheckAll.Location = new System.Drawing.Point(12, 14);
+            this.linkCheckAll.Name = "linkCheckAll";
+            this.linkCheckAll.Size = new System.Drawing.Size(66, 17);
+            this.linkCheckAll.TabIndex = 10;
+            this.linkCheckAll.TabStop = true;
+            this.linkCheckAll.Text = "Check All";
+            this.linkCheckAll.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkCheckAll_LinkClicked);
+            // 
+            // linkUnCheckAll
+            // 
+            this.linkUnCheckAll.AutoSize = true;
+            this.linkUnCheckAll.Location = new System.Drawing.Point(97, 14);
+            this.linkUnCheckAll.Name = "linkUnCheckAll";
+            this.linkUnCheckAll.Size = new System.Drawing.Size(82, 17);
+            this.linkUnCheckAll.TabIndex = 11;
+            this.linkUnCheckAll.TabStop = true;
+            this.linkUnCheckAll.Text = "Uncheck All";
+            this.linkUnCheckAll.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkUnCheckAll_LinkClicked);
             // 
             // ModifyClaimsFrm
             // 
@@ -365,6 +391,7 @@ namespace LottoDataManager.Forms
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -403,5 +430,7 @@ namespace LottoDataManager.Forms
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLbl;
         private System.Windows.Forms.ToolStripProgressBar toolStripProgBar;
         private BrightIdeasSoftware.OLVColumn olvColWinAmt;
+        private System.Windows.Forms.LinkLabel linkUnCheckAll;
+        private System.Windows.Forms.LinkLabel linkCheckAll;
     }
 }

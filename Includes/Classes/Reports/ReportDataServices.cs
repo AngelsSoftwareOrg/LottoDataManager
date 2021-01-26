@@ -38,9 +38,7 @@ namespace LottoDataManager.Includes.Classes.Reports
             this.lotteryDataWorker = new LotteryDataWorker();
             this.lotteryDrawResultDao = LotteryDrawResultDaoImpl.GetInstance();
         }
-
         private GameMode GameMode { get { return this.lotteryDetails.GameMode; } }
-
         public double GetTotalMoneyBetted()
         {
             return lotteryBetDao.GetTotalAmountBetted(GameMode, DateTimeConverterUtils.GetYear2000(), DateTime.Now);
@@ -54,6 +52,30 @@ namespace LottoDataManager.Includes.Classes.Reports
         public int GetTotalYearsBetting()
         {
             return lotteryBetDao.GetTotalYearsOfBetting(GameMode);
+        }
+        public int[] GetWinningBetTally()
+        {
+            return this.lotteryWinningBetDao.GetWinningBetNumbersTally(GameMode);
+        }
+        public DateTime GetLastTimeYouWon()
+        {
+            return this.lotteryBetDao.GetLastTimeWon(GameMode);
+        }
+        public int[] GetMinMaxWinningBetAmount()
+        {
+            return this.lotteryWinningBetDao.GetMinMaxWinningBetAmount(GameMode);
+        }
+        public int GetTotalBetMade()
+        {
+            return this.lotteryBetDao.GetTotalBetMade(GameMode);
+        }
+        public int[] GetTotalClaimsCount()
+        {
+            return this.lotteryBetDao.GetTotalNumberOfClaims(GameMode);
+        }
+        public double[] GetTotalLuckyPickWinAndLoose()
+        {
+            return this.lotteryBetDao.GetTotalLuckyPickWinAndLoose(GameMode);
         }
     }
 }

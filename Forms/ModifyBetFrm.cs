@@ -119,6 +119,7 @@ namespace LottoDataManager.Forms
         }
         private void DeleteLotteryBets()
         {
+            if (objectListViewBets.CheckedObjects.Count <= 0) return;
             try
             {
                 DialogResult dr = MessageBox.Show("Are you sure you want to delete the selected bets?",

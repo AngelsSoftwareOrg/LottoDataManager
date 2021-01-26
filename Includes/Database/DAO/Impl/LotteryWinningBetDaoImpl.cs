@@ -61,17 +61,18 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
             {
                 
                 command.CommandType = CommandType.Text;
-                command.CommandText = " INSERT INTO lottery_winning_bet (bet_id, winning_amt, active, claim_status,num1, num2, num3, num4, num5, num6) " +
-                                      " VALUES (@lotteryBetID,@winningAmt,true,@claimStatus,@num1,@num2,@num3,@num4,@num5,@num6)";
+                command.CommandText = " INSERT INTO lottery_winning_bet " +
+                                      "        (bet_id,         winning_amt, active, claim_status, num1,  num2,  num3,  num4,  num5,  num6)" +
+                                      " VALUES (@lotteryBetID,  @winningAmt, true,   @claimStatus, @num1, @num2, @num3, @num4, @num5, @num6)";
                 command.Parameters.AddWithValue("@lotteryBetID", lotteryWinningBet.GetLotteryBetId());
                 command.Parameters.AddWithValue("@winningAmt", lotteryWinningBet.GetWinningAmount());
+                command.Parameters.AddWithValue("@claimStatus", lotteryWinningBet.IsClaimed());
                 command.Parameters.AddWithValue("@num1", lotteryWinningBet.GetNum1());
                 command.Parameters.AddWithValue("@num2", lotteryWinningBet.GetNum2());
                 command.Parameters.AddWithValue("@num3", lotteryWinningBet.GetNum3());
                 command.Parameters.AddWithValue("@num4", lotteryWinningBet.GetNum4());
                 command.Parameters.AddWithValue("@num5", lotteryWinningBet.GetNum5());
                 command.Parameters.AddWithValue("@num6", lotteryWinningBet.GetNum6());
-                command.Parameters.AddWithValue("@claimStatus", lotteryWinningBet.IsClaimed());
                 command.Connection = conn;
                 conn.Open();
                 OleDbTransaction transaction = conn.BeginTransaction();
@@ -260,5 +261,85 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                 transaction.Commit();
             }
         }
+        public int[] GetWinningBetNumbersTally(GameMode gameMode)
+        {
+            int[] result = new int[6] { 0,0,0,0,0,0};
+            using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
+            using (OleDbCommand command = new OleDbCommand())
+            {
+                command.CommandType = CommandType.Text;
+                command.CommandText = " SELECT SUM(IIF(b.num1 > 0 AND b.num2=0 AND b.num3=0 AND b.num4=0 AND b.num5=0 AND b.num6=0,1,0)) AS [num1], " +
+                                      " 	   SUM(IIF(b.num2 > 0 AND b.num2>0 AND b.num3=0 AND b.num4=0 AND b.num5=0 AND b.num6=0,1,0)) AS [num2], " +
+                                      " 	   SUM(IIF(b.num3 > 0 AND b.num2>0 AND b.num3>0 AND b.num4=0 AND b.num5=0 AND b.num6=0,1,0)) AS [num3], " +
+                                      " 	   SUM(IIF(b.num4 > 0 AND b.num2>0 AND b.num3>0 AND b.num4>0 AND b.num5=0 AND b.num6=0,1,0)) AS [num4], " +
+                                      " 	   SUM(IIF(b.num5 > 0 AND b.num2>0 AND b.num3>0 AND b.num4>0 AND b.num5>0 AND b.num6=0,1,0)) AS [num5], " +
+                                      " 	   SUM(IIF(b.num6 > 0 AND b.num2>0 AND b.num3>0 AND b.num4>0 AND b.num5>0 AND b.num6>0,1,0)) AS [num6] " +
+                                      "   FROM lottery_bet a " +
+                                      "  INNER JOIN lottery_winning_bet b " +
+                                      "     ON a.ID = b.bet_ID " +
+                                      "  WHERE a.game_cd = @game_cd " +
+                                      "    AND a.active = true " +
+                                      "    AND b.active = true ";
+                command.Parameters.AddWithValue("@game_cd", (int)gameMode);
+                command.Connection = conn;
+                conn.Open();
+                using (OleDbDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            if(!String.IsNullOrWhiteSpace(reader["num1"].ToString()))
+                            {
+                                result[0] = int.Parse(reader["num1"].ToString());
+                                result[1] = int.Parse(reader["num2"].ToString());
+                                result[2] = int.Parse(reader["num3"].ToString());
+                                result[3] = int.Parse(reader["num4"].ToString());
+                                result[4] = int.Parse(reader["num5"].ToString());
+                                result[5] = int.Parse(reader["num6"].ToString());
+                            }
+                        }
+                    }
+                }
+            }
+            return result;
+        }
+        public int[] GetMinMaxWinningBetAmount(GameMode gameMode)
+        {
+            int[] result = new int[2] { 0, 0 };
+            using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
+            using (OleDbCommand command = new OleDbCommand())
+            {
+                command.CommandType = CommandType.Text;
+                command.CommandText = " SELECT MIN(b.winning_amt) as [min_won], " +
+                                      "        MAX(b.winning_amt) as [max_won] " +
+                                      "  FROM lottery_bet a " +
+                                      " INNER JOIN lottery_winning_bet b " +
+                                      "    ON a.ID = b.bet_ID " +
+                                      " WHERE a.game_cd = @game_cd " +
+                                      "   AND a.active = true " +
+                                      "   AND b.active = true " +
+                                      "   AND b.winning_amt > 0";
+                command.Parameters.AddWithValue("@game_cd", (int)gameMode);
+                command.Connection = conn;
+                conn.Open();
+                using (OleDbDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            if(!String.IsNullOrWhiteSpace(reader["min_won"].ToString()))
+                            {
+                                result[0] = int.Parse(reader["min_won"].ToString());
+                                result[1] = int.Parse(reader["max_won"].ToString());
+                            }
+                        }
+                    }
+                }
+            }
+            return result;
+        }
+
     }
 }
