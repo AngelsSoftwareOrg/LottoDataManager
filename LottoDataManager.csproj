@@ -33,8 +33,27 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AngleSharp, Version=0.14.0.0, Culture=neutral, PublicKeyToken=e83494dcdc6d31ea, processorArchitecture=MSIL">
+      <HintPath>packages\AngleSharp.0.14.0\lib\net472\AngleSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="FSharp.Core, Version=4.5.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\FSharp.Core.4.5.2\lib\net45\FSharp.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.7.4.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>packages\HtmlAgilityPack.1.7.4\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="ObjectListView, Version=2.9.1.1072, Culture=neutral, PublicKeyToken=b1c5bf581481bcd4, processorArchitecture=MSIL">
+      <HintPath>packages\ObjectListView.Official.2.9.1\lib\net20\ObjectListView.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Runtime.CompilerServices.Unsafe.4.5.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Encoding.CodePages, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Text.Encoding.CodePages.4.5.0\lib\net461\System.Text.Encoding.CodePages.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,14 +65,123 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="Forms\AddBetFrm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Forms\AddBetFrm.Designer.cs">
+      <DependentUpon>AddBetFrm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\DrawAndBetMatchFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DrawAndBetMatchFrm.Designer.cs">
+      <DependentUpon>DrawAndBetMatchFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ModifyClaimsFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ModifyClaimsFrm.Designer.cs">
+      <DependentUpon>ModifyClaimsFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ModifyBetFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ModifyBetFrm.Designer.cs">
+      <DependentUpon>ModifyBetFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Includes\Classes\LotteryDataServices.cs" />
+    <Compile Include="Includes\Classes\LotteryDataWorker.cs" />
+    <Compile Include="Includes\Classes\LotteryDataWorkerEvent.cs" />
+    <Compile Include="Includes\Classes\LotteryDataWorkerEventStages.cs" />
+    <Compile Include="Includes\Classes\Reports\DashboardReport.cs" />
+    <Compile Include="Includes\Classes\Reports\ReportAbstract.cs" />
+    <Compile Include="Includes\Classes\Reports\ReportDataServices.cs" />
+    <Compile Include="Includes\Classes\Scraping\LottoWebScraper.cs" />
+    <Compile Include="Includes\Classes\Scraping\LottoPCSOScraper.cs" />
+    <Compile Include="Includes\Classes\Scraping\LottoWebScraperEvent.cs" />
+    <Compile Include="Includes\Classes\Scraping\LottoWebScrapingStages.cs" />
+    <Compile Include="Includes\Classes\Scraping\WebLottoScraperFactory.cs" />
+    <Compile Include="Includes\Classes\UserSettings.cs" />
+    <Compile Include="Includes\Database\DAO\Impl\LotteryBetDaoImpl.cs" />
+    <Compile Include="Includes\Database\DAO\Impl\LotteryDaoImplCommon.cs" />
+    <Compile Include="Includes\Database\DAO\Impl\LotteryOutletDaoImpl.cs" />
+    <Compile Include="Includes\Database\DAO\Impl\LotteryWinningBetDaoImpl.cs" />
+    <Compile Include="Includes\Database\DAO\Impl\LotteryDaoImpl.cs" />
+    <Compile Include="Includes\Database\DAO\Impl\UserSettingDaoImpl.cs" />
+    <Compile Include="Includes\Database\DAO\Interface\LotteryBetDao.cs" />
+    <Compile Include="Includes\Database\DAO\Interface\LotteryOutletDao.cs" />
+    <Compile Include="Includes\Database\DAO\Interface\LotteryWinningBetDao.cs" />
+    <Compile Include="Includes\Database\DAO\Interface\LotteryDao.cs" />
+    <Compile Include="Includes\Database\DAO\Interface\LotteryDrawResultDao.cs" />
+    <Compile Include="Includes\Database\DAO\Impl\LotteryDrawResultDaoImpl.cs" />
+    <Compile Include="Includes\Database\DAO\Interface\LotteryWinningCombinationDao.cs" />
+    <Compile Include="Includes\Database\DAO\Impl\LotteryWinningCombinationDaoImpl.cs" />
+    <Compile Include="Includes\Database\DAO\Interface\UserSettingDao.cs" />
+    <Compile Include="Includes\Model\Details\Lottery.cs" />
+    <Compile Include="Includes\Model\Details\LotteryBet.cs" />
+    <Compile Include="Includes\Model\Details\LotteryDataDerivation.cs" />
+    <Compile Include="Includes\Model\Details\LotteryNumbersAndOperations.cs" />
+    <Compile Include="Includes\Model\Details\LotteryOutlet.cs" />
+    <Compile Include="Includes\Model\Details\LotteryWinningBet.cs" />
+    <Compile Include="Includes\Model\Details\Setup\LotteryBetSetup.cs" />
+    <Compile Include="Includes\Model\Details\LotteryDrawResult.cs" />
+    <Compile Include="Includes\Model\Details\Setup\LotteryCommonSetup.cs" />
+    <Compile Include="Includes\Model\Details\Setup\LotteryDrawResultSetup.cs" />
+    <Compile Include="Includes\Model\Details\Setup\LotteryOutletSetup.cs" />
+    <Compile Include="Includes\Model\Details\Setup\LotterySetup.cs" />
+    <Compile Include="Includes\Model\Details\Setup\LotteryWinningBetSetup.cs" />
+    <Compile Include="Includes\Model\Game\Game658.cs" />
+    <Compile Include="Includes\Model\Game\Game655.cs" />
+    <Compile Include="Includes\Model\Game\Game649.cs" />
+    <Compile Include="Includes\Model\Game\Game645.cs" />
+    <Compile Include="Includes\Model\Game\GameFactory.cs" />
+    <Compile Include="Includes\Utilities\AppSettings.cs" />
+    <Compile Include="Includes\Database\DAO\Interface\LotteryScheduleDao.cs" />
+    <Compile Include="Includes\Database\DAO\Impl\LotteryScheduleDaoImpl.cs" />
+    <Compile Include="Includes\Database\DAO\Interface\LotteryTicketPanelDao.cs" />
+    <Compile Include="Includes\Database\DAO\Impl\LotteryTicketPanelDaoImpl.cs" />
+    <Compile Include="Includes\Database\Engine\ConnectionDetails.cs" />
+    <Compile Include="Includes\Database\Engine\DatabaseConnectionFactory.cs" />
+    <Compile Include="Includes\Database\Engine\DatabaseType.cs" />
+    <Compile Include="Includes\Model\Game\Game642.cs" />
+    <Compile Include="Includes\Model\Game\LotteryDetails.cs" />
+    <Compile Include="Includes\Model\Details\LotterySchedule.cs" />
+    <Compile Include="Includes\Model\Details\Setup\LotteryScheduleSetup.cs" />
+    <Compile Include="Includes\Model\Details\LotteryTicketPanel.cs" />
+    <Compile Include="Includes\Model\Details\Setup\LotteryTicketPanelSetup.cs" />
+    <Compile Include="Includes\Model\Details\LotteryWinningCombination.cs" />
+    <Compile Include="Includes\Model\Details\Setup\LotteryWinningCombinationSetup.cs" />
+    <Compile Include="Includes\Model\Structs\GameMode.cs" />
+    <Compile Include="Includes\Model\Structs\NumberDirection.cs" />
+    <Compile Include="Forms\MainFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MainFrm.Designer.cs">
+      <DependentUpon>MainFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Includes\Utilities\ClassReflectionUtil.cs" />
+    <Compile Include="Includes\Utilities\ConverterUtils.cs" />
+    <Compile Include="Includes\Utilities\DateTimeConverterUtils.cs" />
+    <Compile Include="Includes\Utilities\ImageUtils.cs" />
+    <Compile Include="Includes\Utilities\ResourcesUtils.cs" />
+    <Compile Include="Includes\Utilities\StringUtils.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\AddBetFrm.resx">
+      <DependentUpon>AddBetFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DrawAndBetMatchFrm.resx">
+      <DependentUpon>DrawAndBetMatchFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MainFrm.resx">
+      <DependentUpon>MainFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ModifyClaimsFrm.resx">
+      <DependentUpon>ModifyClaimsFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ModifyBetFrm.resx">
+      <DependentUpon>ModifyBetFrm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -62,7 +190,9 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -72,9 +202,29 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Resources\messages_en.properties" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Includes\Session\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DatabaseMain\Lotto_Main_DB.accdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\Icons\Stars6_20x.png" />
+    <None Include="Resources\Icons\Star5_20x.png" />
+    <None Include="Resources\Icons\Stars4_20x.png" />
+    <None Include="Resources\Icons\Star3_20x.png" />
+    <None Include="Resources\Icons\Stars1_30x.png" />
+    <None Include="Resources\Icons\Stars1_20x.png" />
+    <None Include="Resources\Icons\Star2_20x.png" />
+    <None Include="Resources\Icons\torch_24x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

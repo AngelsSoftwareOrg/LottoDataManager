@@ -1,7 +1,18 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="LottoDataManager.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="msaccess_datasource_path" Type="System.String" Scope="User">
+      <Value Profile="(Default)">\DatabaseMain\Lotto_Main_DB.accdb</Value>
+    </Setting>
+    <Setting Name="db_type" Type="System.String" Scope="User">
+      <Value Profile="(Default)">MSACCESS</Value>
+    </Setting>
+    <Setting Name="currency_symbol" Type="System.String" Scope="User">
+      <Value Profile="(Default)">₱</Value>
+    </Setting>
+    <Setting Name="lotto_scrape_site" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://www.pcso.gov.ph/SearchLottoResult.aspx</Value>
+    </Setting>
+  </Settings>
 </SettingsFile>
