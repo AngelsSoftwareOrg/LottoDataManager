@@ -19,5 +19,6 @@ namespace LottoDataManager.Includes.Model.Details
         int[] GetBetNumbersAsArray();
         bool IsLuckyPick();
         String GetSimpleContentDetails();
+        int GetMatchNumCount();
     }
 }

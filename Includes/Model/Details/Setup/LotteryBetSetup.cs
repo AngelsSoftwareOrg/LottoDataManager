@@ -17,7 +17,7 @@ namespace LottoDataManager.Includes.Model.Details
         private double betAmount;
         private int outletCode;
         private bool luckyPick;
-
+        private int matchNumCount;
         public LotteryBetSetup(): base() {}
         public int GameCode { get => gameCode; set => gameCode = value; }
         public DateTime TargetDrawDate { get => targetDrawDate; set => targetDrawDate = value; }
@@ -25,6 +25,7 @@ namespace LottoDataManager.Includes.Model.Details
         public int OutletCode { get => outletCode; set => outletCode = value; }
         public long Id { get => id; set => id = value; }
         public bool LuckyPick { get => luckyPick; set => luckyPick = value; }
+        public int MatchNumCount { get => matchNumCount; set => matchNumCount = value; }
         public double GetBetAmount()
         {
             return BetAmount;
@@ -74,10 +75,13 @@ namespace LottoDataManager.Includes.Model.Details
             return base.ToString();
 #endif
         }
-
         public bool IsLuckyPick()
         {
             return LuckyPick;
+        }
+        public int GetMatchNumCount()
+        {
+            return MatchNumCount;
         }
     }
 }

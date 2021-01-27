@@ -30,12 +30,19 @@ namespace LottoDataManager.Includes.Classes.Scraping
         {
             this.lotteriesDetailsArr = lotteriesDetailsArr;
             LotteryDrawResultDao lotteryDao = LotteryDrawResultDaoImpl.GetInstance();
-            foreach (LotteryDetails lotteryDetails in this.lotteriesDetailsArr)
+            try
             {
-                this.currentLotteryDetailsProcess = lotteryDetails;
-                RaiseEvent(LottoWebScrapingStages.INIT);
-                this.sinceWhenToScrape = lotteryDao.GetLatestDrawDate(lotteryDetails.GameMode);
-                ScrapeWebsite(lotteryDetails, GenerateParameters(lotteryDetails));
+                foreach (LotteryDetails lotteryDetails in this.lotteriesDetailsArr)
+                {
+                    this.currentLotteryDetailsProcess = lotteryDetails;
+                    RaiseEvent(LottoWebScrapingStages.INIT);
+                    this.sinceWhenToScrape = lotteryDao.GetLatestDrawDate(lotteryDetails.GameMode);
+                    ScrapeWebsite(lotteryDetails, GenerateParameters(lotteryDetails));
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
             }
         }
 
@@ -104,27 +111,38 @@ namespace LottoDataManager.Includes.Classes.Scraping
 
         internal async void ScrapeWebsite(LotteryDetails lotteryDetails, Dictionary<string, string> parameters)
         {
-            RaiseEvent(LottoWebScrapingStages.CONNECTING);
-            IHtmlDocument documentForSession = await GetWebsiteDOMAsync(GenerateParameters(lotteryDetails));
-            RaiseEvent(LottoWebScrapingStages.SESSION_CREATION);
-            Dictionary<string, string> sessionParam = GetSessionBasedParameters(lotteryDetails, documentForSession);
-            RaiseEvent(LottoWebScrapingStages.SEARCHING_DATA);
-            IHtmlDocument document = await GetWebsiteDOMAsync(sessionParam);
-            RaiseEvent(LottoWebScrapingStages.SCRAPING);
-            List<LotteryDrawResult> lotteryDrawResultArr = GetScrapeResults(lotteryDetails, document);
-
-            int countCtr = 1;
-            LotteryDrawResultDao lotteryDao = LotteryDrawResultDaoImpl.GetInstance();
-            foreach (LotteryDrawResult scrapeResult in lotteryDrawResultArr.ToList())
+            try
             {
-                LotteryDrawResult result = lotteryDao.GetLotteryDrawResultByDrawDate(lotteryDetails.GameMode, scrapeResult.GetDrawDate());
-                if (result == null && !scrapeResult.IsDrawResulSequenceEmpty())
+                RaiseEvent(LottoWebScrapingStages.CONNECTING);
+                IHtmlDocument documentForSession = await GetWebsiteDOMAsync(GenerateParameters(lotteryDetails));
+                RaiseEvent(LottoWebScrapingStages.SESSION_CREATION);
+                Dictionary<string, string> sessionParam = GetSessionBasedParameters(lotteryDetails, documentForSession);
+                RaiseEvent(LottoWebScrapingStages.SEARCHING_DATA);
+                IHtmlDocument document = await GetWebsiteDOMAsync(sessionParam);
+                RaiseEvent(LottoWebScrapingStages.SCRAPING);
+                List<LotteryDrawResult> lotteryDrawResultArr = GetScrapeResults(lotteryDetails, document);
+
+                int countCtr = 1;
+                LotteryDrawResultDao lotteryDao = LotteryDrawResultDaoImpl.GetInstance();
+                foreach (LotteryDrawResult scrapeResult in lotteryDrawResultArr.ToList())
                 {
-                    lotteryDao.InsertDrawDate(scrapeResult);
+                    LotteryDrawResult result = lotteryDao.GetLotteryDrawResultByDrawDate(lotteryDetails.GameMode, scrapeResult.GetDrawDate());
+                    if (result == null && !scrapeResult.IsDrawResulSequenceEmpty())
+                    {
+                        lotteryDao.InsertDrawDate(scrapeResult);
+                    }
+                    RaiseEvent(LottoWebScrapingStages.INSERT, ConverterUtils.GetPercentageFloored(countCtr++, lotteryDrawResultArr.Count));
                 }
-                RaiseEvent(LottoWebScrapingStages.INSERT, ConverterUtils.GetPercentageFloored(countCtr++, lotteryDrawResultArr.Count));
+                RaiseEvent(LottoWebScrapingStages.FINISH);
             }
-            RaiseEvent(LottoWebScrapingStages.FINISH);
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                RaiseEvent(LottoWebScrapingStages.FINISH);
+            }
         }
 
         private List<LotteryDrawResult> GetScrapeResults(LotteryDetails lotteryDetails, IHtmlDocument document)

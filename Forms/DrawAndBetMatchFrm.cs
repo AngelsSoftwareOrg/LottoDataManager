@@ -21,11 +21,14 @@ namespace LottoDataManager.Forms
         private LotteryTicketPanel lotteryTicketPanel;
         private LotteryDrawResult drawResult;
         private readonly String FILLER_NAME = "filler";
-        public DrawAndBetMatchFrm(LotteryDataServices lotteryDataServices, DateTime betDateTime)
+        private long betIdDefault;
+
+        public DrawAndBetMatchFrm(LotteryDataServices lotteryDataServices, DateTime betDateTime, long betIdDefault)
         {
             InitializeComponent();
             this.betDateTime = betDateTime;
             this.lotteryDataServices = lotteryDataServices;
+            this.betIdDefault = betIdDefault;
 
             //Debugging
             //if (lotteryDataServices == null) this.lotteryDataServices = new LotteryDataServices(new Game658());
@@ -60,9 +63,24 @@ namespace LottoDataManager.Forms
             //print your first bet
             if (objListViewBet.GetItemCount() > 0)
             {
-                LotteryBet bet = (LotteryBet) objListViewBet.GetModelObject(0);
-                GenerateResultPanels(bet.GetAllNumberSequenceSorted(), tblLyPnlBet, groupBoxYourBet.ForeColor);
-                objListViewBet.SelectedIndex = 0;
+                if(this.betIdDefault > 0)
+                {
+                    foreach (LotteryBet bet in objListViewBet.Objects)
+                    {
+                        if (bet.GetId() == this.betIdDefault)
+                        {
+                            GenerateResultPanels(bet.GetAllNumberSequenceSorted(), tblLyPnlBet, groupBoxYourBet.ForeColor);
+                            objListViewBet.SelectedIndex = objListViewBet.IndexOf(bet);
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    LotteryBet bet = (LotteryBet) objListViewBet.GetModelObject(0);
+                    GenerateResultPanels(bet.GetAllNumberSequenceSorted(), tblLyPnlBet, groupBoxYourBet.ForeColor);
+                    objListViewBet.SelectedIndex = 0;
+                }
             }
             else
             {
@@ -143,9 +161,6 @@ namespace LottoDataManager.Forms
 
                 //get the next item sequence
                 ctrItemSeq++;
-
-                //numLbl.Image = Resources.torch_24x;
-                //numLbl.BackColor = Color.Tomato;
 
                 numLbl.ImageAlign = ContentAlignment.TopRight;
                 numLbl.BorderStyle = BorderStyle.Fixed3D;

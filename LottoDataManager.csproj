@@ -77,12 +77,6 @@
     <Compile Include="Forms\DrawAndBetMatchFrm.Designer.cs">
       <DependentUpon>DrawAndBetMatchFrm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\LottoCheckLatestResultFrm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\LottoCheckLatestResultFrm.Designer.cs">
-      <DependentUpon>LottoCheckLatestResultFrm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\ModifyClaimsFrm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -168,6 +162,7 @@
     <Compile Include="Includes\Utilities\ClassReflectionUtil.cs" />
     <Compile Include="Includes\Utilities\ConverterUtils.cs" />
     <Compile Include="Includes\Utilities\DateTimeConverterUtils.cs" />
+    <Compile Include="Includes\Utilities\ImageUtils.cs" />
     <Compile Include="Includes\Utilities\ResourcesUtils.cs" />
     <Compile Include="Includes\Utilities\StringUtils.cs" />
     <Compile Include="Program.cs" />
@@ -177,9 +172,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\DrawAndBetMatchFrm.resx">
       <DependentUpon>DrawAndBetMatchFrm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LottoCheckLatestResultFrm.resx">
-      <DependentUpon>LottoCheckLatestResultFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainFrm.resx">
       <DependentUpon>MainFrm.cs</DependentUpon>
@@ -222,6 +214,13 @@
     <Content Include="DatabaseMain\Lotto_Main_DB.accdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\Icons\Stars6_20x.png" />
+    <None Include="Resources\Icons\Star5_20x.png" />
+    <None Include="Resources\Icons\Stars4_20x.png" />
+    <None Include="Resources\Icons\Star3_20x.png" />
+    <None Include="Resources\Icons\Stars1_30x.png" />
+    <None Include="Resources\Icons\Stars1_20x.png" />
+    <None Include="Resources\Icons\Star2_20x.png" />
     <None Include="Resources\Icons\torch_24x.png" />
   </ItemGroup>
   <ItemGroup>

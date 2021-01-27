@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.OleDb;
 using System.Linq;
 using System.Text;
@@ -18,6 +19,12 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
             int modified = (int)command.ExecuteScalar();
             return modified;
         }
-
+        protected bool ColumnExists(IDataReader reader, string columnName)
+        {
+            return reader.GetSchemaTable()
+                         .Rows
+                         .OfType<DataRow>()
+                         .Any(row => (String)row["ColumnName"] == columnName);
+        }
     }
 }

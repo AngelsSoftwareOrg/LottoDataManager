@@ -41,7 +41,7 @@ namespace LottoDataManager.Includes.Classes.Reports
         private GameMode GameMode { get { return this.lotteryDetails.GameMode; } }
         public double GetTotalMoneyBetted()
         {
-            return lotteryBetDao.GetTotalAmountBetted(GameMode, DateTimeConverterUtils.GetYear2000(), DateTime.Now);
+            return lotteryBetDao.GetTotalAmountBetted(GameMode, DateTimeConverterUtils.GetYear2011(), DateTime.Now);
         }
         public double GetTotalMoneyBettedLastYear()
         {
@@ -76,6 +76,10 @@ namespace LottoDataManager.Includes.Classes.Reports
         public double[] GetTotalLuckyPickWinAndLoose()
         {
             return this.lotteryBetDao.GetTotalLuckyPickWinAndLoose(GameMode);
+        }
+        public double[] GetMonthlySpending(int year)
+        {
+            return this.lotteryBetDao.GetMonthlySpending(GameMode, year);
         }
     }
 }

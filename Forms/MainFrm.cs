@@ -40,9 +40,44 @@ namespace LottoDataManager
         }
         private void RefreshSubscription()
         {
-            lottoWebScraper.WebScrapingStatus += LottoWebScraper_WebScrapingStatus;
             Application.ApplicationExit += new EventHandler(this.OnApplicationExit);
-            lotteryDataWorker.LotteryDataWorkerProcessingStatus += LotteryDataWorker_LotteryDataWorkerProcessingStatus;
+            this.lottoWebScraper.WebScrapingStatus += LottoWebScraper_WebScrapingStatus;
+            this.lotteryDataWorker.LotteryDataWorkerProcessingStatus += LotteryDataWorker_LotteryDataWorkerProcessingStatus;
+            this.olvColBetResult.ImageGetter = delegate (object rowObject) {
+                if (rowObject == null) return 0;
+                LotteryBet p = (LotteryBet)rowObject;
+                if (p.GetMatchNumCount() <= 0) return 0;
+                return ImageUtils.GetStarWonImage(p.GetMatchNumCount());
+            };
+            this.olvColBetResult.AspectGetter = delegate (object rowObject) {
+                if (rowObject == null) return 0;
+                LotteryBet p = (LotteryBet)rowObject;
+                return p.GetMatchNumCount();
+            };
+            this.olvColBetResult.AspectToStringConverter = delegate (object rowObject) {
+                return String.Empty;
+            };
+            this.olvColWinners.AspectGetter = delegate (object rowObject)
+            {
+                if (rowObject == null) return 0;
+                LotteryDrawResult p = (LotteryDrawResult)rowObject;
+                if (p.GetWinners() <= 0) return "0";
+                return p.GetWinners();
+            };
+            this.olvColWinStamp.ImageGetter = delegate (object rowObject) {
+                if (rowObject == null) return 0;
+                LotteryDrawResult p = (LotteryDrawResult)rowObject;
+                if (p.GetWinners() <= 0) return 0;
+                return ImageUtils.GetStarJackpotImage(5);
+            };
+            this.olvColWinStamp.AspectGetter = delegate (object rowObject) {
+                if (rowObject == null) return 0;
+                LotteryDrawResult p = (LotteryDrawResult)rowObject;
+                return p.GetWinners();
+            };
+            this.olvColWinStamp.AspectToStringConverter = delegate (object rowObject) {
+                return String.Empty;
+            };
         }
         private void ReinitateLotteryServices()
         {
@@ -106,6 +141,8 @@ namespace LottoDataManager
                 this.olvColNum6.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
                 this.olvColJackpot.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
                 this.olvColWinners.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
+                //this.olvColWinStamp.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+                this.olvColWinStamp.Width = 100;
                 //objListVwWinningNum.EnsureVisible(objListVwWinningNum.Items.Count - 1);
             }
             catch (Exception e)
@@ -338,17 +375,17 @@ namespace LottoDataManager
         {
             LotteryBet bet = (LotteryBet)objectLstVwLatestBet.SelectedObject;
             if (bet == null) return;
-            OpenBetsAndDrawResultMatchMakingForm(bet.GetTargetDrawDate());
+            OpenBetsAndDrawResultMatchMakingForm(bet.GetTargetDrawDate(),bet.GetId());
         }
         private void SelectDrawResultAndOpenMatchMakingForm()
         {
             LotteryDrawResult drawResult = (LotteryDrawResult)objListVwWinningNum.SelectedObject;
             if (drawResult == null) return;
-            OpenBetsAndDrawResultMatchMakingForm(drawResult.GetDrawDate());
+            OpenBetsAndDrawResultMatchMakingForm(drawResult.GetDrawDate(),0);
         }
-        private void OpenBetsAndDrawResultMatchMakingForm(DateTime dateRef)
+        private void OpenBetsAndDrawResultMatchMakingForm(DateTime dateRef, long betIdDefault)
         {
-            DrawAndBetMatchFrm m = new DrawAndBetMatchFrm(this.lotteryDataServices, dateRef);
+            DrawAndBetMatchFrm m = new DrawAndBetMatchFrm(this.lotteryDataServices, dateRef, betIdDefault);
             m.ShowDialog();
         }
         #endregion
@@ -479,12 +516,6 @@ namespace LottoDataManager
         {
             this.Close();
         }
-
-
-
-
-
-
 
         #endregion
 

@@ -31,11 +31,22 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
             using (OleDbCommand command = new OleDbCommand())
             {
                 command.CommandType = CommandType.Text;
-                command.CommandText = "SELECT * FROM lottery_bet " +
-                                      " WHERE game_cd = @game_cd " +
-                                      "   AND target_draw_date >= CDATE(@sinceWhen) " +
-                                      "   AND active = true " +
-                                      " ORDER BY target_draw_date DESC";
+                command.CommandText = "SELECT a.*, " +
+                                      "       (   IIF(a.num1 IN(b.num1, b.num2, b.num3, b.num4, b.num5, b.num6), 1, 0) +  " +
+                                      "           IIF(a.num2 IN(b.num1, b.num2, b.num3, b.num4, b.num5, b.num6), 1, 0) +  " +
+                                      "           IIF(a.num3 IN(b.num1, b.num2, b.num3, b.num4, b.num5, b.num6), 1, 0) +  " +
+                                      "           IIF(a.num4 IN(b.num1, b.num2, b.num3, b.num4, b.num5, b.num6), 1, 0) +  " +
+                                      "           IIF(a.num5 IN(b.num1, b.num2, b.num3, b.num4, b.num5, b.num6), 1, 0) +  " +
+                                      "           IIF(a.num6 IN(b.num1, b.num2, b.num3, b.num4, b.num5, b.num6), 1, 0)    " +
+                                      "       ) AS[match_cnt] " +
+                                      "  FROM lottery_bet a " +
+                                      "  LEFT OUTER JOIN draw_results b " +
+                                      "    ON a.target_draw_date = b.draw_date " +
+                                      " WHERE a.game_cd = @game_cd " +
+                                      "   AND a.game_cd = b.game_cd " +
+                                      "   AND a.target_draw_date >= CDATE(@sinceWhen) " +
+                                      "   AND a.active = true " +
+                                      " ORDER BY a.target_draw_date DESC";
                 command.Parameters.AddWithValue("@game_cd", OleDbType.Integer).Value = gameMode;
                 command.Parameters.AddWithValue("@sinceWhen", OleDbType.DBDate).Value = sinceWhen.Date.ToString();
                 command.Connection = conn;
@@ -277,6 +288,9 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
             bet.Num5 = int.Parse(reader["num5"].ToString());
             bet.Num6 = int.Parse(reader["num6"].ToString());
             bet.LuckyPick = bool.Parse(reader["luckypick"].ToString());
+            if (ColumnExists(reader,"match_cnt")){
+                bet.MatchNumCount = int.Parse(reader["match_cnt"].ToString());
+            }
             bet.SortNumbers();
             return bet;
         }
@@ -500,7 +514,63 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                     }
                 }
             }
-            return DateTimeConverterUtils.GetYear2000();
+            return DateTimeConverterUtils.GetYear2011();
+        }
+        public double[] GetMonthlySpending(GameMode gameMode, int year)
+        {
+            double[] result = new double[13] {0,0,0,0,0,0,0,0,0,0,0,0,0};
+            using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
+            using (OleDbCommand command = new OleDbCommand())
+            {
+                command.CommandType = CommandType.Text;
+                command.CommandText = " SELECT SUM(IIF(MONTH(target_draw_date) = 1, bet_amt, 0)) AS [jan], " +
+                                      "        SUM(IIF(MONTH(target_draw_date) = 2, bet_amt, 0)) AS [feb], " +
+                                      "        SUM(IIF(MONTH(target_draw_date) = 3, bet_amt, 0)) AS [mar], " +
+                                      "        SUM(IIF(MONTH(target_draw_date) = 4, bet_amt, 0)) AS [apr], " +
+                                      "        SUM(IIF(MONTH(target_draw_date) = 5, bet_amt, 0)) AS [may], " +
+                                      "        SUM(IIF(MONTH(target_draw_date) = 6, bet_amt, 0)) AS [jun], " +
+                                      "        SUM(IIF(MONTH(target_draw_date) = 7, bet_amt, 0)) AS [jul], " +
+                                      "        SUM(IIF(MONTH(target_draw_date) = 8, bet_amt, 0)) AS [aug], " +
+                                      "        SUM(IIF(MONTH(target_draw_date) = 9, bet_amt, 0)) AS [sep], " +
+                                      "        SUM(IIF(MONTH(target_draw_date) = 0, bet_amt, 0)) AS [oct], " +
+                                      "        SUM(IIF(MONTH(target_draw_date) = 11, bet_amt, 0)) AS [nov], " +
+                                      "        SUM(IIF(MONTH(target_draw_date) = 12, bet_amt, 0)) AS [dec], " +
+                                      "        SUM(bet_amt) AS[annual] " +
+                                      "   FROM lottery_bet " +
+                                      "  WHERE game_cd = @game_cd " +
+                                      "    AND YEAR(target_draw_date) = @year " +
+                                      "    AND active = true";
+                command.Parameters.AddWithValue("@game_cd", (int)gameMode);
+                command.Parameters.AddWithValue("@year", year);
+                command.Connection = conn;
+                conn.Open();
+                using (OleDbDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            if (!String.IsNullOrEmpty(reader["jan"].ToString()))
+                            {
+                                result[0] = double.Parse(reader["jan"].ToString());
+                                result[1] = double.Parse(reader["feb"].ToString());
+                                result[2] = double.Parse(reader["mar"].ToString());
+                                result[3] = double.Parse(reader["apr"].ToString());
+                                result[4] = double.Parse(reader["may"].ToString());
+                                result[5] = double.Parse(reader["jun"].ToString());
+                                result[6] = double.Parse(reader["jul"].ToString());
+                                result[7] = double.Parse(reader["aug"].ToString());
+                                result[8] = double.Parse(reader["sep"].ToString());
+                                result[9] = double.Parse(reader["aug"].ToString());
+                                result[10] = double.Parse(reader["nov"].ToString());
+                                result[11] = double.Parse(reader["dec"].ToString());
+                                result[12] = double.Parse(reader["annual"].ToString());
+                            }
+                        }
+                    }
+                }
+            }
+            return result;
         }
     }
 }

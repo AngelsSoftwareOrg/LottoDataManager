@@ -27,6 +27,7 @@ namespace LottoDataManager.Includes.Classes.Reports
             GetNumberOfTimeWonADigitSequence();
             GetLastTimeYouWon();
             GetMinMaxWinningBetAmount();
+            GetMonthlyAndAnnualSpending();
             return dashboardReportList;
         }
         
@@ -107,5 +108,29 @@ namespace LottoDataManager.Includes.Classes.Reports
             value = result[1].ToString();
             dashboardReportList.Add(new KeyValuePair<string, string>(key, value));
         }
+        private void GetMonthlyAndAnnualSpending()
+        {
+            int thisyear = DateTime.Now.Year;
+            int lastyear = thisyear - 1;
+
+            double[] resultLastYear = this.reportDataServices.GetMonthlySpending(lastyear);
+            double[] resultThisYear = this.reportDataServices.GetMonthlySpending(thisyear);
+
+            //monthly
+            for (int ctr = 0; ctr < resultLastYear.Length - 1; ctr++)
+            {     
+                String msg = ResourcesUtils.GetMessage(String.Format("drpt_monthly_spending_{0}", ctr + 1));
+                String key = String.Format(msg,thisyear,lastyear);
+                String value = String.Format("{0} / {1}", resultThisYear[ctr].ToString("C"), resultLastYear[ctr].ToString("C"));
+                dashboardReportList.Add(new KeyValuePair<string, string>(key, value));
+            }
+
+            //annual
+            String msg2 = ResourcesUtils.GetMessage("drpt_annual_spending");
+            String key2 = String.Format(msg2, thisyear, lastyear);
+            String value2 = String.Format("{0} / {1}", resultThisYear[12].ToString("C"), resultLastYear[12].ToString("C"));
+            dashboardReportList.Add(new KeyValuePair<string, string>(key2, value2));
+        }
+
     }
 }

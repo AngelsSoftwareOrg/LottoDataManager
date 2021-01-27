@@ -14,9 +14,13 @@ namespace LottoDataManager.Includes.Utilities
         {
             return dateSource.ToString(outputFormat);
         }
-        public static DateTime GetYear2000()
+        /// <summary>
+        /// PCSO lowest date
+        /// </summary>
+        /// <returns>DateTime</returns>
+        public static DateTime GetYear2011()
         {
-            DateTime y2k = new DateTime(2000,1,1,0,0,0,DateTimeKind.Local);
+            DateTime y2k = new DateTime(2011,1,1,0,0,0,DateTimeKind.Local);
             return y2k;
         }
 

@@ -196,7 +196,7 @@ namespace LottoDataManager.Includes.Database.DAO
                     }
                 }
             }
-            return DateTimeConverterUtils.GetYear2000();
+            return DateTimeConverterUtils.GetYear2011();
         }
 
         public void InsertDrawDate(LotteryDrawResult lotteryDrawResult)
@@ -257,7 +257,7 @@ namespace LottoDataManager.Includes.Database.DAO
                     }
                 }
             }
-            return DateTimeConverterUtils.GetYear2000();
+            return DateTimeConverterUtils.GetYear2011();
         }
 
         private OleDbCommand GetDrawResultCommandByRange(GameMode gameMode, DateTime fromDate, DateTime toDate)
