@@ -133,7 +133,6 @@ namespace LottoDataManager.Includes.Classes.Scraping
                     }
                     RaiseEvent(LottoWebScrapingStages.INSERT, ConverterUtils.GetPercentageFloored(countCtr++, lotteryDrawResultArr.Count));
                 }
-                RaiseEvent(LottoWebScrapingStages.FINISH);
             }
             catch (Exception ex)
             {

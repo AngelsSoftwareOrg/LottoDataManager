@@ -23,7 +23,7 @@ namespace LottoDataManager.Forms
         private readonly String FILLER_NAME = "filler";
         private long betIdDefault;
 
-        public DrawAndBetMatchFrm(LotteryDataServices lotteryDataServices, DateTime betDateTime, long betIdDefault)
+        public DrawAndBetMatchFrm(LotteryDataServices lotteryDataServices, DateTime betDateTime, long betIdDefault=0)
         {
             InitializeComponent();
             this.betDateTime = betDateTime;

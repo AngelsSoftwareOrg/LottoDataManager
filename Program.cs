@@ -22,6 +22,7 @@ namespace LottoDataManager
             //Application.Run(new AddBetFrm());
             //Application.Run(new DrawAndBetMatchFrm(null, DateTime.Now));
             //Application.Run(new ModifyClaimsFrm(null));
+            //Application.Run(new PickGeneratorFrm(null));
         }
     }
 }

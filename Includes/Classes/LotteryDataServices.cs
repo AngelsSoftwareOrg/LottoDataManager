@@ -140,5 +140,14 @@ namespace LottoDataManager.Includes.Classes
         {
             lotteryWinningBetDao.UpdateClaimStatus(winBet);
         }
+        public List<int> GetTopDrawnResultDigits()
+        {
+            return this.lotteryDrawResultDao.GetTopDrawnDigitResults(GameMode);
+        }
+        public List<int> GetTopDrawnPreviousSeasonDigitResults()
+        {
+            return this.lotteryDrawResultDao.GetTopDrawnPreviousSeasonDigitResults(GameMode);
+        }
+
     }
 }

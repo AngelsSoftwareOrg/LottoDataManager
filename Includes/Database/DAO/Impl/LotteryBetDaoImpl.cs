@@ -46,7 +46,18 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                                       "   AND a.game_cd = b.game_cd " +
                                       "   AND a.target_draw_date >= CDATE(@sinceWhen) " +
                                       "   AND a.active = true " +
-                                      " ORDER BY a.target_draw_date DESC";
+                                      " UNION " +
+                                      " SELECT a.*, " +
+                                      "        0 " +
+                                      "   FROM lottery_bet a " +
+                                      "  WHERE a.game_cd = @game_cd " +
+                                      "    AND a.target_draw_date >= CDATE(@sinceWhen) " +
+                                      "    AND a.active = true " +
+                                      "    AND (SELECT DISTINCT b.draw_date FROM draw_results b " +
+                                      "   	     WHERE a.target_draw_date = b.draw_date) IS NULL " +
+                                      "  ORDER BY a.target_draw_date DESC ";
+                command.Parameters.AddWithValue("@game_cd", OleDbType.Integer).Value = gameMode;
+                command.Parameters.AddWithValue("@sinceWhen", OleDbType.DBDate).Value = sinceWhen.Date.ToString();
                 command.Parameters.AddWithValue("@game_cd", OleDbType.Integer).Value = gameMode;
                 command.Parameters.AddWithValue("@sinceWhen", OleDbType.DBDate).Value = sinceWhen.Date.ToString();
                 command.Connection = conn;
