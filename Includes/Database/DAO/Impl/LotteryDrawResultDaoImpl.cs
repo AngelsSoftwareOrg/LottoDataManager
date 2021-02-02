@@ -306,6 +306,75 @@ namespace LottoDataManager.Includes.Database.DAO
             return merge;
         }
 
+        public List<int> GetTopDrawnDigitFromJackpotsResults(GameMode gameMode)
+        {
+            List<int> merge = new List<int>();
+            using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
+            using (OleDbCommand command = new OleDbCommand())
+            {
+                command.CommandType = CommandType.Text;
+                command.CommandText = "SELECT num1, num2, num3, num4, num5, num6 " +
+                                      "  FROM draw_results " +
+                                      "  WHERE game_cd = @game_cd " +
+                                      "    AND winners > 0";
+                command.Parameters.AddWithValue("@game_cd", (int)gameMode);
+                command.Connection = conn;
+                conn.Open();
+
+                using (OleDbDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            merge.Add(int.Parse(reader["num1"].ToString()));
+                            merge.Add(int.Parse(reader["num2"].ToString()));
+                            merge.Add(int.Parse(reader["num3"].ToString()));
+                            merge.Add(int.Parse(reader["num4"].ToString()));
+                            merge.Add(int.Parse(reader["num5"].ToString()));
+                            merge.Add(int.Parse(reader["num6"].ToString()));
+                        }
+                    }
+                }
+            }
+            return merge;
+        }
+
+        public List<int> GetTopDrawnDigitFromDateRange(GameMode gameMode, DateTime dateFrom, DateTime dateTo)
+        {
+            List<int> merge = new List<int>();
+            using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
+            using (OleDbCommand command = new OleDbCommand())
+            {
+                command.CommandType = CommandType.Text;
+                command.CommandText = "SELECT num1, num2, num3, num4, num5, num6 " +
+                                      "  FROM draw_results " +
+                                      "  WHERE game_cd = @game_cd " +
+                                      "    AND draw_date BETWEEN CDATE(@dateFrom) AND CDATE(@dateTo)";
+                command.Parameters.AddWithValue("@game_cd", (int)gameMode);
+                command.Parameters.AddWithValue("@dateFrom", dateFrom.Date.ToString());
+                command.Parameters.AddWithValue("@dateTo", dateTo.Date.ToString());
+                command.Connection = conn;
+                conn.Open();
+
+                using (OleDbDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            merge.Add(int.Parse(reader["num1"].ToString()));
+                            merge.Add(int.Parse(reader["num2"].ToString()));
+                            merge.Add(int.Parse(reader["num3"].ToString()));
+                            merge.Add(int.Parse(reader["num4"].ToString()));
+                            merge.Add(int.Parse(reader["num5"].ToString()));
+                            merge.Add(int.Parse(reader["num6"].ToString()));
+                        }
+                    }
+                }
+            }
+            return merge;
+        }
 
         public List<LotteryDrawResult> GetJackpotDrawResults(GameMode gameMode)
         {

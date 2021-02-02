@@ -25,7 +25,7 @@ namespace LottoDataManager.Includes.Classes.Generator.Types
             LotteryTicketPanel lotteryTicketPanel = lotteryDataServices.GetLotteryTicketPanel();
             List<int[]> sequenceArr = new List<int[]>();
             Random rnd = new Random();
-            for(int ctr=0; ctr < GetParamValue(); ctr++)
+            for(int ctr=0; ctr < GetFieldParamValueForCount(); ctr++)
             {
                 int[] result = new int[lotteryTicketPanel.GetGameDigitCount()];
                 for (int seqCtr = 0; seqCtr < lotteryTicketPanel.GetGameDigitCount(); seqCtr++)
@@ -46,29 +46,15 @@ namespace LottoDataManager.Includes.Classes.Generator.Types
             }
             return sequenceArr;
         }
-        private int GetParamValue()
-        {
-            foreach(SequenceGeneratorParams seq in SequenceParams)
-            {
-                if(seq.GeneratorParamType == GeneratorParamType.COUNT)
-                {
-                    if (seq.ParamValue == null) return 0;
-                    int count;
-                    int.TryParse(seq.ParamValue.ToString(), out count);
-                    return count;
-                }
-            }
-            return 0;
-        }
         public bool AreParametersValueValid(out String errMessage)
         {
             errMessage = "";
             try
             {
-                int count=GetParamValue();
+                int count = GetFieldParamValueForCount();
                 if (count <= 0 || count > 99)
                 {
-                    errMessage = ResourcesUtils.GetMessage("pick_class_luckypick_err1");
+                    errMessage = ResourcesUtils.GetMessage("pick_class_validate_count_1");
                     return false;
                 }
             }
@@ -79,11 +65,6 @@ namespace LottoDataManager.Includes.Classes.Generator.Types
             }
             return true;
         }
-        public string GetDescription()
-        {
-            return Description;
-        }
-
 
     }
 }

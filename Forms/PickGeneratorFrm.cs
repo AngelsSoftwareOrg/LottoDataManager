@@ -33,7 +33,7 @@ namespace LottoDataManager.Forms
 
             //Debugging
             //if(lotteryDataServices==null)
-             //   this.lotteryDataServices = new LotteryDataServices(new Game658());
+            //    this.lotteryDataServices = new LotteryDataServices(new Game658());
             //end debugging
 
             this.lotteryTicketPanel = this.lotteryDataServices.GetLotteryTicketPanel();
@@ -62,8 +62,11 @@ namespace LottoDataManager.Forms
         private void EnlistGenerators()
         {
             DisplayGenerators(new LuckyPickGenerator(this.lotteryDataServices));
-            DisplayGenerators(new TopDrawCurrentSeason(this.lotteryDataServices));
-            DisplayGenerators(new TopDrawPreviousSeason(this.lotteryDataServices));
+            DisplayGenerators(new TopDrawCurrentSeasonGenerator(this.lotteryDataServices));
+            DisplayGenerators(new TopDrawPreviousSeasonGenerator(this.lotteryDataServices));
+            DisplayGenerators(new TopDrawnNumbersFromJackpotGenerator(this.lotteryDataServices));
+            DisplayGenerators(new RandomNumbersFromJackpotsDigitsGenerator(this.lotteryDataServices));
+            DisplayGenerators(new TopDrawNumbersFromDateRange(this.lotteryDataServices));
         }
         private void DisplayGenerators(SequenceGenerator seqGen)
         {
@@ -76,11 +79,11 @@ namespace LottoDataManager.Forms
             tblPnlLayParams.ColumnStyles.Clear();
             tblPnlLayParams.RowStyles.Clear();
             tblPnlLayParams.ColumnCount = 2;
-            tblPnlLayParams.RowCount = seqParams.Count;
+            tblPnlLayParams.RowCount = seqParams.Count+1;
             
             int rowsCount = tblPnlLayParams.RowCount;
             int colsCount = tblPnlLayParams.ColumnCount;
-            Single percHeight = ((Single)1 / (Single)rowsCount) * 100;
+            //Single percHeight = ((Single)1 / (Single)rowsCount) * 100;
             Single percWidth = ((Single)1 / (Single)colsCount) * 100;
 
             //generate the require columns
@@ -94,7 +97,7 @@ namespace LottoDataManager.Forms
             {
                 SequenceGeneratorParams sgp = ((seqParams.Count-1) >= rowCtr) ? seqParams[rowCtr] : null;
                 //add each column and its content in the current row that to add
-                for (int colCtr = 0; colCtr <= colsCount; colCtr++)
+                for (int colCtr = 0; colCtr < colsCount; colCtr++)
                 {
                     Control control;
                     if (colCtr == 0 && sgp !=null) //put the label
@@ -113,7 +116,7 @@ namespace LottoDataManager.Forms
                     {
                         control = new Label() { Text = "" };
                     }
-                    tblPnlLayParams.Controls.Add(control, colCtr, tblPnlLayParams.RowCount - 1);
+                    tblPnlLayParams.Controls.Add(control, colCtr, tblPnlLayParams.RowCount-1);
                 }
                 tblPnlLayParams.RowCount = tblPnlLayParams.RowCount + 1;
                 tblPnlLayParams.RowStyles.Add(new ColumnStyle(SizeType.AutoSize));

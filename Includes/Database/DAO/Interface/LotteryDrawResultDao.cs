@@ -21,5 +21,7 @@ namespace LottoDataManager.Includes.Database.DAO
         List<int> GetTopDrawnDigitResults(GameMode gameMode);
         List<LotteryDrawResult> GetJackpotDrawResults(GameMode gameMode);
         List<int> GetTopDrawnPreviousSeasonDigitResults(GameMode gameMode);
+        List<int> GetTopDrawnDigitFromJackpotsResults(GameMode gameMode);
+        List<int> GetTopDrawnDigitFromDateRange(GameMode gameMode, DateTime dateFrom, DateTime dateTo);
     }
 }

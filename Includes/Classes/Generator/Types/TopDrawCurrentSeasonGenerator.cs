@@ -8,9 +8,9 @@ using LottoDataManager.Includes.Utilities;
 
 namespace LottoDataManager.Includes.Classes.Generator.Types
 {
-    public class TopDrawCurrentSeason : AbstractSequenceGenerator, SequenceGenerator
+    public class TopDrawCurrentSeasonGenerator : AbstractSequenceGenerator, SequenceGenerator
     {
-        public TopDrawCurrentSeason(LotteryDataServices lotteryDataServices) : base(lotteryDataServices)
+        public TopDrawCurrentSeasonGenerator(LotteryDataServices lotteryDataServices) : base(lotteryDataServices)
         {
             this.Description = ResourcesUtils.GetMessage("pick_class_top_draw_cur_season_desc");
             SequenceParams = new List<SequenceGeneratorParams>();

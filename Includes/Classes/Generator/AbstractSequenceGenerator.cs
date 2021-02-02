@@ -98,6 +98,39 @@ namespace LottoDataManager.Includes.Classes.Generator
             }
             return sequenceArr;
         }
-    
+        protected int GetFieldParamValueForCount()
+        {
+            foreach (SequenceGeneratorParams seq in SequenceParams)
+            {
+                if (seq.GeneratorParamType == GeneratorParamType.COUNT)
+                {
+                    if (seq.ParamValue == null) return 0;
+                    int count;
+                    int.TryParse(seq.ParamValue.ToString(), out count);
+                    return count;
+                }
+            }
+            return 0;
+        }
+        protected Object GetFieldParamValue(GeneratorParamType paramType)
+        {
+            foreach (SequenceGeneratorParams seq in SequenceParams)
+            {
+                if ((seq.GeneratorParamType == GeneratorParamType.FROMDATE ||
+                     seq.GeneratorParamType == GeneratorParamType.TODATE)
+                    && seq.GeneratorParamType == paramType)
+                {
+                    if (seq.ParamValue == null) return 0;
+                    DateTime result;
+                    DateTime.TryParse(seq.ParamValue.ToString(), out result);
+                    return result;
+                }
+            }
+            return 0;
+        }
+        public string GetDescription()
+        {
+            return Description;
+        }
     }
 }

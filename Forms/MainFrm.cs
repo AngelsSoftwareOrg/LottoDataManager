@@ -48,7 +48,7 @@ namespace LottoDataManager
         {
             this.lotteryDataServices = new LotteryDataServices(this.lotteryDetails);
             this.lotteryDataWorker = new LotteryDataWorker();
-            this.dashboardReport = new DashboardReport(this.lotteryDetails);
+            this.dashboardReport = new DashboardReport(this.lotteryDataServices);
         }
         private void ClearAllForms()
         {
@@ -226,8 +226,8 @@ namespace LottoDataManager
         }
         private void RefreshDashboardReport()
         {
-            listViewOtherDetails.Items.Clear();
             listViewOtherDetails.BeginUpdate();
+            listViewOtherDetails.Items.Clear();
             foreach (KeyValuePair<String, String> kvp in dashboardReport.GetDashboardReport())
             {
                 ListViewItem itm = new ListViewItem(kvp.Key);

@@ -148,6 +148,13 @@ namespace LottoDataManager.Includes.Classes
         {
             return this.lotteryDrawResultDao.GetTopDrawnPreviousSeasonDigitResults(GameMode);
         }
-
+        public List<int> GetTopDrawnDigitFromJackpotsResults()
+        {
+            return this.lotteryDrawResultDao.GetTopDrawnDigitFromJackpotsResults(GameMode);
+        }
+        public List<int> GetTopDrawnDigitFromDateRange(DateTime dateFrom, DateTime dateTo)
+        {
+            return this.lotteryDrawResultDao.GetTopDrawnDigitFromDateRange(GameMode, dateFrom, dateTo);
+        }
     }
 }

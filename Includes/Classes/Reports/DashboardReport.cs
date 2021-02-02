@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LottoDataManager.Includes.Model;
+using LottoDataManager.Includes.Model.Details;
 using LottoDataManager.Includes.Utilities;
 
 namespace LottoDataManager.Includes.Classes.Reports
@@ -11,12 +12,13 @@ namespace LottoDataManager.Includes.Classes.Reports
     public class DashboardReport: ReportAbstract
     {
         private List<KeyValuePair<String, String>> dashboardReportList = new List<KeyValuePair<string, string>>();
-        public DashboardReport(LotteryDetails lotteryDetails): base(lotteryDetails)
+        public DashboardReport(LotteryDataServices lotteryDataServices) : base(lotteryDataServices)
         {
         }
         public List<KeyValuePair<String, String>> GetDashboardReport()
         {
             dashboardReportList = new List<KeyValuePair<string, string>>();
+            GetNextDrawDates();
             GetTotalBetsMade();
             GetTotalClaimsCount();
             GetTotalLuckypickWinAndLoose();
@@ -131,6 +133,21 @@ namespace LottoDataManager.Includes.Classes.Reports
             String value2 = String.Format("{0} / {1}", resultThisYear[12].ToString("C"), resultLastYear[12].ToString("C"));
             dashboardReportList.Add(new KeyValuePair<string, string>(key2, value2));
         }
-
+        private void GetNextDrawDates()
+        {
+            LotteryTicketPanel lotteryTicketPanel = lotteryDataServices.GetLotteryTicketPanel();
+            LotterySchedule lotterySchedule = lotteryDataServices.GetLotterySchedule();
+            DateTime dateStartingTommorow = DateTime.Now.AddDays(1);
+            //for one week schedule only
+            for(int ctr=1; ctr<=7; ctr++)
+            {
+                if (lotterySchedule.IsDrawDateMatchLotterySchedule(dateStartingTommorow)){
+                    String key = ResourcesUtils.GetMessage("drpt_next_lottery_sched");
+                    String value = DateTimeConverterUtils.ConvertToFormat(dateStartingTommorow, DateTimeConverterUtils.DATE_FORMAT_LONG);
+                    dashboardReportList.Add(new KeyValuePair<string, string>(key, value));
+                }
+                dateStartingTommorow = dateStartingTommorow.AddDays(1);
+            }
+        }
     }
 }

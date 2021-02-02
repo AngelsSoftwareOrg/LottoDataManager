@@ -11,9 +11,16 @@ namespace LottoDataManager.Includes.Classes.Generator
         private GeneratorParamType generatorParamType;
         private String description;
         private Object paramValue;
+        private readonly long uniqueID;
+
+        public SequenceGeneratorParams()
+        {
+            uniqueID = System.DateTime.Now.Ticks;
+        }
 
         public GeneratorParamType GeneratorParamType { get => generatorParamType; set => generatorParamType = value; }
         public string Description { get => description; set => description = value; }
         public object ParamValue { get => paramValue; set => paramValue = value; }
+        public long UniqueID => uniqueID;
     }
 }

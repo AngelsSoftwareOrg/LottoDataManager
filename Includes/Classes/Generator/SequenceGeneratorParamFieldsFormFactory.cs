@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using LottoDataManager.Includes.Utilities;
 
 namespace LottoDataManager.Includes.Classes.Generator
 {
@@ -22,10 +23,27 @@ namespace LottoDataManager.Includes.Classes.Generator
         public Control GetControl(SequenceGeneratorParams seqParam)
         {
             if (seqParam.GeneratorParamType == GeneratorParamType.COUNT) return GetNumericUpAndDown(seqParam);
-
+            if (seqParam.GeneratorParamType == GeneratorParamType.FROMDATE) return GetDateTime(seqParam, -366);
+            if (seqParam.GeneratorParamType == GeneratorParamType.TODATE) return GetDateTime(seqParam, 0);
             return null;
         }
 
+        private DateTimePicker GetDateTime(SequenceGeneratorParams seqParam, int addDays)
+        {
+            DateTimePicker dtPicker = new DateTimePicker();
+            dtPicker.MinDate = DateTimeConverterUtils.GetYear2011();
+            dtPicker.Tag = seqParam;
+            dtPicker.ValueChanged += DtPicker_ValueChanged;
+            dtPicker.Value = DateTime.Now.AddDays(addDays);
+            return dtPicker;
+        }
+
+        private void DtPicker_ValueChanged(object sender, EventArgs e)
+        {
+            DateTimePicker dtPicker = (DateTimePicker)sender;
+            SequenceGeneratorParams seq = (SequenceGeneratorParams)dtPicker.Tag;
+            seq.ParamValue = dtPicker.Value;
+        }
 
         private NumericUpDown GetNumericUpAndDown(SequenceGeneratorParams seqParam)
         {

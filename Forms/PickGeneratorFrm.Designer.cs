@@ -100,7 +100,7 @@ namespace LottoDataManager.Forms
             // 
             // tblPnlLayParams
             // 
-            this.tblPnlLayParams.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.InsetDouble;
+            this.tblPnlLayParams.AutoSize = true;
             this.tblPnlLayParams.ColumnCount = 2;
             this.tblPnlLayParams.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tblPnlLayParams.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -299,6 +299,7 @@ namespace LottoDataManager.Forms
             this.panel1.ResumeLayout(false);
             this.grpbxParam.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.grpbxGenType.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.lvGenType)).EndInit();
             this.grpbxActions.ResumeLayout(false);

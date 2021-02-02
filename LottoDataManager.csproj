@@ -104,8 +104,11 @@
     <Compile Include="Includes\Classes\Generator\SequenceGenerator.cs" />
     <Compile Include="Includes\Classes\Generator\SequenceGeneratorParams.cs" />
     <Compile Include="Includes\Classes\Generator\Types\LuckyPickGenerator.cs" />
-    <Compile Include="Includes\Classes\Generator\Types\TopDrawCurrentSeason.cs" />
-    <Compile Include="Includes\Classes\Generator\Types\TopDrawPreviousSeason.cs" />
+    <Compile Include="Includes\Classes\Generator\Types\RandomNumbersFromJackpotsDigitsGenerator.cs" />
+    <Compile Include="Includes\Classes\Generator\Types\TopDrawCurrentSeasonGenerator.cs" />
+    <Compile Include="Includes\Classes\Generator\Types\TopDrawnNumbersFromJackpotGenerator.cs" />
+    <Compile Include="Includes\Classes\Generator\Types\TopDrawNumbersFromDateRange.cs" />
+    <Compile Include="Includes\Classes\Generator\Types\TopDrawPreviousSeasonGenerator.cs" />
     <Compile Include="Includes\Classes\LotteryDataServices.cs" />
     <Compile Include="Includes\Classes\LotteryDataWorker.cs" />
     <Compile Include="Includes\Classes\LotteryDataWorkerEvent.cs" />
