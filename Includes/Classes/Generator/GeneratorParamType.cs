@@ -13,7 +13,7 @@ namespace LottoDataManager.Includes.Classes.Generator
         MONTHLY, 
         COUNT,
         GAME_SEASON,
-        DIRECTION
+        PATTERN
 
     }
 }

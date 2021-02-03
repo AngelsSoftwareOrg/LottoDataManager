@@ -48,16 +48,7 @@ namespace LottoDataManager.Forms
             grpbxFinalActions.Text = ResourcesUtils.GetMessage("pick_grp_fnl_actions");
             btnClearSel.Text = ResourcesUtils.GetMessage("pick_btn_clr_sel");
             btnGenerate.Text = ResourcesUtils.GetMessage("pick_btn_generate");
-
             EnlistGenerators();
-            //LayoutGeneratorsParams();
-        }
-
-        private int GetSpecificGeneratedValue(object rowObject, int index)
-        {
-            if (rowObject == null) return 0;
-            int[] seq = (int[])rowObject;
-            return seq[index];
         }
         private void EnlistGenerators()
         {
@@ -67,6 +58,8 @@ namespace LottoDataManager.Forms
             DisplayGenerators(new TopDrawnNumbersFromJackpotGenerator(this.lotteryDataServices));
             DisplayGenerators(new RandomNumbersFromJackpotsDigitsGenerator(this.lotteryDataServices));
             DisplayGenerators(new TopDrawNumbersFromDateRange(this.lotteryDataServices));
+            DisplayGenerators(new NumberNotYetPickUpGenerator(this.lotteryDataServices));
+            DisplayGenerators(new RandomPatternSequenceGenerator(this.lotteryDataServices));
         }
         private void DisplayGenerators(SequenceGenerator seqGen)
         {

@@ -27,10 +27,5 @@ namespace LottoDataManager.Includes.Classes.Generator.Types
             return GroupAndCountAndSlice(lotteryDataServices.GetTopDrawnResultDigits().ToArray());
         }
 
-        public string GetDescription()
-        {
-            return this.Description;
-        }
-
     }
 }

@@ -100,10 +100,12 @@
     <Compile Include="Includes\Classes\Comparers\ListviewTextSorter.cs" />
     <Compile Include="Includes\Classes\Generator\AbstractSequenceGenerator.cs" />
     <Compile Include="Includes\Classes\Generator\GeneratorParamType.cs" />
+    <Compile Include="Includes\Classes\Generator\NumberNotYetPickUpGenerator.cs" />
     <Compile Include="Includes\Classes\Generator\SequenceGeneratorParamFieldsFormFactory.cs" />
     <Compile Include="Includes\Classes\Generator\SequenceGenerator.cs" />
     <Compile Include="Includes\Classes\Generator\SequenceGeneratorParams.cs" />
     <Compile Include="Includes\Classes\Generator\Types\LuckyPickGenerator.cs" />
+    <Compile Include="Includes\Classes\Generator\Types\RandomPatternSequenceGenerator.cs" />
     <Compile Include="Includes\Classes\Generator\Types\RandomNumbersFromJackpotsDigitsGenerator.cs" />
     <Compile Include="Includes\Classes\Generator\Types\TopDrawCurrentSeasonGenerator.cs" />
     <Compile Include="Includes\Classes\Generator\Types\TopDrawnNumbersFromJackpotGenerator.cs" />

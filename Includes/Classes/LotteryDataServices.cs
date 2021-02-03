@@ -156,5 +156,9 @@ namespace LottoDataManager.Includes.Classes
         {
             return this.lotteryDrawResultDao.GetTopDrawnDigitFromDateRange(GameMode, dateFrom, dateTo);
         }
+        public List<int[]> GetTopDrawnDigitToSequenceFromDateRange(DateTime dateFrom, DateTime dateTo)
+        {
+            return this.lotteryDrawResultDao.GetTopDrawnDigitToSequenceFromDateRange(GameMode, dateFrom, dateTo);
+        }
     }
 }

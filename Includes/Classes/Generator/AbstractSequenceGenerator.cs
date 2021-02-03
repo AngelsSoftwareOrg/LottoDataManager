@@ -12,11 +12,13 @@ namespace LottoDataManager.Includes.Classes.Generator
     {
         private String description;
         private List<SequenceGeneratorParams> sequenceParams;
+        private Random random = new Random();
         protected LotteryDataServices lotteryDataServices;
+        protected LotteryTicketPanel lotteryTicketPanel;
         protected AbstractSequenceGenerator(LotteryDataServices lotteryDataServices)
         {
             this.lotteryDataServices = lotteryDataServices;
-
+            this.lotteryTicketPanel = this.lotteryDataServices.GetLotteryTicketPanel();
         }
         protected string Description { get => description; set => description = value; }
         protected List<SequenceGeneratorParams> SequenceParams { get => sequenceParams; set => sequenceParams = value; }
@@ -32,7 +34,7 @@ namespace LottoDataManager.Includes.Classes.Generator
                 {
                     seq.ParamValue = 1;
                 }
-                else if(seq.GeneratorParamType == GeneratorParamType.DIRECTION) 
+                else if(seq.GeneratorParamType == GeneratorParamType.PATTERN) 
                 {
                     seq.ParamValue = null;
                 }
@@ -56,7 +58,6 @@ namespace LottoDataManager.Includes.Classes.Generator
         }
         protected List<int[]> GroupAndCountAndSlice(int[] drawnNumbers)
         {
-            LotteryTicketPanel lotteryTicketPanel = lotteryDataServices.GetLotteryTicketPanel();
             List<int[]> sequenceArr = new List<int[]>();
 
             var numberGroups = drawnNumbers.GroupBy(i => i)
@@ -120,13 +121,67 @@ namespace LottoDataManager.Includes.Classes.Generator
                      seq.GeneratorParamType == GeneratorParamType.TODATE)
                     && seq.GeneratorParamType == paramType)
                 {
-                    if (seq.ParamValue == null) return 0;
+                    if (seq.ParamValue == null) return null;
                     DateTime result;
                     DateTime.TryParse(seq.ParamValue.ToString(), out result);
                     return result;
                 }
+                else if (seq.GeneratorParamType == GeneratorParamType.PATTERN
+                       && seq.GeneratorParamType == paramType)
+                {
+                    if (seq.ParamValue == null) return null;
+                    return seq.ParamValue.ToString();
+                }
             }
-            return 0;
+            return null;
+        }
+        protected bool IsDateFromAndToValid(DateTime dateFrom, DateTime dateTo, out String errMessage)
+        {
+            errMessage = "";
+            if (dateFrom.Date.CompareTo(dateTo.Date) > 0)
+            {
+                errMessage = ResourcesUtils.GetMessage("pick_class_validate_date_from_1");
+                return false;
+            }
+            else if (dateFrom.Date.CompareTo(DateTimeConverterUtils.GetYear2011().Date) < 0)
+            {
+                errMessage = ResourcesUtils.GetMessage("pick_class_validate_date_from_2");
+                return false;
+            }
+            else if (dateTo.Date.CompareTo(DateTimeConverterUtils.GetYear2011().Date) < 0)
+            {
+                errMessage = ResourcesUtils.GetMessage("pick_class_validate_date_to_1");
+                return false;
+            }
+            return true;
+        }
+        protected int GetRandomNumber()
+        {
+            return random.Next(lotteryTicketPanel.GetMin(), lotteryTicketPanel.GetMax() + 1);
+        }
+        protected int GetRandomNumber(int[] notContainsWithin)
+        {
+            while (true)
+            {
+                int r = GetRandomNumber();
+                if (notContainsWithin.Contains(r)) continue;
+                return r;
+            }
+        }
+
+        protected int[] RandomNumberFiller(int[] sequence)
+        {
+            for(int ctr=0; ctr<sequence.Length; ctr++)
+            {
+                while (true)
+                {
+                    int r = GetRandomNumber();
+                    if (sequence.Contains(r)) continue;
+                    sequence[ctr] = r;
+                    break;
+                }
+            }
+            return sequence;
         }
         public string GetDescription()
         {
