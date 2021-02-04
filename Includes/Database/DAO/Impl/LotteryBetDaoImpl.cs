@@ -527,6 +527,42 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
             }
             return DateTimeConverterUtils.GetYear2011();
         }
+        public List<LotteryBet> GetLotteryBetsCurrentSeason(GameMode gameMode)
+        {
+            List<LotteryBet> lotteryBet = new List<LotteryBet>();
+            using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
+            using (OleDbCommand command = new OleDbCommand())
+            {
+                command.CommandType = CommandType.Text;
+                command.CommandText = "SELECT b.* " +
+                                      "  FROM lottery_bet b " +
+                                      "  WHERE b.game_cd = @game_cd1 " +
+                                      "  AND b.active = true " +
+                                      "  AND b.target_draw_date >= (SELECT TOP 1 a.draw_date " +
+                                      "    FROM draw_results a " +
+                                      "   WHERE a.game_cd = @game_cd2 " +
+                                      "     AND a.draw_date > (SELECT TOP 1 d.draw_date " +
+                                      "                          FROM draw_results d " +
+                                      "                         WHERE d.winners > 0 " +
+                                      "                           AND d.game_cd = @game_cd3 " +
+                                      "                         ORDER BY d.draw_date DESC) " +
+                                      "  ORDER BY a.draw_date ASC)";
+                command.Parameters.AddWithValue("@game_cd1", gameMode);
+                command.Parameters.AddWithValue("@game_cd2", gameMode);
+                command.Parameters.AddWithValue("@game_cd3", gameMode);
+                command.Connection = conn;
+                conn.Open();
+
+                using (OleDbDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        lotteryBet.Add(GetInstanceDeriveLotteryBetSetup(reader));
+                    }
+                }
+            }
+            return lotteryBet;
+        }
         public double[] GetMonthlySpending(GameMode gameMode, int year)
         {
             double[] result = new double[13] {0,0,0,0,0,0,0,0,0,0,0,0,0};

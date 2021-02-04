@@ -31,7 +31,7 @@ namespace LottoDataManager.Forms
             //if(lotteryDataServices==null)
             //    this.lotteryDataServices = new LotteryDataServices(new Game658());
             //end debugging
-            
+
             this.lotteryTicketPanel = this.lotteryDataServices.GetLotteryTicketPanel();
             this.lotteryOutletArr = this.lotteryDataServices.GetLotteryOutlets();
             this.lotterySchedule = this.lotteryDataServices.GetLotterySchedule();
@@ -39,7 +39,7 @@ namespace LottoDataManager.Forms
         }
         private void AddBetFrm_Load(object sender, EventArgs e)
         {
-            textBoxInstruction.Text = "Please input your " + lotteryTicketPanel.GetGameDigitCount() + 
+            textBoxInstruction.Text = "Please input your " + lotteryTicketPanel.GetGameDigitCount() +
                                       " digits number in the textbox below per line, " +
                                       "separated each numbers either with space, hypen or a tab. e.g. \r\n" +
                                       "21 34 57 45 28 44 (spaces) \r\n" +
@@ -99,7 +99,7 @@ namespace LottoDataManager.Forms
         }
         private List<LotteryBet> ValidateAndCompileData()
         {
-            List <LotteryBet> lotteryBetArr = new List<LotteryBet>();
+            List<LotteryBet> lotteryBetArr = new List<LotteryBet>();
             try
             {
                 if (tabControlInputs.SelectedTab == tabPageDelimiters)
@@ -129,7 +129,7 @@ namespace LottoDataManager.Forms
                 {
                     DisplayLog("Validating selected numbers... ");
                     LotteryBetSetup lotteryBet = new LotteryBetSetup();
-                    lotteryBet.PutNumberSequence(lblSelectedNumber.Text.Replace(" ",""));
+                    lotteryBet.PutNumberSequence(lblSelectedNumber.Text.Replace(" ", ""));
                     CompleteLotteryBetDetails(lotteryBet);
                     lotteryBetArr.Add(lotteryBet);
                 }
@@ -151,10 +151,10 @@ namespace LottoDataManager.Forms
         private bool IsNumberSequenceValid(String[] numberSequence)
         {
             int convertedNum = 0;
-            foreach(String num in numberSequence)
+            foreach (String num in numberSequence)
             {
                 if (!int.TryParse(num, out convertedNum)) throw new Exception("Input number is not accepted or out of bounds for the game minimum and maximum number range");
-                if(convertedNum < this.lotteryTicketPanel.GetMin() || convertedNum > this.lotteryTicketPanel.GetMax())
+                if (convertedNum < this.lotteryTicketPanel.GetMin() || convertedNum > this.lotteryTicketPanel.GetMax())
                 {
                     throw new Exception(String.Format("Input number should be between {0} and {1}.", this.lotteryTicketPanel.GetMin(), this.lotteryTicketPanel.GetMax()));
                 }
@@ -163,7 +163,7 @@ namespace LottoDataManager.Forms
         }
         private bool InputFormDataValidation()
         {
-            DateTime nextDrawDate = (radioBtnPreferredDate.Checked) ? dtPickPreferredDate.Value : 
+            DateTime nextDrawDate = (radioBtnPreferredDate.Checked) ? dtPickPreferredDate.Value :
                                 this.lotteryDataServices.GetNextDrawDate();
             DisplayLog("Checking selected draw date...");
             //RADIO BUTTON
@@ -172,7 +172,7 @@ namespace LottoDataManager.Forms
                 DisplayLog("Selected date is a backdated date. Please be careful when choosing the date");
             }
             DisplayLog("Checking lotto outlet.");
-            if (cmbOutlet.SelectedItem == null || String.IsNullOrWhiteSpace(cmbOutlet.SelectedItem.ToString())) 
+            if (cmbOutlet.SelectedItem == null || String.IsNullOrWhiteSpace(cmbOutlet.SelectedItem.ToString()))
                 throw new Exception("Please select the Lotto Outlet where you purchase the ticket.");
 
             DisplayLog("Checking Lotto Draw Date selection...");
@@ -185,7 +185,7 @@ namespace LottoDataManager.Forms
                 if (!lotterySchedule.IsDrawDateMatchLotterySchedule(dtPickPreferredDate.Value))
                 {
                     String msg = String.Format("Please select the date where it match its scheduled draw date. \n" +
-                        "You selected {0}, but the draw date is every {1}.", 
+                        "You selected {0}, but the draw date is every {1}.",
                         dtPickPreferredDate.Value.Date.ToString("MMMM d - dddd"),
                         this.lotterySchedule.DrawDateEvery());
                     throw new Exception(msg);
@@ -214,19 +214,19 @@ namespace LottoDataManager.Forms
                 tblLayoutPnl.RowCount = tblLayoutPnl.RowCount + 1;
                 tblLayoutPnl.RowStyles.Add(new ColumnStyle(SizeType.AutoSize));
 
-                for (int colCtr=1; colCtr <= colsCount; colCtr++)
+                for (int colCtr = 1; colCtr <= colsCount; colCtr++)
                 {
                     int btnLbl = colCtr;
-                    if(lotteryTicketPanel.GetNumberDirection() == NumberDirection.LEFT_TO_RIGHT)
+                    if (lotteryTicketPanel.GetNumberDirection() == NumberDirection.LEFT_TO_RIGHT)
                     {
-                        btnLbl = colCtr + ((rowCtr-1) * colsCount);
+                        btnLbl = colCtr + ((rowCtr - 1) * colsCount);
                     }
                     else //NumberDirection.TOP_TO_BOTTOM
                     {
                         btnLbl = rowCtr + ((colCtr * rowsCount) - rowsCount);
                     }
 
-                    if(btnLbl <= lotteryTicketPanel.GetMax())
+                    if (btnLbl <= lotteryTicketPanel.GetMax())
                     {
                         Button btn = new Button();
                         btn.Text = btnLbl.ToString();
@@ -291,15 +291,15 @@ namespace LottoDataManager.Forms
                 AddSelectedTicketPanelNumber(btnNum);
             }
         }
-        private void AddSelectedTicketPanelNumber(Button btnNumClicked=null)
+        private void AddSelectedTicketPanelNumber(Button btnNumClicked = null)
         {
-            if(btnNumClicked !=null) selTcktPnlNum.Add(btnNumClicked);
+            if (btnNumClicked != null) selTcktPnlNum.Add(btnNumClicked);
             String numSelected = "";
-            for(int ctr=0; ctr<lotteryTicketPanel.GetGameDigitCount(); ctr++)
+            for (int ctr = 0; ctr < lotteryTicketPanel.GetGameDigitCount(); ctr++)
             {
                 if (ctr > 0) numSelected += " - ";
-                Button btn = ((selTcktPnlNum.Count) >= (ctr+1)) ? (Button)selTcktPnlNum[ctr] : null;
-                numSelected += (btn==null)? "00" : btn.Text.PadLeft(2, char.Parse("0"));
+                Button btn = ((selTcktPnlNum.Count) >= (ctr + 1)) ? (Button)selTcktPnlNum[ctr] : null;
+                numSelected += (btn == null) ? "00" : btn.Text.PadLeft(2, char.Parse("0"));
             }
             lblSelectedNumber.Text = numSelected;
         }
@@ -307,11 +307,11 @@ namespace LottoDataManager.Forms
         {
             selTcktPnlNum.Clear();
             AddSelectedTicketPanelNumber();
-            foreach(Control control in tblLayoutPnl.Controls)
+            foreach (Control control in tblLayoutPnl.Controls)
             {
-                if(control.GetType() == typeof(Button))
+                if (control.GetType() == typeof(Button))
                 {
-                    DecorateTicketPanelButtonNum((Button) control, false);
+                    DecorateTicketPanelButtonNum((Button)control, false);
                 }
             }
         }
@@ -328,5 +328,25 @@ namespace LottoDataManager.Forms
             dtPickPreferredDate.Visible = false;
             Application.DoEvents();
         }
+
+
+        #region Public Interface"
+        public void AddSequenceEntry(String sequence)
+        {
+            if (textBoxDelimitersInput.Text.Length > 0) textBoxDelimitersInput.AppendText(Environment.NewLine);
+            textBoxDelimitersInput.AppendText(sequence);
+        }
+        public void ClearSequenceEntries()
+        {
+            textBoxDelimitersInput.Text = "";
+        }
+
+        public void IsLuckyPick(bool value)
+        {
+            this.checkBoxLuckyPick.Checked = value;
+        }
+        #endregion
+
+
     }
 }

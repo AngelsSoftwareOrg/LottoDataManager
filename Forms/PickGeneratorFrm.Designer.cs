@@ -31,6 +31,7 @@ namespace LottoDataManager.Forms
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PickGeneratorFrm));
             this.panel1 = new System.Windows.Forms.Panel();
             this.grpbxParam = new System.Windows.Forms.GroupBox();
@@ -53,6 +54,13 @@ namespace LottoDataManager.Forms
             this.lvColSeq5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvColSeq6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.grpbxFinalActions = new System.Windows.Forms.GroupBox();
+            this.btnExit = new System.Windows.Forms.Button();
+            this.btnAddSelected = new System.Windows.Forms.Button();
+            this.linkUncheckAll = new System.Windows.Forms.LinkLabel();
+            this.ctxMenuBet = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.uncheckAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.checkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addBetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             this.grpbxParam.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -61,6 +69,8 @@ namespace LottoDataManager.Forms
             this.grpbxActions.SuspendLayout();
             this.panel2.SuspendLayout();
             this.grpbxOutput.SuspendLayout();
+            this.grpbxFinalActions.SuspendLayout();
+            this.ctxMenuBet.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -232,6 +242,7 @@ namespace LottoDataManager.Forms
             this.lvColSeq4,
             this.lvColSeq5,
             this.lvColSeq6});
+            this.lvGenSeq.ContextMenuStrip = this.ctxMenuBet;
             this.lvGenSeq.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvGenSeq.FullRowSelect = true;
             this.lvGenSeq.GridLines = true;
@@ -274,6 +285,9 @@ namespace LottoDataManager.Forms
             // 
             // grpbxFinalActions
             // 
+            this.grpbxFinalActions.Controls.Add(this.linkUncheckAll);
+            this.grpbxFinalActions.Controls.Add(this.btnAddSelected);
+            this.grpbxFinalActions.Controls.Add(this.btnExit);
             this.grpbxFinalActions.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.grpbxFinalActions.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpbxFinalActions.ForeColor = System.Drawing.Color.Navy;
@@ -284,10 +298,81 @@ namespace LottoDataManager.Forms
             this.grpbxFinalActions.TabStop = false;
             this.grpbxFinalActions.Text = "Step 5: Final Actions";
             // 
+            // btnExit
+            // 
+            this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExit.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExit.ForeColor = System.Drawing.Color.Black;
+            this.btnExit.Location = new System.Drawing.Point(440, 21);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(142, 69);
+            this.btnExit.TabIndex = 0;
+            this.btnExit.Text = "Exit";
+            this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            // 
+            // btnAddSelected
+            // 
+            this.btnAddSelected.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddSelected.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnAddSelected.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddSelected.ForeColor = System.Drawing.Color.Black;
+            this.btnAddSelected.Location = new System.Drawing.Point(271, 21);
+            this.btnAddSelected.Name = "btnAddSelected";
+            this.btnAddSelected.Size = new System.Drawing.Size(163, 69);
+            this.btnAddSelected.TabIndex = 1;
+            this.btnAddSelected.Text = "Place checked as bet";
+            this.btnAddSelected.UseVisualStyleBackColor = true;
+            this.btnAddSelected.Click += new System.EventHandler(this.btnAddSelected_Click);
+            // 
+            // linkUncheckAll
+            // 
+            this.linkUncheckAll.AutoSize = true;
+            this.linkUncheckAll.Location = new System.Drawing.Point(6, 46);
+            this.linkUncheckAll.Name = "linkUncheckAll";
+            this.linkUncheckAll.Size = new System.Drawing.Size(86, 18);
+            this.linkUncheckAll.TabIndex = 2;
+            this.linkUncheckAll.TabStop = true;
+            this.linkUncheckAll.Text = "Uncheck All";
+            this.linkUncheckAll.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkUncheckAll_LinkClicked);
+            // 
+            // ctxMenuBet
+            // 
+            this.ctxMenuBet.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.ctxMenuBet.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.checkToolStripMenuItem,
+            this.uncheckAllToolStripMenuItem,
+            this.addBetToolStripMenuItem});
+            this.ctxMenuBet.Name = "ctxMenuBet";
+            this.ctxMenuBet.Size = new System.Drawing.Size(156, 76);
+            // 
+            // uncheckAllToolStripMenuItem
+            // 
+            this.uncheckAllToolStripMenuItem.Name = "uncheckAllToolStripMenuItem";
+            this.uncheckAllToolStripMenuItem.Size = new System.Drawing.Size(155, 24);
+            this.uncheckAllToolStripMenuItem.Text = "Uncheck All";
+            this.uncheckAllToolStripMenuItem.Click += new System.EventHandler(this.uncheckAllToolStripMenuItem_Click);
+            // 
+            // checkToolStripMenuItem
+            // 
+            this.checkToolStripMenuItem.Name = "checkToolStripMenuItem";
+            this.checkToolStripMenuItem.Size = new System.Drawing.Size(155, 24);
+            this.checkToolStripMenuItem.Text = "Check";
+            this.checkToolStripMenuItem.Click += new System.EventHandler(this.checkToolStripMenuItem_Click);
+            // 
+            // addBetToolStripMenuItem
+            // 
+            this.addBetToolStripMenuItem.Name = "addBetToolStripMenuItem";
+            this.addBetToolStripMenuItem.Size = new System.Drawing.Size(155, 24);
+            this.addBetToolStripMenuItem.Text = "Add Bet";
+            this.addBetToolStripMenuItem.Click += new System.EventHandler(this.addBetToolStripMenuItem_Click);
+            // 
             // PickGeneratorFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnExit;
             this.ClientSize = new System.Drawing.Size(1126, 573);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -305,6 +390,9 @@ namespace LottoDataManager.Forms
             this.grpbxActions.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.grpbxOutput.ResumeLayout(false);
+            this.grpbxFinalActions.ResumeLayout(false);
+            this.grpbxFinalActions.PerformLayout();
+            this.ctxMenuBet.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -332,5 +420,12 @@ namespace LottoDataManager.Forms
         private System.Windows.Forms.ColumnHeader lvColSeq4;
         private System.Windows.Forms.ColumnHeader lvColSeq5;
         private System.Windows.Forms.ColumnHeader lvColSeq6;
+        private System.Windows.Forms.Button btnExit;
+        private System.Windows.Forms.Button btnAddSelected;
+        private System.Windows.Forms.LinkLabel linkUncheckAll;
+        private System.Windows.Forms.ContextMenuStrip ctxMenuBet;
+        private System.Windows.Forms.ToolStripMenuItem checkToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem uncheckAllToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem addBetToolStripMenuItem;
     }
 }

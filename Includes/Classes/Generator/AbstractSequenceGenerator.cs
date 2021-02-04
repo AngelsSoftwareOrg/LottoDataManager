@@ -173,12 +173,15 @@ namespace LottoDataManager.Includes.Classes.Generator
         {
             for(int ctr=0; ctr<sequence.Length; ctr++)
             {
-                while (true)
+                if (sequence[ctr] == 0)
                 {
-                    int r = GetRandomNumber();
-                    if (sequence.Contains(r)) continue;
-                    sequence[ctr] = r;
-                    break;
+                    while (true)
+                    {
+                        int r = GetRandomNumber();
+                        if (sequence.Contains(r)) continue;
+                        sequence[ctr] = r;
+                        break;
+                    }
                 }
             }
             return sequence;

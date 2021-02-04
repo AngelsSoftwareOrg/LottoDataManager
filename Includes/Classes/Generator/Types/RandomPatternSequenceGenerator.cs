@@ -54,16 +54,6 @@ namespace LottoDataManager.Includes.Classes.Generator.Types
         }
         public List<int[]> GenerateSequence()
         {
-
-
-            /*            combo.Items.Add(ResourcesUtils.GetMessage("pick_class_top_pattern_fldd")); xxx
-                        combo.Items.Add(ResourcesUtils.GetMessage("pick_class_top_pattern_fldu")); xxx
-
-                        combo.Items.Add(ResourcesUtils.GetMessage("pick_class_top_pattern_flvu"));
-                        combo.Items.Add(ResourcesUtils.GetMessage("pick_class_top_pattern_frdd"));
-                        combo.Items.Add(ResourcesUtils.GetMessage("pick_class_top_pattern_frdu"));
-                        combo.Items.Add(ResourcesUtils.GetMessage("pick_class_top_pattern_frvu"));*/
-
             String pattern = (String)GetFieldParamValue(GeneratorParamType.PATTERN);
             List<int[]> topDrFrDtRange = lotteryDataServices.GetTopDrawnDigitToSequenceFromDateRange(
                                     (DateTime)GetFieldParamValue(GeneratorParamType.FROMDATE),
@@ -71,10 +61,14 @@ namespace LottoDataManager.Includes.Classes.Generator.Types
             List<int[]> result;
             if (GetLeftDiagonalDown(pattern, topDrFrDtRange, out result)) return result;
             if (GetLeftDiagonalUp(pattern, topDrFrDtRange, out result)) return result;
-
+            if (GetLeftVerticalDown(pattern, topDrFrDtRange, out result)) return result;
+            if (GetLeftVerticalUpward(pattern, topDrFrDtRange, out result)) return result;
+            if (GetRightDiagonalDown(pattern, topDrFrDtRange, out result)) return result;
+            if (GetRightDiagonalUp(pattern, topDrFrDtRange, out result)) return result;
+            if (GetRightVerticalDown(pattern, topDrFrDtRange, out result)) return result;
+            if (GetRightVerticalUpward(pattern, topDrFrDtRange, out result)) return result;
             return result;
         }
-
         private bool GetLeftDiagonalDown(String pattern, List<int[]> drawNumbers, out List<int[]> result)
         {
             result = new List<int[]>();
@@ -101,13 +95,12 @@ namespace LottoDataManager.Includes.Classes.Generator.Types
                     }
                     seqRow++;
                 }
+                Array.Sort(seqEntry);
                 result.Add(seqEntry);
-
                 if (seqRow > drawNumbers.Count) break;
             }
             return true;
         }
-
         private bool GetLeftDiagonalUp(String pattern, List<int[]> drawNumbers, out List<int[]> result)
         {
             result = new List<int[]>();
@@ -119,7 +112,7 @@ namespace LottoDataManager.Includes.Classes.Generator.Types
             {
                 int[] seqEntry = new int[lotteryTicketPanel.GetGameDigitCount()];
 
-                for (int ctr = (lotteryTicketPanel.GetGameDigitCount()-1); ctr >= 0; ctr--)
+                for (int ctr = 0; ctr < lotteryTicketPanel.GetGameDigitCount(); ctr++)
                 {
                     if (seqRow >=0)
                     {
@@ -133,12 +126,251 @@ namespace LottoDataManager.Includes.Classes.Generator.Types
                     }
                     seqRow--;
                 }
+                Array.Sort(seqEntry);
                 result.Add(seqEntry);
                 if (seqRow < 0) break;
             }
             return true;
         }
+        private bool GetLeftVerticalDown(String pattern, List<int[]> drawNumbers, out List<int[]> result)
+        {
+            result = new List<int[]>();
+            bool isLeftVertdown = pattern.Equals(ResourcesUtils.GetMessage("pick_class_top_pattern_flvd"), StringComparison.OrdinalIgnoreCase);
+            if (!isLeftVertdown) return false;
 
+            List<int[]> destinationSeqArr = new List<int[]>();
+            for (int ctr = 0; ctr < drawNumbers.Count; ctr++)
+            {
+                destinationSeqArr.Add(new int[lotteryTicketPanel.GetGameDigitCount()]);
+            }
+
+            int fromIndex = 0;
+            int toIndex = lotteryTicketPanel.GetGameDigitCount();
+            while (fromIndex < drawNumbers.Count)
+            {
+                int placingIndex = 0;
+                for (int drawRowCtr = fromIndex; drawRowCtr < toIndex; drawRowCtr++)
+                {
+                    if (drawRowCtr > (drawNumbers.Count - 1)) break;
+                    int[] source = drawNumbers[drawRowCtr];
+                    int sourceValueIdx = 0;
+                    for (int destinationFrom = fromIndex; destinationFrom < toIndex; destinationFrom++)
+                    {
+                        if (destinationFrom > (destinationSeqArr.Count-1)) break;
+                        int[] destination = destinationSeqArr[destinationFrom];
+                        int numToPlaceToDestination = source[sourceValueIdx++];
+                        if(destination.Contains(numToPlaceToDestination)) numToPlaceToDestination = GetRandomNumber(destination);
+                        destination[placingIndex] = numToPlaceToDestination;
+                    }
+                    placingIndex++;
+                }
+
+                fromIndex += lotteryTicketPanel.GetGameDigitCount();
+                toIndex += lotteryTicketPanel.GetGameDigitCount();
+            }
+            foreach(int[] seq in destinationSeqArr)
+            {
+                RandomNumberFiller(seq);
+                Array.Sort(seq);
+            }
+            result.AddRange(destinationSeqArr.ToArray());
+            return true;
+        }
+        private bool GetLeftVerticalUpward(String pattern, List<int[]> drawNumbers, out List<int[]> result)
+        {
+            result = new List<int[]>();
+            bool isLeftVertdUp = pattern.Equals(ResourcesUtils.GetMessage("pick_class_top_pattern_flvu"), StringComparison.OrdinalIgnoreCase);
+            if (!isLeftVertdUp) return false;
+
+            List<int[]> destinationSeqArr = new List<int[]>();
+            for (int ctr = 0; ctr < drawNumbers.Count; ctr++)
+            {
+                destinationSeqArr.Add(new int[lotteryTicketPanel.GetGameDigitCount()]);
+            }
+
+            int fromIndex = drawNumbers.Count - 1;
+            int toIndex = fromIndex - lotteryTicketPanel.GetGameDigitCount();
+            while (fromIndex > 0)
+            {
+                int placingIndex = lotteryTicketPanel.GetGameDigitCount() - 1;
+                for (int drawRowCtr = fromIndex; drawRowCtr > toIndex; drawRowCtr--)
+                {
+                    if (drawRowCtr < 0) break;
+                    int[] source = drawNumbers[drawRowCtr];
+                    int sourceValueIdx = 0;
+                    for (int destinationFrom = fromIndex; destinationFrom < toIndex; destinationFrom++)
+                    {
+                        if (destinationFrom < 0) break;
+                        int[] destination = destinationSeqArr[destinationFrom];
+                        int numToPlaceToDestination = source[sourceValueIdx++];
+                        if (destination.Contains(numToPlaceToDestination)) numToPlaceToDestination = GetRandomNumber(destination);
+                        destination[placingIndex] = numToPlaceToDestination;
+                    }
+                    placingIndex--;
+                }
+
+                fromIndex -= lotteryTicketPanel.GetGameDigitCount();
+                toIndex -= lotteryTicketPanel.GetGameDigitCount();
+            }
+            foreach (int[] seq in destinationSeqArr)
+            {
+                RandomNumberFiller(seq);
+                Array.Sort(seq);
+            }
+            result.AddRange(destinationSeqArr.ToArray());
+            return true;
+        }
+        private bool GetRightDiagonalDown(String pattern, List<int[]> drawNumbers, out List<int[]> result)
+        {
+            result = new List<int[]>();
+            bool isRightDiagDown = pattern.Equals(ResourcesUtils.GetMessage("pick_class_top_pattern_frdd"), StringComparison.OrdinalIgnoreCase);
+
+            if (!isRightDiagDown) return false;
+
+            int seqRow = 0;
+            while (seqRow < drawNumbers.Count)
+            {
+                int[] seqEntry = new int[lotteryTicketPanel.GetGameDigitCount()];
+
+                for (int ctr = (lotteryTicketPanel.GetGameDigitCount()-1); ctr >=0 ; ctr--)
+                {
+                    if (seqRow < drawNumbers.Count)
+                    {
+                        int n = drawNumbers[seqRow][ctr];
+                        if (seqEntry.Contains(n)) n = GetRandomNumber(seqEntry);
+                        seqEntry[ctr] = n;
+                    }
+                    else
+                    {
+                        seqEntry = RandomNumberFiller(seqEntry);
+                    }
+                    seqRow++;
+                }
+                Array.Sort(seqEntry);
+                result.Add(seqEntry);
+                if (seqRow > drawNumbers.Count) break;
+            }
+            return true;
+        }
+        private bool GetRightDiagonalUp(String pattern, List<int[]> drawNumbers, out List<int[]> result)
+        {
+            result = new List<int[]>();
+            bool isRightDiagUp = pattern.Equals(ResourcesUtils.GetMessage("pick_class_top_pattern_frdu"), StringComparison.OrdinalIgnoreCase);
+            if (!isRightDiagUp) return false;
+
+            int seqRow = drawNumbers.Count - 1;
+            while (seqRow >= 0)
+            {
+                int[] seqEntry = new int[lotteryTicketPanel.GetGameDigitCount()];
+
+                for (int ctr = (lotteryTicketPanel.GetGameDigitCount() - 1); ctr >= 0; ctr--)
+                {
+                    if (seqRow >= 0)
+                    {
+                        int n = drawNumbers[seqRow][ctr];
+                        if (seqEntry.Contains(n)) n = GetRandomNumber(seqEntry);
+                        seqEntry[ctr] = n;
+                    }
+                    else
+                    {
+                        seqEntry = RandomNumberFiller(seqEntry);
+                    }
+                    seqRow--;
+                }
+                Array.Sort(seqEntry);
+                result.Add(seqEntry);
+                if (seqRow < 0) break;
+            }
+            return true;
+        }
+        private bool GetRightVerticalDown(String pattern, List<int[]> drawNumbers, out List<int[]> result)
+        {
+            result = new List<int[]>();
+            bool isRightVertdown = pattern.Equals(ResourcesUtils.GetMessage("pick_class_top_pattern_frvd"), StringComparison.OrdinalIgnoreCase);
+            if (!isRightVertdown) return false;
+
+            List<int[]> destinationSeqArr = new List<int[]>();
+            for (int ctr = 0; ctr < drawNumbers.Count; ctr++)
+            {
+                destinationSeqArr.Add(new int[lotteryTicketPanel.GetGameDigitCount()]);
+            }
+
+            int fromIndex = 0;
+            int toIndex = lotteryTicketPanel.GetGameDigitCount();
+            while (fromIndex < drawNumbers.Count)
+            {
+                int placingIndex = 0;
+                for (int drawRowCtr = fromIndex; drawRowCtr < toIndex; drawRowCtr++)
+                {
+                    if (drawRowCtr > (drawNumbers.Count - 1)) break;
+                    int[] source = drawNumbers[drawRowCtr];
+                    int sourceValueIdx = lotteryTicketPanel.GetGameDigitCount()-1;
+                    for (int destinationFrom = fromIndex; destinationFrom < toIndex; destinationFrom++)
+                    {
+                        if (destinationFrom > (destinationSeqArr.Count - 1)) break;
+                        int[] destination = destinationSeqArr[destinationFrom];
+                        int numToPlaceToDestination = source[sourceValueIdx--];
+                        if (destination.Contains(numToPlaceToDestination)) numToPlaceToDestination = GetRandomNumber(destination);
+                        destination[placingIndex] = numToPlaceToDestination;
+                    }
+                    placingIndex++;
+                }
+
+                fromIndex += lotteryTicketPanel.GetGameDigitCount();
+                toIndex += lotteryTicketPanel.GetGameDigitCount();
+            }
+            foreach (int[] seq in destinationSeqArr)
+            {
+                RandomNumberFiller(seq);
+                Array.Sort(seq);
+            }
+            result.AddRange(destinationSeqArr.ToArray());
+            return true;
+        }
+        private bool GetRightVerticalUpward(String pattern, List<int[]> drawNumbers, out List<int[]> result)
+        {
+            result = new List<int[]>();
+            bool isRightVertdUp = pattern.Equals(ResourcesUtils.GetMessage("pick_class_top_pattern_frvu"), StringComparison.OrdinalIgnoreCase);
+            if (!isRightVertdUp) return false;
+
+            List<int[]> destinationSeqArr = new List<int[]>();
+            for (int ctr = 0; ctr < drawNumbers.Count; ctr++)
+            {
+                destinationSeqArr.Add(new int[lotteryTicketPanel.GetGameDigitCount()]);
+            }
+
+            int fromIndex = drawNumbers.Count-1;
+            int toIndex = fromIndex - lotteryTicketPanel.GetGameDigitCount();
+            while (fromIndex > 0)
+            {
+                int placingIndex = lotteryTicketPanel.GetGameDigitCount() - 1;
+                for (int drawRowCtr = fromIndex; drawRowCtr > toIndex; drawRowCtr--)
+                {
+                    if (drawRowCtr < 0) break;
+                    int[] source = drawNumbers[drawRowCtr];
+                    int sourceValueIdx = lotteryTicketPanel.GetGameDigitCount() - 1;
+                    for (int destinationFrom = fromIndex; destinationFrom < toIndex; destinationFrom++)
+                    {
+                        if (destinationFrom < 0) break;
+                        int[] destination = destinationSeqArr[destinationFrom];
+                        int numToPlaceToDestination = source[sourceValueIdx--];
+                        if (destination.Contains(numToPlaceToDestination)) numToPlaceToDestination = GetRandomNumber(destination);
+                        destination[placingIndex] = numToPlaceToDestination;
+                    }
+                    placingIndex--;
+                }
+
+                fromIndex -= lotteryTicketPanel.GetGameDigitCount();
+                toIndex -= lotteryTicketPanel.GetGameDigitCount();
+            }
+            foreach (int[] seq in destinationSeqArr)
+            {
+                RandomNumberFiller(seq);
+                Array.Sort(seq);
+            }
+            result.AddRange(destinationSeqArr.ToArray());
+            return true;
+        }
 
     }
 }

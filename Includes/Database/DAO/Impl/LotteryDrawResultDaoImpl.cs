@@ -14,9 +14,7 @@ namespace LottoDataManager.Includes.Database.DAO
     public class LotteryDrawResultDaoImpl: LotteryDrawResultDao
     {
         private static LotteryDrawResultDaoImpl lotteryDrawResultDaoImpl;
-
         private LotteryDrawResultDaoImpl() { }
-
         public static LotteryDrawResultDao GetInstance()
         {
             if (lotteryDrawResultDaoImpl == null)
@@ -25,7 +23,6 @@ namespace LottoDataManager.Includes.Database.DAO
             }
             return lotteryDrawResultDaoImpl;
         }
-
         private DataTable GetStandardDrawResultTable()
         {
             DataTable dt = new DataTable();
@@ -40,7 +37,6 @@ namespace LottoDataManager.Includes.Database.DAO
             dt.Columns.Add("Winners", typeof(int));
             return dt;
         }
-
         public DataTable GetLotteryDrawResult(GameMode gameMode, DateTime drawDate)
         {
             DataTable dt = new DataTable();
@@ -56,7 +52,6 @@ namespace LottoDataManager.Includes.Database.DAO
             }
             return dt;
         }
-
         public LotteryDrawResult GetLotteryDrawResultByDrawDate(GameMode gameMode, DateTime drawDate)
         {
             LotteryDrawResultSetup lotteryDrawResult = null;
@@ -83,7 +78,6 @@ namespace LottoDataManager.Includes.Database.DAO
             }
             return lotteryDrawResult;
         }
-
         public List<LotteryDrawResult> GetAllDrawResults(GameMode gameMode)
         {
             List<LotteryDrawResult> results = new List<LotteryDrawResult>();
@@ -105,7 +99,6 @@ namespace LottoDataManager.Includes.Database.DAO
             }
             return results;
         }
-
         public List<LotteryDrawResult> GetDrawResultsFromStartingDate(GameMode gameMode, DateTime startingDrawDate)
         {
             List<LotteryDrawResult> results = new List<LotteryDrawResult>();
@@ -130,7 +123,6 @@ namespace LottoDataManager.Includes.Database.DAO
             }
             return results;
         }
-
         public DateTime GetNextDrawDate(GameMode gameMode, DateTime betDate)
         {
             using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
@@ -159,7 +151,6 @@ namespace LottoDataManager.Includes.Database.DAO
             }
             return DateTimeConverterUtils.GetYear2011();
         }
-
         public void InsertDrawDate(LotteryDrawResult lotteryDrawResult)
         {
             using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
@@ -192,7 +183,6 @@ namespace LottoDataManager.Includes.Database.DAO
                 transaction.Commit();
             }
         }
-
         public DateTime GetLatestDrawDate(GameMode gameMode)
         {
             using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
@@ -220,7 +210,6 @@ namespace LottoDataManager.Includes.Database.DAO
             }
             return DateTimeConverterUtils.GetYear2011();
         }
-
         public List<int> GetTopDrawnDigitResults(GameMode gameMode)
         {
             List<int> merge = new List<int>();
@@ -259,7 +248,6 @@ namespace LottoDataManager.Includes.Database.DAO
             }
             return merge;
         }
-
         public List<int> GetTopDrawnPreviousSeasonDigitResults(GameMode gameMode)
         {
             List<int> merge = new List<int>();
@@ -305,7 +293,6 @@ namespace LottoDataManager.Includes.Database.DAO
             }
             return merge;
         }
-
         public List<int> GetTopDrawnDigitFromJackpotsResults(GameMode gameMode)
         {
             List<int> merge = new List<int>();
@@ -339,7 +326,6 @@ namespace LottoDataManager.Includes.Database.DAO
             }
             return merge;
         }
-
         public List<int> GetTopDrawnDigitFromDateRange(GameMode gameMode, DateTime dateFrom, DateTime dateTo)
         {
             List<int> merge = new List<int>();
@@ -412,7 +398,6 @@ namespace LottoDataManager.Includes.Database.DAO
             }
             return result;
         }
-
         public List<LotteryDrawResult> GetJackpotDrawResults(GameMode gameMode)
         {
             List<LotteryDrawResult> results = new List<LotteryDrawResult>();
@@ -437,7 +422,6 @@ namespace LottoDataManager.Includes.Database.DAO
             }
             return results;
         }
-
         private LotteryDrawResultSetup GetLotteryDrawResultSetup(OleDbDataReader reader, GameMode gameMode)
         {
             LotteryDrawResultSetup dr = new LotteryDrawResultSetup();
@@ -456,7 +440,6 @@ namespace LottoDataManager.Includes.Database.DAO
             dr.Id = long.Parse(reader["ID"].ToString());
             return dr;
         }
-
         private OleDbCommand GetDrawResultCommandByRange(GameMode gameMode, DateTime fromDate, DateTime toDate)
         {
             OleDbCommand command = new OleDbCommand(
@@ -469,13 +452,11 @@ namespace LottoDataManager.Includes.Database.DAO
             command.Parameters.AddWithValue("@date_to", (toDate == null) ? fromDate : toDate);
             return command;
         }
-
         private String GetStandardSelectQuery()
         {
             return "SELECT ID, draw_date, num1, num2, num3, num4, num5, num6, jackpot_amt, winners " +
                 "  FROM draw_results " +
                 " WHERE game_cd = @game_cd ";
         }
-
     }
 }

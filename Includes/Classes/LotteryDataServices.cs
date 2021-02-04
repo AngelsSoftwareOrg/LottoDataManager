@@ -160,5 +160,10 @@ namespace LottoDataManager.Includes.Classes
         {
             return this.lotteryDrawResultDao.GetTopDrawnDigitToSequenceFromDateRange(GameMode, dateFrom, dateTo);
         }
+        public List<LotteryBet> GetLotteryBetsCurrentSeason()
+        {
+            return this.lotteryBetDao.GetLotteryBetsCurrentSeason(GameMode);
+        }
+
     }
 }

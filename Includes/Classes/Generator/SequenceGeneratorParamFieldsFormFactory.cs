@@ -35,9 +35,12 @@ namespace LottoDataManager.Includes.Classes.Generator
             combo.Items.Add(ResourcesUtils.GetMessage("pick_class_top_pattern_fldd"));
             combo.Items.Add(ResourcesUtils.GetMessage("pick_class_top_pattern_fldu"));
             combo.Items.Add(ResourcesUtils.GetMessage("pick_class_top_pattern_flvu"));
+            combo.Items.Add(ResourcesUtils.GetMessage("pick_class_top_pattern_flvd"));
             combo.Items.Add(ResourcesUtils.GetMessage("pick_class_top_pattern_frdd"));
             combo.Items.Add(ResourcesUtils.GetMessage("pick_class_top_pattern_frdu"));
             combo.Items.Add(ResourcesUtils.GetMessage("pick_class_top_pattern_frvu"));
+            combo.Items.Add(ResourcesUtils.GetMessage("pick_class_top_pattern_frvd"));
+            
             if (combo.Items.Count > 0) combo.SelectedIndex = 0;
             return combo;
         }

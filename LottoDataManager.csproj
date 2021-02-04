@@ -105,6 +105,7 @@
     <Compile Include="Includes\Classes\Generator\SequenceGenerator.cs" />
     <Compile Include="Includes\Classes\Generator\SequenceGeneratorParams.cs" />
     <Compile Include="Includes\Classes\Generator\Types\LuckyPickGenerator.cs" />
+    <Compile Include="Includes\Classes\Generator\Types\NumsNotYetBetCurSeasonGenerator.cs" />
     <Compile Include="Includes\Classes\Generator\Types\RandomPatternSequenceGenerator.cs" />
     <Compile Include="Includes\Classes\Generator\Types\RandomNumbersFromJackpotsDigitsGenerator.cs" />
     <Compile Include="Includes\Classes\Generator\Types\TopDrawCurrentSeasonGenerator.cs" />

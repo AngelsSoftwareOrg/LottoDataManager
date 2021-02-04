@@ -25,7 +25,7 @@ namespace LottoDataManager.Forms
         private LotteryDataServices lotteryDataServices;
         private LotteryTicketPanel lotteryTicketPanel;
         private SequenceGeneratorParamFieldsFormFactory seqFactory = SequenceGeneratorParamFieldsFormFactory.GetInstance();
-
+        
         public PickGeneratorFrm(LotteryDataServices lotteryDataServices)
         {
             InitializeComponent();
@@ -48,6 +48,9 @@ namespace LottoDataManager.Forms
             grpbxFinalActions.Text = ResourcesUtils.GetMessage("pick_grp_fnl_actions");
             btnClearSel.Text = ResourcesUtils.GetMessage("pick_btn_clr_sel");
             btnGenerate.Text = ResourcesUtils.GetMessage("pick_btn_generate");
+            btnAddSelected.Text = ResourcesUtils.GetMessage("pick_btn_place_bet");
+            btnExit.Text = ResourcesUtils.GetMessage("common_btn_exit");
+            linkUncheckAll.Text = ResourcesUtils.GetMessage("common_link_uncheck_all");
             EnlistGenerators();
         }
         private void EnlistGenerators()
@@ -60,6 +63,7 @@ namespace LottoDataManager.Forms
             DisplayGenerators(new TopDrawNumbersFromDateRange(this.lotteryDataServices));
             DisplayGenerators(new NumberNotYetPickUpGenerator(this.lotteryDataServices));
             DisplayGenerators(new RandomPatternSequenceGenerator(this.lotteryDataServices));
+            DisplayGenerators(new NumsNotYetBetCurSeasonGenerator(this.lotteryDataServices));
         }
         private void DisplayGenerators(SequenceGenerator seqGen)
         {
@@ -136,6 +140,7 @@ namespace LottoDataManager.Forms
         private void btnClearSel_Click(object sender, EventArgs e)
         {
             lvGenType.SelectedItems.Clear();
+            lvGenSeq.Items.Clear();
             ClearSequenceGenParametersValue();
         }
         private void ClearSequenceGenParametersValue()
@@ -199,6 +204,68 @@ namespace LottoDataManager.Forms
             lvObj.Sort();
         }
         #endregion
-
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+        private void linkUncheckAll_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            UncheckAllSequences();
+        }
+        private void UncheckAllSequences()
+        {
+            foreach (ListViewItem item in lvGenSeq.CheckedItems)
+            {
+                item.Checked = false;
+            }
+        }
+        private void btnAddSelected_Click(object sender, EventArgs e)
+        {
+            List<ListViewItem> merge = new List<ListViewItem>();
+            foreach (ListViewItem item in lvGenSeq.CheckedItems)
+            {
+                merge.Add(item);
+            }
+            AddBet(merge);
+        }
+        private void AddBet(List<ListViewItem> listViewItems)
+        {
+            AddBetFrm bet = new AddBetFrm(this.lotteryDataServices);
+            StringBuilder sequence = new StringBuilder();
+            foreach (ListViewItem item in listViewItems)
+            {
+                for (int n = 0; n < item.SubItems.Count; n++)
+                {
+                    if (n == 0) continue;
+                    if (sequence.Length > 0) sequence.Append("-");
+                    if(item.SubItems[n].Text.Length==1) sequence.Append("0");
+                    sequence.Append(item.SubItems[n].Text);
+                }
+                bet.AddSequenceEntry(sequence.ToString());
+                sequence.Clear();
+            }
+            bet.IsLuckyPick(true);
+            bet.ShowDialog();
+        }
+        private void checkToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach(ListViewItem item in lvGenSeq.SelectedItems)
+            {
+                item.Checked = true;
+            }
+        }
+        private void uncheckAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            UncheckAllSequences();
+        }
+        private void addBetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            List<ListViewItem> merge = new List<ListViewItem>();
+            foreach (ListViewItem item in lvGenSeq.SelectedItems)
+            {
+                merge.Add(item);
+            }
+            AddBet(merge);
+        }
     }
 }
