@@ -60,6 +60,7 @@ namespace LottoDataManager.Forms
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripProgBar = new System.Windows.Forms.ToolStripProgressBar();
             this.toolStripStatusLbl = new System.Windows.Forms.ToolStripStatusLabel();
+            this.olvLottoOutlet = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.objectListViewBets)).BeginInit();
             this.ctxMenuLvBet.SuspendLayout();
@@ -88,6 +89,7 @@ namespace LottoDataManager.Forms
             this.objectListViewBets.AllColumns.Add(this.olvColNum4);
             this.objectListViewBets.AllColumns.Add(this.olvColNum5);
             this.objectListViewBets.AllColumns.Add(this.olvColNum6);
+            this.objectListViewBets.AllColumns.Add(this.olvLottoOutlet);
             this.objectListViewBets.CellEditUseWholeCell = false;
             this.objectListViewBets.CheckBoxes = true;
             this.objectListViewBets.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -98,7 +100,8 @@ namespace LottoDataManager.Forms
             this.olvColNum3,
             this.olvColNum4,
             this.olvColNum5,
-            this.olvColNum6});
+            this.olvColNum6,
+            this.olvLottoOutlet});
             this.objectListViewBets.ContextMenuStrip = this.ctxMenuLvBet;
             this.objectListViewBets.Cursor = System.Windows.Forms.Cursors.Default;
             this.objectListViewBets.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -339,6 +342,12 @@ namespace LottoDataManager.Forms
             this.toolStripStatusLbl.Size = new System.Drawing.Size(89, 20);
             this.toolStripStatusLbl.Text = "Hello World";
             // 
+            // olvLottoOutlet
+            // 
+            this.olvLottoOutlet.CellEditUseWholeCell = true;
+            this.olvLottoOutlet.Text = "Lotto Outlet";
+            this.olvLottoOutlet.Width = 145;
+            // 
             // ModifyBetFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -398,5 +407,6 @@ namespace LottoDataManager.Forms
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLbl;
         private System.Windows.Forms.ToolStripProgressBar toolStripProgBar;
+        private BrightIdeasSoftware.OLVColumn olvLottoOutlet;
     }
 }

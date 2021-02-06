@@ -20,5 +20,6 @@ namespace LottoDataManager.Includes.Model.Details
         bool IsLuckyPick();
         String GetSimpleContentDetails();
         int GetMatchNumCount();
+        LotteryOutlet GetLotteryOutlet();
     }
 }

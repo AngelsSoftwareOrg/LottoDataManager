@@ -21,6 +21,7 @@ namespace LottoDataManager.Forms
         private LotteryDataServices lotteryDataServices;
         private LotteryTicketPanel lotteryTicketPanel;
         private readonly String MODIFIED_TAG = "modified";
+        private List<LotteryOutlet> lotteryOutletList;
 
         public ModifyBetFrm(LotteryDataServices lotteryDataServices)
         {
@@ -28,48 +29,94 @@ namespace LottoDataManager.Forms
             this.lotteryDataServices = lotteryDataServices;
 
             //Debugging
-            //if(lotteryDataServices==null)
-            //    this.lotteryDataServices = new LotteryDataServices(new Game658());
+            if(lotteryDataServices==null)
+                this.lotteryDataServices = new LotteryDataServices(new Game642());
             //end debugging
 
             this.lotteryTicketPanel = this.lotteryDataServices.GetLotteryTicketPanel();
+            this.lotteryOutletList = this.lotteryDataServices.GetLotteryOutlets();
             InitializesForms();
         }
-
         private void InitializesForms()
         {
             dateTimePickerBets.Value = DateTime.Now.AddYears(-1);
+            InitializesListViewColumns();
             FillUpBetList();
             ResizeColumnsBetList();
             objectListViewBets.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClickAlways;
             objectListViewBets.CellEditStarting += ObjectListViewBets_CellEditStarting;
+            objectListViewBets.CellEditFinishing += ObjectListViewBets_CellEditFinishing;
             objectListViewBets.CellEditFinished += ObjectListViewBets_CellEditFinished;
             objectListViewBets.UseHotControls = false;
             objectListViewBets.UseCellFormatEvents = false;
-
             toolStripProgBar.Visible = false;
             toolStripStatusLbl.Text = "";
         }
+        private void InitializesListViewColumns()
+        {
+            this.olvLottoOutlet.AspectGetter = delegate (object rowObject)
+            {
+                LotteryBet lotteryBet = (LotteryBet)rowObject;
+                LotteryOutlet outlet = lotteryBet.GetLotteryOutlet();
+                return outlet;
+            };
 
+            this.olvLottoOutlet.AspectToStringConverter = delegate (object rowObject)
+            {
+                LotteryOutlet outlet = (LotteryOutlet)rowObject;
+                return outlet.GetDescription();
+            };
+        }
         #region "Forms functions"
+        private LotteryOutlet GetOutletObject(int outletCd)
+        {
+            return lotteryOutletList.Find(item => item.GetOutletCode() == outletCd);
+        }
+        private void ObjectListViewBets_CellEditFinishing(object sender, CellEditEventArgs e)
+        {
+            if (e.Column == this.olvLottoOutlet)
+            {
+                ComboBox cmb = (ComboBox)e.Control;
+                if (cmb.SelectedItem != null) e.NewValue = cmb.SelectedItem;
+            }
+        }
         private void ObjectListViewBets_CellEditFinished(object sender, BrightIdeasSoftware.CellEditEventArgs e)
         {
             try
             {
-                if (e.NewValue.ToString() == e.Value.ToString()) e.Cancel = true;
-                if (e.Cancel == false)
+                if (e.Column == this.olvLottoOutlet)
                 {
-                    int newValue = int.Parse(e.NewValue.ToString());
-                    if (!lotteryTicketPanel.IsWithinMinMax(newValue)) 
-                        throw new Exception(String.Format("Input should be in between {0} and {1}", 
-                            lotteryTicketPanel.GetMin(), lotteryTicketPanel.GetMax()));
+                    LotteryOutlet oldval = (LotteryOutlet)e.Value;
+                    LotteryOutlet newval = (LotteryOutlet)e.NewValue;
+                    if (oldval.GetOutletCode() == newval.GetOutletCode()) e.Cancel = true;
+                    if (e.Cancel == false)
+                    {
+                        ObjectListView lv = (ObjectListView)sender;
+                        LotteryBetSetup setup = (LotteryBetSetup)e.RowObject;
+                        setup.OutletCode = newval.GetOutletCode();
+                        e.ListViewItem.Tag = MODIFIED_TAG;
+                        setup.LotteryOutlet = GetOutletObject(newval.GetOutletCode());
+                        lv.RefreshObject(e.RowObject);
+                        lv.Refresh();
+                    }
+                }
+                else
+                {
+                    if (e.NewValue.ToString() == e.Value.ToString()) e.Cancel = true;
+                    if (e.Cancel == false)
+                    {
+                        int newValue = int.Parse(e.NewValue.ToString());
+                        if (!lotteryTicketPanel.IsWithinMinMax(newValue))
+                            throw new Exception(String.Format("Input should be in between {0} and {1}",
+                                lotteryTicketPanel.GetMin(), lotteryTicketPanel.GetMax()));
 
-                    ObjectListView lv = (ObjectListView)sender;
-                    LotteryBetSetup setup = (LotteryBetSetup)e.RowObject;
-                    setup.FillNumberBySeq(e.SubItemIndex - 1, newValue);
-                    e.ListViewItem.Tag = MODIFIED_TAG;
-                    lv.RefreshObject(e.RowObject);
-                    lv.Refresh();
+                        ObjectListView lv = (ObjectListView)sender;
+                        LotteryBetSetup setup = (LotteryBetSetup)e.RowObject;
+                        setup.FillNumberBySeq(e.SubItemIndex - 1, newValue);
+                        e.ListViewItem.Tag = MODIFIED_TAG;
+                        lv.RefreshObject(e.RowObject);
+                        lv.Refresh();
+                    }
                 }
             }
             catch (Exception ex)
@@ -103,7 +150,32 @@ namespace LottoDataManager.Forms
         }
         private void ObjectListViewBets_CellEditStarting(object sender, BrightIdeasSoftware.CellEditEventArgs e)
         {
-            //Console.WriteLine("ObjectListViewBets_CellEditStarting");
+            if (e.Column == this.olvLottoOutlet)
+            {
+                ComboBox outletCodeEditorCmb = new ComboBox();
+                outletCodeEditorCmb.DropDownStyle = ComboBoxStyle.DropDownList;
+                foreach (LotteryOutlet outlet in lotteryOutletList)
+                {
+                    outletCodeEditorCmb.Items.Add(outlet);
+                }
+                outletCodeEditorCmb.Bounds = e.CellBounds;
+                outletCodeEditorCmb.Font = ((ObjectListView)sender).Font;
+
+                int selectedIndex = 0;
+                LotteryBet bet = (LotteryBet)e.RowObject;
+                for (int i = 0; i < outletCodeEditorCmb.Items.Count; i++)
+                {
+                    LotteryOutlet outlet = (LotteryOutlet) outletCodeEditorCmb.Items[i];
+                    if (outlet.GetOutletCode() == bet.GetOutletCode())
+                    {
+                        selectedIndex = i;
+                        break;
+                    }
+                }
+                // should select the entry that reflects the current value
+                if (outletCodeEditorCmb.Items.Count>0) outletCodeEditorCmb.SelectedIndex = selectedIndex; 
+                e.Control = outletCodeEditorCmb;
+            }
         }
         private void btnExit_Click(object sender, EventArgs e)
         {
@@ -216,6 +288,7 @@ namespace LottoDataManager.Forms
             this.olvColNum4.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
             this.olvColNum5.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
             this.olvColNum6.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
+            this.olvLottoOutlet.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
             this.objectListViewBets.Refresh();
         }
         private void linkLabelFilterNow_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -263,9 +336,6 @@ namespace LottoDataManager.Forms
         {
             SaveLotteryBetsChanges();
         }
-
         #endregion
-
-
     }
 }
