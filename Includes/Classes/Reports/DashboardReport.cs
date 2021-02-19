@@ -142,7 +142,7 @@ namespace LottoDataManager.Includes.Classes.Reports
             for(int ctr=1; ctr<=7; ctr++)
             {
                 if (lotterySchedule.IsDrawDateMatchLotterySchedule(dateStartingTommorow)){
-                    String key = ResourcesUtils.GetMessage("drpt_next_lottery_sched");
+                    String key = String.Format("{0} ({1})",ResourcesUtils.GetMessage("drpt_next_lottery_sched"),(dashboardReportList.Count + 1));
                     String value = DateTimeConverterUtils.ConvertToFormat(dateStartingTommorow, DateTimeConverterUtils.DATE_FORMAT_LONG);
                     dashboardReportList.Add(new KeyValuePair<string, string>(key, value));
                 }

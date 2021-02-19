@@ -245,7 +245,8 @@ namespace LottoDataManager.Forms
                 sequence.Clear();
             }
             bet.IsLuckyPick(true);
-            bet.ShowDialog();
+            bet.ShowDialog(this);
+            bet.Dispose();
         }
         private void checkToolStripMenuItem_Click(object sender, EventArgs e)
         {

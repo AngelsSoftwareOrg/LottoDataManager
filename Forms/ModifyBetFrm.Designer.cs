@@ -41,6 +41,7 @@ namespace LottoDataManager.Forms
             this.olvColNum4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColNum5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColNum6 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvLottoOutlet = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.ctxMenuLvBet = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkedHighlightedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -60,7 +61,6 @@ namespace LottoDataManager.Forms
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripProgBar = new System.Windows.Forms.ToolStripProgressBar();
             this.toolStripStatusLbl = new System.Windows.Forms.ToolStripStatusLabel();
-            this.olvLottoOutlet = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.objectListViewBets)).BeginInit();
             this.ctxMenuLvBet.SuspendLayout();
@@ -73,10 +73,10 @@ namespace LottoDataManager.Forms
             // 
             this.panel1.Controls.Add(this.objectListViewBets);
             this.panel1.Controls.Add(this.panel2);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(945, 471);
+            this.panel1.Size = new System.Drawing.Size(945, 429);
             this.panel1.TabIndex = 0;
             // 
             // objectListViewBets
@@ -112,7 +112,7 @@ namespace LottoDataManager.Forms
             this.objectListViewBets.Location = new System.Drawing.Point(0, 68);
             this.objectListViewBets.Name = "objectListViewBets";
             this.objectListViewBets.ShowGroups = false;
-            this.objectListViewBets.Size = new System.Drawing.Size(945, 403);
+            this.objectListViewBets.Size = new System.Drawing.Size(945, 361);
             this.objectListViewBets.TabIndex = 0;
             this.objectListViewBets.UseCompatibleStateImageBehavior = false;
             this.objectListViewBets.View = System.Windows.Forms.View.Details;
@@ -167,6 +167,12 @@ namespace LottoDataManager.Forms
             this.olvColNum6.AspectName = "GetNum6";
             this.olvColNum6.Text = "Num # 6";
             this.olvColNum6.Width = 88;
+            // 
+            // olvLottoOutlet
+            // 
+            this.olvLottoOutlet.CellEditUseWholeCell = true;
+            this.olvLottoOutlet.Text = "Lotto Outlet";
+            this.olvLottoOutlet.Width = 145;
             // 
             // ctxMenuLvBet
             // 
@@ -229,6 +235,7 @@ namespace LottoDataManager.Forms
             // 
             // label2
             // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.DarkBlue;
@@ -271,15 +278,16 @@ namespace LottoDataManager.Forms
             this.panel3.Controls.Add(this.btnDeleteChecked);
             this.panel3.Controls.Add(this.btnSaveChanges);
             this.panel3.Controls.Add(this.btnExit);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(0, 471);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel3.Location = new System.Drawing.Point(0, 429);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(945, 79);
+            this.panel3.Size = new System.Drawing.Size(945, 81);
             this.panel3.TabIndex = 3;
             // 
             // btnRestoreBack
             // 
-            this.btnRestoreBack.Location = new System.Drawing.Point(464, 12);
+            this.btnRestoreBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRestoreBack.Location = new System.Drawing.Point(464, 14);
             this.btnRestoreBack.Name = "btnRestoreBack";
             this.btnRestoreBack.Size = new System.Drawing.Size(171, 56);
             this.btnRestoreBack.TabIndex = 9;
@@ -289,6 +297,7 @@ namespace LottoDataManager.Forms
             // 
             // btnDeleteChecked
             // 
+            this.btnDeleteChecked.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnDeleteChecked.Image = ((System.Drawing.Image)(resources.GetObject("btnDeleteChecked.Image")));
             this.btnDeleteChecked.Location = new System.Drawing.Point(12, 21);
             this.btnDeleteChecked.Name = "btnDeleteChecked";
@@ -299,7 +308,8 @@ namespace LottoDataManager.Forms
             // 
             // btnSaveChanges
             // 
-            this.btnSaveChanges.Location = new System.Drawing.Point(641, 12);
+            this.btnSaveChanges.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSaveChanges.Location = new System.Drawing.Point(641, 14);
             this.btnSaveChanges.Name = "btnSaveChanges";
             this.btnSaveChanges.Size = new System.Drawing.Size(146, 56);
             this.btnSaveChanges.TabIndex = 7;
@@ -309,8 +319,9 @@ namespace LottoDataManager.Forms
             // 
             // btnExit
             // 
+            this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExit.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnExit.Location = new System.Drawing.Point(793, 12);
+            this.btnExit.Location = new System.Drawing.Point(793, 14);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(146, 56);
             this.btnExit.TabIndex = 6;
@@ -324,7 +335,7 @@ namespace LottoDataManager.Forms
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripProgBar,
             this.toolStripStatusLbl});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 550);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 510);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(945, 26);
             this.statusStrip1.TabIndex = 10;
@@ -342,23 +353,16 @@ namespace LottoDataManager.Forms
             this.toolStripStatusLbl.Size = new System.Drawing.Size(89, 20);
             this.toolStripStatusLbl.Text = "Hello World";
             // 
-            // olvLottoOutlet
-            // 
-            this.olvLottoOutlet.CellEditUseWholeCell = true;
-            this.olvLottoOutlet.Text = "Lotto Outlet";
-            this.olvLottoOutlet.Width = 145;
-            // 
             // ModifyBetFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(945, 576);
-            this.Controls.Add(this.panel3);
+            this.CancelButton = this.btnExit;
+            this.ClientSize = new System.Drawing.Size(945, 536);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panel3);
             this.Controls.Add(this.statusStrip1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ModifyBetFrm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

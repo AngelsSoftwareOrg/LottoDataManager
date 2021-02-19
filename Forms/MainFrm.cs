@@ -354,6 +354,7 @@ namespace LottoDataManager
         {
             AddBetFrm betForm = new AddBetFrm(this.lotteryDataServices);
             betForm.ShowDialog();
+            betForm.Dispose();
             RefreshBets();
         }
         private void compareDrawResultAndBetToolStripMenuItem_Click(object sender, EventArgs e)
@@ -392,6 +393,7 @@ namespace LottoDataManager
         {
             DrawAndBetMatchFrm m = new DrawAndBetMatchFrm(this.lotteryDataServices, dateRef, betIdDefault);
             m.ShowDialog();
+            m.Dispose();
         }
         #endregion
 
@@ -487,6 +489,7 @@ namespace LottoDataManager
         {
             ModifyBetFrm bet = new ModifyBetFrm(lotteryDataServices);
             bet.ShowDialog();
+            bet.Dispose();
             RefreshBets();
         }
         private void editClaimStatusToolStripMenuItem_Click(object sender, EventArgs e)
@@ -501,12 +504,14 @@ namespace LottoDataManager
         {
             ModifyClaimsFrm m = new ModifyClaimsFrm(this.lotteryDataServices);
             m.ShowDialog();
+            m.Dispose();
             RefreshBets();
         }
         private void seqGenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             PickGeneratorFrm pick = new PickGeneratorFrm(lotteryDataServices);
             pick.ShowDialog();
+            pick.Dispose();
         }
         #endregion
 
