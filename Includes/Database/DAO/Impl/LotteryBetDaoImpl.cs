@@ -67,7 +67,8 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                                         "     AND a.active = true " +
                                         "     AND o.active = true" +
                                         "     AND (SELECT DISTINCT b.draw_date FROM draw_results b " +
-                                        "    	     WHERE a.target_draw_date = b.draw_date) IS NULL " +
+                                        "    	    WHERE a.target_draw_date = b.draw_date " +
+                                        "             AND a.game_cd = b.game_cd) IS NULL " +
                                         "   ORDER BY a.target_draw_date DESC ";
                 command.Parameters.AddWithValue("@game_cd", OleDbType.Integer).Value = gameMode;
                 command.Parameters.AddWithValue("@sinceWhen", OleDbType.DBDate).Value = sinceWhen.Date.ToString();

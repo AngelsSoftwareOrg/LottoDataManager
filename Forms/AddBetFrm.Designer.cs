@@ -56,12 +56,12 @@ namespace LottoDataManager.Forms
             this.radioBtnPreferredDate = new System.Windows.Forms.RadioButton();
             this.dtPickPreferredDate = new System.Windows.Forms.DateTimePicker();
             this.groupDetails = new System.Windows.Forms.GroupBox();
+            this.lblDrawDateEvery = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.lblGameDesc = new System.Windows.Forms.Label();
             this.lblNextDrawDate = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.lblDrawDateEvery = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerMain)).BeginInit();
             this.splitContainerMain.Panel1.SuspendLayout();
             this.splitContainerMain.Panel2.SuspendLayout();
@@ -309,7 +309,7 @@ namespace LottoDataManager.Forms
             this.cmbOutlet.Location = new System.Drawing.Point(117, 25);
             this.cmbOutlet.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbOutlet.Name = "cmbOutlet";
-            this.cmbOutlet.Size = new System.Drawing.Size(491, 26);
+            this.cmbOutlet.Size = new System.Drawing.Size(627, 26);
             this.cmbOutlet.Sorted = true;
             this.cmbOutlet.TabIndex = 9;
             // 
@@ -427,6 +427,27 @@ namespace LottoDataManager.Forms
             this.groupDetails.TabStop = false;
             this.groupDetails.Text = "Current game: ";
             // 
+            // lblDrawDateEvery
+            // 
+            this.lblDrawDateEvery.AutoSize = true;
+            this.lblDrawDateEvery.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDrawDateEvery.ForeColor = System.Drawing.Color.Green;
+            this.lblDrawDateEvery.Location = new System.Drawing.Point(124, 76);
+            this.lblDrawDateEvery.Name = "lblDrawDateEvery";
+            this.lblDrawDateEvery.Size = new System.Drawing.Size(237, 18);
+            this.lblDrawDateEvery.TabIndex = 8;
+            this.lblDrawDateEvery.Text = "Monday, Tuesday, Wednesday";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(6, 76);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(121, 17);
+            this.label5.TabIndex = 7;
+            this.label5.Text = "Draw Date every: ";
+            // 
             // lblGameDesc
             // 
             this.lblGameDesc.AutoSize = true;
@@ -468,27 +489,6 @@ namespace LottoDataManager.Forms
             this.label3.Size = new System.Drawing.Size(93, 17);
             this.label3.TabIndex = 3;
             this.label3.Text = "Game Mode: ";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(6, 76);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(121, 17);
-            this.label5.TabIndex = 7;
-            this.label5.Text = "Draw Date every: ";
-            // 
-            // lblDrawDateEvery
-            // 
-            this.lblDrawDateEvery.AutoSize = true;
-            this.lblDrawDateEvery.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDrawDateEvery.ForeColor = System.Drawing.Color.Green;
-            this.lblDrawDateEvery.Location = new System.Drawing.Point(124, 76);
-            this.lblDrawDateEvery.Name = "lblDrawDateEvery";
-            this.lblDrawDateEvery.Size = new System.Drawing.Size(237, 18);
-            this.lblDrawDateEvery.TabIndex = 8;
-            this.lblDrawDateEvery.Text = "Monday, Tuesday, Wednesday";
             // 
             // AddBetFrm
             // 
