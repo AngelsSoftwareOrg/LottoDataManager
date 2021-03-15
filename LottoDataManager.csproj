@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Clover_Icon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="AngleSharp, Version=0.14.0.0, Culture=neutral, PublicKeyToken=e83494dcdc6d31ea, processorArchitecture=MSIL">
       <HintPath>packages\AngleSharp.0.14.0\lib\net472\AngleSharp.dll</HintPath>
@@ -104,10 +107,13 @@
     <Compile Include="Includes\Classes\Generator\SequenceGeneratorParamFieldsFormFactory.cs" />
     <Compile Include="Includes\Classes\Generator\SequenceGenerator.cs" />
     <Compile Include="Includes\Classes\Generator\SequenceGeneratorParams.cs" />
+    <Compile Include="Includes\Classes\Generator\Types\HistoricalFrequencyRandomGenerator.cs" />
     <Compile Include="Includes\Classes\Generator\Types\LuckyPickGenerator.cs" />
     <Compile Include="Includes\Classes\Generator\Types\NumsNotYetBetCurSeasonGenerator.cs" />
     <Compile Include="Includes\Classes\Generator\Types\RandomPatternSequenceGenerator.cs" />
     <Compile Include="Includes\Classes\Generator\Types\RandomNumbersFromJackpotsDigitsGenerator.cs" />
+    <Compile Include="Includes\Classes\Generator\Types\RandomPickTotalSumBetweenGenerators.cs" />
+    <Compile Include="Includes\Classes\Generator\Types\RandomPickTotalSumBetweenGenerators1n31.cs" />
     <Compile Include="Includes\Classes\Generator\Types\TopDrawCurrentSeasonGenerator.cs" />
     <Compile Include="Includes\Classes\Generator\Types\TopDrawnNumbersFromJackpotGenerator.cs" />
     <Compile Include="Includes\Classes\Generator\Types\TopDrawNumbersFromDateRange.cs" />
@@ -140,6 +146,8 @@
     <Compile Include="Includes\Database\DAO\Interface\LotteryWinningCombinationDao.cs" />
     <Compile Include="Includes\Database\DAO\Impl\LotteryWinningCombinationDaoImpl.cs" />
     <Compile Include="Includes\Database\DAO\Interface\UserSettingDao.cs" />
+    <Compile Include="Includes\Model\Reports\DashboardReportItem.cs" />
+    <Compile Include="Includes\Model\Reports\Setup\DashboardReportItemSetup.cs" />
     <Compile Include="Includes\Model\Details\Lottery.cs" />
     <Compile Include="Includes\Model\Details\LotteryBet.cs" />
     <Compile Include="Includes\Model\Details\LotteryDataDerivation.cs" />
@@ -158,6 +166,7 @@
     <Compile Include="Includes\Model\Game\Game649.cs" />
     <Compile Include="Includes\Model\Game\Game645.cs" />
     <Compile Include="Includes\Model\Game\GameFactory.cs" />
+    <Compile Include="Includes\Model\Structs\DashboardReportItemActions.cs" />
     <Compile Include="Includes\Utilities\AppSettings.cs" />
     <Compile Include="Includes\Database\DAO\Interface\LotteryScheduleDao.cs" />
     <Compile Include="Includes\Database\DAO\Impl\LotteryScheduleDaoImpl.cs" />
@@ -237,6 +246,7 @@
     <Folder Include="Includes\Session\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Clover_Icon.ico" />
     <Content Include="DatabaseMain\Lotto_Main_DB.accdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

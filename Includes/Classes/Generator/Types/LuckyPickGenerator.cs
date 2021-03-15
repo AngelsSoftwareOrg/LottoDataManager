@@ -48,22 +48,7 @@ namespace LottoDataManager.Includes.Classes.Generator.Types
         }
         public bool AreParametersValueValid(out String errMessage)
         {
-            errMessage = "";
-            try
-            {
-                int count = GetFieldParamValueForCount();
-                if (count <= 0 || count > 99)
-                {
-                    errMessage = ResourcesUtils.GetMessage("pick_class_validate_count_1");
-                    return false;
-                }
-            }
-            catch (Exception ex)
-            {
-                errMessage = ex.Message;
-                return false;
-            }
-            return true;
+            return ValidateCountParamField(out errMessage);
         }
 
     }

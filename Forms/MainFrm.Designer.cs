@@ -183,7 +183,7 @@ namespace LottoDataManager
             // predictionsToolStripMenuItem
             // 
             this.predictionsToolStripMenuItem.Name = "predictionsToolStripMenuItem";
-            this.predictionsToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.predictionsToolStripMenuItem.Size = new System.Drawing.Size(232, 26);
             this.predictionsToolStripMenuItem.Text = "Predictions";
             // 
             // seqGenToolStripMenuItem
@@ -348,6 +348,7 @@ namespace LottoDataManager
             this.listViewOtherDetails.TabIndex = 0;
             this.listViewOtherDetails.UseCompatibleStateImageBehavior = false;
             this.listViewOtherDetails.View = System.Windows.Forms.View.Details;
+            this.listViewOtherDetails.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listViewOtherDetails_MouseDoubleClick);
             // 
             // colProperties
             // 

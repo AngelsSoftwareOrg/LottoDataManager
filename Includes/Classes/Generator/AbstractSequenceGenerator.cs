@@ -30,11 +30,11 @@ namespace LottoDataManager.Includes.Classes.Generator
         {
             foreach (SequenceGeneratorParams seq in SequenceParams)
             {
-                if(seq.GeneratorParamType == GeneratorParamType.COUNT)
+                if (seq.GeneratorParamType == GeneratorParamType.COUNT)
                 {
                     seq.ParamValue = 1;
                 }
-                else if(seq.GeneratorParamType == GeneratorParamType.PATTERN) 
+                else if (seq.GeneratorParamType == GeneratorParamType.PATTERN)
                 {
                     seq.ParamValue = null;
                 }
@@ -61,7 +61,8 @@ namespace LottoDataManager.Includes.Classes.Generator
             List<int[]> sequenceArr = new List<int[]>();
 
             var numberGroups = drawnNumbers.GroupBy(i => i)
-                                    .Select(grp => new {
+                                    .Select(grp => new
+                                    {
                                         number = grp.Key,
                                         total = grp.Count(),
                                         average = grp.Average(),
@@ -96,6 +97,29 @@ namespace LottoDataManager.Includes.Classes.Generator
                     sequenceArr.Add(result);
                 }
                 segCount += inc;
+            }
+            return sequenceArr;
+        }
+        protected int[] GroupAndCountOnly(int[] drawnNumbers)
+        {
+            var numberGroups = drawnNumbers.GroupBy(i => i)
+                                    .Select(grp => new
+                                    {
+                                        number = grp.Key,
+                                        total = grp.Count(),
+                                        average = grp.Average(),
+                                        minimum = grp.Min(),
+                                        maximum = grp.Max()
+                                    }).ToArray();
+
+            Array.Sort(numberGroups, (x, y) => (x.total > y.total) ? -1 : 1);
+
+            int[] sequenceArr = new int[numberGroups.Length];
+            int ctr = 0;
+            foreach (Object item in numberGroups)
+            {
+                Type type = item.GetType();
+                sequenceArr[ctr++] = (int)type.GetProperty("number").GetValue(item, null);
             }
             return sequenceArr;
         }
@@ -168,10 +192,9 @@ namespace LottoDataManager.Includes.Classes.Generator
                 return r;
             }
         }
-
         protected int[] RandomNumberFiller(int[] sequence)
         {
-            for(int ctr=0; ctr<sequence.Length; ctr++)
+            for (int ctr = 0; ctr < sequence.Length; ctr++)
             {
                 if (sequence[ctr] == 0)
                 {
@@ -189,6 +212,56 @@ namespace LottoDataManager.Includes.Classes.Generator
         public string GetDescription()
         {
             return Description;
+        }
+        protected bool ValidateCountParamField(out String errMessage)
+        {
+            errMessage = "";
+            try
+            {
+                int count = GetFieldParamValueForCount();
+                if (count <= 0 || count > 99)
+                {
+                    errMessage = ResourcesUtils.GetMessage("pick_class_validate_count_1");
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                errMessage = ex.Message;
+                return false;
+            }
+            return true;
+        }
+        protected bool ValidateDateRangeParamField(out string errMessage)
+        {
+            errMessage = "";
+            try
+            {
+                DateTime dtFromDate = (DateTime)GetFieldParamValue(GeneratorParamType.FROMDATE);
+                DateTime dtToDate = (DateTime)GetFieldParamValue(GeneratorParamType.TODATE);
+
+                if (dtFromDate.Date.CompareTo(dtToDate.Date) > 0)
+                {
+                    errMessage = ResourcesUtils.GetMessage("pick_class_validate_date_from_1");
+                    return false;
+                }
+                else if (dtFromDate.Date.CompareTo(DateTimeConverterUtils.GetYear2011().Date) < 0)
+                {
+                    errMessage = ResourcesUtils.GetMessage("pick_class_validate_date_from_2");
+                    return false;
+                }
+                else if (dtToDate.Date.CompareTo(DateTimeConverterUtils.GetYear2011().Date) < 0)
+                {
+                    errMessage = ResourcesUtils.GetMessage("pick_class_validate_date_to_1");
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                errMessage = ex.Message;
+                return false;
+            }
+            return true;
         }
     }
 }

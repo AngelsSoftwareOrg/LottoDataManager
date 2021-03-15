@@ -64,6 +64,9 @@ namespace LottoDataManager.Forms
             DisplayGenerators(new NumberNotYetPickUpGenerator(this.lotteryDataServices));
             DisplayGenerators(new RandomPatternSequenceGenerator(this.lotteryDataServices));
             DisplayGenerators(new NumsNotYetBetCurSeasonGenerator(this.lotteryDataServices));
+            DisplayGenerators(new HistoricalFrequencyRandomGenerator(this.lotteryDataServices));
+            DisplayGenerators(new RandomPickTotalSumBetweenGenerators(this.lotteryDataServices));
+            DisplayGenerators(new RandomPickTotalSumBetweenGenerators1n31(this.lotteryDataServices));
         }
         private void DisplayGenerators(SequenceGenerator seqGen)
         {
@@ -141,6 +144,7 @@ namespace LottoDataManager.Forms
         {
             lvGenType.SelectedItems.Clear();
             lvGenSeq.Items.Clear();
+            lvGenSeq.ListViewItemSorter = null;
             ClearSequenceGenParametersValue();
         }
         private void ClearSequenceGenParametersValue()

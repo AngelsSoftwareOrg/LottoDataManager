@@ -16,6 +16,8 @@ using LottoDataManager.Includes.Database.DAO;
 using LottoDataManager.Includes.Model;
 using LottoDataManager.Includes.Model.Details;
 using LottoDataManager.Includes.Model.Game;
+using LottoDataManager.Includes.Model.Reports;
+using LottoDataManager.Includes.Model.Structs;
 using LottoDataManager.Includes.Utilities;
 
 namespace LottoDataManager
@@ -228,15 +230,41 @@ namespace LottoDataManager
         {
             listViewOtherDetails.BeginUpdate();
             listViewOtherDetails.Items.Clear();
-            foreach (KeyValuePair<String, String> kvp in dashboardReport.GetDashboardReport())
+            foreach (DashboardReportItem dpitm in dashboardReport.GetDashboardReport())
             {
-                ListViewItem itm = new ListViewItem(kvp.Key);
-                itm.SubItems.Add(kvp.Value);
+                ListViewItem itm = new ListViewItem(dpitm.GetDescription());
+                itm.SubItems.Add(dpitm.GetValue());
+                itm.Tag = dpitm;
+                if (dpitm.IsHighlight()) itm.BackColor = dpitm.GetHighlightColor();
                 listViewOtherDetails.Items.Add(itm);
             }
             listViewOtherDetails.EndUpdate();
-            Application.DoEvents();
         }
+        private void listViewOtherDetails_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            ListViewHitTestInfo info = listViewOtherDetails.HitTest(e.X, e.Y);
+            ListViewItem item = info.Item;
+
+            if (item == null)
+            {
+                this.listViewOtherDetails.SelectedItems.Clear();
+                return;
+            }
+
+            DashboardReportItem rptItem = (DashboardReportItem)item.Tag;
+            if(rptItem.GetDashboardReportItemActions() != DashboardReportItemActions.NONE)
+            {
+                ActionableDashboardReportItem(rptItem);
+            }
+        }
+        private void ActionableDashboardReportItem(DashboardReportItem rptItem)
+        {
+            if(rptItem.GetDashboardReportItemActions() == DashboardReportItemActions.OPEN_CLAIM_FORM)
+            {
+                ShowModifyClaimStatus();
+            }
+        }
+
         #endregion
 
         #region "Draw Result"
@@ -339,7 +367,6 @@ namespace LottoDataManager
         private void toolStripBtnWinBets_Click(object sender, EventArgs e)
         {
             statusLabelLoading.Visible = true;
-            Application.DoEvents();
             //RefreshSubscription();
             lotteryDataWorker.ProcessCheckingForWinningBets(this.lotteryDetails.GameMode);
             statusLabelLoading.Text = "";
@@ -532,8 +559,8 @@ namespace LottoDataManager
             this.Close();
         }
 
-        #endregion
 
+        #endregion
 
     }
 }

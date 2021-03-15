@@ -27,33 +27,7 @@ namespace LottoDataManager.Includes.Classes.Generator.Types
         }
         public bool AreParametersValueValid(out string errMessage)
         {
-            errMessage = "";
-            try
-            {
-                DateTime dtFromDate = (DateTime) GetFieldParamValue(GeneratorParamType.FROMDATE);
-                DateTime dtToDate = (DateTime)GetFieldParamValue(GeneratorParamType.TODATE);
-
-                if (dtFromDate.Date.CompareTo(dtToDate.Date)>0)
-                {
-                    errMessage = ResourcesUtils.GetMessage("pick_class_validate_date_from_1");
-                    return false;
-                }else if (dtFromDate.Date.CompareTo(DateTimeConverterUtils.GetYear2011().Date) < 0)
-                {
-                    errMessage = ResourcesUtils.GetMessage("pick_class_validate_date_from_2");
-                    return false;
-                }
-                else if (dtToDate.Date.CompareTo(DateTimeConverterUtils.GetYear2011().Date) < 0)
-                {
-                    errMessage = ResourcesUtils.GetMessage("pick_class_validate_date_to_1");
-                    return false;
-                }
-            }
-            catch (Exception ex)
-            {
-                errMessage = ex.Message;
-                return false;
-            }
-            return true;
+            return (ValidateDateRangeParamField(out errMessage));
         }
         public List<int[]> GenerateSequence()
         {
