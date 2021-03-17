@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LottoDataManager.Includes.Classes.Generator;
 using LottoDataManager.Includes.Model.Structs;
 
 namespace LottoDataManager.Includes.Utilities
@@ -25,6 +26,15 @@ namespace LottoDataManager.Includes.Utilities
                 if (item == value) return (NumberDirection)item;
             }
             return NumberDirection.LEFT_TO_RIGHT;
+        }
+
+        public static GeneratorType FindGeneratorType(int value)
+        {
+            foreach (int item in Enum.GetValues(typeof(GeneratorType)))
+            {
+                if (item == value) return (GeneratorType)item;
+            }
+            return GeneratorType.PERSONAL_PICK;
         }
     }
 }

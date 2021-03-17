@@ -12,6 +12,7 @@ namespace LottoDataManager.Includes.Classes.Generator.Types
     {
         public HistoricalFrequencyRandomGenerator(LotteryDataServices lotteryDataServices) : base(lotteryDataServices)
         {
+            SeqGeneratorType = GeneratorType.HISTORICAL_FREQ_RANDOM;
             this.Description = ResourcesUtils.GetMessage("pick_class_historic_freq_desc");
             SequenceParams = new List<SequenceGeneratorParams>();
             SequenceParams.Add(new SequenceGeneratorParams()

@@ -22,6 +22,7 @@ namespace LottoDataManager.Forms
         private LotteryTicketPanel lotteryTicketPanel;
         private readonly String MODIFIED_TAG = "modified";
         private List<LotteryOutlet> lotteryOutletList;
+        private List<LotterySequenceGenerator> lotterySequenceGeneratorList;
 
         public ModifyBetFrm(LotteryDataServices lotteryDataServices)
         {
@@ -35,6 +36,7 @@ namespace LottoDataManager.Forms
 
             this.lotteryTicketPanel = this.lotteryDataServices.GetLotteryTicketPanel();
             this.lotteryOutletList = this.lotteryDataServices.GetLotteryOutlets();
+            this.lotterySequenceGeneratorList = this.lotteryDataServices.GetAllSequenceGenerators();
             InitializesForms();
         }
         private void InitializesForms()
@@ -66,15 +68,32 @@ namespace LottoDataManager.Forms
                 LotteryOutlet outlet = (LotteryOutlet)rowObject;
                 return outlet.GetDescription();
             };
+
+            this.olvLottoSeqGen.AspectGetter = delegate (object rowObject)
+            {
+                LotteryBet lotteryBet = (LotteryBet)rowObject;
+                LotterySequenceGenerator outlet = lotteryBet.GetLotterySequenceGenerator();
+                return outlet;
+            };
+
+            this.olvLottoSeqGen.AspectToStringConverter = delegate (object rowObject)
+            {
+                LotterySequenceGenerator seqgen = (LotterySequenceGenerator)rowObject;
+                return seqgen.GetDescription();
+            };
         }
         #region "Forms functions"
         private LotteryOutlet GetOutletObject(int outletCd)
         {
             return lotteryOutletList.Find(item => item.GetOutletCode() == outletCd);
         }
+        private LotterySequenceGenerator GetSeqGenObject(int seqgencd)
+        {
+            return lotterySequenceGeneratorList.Find(item => item.GetSeqGenCode() == seqgencd);
+        }
         private void ObjectListViewBets_CellEditFinishing(object sender, CellEditEventArgs e)
         {
-            if (e.Column == this.olvLottoOutlet)
+            if (e.Column == this.olvLottoOutlet || e.Column == this.olvLottoSeqGen)
             {
                 ComboBox cmb = (ComboBox)e.Control;
                 if (cmb.SelectedItem != null) e.NewValue = cmb.SelectedItem;
@@ -88,6 +107,7 @@ namespace LottoDataManager.Forms
                 {
                     LotteryOutlet oldval = (LotteryOutlet)e.Value;
                     LotteryOutlet newval = (LotteryOutlet)e.NewValue;
+                    if (newval == null) { e.Cancel = true; return; }
                     if (oldval.GetOutletCode() == newval.GetOutletCode()) e.Cancel = true;
                     if (e.Cancel == false)
                     {
@@ -96,6 +116,22 @@ namespace LottoDataManager.Forms
                         setup.OutletCode = newval.GetOutletCode();
                         e.ListViewItem.Tag = MODIFIED_TAG;
                         setup.LotteryOutlet = GetOutletObject(newval.GetOutletCode());
+                        lv.RefreshObject(e.RowObject);
+                        lv.Refresh();
+                    }
+                }
+                else if (e.Column == this.olvLottoSeqGen)
+                {
+                    LotterySequenceGenerator oldval = (LotterySequenceGenerator)e.Value;
+                    LotterySequenceGenerator newval = (LotterySequenceGenerator)e.NewValue;
+                    if (newval == null) { e.Cancel = true; return; }
+                    if (oldval.GetSeqGenCode() == newval.GetSeqGenCode()) e.Cancel = true;
+                    if (e.Cancel == false)
+                    {
+                        ObjectListView lv = (ObjectListView)sender;
+                        LotteryBetSetup setup = (LotteryBetSetup)e.RowObject;
+                        e.ListViewItem.Tag = MODIFIED_TAG;
+                        setup.LotterySeqGen = GetSeqGenObject(newval.GetSeqGenCode());
                         lv.RefreshObject(e.RowObject);
                         lv.Refresh();
                     }
@@ -153,11 +189,7 @@ namespace LottoDataManager.Forms
             if (e.Column == this.olvLottoOutlet)
             {
                 ComboBox outletCodeEditorCmb = new ComboBox();
-                outletCodeEditorCmb.DropDownStyle = ComboBoxStyle.DropDownList;
-                foreach (LotteryOutlet outlet in lotteryOutletList)
-                {
-                    outletCodeEditorCmb.Items.Add(outlet);
-                }
+                outletCodeEditorCmb.Items.AddRange(lotteryOutletList.ToArray());
                 outletCodeEditorCmb.Bounds = e.CellBounds;
                 outletCodeEditorCmb.Font = ((ObjectListView)sender).Font;
 
@@ -175,6 +207,28 @@ namespace LottoDataManager.Forms
                 // should select the entry that reflects the current value
                 if (outletCodeEditorCmb.Items.Count>0) outletCodeEditorCmb.SelectedIndex = selectedIndex; 
                 e.Control = outletCodeEditorCmb;
+
+            }else if (e.Column == this.olvLottoSeqGen)
+            {
+                ComboBox seqgenEditorCmb = new ComboBox();
+                seqgenEditorCmb.Items.AddRange(lotterySequenceGeneratorList.ToArray());
+                seqgenEditorCmb.Bounds = e.CellBounds;
+                seqgenEditorCmb.Font = ((ObjectListView)sender).Font;
+
+                int selectedIndex = 0;
+                LotteryBet bet = (LotteryBet)e.RowObject;
+                for (int i = 0; i < seqgenEditorCmb.Items.Count; i++)
+                {
+                    LotterySequenceGenerator seqGen = (LotterySequenceGenerator)seqgenEditorCmb.Items[i];
+                    if (seqGen.GetSeqGenCode() == bet.GetLotterySequenceGenerator().GetSeqGenCode())
+                    {
+                        selectedIndex = i;
+                        break;
+                    }
+                }
+                // should select the entry that reflects the current value
+                if (seqgenEditorCmb.Items.Count > 0) seqgenEditorCmb.SelectedIndex = selectedIndex;
+                e.Control = seqgenEditorCmb;
             }
         }
         private void btnExit_Click(object sender, EventArgs e)
@@ -289,6 +343,7 @@ namespace LottoDataManager.Forms
             this.olvColNum5.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
             this.olvColNum6.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
             this.olvLottoOutlet.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+            this.olvLottoSeqGen.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
             this.objectListViewBets.Refresh();
         }
         private void linkLabelFilterNow_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

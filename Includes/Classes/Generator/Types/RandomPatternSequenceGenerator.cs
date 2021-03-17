@@ -11,6 +11,7 @@ namespace LottoDataManager.Includes.Classes.Generator.Types
     {
         public RandomPatternSequenceGenerator(LotteryDataServices lotteryDataServices) : base(lotteryDataServices)
         {
+            SeqGeneratorType = GeneratorType.RANDOM_PATTERN_SEQUENCE;
             this.Description = ResourcesUtils.GetMessage("pick_class_top_pattern_desc");
             SequenceParams = new List<SequenceGeneratorParams>();
             SequenceParams.Add(new SequenceGeneratorParams()

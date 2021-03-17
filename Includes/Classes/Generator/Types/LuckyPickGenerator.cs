@@ -12,6 +12,7 @@ namespace LottoDataManager.Includes.Classes.Generator.Types
     {
         public LuckyPickGenerator(LotteryDataServices lotteryDataServices): base(lotteryDataServices)
         {
+            SeqGeneratorType = GeneratorType.LUCKY_PICK;
             this.Description = ResourcesUtils.GetMessage("pick_class_luckypick_desc");
             SequenceParams = new List<SequenceGeneratorParams>();
             SequenceParams.Add(new SequenceGeneratorParams()

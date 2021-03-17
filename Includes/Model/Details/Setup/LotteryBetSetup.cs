@@ -19,7 +19,7 @@ namespace LottoDataManager.Includes.Model.Details
         private bool luckyPick;
         private int matchNumCount;
         private LotteryOutlet lotteryOutlet;
-
+        private LotterySequenceGenerator lotterySeqGen;
 
         public LotteryBetSetup(): base() {}
         public int GameCode { get => gameCode; set => gameCode = value; }
@@ -30,6 +30,7 @@ namespace LottoDataManager.Includes.Model.Details
         public bool LuckyPick { get => luckyPick; set => luckyPick = value; }
         public int MatchNumCount { get => matchNumCount; set => matchNumCount = value; }
         public LotteryOutlet LotteryOutlet { get => lotteryOutlet; set => lotteryOutlet = value; }
+        public LotterySequenceGenerator LotterySeqGen { get => lotterySeqGen; set => lotterySeqGen = value; }
 
         public double GetBetAmount()
         {
@@ -91,6 +92,10 @@ namespace LottoDataManager.Includes.Model.Details
         public LotteryOutlet GetLotteryOutlet()
         {
             return LotteryOutlet;
+        }
+        public LotterySequenceGenerator GetLotterySequenceGenerator()
+        {
+            return LotterySeqGen;
         }
     }
 }

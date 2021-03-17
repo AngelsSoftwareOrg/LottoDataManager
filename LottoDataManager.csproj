@@ -103,7 +103,8 @@
     <Compile Include="Includes\Classes\Comparers\ListviewTextSorter.cs" />
     <Compile Include="Includes\Classes\Generator\AbstractSequenceGenerator.cs" />
     <Compile Include="Includes\Classes\Generator\GeneratorParamType.cs" />
-    <Compile Include="Includes\Classes\Generator\NumberNotYetPickUpGenerator.cs" />
+    <Compile Include="Includes\Classes\Generator\GeneratorType.cs" />
+    <Compile Include="Includes\Classes\Generator\Types\NumberNotYetPickUpGenerator.cs" />
     <Compile Include="Includes\Classes\Generator\SequenceGeneratorParamFieldsFormFactory.cs" />
     <Compile Include="Includes\Classes\Generator\SequenceGenerator.cs" />
     <Compile Include="Includes\Classes\Generator\SequenceGeneratorParams.cs" />
@@ -114,6 +115,7 @@
     <Compile Include="Includes\Classes\Generator\Types\RandomNumbersFromJackpotsDigitsGenerator.cs" />
     <Compile Include="Includes\Classes\Generator\Types\RandomPickTotalSumBetweenGenerators.cs" />
     <Compile Include="Includes\Classes\Generator\Types\RandomPickTotalSumBetweenGenerators1n31.cs" />
+    <Compile Include="Includes\Classes\Generator\Types\RandomPickTotalSumBetweenGeneratorsUsingTopPickCurSeason.cs" />
     <Compile Include="Includes\Classes\Generator\Types\TopDrawCurrentSeasonGenerator.cs" />
     <Compile Include="Includes\Classes\Generator\Types\TopDrawnNumbersFromJackpotGenerator.cs" />
     <Compile Include="Includes\Classes\Generator\Types\TopDrawNumbersFromDateRange.cs" />
@@ -134,11 +136,13 @@
     <Compile Include="Includes\Database\DAO\Impl\LotteryBetDaoImpl.cs" />
     <Compile Include="Includes\Database\DAO\Impl\LotteryDaoImplCommon.cs" />
     <Compile Include="Includes\Database\DAO\Impl\LotteryOutletDaoImpl.cs" />
+    <Compile Include="Includes\Database\DAO\Impl\LotterySequenceGenDaoImpl.cs" />
     <Compile Include="Includes\Database\DAO\Impl\LotteryWinningBetDaoImpl.cs" />
     <Compile Include="Includes\Database\DAO\Impl\LotteryDaoImpl.cs" />
     <Compile Include="Includes\Database\DAO\Impl\UserSettingDaoImpl.cs" />
     <Compile Include="Includes\Database\DAO\Interface\LotteryBetDao.cs" />
     <Compile Include="Includes\Database\DAO\Interface\LotteryOutletDao.cs" />
+    <Compile Include="Includes\Database\DAO\Interface\LotterySequenceGenDao.cs" />
     <Compile Include="Includes\Database\DAO\Interface\LotteryWinningBetDao.cs" />
     <Compile Include="Includes\Database\DAO\Interface\LotteryDao.cs" />
     <Compile Include="Includes\Database\DAO\Interface\LotteryDrawResultDao.cs" />
@@ -146,6 +150,8 @@
     <Compile Include="Includes\Database\DAO\Interface\LotteryWinningCombinationDao.cs" />
     <Compile Include="Includes\Database\DAO\Impl\LotteryWinningCombinationDaoImpl.cs" />
     <Compile Include="Includes\Database\DAO\Interface\UserSettingDao.cs" />
+    <Compile Include="Includes\Model\Details\LotterySequenceGenerator.cs" />
+    <Compile Include="Includes\Model\Details\Setup\LotterySequenceGeneratorSetup.cs" />
     <Compile Include="Includes\Model\Reports\DashboardReportItem.cs" />
     <Compile Include="Includes\Model\Reports\Setup\DashboardReportItemSetup.cs" />
     <Compile Include="Includes\Model\Details\Lottery.cs" />

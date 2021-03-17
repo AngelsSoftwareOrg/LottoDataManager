@@ -11,6 +11,7 @@ namespace LottoDataManager.Includes.Classes.Generator.Types
     {
         public TopDrawPreviousSeasonGenerator(LotteryDataServices lotteryDataServices) : base(lotteryDataServices)
         {
+            SeqGeneratorType = GeneratorType.TOP_DRAW_USING_PREVIOUS_SEASON_NUM_RES;
             this.Description = ResourcesUtils.GetMessage("pick_class_top_draw_prev_season_desc");
             SequenceParams = new List<SequenceGeneratorParams>();
         }

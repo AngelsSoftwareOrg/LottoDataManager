@@ -13,5 +13,7 @@ namespace LottoDataManager.Includes.Classes.Generator
         String GetDescription();
         List<SequenceGeneratorParams> GetFieldParameters();
         void ResetParamsValue();
+        int GetSequenceGeneratorID();
+        GeneratorType GetSequenceGeneratorType();
     }
 }

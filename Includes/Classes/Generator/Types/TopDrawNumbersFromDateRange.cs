@@ -12,6 +12,7 @@ namespace LottoDataManager.Includes.Classes.Generator.Types
     {
         public TopDrawNumbersFromDateRange(LotteryDataServices lotteryDataServices) : base(lotteryDataServices)
         {
+            SeqGeneratorType = GeneratorType.TOP_DRAW_NUMBERS_USING_DATE_RANGE;
             this.Description = ResourcesUtils.GetMessage("pick_class_top_draw_date_range_desc");
             SequenceParams = new List<SequenceGeneratorParams>();
             SequenceParams.Add(new SequenceGeneratorParams()

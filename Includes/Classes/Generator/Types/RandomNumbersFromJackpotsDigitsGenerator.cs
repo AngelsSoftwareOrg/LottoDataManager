@@ -12,6 +12,7 @@ namespace LottoDataManager.Includes.Classes.Generator.Types
     {
         public RandomNumbersFromJackpotsDigitsGenerator(LotteryDataServices lotteryDataServices) : base(lotteryDataServices)
         {
+            SeqGeneratorType = GeneratorType.RANDOM_NUMBERS_USING_JACKPOTS_WINNING_DIGITS;
             this.Description = ResourcesUtils.GetMessage("pick_class_random_from_jackpot_numbers_desc");
             SequenceParams = new List<SequenceGeneratorParams>();
             SequenceParams.Add(new SequenceGeneratorParams()

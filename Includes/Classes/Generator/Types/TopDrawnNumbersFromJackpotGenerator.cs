@@ -11,6 +11,7 @@ namespace LottoDataManager.Includes.Classes.Generator.Types
     {
         public TopDrawnNumbersFromJackpotGenerator(LotteryDataServices lotteryDataServices) : base(lotteryDataServices)
         {
+            SeqGeneratorType = GeneratorType.TOP_DRAWN_NUMBERS_FROM_JACKPOTS;
             this.Description = ResourcesUtils.GetMessage("pick_class_top_draw_jackpot_numbers_desc");
             SequenceParams = new List<SequenceGeneratorParams>();
         }

@@ -15,6 +15,7 @@ namespace LottoDataManager.Includes.Classes.Generator
         private Random random = new Random();
         protected LotteryDataServices lotteryDataServices;
         protected LotteryTicketPanel lotteryTicketPanel;
+        private GeneratorType seqGeneratorType;
         protected AbstractSequenceGenerator(LotteryDataServices lotteryDataServices)
         {
             this.lotteryDataServices = lotteryDataServices;
@@ -22,6 +23,7 @@ namespace LottoDataManager.Includes.Classes.Generator
         }
         protected string Description { get => description; set => description = value; }
         protected List<SequenceGeneratorParams> SequenceParams { get => sequenceParams; set => sequenceParams = value; }
+        protected GeneratorType SeqGeneratorType { get => seqGeneratorType; set => seqGeneratorType = value; }
         public List<SequenceGeneratorParams> GetFieldParameters()
         {
             return SequenceParams.ToList();
@@ -262,6 +264,14 @@ namespace LottoDataManager.Includes.Classes.Generator
                 return false;
             }
             return true;
+        }
+        public GeneratorType GetSequenceGeneratorType()
+        {
+            return SeqGeneratorType;
+        }
+        public int GetSequenceGeneratorID()
+        {
+            return (int)SeqGeneratorType;
         }
     }
 }

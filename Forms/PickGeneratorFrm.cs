@@ -67,6 +67,7 @@ namespace LottoDataManager.Forms
             DisplayGenerators(new HistoricalFrequencyRandomGenerator(this.lotteryDataServices));
             DisplayGenerators(new RandomPickTotalSumBetweenGenerators(this.lotteryDataServices));
             DisplayGenerators(new RandomPickTotalSumBetweenGenerators1n31(this.lotteryDataServices));
+            DisplayGenerators(new RandomPickTotalSumBetweenGeneratorsUsingTopPickCurSeason(this.lotteryDataServices));
         }
         private void DisplayGenerators(SequenceGenerator seqGen)
         {
@@ -131,7 +132,6 @@ namespace LottoDataManager.Forms
             foreach(int[] seq in seqArr)
             {
                 ListViewItem item = new ListViewItem(String.Format(" {0}. ) ",ctr++));
-                
                 for (int seqCtr=0; seqCtr < seq.Length; seqCtr++)
                 {
                     item.SubItems.Add(seq[seqCtr].ToString());
@@ -248,7 +248,8 @@ namespace LottoDataManager.Forms
                 bet.AddSequenceEntry(sequence.ToString());
                 sequence.Clear();
             }
-            bet.IsLuckyPick(true);
+            
+            bet.SelectedSequenceGenerator = ((SequenceGenerator)lvGenType.SelectedObject).GetSequenceGeneratorType();
             bet.ShowDialog(this);
             bet.Dispose();
         }

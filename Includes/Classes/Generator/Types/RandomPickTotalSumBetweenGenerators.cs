@@ -12,6 +12,7 @@ namespace LottoDataManager.Includes.Classes.Generator.Types
     {
         public RandomPickTotalSumBetweenGenerators(LotteryDataServices lotteryDataServices) : base(lotteryDataServices)
         {
+            SeqGeneratorType = GeneratorType.RANDOM_PICK_A_SEQ_104_176_1;
             this.Description = ResourcesUtils.GetMessage("pick_class_random_sum1_desc");
             SequenceParams = new List<SequenceGeneratorParams>();
             SequenceParams.Add(new SequenceGeneratorParams()

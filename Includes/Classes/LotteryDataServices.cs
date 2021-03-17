@@ -25,7 +25,7 @@ namespace LottoDataManager.Includes.Classes
         private LotteryWinningBetDao lotteryWinningBetDao;
         private LotteryDataWorker lotteryDataWorker;
         private LotteryDrawResultDao lotteryDrawResultDao;
-
+        private LotterySequenceGenDao lotterySeqGenDao;
         public LotteryDataServices(LotteryDetails lotteryDetails)
         {
             this.lotteryDetails = lotteryDetails;
@@ -38,6 +38,7 @@ namespace LottoDataManager.Includes.Classes
             this.lotteryWinningBetDao = LotteryWinningBetDaoImpl.GetInstance();
             this.lotteryDataWorker = new LotteryDataWorker();
             this.lotteryDrawResultDao = LotteryDrawResultDaoImpl.GetInstance();
+            this.lotterySeqGenDao = LotterySequenceGenDaoImpl.GetInstance();
         }
         private GameMode GameMode {
 
@@ -164,6 +165,9 @@ namespace LottoDataManager.Includes.Classes
         {
             return this.lotteryBetDao.GetLotteryBetsCurrentSeason(GameMode);
         }
-
+        public List<LotterySequenceGenerator> GetAllSequenceGenerators()
+        {
+            return lotterySeqGenDao.GetAllSeqGenerators();
+        }
     }
 }

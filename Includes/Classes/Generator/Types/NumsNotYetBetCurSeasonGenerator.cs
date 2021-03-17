@@ -12,6 +12,7 @@ namespace LottoDataManager.Includes.Classes.Generator.Types
     {
         public NumsNotYetBetCurSeasonGenerator(LotteryDataServices lotteryDataServices) : base(lotteryDataServices)
         {
+            SeqGeneratorType = GeneratorType.NUMBERS_NOT_YET_BETTED_THIS_CURRENT_SEASON;
             this.Description = ResourcesUtils.GetMessage("pick_class_numbers_not_yet_bet_desc");
             SequenceParams = new List<SequenceGeneratorParams>();
         }
@@ -40,5 +41,6 @@ namespace LottoDataManager.Includes.Classes.Generator.Types
             Array.Sort(result);
             return GroupAndCountAndSlice(result);
         }
+
     }
 }

@@ -45,7 +45,8 @@ namespace LottoDataManager.Forms
             this.lblSelectedNumber = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.checkBoxLuckyPick = new System.Windows.Forms.CheckBox();
+            this.cmbSeqGenType = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.cmbOutlet = new System.Windows.Forms.ComboBox();
             this.txtStatus = new System.Windows.Forms.TextBox();
@@ -261,7 +262,8 @@ namespace LottoDataManager.Forms
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.checkBoxLuckyPick);
+            this.groupBox1.Controls.Add(this.cmbSeqGenType);
+            this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.cmbOutlet);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -275,17 +277,27 @@ namespace LottoDataManager.Forms
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Where did you buy the ticket?";
             // 
-            // checkBoxLuckyPick
+            // cmbSeqGenType
             // 
-            this.checkBoxLuckyPick.AutoSize = true;
-            this.checkBoxLuckyPick.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBoxLuckyPick.Location = new System.Drawing.Point(16, 61);
-            this.checkBoxLuckyPick.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.checkBoxLuckyPick.Name = "checkBoxLuckyPick";
-            this.checkBoxLuckyPick.Size = new System.Drawing.Size(130, 21);
-            this.checkBoxLuckyPick.TabIndex = 11;
-            this.checkBoxLuckyPick.Text = "Is it Lucky Pick?";
-            this.checkBoxLuckyPick.UseVisualStyleBackColor = true;
+            this.cmbSeqGenType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbSeqGenType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSeqGenType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbSeqGenType.FormattingEnabled = true;
+            this.cmbSeqGenType.Location = new System.Drawing.Point(117, 56);
+            this.cmbSeqGenType.Name = "cmbSeqGenType";
+            this.cmbSeqGenType.Size = new System.Drawing.Size(627, 26);
+            this.cmbSeqGenType.TabIndex = 12;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(14, 57);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(78, 17);
+            this.label6.TabIndex = 10;
+            this.label6.Text = "Pick Type: ";
             // 
             // label1
             // 
@@ -553,7 +565,6 @@ namespace LottoDataManager.Forms
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TableLayoutPanel tblLayoutPnl;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.CheckBox checkBoxLuckyPick;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cmbOutlet;
         private System.Windows.Forms.Label label2;
@@ -561,5 +572,7 @@ namespace LottoDataManager.Forms
         private System.Windows.Forms.LinkLabel linkLblClrSelNum;
         private System.Windows.Forms.Label lblDrawDateEvery;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox cmbSeqGenType;
+        private System.Windows.Forms.Label label6;
     }
 }

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using LottoDataManager.Includes.Classes;
+using LottoDataManager.Includes.Classes.Generator;
 using LottoDataManager.Includes.Model;
 using LottoDataManager.Includes.Model.Details;
 using LottoDataManager.Includes.Model.Structs;
@@ -20,6 +21,7 @@ namespace LottoDataManager.Forms
         private LotteryDataServices lotteryDataServices;
         private LotteryTicketPanel lotteryTicketPanel;
         private List<LotteryOutlet> lotteryOutletArr;
+        private List<LotterySequenceGenerator> lotterySeqGenArr;
         private List<Button> selTcktPnlNum = new List<Button>();
         private LotterySchedule lotterySchedule;
         public AddBetFrm(LotteryDataServices lotteryDataServices)
@@ -35,6 +37,11 @@ namespace LottoDataManager.Forms
             this.lotteryTicketPanel = this.lotteryDataServices.GetLotteryTicketPanel();
             this.lotteryOutletArr = this.lotteryDataServices.GetLotteryOutlets();
             this.lotterySchedule = this.lotteryDataServices.GetLotterySchedule();
+            this.lotterySeqGenArr = this.lotteryDataServices.GetAllSequenceGenerators();
+
+            //need to place it here so that other form calling this form may preset the combo box before showing the form
+            cmbOutlet.Items.AddRange(lotteryOutletArr.ToArray());
+            cmbSeqGenType.Items.AddRange(lotterySeqGenArr.ToArray());
             GenerateTicketPanelNumbers();
         }
         private void AddBetFrm_Load(object sender, EventArgs e)
@@ -49,11 +56,30 @@ namespace LottoDataManager.Forms
             lblGameDesc.Text = lotteryDataServices.LotteryDetails.Description;
             lblNextDrawDate.Text = lotteryDataServices.GetNextDrawDateFormatted();
             lblDrawDateEvery.Text = lotterySchedule.DrawDateEvery();
-            cmbOutlet.Items.AddRange(lotteryOutletArr.ToArray());
             AddSelectedTicketPanelNumber();
             radioBtnNextDrawDate.Checked = true;
             dtPickPreferredDate.Visible = false;
+
+            //select default if no selection
+            if(cmbSeqGenType.SelectedItem == null) SelectedSequenceGenerator = GeneratorType.PERSONAL_PICK;
         }
+
+        public GeneratorType SelectedSequenceGenerator
+        {
+            set
+            {
+                GeneratorType genType = value;
+                foreach(LotterySequenceGenerator g in cmbSeqGenType.Items)
+                {
+                    if (g.GetSeqGenCode() == (int)genType)
+                    {
+                        cmbSeqGenType.SelectedItem = g;
+                        break;
+                    }
+                }
+            }
+        }
+
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -143,7 +169,7 @@ namespace LottoDataManager.Forms
         private void CompleteLotteryBetDetails(LotteryBetSetup lotteryBet)
         {
             lotteryBet.GameCode = this.lotteryDataServices.LotteryDetails.GameCode;
-            lotteryBet.LuckyPick = this.checkBoxLuckyPick.Checked;
+            lotteryBet.LotterySeqGen = (LotterySequenceGenerator) cmbSeqGenType.SelectedItem;
             lotteryBet.TargetDrawDate = (radioBtnPreferredDate.Checked) ? dtPickPreferredDate.Value : lotteryDataServices.GetNextDrawDate();
             lotteryBet.BetAmount = lotteryDataServices.LotteryDetails.Lottery.GetPricePerBet();
             lotteryBet.OutletCode = ((LotteryOutlet)cmbOutlet.SelectedItem).GetOutletCode();
@@ -339,11 +365,6 @@ namespace LottoDataManager.Forms
         public void ClearSequenceEntries()
         {
             textBoxDelimitersInput.Text = "";
-        }
-
-        public void IsLuckyPick(bool value)
-        {
-            this.checkBoxLuckyPick.Checked = value;
         }
         #endregion
 
