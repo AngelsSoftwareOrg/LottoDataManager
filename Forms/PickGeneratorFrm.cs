@@ -138,6 +138,7 @@ namespace LottoDataManager.Forms
                 }
                 lvGenSeq.Items.Add(item);
             }
+            lvGenSeq.Tag = lvGenType.SelectedObject;
             lvGenSeq.EndUpdate();
         }
         private void btnClearSel_Click(object sender, EventArgs e)
@@ -145,6 +146,7 @@ namespace LottoDataManager.Forms
             lvGenType.SelectedItems.Clear();
             lvGenSeq.Items.Clear();
             lvGenSeq.ListViewItemSorter = null;
+            lvGenSeq.Tag = null;
             ClearSequenceGenParametersValue();
         }
         private void ClearSequenceGenParametersValue()
@@ -249,7 +251,7 @@ namespace LottoDataManager.Forms
                 sequence.Clear();
             }
             
-            bet.SelectedSequenceGenerator = ((SequenceGenerator)lvGenType.SelectedObject).GetSequenceGeneratorType();
+            bet.SelectedSequenceGenerator = ((SequenceGenerator)lvGenSeq.Tag).GetSequenceGeneratorType();
             bet.ShowDialog(this);
             bet.Dispose();
         }
