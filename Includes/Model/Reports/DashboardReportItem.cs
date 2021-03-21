@@ -15,5 +15,6 @@ namespace LottoDataManager.Includes.Model.Reports
         bool IsHighlight();
         Color GetHighlightColor();
         DashboardReportItemActions GetDashboardReportItemActions();
+        Color GetFontColor();
     }
 }

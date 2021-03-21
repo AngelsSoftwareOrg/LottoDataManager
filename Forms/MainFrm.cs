@@ -236,6 +236,7 @@ namespace LottoDataManager
                 itm.SubItems.Add(dpitm.GetValue());
                 itm.Tag = dpitm;
                 if (dpitm.IsHighlight()) itm.BackColor = dpitm.GetHighlightColor();
+                if (dpitm.GetFontColor() != Color.Black) itm.ForeColor= dpitm.GetFontColor();
                 listViewOtherDetails.Items.Add(itm);
             }
             listViewOtherDetails.EndUpdate();

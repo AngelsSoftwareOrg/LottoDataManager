@@ -21,6 +21,7 @@ namespace LottoDataManager.Includes.Classes.Reports
         public List<DashboardReportItemSetup> GetDashboardReport()
         {
             dashboardReportList = new List<DashboardReportItemSetup>();
+            GetPreviousDrawDates();
             GetNextDrawDates();
             GetTotalBetsMade();
             GetTotalClaimsCount();
@@ -143,20 +144,41 @@ namespace LottoDataManager.Includes.Classes.Reports
         }
         private void GetNextDrawDates()
         {
-            LotteryTicketPanel lotteryTicketPanel = lotteryDataServices.GetLotteryTicketPanel();
+            int ctrDays = 14;
             LotterySchedule lotterySchedule = lotteryDataServices.GetLotterySchedule();
             DateTime dateStartingTommorow = DateTime.Now.AddDays(1);
-            //for one week schedule only
-            for(int ctr=1; ctr<=7; ctr++)
+            int idxLabel = 1;
+            for (int ctr=1; ctr<= ctrDays; ctr++)
             {
                 if (lotterySchedule.IsDrawDateMatchLotterySchedule(dateStartingTommorow)){
-                    String key = String.Format("{0} ({1})",ResourcesUtils.GetMessage("drpt_next_lottery_sched"),(dashboardReportList.Count + 1));
+                    String key = String.Format("{0} ({1})",ResourcesUtils.GetMessage("drpt_next_lottery_sched"), idxLabel++);
                     String value = DateTimeConverterUtils.ConvertToFormat(dateStartingTommorow, DateTimeConverterUtils.DATE_FORMAT_LONG);
                     dashboardReportList.Add(GenModel(key, value));
                 }
                 dateStartingTommorow = dateStartingTommorow.AddDays(1);
             }
         }
+        private void GetPreviousDrawDates()
+        {
+            int ctrDays = 14;
+            LotterySchedule lotterySchedule = lotteryDataServices.GetLotterySchedule();
+            DateTime dateLastXDays = DateTime.Now.AddDays(-ctrDays);
+            int idxLabel = 1;
+            //for one week schedule only
+            for (int ctr = 1; ctr <= ctrDays; ctr++)
+            {
+                if (lotterySchedule.IsDrawDateMatchLotterySchedule(dateLastXDays))
+                {
+                    String key = String.Format("{0} ({1})", ResourcesUtils.GetMessage("drpt_prev_lottery_sched"), idxLabel++);
+                    String value = DateTimeConverterUtils.ConvertToFormat(dateLastXDays, DateTimeConverterUtils.DATE_FORMAT_LONG);
+                    DashboardReportItemSetup dshSetup = GenModel(key, value);
+                    dshSetup.FontColor = Color.Gray;
+                    dashboardReportList.Add(dshSetup);
+                }
+                dateLastXDays = dateLastXDays.AddDays(1);
+            }
+        }
+
         private DashboardReportItemSetup GenModel(String key, String value)
         {
             return new DashboardReportItemSetup() { Description = key, Value = value };

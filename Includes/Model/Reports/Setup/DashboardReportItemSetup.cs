@@ -14,6 +14,9 @@ namespace LottoDataManager.Includes.Model.Reports
         private String description;
         private Color highlightColor;
         private bool isHighlightColor;
+        private Color fontColor;
+
+
         private DashboardReportItemActions dashboardReportItemAction;
         public DashboardReportItemSetup()
         {
@@ -21,6 +24,7 @@ namespace LottoDataManager.Includes.Model.Reports
             description = "";
             HighlightColor = Color.Empty;
             isHighlightColor = false;
+            FontColor = Color.Black;
             DashboardReportItemAction = DashboardReportItemActions.NONE;
         }
         public string Value { get => value; set => this.value = value; }
@@ -28,6 +32,8 @@ namespace LottoDataManager.Includes.Model.Reports
         public Color HighlightColor { get => highlightColor; set => highlightColor = value; }
         public bool IsHighlightColor { get => isHighlightColor; set => isHighlightColor = value; }
         public DashboardReportItemActions DashboardReportItemAction { get => dashboardReportItemAction; set => dashboardReportItemAction = value; }
+        public Color FontColor { get => fontColor; set => fontColor = value; }
+
         public string GetDescription()
         {
             return Description;
@@ -47,6 +53,10 @@ namespace LottoDataManager.Includes.Model.Reports
         public DashboardReportItemActions GetDashboardReportItemActions()
         {
             return DashboardReportItemAction;
+        }
+        public Color GetFontColor()
+        {
+            return FontColor;
         }
     }
 }
