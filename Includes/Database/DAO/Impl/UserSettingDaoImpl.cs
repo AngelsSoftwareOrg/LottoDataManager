@@ -59,10 +59,54 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                 if (result < 0)
                 {
                     transaction.Rollback();
-                    throw new Exception("SaveLastOpenedLottery: Error updating data into Lottery Bet Database! ");
+                    throw new Exception("SaveLastOpenedLottery: Error updating data into user setting Database! ");
                 }
                 transaction.Commit();
             }
         }
+        public String GetMLDataSetDirectoryPath()
+        {
+            using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
+            using (OleDbCommand command = new OleDbCommand())
+            {
+                command.CommandType = CommandType.Text;
+                command.CommandText = "SELECT ID, config_name, value FROM user_setting WHERE config_name = 'ml_data_set'";
+                command.Connection = conn;
+                conn.Open();
+                using (OleDbDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            return reader["value"].ToString();
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+        public void SaveMLDataSetDirectoryPath(String filePath)
+        {
+            using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
+            using (OleDbCommand command = new OleDbCommand())
+            {
+                command.CommandType = CommandType.Text;
+                command.CommandText = "UPDATE user_setting SET [value] = @value WHERE config_name='ml_data_set'";
+                command.Parameters.AddWithValue("@value", filePath);
+                command.Connection = conn;
+                conn.Open();
+                OleDbTransaction transaction = conn.BeginTransaction();
+                command.Transaction = transaction;
+                int result = command.ExecuteNonQuery();
+                if (result < 0)
+                {
+                    transaction.Rollback();
+                    throw new Exception("SaveMLDataSetDirectoryPath: Error updating data into user setting Database! ");
+                }
+                transaction.Commit();
+            }
+        }
+
     }
 }

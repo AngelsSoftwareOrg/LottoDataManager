@@ -125,10 +125,12 @@ namespace LottoDataManager.Includes.Classes.Generator
             }
             return sequenceArr;
         }
-        protected int GetFieldParamValueForCount()
+        protected int GetFieldParamValueForCount(int fieldIndex=0)
         {
+            int ctr = 0;
             foreach (SequenceGeneratorParams seq in SequenceParams)
             {
+                if(ctr++ == fieldIndex)
                 if (seq.GeneratorParamType == GeneratorParamType.COUNT)
                 {
                     if (seq.ParamValue == null) return 0;
@@ -215,12 +217,12 @@ namespace LottoDataManager.Includes.Classes.Generator
         {
             return Description;
         }
-        protected bool ValidateCountParamField(out String errMessage)
+        protected bool ValidateCountParamField(out String errMessage, int fieldIndex=0)
         {
             errMessage = "";
             try
             {
-                int count = GetFieldParamValueForCount();
+                int count = GetFieldParamValueForCount(fieldIndex);
                 if (count <= 0 || count > 99)
                 {
                     errMessage = ResourcesUtils.GetMessage("pick_class_validate_count_1");
@@ -272,6 +274,25 @@ namespace LottoDataManager.Includes.Classes.Generator
         public int GetSequenceGeneratorID()
         {
             return (int)SeqGeneratorType;
+        }
+        protected int[] LuckyPickGenerator(Random rnd)
+        {
+            int[] result = new int[lotteryTicketPanel.GetGameDigitCount()];
+            for (int seqCtr = 0; seqCtr < lotteryTicketPanel.GetGameDigitCount(); seqCtr++)
+            {
+                while (true)
+                {
+                    int anyDigit = rnd.Next(lotteryTicketPanel.GetMin(), lotteryTicketPanel.GetMax() + 1);
+                    if (anyDigit <= 0) anyDigit = 1;
+                    if (!result.Contains(anyDigit))
+                    {
+                        result[seqCtr] = anyDigit;
+                        break;
+                    }
+                }
+            }
+            Array.Sort(result);
+            return result;
         }
     }
 }

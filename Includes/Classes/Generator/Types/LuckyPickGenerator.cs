@@ -28,22 +28,7 @@ namespace LottoDataManager.Includes.Classes.Generator.Types
             Random rnd = new Random();
             for(int ctr=0; ctr < GetFieldParamValueForCount(); ctr++)
             {
-                int[] result = new int[lotteryTicketPanel.GetGameDigitCount()];
-                for (int seqCtr = 0; seqCtr < lotteryTicketPanel.GetGameDigitCount(); seqCtr++)
-                {
-                    while (true)
-                    {
-                        int anyDigit = rnd.Next(lotteryTicketPanel.GetMin(), lotteryTicketPanel.GetMax() + 1);
-                        if (anyDigit <= 0) anyDigit = 1;
-                        if (!result.Contains(anyDigit))
-                        {
-                            result[seqCtr] = anyDigit;
-                            break;
-                        }
-                    }
-                }
-                Array.Sort(result);
-                sequenceArr.Add(result);
+                sequenceArr.Add(LuckyPickGenerator(rnd));
             }
             return sequenceArr;
         }

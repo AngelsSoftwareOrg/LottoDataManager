@@ -389,6 +389,20 @@ namespace LottoDataManager
         {
             SelectBetAndOpenMatchMakingForm();
         }
+        private void selectAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            objectLstVwLatestBet.SelectAll();
+        }
+        private void copySelectedAsLinearCSVToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach(LotteryBet bet in objectLstVwLatestBet.SelectedObjects)
+            {
+                if (sb.Length > 0) sb.Append(",");
+                sb.Append(bet.GetGNUFormat());
+            }
+            if (sb.Length > 0) Clipboard.SetText(sb.ToString());
+        }
         private void objectLstVwLatestBet_DoubleClick(object sender, EventArgs e)
         {
             SelectBetAndOpenMatchMakingForm();
@@ -561,7 +575,9 @@ namespace LottoDataManager
         }
 
 
+
         #endregion
+
 
     }
 }

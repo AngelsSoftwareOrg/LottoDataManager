@@ -10,5 +10,7 @@ namespace LottoDataManager.Includes.Database.DAO.Interface
     {
         int GetLastOpenedLottery();
         void SaveLastOpenedLottery(int game_cd);
+        String GetMLDataSetDirectoryPath();
+        void SaveMLDataSetDirectoryPath(String filePath);
     }
 }

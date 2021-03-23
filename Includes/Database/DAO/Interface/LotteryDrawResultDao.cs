@@ -24,5 +24,6 @@ namespace LottoDataManager.Includes.Database.DAO
         List<int> GetTopDrawnDigitFromJackpotsResults(GameMode gameMode);
         List<int> GetTopDrawnDigitFromDateRange(GameMode gameMode, DateTime dateFrom, DateTime dateTo);
         List<int[]> GetTopDrawnDigitToSequenceFromDateRange(GameMode gameMode, DateTime dateFrom, DateTime dateTo);
+        List<LotteryDrawResult> GetLatestLotteryResult(GameMode gameMode, int howManyDraws);
     }
 }

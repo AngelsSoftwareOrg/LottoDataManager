@@ -26,9 +26,11 @@ namespace LottoDataManager.Includes.Classes
         private LotteryDataWorker lotteryDataWorker;
         private LotteryDrawResultDao lotteryDrawResultDao;
         private LotterySequenceGenDao lotterySeqGenDao;
+        private UserSettings userSetting;
         public LotteryDataServices(LotteryDetails lotteryDetails)
         {
             this.lotteryDetails = lotteryDetails;
+            this.userSetting = new UserSettings();
             this.lotteryDataDerivation = new LotteryDataDerivation(this.LotteryDetails.GameMode);
             this.lotteryTicketPanelDao = LotteryTicketPanelDaoImpl.GetInstance();
             this.lotteryOutletDao = LotteryOutletDaoImpl.GetInstance();
@@ -91,7 +93,7 @@ namespace LottoDataManager.Includes.Classes
         }
         public void SaveLastOpenedLottery()
         {
-            this.userSettingDao.SaveLastOpenedLottery(this.LotteryDetails.GameCode);
+            this.userSetting.SaveLastOpenedLottery(this.lotteryDetails.GameCode);
         }
         public String GetNextDrawDateFormatted()
         {
@@ -168,6 +170,10 @@ namespace LottoDataManager.Includes.Classes
         public List<LotterySequenceGenerator> GetAllSequenceGenerators()
         {
             return lotterySeqGenDao.GetAllSeqGenerators();
+        }
+        public List<LotteryDrawResult> GetLatestLotteryResult(int howManyDraws)
+        {
+            return this.lotteryDrawResultDao.GetLatestLotteryResult(this.lotteryDetails.GameMode, howManyDraws);
         }
     }
 }

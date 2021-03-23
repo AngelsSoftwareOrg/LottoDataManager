@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using LottoDataManager.Includes.Model.Details.Setup;
 using LottoDataManager.Includes.Utilities;
+using LottoDataManagerML.Model;
 
 namespace LottoDataManager.Includes.Model.Details
 {
@@ -16,7 +17,6 @@ namespace LottoDataManager.Includes.Model.Details
         private int gameCode;
         private double jackpotAmt;
         private int winners;
-
         public LotteryDrawResultSetup() : base() { }
         public DateTime DrawDate { get => drawDate; set => drawDate = value; }
         public int GameCode { get => gameCode; set => gameCode = value; }
@@ -69,6 +69,20 @@ namespace LottoDataManager.Includes.Model.Details
         public bool IsDrawResulSequenceEmpty()
         {
             return (this.Num1 <= 0 && this.Num2 <= 0 && this.Num3 <= 0 && this.Num4 <= 0 && this.Num5 <= 0 && this.Num6 <= 0);
+        }
+        public ModelInput GetModelInput()
+        {
+            return new ModelInput()
+            {
+                Draw_date = GetDrawDateFormatted() + " 00:00:00.0",
+                Num1 = GetNum1(),
+                Num2 = GetNum2(),
+                Num3 = GetNum3(),
+                Num4 = GetNum4(),
+                Num5 = GetNum5(),
+                Num6 = GetNum6(),
+                Game_cd = GetGameCode()
+            };
         }
         override
         public String ToString()

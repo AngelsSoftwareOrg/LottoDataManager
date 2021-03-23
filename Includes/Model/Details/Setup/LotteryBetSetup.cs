@@ -97,5 +97,9 @@ namespace LottoDataManager.Includes.Model.Details
         {
             return LotterySeqGen;
         }
+        public String GetGNUFormat()
+        {
+            return String.Format("{0}-{1}-{2}-{3}-{4}-{5}", Num1, Num2, Num3, Num4, Num5, Num6);
+        }
     }
 }

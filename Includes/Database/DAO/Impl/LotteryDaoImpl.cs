@@ -16,9 +16,6 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
     public class LotteryDaoImpl : LotteryDao
     {
         private static LotteryDaoImpl lotteryDaoImpl;
-
-        public GameMode ClassReflection { get; private set; }
-
         private LotteryDaoImpl() { }
         public static LotteryDao GetInstance()
         {
