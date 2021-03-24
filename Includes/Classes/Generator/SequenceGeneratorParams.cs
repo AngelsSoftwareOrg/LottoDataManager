@@ -12,15 +12,17 @@ namespace LottoDataManager.Includes.Classes.Generator
         private String description;
         private Object paramValue;
         private readonly long uniqueID;
-
+        private int maxCountValue;
         public SequenceGeneratorParams()
         {
             uniqueID = System.DateTime.Now.Ticks;
+            maxCountValue = 99;
         }
 
         public GeneratorParamType GeneratorParamType { get => generatorParamType; set => generatorParamType = value; }
         public string Description { get => description; set => description = value; }
         public object ParamValue { get => paramValue; set => paramValue = value; }
         public long UniqueID => uniqueID;
+        public int MaxCountValue { get => maxCountValue; set => maxCountValue = value; }
     }
 }

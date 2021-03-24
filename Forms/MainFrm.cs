@@ -42,9 +42,7 @@ namespace LottoDataManager
         }
         private void RefreshSubscription()
         {
-            
             this.lottoWebScraper.WebScrapingStatus += LottoWebScraper_WebScrapingStatus;
-
         }
         private void ReinitateLotteryServices()
         {
@@ -111,8 +109,6 @@ namespace LottoDataManager
 
                 this.Enabled = false;
                 ClearAllForms();
-                Application.DoEvents();
-                this.Show();
                 Application.DoEvents();
                 RefreshFieldDetails();
                 SetBetsAndResultDefaultList();
@@ -555,6 +551,11 @@ namespace LottoDataManager
             pick.ShowDialog();
             pick.Dispose();
         }
+        private void aboutToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            AboutFrm f = new AboutFrm();
+            f.ShowDialog();
+        }
         #endregion
 
         #region "Main Form"
@@ -573,11 +574,11 @@ namespace LottoDataManager
         {
             this.Close();
         }
-
-
-
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            SplashScreenFrm.GetIntance().DisposeInstance();
+            this.Show();
+        }
         #endregion
-
-
     }
 }

@@ -50,6 +50,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\AboutFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AboutFrm.Designer.cs">
+      <DependentUpon>AboutFrm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\AddBetFrm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -80,6 +86,12 @@
     <Compile Include="Forms\PickGeneratorFrm.Designer.cs">
       <DependentUpon>PickGeneratorFrm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\SplashScreenFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SplashScreenFrm.Designer.cs">
+      <DependentUpon>SplashScreenFrm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Includes\Classes\Comparers\AbstractSorter.cs" />
     <Compile Include="Includes\Classes\Comparers\ListviewIntSorter.cs" />
     <Compile Include="Includes\Classes\Comparers\ListviewTextSorter.cs" />
@@ -98,6 +110,7 @@
     <Compile Include="Includes\Classes\Generator\Types\RandomPickTotalSumBetweenGenerators.cs" />
     <Compile Include="Includes\Classes\Generator\Types\RandomPickTotalSumBetweenGenerators1n31.cs" />
     <Compile Include="Includes\Classes\Generator\Types\RandomPickTotalSumBetweenGeneratorsUsingTopPickCurSeason.cs" />
+    <Compile Include="Includes\Classes\Generator\Types\RandomPredictionDrawResults.cs" />
     <Compile Include="Includes\Classes\Generator\Types\RandomPrediction.cs" />
     <Compile Include="Includes\Classes\Generator\Types\TopDrawCurrentSeasonGenerator.cs" />
     <Compile Include="Includes\Classes\Generator\Types\TopDrawnNumbersFromJackpotGenerator.cs" />
@@ -188,6 +201,9 @@
     <Compile Include="Includes\Utilities\StringUtils.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\AboutFrm.resx">
+      <DependentUpon>AboutFrm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\AddBetFrm.resx">
       <DependentUpon>AddBetFrm.cs</DependentUpon>
     </EmbeddedResource>
@@ -205,6 +221,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\PickGeneratorFrm.resx">
       <DependentUpon>PickGeneratorFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SplashScreenFrm.resx">
+      <DependentUpon>SplashScreenFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -239,6 +258,12 @@
     <Content Include="DatabaseMain\Lotto_Main_DB.accdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\Design\CloverBig.png" />
+    <None Include="Resources\Icons\gear-32px.png" />
+    <None Include="Resources\Icons\lotto-32px.png" />
+    <None Include="Resources\Icons\statistic_32.png" />
+    <None Include="Resources\Icons\Exit_32.png" />
+    <None Include="Resources\Icons\Open_Document_32.png" />
     <None Include="Resources\Icons\Stars6_20x.png" />
     <None Include="Resources\Icons\Star5_20x.png" />
     <None Include="Resources\Icons\Stars4_20x.png" />

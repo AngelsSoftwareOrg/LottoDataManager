@@ -71,7 +71,7 @@ namespace LottoDataManager.Includes.Classes.Generator
         {
             NumericUpDown numericUpDown = new NumericUpDown();
             numericUpDown.Minimum = 1;
-            numericUpDown.Maximum = 10000;
+            numericUpDown.Maximum = 100000;
             numericUpDown.Tag = seqParam;
             numericUpDown.ValueChanged += NumericUpDown_ValueChanged;
             numericUpDown.Value = 1;

@@ -17,12 +17,15 @@ namespace LottoDataManager
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            SplashScreenFrm.GetIntance().Show();
             Application.Run(new MainForm());
             //Application.Run(new ModifyBetFrm(null));
             //Application.Run(new AddBetFrm());
             //Application.Run(new DrawAndBetMatchFrm(null, DateTime.Now));
             //Application.Run(new ModifyClaimsFrm(null));
             //Application.Run(new PickGeneratorFrm(null));
+            //Application.Run(new AboutFrm());
+            //Application.Run(new SplashScreenFrm());
         }
     }
 }

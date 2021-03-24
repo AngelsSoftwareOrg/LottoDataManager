@@ -70,5 +70,53 @@ namespace LottoDataManager.Properties {
                 this["lotto_scrape_site"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public string version_major {
+            get {
+                return ((string)(this["version_major"]));
+            }
+            set {
+                this["version_major"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public string version_minor {
+            get {
+                return ((string)(this["version_minor"]));
+            }
+            set {
+                this["version_minor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public string version_patch {
+            get {
+                return ((string)(this["version_patch"]));
+            }
+            set {
+                this["version_patch"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("r0")]
+        public string version_release {
+            get {
+                return ((string)(this["version_release"]));
+            }
+            set {
+                this["version_release"] = value;
+            }
+        }
     }
 }

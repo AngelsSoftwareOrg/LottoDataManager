@@ -19,12 +19,15 @@ namespace LottoDataManager.Includes.Classes.Generator.Types
             SequenceParams.Add(new SequenceGeneratorParams()
             {
                 GeneratorParamType = GeneratorParamType.COUNT,
-                Description = ResourcesUtils.GetMessage("pick_class_random_prediction_count")
+                Description = ResourcesUtils.GetMessage("pick_class_random_prediction_count"),
+                MaxCountValue = 999
+
             });
             SequenceParams.Add(new SequenceGeneratorParams()
             {
                 GeneratorParamType = GeneratorParamType.COUNT,
-                Description = @ResourcesUtils.GetMessage("pick_class_random_prediction_coefficient")
+                Description = @ResourcesUtils.GetMessage("pick_class_random_prediction_coefficient"),
+                MaxCountValue = 20
             });
         }
 
@@ -35,7 +38,6 @@ namespace LottoDataManager.Includes.Classes.Generator.Types
 
         public List<int[]> GenerateSequence()
         {
-            List<LotteryDrawResult> lotteryDrawResults = this.lotteryDataServices.GetLatestLotteryResult(GetFieldParamValueForCount());
             String drawDate = DateTimeConverterUtils.ConvertToFormat(this.lotteryDataServices.GetNextDrawDate(), 
                 DateTimeConverterUtils.STANDARD_DATE_FORMAT) + " 00:00:00.0";
             List<int[]> results = new List<int[]>();

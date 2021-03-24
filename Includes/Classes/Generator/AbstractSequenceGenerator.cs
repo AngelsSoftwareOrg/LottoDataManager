@@ -131,16 +131,43 @@ namespace LottoDataManager.Includes.Classes.Generator
             foreach (SequenceGeneratorParams seq in SequenceParams)
             {
                 if(ctr++ == fieldIndex)
-                if (seq.GeneratorParamType == GeneratorParamType.COUNT)
                 {
-                    if (seq.ParamValue == null) return 0;
-                    int count;
-                    int.TryParse(seq.ParamValue.ToString(), out count);
-                    return count;
+                    if (seq.GeneratorParamType == GeneratorParamType.COUNT)
+                    {
+                        if (seq.ParamValue == null) return 0;
+                        int count;
+                        int.TryParse(seq.ParamValue.ToString(), out count);
+                        return count;
+                    }
                 }
             }
             return 0;
         }
+        protected int GetFieldFieldCountValue(SequenceGeneratorParams seq)
+        {
+            if (seq.GeneratorParamType == GeneratorParamType.COUNT)
+            {
+                if (seq.ParamValue == null) return 0;
+                int count;
+                int.TryParse(seq.ParamValue.ToString(), out count);
+                return count;
+            }
+            return 0;
+        }
+        protected SequenceGeneratorParams GetSequenceGeneratorParams(GeneratorParamType type, int fieldIndex = 0)
+        {
+            int ctr = 0;
+            foreach (SequenceGeneratorParams seq in SequenceParams)
+            {
+                if (seq.GeneratorParamType == GeneratorParamType.COUNT)
+                {
+                    if (ctr == fieldIndex) return seq;
+                }
+                ctr++;
+            }
+            return null;
+        }
+
         protected Object GetFieldParamValue(GeneratorParamType paramType)
         {
             foreach (SequenceGeneratorParams seq in SequenceParams)
@@ -222,10 +249,11 @@ namespace LottoDataManager.Includes.Classes.Generator
             errMessage = "";
             try
             {
-                int count = GetFieldParamValueForCount(fieldIndex);
-                if (count <= 0 || count > 99)
+                SequenceGeneratorParams seq = GetSequenceGeneratorParams(GeneratorParamType.COUNT, fieldIndex);
+                int count = GetFieldFieldCountValue(seq);
+                if (count <= 0 || count > seq.MaxCountValue)
                 {
-                    errMessage = ResourcesUtils.GetMessage("pick_class_validate_count_1");
+                    errMessage = String.Format(ResourcesUtils.GetMessage("pick_class_validate_count_1"), seq.MaxCountValue);
                     return false;
                 }
             }

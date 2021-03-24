@@ -22,6 +22,7 @@ namespace LottoDataManager.Includes.Classes.Generator
         TOP_DRAW_NUMBERS_USING_DATE_RANGE = 11,
         TOP_DRAW_USING_PREVIOUS_SEASON_NUM_RES = 12,
         NUMBER_NOT_YET_PICK_UP_GENERATOR = 13,
-        RANDOM_PREDICTION = 14
+        RANDOM_PREDICTION = 14,
+        RANDOM_PREDICTION_DRAW_RESULT = 15
     }
 }
