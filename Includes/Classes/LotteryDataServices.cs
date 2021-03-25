@@ -175,5 +175,9 @@ namespace LottoDataManager.Includes.Classes
         {
             return this.lotteryDrawResultDao.GetLatestLotteryResult(this.lotteryDetails.GameMode, howManyDraws);
         }
+        public List<LotteryDrawResult> GetMachineLearningDataSet(GameMode gameMode, DateTime startingDate)
+        {
+            return this.lotteryDrawResultDao.GetMachineLearningDataSet(gameMode, startingDate);
+        }
     }
 }

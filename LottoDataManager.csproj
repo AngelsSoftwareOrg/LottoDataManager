@@ -68,6 +68,12 @@
     <Compile Include="Forms\DrawAndBetMatchFrm.Designer.cs">
       <DependentUpon>DrawAndBetMatchFrm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\MachineLearningFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MachineLearningFrm.Designer.cs">
+      <DependentUpon>MachineLearningFrm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ModifyClaimsFrm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -120,6 +126,7 @@
     <Compile Include="Includes\Classes\LotteryDataWorker.cs" />
     <Compile Include="Includes\Classes\LotteryDataWorkerEvent.cs" />
     <Compile Include="Includes\Classes\LotteryDataWorkerEventStages.cs" />
+    <Compile Include="Includes\Classes\ML\ModelBuilder.cs" />
     <Compile Include="Includes\Classes\Reports\DashboardReport.cs" />
     <Compile Include="Includes\Classes\Reports\ReportAbstract.cs" />
     <Compile Include="Includes\Classes\Reports\ReportDataServices.cs" />
@@ -196,6 +203,7 @@
     <Compile Include="Includes\Utilities\ClassReflectionUtil.cs" />
     <Compile Include="Includes\Utilities\ConverterUtils.cs" />
     <Compile Include="Includes\Utilities\DateTimeConverterUtils.cs" />
+    <Compile Include="Includes\Utilities\FileUtils.cs" />
     <Compile Include="Includes\Utilities\ImageUtils.cs" />
     <Compile Include="Includes\Utilities\ResourcesUtils.cs" />
     <Compile Include="Includes\Utilities\StringUtils.cs" />
@@ -209,6 +217,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\DrawAndBetMatchFrm.resx">
       <DependentUpon>DrawAndBetMatchFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MachineLearningFrm.resx">
+      <DependentUpon>MachineLearningFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainFrm.resx">
       <DependentUpon>MainFrm.cs</DependentUpon>
@@ -258,6 +269,7 @@
     <Content Include="DatabaseMain\Lotto_Main_DB.accdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\Icons\bot_01_32px.png" />
     <None Include="Resources\Design\CloverBig.png" />
     <None Include="Resources\Icons\gear-32px.png" />
     <None Include="Resources\Icons\lotto-32px.png" />

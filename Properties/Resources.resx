@@ -121,40 +121,43 @@
   <data name="Stars4_20x" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Icons\Stars4_20x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="gear-32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\gear-32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="messages_en" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\messages_en.properties;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="Stars2_20x" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\Star2_20x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="CloverBig" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Design\CloverBig.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="lotto-32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Icons\lotto-32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Stars6_20x" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\Stars6_20x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Stars1_20x" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons\Stars1_20x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Exit_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Icons\Exit_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="statistic_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\statistic_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Stars1_20x" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\Stars1_20x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Open_Document_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons\Open_Document_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="torch_24x" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Icons\torch_24x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="gear-32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons\gear-32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Stars2_20x" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons\Star2_20x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="messages_en" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\messages_en.properties;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="statistic_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons\statistic_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Stars6_20x" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons\Stars6_20x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Star5_20x" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Icons\Star5_20x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Open_Document_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\Open_Document_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CloverBig" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Design\CloverBig.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="bot_01_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons\bot_01_32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

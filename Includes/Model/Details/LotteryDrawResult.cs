@@ -22,5 +22,6 @@ namespace LottoDataManager.Includes.Model.Details
         void PutNumberSequence(String sequence);
         bool IsDrawResulSequenceEmpty();
         ModelInput GetModelInput();
+        String GetMachineLearningDataSetEntry();
     }
 }

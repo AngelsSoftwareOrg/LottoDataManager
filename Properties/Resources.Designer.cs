@@ -63,6 +63,16 @@ namespace LottoDataManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap bot_01_32px {
+            get {
+                object obj = ResourceManager.GetObject("bot_01_32px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap CloverBig {
             get {
                 object obj = ResourceManager.GetObject("CloverBig", resourceCulture);

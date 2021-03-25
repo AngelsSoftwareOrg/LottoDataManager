@@ -25,5 +25,6 @@ namespace LottoDataManager.Includes.Database.DAO
         List<int> GetTopDrawnDigitFromDateRange(GameMode gameMode, DateTime dateFrom, DateTime dateTo);
         List<int[]> GetTopDrawnDigitToSequenceFromDateRange(GameMode gameMode, DateTime dateFrom, DateTime dateTo);
         List<LotteryDrawResult> GetLatestLotteryResult(GameMode gameMode, int howManyDraws);
+        List<LotteryDrawResult> GetMachineLearningDataSet(GameMode gameMode, DateTime startingDate);
     }
 }

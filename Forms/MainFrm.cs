@@ -556,6 +556,10 @@ namespace LottoDataManager
             AboutFrm f = new AboutFrm();
             f.ShowDialog();
         }
+        private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SetBetsAndResultDefaultList();
+        }
         #endregion
 
         #region "Main Form"
@@ -580,5 +584,7 @@ namespace LottoDataManager
             this.Show();
         }
         #endregion
+
+
     }
 }
