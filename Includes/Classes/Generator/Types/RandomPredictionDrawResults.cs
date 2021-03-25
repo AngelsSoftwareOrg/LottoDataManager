@@ -50,17 +50,52 @@ namespace LottoDataManager.Includes.Classes.Generator.Types
                 ModelInput sampleData = lotDraw.GetModelInput();
                 var predictionResult = ConsumeModel.Predict(sampleData);
 
-/*                Console.WriteLine(String.Format("Data: {0}, {1},{2},{3},{4},{5},{6},{7},{8} ", sampleData.Draw_date,
-                    sampleData.Num1, sampleData.Num2, sampleData.Num3, sampleData.Num4, sampleData.Num5, sampleData.Num6,
-                    sampleData.Game_cd.ToString(), predictionResult.Score.ToString()));*/
+                //Console.WriteLine(String.Format("Data: {0}, {1},{2},{3},{4},{5},{6},{7},{8} ", sampleData.Draw_date,
+                //    sampleData.Num1, sampleData.Num2, sampleData.Num3, sampleData.Num4, sampleData.Num5, sampleData.Num6,
+                //    sampleData.Game_cd.ToString(), predictionResult.Score.ToString("G20")));
 
                 if (int.Parse(predictionResult.Score.ToString().Substring(0, 1)) >= selectedCoefficient)
                 {
-                    results.Add(lotDraw.GetAllNumberSequenceSorted());
+                    int[] x = ConvertAndFillSequence(predictionResult.Score);
+                    results.Add(x);
                 }
             }
-
             return results;
+        }
+
+        private int[] ConvertAndFillSequence(float sourceNum)
+        {
+            int[] result = new int[this.lotteryTicketPanel.GetGameDigitCount()];
+            String numbers = sourceNum.ToString("G20");
+            if (numbers.Length < 12) numbers = numbers.PadLeft(12, char.Parse("0"));
+
+            Random rand = new Random();
+            int x = 0;
+            while (true)
+            {
+                int n = int.Parse(numbers.Substring(x, 2));
+                if (n < this.lotteryTicketPanel.GetMin()) n = rand.Next(this.lotteryTicketPanel.GetMin(), this.lotteryTicketPanel.GetMax());
+                if (n > this.lotteryTicketPanel.GetMax()) n = n - (this.lotteryTicketPanel.GetMax() % n);
+
+                while (true)
+                {
+                    if (result.Contains(n)) n++;
+                    if (n < this.lotteryTicketPanel.GetMin() || n > this.lotteryTicketPanel.GetMax())
+                    {
+                        n = rand.Next(this.lotteryTicketPanel.GetMin(), this.lotteryTicketPanel.GetMax());
+                    }
+
+                    if (!result.Contains(n))
+                    {
+                        result[x / 2] = n;
+                        break;
+                    }
+                }
+                x += 2;
+                if ((x + 2) > numbers.Length) break;
+            }
+            Array.Sort(result);
+            return result;
         }
     }
 }

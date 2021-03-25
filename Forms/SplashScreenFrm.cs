@@ -27,7 +27,7 @@ namespace LottoDataManager.Forms
         }
         public void DisposeInstance()
         {
-            System.Threading.Thread.Sleep(500);
+            System.Threading.Thread.Sleep(1000);
             Hide();
             if (splashScreenFrm != null) splashScreenFrm.Dispose(true);
         }

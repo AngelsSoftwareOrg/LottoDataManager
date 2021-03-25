@@ -41,7 +41,7 @@ namespace LottoDataManager.Forms
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
             this.pictureBox2.Location = new System.Drawing.Point(0, 0);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(950, 439);
+            this.pictureBox2.Size = new System.Drawing.Size(859, 439);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 1;
             this.pictureBox2.TabStop = false;
@@ -50,23 +50,23 @@ namespace LottoDataManager.Forms
             // 
             this.lblVersion.AutoSize = true;
             this.lblVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblVersion.Location = new System.Drawing.Point(481, 294);
+            this.lblVersion.Location = new System.Drawing.Point(441, 271);
             this.lblVersion.Name = "lblVersion";
             this.lblVersion.Size = new System.Drawing.Size(95, 20);
             this.lblVersion.TabIndex = 2;
             this.lblVersion.Text = "v2.0.0.1.r1";
             // 
-            // SplashScreen
+            // SplashScreenFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(950, 439);
+            this.ClientSize = new System.Drawing.Size(859, 439);
             this.Controls.Add(this.lblVersion);
             this.Controls.Add(this.pictureBox2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "SplashScreen";
+            this.Name = "SplashScreenFrm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Splash Screen";
             this.TransparencyKey = System.Drawing.Color.Yellow;
