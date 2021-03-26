@@ -20,6 +20,7 @@ namespace LottoDataManager.Forms
     {
         private bool isUpdateProcessingStarted = false;
         private LotteryDataServices lotteryDataServices;
+        private MachineLearningModelBuilder machineLearningModelBuilder;
 
         public MachineLearningFrm(LotteryDataServices lotteryDataServices)
         {
@@ -30,6 +31,14 @@ namespace LottoDataManager.Forms
             //debugging end
 
             this.lotteryDataServices = lotteryDataServices;
+            this.machineLearningModelBuilder = new MachineLearningModelBuilder();
+            machineLearningModelBuilder.ProcessingStatus += MachineLearningModelBuilder_ProcessingStatus;
+        }
+
+        private void MachineLearningModelBuilder_ProcessingStatus(object sender, string e)
+        {
+            log(e);
+            Application.DoEvents();
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -40,16 +49,17 @@ namespace LottoDataManager.Forms
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             IsUpdateStarted(true);
+            txtStatus.Text = "";
             StartUpdate();
             IsUpdateStarted(false);
         }
 
         private void StartUpdate()
         {
-            log("Getting data sets from the database.");
+            log(ResourcesUtils.GetMessage("mac_lrn_log_1"));
             String fileName = FileUtils.GetCSVTempFilePathName();
 
-            log("Creating temporary data set file: " + fileName);
+            log(ResourcesUtils.GetMessage("mac_lrn_log_2") + fileName  + "\r\n");
             using (FileStream fs = File.Create(fileName))
             {
                 byte[] info = new UTF8Encoding(true).GetBytes("draw_date,num1,num2,num3,num4,num5,num6,game_cd,RESULT\r\n");
@@ -57,13 +67,13 @@ namespace LottoDataManager.Forms
 
                 foreach (Lottery lottery in this.lotteryDataServices.GetLotteries())
                 {
-                    log("Getting datasets for " + lottery.GetDescription());
+                    log(ResourcesUtils.GetMessage("mac_lrn_log_3") + lottery.GetDescription());
 
                     DateTime startingDateTime = DateTimeConverterUtils.GetYear2011();
                     while (true)
                     {
                         List<LotteryDrawResult> lotteryDrawResults = lotteryDataServices.GetMachineLearningDataSet(lottery.GetGameMode(), startingDateTime);
-                        if (lotteryDrawResults.Count > 0) log("Processing record count of: " + lotteryDrawResults.Count);
+                        if (lotteryDrawResults.Count > 0) log(ResourcesUtils.GetMessage("mac_lrn_log_4") + lotteryDrawResults.Count);
 
                         int ctrEvent = 0;
                         foreach (LotteryDrawResult result in lotteryDrawResults)
@@ -83,18 +93,20 @@ namespace LottoDataManager.Forms
                         Application.DoEvents();
                         if (!isUpdateProcessingStarted) break;
                     }
-                    log("Done writing datasets ");
-                    log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                    log(ResourcesUtils.GetMessage("mac_lrn_log_5"));
+                    log(ResourcesUtils.GetMessage("mac_lrn_log_6"));
                     fs.Flush();
                 }
             }
             try
             {
-                log("Feeding data sets to Machine Learning Trainer...");
-                ModelBuilder.CreateModel(fileName);
-                log("Deleting data sets >>> " + fileName);
+                log(ResourcesUtils.GetMessage("mac_lrn_log_7") + "\r\n\r\n");
+                machineLearningModelBuilder.CreateModel(fileName);
+                log(ResourcesUtils.GetMessage("mac_lrn_log_6"));
+                log(ResourcesUtils.GetMessage("mac_lrn_log_8") + fileName + "\r\n\r\n");
                 if (fileName.Contains(FileUtils.TEMP_FILE_MARKED)) File.Delete(fileName);
-                log("Completed successfully....");
+                log(ResourcesUtils.GetMessage("mac_lrn_log_6"));
+                log(ResourcesUtils.GetMessage("mac_lrn_log_9") + "\r\n\r\n");
             }
             catch (Exception e)
             {

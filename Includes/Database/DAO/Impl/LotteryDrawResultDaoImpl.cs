@@ -487,7 +487,7 @@ namespace LottoDataManager.Includes.Database.DAO
             using (OleDbCommand command = new OleDbCommand())
             {
                 command.CommandType = CommandType.Text;
-                command.CommandText = " SELECT TOP 1000 jackpot_amt,ID,draw_date,num1,num2,num3,num4,num5,num6,winners,game_cd, " +
+                command.CommandText = " SELECT TOP 500 jackpot_amt,ID,draw_date,num1,num2,num3,num4,num5,num6,winners,game_cd, " +
                                         " 	     FORMAT(num1,'00') + FORMAT(num2,'00') + FORMAT(num3,'00') +  " +
                                         " 	     FORMAT(num4,'00') + FORMAT(num5,'00') + FORMAT(num6,'00') AS ['result'] " +
                                         "   FROM draw_results " +

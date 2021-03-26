@@ -38,11 +38,16 @@ namespace LottoDataManager.Forms
             // 
             // txtStatus
             // 
-            this.txtStatus.Dock = System.Windows.Forms.DockStyle.Top;
+            this.txtStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtStatus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.txtStatus.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtStatus.ForeColor = System.Drawing.Color.White;
             this.txtStatus.Location = new System.Drawing.Point(0, 0);
             this.txtStatus.Name = "txtStatus";
             this.txtStatus.ReadOnly = true;
-            this.txtStatus.Size = new System.Drawing.Size(755, 376);
+            this.txtStatus.Size = new System.Drawing.Size(940, 302);
             this.txtStatus.TabIndex = 0;
             this.txtStatus.Text = "";
             // 
@@ -50,7 +55,7 @@ namespace LottoDataManager.Forms
             // 
             this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExit.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnExit.Location = new System.Drawing.Point(653, 382);
+            this.btnExit.Location = new System.Drawing.Point(838, 308);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(94, 62);
             this.btnExit.TabIndex = 1;
@@ -61,7 +66,7 @@ namespace LottoDataManager.Forms
             // btnUpdate
             // 
             this.btnUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnUpdate.Location = new System.Drawing.Point(396, 382);
+            this.btnUpdate.Location = new System.Drawing.Point(581, 308);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(251, 62);
             this.btnUpdate.TabIndex = 2;
@@ -71,7 +76,8 @@ namespace LottoDataManager.Forms
             // 
             // btnStop
             // 
-            this.btnStop.Location = new System.Drawing.Point(6, 382);
+            this.btnStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnStop.Location = new System.Drawing.Point(6, 308);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(184, 62);
             this.btnStop.TabIndex = 3;
@@ -84,14 +90,12 @@ namespace LottoDataManager.Forms
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnExit;
-            this.ClientSize = new System.Drawing.Size(755, 450);
+            this.ClientSize = new System.Drawing.Size(940, 376);
             this.Controls.Add(this.btnStop);
             this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.txtStatus);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "MachineLearningFrm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

@@ -253,7 +253,7 @@ namespace LottoDataManager.Forms
                 sequence.Clear();
             }
             
-            bet.SelectedSequenceGenerator = ((SequenceGenerator)lvGenSeq.Tag).GetSequenceGeneratorType();
+            if(lvGenSeq.Tag !=null) bet.SelectedSequenceGenerator = ((SequenceGenerator)lvGenSeq.Tag).GetSequenceGeneratorType();
             bet.ShowDialog(this);
             bet.Dispose();
         }

@@ -560,6 +560,20 @@ namespace LottoDataManager
         {
             SetBetsAndResultDefaultList();
         }
+        private void machineLearningToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenMachineLearningForm();
+        }
+        private void machineLearningToolStripButton2_Click(object sender, EventArgs e)
+        {
+            OpenMachineLearningForm();
+        }
+        private void OpenMachineLearningForm()
+        {
+            MachineLearningFrm m = new MachineLearningFrm(this.lotteryDataServices);
+            m.ShowDialog();
+        }
+
         #endregion
 
         #region "Main Form"
@@ -583,7 +597,10 @@ namespace LottoDataManager
             SplashScreenFrm.GetIntance().DisposeInstance();
             this.Show();
         }
+
         #endregion
+
+
 
 
     }

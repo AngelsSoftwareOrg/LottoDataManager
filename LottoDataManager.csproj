@@ -126,7 +126,7 @@
     <Compile Include="Includes\Classes\LotteryDataWorker.cs" />
     <Compile Include="Includes\Classes\LotteryDataWorkerEvent.cs" />
     <Compile Include="Includes\Classes\LotteryDataWorkerEventStages.cs" />
-    <Compile Include="Includes\Classes\ML\ModelBuilder.cs" />
+    <Compile Include="Includes\Classes\ML\MachineLearningModelBuilder.cs" />
     <Compile Include="Includes\Classes\Reports\DashboardReport.cs" />
     <Compile Include="Includes\Classes\Reports\ReportAbstract.cs" />
     <Compile Include="Includes\Classes\Reports\ReportDataServices.cs" />
