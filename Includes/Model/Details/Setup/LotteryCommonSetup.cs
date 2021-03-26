@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LottoDataManager.Includes.Utilities;
+using LottoDataManagerML.Model;
 
 namespace LottoDataManager.Includes.Model.Details.Setup
 {

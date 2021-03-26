@@ -54,14 +54,14 @@ namespace LottoDataManager.Forms
             this.linkLabelFilterNow = new System.Windows.Forms.LinkLabel();
             this.dateTimePickerBets = new System.Windows.Forms.DateTimePicker();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.linkUnCheckAll = new System.Windows.Forms.LinkLabel();
+            this.linkCheckAll = new System.Windows.Forms.LinkLabel();
             this.btnRestoreBack = new System.Windows.Forms.Button();
             this.btnSaveChanges = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripProgBar = new System.Windows.Forms.ToolStripProgressBar();
             this.toolStripStatusLbl = new System.Windows.Forms.ToolStripStatusLabel();
-            this.linkCheckAll = new System.Windows.Forms.LinkLabel();
-            this.linkUnCheckAll = new System.Windows.Forms.LinkLabel();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.objectListViewWinningBets)).BeginInit();
             this.ctxMenuLvBet.SuspendLayout();
@@ -293,6 +293,28 @@ namespace LottoDataManager.Forms
             this.panel3.Size = new System.Drawing.Size(945, 79);
             this.panel3.TabIndex = 3;
             // 
+            // linkUnCheckAll
+            // 
+            this.linkUnCheckAll.AutoSize = true;
+            this.linkUnCheckAll.Location = new System.Drawing.Point(97, 14);
+            this.linkUnCheckAll.Name = "linkUnCheckAll";
+            this.linkUnCheckAll.Size = new System.Drawing.Size(82, 17);
+            this.linkUnCheckAll.TabIndex = 11;
+            this.linkUnCheckAll.TabStop = true;
+            this.linkUnCheckAll.Text = "Uncheck All";
+            this.linkUnCheckAll.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkUnCheckAll_LinkClicked);
+            // 
+            // linkCheckAll
+            // 
+            this.linkCheckAll.AutoSize = true;
+            this.linkCheckAll.Location = new System.Drawing.Point(12, 14);
+            this.linkCheckAll.Name = "linkCheckAll";
+            this.linkCheckAll.Size = new System.Drawing.Size(66, 17);
+            this.linkCheckAll.TabIndex = 10;
+            this.linkCheckAll.TabStop = true;
+            this.linkCheckAll.Text = "Check All";
+            this.linkCheckAll.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkCheckAll_LinkClicked);
+            // 
             // btnRestoreBack
             // 
             this.btnRestoreBack.Location = new System.Drawing.Point(464, 13);
@@ -348,32 +370,11 @@ namespace LottoDataManager.Forms
             this.toolStripStatusLbl.Size = new System.Drawing.Size(89, 20);
             this.toolStripStatusLbl.Text = "Hello World";
             // 
-            // linkCheckAll
-            // 
-            this.linkCheckAll.AutoSize = true;
-            this.linkCheckAll.Location = new System.Drawing.Point(12, 14);
-            this.linkCheckAll.Name = "linkCheckAll";
-            this.linkCheckAll.Size = new System.Drawing.Size(66, 17);
-            this.linkCheckAll.TabIndex = 10;
-            this.linkCheckAll.TabStop = true;
-            this.linkCheckAll.Text = "Check All";
-            this.linkCheckAll.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkCheckAll_LinkClicked);
-            // 
-            // linkUnCheckAll
-            // 
-            this.linkUnCheckAll.AutoSize = true;
-            this.linkUnCheckAll.Location = new System.Drawing.Point(97, 14);
-            this.linkUnCheckAll.Name = "linkUnCheckAll";
-            this.linkUnCheckAll.Size = new System.Drawing.Size(82, 17);
-            this.linkUnCheckAll.TabIndex = 11;
-            this.linkUnCheckAll.TabStop = true;
-            this.linkUnCheckAll.Text = "Uncheck All";
-            this.linkUnCheckAll.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkUnCheckAll_LinkClicked);
-            // 
             // ModifyClaimsFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnExit;
             this.ClientSize = new System.Drawing.Size(945, 576);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);

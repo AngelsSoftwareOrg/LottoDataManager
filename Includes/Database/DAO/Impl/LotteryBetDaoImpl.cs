@@ -5,8 +5,10 @@ using System.Data.OleDb;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LottoDataManager.Includes.Classes.Generator;
 using LottoDataManager.Includes.Database.DAO.Interface;
 using LottoDataManager.Includes.Model.Details;
+using LottoDataManager.Includes.Model.Details.Setup;
 using LottoDataManager.Includes.Model.Structs;
 using LottoDataManager.Includes.Utilities;
 
@@ -31,22 +33,56 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
             using (OleDbCommand command = new OleDbCommand())
             {
                 command.CommandType = CommandType.Text;
-                command.CommandText = "SELECT a.*, " +
-                                      "       (   IIF(a.num1 IN(b.num1, b.num2, b.num3, b.num4, b.num5, b.num6), 1, 0) +  " +
-                                      "           IIF(a.num2 IN(b.num1, b.num2, b.num3, b.num4, b.num5, b.num6), 1, 0) +  " +
-                                      "           IIF(a.num3 IN(b.num1, b.num2, b.num3, b.num4, b.num5, b.num6), 1, 0) +  " +
-                                      "           IIF(a.num4 IN(b.num1, b.num2, b.num3, b.num4, b.num5, b.num6), 1, 0) +  " +
-                                      "           IIF(a.num5 IN(b.num1, b.num2, b.num3, b.num4, b.num5, b.num6), 1, 0) +  " +
-                                      "           IIF(a.num6 IN(b.num1, b.num2, b.num3, b.num4, b.num5, b.num6), 1, 0)    " +
-                                      "       ) AS[match_cnt] " +
-                                      "  FROM lottery_bet a " +
-                                      "  LEFT OUTER JOIN draw_results b " +
-                                      "    ON a.target_draw_date = b.draw_date " +
-                                      " WHERE a.game_cd = @game_cd " +
-                                      "   AND a.game_cd = b.game_cd " +
-                                      "   AND a.target_draw_date >= CDATE(@sinceWhen) " +
-                                      "   AND a.active = true " +
-                                      " ORDER BY a.target_draw_date DESC";
+                command.CommandText = " SELECT a.*,  " +
+                                        "       (   IIF(a.num1 IN(b.num1, b.num2, b.num3, b.num4, b.num5, b.num6), 1, 0) +   " +
+                                        "           IIF(a.num2 IN(b.num1, b.num2, b.num3, b.num4, b.num5, b.num6), 1, 0) +   " +
+                                        "           IIF(a.num3 IN(b.num1, b.num2, b.num3, b.num4, b.num5, b.num6), 1, 0) +   " +
+                                        "           IIF(a.num4 IN(b.num1, b.num2, b.num3, b.num4, b.num5, b.num6), 1, 0) +   " +
+                                        "           IIF(a.num5 IN(b.num1, b.num2, b.num3, b.num4, b.num5, b.num6), 1, 0) +   " +
+                                        "           IIF(a.num6 IN(b.num1, b.num2, b.num3, b.num4, b.num5, b.num6), 1, 0)     " +
+                                        "       ) AS[match_cnt],  " +
+                                        "        o.ID AS[O_ID],  " +
+                                        "        o.outlet_cd AS[O_OUTLET_CD],  " +
+                                        "        o.description AS[O_DESCRIPTION], " +
+                                        "        s.ID AS[SEQ_ID],  " +
+                                        "        s.seqgencd AS[SEQ_SEQGENCD],  " +
+                                        "        s.description AS[SEQ_DESCFRIPTION] " +
+                                        "  FROM (((lottery_bet a  " +
+                                        "  LEFT OUTER JOIN draw_results b  " +
+                                        "    ON a.target_draw_date = b.draw_date)  " +
+                                        "  LEFT OUTER JOIN lottery_outlet o  " +
+                                        "    ON o.outlet_cd = a.outlet_cd) " +
+                                        "  LEFT OUTER JOIN lottery_seq_gen s " +
+                                        "   ON a.seqgencd = s.seqgencd) " +
+                                        " WHERE a.game_cd = @game_cd " +
+                                        "   AND a.game_cd = b.game_cd  " +
+                                        "   AND a.target_draw_date >= CDATE(@sinceWhen)  " +
+                                        "   AND a.active = true  " +
+                                        "   AND o.active = true " +
+                                        " UNION  " +
+                                        " SELECT a.*,  " +
+                                        "        0, " +
+                                        "        o.ID AS[O_ID], " +
+                                        "        o.outlet_cd AS[O_OUTLET_CD], " +
+                                        "        o.description AS[O_DESCRIPTION], " +
+                                        "        s.ID AS[SEQ_ID],  " +
+                                        "        s.seqgencd AS[SEQ_SEQGENCD],  " +
+                                        "        s.description AS[SEQ_DESCFRIPTION] " +
+                                        "   FROM ((lottery_bet a  " +
+                                        "   LEFT OUTER JOIN lottery_outlet o " +
+                                        "     ON o.outlet_cd = a.outlet_cd) " +
+                                        "   LEFT OUTER JOIN lottery_seq_gen s " +
+                                        "     ON a.seqgencd = s.seqgencd) " +
+                                        "  WHERE a.game_cd = @game_cd " +
+                                        "    AND a.target_draw_date >= CDATE(@sinceWhen)  " +
+                                        "    AND a.active = true  " +
+                                        "    AND o.active = true " +
+                                        "    AND (SELECT DISTINCT b.draw_date FROM draw_results b  " +
+                                        "   	   WHERE a.target_draw_date = b.draw_date  " +
+                                        "            AND a.game_cd = b.game_cd) IS NULL  " +
+                                        "  ORDER BY a.target_draw_date DESC ";
+                command.Parameters.AddWithValue("@game_cd", OleDbType.Integer).Value = gameMode;
+                command.Parameters.AddWithValue("@sinceWhen", OleDbType.DBDate).Value = sinceWhen.Date.ToString();
                 command.Parameters.AddWithValue("@game_cd", OleDbType.Integer).Value = gameMode;
                 command.Parameters.AddWithValue("@sinceWhen", OleDbType.DBDate).Value = sinceWhen.Date.ToString();
                 command.Connection = conn;
@@ -96,7 +132,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
             using (OleDbCommand command = new OleDbCommand())
             {
                 command.CommandType = CommandType.Text;
-                command.CommandText = "SELECT a.* " + //TOP 10 
+                command.CommandText = "SELECT a.* " +
                                       "  FROM lottery_bet a " + 
                                       "  LEFT OUTER JOIN lottery_winning_bet b " +
                                       "    ON (a.ID = b.bet_id) " +
@@ -153,6 +189,8 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                                       " WHERE game_cd = @game_cd " +
                                       "   AND target_draw_date = CDATE(@draw_date) " +
                                       "   AND active = true " +
+                                      "   AND outlet_cd = @outletCd " +
+                                      "   AND seqgencd = @seqgencd " +
                                       "   AND ( " +
                                       "     @num1 IN(num1, num2, num3, num4, num5, num6) " +
                                       " AND @num2 IN(num1, num2, num3, num4, num5, num6) " +
@@ -162,6 +200,8 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                                       " AND @num6 IN(num1, num2, num3, num4, num5, num6)) ";
                 command.Parameters.AddWithValue("@game_cd", lotteryBet.GetGameCode());
                 command.Parameters.AddWithValue("@draw_date", lotteryBet.GetTargetDrawDate().Date.ToString());
+                command.Parameters.AddWithValue("@outletCd", lotteryBet.GetOutletCode());
+                command.Parameters.AddWithValue("@seqgencd", lotteryBet.GetLotterySequenceGenerator().GetSeqGenCode());
                 command.Parameters.AddWithValue("@num1", lotteryBet.GetNum1());
                 command.Parameters.AddWithValue("@num2", lotteryBet.GetNum2());
                 command.Parameters.AddWithValue("@num3", lotteryBet.GetNum3());
@@ -189,10 +229,10 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
             {
                 command.CommandType = CommandType.Text;
                 command.CommandText = " INSERT INTO lottery_bet (game_cd,target_draw_date, " +
-                                      "                          bet_amt,active,outlet_cd,luckypick, " +
+                                      "                          bet_amt,active,outlet_cd,seqgencd, " +
                                       "                          num1,num2,num3,num4,num5,num6) " +
                                       " VALUES (@game_cda, CDATE(@target_draw_datea), " +
-                                      "         @bet_amta, 1, @outlet_cda, @luckypicka, " +
+                                      "         @bet_amta, 1, @outlet_cda, @seqgencda, " +
                                       "         @num1a, @num2a, @num3a, @num4a, @num5a, @num6a) ";
                 command.Connection = conn;
                 conn.Open();
@@ -206,7 +246,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                     command.Parameters.AddWithValue("@target_draw_datea", item.GetTargetDrawDate().Date.ToString());
                     command.Parameters.AddWithValue("@bet_amta", item.GetBetAmount());
                     command.Parameters.AddWithValue("@outlet_cda", item.GetOutletCode());
-                    command.Parameters.AddWithValue("@luckypicka", item.IsLuckyPick());
+                    command.Parameters.AddWithValue("@seqgencda", item.GetLotterySequenceGenerator().GetSeqGenCode());
                     command.Parameters.AddWithValue("@num1a", item.GetNum1());
                     command.Parameters.AddWithValue("@num2a", item.GetNum2());
                     command.Parameters.AddWithValue("@num3a", item.GetNum3());
@@ -239,17 +279,17 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
             {
                 command.CommandType = CommandType.Text;
                 command.CommandText = " INSERT INTO lottery_bet (game_cd,target_draw_date, " +
-                                      "                          bet_amt,active,outlet_cd,luckypick, " +
+                                      "                          bet_amt,active,outlet_cd,seqgencd, " +
                                       "                          num1,num2,num3,num4,num5,num6) " +
                                       " VALUES (@game_cda, CDATE(@target_draw_datea), " +
-                                      "         @bet_amta, 1, @outlet_cda, @luckypicka, " +
+                                      "         @bet_amta, 1, @outlet_cda, @seqgencda, " +
                                       "         @num1a, @num2a, @num3a, @num4a, @num5a, @num6a) ";
                 command.Connection = conn;
                 command.Parameters.AddWithValue("@game_cda", lotteryBet.GetGameCode());
                 command.Parameters.AddWithValue("@target_draw_datea", lotteryBet.GetTargetDrawDate().Date.ToString());
                 command.Parameters.AddWithValue("@bet_amta", lotteryBet.GetBetAmount());
                 command.Parameters.AddWithValue("@outlet_cda", lotteryBet.GetOutletCode());
-                command.Parameters.AddWithValue("@luckypicka", lotteryBet.IsLuckyPick());
+                command.Parameters.AddWithValue("@seqgencda", lotteryBet.GetLotterySequenceGenerator().GetSeqGenCode());
                 command.Parameters.AddWithValue("@num1a", lotteryBet.GetNum1());
                 command.Parameters.AddWithValue("@num2a", lotteryBet.GetNum2());
                 command.Parameters.AddWithValue("@num3a", lotteryBet.GetNum3());
@@ -287,10 +327,28 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
             bet.Num4 = int.Parse(reader["num4"].ToString());
             bet.Num5 = int.Parse(reader["num5"].ToString());
             bet.Num6 = int.Parse(reader["num6"].ToString());
-            bet.LuckyPick = bool.Parse(reader["luckypick"].ToString());
-            if (ColumnExists(reader,"match_cnt")){
+            if (ColumnExists(reader,"O_OUTLET_CD")){
                 bet.MatchNumCount = int.Parse(reader["match_cnt"].ToString());
             }
+            if (ColumnExists(reader, "O_OUTLET_CD"))
+            {
+                LotteryOutletSetup o = new LotteryOutletSetup()
+                {
+                    Id = int.Parse(reader["O_ID"].ToString()),
+                    OutletCode = int.Parse(reader["O_OUTLET_CD"].ToString()),
+                    Description = reader["O_DESCRIPTION"].ToString()
+                };
+                bet.LotteryOutlet = o;
+            }
+            if (ColumnExists(reader, "SEQ_SEQGENCD"))
+            {
+                LotterySequenceGeneratorSetup lotterySeqGen = new LotterySequenceGeneratorSetup();
+                lotterySeqGen.ID = int.Parse(reader["SEQ_ID"].ToString());
+                lotterySeqGen.SeqGenCode = int.Parse(reader["SEQ_SEQGENCD"].ToString());
+                lotterySeqGen.Description = reader["SEQ_DESCFRIPTION"].ToString();
+                bet.LotterySeqGen = lotterySeqGen;
+            }
+
             bet.SortNumbers();
             return bet;
         }
@@ -429,8 +487,9 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                                       "  WHERE a.game_cd = @game_cd " +
                                       "    AND a.active = true " +
                                       "    AND b.active = true " +
-                                      "    AND a.luckypick = true ";
+                                      "    AND a.seqgencd IN (@luckypick) ";
                 command.Parameters.AddWithValue("@game_cd", (int)gameMode);
+                command.Parameters.AddWithValue("@luckypick", (int)GeneratorType.LUCKY_PICK);
                 command.Connection = conn;
                 conn.Open();
                 using (OleDbDataReader reader = command.ExecuteReader())
@@ -515,6 +574,42 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                 }
             }
             return DateTimeConverterUtils.GetYear2011();
+        }
+        public List<LotteryBet> GetLotteryBetsCurrentSeason(GameMode gameMode)
+        {
+            List<LotteryBet> lotteryBet = new List<LotteryBet>();
+            using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
+            using (OleDbCommand command = new OleDbCommand())
+            {
+                command.CommandType = CommandType.Text;
+                command.CommandText = "SELECT b.* " +
+                                      "  FROM lottery_bet b " +
+                                      "  WHERE b.game_cd = @game_cd1 " +
+                                      "  AND b.active = true " +
+                                      "  AND b.target_draw_date >= (SELECT TOP 1 a.draw_date " +
+                                      "    FROM draw_results a " +
+                                      "   WHERE a.game_cd = @game_cd2 " +
+                                      "     AND a.draw_date > (SELECT TOP 1 d.draw_date " +
+                                      "                          FROM draw_results d " +
+                                      "                         WHERE d.winners > 0 " +
+                                      "                           AND d.game_cd = @game_cd3 " +
+                                      "                         ORDER BY d.draw_date DESC) " +
+                                      "  ORDER BY a.draw_date ASC)";
+                command.Parameters.AddWithValue("@game_cd1", gameMode);
+                command.Parameters.AddWithValue("@game_cd2", gameMode);
+                command.Parameters.AddWithValue("@game_cd3", gameMode);
+                command.Connection = conn;
+                conn.Open();
+
+                using (OleDbDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        lotteryBet.Add(GetInstanceDeriveLotteryBetSetup(reader));
+                    }
+                }
+            }
+            return lotteryBet;
         }
         public double[] GetMonthlySpending(GameMode gameMode, int year)
         {

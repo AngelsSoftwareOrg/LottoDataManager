@@ -25,10 +25,12 @@ namespace LottoDataManager.Includes.Classes
         private LotteryWinningBetDao lotteryWinningBetDao;
         private LotteryDataWorker lotteryDataWorker;
         private LotteryDrawResultDao lotteryDrawResultDao;
-
+        private LotterySequenceGenDao lotterySeqGenDao;
+        private UserSettings userSetting;
         public LotteryDataServices(LotteryDetails lotteryDetails)
         {
             this.lotteryDetails = lotteryDetails;
+            this.userSetting = new UserSettings();
             this.lotteryDataDerivation = new LotteryDataDerivation(this.LotteryDetails.GameMode);
             this.lotteryTicketPanelDao = LotteryTicketPanelDaoImpl.GetInstance();
             this.lotteryOutletDao = LotteryOutletDaoImpl.GetInstance();
@@ -38,6 +40,7 @@ namespace LottoDataManager.Includes.Classes
             this.lotteryWinningBetDao = LotteryWinningBetDaoImpl.GetInstance();
             this.lotteryDataWorker = new LotteryDataWorker();
             this.lotteryDrawResultDao = LotteryDrawResultDaoImpl.GetInstance();
+            this.lotterySeqGenDao = LotterySequenceGenDaoImpl.GetInstance();
         }
         private GameMode GameMode {
 
@@ -90,7 +93,7 @@ namespace LottoDataManager.Includes.Classes
         }
         public void SaveLastOpenedLottery()
         {
-            this.userSettingDao.SaveLastOpenedLottery(this.LotteryDetails.GameCode);
+            this.userSetting.SaveLastOpenedLottery(this.lotteryDetails.GameCode);
         }
         public String GetNextDrawDateFormatted()
         {
@@ -139,6 +142,42 @@ namespace LottoDataManager.Includes.Classes
         public void UpdateClaimStatus(LotteryWinningBet winBet)
         {
             lotteryWinningBetDao.UpdateClaimStatus(winBet);
+        }
+        public List<int> GetTopDrawnResultDigits()
+        {
+            return this.lotteryDrawResultDao.GetTopDrawnDigitResults(GameMode);
+        }
+        public List<int> GetTopDrawnPreviousSeasonDigitResults()
+        {
+            return this.lotteryDrawResultDao.GetTopDrawnPreviousSeasonDigitResults(GameMode);
+        }
+        public List<int> GetTopDrawnDigitFromJackpotsResults()
+        {
+            return this.lotteryDrawResultDao.GetTopDrawnDigitFromJackpotsResults(GameMode);
+        }
+        public List<int> GetTopDrawnDigitFromDateRange(DateTime dateFrom, DateTime dateTo)
+        {
+            return this.lotteryDrawResultDao.GetTopDrawnDigitFromDateRange(GameMode, dateFrom, dateTo);
+        }
+        public List<int[]> GetTopDrawnDigitToSequenceFromDateRange(DateTime dateFrom, DateTime dateTo)
+        {
+            return this.lotteryDrawResultDao.GetTopDrawnDigitToSequenceFromDateRange(GameMode, dateFrom, dateTo);
+        }
+        public List<LotteryBet> GetLotteryBetsCurrentSeason()
+        {
+            return this.lotteryBetDao.GetLotteryBetsCurrentSeason(GameMode);
+        }
+        public List<LotterySequenceGenerator> GetAllSequenceGenerators()
+        {
+            return lotterySeqGenDao.GetAllSeqGenerators();
+        }
+        public List<LotteryDrawResult> GetLatestLotteryResult(int howManyDraws)
+        {
+            return this.lotteryDrawResultDao.GetLatestLotteryResult(this.lotteryDetails.GameMode, howManyDraws);
+        }
+        public List<LotteryDrawResult> GetMachineLearningDataSet(GameMode gameMode, DateTime startingDate)
+        {
+            return this.lotteryDrawResultDao.GetMachineLearningDataSet(gameMode, startingDate);
         }
     }
 }

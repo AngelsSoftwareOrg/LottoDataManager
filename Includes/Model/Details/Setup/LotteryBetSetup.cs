@@ -18,6 +18,9 @@ namespace LottoDataManager.Includes.Model.Details
         private int outletCode;
         private bool luckyPick;
         private int matchNumCount;
+        private LotteryOutlet lotteryOutlet;
+        private LotterySequenceGenerator lotterySeqGen;
+
         public LotteryBetSetup(): base() {}
         public int GameCode { get => gameCode; set => gameCode = value; }
         public DateTime TargetDrawDate { get => targetDrawDate; set => targetDrawDate = value; }
@@ -26,6 +29,9 @@ namespace LottoDataManager.Includes.Model.Details
         public long Id { get => id; set => id = value; }
         public bool LuckyPick { get => luckyPick; set => luckyPick = value; }
         public int MatchNumCount { get => matchNumCount; set => matchNumCount = value; }
+        public LotteryOutlet LotteryOutlet { get => lotteryOutlet; set => lotteryOutlet = value; }
+        public LotterySequenceGenerator LotterySeqGen { get => lotterySeqGen; set => lotterySeqGen = value; }
+
         public double GetBetAmount()
         {
             return BetAmount;
@@ -82,6 +88,24 @@ namespace LottoDataManager.Includes.Model.Details
         public int GetMatchNumCount()
         {
             return MatchNumCount;
+        }
+        public LotteryOutlet GetLotteryOutlet()
+        {
+            return LotteryOutlet;
+        }
+        public LotterySequenceGenerator GetLotterySequenceGenerator()
+        {
+            return LotterySeqGen;
+        }
+        public String GetGNUFormat()
+        {
+            return String.Format("{0}-{1}-{2}-{3}-{4}-{5}", 
+                Num1.ToString().PadLeft(2, char.Parse("0")), 
+                Num2.ToString().PadLeft(2, char.Parse("0")), 
+                Num3.ToString().PadLeft(2, char.Parse("0")), 
+                Num4.ToString().PadLeft(2, char.Parse("0")), 
+                Num5.ToString().PadLeft(2, char.Parse("0")), 
+                Num6.ToString().PadLeft(2, char.Parse("0")));
         }
     }
 }

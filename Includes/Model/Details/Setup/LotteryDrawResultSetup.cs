@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using LottoDataManager.Includes.Model.Details.Setup;
 using LottoDataManager.Includes.Utilities;
+using LottoDataManagerML.Model;
 
 namespace LottoDataManager.Includes.Model.Details
 {
@@ -16,7 +17,6 @@ namespace LottoDataManager.Includes.Model.Details
         private int gameCode;
         private double jackpotAmt;
         private int winners;
-
         public LotteryDrawResultSetup() : base() { }
         public DateTime DrawDate { get => drawDate; set => drawDate = value; }
         public int GameCode { get => gameCode; set => gameCode = value; }
@@ -70,6 +70,20 @@ namespace LottoDataManager.Includes.Model.Details
         {
             return (this.Num1 <= 0 && this.Num2 <= 0 && this.Num3 <= 0 && this.Num4 <= 0 && this.Num5 <= 0 && this.Num6 <= 0);
         }
+        public ModelInput GetModelInput()
+        {
+            return new ModelInput()
+            {
+                Draw_date = GetDrawDateFormatted() + " 00:00:00.0",
+                Num1 = GetNum1(),
+                Num2 = GetNum2(),
+                Num3 = GetNum3(),
+                Num4 = GetNum4(),
+                Num5 = GetNum5(),
+                Num6 = GetNum6(),
+                Game_cd = GetGameCode()
+            };
+        }
         override
         public String ToString()
         {
@@ -81,5 +95,21 @@ namespace LottoDataManager.Includes.Model.Details
             return base.ToString();
 #endif
         }
+
+        public String GetMachineLearningDataSetEntry()
+        {
+            //draw_date,num1,num2,num3,num4,num5,num6,game_cd,RESULT
+            return String.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8}",
+                    DateTimeConverterUtils.ConvertToFormat(DrawDate,DateTimeConverterUtils.STANDARD_DATE_FORMAT),
+                    Num1, Num2, Num3, Num4, Num5, Num6, GameCode, 
+                    String.Format("{0}{1}{2}{3}{4}{5}", 
+                        Num1.ToString().PadLeft(2, char.Parse("0")),
+                        Num2.ToString().PadLeft(2, char.Parse("0")),
+                        Num3.ToString().PadLeft(2, char.Parse("0")),
+                        Num4.ToString().PadLeft(2, char.Parse("0")),
+                        Num5.ToString().PadLeft(2, char.Parse("0")),
+                        Num6.ToString().PadLeft(2, char.Parse("0"))));
+        }
+    
     }
 }

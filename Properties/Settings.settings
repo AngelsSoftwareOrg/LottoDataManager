@@ -14,5 +14,17 @@
     <Setting Name="lotto_scrape_site" Type="System.String" Scope="User">
       <Value Profile="(Default)">https://www.pcso.gov.ph/SearchLottoResult.aspx</Value>
     </Setting>
+    <Setting Name="version_major" Type="System.String" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="version_minor" Type="System.String" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="version_patch" Type="System.String" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="version_release" Type="System.String" Scope="User">
+      <Value Profile="(Default)">r0</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

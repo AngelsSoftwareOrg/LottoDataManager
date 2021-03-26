@@ -37,6 +37,14 @@ namespace LottoDataManager.Includes
             return DatabaseType.MS_ACCESS;
         }
 
+        public static String GetAppVersion()
+        {
+            return String.Format("{0}.{1}.{2}.{3}",
+                Properties.Settings.Default.version_major,
+                Properties.Settings.Default.version_minor,
+                Properties.Settings.Default.version_patch,
+                Properties.Settings.Default.version_release);
+        }
 
     }
 }

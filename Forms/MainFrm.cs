@@ -16,6 +16,8 @@ using LottoDataManager.Includes.Database.DAO;
 using LottoDataManager.Includes.Model;
 using LottoDataManager.Includes.Model.Details;
 using LottoDataManager.Includes.Model.Game;
+using LottoDataManager.Includes.Model.Reports;
+using LottoDataManager.Includes.Model.Structs;
 using LottoDataManager.Includes.Utilities;
 
 namespace LottoDataManager
@@ -40,50 +42,13 @@ namespace LottoDataManager
         }
         private void RefreshSubscription()
         {
-            Application.ApplicationExit += new EventHandler(this.OnApplicationExit);
             this.lottoWebScraper.WebScrapingStatus += LottoWebScraper_WebScrapingStatus;
-            this.lotteryDataWorker.LotteryDataWorkerProcessingStatus += LotteryDataWorker_LotteryDataWorkerProcessingStatus;
-            this.olvColBetResult.ImageGetter = delegate (object rowObject) {
-                if (rowObject == null) return 0;
-                LotteryBet p = (LotteryBet)rowObject;
-                if (p.GetMatchNumCount() <= 0) return 0;
-                return ImageUtils.GetStarWonImage(p.GetMatchNumCount());
-            };
-            this.olvColBetResult.AspectGetter = delegate (object rowObject) {
-                if (rowObject == null) return 0;
-                LotteryBet p = (LotteryBet)rowObject;
-                return p.GetMatchNumCount();
-            };
-            this.olvColBetResult.AspectToStringConverter = delegate (object rowObject) {
-                return String.Empty;
-            };
-            this.olvColWinners.AspectGetter = delegate (object rowObject)
-            {
-                if (rowObject == null) return 0;
-                LotteryDrawResult p = (LotteryDrawResult)rowObject;
-                if (p.GetWinners() <= 0) return "0";
-                return p.GetWinners();
-            };
-            this.olvColWinStamp.ImageGetter = delegate (object rowObject) {
-                if (rowObject == null) return 0;
-                LotteryDrawResult p = (LotteryDrawResult)rowObject;
-                if (p.GetWinners() <= 0) return 0;
-                return ImageUtils.GetStarJackpotImage(5);
-            };
-            this.olvColWinStamp.AspectGetter = delegate (object rowObject) {
-                if (rowObject == null) return 0;
-                LotteryDrawResult p = (LotteryDrawResult)rowObject;
-                return p.GetWinners();
-            };
-            this.olvColWinStamp.AspectToStringConverter = delegate (object rowObject) {
-                return String.Empty;
-            };
         }
         private void ReinitateLotteryServices()
         {
             this.lotteryDataServices = new LotteryDataServices(this.lotteryDetails);
             this.lotteryDataWorker = new LotteryDataWorker();
-            this.dashboardReport = new DashboardReport(this.lotteryDetails);
+            this.dashboardReport = new DashboardReport(this.lotteryDataServices);
         }
         private void ClearAllForms()
         {
@@ -103,15 +68,53 @@ namespace LottoDataManager
         {
             try
             {
+                Application.ApplicationExit += new EventHandler(this.OnApplicationExit);
+                this.lotteryDataWorker.LotteryDataWorkerProcessingStatus += LotteryDataWorker_LotteryDataWorkerProcessingStatus;
+
+                this.olvColBetResult.ImageGetter = delegate (object rowObject) {
+                    if (rowObject == null) return 0;
+                    LotteryBet p = (LotteryBet)rowObject;
+                    if (p.GetMatchNumCount() <= 0) return 0;
+                    return ImageUtils.GetStarWonImage(p.GetMatchNumCount());
+                };
+                this.olvColBetResult.AspectGetter = delegate (object rowObject) {
+                    if (rowObject == null) return 0;
+                    LotteryBet p = (LotteryBet)rowObject;
+                    return p.GetMatchNumCount();
+                };
+                this.olvColBetResult.AspectToStringConverter = delegate (object rowObject) {
+                    return String.Empty;
+                };
+                this.olvColWinners.AspectGetter = delegate (object rowObject)
+                {
+                    if (rowObject == null) return 0;
+                    LotteryDrawResult p = (LotteryDrawResult)rowObject;
+                    if (p.GetWinners() <= 0) return "0";
+                    return p.GetWinners();
+                };
+                this.olvColWinStamp.ImageGetter = delegate (object rowObject) {
+                    if (rowObject == null) return 0;
+                    LotteryDrawResult p = (LotteryDrawResult)rowObject;
+                    if (p.GetWinners() <= 0) return 0;
+                    return ImageUtils.GetStarJackpotImage(5);
+                };
+                this.olvColWinStamp.AspectGetter = delegate (object rowObject) {
+                    if (rowObject == null) return 0;
+                    LotteryDrawResult p = (LotteryDrawResult)rowObject;
+                    return p.GetWinners();
+                };
+                this.olvColWinStamp.AspectToStringConverter = delegate (object rowObject) {
+                    return String.Empty;
+                };
+
                 this.Enabled = false;
                 ClearAllForms();
-                Application.DoEvents();
-                this.Show();
                 Application.DoEvents();
                 RefreshFieldDetails();
                 SetBetsAndResultDefaultList();
                 RefreshWinningNumbersGridContent();
                 DisplayStatusLabel();
+
             }
             catch (Exception ex)
             {
@@ -221,17 +224,44 @@ namespace LottoDataManager
         }
         private void RefreshDashboardReport()
         {
-            listViewOtherDetails.Items.Clear();
             listViewOtherDetails.BeginUpdate();
-            foreach (KeyValuePair<String, String> kvp in dashboardReport.GetDashboardReport())
+            listViewOtherDetails.Items.Clear();
+            foreach (DashboardReportItem dpitm in dashboardReport.GetDashboardReport())
             {
-                ListViewItem itm = new ListViewItem(kvp.Key);
-                itm.SubItems.Add(kvp.Value);
+                ListViewItem itm = new ListViewItem(dpitm.GetDescription());
+                itm.SubItems.Add(dpitm.GetValue());
+                itm.Tag = dpitm;
+                if (dpitm.IsHighlight()) itm.BackColor = dpitm.GetHighlightColor();
+                if (dpitm.GetFontColor() != Color.Black) itm.ForeColor= dpitm.GetFontColor();
                 listViewOtherDetails.Items.Add(itm);
             }
             listViewOtherDetails.EndUpdate();
-            Application.DoEvents();
         }
+        private void listViewOtherDetails_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            ListViewHitTestInfo info = listViewOtherDetails.HitTest(e.X, e.Y);
+            ListViewItem item = info.Item;
+
+            if (item == null)
+            {
+                this.listViewOtherDetails.SelectedItems.Clear();
+                return;
+            }
+
+            DashboardReportItem rptItem = (DashboardReportItem)item.Tag;
+            if(rptItem.GetDashboardReportItemActions() != DashboardReportItemActions.NONE)
+            {
+                ActionableDashboardReportItem(rptItem);
+            }
+        }
+        private void ActionableDashboardReportItem(DashboardReportItem rptItem)
+        {
+            if(rptItem.GetDashboardReportItemActions() == DashboardReportItemActions.OPEN_CLAIM_FORM)
+            {
+                ShowModifyClaimStatus();
+            }
+        }
+
         #endregion
 
         #region "Draw Result"
@@ -334,8 +364,7 @@ namespace LottoDataManager
         private void toolStripBtnWinBets_Click(object sender, EventArgs e)
         {
             statusLabelLoading.Visible = true;
-            Application.DoEvents();
-            RefreshSubscription();
+            //RefreshSubscription();
             lotteryDataWorker.ProcessCheckingForWinningBets(this.lotteryDetails.GameMode);
             statusLabelLoading.Text = "";
             RefreshBets();
@@ -349,11 +378,26 @@ namespace LottoDataManager
         {
             AddBetFrm betForm = new AddBetFrm(this.lotteryDataServices);
             betForm.ShowDialog();
+            betForm.Dispose();
             RefreshBets();
         }
         private void compareDrawResultAndBetToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SelectBetAndOpenMatchMakingForm();
+        }
+        private void selectAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            objectLstVwLatestBet.SelectAll();
+        }
+        private void copySelectedAsLinearCSVToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach(LotteryBet bet in objectLstVwLatestBet.SelectedObjects)
+            {
+                if (sb.Length > 0) sb.Append(",");
+                sb.Append(bet.GetGNUFormat());
+            }
+            if (sb.Length > 0) Clipboard.SetText(sb.ToString());
         }
         private void objectLstVwLatestBet_DoubleClick(object sender, EventArgs e)
         {
@@ -387,6 +431,7 @@ namespace LottoDataManager
         {
             DrawAndBetMatchFrm m = new DrawAndBetMatchFrm(this.lotteryDataServices, dateRef, betIdDefault);
             m.ShowDialog();
+            m.Dispose();
         }
         #endregion
 
@@ -403,7 +448,6 @@ namespace LottoDataManager
                 List<LotteryDetails> lotteryArr = new List<LotteryDetails>();
                 lotteryArr.Add(this.lotteryDetails);
                 lottoWebScraper.StartScraping(lotteryArr);
-                RefreshBets();
             }
             catch (Exception ex)
             {
@@ -428,6 +472,7 @@ namespace LottoDataManager
                 toolStripProgressBarUpdater.Value = 0;
                 toolStripProgressBarUpdater.Visible = false;
                 RefreshWinningNumbersGridContent();
+                RefreshBets();
             }
             else
             {
@@ -482,6 +527,7 @@ namespace LottoDataManager
         {
             ModifyBetFrm bet = new ModifyBetFrm(lotteryDataServices);
             bet.ShowDialog();
+            bet.Dispose();
             RefreshBets();
         }
         private void editClaimStatusToolStripMenuItem_Click(object sender, EventArgs e)
@@ -496,8 +542,38 @@ namespace LottoDataManager
         {
             ModifyClaimsFrm m = new ModifyClaimsFrm(this.lotteryDataServices);
             m.ShowDialog();
+            m.Dispose();
             RefreshBets();
         }
+        private void seqGenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PickGeneratorFrm pick = new PickGeneratorFrm(lotteryDataServices);
+            pick.ShowDialog();
+            pick.Dispose();
+        }
+        private void aboutToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            AboutFrm f = new AboutFrm();
+            f.ShowDialog();
+        }
+        private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SetBetsAndResultDefaultList();
+        }
+        private void machineLearningToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenMachineLearningForm();
+        }
+        private void machineLearningToolStripButton2_Click(object sender, EventArgs e)
+        {
+            OpenMachineLearningForm();
+        }
+        private void OpenMachineLearningForm()
+        {
+            MachineLearningFrm m = new MachineLearningFrm(this.lotteryDataServices);
+            m.ShowDialog();
+        }
+
         #endregion
 
         #region "Main Form"
@@ -516,8 +592,16 @@ namespace LottoDataManager
         {
             this.Close();
         }
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            SplashScreenFrm.GetIntance().DisposeInstance();
+            this.Show();
+        }
 
         #endregion
+
+
+
 
     }
 }

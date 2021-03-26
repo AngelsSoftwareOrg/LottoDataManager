@@ -90,7 +90,7 @@ namespace LottoDataManager.Includes.Classes
         {
             lotteryDataWorkerEvent.LotteryDataWorkerEventStages = stage;
             lotteryDataWorkerEvent.CustomStatusMessage = message;
-            LotteryDataWorkerProcessingStatus.Invoke(this, lotteryDataWorkerEvent);
+            if(LotteryDataWorkerProcessingStatus!=null) LotteryDataWorkerProcessingStatus.Invoke(this, lotteryDataWorkerEvent);
         }
     }
 }

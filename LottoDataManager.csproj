@@ -14,7 +14,7 @@
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -32,28 +32,13 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Clover_Icon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AngleSharp, Version=0.14.0.0, Culture=neutral, PublicKeyToken=e83494dcdc6d31ea, processorArchitecture=MSIL">
-      <HintPath>packages\AngleSharp.0.14.0\lib\net472\AngleSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="FSharp.Core, Version=4.5.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>packages\FSharp.Core.4.5.2\lib\net45\FSharp.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="HtmlAgilityPack, Version=1.7.4.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
-      <HintPath>packages\HtmlAgilityPack.1.7.4\lib\Net45\HtmlAgilityPack.dll</HintPath>
-    </Reference>
-    <Reference Include="ObjectListView, Version=2.9.1.1072, Culture=neutral, PublicKeyToken=b1c5bf581481bcd4, processorArchitecture=MSIL">
-      <HintPath>packages\ObjectListView.Official.2.9.1\lib\net20\ObjectListView.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Caching" />
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>packages\System.Runtime.CompilerServices.Unsafe.4.5.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Text.Encoding.CodePages, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>packages\System.Text.Encoding.CodePages.4.5.0\lib\net461\System.Text.Encoding.CodePages.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -65,6 +50,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\AboutFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AboutFrm.Designer.cs">
+      <DependentUpon>AboutFrm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\AddBetFrm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -76,6 +67,12 @@
     </Compile>
     <Compile Include="Forms\DrawAndBetMatchFrm.Designer.cs">
       <DependentUpon>DrawAndBetMatchFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MachineLearningFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MachineLearningFrm.Designer.cs">
+      <DependentUpon>MachineLearningFrm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\ModifyClaimsFrm.cs">
       <SubType>Form</SubType>
@@ -89,10 +86,47 @@
     <Compile Include="Forms\ModifyBetFrm.Designer.cs">
       <DependentUpon>ModifyBetFrm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\PickGeneratorFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PickGeneratorFrm.Designer.cs">
+      <DependentUpon>PickGeneratorFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SplashScreenFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SplashScreenFrm.Designer.cs">
+      <DependentUpon>SplashScreenFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Includes\Classes\Comparers\AbstractSorter.cs" />
+    <Compile Include="Includes\Classes\Comparers\ListviewIntSorter.cs" />
+    <Compile Include="Includes\Classes\Comparers\ListviewTextSorter.cs" />
+    <Compile Include="Includes\Classes\Generator\AbstractSequenceGenerator.cs" />
+    <Compile Include="Includes\Classes\Generator\GeneratorParamType.cs" />
+    <Compile Include="Includes\Classes\Generator\GeneratorType.cs" />
+    <Compile Include="Includes\Classes\Generator\Types\NumberNotYetPickUpGenerator.cs" />
+    <Compile Include="Includes\Classes\Generator\SequenceGeneratorParamFieldsFormFactory.cs" />
+    <Compile Include="Includes\Classes\Generator\SequenceGenerator.cs" />
+    <Compile Include="Includes\Classes\Generator\SequenceGeneratorParams.cs" />
+    <Compile Include="Includes\Classes\Generator\Types\HistoricalFrequencyRandomGenerator.cs" />
+    <Compile Include="Includes\Classes\Generator\Types\LuckyPickGenerator.cs" />
+    <Compile Include="Includes\Classes\Generator\Types\NumsNotYetBetCurSeasonGenerator.cs" />
+    <Compile Include="Includes\Classes\Generator\Types\RandomPatternSequenceGenerator.cs" />
+    <Compile Include="Includes\Classes\Generator\Types\RandomNumbersFromJackpotsDigitsGenerator.cs" />
+    <Compile Include="Includes\Classes\Generator\Types\RandomPickTotalSumBetweenGenerators.cs" />
+    <Compile Include="Includes\Classes\Generator\Types\RandomPickTotalSumBetweenGenerators1n31.cs" />
+    <Compile Include="Includes\Classes\Generator\Types\RandomPickTotalSumBetweenGeneratorsUsingTopPickCurSeason.cs" />
+    <Compile Include="Includes\Classes\Generator\Types\RandomPredictionDrawResults.cs" />
+    <Compile Include="Includes\Classes\Generator\Types\RandomPrediction.cs" />
+    <Compile Include="Includes\Classes\Generator\Types\TopDrawCurrentSeasonGenerator.cs" />
+    <Compile Include="Includes\Classes\Generator\Types\TopDrawnNumbersFromJackpotGenerator.cs" />
+    <Compile Include="Includes\Classes\Generator\Types\TopDrawNumbersFromDateRange.cs" />
+    <Compile Include="Includes\Classes\Generator\Types\TopDrawPreviousSeasonGenerator.cs" />
     <Compile Include="Includes\Classes\LotteryDataServices.cs" />
     <Compile Include="Includes\Classes\LotteryDataWorker.cs" />
     <Compile Include="Includes\Classes\LotteryDataWorkerEvent.cs" />
     <Compile Include="Includes\Classes\LotteryDataWorkerEventStages.cs" />
+    <Compile Include="Includes\Classes\ML\MachineLearningModelBuilder.cs" />
     <Compile Include="Includes\Classes\Reports\DashboardReport.cs" />
     <Compile Include="Includes\Classes\Reports\ReportAbstract.cs" />
     <Compile Include="Includes\Classes\Reports\ReportDataServices.cs" />
@@ -105,11 +139,13 @@
     <Compile Include="Includes\Database\DAO\Impl\LotteryBetDaoImpl.cs" />
     <Compile Include="Includes\Database\DAO\Impl\LotteryDaoImplCommon.cs" />
     <Compile Include="Includes\Database\DAO\Impl\LotteryOutletDaoImpl.cs" />
+    <Compile Include="Includes\Database\DAO\Impl\LotterySequenceGenDaoImpl.cs" />
     <Compile Include="Includes\Database\DAO\Impl\LotteryWinningBetDaoImpl.cs" />
     <Compile Include="Includes\Database\DAO\Impl\LotteryDaoImpl.cs" />
     <Compile Include="Includes\Database\DAO\Impl\UserSettingDaoImpl.cs" />
     <Compile Include="Includes\Database\DAO\Interface\LotteryBetDao.cs" />
     <Compile Include="Includes\Database\DAO\Interface\LotteryOutletDao.cs" />
+    <Compile Include="Includes\Database\DAO\Interface\LotterySequenceGenDao.cs" />
     <Compile Include="Includes\Database\DAO\Interface\LotteryWinningBetDao.cs" />
     <Compile Include="Includes\Database\DAO\Interface\LotteryDao.cs" />
     <Compile Include="Includes\Database\DAO\Interface\LotteryDrawResultDao.cs" />
@@ -117,6 +153,10 @@
     <Compile Include="Includes\Database\DAO\Interface\LotteryWinningCombinationDao.cs" />
     <Compile Include="Includes\Database\DAO\Impl\LotteryWinningCombinationDaoImpl.cs" />
     <Compile Include="Includes\Database\DAO\Interface\UserSettingDao.cs" />
+    <Compile Include="Includes\Model\Details\LotterySequenceGenerator.cs" />
+    <Compile Include="Includes\Model\Details\Setup\LotterySequenceGeneratorSetup.cs" />
+    <Compile Include="Includes\Model\Reports\DashboardReportItem.cs" />
+    <Compile Include="Includes\Model\Reports\Setup\DashboardReportItemSetup.cs" />
     <Compile Include="Includes\Model\Details\Lottery.cs" />
     <Compile Include="Includes\Model\Details\LotteryBet.cs" />
     <Compile Include="Includes\Model\Details\LotteryDataDerivation.cs" />
@@ -135,6 +175,7 @@
     <Compile Include="Includes\Model\Game\Game649.cs" />
     <Compile Include="Includes\Model\Game\Game645.cs" />
     <Compile Include="Includes\Model\Game\GameFactory.cs" />
+    <Compile Include="Includes\Model\Structs\DashboardReportItemActions.cs" />
     <Compile Include="Includes\Utilities\AppSettings.cs" />
     <Compile Include="Includes\Database\DAO\Interface\LotteryScheduleDao.cs" />
     <Compile Include="Includes\Database\DAO\Impl\LotteryScheduleDaoImpl.cs" />
@@ -162,16 +203,23 @@
     <Compile Include="Includes\Utilities\ClassReflectionUtil.cs" />
     <Compile Include="Includes\Utilities\ConverterUtils.cs" />
     <Compile Include="Includes\Utilities\DateTimeConverterUtils.cs" />
+    <Compile Include="Includes\Utilities\FileUtils.cs" />
     <Compile Include="Includes\Utilities\ImageUtils.cs" />
     <Compile Include="Includes\Utilities\ResourcesUtils.cs" />
     <Compile Include="Includes\Utilities\StringUtils.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\AboutFrm.resx">
+      <DependentUpon>AboutFrm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\AddBetFrm.resx">
       <DependentUpon>AddBetFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\DrawAndBetMatchFrm.resx">
       <DependentUpon>DrawAndBetMatchFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MachineLearningFrm.resx">
+      <DependentUpon>MachineLearningFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainFrm.resx">
       <DependentUpon>MainFrm.cs</DependentUpon>
@@ -181,6 +229,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ModifyBetFrm.resx">
       <DependentUpon>ModifyBetFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PickGeneratorFrm.resx">
+      <DependentUpon>PickGeneratorFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SplashScreenFrm.resx">
+      <DependentUpon>SplashScreenFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -211,9 +265,17 @@
     <Folder Include="Includes\Session\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Clover_Icon.ico" />
     <Content Include="DatabaseMain\Lotto_Main_DB.accdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\Icons\bot_01_32px.png" />
+    <None Include="Resources\Design\CloverBig.png" />
+    <None Include="Resources\Icons\gear-32px.png" />
+    <None Include="Resources\Icons\lotto-32px.png" />
+    <None Include="Resources\Icons\statistic_32.png" />
+    <None Include="Resources\Icons\Exit_32.png" />
+    <None Include="Resources\Icons\Open_Document_32.png" />
     <None Include="Resources\Icons\Stars6_20x.png" />
     <None Include="Resources\Icons\Star5_20x.png" />
     <None Include="Resources\Icons\Stars4_20x.png" />
@@ -225,6 +287,12 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LottoDataManagerML.Model\LottoDataManagerML.Model.csproj">
+      <Project>{7D5BF5C1-FFB2-4290-BCA4-FA879B1E5F63}</Project>
+      <Name>LottoDataManagerML.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

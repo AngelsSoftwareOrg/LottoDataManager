@@ -23,7 +23,7 @@ namespace LottoDataManager.Forms
         private readonly String FILLER_NAME = "filler";
         private long betIdDefault;
 
-        public DrawAndBetMatchFrm(LotteryDataServices lotteryDataServices, DateTime betDateTime, long betIdDefault)
+        public DrawAndBetMatchFrm(LotteryDataServices lotteryDataServices, DateTime betDateTime, long betIdDefault=0)
         {
             InitializeComponent();
             this.betDateTime = betDateTime;
@@ -107,7 +107,7 @@ namespace LottoDataManager.Forms
             int[] seq = bet.GetAllNumberSequence();
             foreach(Label lbl in GetCardNumbers(tblLyPnlBet))
             {
-                if (ctr <= seq.Length) lbl.Text = seq[ctr++].ToString();
+                if (ctr <= seq.Length) lbl.Text = seq[ctr++].ToString();//.PadLeft(2, char.Parse("0"));
             }
             MatchMaking();
         }
@@ -154,7 +154,7 @@ namespace LottoDataManager.Forms
 
                 Label numLbl = new Label();
                 numLbl.Dock = DockStyle.Fill;
-                numLbl.Text = numberSeq[ctrItemSeq].ToString();
+                numLbl.Text = numberSeq[ctrItemSeq].ToString(); //.PadLeft(2,char.Parse("0"));
                 numLbl.Font = new Font("Microsoft Sans Serif", 23F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0)));
                 numLbl.FlatStyle = FlatStyle.Flat;
                 numLbl.ForeColor = fontColor;

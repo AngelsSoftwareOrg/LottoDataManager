@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LottoDataManagerML.Model;
 
 namespace LottoDataManager.Includes.Model.Details
 {
@@ -20,5 +21,7 @@ namespace LottoDataManager.Includes.Model.Details
         bool IsDrawResulDetailsEmpty();
         void PutNumberSequence(String sequence);
         bool IsDrawResulSequenceEmpty();
+        ModelInput GetModelInput();
+        String GetMachineLearningDataSetEntry();
     }
 }
