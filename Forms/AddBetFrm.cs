@@ -24,15 +24,12 @@ namespace LottoDataManager.Forms
         private List<LotterySequenceGenerator> lotterySeqGenArr;
         private List<Button> selTcktPnlNum = new List<Button>();
         private LotterySchedule lotterySchedule;
+        private bool hasDataBeenSave = false;
+
         public AddBetFrm(LotteryDataServices lotteryDataServices)
         {
             InitializeComponent();
             this.lotteryDataServices = lotteryDataServices;
-
-            //Debugging
-            //if(lotteryDataServices==null)
-            //    this.lotteryDataServices = new LotteryDataServices(new Game658());
-            //end debugging
 
             this.lotteryTicketPanel = this.lotteryDataServices.GetLotteryTicketPanel();
             this.lotteryOutletArr = this.lotteryDataServices.GetLotteryOutlets();
@@ -63,7 +60,6 @@ namespace LottoDataManager.Forms
             //select default if no selection
             if(cmbSeqGenType.SelectedItem == null) SelectedSequenceGenerator = GeneratorType.PERSONAL_PICK;
         }
-
         public GeneratorType SelectedSequenceGenerator
         {
             set
@@ -79,10 +75,15 @@ namespace LottoDataManager.Forms
                 }
             }
         }
-
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
+            if (!this.hasDataBeenSave) return;
+            if (ClassReflectionUtil.IsMainForm(this.Owner))
+            {
+                MainForm f = (MainForm)this.Owner;
+                f.RefreshBets();
+            }
         }
         private void DisplayLog(String log)
         {
@@ -108,6 +109,7 @@ namespace LottoDataManager.Forms
                     this.lotteryDataServices.SaveLotteryBets(lotteryBetArr);
                     DisplayLog("FINISH SAVING your bets!!!!");
                     this.Enabled = true;
+                    this.hasDataBeenSave = true;
                     Application.DoEvents();
                 }
                 else

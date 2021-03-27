@@ -33,19 +33,10 @@ namespace LottoDataManager
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.mainMenuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openLotteryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.generatorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.seqGenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.lossProfitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.lotterySettingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.othersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.checkWinningBetsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.checkLotteryUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.machineLearningToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.mainStatusStrip = new System.Windows.Forms.StatusStrip();
             this.statusLabelLoading = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLblUpdater = new System.Windows.Forms.ToolStripStatusLabel();
@@ -106,14 +97,25 @@ namespace LottoDataManager
             this.linkLabelFilterDraw = new System.Windows.Forms.LinkLabel();
             this.dateTimePickerDrawResult = new System.Windows.Forms.DateTimePicker();
             this.toolStripBetsAndResults = new System.Windows.Forms.ToolStrip();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripBtnNewBet = new System.Windows.Forms.ToolStripButton();
             this.toolStripBtnDefaultViewListing = new System.Windows.Forms.ToolStripButton();
             this.toolStripBtnModifyBet = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripBtnWinBets = new System.Windows.Forms.ToolStripButton();
             this.machineLearningToolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.pickGeneratorToolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripBtnWinBets = new System.Windows.Forms.ToolStripButton();
             this.toolStripBtnDownloadResults = new System.Windows.Forms.ToolStripButton();
+            this.openLotteryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.seqGenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lossProfitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lotterySettingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.checkWinningBetsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.checkLotteryUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.machineLearningToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenuStrip.SuspendLayout();
             this.mainStatusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mainSplitContainer)).BeginInit();
@@ -163,21 +165,6 @@ namespace LottoDataManager
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
             this.fileToolStripMenuItem.Text = "File";
             // 
-            // openLotteryToolStripMenuItem
-            // 
-            this.openLotteryToolStripMenuItem.Image = global::LottoDataManager.Properties.Resources.lotto_32px;
-            this.openLotteryToolStripMenuItem.Name = "openLotteryToolStripMenuItem";
-            this.openLotteryToolStripMenuItem.Size = new System.Drawing.Size(178, 26);
-            this.openLotteryToolStripMenuItem.Text = "Open Lottery";
-            // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Image = global::LottoDataManager.Properties.Resources.Exit_32;
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(178, 26);
-            this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
-            // 
             // generatorsToolStripMenuItem
             // 
             this.generatorsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -185,14 +172,6 @@ namespace LottoDataManager
             this.generatorsToolStripMenuItem.Name = "generatorsToolStripMenuItem";
             this.generatorsToolStripMenuItem.Size = new System.Drawing.Size(138, 24);
             this.generatorsToolStripMenuItem.Text = "Ticket Generators";
-            // 
-            // seqGenToolStripMenuItem
-            // 
-            this.seqGenToolStripMenuItem.Image = global::LottoDataManager.Properties.Resources.Star5_20x;
-            this.seqGenToolStripMenuItem.Name = "seqGenToolStripMenuItem";
-            this.seqGenToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.seqGenToolStripMenuItem.Text = "Pick Generators";
-            this.seqGenToolStripMenuItem.Click += new System.EventHandler(this.seqGenToolStripMenuItem_Click);
             // 
             // reportsToolStripMenuItem
             // 
@@ -202,13 +181,6 @@ namespace LottoDataManager
             this.reportsToolStripMenuItem.Size = new System.Drawing.Size(74, 24);
             this.reportsToolStripMenuItem.Text = "Reports";
             // 
-            // lossProfitToolStripMenuItem
-            // 
-            this.lossProfitToolStripMenuItem.Image = global::LottoDataManager.Properties.Resources.statistic_32;
-            this.lossProfitToolStripMenuItem.Name = "lossProfitToolStripMenuItem";
-            this.lossProfitToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.lossProfitToolStripMenuItem.Text = "Loss and Profit";
-            // 
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -216,13 +188,6 @@ namespace LottoDataManager
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
             this.settingsToolStripMenuItem.Size = new System.Drawing.Size(76, 24);
             this.settingsToolStripMenuItem.Text = "Settings";
-            // 
-            // lotterySettingToolStripMenuItem
-            // 
-            this.lotterySettingToolStripMenuItem.Image = global::LottoDataManager.Properties.Resources.gear_32px;
-            this.lotterySettingToolStripMenuItem.Name = "lotterySettingToolStripMenuItem";
-            this.lotterySettingToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.lotterySettingToolStripMenuItem.Text = "Lottery Setting";
             // 
             // othersToolStripMenuItem
             // 
@@ -234,37 +199,6 @@ namespace LottoDataManager
             this.othersToolStripMenuItem.Name = "othersToolStripMenuItem";
             this.othersToolStripMenuItem.Size = new System.Drawing.Size(66, 24);
             this.othersToolStripMenuItem.Text = "Others";
-            // 
-            // checkWinningBetsToolStripMenuItem
-            // 
-            this.checkWinningBetsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("checkWinningBetsToolStripMenuItem.Image")));
-            this.checkWinningBetsToolStripMenuItem.Name = "checkWinningBetsToolStripMenuItem";
-            this.checkWinningBetsToolStripMenuItem.Size = new System.Drawing.Size(240, 26);
-            this.checkWinningBetsToolStripMenuItem.Text = "Check Winning Bets";
-            // 
-            // checkLotteryUpdatesToolStripMenuItem
-            // 
-            this.checkLotteryUpdatesToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("checkLotteryUpdatesToolStripMenuItem.Image")));
-            this.checkLotteryUpdatesToolStripMenuItem.Name = "checkLotteryUpdatesToolStripMenuItem";
-            this.checkLotteryUpdatesToolStripMenuItem.Size = new System.Drawing.Size(240, 26);
-            this.checkLotteryUpdatesToolStripMenuItem.Text = "Check Lottery Updates";
-            this.checkLotteryUpdatesToolStripMenuItem.Click += new System.EventHandler(this.checkLotteryUpdatesToolStripMenuItem_Click);
-            // 
-            // machineLearningToolStripMenuItem
-            // 
-            this.machineLearningToolStripMenuItem.Image = global::LottoDataManager.Properties.Resources.bot_01_32px;
-            this.machineLearningToolStripMenuItem.Name = "machineLearningToolStripMenuItem";
-            this.machineLearningToolStripMenuItem.Size = new System.Drawing.Size(240, 26);
-            this.machineLearningToolStripMenuItem.Text = "Machine Learning";
-            this.machineLearningToolStripMenuItem.Click += new System.EventHandler(this.machineLearningToolStripMenuItem_Click);
-            // 
-            // aboutToolStripMenuItem1
-            // 
-            this.aboutToolStripMenuItem1.Image = global::LottoDataManager.Properties.Resources.Stars4_20x;
-            this.aboutToolStripMenuItem1.Name = "aboutToolStripMenuItem1";
-            this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(240, 26);
-            this.aboutToolStripMenuItem1.Text = "About";
-            this.aboutToolStripMenuItem1.Click += new System.EventHandler(this.aboutToolStripMenuItem1_Click);
             // 
             // mainStatusStrip
             // 
@@ -858,15 +792,27 @@ namespace LottoDataManager
             this.toolStripBtnDefaultViewListing,
             this.toolStripBtnModifyBet,
             this.toolStripButton1,
-            this.toolStripBtnWinBets,
             this.machineLearningToolStripButton2,
             this.toolStripSeparator1,
+            this.pickGeneratorToolStripButton2,
+            this.toolStripSeparator2,
+            this.toolStripBtnWinBets,
             this.toolStripBtnDownloadResults});
             this.toolStripBetsAndResults.Location = new System.Drawing.Point(0, 0);
             this.toolStripBetsAndResults.Name = "toolStripBetsAndResults";
             this.toolStripBetsAndResults.Size = new System.Drawing.Size(899, 37);
             this.toolStripBetsAndResults.TabIndex = 15;
             this.toolStripBetsAndResults.Text = "toolStrip2";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 37);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 37);
             // 
             // toolStripBtnNewBet
             // 
@@ -908,16 +854,6 @@ namespace LottoDataManager
             this.toolStripButton1.Text = "Edit Winning Bet Claim Status";
             this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
-            // toolStripBtnWinBets
-            // 
-            this.toolStripBtnWinBets.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripBtnWinBets.Image = ((System.Drawing.Image)(resources.GetObject("toolStripBtnWinBets.Image")));
-            this.toolStripBtnWinBets.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripBtnWinBets.Name = "toolStripBtnWinBets";
-            this.toolStripBtnWinBets.Size = new System.Drawing.Size(34, 34);
-            this.toolStripBtnWinBets.Text = "Check and match your winning bets";
-            this.toolStripBtnWinBets.Click += new System.EventHandler(this.toolStripBtnWinBets_Click);
-            // 
             // machineLearningToolStripButton2
             // 
             this.machineLearningToolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -928,10 +864,25 @@ namespace LottoDataManager
             this.machineLearningToolStripButton2.Text = "Open Machine Learning Data Sets update form";
             this.machineLearningToolStripButton2.Click += new System.EventHandler(this.machineLearningToolStripButton2_Click);
             // 
-            // toolStripSeparator1
+            // pickGeneratorToolStripButton2
             // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 37);
+            this.pickGeneratorToolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.pickGeneratorToolStripButton2.Image = global::LottoDataManager.Properties.Resources.Star5_32x;
+            this.pickGeneratorToolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.pickGeneratorToolStripButton2.Name = "pickGeneratorToolStripButton2";
+            this.pickGeneratorToolStripButton2.Size = new System.Drawing.Size(34, 34);
+            this.pickGeneratorToolStripButton2.Text = "Pick Generators";
+            this.pickGeneratorToolStripButton2.Click += new System.EventHandler(this.pickGeneratorToolStripButton2_Click);
+            // 
+            // toolStripBtnWinBets
+            // 
+            this.toolStripBtnWinBets.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripBtnWinBets.Image = ((System.Drawing.Image)(resources.GetObject("toolStripBtnWinBets.Image")));
+            this.toolStripBtnWinBets.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripBtnWinBets.Name = "toolStripBtnWinBets";
+            this.toolStripBtnWinBets.Size = new System.Drawing.Size(34, 34);
+            this.toolStripBtnWinBets.Text = "Check and match your winning bets to draw result for quick glance";
+            this.toolStripBtnWinBets.Click += new System.EventHandler(this.toolStripBtnWinBets_Click);
             // 
             // toolStripBtnDownloadResults
             // 
@@ -943,6 +894,74 @@ namespace LottoDataManager
             this.toolStripBtnDownloadResults.Text = "DownloadDrawResults";
             this.toolStripBtnDownloadResults.ToolTipText = "Download Draw Results";
             this.toolStripBtnDownloadResults.Click += new System.EventHandler(this.toolStripBtnDownloadResults_Click);
+            // 
+            // openLotteryToolStripMenuItem
+            // 
+            this.openLotteryToolStripMenuItem.Image = global::LottoDataManager.Properties.Resources.lotto_32px;
+            this.openLotteryToolStripMenuItem.Name = "openLotteryToolStripMenuItem";
+            this.openLotteryToolStripMenuItem.Size = new System.Drawing.Size(178, 26);
+            this.openLotteryToolStripMenuItem.Text = "Open Lottery";
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Image = global::LottoDataManager.Properties.Resources.Exit_32;
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(178, 26);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // seqGenToolStripMenuItem
+            // 
+            this.seqGenToolStripMenuItem.Image = global::LottoDataManager.Properties.Resources.Star5_20x;
+            this.seqGenToolStripMenuItem.Name = "seqGenToolStripMenuItem";
+            this.seqGenToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
+            this.seqGenToolStripMenuItem.Text = "Pick Generators";
+            this.seqGenToolStripMenuItem.Click += new System.EventHandler(this.seqGenToolStripMenuItem_Click);
+            // 
+            // lossProfitToolStripMenuItem
+            // 
+            this.lossProfitToolStripMenuItem.Image = global::LottoDataManager.Properties.Resources.statistic_32;
+            this.lossProfitToolStripMenuItem.Name = "lossProfitToolStripMenuItem";
+            this.lossProfitToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.lossProfitToolStripMenuItem.Text = "Loss and Profit";
+            // 
+            // lotterySettingToolStripMenuItem
+            // 
+            this.lotterySettingToolStripMenuItem.Image = global::LottoDataManager.Properties.Resources.gear_32px;
+            this.lotterySettingToolStripMenuItem.Name = "lotterySettingToolStripMenuItem";
+            this.lotterySettingToolStripMenuItem.Size = new System.Drawing.Size(189, 26);
+            this.lotterySettingToolStripMenuItem.Text = "Lottery Setting";
+            // 
+            // checkWinningBetsToolStripMenuItem
+            // 
+            this.checkWinningBetsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("checkWinningBetsToolStripMenuItem.Image")));
+            this.checkWinningBetsToolStripMenuItem.Name = "checkWinningBetsToolStripMenuItem";
+            this.checkWinningBetsToolStripMenuItem.Size = new System.Drawing.Size(240, 26);
+            this.checkWinningBetsToolStripMenuItem.Text = "Check Winning Bets";
+            // 
+            // checkLotteryUpdatesToolStripMenuItem
+            // 
+            this.checkLotteryUpdatesToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("checkLotteryUpdatesToolStripMenuItem.Image")));
+            this.checkLotteryUpdatesToolStripMenuItem.Name = "checkLotteryUpdatesToolStripMenuItem";
+            this.checkLotteryUpdatesToolStripMenuItem.Size = new System.Drawing.Size(240, 26);
+            this.checkLotteryUpdatesToolStripMenuItem.Text = "Check Lottery Updates";
+            this.checkLotteryUpdatesToolStripMenuItem.Click += new System.EventHandler(this.checkLotteryUpdatesToolStripMenuItem_Click);
+            // 
+            // machineLearningToolStripMenuItem
+            // 
+            this.machineLearningToolStripMenuItem.Image = global::LottoDataManager.Properties.Resources.bot_01_32px;
+            this.machineLearningToolStripMenuItem.Name = "machineLearningToolStripMenuItem";
+            this.machineLearningToolStripMenuItem.Size = new System.Drawing.Size(240, 26);
+            this.machineLearningToolStripMenuItem.Text = "Machine Learning";
+            this.machineLearningToolStripMenuItem.Click += new System.EventHandler(this.machineLearningToolStripMenuItem_Click);
+            // 
+            // aboutToolStripMenuItem1
+            // 
+            this.aboutToolStripMenuItem1.Image = global::LottoDataManager.Properties.Resources.Stars4_20x;
+            this.aboutToolStripMenuItem1.Name = "aboutToolStripMenuItem1";
+            this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(240, 26);
+            this.aboutToolStripMenuItem1.Text = "About";
+            this.aboutToolStripMenuItem1.Click += new System.EventHandler(this.aboutToolStripMenuItem1_Click);
             // 
             // MainForm
             // 
@@ -1078,6 +1097,8 @@ namespace LottoDataManager
         private System.Windows.Forms.ToolStripMenuItem machineLearningToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton machineLearningToolStripButton2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripButton pickGeneratorToolStripButton2;
     }
 }
 

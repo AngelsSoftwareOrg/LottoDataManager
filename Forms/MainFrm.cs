@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
 using LottoDataManager.Forms;
+using LottoDataManager.Includes;
 using LottoDataManager.Includes.Classes;
 using LottoDataManager.Includes.Classes.Reports;
 using LottoDataManager.Includes.Classes.Scraping;
@@ -35,6 +36,7 @@ namespace LottoDataManager
         {
             InitializeComponent();
             this.lotteryDetails = GameFactory.GetPreviousOpenGameInstance();
+            this.Text = String.Format("{0} - {1}",ResourcesUtils.GetMessage("mainf_title"), AppSettings.GetAppVersionWithPrefix());
             ReinitateLotteryServices();
             GenerateLotteriesGameMenu();
             InitializesFormContent();
@@ -342,7 +344,7 @@ namespace LottoDataManager
             RefreshWinningNumbersGridContent();
             RefreshBets();
         }
-        private void RefreshBets()
+        public void RefreshBets()
         {
             RefreshFieldDetails();
             RefreshBetListViewGridContent();
@@ -377,7 +379,7 @@ namespace LottoDataManager
         private void toolStripBtnNewBet_Click(object sender, EventArgs e)
         {
             AddBetFrm betForm = new AddBetFrm(this.lotteryDataServices);
-            betForm.ShowDialog();
+            betForm.ShowDialog(this);
             betForm.Dispose();
             RefreshBets();
         }
@@ -547,8 +549,12 @@ namespace LottoDataManager
         }
         private void seqGenToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            ShowPickGeneratorForm();
+        }
+        private void ShowPickGeneratorForm()
+        {
             PickGeneratorFrm pick = new PickGeneratorFrm(lotteryDataServices);
-            pick.ShowDialog();
+            pick.ShowDialog(this);
             pick.Dispose();
         }
         private void aboutToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -573,7 +579,10 @@ namespace LottoDataManager
             MachineLearningFrm m = new MachineLearningFrm(this.lotteryDataServices);
             m.ShowDialog();
         }
-
+        private void pickGeneratorToolStripButton2_Click(object sender, EventArgs e)
+        {
+            ShowPickGeneratorForm();
+        }
         #endregion
 
         #region "Main Form"
@@ -598,9 +607,11 @@ namespace LottoDataManager
             this.Show();
         }
 
+
+
+
+
         #endregion
-
-
 
 
     }

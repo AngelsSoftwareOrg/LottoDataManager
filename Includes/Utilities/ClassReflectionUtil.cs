@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using LottoDataManager.Includes.Classes.Generator;
 using LottoDataManager.Includes.Model.Structs;
 
@@ -27,7 +28,6 @@ namespace LottoDataManager.Includes.Utilities
             }
             return NumberDirection.LEFT_TO_RIGHT;
         }
-
         public static GeneratorType FindGeneratorType(int value)
         {
             foreach (int item in Enum.GetValues(typeof(GeneratorType)))
@@ -36,5 +36,16 @@ namespace LottoDataManager.Includes.Utilities
             }
             return GeneratorType.PERSONAL_PICK;
         }
+        public static bool IsMainForm(Form formObj)
+        {
+            return (formObj is MainForm);
+        }
+        public static Form GetMainFormObj(Form form1, Form form2)
+        {
+            if (IsMainForm(form1)) return form1;
+            if (IsMainForm(form2)) return form2;
+            return null;
+        }
+    
     }
 }

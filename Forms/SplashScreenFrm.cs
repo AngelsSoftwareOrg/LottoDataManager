@@ -34,7 +34,7 @@ namespace LottoDataManager.Forms
 
         private void SplashScreen_Load(object sender, EventArgs e)
         {
-            lblVersion.Text = "v" + AppSettings.GetAppVersion();
+            lblVersion.Text = AppSettings.GetAppVersionWithPrefix();
         }
     }
 }

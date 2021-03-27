@@ -25,11 +25,6 @@ namespace LottoDataManager.Forms
         public MachineLearningFrm(LotteryDataServices lotteryDataServices)
         {
             InitializeComponent();
-
-            //debugging
-            lotteryDataServices = new LotteryDataServices(new Includes.Model.LotteryDetails(Includes.Model.Structs.GameMode.Mode_642));
-            //debugging end
-
             this.lotteryDataServices = lotteryDataServices;
             this.machineLearningModelBuilder = new MachineLearningModelBuilder();
             machineLearningModelBuilder.ProcessingStatus += MachineLearningModelBuilder_ProcessingStatus;

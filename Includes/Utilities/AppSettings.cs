@@ -45,6 +45,10 @@ namespace LottoDataManager.Includes
                 Properties.Settings.Default.version_patch,
                 Properties.Settings.Default.version_release);
         }
+        public static String GetAppVersionWithPrefix()
+        {
+            return String.Format("v{0}", GetAppVersion());
+        }
 
     }
 }
