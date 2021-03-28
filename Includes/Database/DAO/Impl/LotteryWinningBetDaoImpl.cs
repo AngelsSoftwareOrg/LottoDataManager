@@ -207,7 +207,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                                       "   AND a.target_draw_date >= CDATE(@sinceWhen) " +
                                       "   AND a.active = true " +
                                       "   AND b.active = true " +
-                                      "   AND c.active = true " +
+                                      //"   AND c.active = true " +
                                       "   AND b.winning_amt > 0";
                 command.Parameters.AddWithValue("@game_cd", (int)gameMode);
                 command.Parameters.AddWithValue("@sinceWhen", sinceWhen.Date.ToString());

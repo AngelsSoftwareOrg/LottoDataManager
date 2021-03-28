@@ -365,6 +365,10 @@ namespace LottoDataManager
         }
         private void toolStripBtnWinBets_Click(object sender, EventArgs e)
         {
+            CheckWinningBets();
+        }
+        private void CheckWinningBets()
+        {
             statusLabelLoading.Visible = true;
             //RefreshSubscription();
             lotteryDataWorker.ProcessCheckingForWinningBets(this.lotteryDetails.GameMode);
@@ -583,6 +587,15 @@ namespace LottoDataManager
         {
             ShowPickGeneratorForm();
         }
+        private void lotterySettingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LotterySettingsFrm settings = new LotterySettingsFrm(lotteryDataServices);
+            settings.ShowDialog(this);
+        }
+        private void checkWinningBetsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CheckWinningBets();
+        }
         #endregion
 
         #region "Main Form"
@@ -606,10 +619,6 @@ namespace LottoDataManager
             SplashScreenFrm.GetIntance().DisposeInstance();
             this.Show();
         }
-
-
-
-
 
         #endregion
 

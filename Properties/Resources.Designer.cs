@@ -83,6 +83,16 @@ namespace LottoDataManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Edit_01_32x {
+            get {
+                object obj = ResourceManager.GetObject("Edit_01_32x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Exit_32 {
             get {
                 object obj = ResourceManager.GetObject("Exit_32", resourceCulture);
@@ -126,6 +136,16 @@ namespace LottoDataManager.Properties {
         internal static System.Drawing.Bitmap Open_Document_32 {
             get {
                 object obj = ResourceManager.GetObject("Open_Document_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap save_v1_32 {
+            get {
+                object obj = ResourceManager.GetObject("save_v1_32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -216,6 +236,16 @@ namespace LottoDataManager.Properties {
         internal static System.Drawing.Bitmap torch_24x {
             get {
                 object obj = ResourceManager.GetObject("torch_24x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Trash_32x {
+            get {
+                object obj = ResourceManager.GetObject("Trash_32x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

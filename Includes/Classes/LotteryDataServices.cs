@@ -179,5 +179,17 @@ namespace LottoDataManager.Includes.Classes
         {
             return this.lotteryDrawResultDao.GetMachineLearningDataSet(gameMode, startingDate);
         }
+        public void UpdateLotteryOutletDescription(LotteryOutlet updatedModel)
+        {
+            this.lotteryOutletDao.UpdateDescription(updatedModel);
+        }
+        public void RemoveLotteryOutlet(LotteryOutlet removeModel)
+        {
+            this.lotteryOutletDao.RemoveOutlet(removeModel);
+        }
+        public int AddLotteryOutlet(String outletDescription)
+        {
+            return this.lotteryOutletDao.InsertLotteryOutlet(outletDescription);
+        }
     }
 }

@@ -58,7 +58,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                                         "   AND a.game_cd = b.game_cd  " +
                                         "   AND a.target_draw_date >= CDATE(@sinceWhen)  " +
                                         "   AND a.active = true  " +
-                                        "   AND o.active = true " +
+                                        //"   AND o.active = true " +
                                         " UNION  " +
                                         " SELECT a.*,  " +
                                         "        0, " +
@@ -76,7 +76,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                                         "  WHERE a.game_cd = @game_cd " +
                                         "    AND a.target_draw_date >= CDATE(@sinceWhen)  " +
                                         "    AND a.active = true  " +
-                                        "    AND o.active = true " +
+                                        //"    AND o.active = true " +
                                         "    AND (SELECT DISTINCT b.draw_date FROM draw_results b  " +
                                         "   	   WHERE a.target_draw_date = b.draw_date  " +
                                         "            AND a.game_cd = b.game_cd) IS NULL  " +
