@@ -619,9 +619,6 @@ namespace LottoDataManager
             SplashScreenFrm.GetIntance().DisposeInstance();
             this.Show();
         }
-
         #endregion
-
-
     }
 }

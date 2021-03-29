@@ -48,6 +48,7 @@ namespace LottoDataManager.Forms
         }
         private void SetDefaultSelectedSetting()
         {
+            //DEBUGGING
             mainMenuTreeView.SelectedNode = mainMenuTreeView.Nodes[0];
             ShowNodeSettings(mainMenuTreeView.SelectedNode);
         }
@@ -269,7 +270,53 @@ namespace LottoDataManager.Forms
         #region LOTTERY WINNING PRIZE AMOUNT RELATED CODES
         private void LoadWinningPrizeAmount()
         {
+            this.lblLWPAmatchBet1.Text = String.Format(ResourcesUtils.GetMessage("lott_lwpa_lbls_1"), 1, this.lotteryTicketPanel.GetGameDigitCount());
+            this.lblLWPAmatchBet2.Text = String.Format(ResourcesUtils.GetMessage("lott_lwpa_lbls_1"), 2, this.lotteryTicketPanel.GetGameDigitCount());
+            this.lblLWPAmatchBet3.Text = String.Format(ResourcesUtils.GetMessage("lott_lwpa_lbls_1"), 3, this.lotteryTicketPanel.GetGameDigitCount());
+            this.lblLWPAmatchBet4.Text = String.Format(ResourcesUtils.GetMessage("lott_lwpa_lbls_1"), 4, this.lotteryTicketPanel.GetGameDigitCount());
+            this.lblLWPAmatchBet5.Text = String.Format(ResourcesUtils.GetMessage("lott_lwpa_lbls_1"), 5, this.lotteryTicketPanel.GetGameDigitCount());
+            this.lblLWPAmatchBet6.Text = String.Format(ResourcesUtils.GetMessage("lott_lwpa_lbls_1"), 6, this.lotteryTicketPanel.GetGameDigitCount());
+            SetupLotteryWinningAmtFields();
+        }
 
+        private void SetupLotteryWinningAmtFields()
+        {
+            cmbLWPAGameMode.Items.Clear();
+            cmbLWPAGameMode.Items.AddRange(lotteryDataServices.GetLotteries().ToArray());
+            if (cmbLWPAGameMode.Items.Count > 0) cmbLWPAGameMode.SelectedItem = cmbLWPAGameMode.Items[0];
+        }
+        private void cmbLWPAGameMode_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Lottery lottery = (Lottery) cmbLWPAGameMode.SelectedItem;
+            lblLWPASelectedGame.Text = lottery.GetDescription();
+            LotteryWinningCombination prize = this.lotteryDataServices.GetLotteryWinningCombinations(lottery.GetGameMode());
+            txtbLWPABet1.Text = prize.GetMatch1().ToString();
+            txtbLWPABet2.Text = prize.GetMatch2().ToString();
+            txtbLWPABet3.Text = prize.GetMatch3().ToString();
+            txtbLWPABet4.Text = prize.GetMatch4().ToString();
+            txtbLWPABet5.Text = prize.GetMatch5().ToString();
+            txtbLWPABet6.Text = prize.GetMatch6().ToString();
+        }
+        private void btnLAWPASaveChanges_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Lottery lottery = (Lottery)cmbLWPAGameMode.SelectedItem;
+                LotteryWinningCombination originalCombination = this.lotteryDataServices.GetLotteryWinningCombinations(lottery.GetGameMode());
+                LotteryWinningCombinationSetup lotteryUpdated = (LotteryWinningCombinationSetup)originalCombination.Clone();
+                lotteryUpdated.Match1 = int.Parse(txtbLWPABet1.Value.ToString());
+                lotteryUpdated.Match2 = int.Parse(txtbLWPABet2.Value.ToString());
+                lotteryUpdated.Match3 = int.Parse(txtbLWPABet3.Value.ToString());
+                lotteryUpdated.Match4 = int.Parse(txtbLWPABet4.Value.ToString());
+                lotteryUpdated.Match5 = int.Parse(txtbLWPABet5.Value.ToString());
+                lotteryUpdated.Match6 = int.Parse(txtbLWPABet6.Value.ToString());
+                this.lotteryDataServices.SaveWinningCombination(lotteryUpdated);
+                MessageBox.Show(ResourcesUtils.GetMessage("lott_lwpa_msg1"));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
         #endregion
 
@@ -285,6 +332,8 @@ namespace LottoDataManager.Forms
         {
 
         }
+
+
 
 
 

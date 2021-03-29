@@ -223,6 +223,14 @@ namespace LottoDataManager.Forms
         }
         private void btnAddSelected_Click(object sender, EventArgs e)
         {
+            AddChosenBets();
+        }
+        private void addBetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddChosenBets();
+        }
+        private void AddChosenBets()
+        {
             List<ListViewItem> merge = new List<ListViewItem>();
             foreach (ListViewItem item in lvGenSeq.CheckedItems)
             {
@@ -265,14 +273,6 @@ namespace LottoDataManager.Forms
         {
             UncheckAllSequences();
         }
-        private void addBetToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            List<ListViewItem> merge = new List<ListViewItem>();
-            foreach (ListViewItem item in lvGenSeq.SelectedItems)
-            {
-                merge.Add(item);
-            }
-            AddBet(merge);
-        }
+
     }
 }

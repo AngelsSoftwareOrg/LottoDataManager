@@ -26,6 +26,7 @@ namespace LottoDataManager.Includes.Classes
         private LotteryDataWorker lotteryDataWorker;
         private LotteryDrawResultDao lotteryDrawResultDao;
         private LotterySequenceGenDao lotterySeqGenDao;
+        private LotteryWinningCombinationDao lotteryWinningCombinationDao;
         private UserSettings userSetting;
         public LotteryDataServices(LotteryDetails lotteryDetails)
         {
@@ -41,6 +42,7 @@ namespace LottoDataManager.Includes.Classes
             this.lotteryDataWorker = new LotteryDataWorker();
             this.lotteryDrawResultDao = LotteryDrawResultDaoImpl.GetInstance();
             this.lotterySeqGenDao = LotterySequenceGenDaoImpl.GetInstance();
+            this.lotteryWinningCombinationDao = LotteryWinningCombinationDaoImpl.GetInstance();
         }
         private GameMode GameMode {
 
@@ -190,6 +192,15 @@ namespace LottoDataManager.Includes.Classes
         public int AddLotteryOutlet(String outletDescription)
         {
             return this.lotteryOutletDao.InsertLotteryOutlet(outletDescription);
+        }
+        public LotteryWinningCombination GetLotteryWinningCombinations(GameMode gameMode)
+        {
+            return this.lotteryWinningCombinationDao.GetLotteryWinningCombination(gameMode);
+        }
+        public void SaveWinningCombination(LotteryWinningCombination lotteryUpdated)
+        {
+            this.lotteryWinningCombinationDao.RemoveWinningCombination(lotteryUpdated);
+            this.lotteryWinningCombinationDao.InsertWinningCombination(lotteryUpdated);
         }
     }
 }

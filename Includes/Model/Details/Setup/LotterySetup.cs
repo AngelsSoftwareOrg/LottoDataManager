@@ -18,6 +18,18 @@ namespace LottoDataManager.Includes.Model.Details.Setup
         public string Description { get => description; set => description = value; }
         public double PricePerBet { get => pricePerBet; set => pricePerBet = value; }
         public int WebScrapeGameCode { get => webScrapeGameCode; set => webScrapeGameCode = value; }
+        public Lottery Clone()
+        {
+            LotterySetup setup = new LotterySetup()
+            {
+                GameCode = this.GameCode,
+                Description = new string(this.Description.ToCharArray()),
+                PricePerBet = this.PricePerBet,
+                WebScrapeGameCode = this.WebScrapeGameCode
+            };
+            return setup;
+        }
+
         public string GetDescription()
         {
             return Description ;
@@ -33,6 +45,11 @@ namespace LottoDataManager.Includes.Model.Details.Setup
         public int GetWebScrapeGameCode()
         {
             return WebScrapeGameCode;
+        }
+        override
+        public String ToString()
+        {
+            return Description;
         }
     }
 }

@@ -11,5 +11,7 @@ namespace LottoDataManager.Includes.Database.DAO
     public interface LotteryWinningCombinationDao
     {
         LotteryWinningCombination GetLotteryWinningCombination(GameMode gameMode);
+        void RemoveWinningCombination(LotteryWinningCombination lwc);
+        int InsertWinningCombination(LotteryWinningCombination lwc);
     }
 }
