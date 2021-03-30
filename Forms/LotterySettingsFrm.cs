@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,17 +24,27 @@ namespace LottoDataManager.Forms
         private readonly ListviewIntSorter lvwIntSorter = new ListviewIntSorter();
         private LotteryDataServices lotteryDataServices;
         private LotteryTicketPanel lotteryTicketPanel;
+        private LotteryAppConfiguration lotteryAppConfiguration;
+
+        public object ResourcesUtil { get; private set; }
 
         public LotterySettingsFrm(LotteryDataServices lotteryDataServices)
         {
             InitializeComponent();
             //Debugging
             if (lotteryDataServices == null) lotteryDataServices = new LotteryDataServices(new Game658());
+
+
             //this.betDateTime = new DateTime(2021,01,3,0,0,0);
             //end debugging
 
             this.lotteryDataServices = lotteryDataServices;
             this.lotteryTicketPanel = this.lotteryDataServices.GetLotteryTicketPanel();
+            this.lotteryAppConfiguration = LotteryAppConfiguration.GetInstance();
+            //txtConfigDBSource.Text = @"D:\Development\WorkSpace00002\LottoDataManager\DatabaseMain\Lotto_Main_DB.accdb";
+            //txtConfigFolderML.Text = @"D:\Development\WorkSpace00002\LottoDataManager\DatabaseMain\";
+            txtConfigDBSource.Text = this.lotteryAppConfiguration.DBSourcePath;
+            txtConfigFolderML.Text = this.lotteryAppConfiguration.MLModelPath;
         }
 
         #region MAIN FORM
@@ -103,7 +114,7 @@ namespace LottoDataManager.Forms
         }
         #endregion
 
-        #region "LISTVIEW SORTER"
+        #region LISTVIEW SORTER
         private void lvLotteryOutlets_ColumnClick(object sender, ColumnClickEventArgs e)
         {
             listviewSorter(sender, e);
@@ -488,7 +499,70 @@ namespace LottoDataManager.Forms
         {
 
         }
+        private void lnkLblConfigDB_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            OpenDBFile();
+        }
+        private void lnkLblConfigML_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            OpenMLPath();
+        }
+        private void btnConfigSave_Click(object sender, EventArgs e)
+        {
+            SaveConfigChanges();
+        }
+        private void OpenDBFile()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = ResourcesUtils.SourceDBFileDialogFilter;
+            openFileDialog.Title = ResourcesUtils.GetMessage("lott_config_db_title");
+            DialogResult dialogResult = openFileDialog.ShowDialog();
+            if (dialogResult == DialogResult.OK)
+            {
+                if (String.IsNullOrWhiteSpace(openFileDialog.FileName)) return;
+                txtConfigDBSource.Text = openFileDialog.FileName;
+            }
+        }
+        private void OpenMLPath()
+        {
+            FolderBrowserDialog folder = new FolderBrowserDialog();
+            folder.SelectedPath = txtConfigFolderML.Text;
+            DialogResult dialogResult = folder.ShowDialog();
+            if (dialogResult == DialogResult.OK)
+            {
+                if (String.IsNullOrWhiteSpace(folder.SelectedPath)) return;
+                txtConfigFolderML.Text = folder.SelectedPath;
+            }
+        }
+        private bool IsLotteryConfigFieldsValid()
+        {
+            if (String.IsNullOrWhiteSpace(txtConfigDBSource.Text) || !File.Exists(txtConfigDBSource.Text))
+            {
+                MessageBox.Show(ResourcesUtils.GetMessage("lott_config_msg1"));
+                return false;
+            }
+            if (String.IsNullOrWhiteSpace(txtConfigFolderML.Text) || !Directory.Exists(txtConfigFolderML.Text))
+            {
+                MessageBox.Show(ResourcesUtils.GetMessage("lott_config_msg2"));
+                return false;
+            }
+            return true;
+        }
+        private void SaveConfigChanges()
+        {
+            try
+            {
+                if (!IsLotteryConfigFieldsValid()) return;
+                lotteryAppConfiguration.DBSourcePath = txtConfigDBSource.Text;
+                lotteryAppConfiguration.MLModelPath = txtConfigFolderML.Text;
+                lotteryAppConfiguration.SaveConfigFile();
+                MessageBox.Show(ResourcesUtils.GetMessage("lott_config_msg3"));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
         #endregion
-
     }
 }

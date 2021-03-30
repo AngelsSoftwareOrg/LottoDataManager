@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LottoDataManager.Includes.Classes;
 using LottoDataManager.Includes.Database.Engine;
 
 namespace LottoDataManager.Includes
@@ -14,7 +15,12 @@ namespace LottoDataManager.Includes
         {
             get
             {
-                return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\.." + Properties.Settings.Default.msaccess_datasource_path);
+                LotteryAppConfiguration lotteryAppConfiguration = LotteryAppConfiguration.GetInstance();
+                if (String.IsNullOrEmpty(lotteryAppConfiguration.DBSourcePath) || !File.Exists(lotteryAppConfiguration.DBSourcePath))
+                {
+                    return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\.." + Properties.Settings.Default.msaccess_datasource_path);
+                }
+                return lotteryAppConfiguration.DBSourcePath;
             }
         }
 

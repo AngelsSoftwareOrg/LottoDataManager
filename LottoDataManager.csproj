@@ -128,6 +128,7 @@
     <Compile Include="Includes\Classes\Generator\Types\TopDrawnNumbersFromJackpotGenerator.cs" />
     <Compile Include="Includes\Classes\Generator\Types\TopDrawNumbersFromDateRange.cs" />
     <Compile Include="Includes\Classes\Generator\Types\TopDrawPreviousSeasonGenerator.cs" />
+    <Compile Include="Includes\Classes\LotteryAppConfiguration.cs" />
     <Compile Include="Includes\Classes\LotteryDataServices.cs" />
     <Compile Include="Includes\Classes\LotteryDataWorker.cs" />
     <Compile Include="Includes\Classes\LotteryDataWorkerEvent.cs" />
@@ -142,13 +143,16 @@
     <Compile Include="Includes\Classes\Scraping\LottoWebScrapingStages.cs" />
     <Compile Include="Includes\Classes\Scraping\WebLottoScraperFactory.cs" />
     <Compile Include="Includes\Classes\UserSettings.cs" />
+    <Compile Include="Includes\Database\DAO\Impl\AppVersioningDaoImpl.cs" />
     <Compile Include="Includes\Database\DAO\Impl\LotteryBetDaoImpl.cs" />
     <Compile Include="Includes\Database\DAO\Impl\LotteryDaoImplCommon.cs" />
     <Compile Include="Includes\Database\DAO\Impl\LotteryOutletDaoImpl.cs" />
     <Compile Include="Includes\Database\DAO\Impl\LotterySequenceGenDaoImpl.cs" />
     <Compile Include="Includes\Database\DAO\Impl\LotteryWinningBetDaoImpl.cs" />
     <Compile Include="Includes\Database\DAO\Impl\LotteryDaoImpl.cs" />
+    <Compile Include="Includes\Database\DAO\Impl\TestingDatabaseSourceFileDaoImpl.cs" />
     <Compile Include="Includes\Database\DAO\Impl\UserSettingDaoImpl.cs" />
+    <Compile Include="Includes\Database\DAO\Interface\AppVersioningDao.cs" />
     <Compile Include="Includes\Database\DAO\Interface\LotteryBetDao.cs" />
     <Compile Include="Includes\Database\DAO\Interface\LotteryOutletDao.cs" />
     <Compile Include="Includes\Database\DAO\Interface\LotterySequenceGenDao.cs" />
@@ -158,8 +162,11 @@
     <Compile Include="Includes\Database\DAO\Impl\LotteryDrawResultDaoImpl.cs" />
     <Compile Include="Includes\Database\DAO\Interface\LotteryWinningCombinationDao.cs" />
     <Compile Include="Includes\Database\DAO\Impl\LotteryWinningCombinationDaoImpl.cs" />
+    <Compile Include="Includes\Database\DAO\Interface\TestingDatabaseSourceFileDao.cs" />
     <Compile Include="Includes\Database\DAO\Interface\UserSettingDao.cs" />
+    <Compile Include="Includes\Model\Details\AppVersioning.cs" />
     <Compile Include="Includes\Model\Details\LotterySequenceGenerator.cs" />
+    <Compile Include="Includes\Model\Details\Setup\AppVersioningSetup.cs" />
     <Compile Include="Includes\Model\Details\Setup\LotterySequenceGeneratorSetup.cs" />
     <Compile Include="Includes\Model\Reports\DashboardReportItem.cs" />
     <Compile Include="Includes\Model\Reports\Setup\DashboardReportItemSetup.cs" />

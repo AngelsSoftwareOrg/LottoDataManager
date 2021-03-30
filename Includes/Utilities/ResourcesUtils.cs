@@ -13,6 +13,15 @@ namespace LottoDataManager.Includes.Utilities
         private static readonly String RESOURCE_NAME = "LottoDataManager.Properties.Resources";
         private static readonly String RESOURCE_PROPERTY_FILE_NAME_MESSAGES_EN = "messages_en";
         private static Dictionary<String, String> MESSAGES_DICTIONARY = new Dictionary<string, string>();
+
+        private static readonly String RESOURCE_ID_APPLICATION_ID = "APPLICATION_ID";
+        private static readonly String RESOURCE_ID_DB_SOURCE_FILE_TYPE_EXTENSION = "DB_SOURCE_FILE_TYPE_EXTENSION";
+        private static readonly String RESOURCE_ID_DB_SOURCE_FILE_TYPE_EXTENSION_DESC = "DB_SOURCE_FILE_TYPE_EXTENSION_DESC";
+        private static readonly String RESOURCE_ID_ML_MODEL_FILE_TYPE_EXTENSION = "ML_MODEL_FILE_TYPE_EXTENSION";
+        private static readonly String RESOURCE_ID_ML_MODEL_FILE_TYPE_EXTENSION_DESC = "ML_MODEL_FILE_TYPE_EXTENSION_DESC";
+        private static readonly String RESOURCE_ID_APP_DATA_FOLDER = "APP_DATA_FOLDER";
+        private static readonly String RESOURCE_ID_APP_DATA_FOLDER_CONFIG_FILE_NAME = "APP_DATA_FOLDER_CONFIG_FILE_NAME";
+
         static ResourcesUtils()
         {
             RESOURCE_MANAGER = new ResourceManager(RESOURCE_NAME, typeof(ResourcesUtils).Assembly);
@@ -24,16 +33,23 @@ namespace LottoDataManager.Includes.Utilities
         }
         public static string GetMessage(String messageName)
         {
-            String value = null;
+            String value;
             MESSAGES_DICTIONARY.TryGetValue(messageName, out value);
             return value;
         }
-
+        public static String ApplicationID { get { return GetSetting(RESOURCE_ID_APPLICATION_ID); } }
+        public static String SourceDBFileExtension { get { return GetSetting(RESOURCE_ID_DB_SOURCE_FILE_TYPE_EXTENSION); } }
+        public static String SourceDBFileDialogFilter { get { return SourceDBFileExtensionDescription + "|*" + SourceDBFileExtension; } }
+        public static String SourceDBFileExtensionDescription { get { return GetSetting(RESOURCE_ID_DB_SOURCE_FILE_TYPE_EXTENSION_DESC); } }
+        public static String MachineLearningModelFileExtension { get { return GetSetting(RESOURCE_ID_ML_MODEL_FILE_TYPE_EXTENSION); } }
+        public static String MachineLearningModelFileExtensionDescription { get { return GetSetting(RESOURCE_ID_ML_MODEL_FILE_TYPE_EXTENSION_DESC); } }
+        public static String AppDataFolderName { get { return GetSetting(RESOURCE_ID_APP_DATA_FOLDER); } }
+        public static String AppDataConfigFileName { get { return GetSetting(RESOURCE_ID_APP_DATA_FOLDER_CONFIG_FILE_NAME); } }
         public void Dispose()
         {
             RESOURCE_MANAGER = null;
+            MESSAGES_DICTIONARY = null;
         }
-
         private static void GetResourceMessages()
         {
             String fileObject = Encoding.UTF8.GetString((Byte[])RESOURCE_MANAGER.GetObject(RESOURCE_PROPERTY_FILE_NAME_MESSAGES_EN));

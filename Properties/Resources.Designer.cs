@@ -61,6 +61,33 @@ namespace LottoDataManager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Lotto Data Manager.
+        /// </summary>
+        internal static string APP_DATA_FOLDER {
+            get {
+                return ResourceManager.GetString("APP_DATA_FOLDER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to lotto_data_manager_ini.config.
+        /// </summary>
+        internal static string APP_DATA_FOLDER_CONFIG_FILE_NAME {
+            get {
+                return ResourceManager.GetString("APP_DATA_FOLDER_CONFIG_FILE_NAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to LOTTO_DATA_MANAGER.
+        /// </summary>
+        internal static string APPLICATION_ID {
+            get {
+                return ResourceManager.GetString("APPLICATION_ID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap Available_Updates_32px {
@@ -97,6 +124,24 @@ namespace LottoDataManager.Properties {
             get {
                 object obj = ResourceManager.GetObject("CloverBig", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .accdb.
+        /// </summary>
+        internal static string DB_SOURCE_FILE_TYPE_EXTENSION {
+            get {
+                return ResourceManager.GetString("DB_SOURCE_FILE_TYPE_EXTENSION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MS Access.
+        /// </summary>
+        internal static string DB_SOURCE_FILE_TYPE_EXTENSION_DESC {
+            get {
+                return ResourceManager.GetString("DB_SOURCE_FILE_TYPE_EXTENSION_DESC", resourceCulture);
             }
         }
         
@@ -157,6 +202,24 @@ namespace LottoDataManager.Properties {
             get {
                 object obj = ResourceManager.GetObject("messages_en", resourceCulture);
                 return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .zip.
+        /// </summary>
+        internal static string ML_MODEL_FILE_TYPE_EXTENSION {
+            get {
+                return ResourceManager.GetString("ML_MODEL_FILE_TYPE_EXTENSION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ZIP Archive File type for ML Model.
+        /// </summary>
+        internal static string ML_MODEL_FILE_TYPE_EXTENSION_DESC {
+            get {
+                return ResourceManager.GetString("ML_MODEL_FILE_TYPE_EXTENSION_DESC", resourceCulture);
             }
         }
         
