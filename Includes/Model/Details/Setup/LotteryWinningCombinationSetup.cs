@@ -17,7 +17,7 @@ namespace LottoDataManager.Includes.Model.Details
         private double match5;
         private double match6;
         private int Id;
-        private GameMode gameCode;
+        private GameMode gameMode;
         public double Match0 { get => match0; set => match0 = value; }
         public double Match1 { get => match1; set => match1 = value; }
         public double Match2 { get => match2; set => match2 = value; }
@@ -26,13 +26,13 @@ namespace LottoDataManager.Includes.Model.Details
         public double Match5 { get => match5; set => match5 = value; }
         public double Match6 { get => match6; set => match6 = value; }
         public int ID { get => Id; set => Id = value; }
-        public GameMode GameCode { get => gameCode; set => gameCode = value; }
+        public GameMode GameMode { get => gameMode; set => gameMode = value; }
         public object Clone()
         {
             LotteryWinningCombinationSetup s = new LotteryWinningCombinationSetup()
             {
                 ID = this.ID,
-                GameCode = this.GameCode,
+                GameMode = this.GameMode,
                 Match0 = this.Match0,
                 Match1 = this.Match1,
                 Match2 = this.Match2,
@@ -44,9 +44,9 @@ namespace LottoDataManager.Includes.Model.Details
             return s;
         }
 
-        public GameMode GetGameCode()
+        public GameMode GetGameMode()
         {
-            return GameCode;
+            return GameMode;
         }
         public int GetID()
         {

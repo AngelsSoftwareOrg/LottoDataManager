@@ -120,6 +120,20 @@ namespace LottoDataManager.Includes.Classes
         {
             return this.lotteryScheduleDao.GetLotterySchedule(this.GameMode);
         }
+        public LotterySchedule GetLotterySchedule(GameMode gameMode)
+        {
+            return this.lotteryScheduleDao.GetLotterySchedule(gameMode);
+        }
+        public int AddNewLotterySchedule(LotterySchedule lotterySchedule)
+        {
+            LotterySchedule original = this.lotteryScheduleDao.GetLotterySchedule(lotterySchedule.GetGameMode());
+            if(original.IsEqualSchedule(lotterySchedule)){
+                throw new Exception(ResourcesUtils.GetMessage("lott_sched_msg1"));
+            }
+            this.lotteryScheduleDao.RemoveLotterySchedule(lotterySchedule);
+            return this.lotteryScheduleDao.InsertLotterySchedule(lotterySchedule);
+        }
+
         public void DeleteLotteryBet(List<LotteryBet> lotteryBets)
         {
             foreach(LotteryBet lotteryBet in lotteryBets)
@@ -172,6 +186,14 @@ namespace LottoDataManager.Includes.Classes
         public List<LotterySequenceGenerator> GetAllSequenceGenerators()
         {
             return lotterySeqGenDao.GetAllSeqGenerators();
+        }
+        public void UpdateDescriptionLotterySequenceGenerator(LotterySequenceGenerator updatedModel)
+        {
+            if (this.lotterySeqGenDao.IsDescriptionExisting(updatedModel.GetDescription()))
+            {
+                throw new Exception(ResourcesUtils.GetMessage("lott_seq_gen_msg1"));
+            }
+            this.lotterySeqGenDao.UpdateDescription(updatedModel);
         }
         public List<LotteryDrawResult> GetLatestLotteryResult(int howManyDraws)
         {

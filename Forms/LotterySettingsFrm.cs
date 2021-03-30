@@ -26,12 +26,12 @@ namespace LottoDataManager.Forms
 
         public LotterySettingsFrm(LotteryDataServices lotteryDataServices)
         {
+            InitializeComponent();
             //Debugging
             if (lotteryDataServices == null) lotteryDataServices = new LotteryDataServices(new Game658());
             //this.betDateTime = new DateTime(2021,01,3,0,0,0);
             //end debugging
 
-            InitializeComponent();
             this.lotteryDataServices = lotteryDataServices;
             this.lotteryTicketPanel = this.lotteryDataServices.GetLotteryTicketPanel();
         }
@@ -48,7 +48,7 @@ namespace LottoDataManager.Forms
         }
         private void SetDefaultSelectedSetting()
         {
-            //DEBUGGING
+            mainMenuTreeView.HideSelection = false;
             mainMenuTreeView.SelectedNode = mainMenuTreeView.Nodes[0];
             ShowNodeSettings(mainMenuTreeView.SelectedNode);
         }
@@ -94,11 +94,21 @@ namespace LottoDataManager.Forms
                 LoadScheduleCodes();
                 lotterySchedTabPage.Show();
             }
+            else if (node.Name.Equals("nodeConfig", StringComparison.OrdinalIgnoreCase))
+            {
+                mainTabControl.TabPages.Add(lotteryConfig);
+                LoadLotteryConfig();
+                lotterySchedTabPage.Show();
+            }
         }
         #endregion
 
         #region "LISTVIEW SORTER"
         private void lvLotteryOutlets_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            listviewSorter(sender, e);
+        }
+        private void lvSeqGenDescriptions_ColumnClick(object sender, ColumnClickEventArgs e)
         {
             listviewSorter(sender, e);
         }
@@ -278,7 +288,6 @@ namespace LottoDataManager.Forms
             this.lblLWPAmatchBet6.Text = String.Format(ResourcesUtils.GetMessage("lott_lwpa_lbls_1"), 6, this.lotteryTicketPanel.GetGameDigitCount());
             SetupLotteryWinningAmtFields();
         }
-
         private void SetupLotteryWinningAmtFields()
         {
             cmbLWPAGameMode.Items.Clear();
@@ -301,6 +310,10 @@ namespace LottoDataManager.Forms
         {
             try
             {
+                DialogResult dr = MessageBox.Show(ResourcesUtils.GetMessage("lott_lwpa_msg3"),
+                                    ResourcesUtils.GetMessage("lott_lwpa_msg2"), MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+                if (dr == DialogResult.No) return;
+
                 Lottery lottery = (Lottery)cmbLWPAGameMode.SelectedItem;
                 LotteryWinningCombination originalCombination = this.lotteryDataServices.GetLotteryWinningCombinations(lottery.GetGameMode());
                 LotteryWinningCombinationSetup lotteryUpdated = (LotteryWinningCombinationSetup)originalCombination.Clone();
@@ -323,23 +336,159 @@ namespace LottoDataManager.Forms
         #region LOTTERY SEQUENCE GENERATORS CODES
         private void LoadSequenceGenerators()
         {
+            txtbGenSeqDescription.Text = "";
+            UpdateSeqGenDescLenLbl();
+            lvSeqGenDescriptions.Items.Clear();
+            lvSeqGenDescriptions.BeginUpdate();
+            List<LotterySequenceGenerator> lotteryOutletList = lotteryDataServices.GetAllSequenceGenerators();
 
+            foreach (LotterySequenceGenerator seqGen in lotteryOutletList)
+            {
+                ListViewItem item = new ListViewItem(seqGen.GetDescription());
+                item.Tag = seqGen;
+                lvSeqGenDescriptions.Items.Add(item);
+            }
+            lvSeqGenDescriptions.EndUpdate();
+        }
+        private void btnSeqGenSaveChanges_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (IsValidateLotterySeqGenDescription(txtbGenSeqDescription.Text)) return;
+                LotterySequenceGeneratorSetup selectedSeqGen = (LotterySequenceGeneratorSetup)GetSelectedLotterySequenceGenerator();
+                selectedSeqGen.Description = txtbGenSeqDescription.Text;
+                this.lotteryDataServices.UpdateDescriptionLotterySequenceGenerator(selectedSeqGen);
+                MessageBox.Show(ResourcesUtils.GetMessage("lott_seq_gen_msg5"));
+                LoadSequenceGenerators();
+                FocusItemOnLotterySequenceGenerators(selectedSeqGen.GetID());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        private bool IsValidateLotterySeqGenDescription(String description)
+        {
+            if (description.Length <= 0)
+            {
+                MessageBox.Show(ResourcesUtils.GetMessage("lott_seq_gen_msg2"));
+                return true;
+            }
+            else if (description.Length > LotteryOutletDaoImpl.MAX_LEN_DESCRIPTION)
+            {
+                MessageBox.Show(ResourcesUtils.GetMessage("lott_seq_gen_msg3"));
+                return true;
+            }
+            else if (StringUtils.ContainsInvalidCharacters(description))
+            {
+                MessageBox.Show(ResourcesUtils.GetMessage("lott_seq_gen_msg4"));
+                return true;
+            }
+            return false;
+        }
+        private void lvSeqGenDescriptions_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lvSeqGenDescriptions.SelectedItems.Count <= 0) return;
+            LotterySequenceGenerator seqGen = GetSelectedLotterySequenceGenerator();
+            txtbGenSeqDescription.Text = seqGen.GetDescription();
+            UpdateSeqGenDescLenLbl();
+        }
+        private void txtbGenSeqDescription_TextChanged(object sender, EventArgs e)
+        {
+            UpdateSeqGenDescLenLbl();
+        }
+        private LotterySequenceGenerator GetSelectedLotterySequenceGenerator()
+        {
+            if (lvSeqGenDescriptions.SelectedItems.Count <= 0) return null;
+            ListViewItem item = lvSeqGenDescriptions.SelectedItems[0];
+            LotterySequenceGenerator seqgen = (LotterySequenceGenerator)item.Tag;
+            return seqgen;
+        }
+        private void UpdateSeqGenDescLenLbl()
+        {
+            lblSeqGenChars.Text = String.Format("({0}/{1} chars)",
+                txtbGenSeqDescription.Text.Length,
+                LotteryOutletDaoImpl.MAX_LEN_DESCRIPTION);
+        }
+        private void FocusItemOnLotterySequenceGenerators(int sequenceGenIdOrSeqId)
+        {
+            foreach (ListViewItem item in lvSeqGenDescriptions.Items)
+            {
+                LotterySequenceGenerator seqGen = (LotterySequenceGenerator)item.Tag;
+                if (seqGen.GetSeqGenCode() == sequenceGenIdOrSeqId || seqGen.GetID() == sequenceGenIdOrSeqId)
+                {
+                    item.Selected = true;
+                    item.EnsureVisible();
+                    break;
+                }
+            }
         }
         #endregion
 
         #region LOTTERY SCHEDULE CODES
         private void LoadScheduleCodes()
         {
-
+            DefaultLotSchedCheckboxes();
+            cmbLotSchedLotteries.Items.Clear();
+            cmbLotSchedLotteries.Items.AddRange(lotteryDataServices.GetLotteries().ToArray());
+            if (cmbLotSchedLotteries.Items.Count > 0) cmbLotSchedLotteries.SelectedItem = cmbLotSchedLotteries.Items[0];
         }
+        private void DefaultLotSchedCheckboxes()
+        {
+            chkbLotSchedMon.Checked = false;
+            chkbLotSchedTue.Checked = false;
+            chkbLotSchedWed.Checked = false;
+            chkbLotSchedThurs.Checked = false;
+            chkbLotSchedFri.Checked = false;
+            chkbLotSchedSat.Checked = false;
+            chkbLotSchedSun.Checked = false;
+        }
+        private void btnLotSchedSave_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DialogResult dr = MessageBox.Show(ResourcesUtils.GetMessage("lott_sched_msg4"), 
+                    ResourcesUtils.GetMessage("lott_sched_msg3"), MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+                if (dr == DialogResult.No) return;
 
-
-
-
-
-
+                Lottery lottery = (Lottery)cmbLotSchedLotteries.SelectedItem;
+                LotteryScheduleSetup lotSchedNew = (LotteryScheduleSetup)this.lotteryDataServices.GetLotterySchedule(lottery.GetGameMode());
+                lotSchedNew.Monday = chkbLotSchedMon.Checked;
+                lotSchedNew.Tuesday = chkbLotSchedTue.Checked;
+                lotSchedNew.Wednesday = chkbLotSchedWed.Checked;
+                lotSchedNew.Thursday = chkbLotSchedThurs.Checked;
+                lotSchedNew.Friday = chkbLotSchedFri.Checked;
+                lotSchedNew.Saturday = chkbLotSchedSat.Checked;
+                lotSchedNew.Sunday = chkbLotSchedSun.Checked;
+                this.lotteryDataServices.AddNewLotterySchedule(lotSchedNew);
+                MessageBox.Show(ResourcesUtils.GetMessage("lott_sched_msg2"));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        private void cmbLotSchedLotteries_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Lottery lottery = (Lottery)cmbLotSchedLotteries.SelectedItem;
+            lblLotSchedSelectedGame.Text = lottery.GetDescription();
+            LotterySchedule lotSched= this.lotteryDataServices.GetLotterySchedule(lottery.GetGameMode());
+            chkbLotSchedMon.Checked = lotSched.IsMonday();
+            chkbLotSchedTue.Checked = lotSched.IsTuesday();
+            chkbLotSchedWed.Checked = lotSched.IsWednesday();
+            chkbLotSchedThurs.Checked = lotSched.IsThursday();
+            chkbLotSchedFri.Checked = lotSched.IsFriday();
+            chkbLotSchedSat.Checked = lotSched.IsSaturday();
+            chkbLotSchedSun.Checked = lotSched.IsSunday();
+        }
         #endregion
 
+        #region LOTTERY CONFIGURATION
+        private void LoadLotteryConfig()
+        {
+
+        }
+        #endregion
 
     }
 }

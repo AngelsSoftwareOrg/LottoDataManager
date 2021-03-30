@@ -591,6 +591,7 @@ namespace LottoDataManager
         {
             LotterySettingsFrm settings = new LotterySettingsFrm(lotteryDataServices);
             settings.ShowDialog(this);
+            RefreshBets();
         }
         private void checkWinningBetsToolStripMenuItem_Click(object sender, EventArgs e)
         {

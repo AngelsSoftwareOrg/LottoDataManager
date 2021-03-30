@@ -42,6 +42,7 @@ namespace LottoDataManager.Forms
             this.olvColNum5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColNum6 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvLottoOutlet = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvLottoSeqGen = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.ctxMenuLvBet = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkedHighlightedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,14 +55,13 @@ namespace LottoDataManager.Forms
             this.linkLabelFilterNow = new System.Windows.Forms.LinkLabel();
             this.dateTimePickerBets = new System.Windows.Forms.DateTimePicker();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.btnRestoreBack = new System.Windows.Forms.Button();
-            this.btnDeleteChecked = new System.Windows.Forms.Button();
-            this.btnSaveChanges = new System.Windows.Forms.Button();
-            this.btnExit = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripProgBar = new System.Windows.Forms.ToolStripProgressBar();
             this.toolStripStatusLbl = new System.Windows.Forms.ToolStripStatusLabel();
-            this.olvLottoSeqGen = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.btnExit = new System.Windows.Forms.Button();
+            this.btnRestoreBack = new System.Windows.Forms.Button();
+            this.btnDeleteChecked = new System.Windows.Forms.Button();
+            this.btnSaveChanges = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.objectListViewBets)).BeginInit();
             this.ctxMenuLvBet.SuspendLayout();
@@ -177,6 +177,12 @@ namespace LottoDataManager.Forms
             this.olvLottoOutlet.Text = "Lotto Outlet";
             this.olvLottoOutlet.Width = 145;
             // 
+            // olvLottoSeqGen
+            // 
+            this.olvLottoSeqGen.CellEditUseWholeCell = true;
+            this.olvLottoSeqGen.Text = "Sequence Generator";
+            this.olvLottoSeqGen.Width = 160;
+            // 
             // ctxMenuLvBet
             // 
             this.ctxMenuLvBet.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -287,51 +293,6 @@ namespace LottoDataManager.Forms
             this.panel3.Size = new System.Drawing.Size(945, 81);
             this.panel3.TabIndex = 3;
             // 
-            // btnRestoreBack
-            // 
-            this.btnRestoreBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRestoreBack.Location = new System.Drawing.Point(464, 14);
-            this.btnRestoreBack.Name = "btnRestoreBack";
-            this.btnRestoreBack.Size = new System.Drawing.Size(171, 56);
-            this.btnRestoreBack.TabIndex = 9;
-            this.btnRestoreBack.Text = "Restore Back the List";
-            this.btnRestoreBack.UseVisualStyleBackColor = true;
-            this.btnRestoreBack.Click += new System.EventHandler(this.btnRestoreBack_Click);
-            // 
-            // btnDeleteChecked
-            // 
-            this.btnDeleteChecked.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnDeleteChecked.Image = ((System.Drawing.Image)(resources.GetObject("btnDeleteChecked.Image")));
-            this.btnDeleteChecked.Location = new System.Drawing.Point(12, 21);
-            this.btnDeleteChecked.Name = "btnDeleteChecked";
-            this.btnDeleteChecked.Size = new System.Drawing.Size(50, 39);
-            this.btnDeleteChecked.TabIndex = 8;
-            this.btnDeleteChecked.UseVisualStyleBackColor = true;
-            this.btnDeleteChecked.Click += new System.EventHandler(this.btnDeleteChecked_Click);
-            // 
-            // btnSaveChanges
-            // 
-            this.btnSaveChanges.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSaveChanges.Location = new System.Drawing.Point(641, 14);
-            this.btnSaveChanges.Name = "btnSaveChanges";
-            this.btnSaveChanges.Size = new System.Drawing.Size(146, 56);
-            this.btnSaveChanges.TabIndex = 7;
-            this.btnSaveChanges.Text = "Save Changes";
-            this.btnSaveChanges.UseVisualStyleBackColor = true;
-            this.btnSaveChanges.Click += new System.EventHandler(this.btnSaveChanges_Click);
-            // 
-            // btnExit
-            // 
-            this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExit.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnExit.Location = new System.Drawing.Point(793, 14);
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(146, 56);
-            this.btnExit.TabIndex = 6;
-            this.btnExit.Text = "Exit";
-            this.btnExit.UseVisualStyleBackColor = true;
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
-            // 
             // statusStrip1
             // 
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -356,11 +317,59 @@ namespace LottoDataManager.Forms
             this.toolStripStatusLbl.Size = new System.Drawing.Size(89, 20);
             this.toolStripStatusLbl.Text = "Hello World";
             // 
-            // olvLottoSeqGen
+            // btnExit
             // 
-            this.olvLottoSeqGen.CellEditUseWholeCell = true;
-            this.olvLottoSeqGen.Text = "Sequence Generator";
-            this.olvLottoSeqGen.Width = 160;
+            this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExit.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnExit.Image = global::LottoDataManager.Properties.Resources.Exit_32;
+            this.btnExit.Location = new System.Drawing.Point(793, 14);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(146, 56);
+            this.btnExit.TabIndex = 6;
+            this.btnExit.Text = "Exit";
+            this.btnExit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnExit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            // 
+            // btnRestoreBack
+            // 
+            this.btnRestoreBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRestoreBack.Image = global::LottoDataManager.Properties.Resources.Available_Updates_32px;
+            this.btnRestoreBack.Location = new System.Drawing.Point(415, 14);
+            this.btnRestoreBack.Name = "btnRestoreBack";
+            this.btnRestoreBack.Size = new System.Drawing.Size(209, 56);
+            this.btnRestoreBack.TabIndex = 9;
+            this.btnRestoreBack.Text = "Restore Back the List";
+            this.btnRestoreBack.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnRestoreBack.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnRestoreBack.UseVisualStyleBackColor = true;
+            this.btnRestoreBack.Click += new System.EventHandler(this.btnRestoreBack_Click);
+            // 
+            // btnDeleteChecked
+            // 
+            this.btnDeleteChecked.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnDeleteChecked.Image = ((System.Drawing.Image)(resources.GetObject("btnDeleteChecked.Image")));
+            this.btnDeleteChecked.Location = new System.Drawing.Point(12, 14);
+            this.btnDeleteChecked.Name = "btnDeleteChecked";
+            this.btnDeleteChecked.Size = new System.Drawing.Size(50, 56);
+            this.btnDeleteChecked.TabIndex = 8;
+            this.btnDeleteChecked.UseVisualStyleBackColor = true;
+            this.btnDeleteChecked.Click += new System.EventHandler(this.btnDeleteChecked_Click);
+            // 
+            // btnSaveChanges
+            // 
+            this.btnSaveChanges.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSaveChanges.Image = global::LottoDataManager.Properties.Resources.save_v1_32;
+            this.btnSaveChanges.Location = new System.Drawing.Point(630, 14);
+            this.btnSaveChanges.Name = "btnSaveChanges";
+            this.btnSaveChanges.Size = new System.Drawing.Size(157, 56);
+            this.btnSaveChanges.TabIndex = 7;
+            this.btnSaveChanges.Text = "Save Changes";
+            this.btnSaveChanges.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnSaveChanges.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSaveChanges.UseVisualStyleBackColor = true;
+            this.btnSaveChanges.Click += new System.EventHandler(this.btnSaveChanges_Click);
             // 
             // ModifyBetFrm
             // 

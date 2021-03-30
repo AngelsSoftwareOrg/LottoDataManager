@@ -32,8 +32,8 @@ namespace LottoDataManager.Forms
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MachineLearningFrm));
             this.txtStatus = new System.Windows.Forms.RichTextBox();
             this.btnExit = new System.Windows.Forms.Button();
-            this.btnUpdate = new System.Windows.Forms.Button();
             this.btnStop = new System.Windows.Forms.Button();
+            this.btnUpdate = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtStatus
@@ -55,35 +55,42 @@ namespace LottoDataManager.Forms
             // 
             this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExit.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnExit.Location = new System.Drawing.Point(838, 308);
+            this.btnExit.Image = global::LottoDataManager.Properties.Resources.Exit_32;
+            this.btnExit.Location = new System.Drawing.Point(809, 308);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(94, 62);
+            this.btnExit.Size = new System.Drawing.Size(123, 62);
             this.btnExit.TabIndex = 1;
             this.btnExit.Text = "Exit";
+            this.btnExit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
-            // 
-            // btnUpdate
-            // 
-            this.btnUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnUpdate.Location = new System.Drawing.Point(581, 308);
-            this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(251, 62);
-            this.btnUpdate.TabIndex = 2;
-            this.btnUpdate.Text = "Update Machine Learning Data Sets";
-            this.btnUpdate.UseVisualStyleBackColor = true;
-            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // btnStop
             // 
             this.btnStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnStop.Image = global::LottoDataManager.Properties.Resources.Button_Close_icon_32px;
             this.btnStop.Location = new System.Drawing.Point(6, 308);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(184, 62);
             this.btnStop.TabIndex = 3;
             this.btnStop.Text = "Stop";
+            this.btnStop.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnStop.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnStop.UseVisualStyleBackColor = true;
             this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
+            // 
+            // btnUpdate
+            // 
+            this.btnUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnUpdate.Image = global::LottoDataManager.Properties.Resources.bot_01_32px;
+            this.btnUpdate.Location = new System.Drawing.Point(480, 308);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(323, 62);
+            this.btnUpdate.TabIndex = 2;
+            this.btnUpdate.Text = "Update Machine Learning Data Sets";
+            this.btnUpdate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // MachineLearningFrm
             // 

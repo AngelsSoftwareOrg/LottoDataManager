@@ -11,5 +11,7 @@ namespace LottoDataManager.Includes.Database.DAO.Interface
     {
         List<LotterySequenceGenerator> GetAllSeqGenerators();
         LotterySequenceGenerator GetSeqGenerators(int seqGenId);
+        void UpdateDescription(LotterySequenceGenerator updatedModel);
+        bool IsDescriptionExisting(String seqGenDescription);
     }
 }

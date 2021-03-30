@@ -278,6 +278,11 @@
     <Content Include="DatabaseMain\Lotto_Main_DB.accdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\Icons\money_32px.png" />
+    <None Include="Resources\Icons\erase_32px.png" />
+    <None Include="Resources\Icons\Available_Updates_32px.png" />
+    <None Include="Resources\Icons\Button-Close-icon_32px.png" />
+    <None Include="Resources\Icons\stop_20.png" />
     <None Include="Resources\Icons\Trash_32x.png" />
     <None Include="Resources\Icons\Edit_01_32x.png" />
     <None Include="Resources\Icons\save_v1_32.png" />

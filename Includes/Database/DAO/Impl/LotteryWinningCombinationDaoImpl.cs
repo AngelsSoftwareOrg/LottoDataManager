@@ -15,9 +15,7 @@ namespace LottoDataManager.Includes.Database.DAO
     public class LotteryWinningCombinationDaoImpl : LotteryDaoImplCommon, LotteryWinningCombinationDao
     {
         private static LotteryWinningCombinationDaoImpl lotteryWinningCombinationDaoImpl;
-
         private LotteryWinningCombinationDaoImpl() { }
-
         public static LotteryWinningCombinationDao GetInstance()
         {
             if (lotteryWinningCombinationDaoImpl == null)
@@ -53,7 +51,7 @@ namespace LottoDataManager.Includes.Database.DAO
                 command.CommandText = " UPDATE lottery_winning_combination SET active = false " +
                                       " WHERE ID = @id AND game_cd = @game_cd AND active = true";
                 command.Parameters.AddWithValue("@id", lwc.GetID());
-                command.Parameters.AddWithValue("@game_cd", lwc.GetGameCode());
+                command.Parameters.AddWithValue("@game_cd", lwc.GetGameMode());
                 command.Connection = conn;
                 conn.Open();
                 OleDbTransaction transaction = conn.BeginTransaction();
@@ -78,7 +76,7 @@ namespace LottoDataManager.Includes.Database.DAO
                 command.CommandText = " INSERT INTO `lottery_winning_combination` " +
                                       "          (`game_cd`, `active`, `match_0`, `match_1`, `match_2`, `match_3`, `match_4`, `match_5`, `match_6`) " +
                                       "  VALUES (@game_cd, true, @m0, @m1, @m2, @m3, @m4, @m5, @m6) ";
-                command.Parameters.AddWithValue("@game_cd", (int)lwc.GetGameCode());
+                command.Parameters.AddWithValue("@game_cd", (int)lwc.GetGameMode());
                 command.Parameters.AddWithValue("@m0", lwc.GetMatch0());
                 command.Parameters.AddWithValue("@m1", lwc.GetMatch1());
                 command.Parameters.AddWithValue("@m2", lwc.GetMatch2());
@@ -109,7 +107,7 @@ namespace LottoDataManager.Includes.Database.DAO
         {
             LotteryWinningCombinationSetup setup = new LotteryWinningCombinationSetup();
             setup.ID = int.Parse(reader["ID"].ToString());
-            setup.GameCode = ClassReflectionUtil.FindGameMode(int.Parse(reader["game_cd"].ToString()));
+            setup.GameMode = ClassReflectionUtil.FindGameMode(int.Parse(reader["game_cd"].ToString()));
             setup.Match0 = double.Parse(reader["match_0"].ToString());
             setup.Match1 = double.Parse(reader["match_1"].ToString());
             setup.Match2 = double.Parse(reader["match_2"].ToString());

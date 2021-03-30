@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LottoDataManager.Includes.Model.Structs;
 
 namespace LottoDataManager.Includes.Model.Details
 {
@@ -17,5 +18,8 @@ namespace LottoDataManager.Includes.Model.Details
         bool IsSunday();
         bool IsDrawDateMatchLotterySchedule(DateTime drawDate);
         String DrawDateEvery();
+        int GetID();
+        GameMode GetGameMode();
+        bool IsEqualSchedule(LotterySchedule compareTo);
     }
 }

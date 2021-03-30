@@ -63,9 +63,29 @@ namespace LottoDataManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Available_Updates_32px {
+            get {
+                object obj = ResourceManager.GetObject("Available_Updates_32px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap bot_01_32px {
             get {
                 object obj = ResourceManager.GetObject("bot_01_32px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Button_Close_icon_32px {
+            get {
+                object obj = ResourceManager.GetObject("Button-Close-icon_32px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -86,6 +106,16 @@ namespace LottoDataManager.Properties {
         internal static System.Drawing.Bitmap Edit_01_32x {
             get {
                 object obj = ResourceManager.GetObject("Edit_01_32x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap erase_32px {
+            get {
+                object obj = ResourceManager.GetObject("erase_32px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -127,6 +157,16 @@ namespace LottoDataManager.Properties {
             get {
                 object obj = ResourceManager.GetObject("messages_en", resourceCulture);
                 return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap money_32px {
+            get {
+                object obj = ResourceManager.GetObject("money_32px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -226,6 +266,16 @@ namespace LottoDataManager.Properties {
         internal static System.Drawing.Bitmap statistic_32 {
             get {
                 object obj = ResourceManager.GetObject("statistic_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap stop_20 {
+            get {
+                object obj = ResourceManager.GetObject("stop_20", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

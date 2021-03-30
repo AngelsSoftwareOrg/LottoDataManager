@@ -18,7 +18,7 @@ namespace LottoDataManager.Includes.Model.Details
         double GetMatch6();
         double GetWinningAmount(int matchingCount);
         int GetID();
-        GameMode GetGameCode();
+        GameMode GetGameMode();
         
     }
 }

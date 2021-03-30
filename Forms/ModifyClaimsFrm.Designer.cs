@@ -317,32 +317,41 @@ namespace LottoDataManager.Forms
             // 
             // btnRestoreBack
             // 
-            this.btnRestoreBack.Location = new System.Drawing.Point(464, 13);
+            this.btnRestoreBack.Image = global::LottoDataManager.Properties.Resources.Available_Updates_32px;
+            this.btnRestoreBack.Location = new System.Drawing.Point(397, 13);
             this.btnRestoreBack.Name = "btnRestoreBack";
-            this.btnRestoreBack.Size = new System.Drawing.Size(171, 56);
+            this.btnRestoreBack.Size = new System.Drawing.Size(212, 56);
             this.btnRestoreBack.TabIndex = 9;
             this.btnRestoreBack.Text = "Restore Back the List";
+            this.btnRestoreBack.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnRestoreBack.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnRestoreBack.UseVisualStyleBackColor = true;
             this.btnRestoreBack.Click += new System.EventHandler(this.btnRestoreBack_Click);
             // 
             // btnSaveChanges
             // 
-            this.btnSaveChanges.Location = new System.Drawing.Point(641, 13);
+            this.btnSaveChanges.Image = global::LottoDataManager.Properties.Resources.save_v1_32;
+            this.btnSaveChanges.Location = new System.Drawing.Point(615, 13);
             this.btnSaveChanges.Name = "btnSaveChanges";
-            this.btnSaveChanges.Size = new System.Drawing.Size(146, 56);
+            this.btnSaveChanges.Size = new System.Drawing.Size(172, 56);
             this.btnSaveChanges.TabIndex = 7;
             this.btnSaveChanges.Text = "Save Changes";
+            this.btnSaveChanges.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnSaveChanges.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSaveChanges.UseVisualStyleBackColor = true;
             this.btnSaveChanges.Click += new System.EventHandler(this.btnSaveChanges_Click);
             // 
             // btnExit
             // 
             this.btnExit.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnExit.Image = global::LottoDataManager.Properties.Resources.Exit_32;
             this.btnExit.Location = new System.Drawing.Point(793, 13);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(146, 56);
             this.btnExit.TabIndex = 6;
             this.btnExit.Text = "Exit";
+            this.btnExit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnExit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
