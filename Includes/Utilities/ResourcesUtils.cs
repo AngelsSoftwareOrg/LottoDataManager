@@ -55,6 +55,8 @@ namespace LottoDataManager.Includes.Utilities
             String fileObject = Encoding.UTF8.GetString((Byte[])RESOURCE_MANAGER.GetObject(RESOURCE_PROPERTY_FILE_NAME_MESSAGES_EN));
             foreach(String lineStr in fileObject.Split(Char.Parse("\n")).ToList<string>())
             {
+                String lineStrTmp = lineStr.Trim();
+                if (lineStrTmp.StartsWith("#")) continue;
                 if (!String.IsNullOrWhiteSpace(lineStr))
                 {
                     String[] splitted = lineStr.Split("=".ToCharArray());

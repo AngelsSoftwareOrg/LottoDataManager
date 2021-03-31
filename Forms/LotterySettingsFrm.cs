@@ -25,26 +25,22 @@ namespace LottoDataManager.Forms
         private LotteryDataServices lotteryDataServices;
         private LotteryTicketPanel lotteryTicketPanel;
         private LotteryAppConfiguration lotteryAppConfiguration;
+        private String NODE_NAME_OPTION_CONFIG = "nodeConfig";
 
         public object ResourcesUtil { get; private set; }
 
         public LotterySettingsFrm(LotteryDataServices lotteryDataServices)
         {
             InitializeComponent();
-            //Debugging
-            if (lotteryDataServices == null) lotteryDataServices = new LotteryDataServices(new Game658());
-
-
-            //this.betDateTime = new DateTime(2021,01,3,0,0,0);
-            //end debugging
-
-            this.lotteryDataServices = lotteryDataServices;
-            this.lotteryTicketPanel = this.lotteryDataServices.GetLotteryTicketPanel();
+            if(lotteryDataServices != null)
+            {
+                this.lotteryDataServices = lotteryDataServices;
+                this.lotteryTicketPanel = this.lotteryDataServices.GetLotteryTicketPanel();
+            }
             this.lotteryAppConfiguration = LotteryAppConfiguration.GetInstance();
-            //txtConfigDBSource.Text = @"D:\Development\WorkSpace00002\LottoDataManager\DatabaseMain\Lotto_Main_DB.accdb";
-            //txtConfigFolderML.Text = @"D:\Development\WorkSpace00002\LottoDataManager\DatabaseMain\";
             txtConfigDBSource.Text = this.lotteryAppConfiguration.DBSourcePath;
             txtConfigFolderML.Text = this.lotteryAppConfiguration.MLModelPath;
+            txtConfigNotes.Text = ResourcesUtils.GetMessage("lott_app_config_notes");
         }
 
         #region MAIN FORM
@@ -105,7 +101,7 @@ namespace LottoDataManager.Forms
                 LoadScheduleCodes();
                 lotterySchedTabPage.Show();
             }
-            else if (node.Name.Equals("nodeConfig", StringComparison.OrdinalIgnoreCase))
+            else if (node.Name.Equals(NODE_NAME_OPTION_CONFIG, StringComparison.OrdinalIgnoreCase))
             {
                 mainTabControl.TabPages.Add(lotteryConfig);
                 LoadLotteryConfig();
@@ -562,6 +558,23 @@ namespace LottoDataManager.Forms
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+        #endregion
+
+        #region PUBLIC METHODS
+        public void LimitOptionsToConfig()
+        {
+            TreeNode configNode=null;
+            foreach(TreeNode node in this.mainMenuTreeView.Nodes)
+            {
+                if (node.Name.Equals(NODE_NAME_OPTION_CONFIG, StringComparison.OrdinalIgnoreCase))
+                {
+                    configNode = node;
+                    break;
+                }
+            }
+            this.mainMenuTreeView.Nodes.Clear();
+            this.mainMenuTreeView.Nodes.Add(configNode);
         }
         #endregion
     }

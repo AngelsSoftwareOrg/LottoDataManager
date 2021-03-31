@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="msaccess_datasource_path" Type="System.String" Scope="User">
-      <Value Profile="(Default)">\DatabaseMain\Lotto_Main_DB.accdb</Value>
+      <Value Profile="(Default)">\DatabaseMain\Lotto_Main_DB_BACKUP.accdb</Value>
     </Setting>
     <Setting Name="db_type" Type="System.String" Scope="User">
       <Value Profile="(Default)">MSACCESS</Value>

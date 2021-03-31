@@ -1,4 +1,6 @@
 ﻿using LottoDataManager.Includes;
+using LottoDataManager.Includes.Classes;
+using LottoDataManager.Includes.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,7 +21,6 @@ namespace LottoDataManager.Forms
         {
             InitializeComponent();
         }
-
         public static SplashScreenFrm GetIntance()
         {
             if (splashScreenFrm == null) splashScreenFrm = new SplashScreenFrm();
@@ -31,10 +32,33 @@ namespace LottoDataManager.Forms
             Hide();
             if (splashScreenFrm != null) splashScreenFrm.Dispose(true);
         }
-
         private void SplashScreen_Load(object sender, EventArgs e)
         {
             lblVersion.Text = AppSettings.GetAppVersionWithPrefix();
+            TestDatabaseSourceConnection();
+        }
+        private void TestDatabaseSourceConnection()
+        {
+            if (!IsDatabaseConnectionSuccessful())
+            {
+                //spoof a game, to have settings initiliaze
+                LotterySettingsFrm settings = new LotterySettingsFrm(null);
+                settings.LimitOptionsToConfig();
+                this.Hide();
+                settings.ShowDialog(this);
+                if (!IsDatabaseConnectionSuccessful())
+                {
+                    this.DialogResult = DialogResult.Abort;
+                    return;
+                }
+                this.Show();
+            }
+            this.DialogResult = DialogResult.Yes;
+        }
+        private bool IsDatabaseConnectionSuccessful()
+        {
+            LotteryAppConfiguration appConfig = LotteryAppConfiguration.GetInstance();
+            return appConfig.TestMainDatabaseSourceConnection(appConfig.DBSourcePath);
         }
     }
 }

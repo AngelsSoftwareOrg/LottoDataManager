@@ -278,13 +278,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="DatabaseMain\" />
     <Folder Include="Includes\Session\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Clover_Icon.ico" />
-    <Content Include="DatabaseMain\Lotto_Main_DB.accdb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <None Include="Resources\Icons\money_32px.png" />
     <None Include="Resources\Icons\erase_32px.png" />
     <None Include="Resources\Icons\Available_Updates_32px.png" />

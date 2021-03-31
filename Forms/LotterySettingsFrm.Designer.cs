@@ -44,6 +44,7 @@ namespace LottoDataManager.Forms
             this.lotteryConfig = new System.Windows.Forms.TabPage();
             this.btnConfigSave = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.txtConfigNotes = new System.Windows.Forms.TextBox();
             this.lnkLblConfigML = new System.Windows.Forms.LinkLabel();
             this.txtConfigFolderML = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -263,6 +264,7 @@ namespace LottoDataManager.Forms
             this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox4.Controls.Add(this.txtConfigNotes);
             this.groupBox4.Controls.Add(this.lnkLblConfigML);
             this.groupBox4.Controls.Add(this.txtConfigFolderML);
             this.groupBox4.Controls.Add(this.label4);
@@ -275,6 +277,22 @@ namespace LottoDataManager.Forms
             this.groupBox4.TabIndex = 0;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Database and Model Sources";
+            // 
+            // txtConfigNotes
+            // 
+            this.txtConfigNotes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtConfigNotes.BackColor = System.Drawing.SystemColors.MenuBar;
+            this.txtConfigNotes.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtConfigNotes.ForeColor = System.Drawing.Color.MediumBlue;
+            this.txtConfigNotes.Location = new System.Drawing.Point(12, 269);
+            this.txtConfigNotes.Multiline = true;
+            this.txtConfigNotes.Name = "txtConfigNotes";
+            this.txtConfigNotes.ReadOnly = true;
+            this.txtConfigNotes.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtConfigNotes.Size = new System.Drawing.Size(773, 65);
+            this.txtConfigNotes.TabIndex = 6;
             // 
             // lnkLblConfigML
             // 
@@ -302,7 +320,7 @@ namespace LottoDataManager.Forms
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(8, 140);
+            this.label4.Location = new System.Drawing.Point(11, 140);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(201, 17);
             this.label4.TabIndex = 3;
@@ -334,7 +352,7 @@ namespace LottoDataManager.Forms
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 23);
+            this.label2.Location = new System.Drawing.Point(9, 23);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(172, 17);
             this.label2.TabIndex = 0;
@@ -347,7 +365,7 @@ namespace LottoDataManager.Forms
             this.lotteryOutletTabPage.Location = new System.Drawing.Point(4, 25);
             this.lotteryOutletTabPage.Name = "lotteryOutletTabPage";
             this.lotteryOutletTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.lotteryOutletTabPage.Size = new System.Drawing.Size(789, 370);
+            this.lotteryOutletTabPage.Size = new System.Drawing.Size(789, 407);
             this.lotteryOutletTabPage.TabIndex = 0;
             this.lotteryOutletTabPage.Text = "Lottery Outlet";
             this.lotteryOutletTabPage.UseVisualStyleBackColor = true;
@@ -358,7 +376,7 @@ namespace LottoDataManager.Forms
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(3, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(783, 215);
+            this.panel2.Size = new System.Drawing.Size(783, 252);
             this.panel2.TabIndex = 0;
             // 
             // lvLotteryOutlets
@@ -373,7 +391,7 @@ namespace LottoDataManager.Forms
             this.lvLotteryOutlets.Location = new System.Drawing.Point(0, 0);
             this.lvLotteryOutlets.MultiSelect = false;
             this.lvLotteryOutlets.Name = "lvLotteryOutlets";
-            this.lvLotteryOutlets.Size = new System.Drawing.Size(783, 215);
+            this.lvLotteryOutlets.Size = new System.Drawing.Size(783, 252);
             this.lvLotteryOutlets.TabIndex = 0;
             this.lvLotteryOutlets.UseCompatibleStateImageBehavior = false;
             this.lvLotteryOutlets.View = System.Windows.Forms.View.Details;
@@ -393,7 +411,7 @@ namespace LottoDataManager.Forms
             this.panel1.Controls.Add(this.btnSaveLotteryOutlet);
             this.panel1.Controls.Add(this.txtOutletCodeDesc);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(3, 218);
+            this.panel1.Location = new System.Drawing.Point(3, 255);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(783, 149);
             this.panel1.TabIndex = 0;
@@ -464,7 +482,7 @@ namespace LottoDataManager.Forms
             this.lotteryWinPrizeTabPage.Location = new System.Drawing.Point(4, 25);
             this.lotteryWinPrizeTabPage.Name = "lotteryWinPrizeTabPage";
             this.lotteryWinPrizeTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.lotteryWinPrizeTabPage.Size = new System.Drawing.Size(789, 370);
+            this.lotteryWinPrizeTabPage.Size = new System.Drawing.Size(789, 407);
             this.lotteryWinPrizeTabPage.TabIndex = 1;
             this.lotteryWinPrizeTabPage.Text = "Lottery Winning Prize/Amount";
             this.lotteryWinPrizeTabPage.UseVisualStyleBackColor = true;
@@ -473,7 +491,7 @@ namespace LottoDataManager.Forms
             // 
             this.btnLAWPASaveChanges.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnLAWPASaveChanges.Image = global::LottoDataManager.Properties.Resources.save_v1_32;
-            this.btnLAWPASaveChanges.Location = new System.Drawing.Point(639, 339);
+            this.btnLAWPASaveChanges.Location = new System.Drawing.Point(604, 340);
             this.btnLAWPASaveChanges.Name = "btnLAWPASaveChanges";
             this.btnLAWPASaveChanges.Size = new System.Drawing.Size(179, 62);
             this.btnLAWPASaveChanges.TabIndex = 3;
@@ -729,7 +747,7 @@ namespace LottoDataManager.Forms
             this.lotterySeqGenTabPage.Controls.Add(this.panel4);
             this.lotterySeqGenTabPage.Location = new System.Drawing.Point(4, 25);
             this.lotterySeqGenTabPage.Name = "lotterySeqGenTabPage";
-            this.lotterySeqGenTabPage.Size = new System.Drawing.Size(789, 370);
+            this.lotterySeqGenTabPage.Size = new System.Drawing.Size(789, 407);
             this.lotterySeqGenTabPage.TabIndex = 2;
             this.lotterySeqGenTabPage.Text = "Lottery Sequence Generator";
             this.lotterySeqGenTabPage.UseVisualStyleBackColor = true;
@@ -740,7 +758,7 @@ namespace LottoDataManager.Forms
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(789, 221);
+            this.panel3.Size = new System.Drawing.Size(789, 258);
             this.panel3.TabIndex = 1;
             // 
             // lvSeqGenDescriptions
@@ -755,7 +773,7 @@ namespace LottoDataManager.Forms
             this.lvSeqGenDescriptions.Location = new System.Drawing.Point(0, 0);
             this.lvSeqGenDescriptions.MultiSelect = false;
             this.lvSeqGenDescriptions.Name = "lvSeqGenDescriptions";
-            this.lvSeqGenDescriptions.Size = new System.Drawing.Size(789, 221);
+            this.lvSeqGenDescriptions.Size = new System.Drawing.Size(789, 258);
             this.lvSeqGenDescriptions.TabIndex = 0;
             this.lvSeqGenDescriptions.UseCompatibleStateImageBehavior = false;
             this.lvSeqGenDescriptions.View = System.Windows.Forms.View.Details;
@@ -773,7 +791,7 @@ namespace LottoDataManager.Forms
             this.panel4.Controls.Add(this.btnSeqGenSaveChanges);
             this.panel4.Controls.Add(this.txtbGenSeqDescription);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel4.Location = new System.Drawing.Point(0, 221);
+            this.panel4.Location = new System.Drawing.Point(0, 258);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(789, 149);
             this.panel4.TabIndex = 2;
@@ -791,7 +809,7 @@ namespace LottoDataManager.Forms
             // 
             this.btnSeqGenSaveChanges.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSeqGenSaveChanges.Image = global::LottoDataManager.Properties.Resources.save_v1_32;
-            this.btnSeqGenSaveChanges.Location = new System.Drawing.Point(517, 84);
+            this.btnSeqGenSaveChanges.Location = new System.Drawing.Point(516, 86);
             this.btnSeqGenSaveChanges.Name = "btnSeqGenSaveChanges";
             this.btnSeqGenSaveChanges.Size = new System.Drawing.Size(268, 62);
             this.btnSeqGenSaveChanges.TabIndex = 1;
@@ -819,7 +837,7 @@ namespace LottoDataManager.Forms
             this.lotterySchedTabPage.Controls.Add(this.btnLotSchedSave);
             this.lotterySchedTabPage.Location = new System.Drawing.Point(4, 25);
             this.lotterySchedTabPage.Name = "lotterySchedTabPage";
-            this.lotterySchedTabPage.Size = new System.Drawing.Size(789, 370);
+            this.lotterySchedTabPage.Size = new System.Drawing.Size(789, 407);
             this.lotterySchedTabPage.TabIndex = 3;
             this.lotterySchedTabPage.Text = "Lottery Schedule";
             this.lotterySchedTabPage.UseVisualStyleBackColor = true;
@@ -840,7 +858,7 @@ namespace LottoDataManager.Forms
             this.groupBox3.Controls.Add(this.label3);
             this.groupBox3.Location = new System.Drawing.Point(3, 48);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(782, 251);
+            this.groupBox3.Size = new System.Drawing.Size(782, 286);
             this.groupBox3.TabIndex = 5;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Game Schedule";
@@ -961,7 +979,7 @@ namespace LottoDataManager.Forms
             // 
             this.btnLotSchedSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnLotSchedSave.Image = global::LottoDataManager.Properties.Resources.save_v1_32;
-            this.btnLotSchedSave.Location = new System.Drawing.Point(606, 305);
+            this.btnLotSchedSave.Location = new System.Drawing.Point(606, 340);
             this.btnLotSchedSave.Name = "btnLotSchedSave";
             this.btnLotSchedSave.Size = new System.Drawing.Size(179, 62);
             this.btnLotSchedSave.TabIndex = 4;
@@ -1118,5 +1136,6 @@ namespace LottoDataManager.Forms
         private System.Windows.Forms.LinkLabel lnkLblConfigML;
         private System.Windows.Forms.TextBox txtConfigFolderML;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txtConfigNotes;
     }
 }

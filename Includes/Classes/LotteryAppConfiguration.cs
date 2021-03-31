@@ -46,9 +46,7 @@ namespace LottoDataManager.Includes.Classes
             {
                 try
                 {
-                    //Test if the source file can be queried with
-                    TestingDatabaseSourceFileDao db = TestingDatabaseSourceFileDaoImpl.GetInstance();
-                    bool isSuccess = db.TestConnection(value);
+                    bool isSuccess = TestMainDatabaseSourceConnection(value);
                     if (!isSuccess) throw new Exception(ResourcesUtils.GetMessage("lott_app_config_msg1"));
                     SetConfigValue(DB_SOURCE_CONFIG_KEY, value);
                 }
@@ -61,6 +59,13 @@ namespace LottoDataManager.Includes.Classes
             {
                 return GetConfigValue(DB_SOURCE_CONFIG_KEY);
             }
+        }
+        public bool TestMainDatabaseSourceConnection(String dbFilePath)
+        {
+            //Test if the source file can be queried with
+            TestingDatabaseSourceFileDao db = TestingDatabaseSourceFileDaoImpl.GetInstance();
+            if (String.IsNullOrEmpty(dbFilePath)) return false;
+            return db.TestConnection(dbFilePath);
         }
         public String MLModelPath
         {

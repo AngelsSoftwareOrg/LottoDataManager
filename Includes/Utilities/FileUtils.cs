@@ -10,23 +10,19 @@ namespace LottoDataManager.Includes.Utilities
     public class FileUtils
     {
         public static String TEMP_FILE_MARKED = "Lotto_Data_manager_1234567890_";
-
         static FileUtils()
         {
         }
-
         public static string GetTempFilePathWithExtension(string extension)
         {
             var path = Path.GetTempPath();
             var fileName = TEMP_FILE_MARKED + Guid.NewGuid().ToString() + extension;
             return Path.Combine(path, fileName);
         }
-
         public static string GetCSVTempFilePathName()
         {
             return GetTempFilePathWithExtension(".csv");
         }
-
         public static String GetConfigFileFullPath()
         {
             String complete = Path.Combine(GetAppDataFolder(), ResourcesUtils.AppDataConfigFileName);
@@ -35,7 +31,6 @@ namespace LottoDataManager.Includes.Utilities
             }
             return complete;
         }
-
         private static String GetAppDataFolder()
         {
             // The folder for the roaming current user 
@@ -50,7 +45,6 @@ namespace LottoDataManager.Includes.Utilities
 
             return specificFolder;
         }
-
         public static void SaveConfigurationFile(Dictionary<String, String> configKeyPairValue)
         {
             String filePath = Path.Combine(GetAppDataFolder(), ResourcesUtils.AppDataConfigFileName);
@@ -64,18 +58,20 @@ namespace LottoDataManager.Includes.Utilities
                 }
             }
         }
-
         public static Dictionary<String, String> GetFilePropertiesContent(String filePath)
         {
             Dictionary<String, String> tempDictionary = new Dictionary<string, string>();
             String fileObject = Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(File.ReadAllText(filePath)));
             foreach (String lineStr in fileObject.Split(Char.Parse("\n")).ToList<string>())
             {
-                if (!String.IsNullOrWhiteSpace(lineStr))
+                String lineStrTmp = lineStr.Trim();
+                if (lineStrTmp.StartsWith("#")) continue;
+                if (!String.IsNullOrWhiteSpace(lineStrTmp))
                 {
-                    String[] splitted = lineStr.Split("=".ToCharArray());
+                    String[] splitted = lineStrTmp.Split("=".ToCharArray());
                     if (splitted == null) continue;
                     if (splitted.Length <= 1) continue;
+                    if (String.IsNullOrEmpty(splitted[0])) continue;
                     tempDictionary.Add(splitted[0], splitted[1]);
                 }
             }
