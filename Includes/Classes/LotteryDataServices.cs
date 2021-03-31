@@ -199,9 +199,13 @@ namespace LottoDataManager.Includes.Classes
         {
             return this.lotteryDrawResultDao.GetLatestLotteryResult(this.lotteryDetails.GameMode, howManyDraws);
         }
-        public List<LotteryDrawResult> GetMachineLearningDataSet(GameMode gameMode, DateTime startingDate)
+        public List<LotteryDrawResult> GetMachineLearningDataSetFastTree(GameMode gameMode, DateTime startingDate)
         {
-            return this.lotteryDrawResultDao.GetMachineLearningDataSet(gameMode, startingDate);
+            return this.lotteryDrawResultDao.GetMachineLearningDataSetFastTree(gameMode, startingDate);
+        }
+        public List<LotteryDrawResult> GetMachineLearningDataSetSDCA(GameMode gameMode, DateTime startingDate)
+        {
+            return this.lotteryDrawResultDao.GetMachineLearningDataSetSDCA(gameMode, startingDate);
         }
         public void UpdateLotteryOutletDescription(LotteryOutlet updatedModel)
         {

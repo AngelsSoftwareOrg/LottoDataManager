@@ -19,6 +19,7 @@ namespace LottoDataManager.Includes.Model.Details
         bool IsDrawResulSequenceEmpty();
         ModelInputFastTree GetModelInput();
         ModelInputSDCARegression GetModelInputSDCARegression();
-        String GetMachineLearningDataSetEntry();
+        String GetMachineLearningDataSetEntryFastTree();
+        String GetMachineLearningDataSetEntrySDCA();
     }
 }

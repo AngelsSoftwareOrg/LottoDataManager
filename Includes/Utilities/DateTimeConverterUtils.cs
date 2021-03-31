@@ -10,6 +10,7 @@ namespace LottoDataManager.Includes.Utilities
     {
         public static readonly String DATE_FORMAT_LONG = "MMMM dd, yyyy - dddd";
         public static readonly String STANDARD_DATE_FORMAT = "yyyy-MM-dd";
+        public static readonly String STANDARD_DATE_FORMAT_DFLT_TIME = "yyyy-MM-dd 00:00:00.0";
         public static String ConvertToFormat(DateTime dateSource, String outputFormat)
         {
             return dateSource.ToString(outputFormat);

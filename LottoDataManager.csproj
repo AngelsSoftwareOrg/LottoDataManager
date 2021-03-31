@@ -165,6 +165,7 @@
     <Compile Include="Includes\Classes\ML\LightGbmRegression\ModelOutputLightGbmRegression.cs" />
     <Compile Include="Includes\Classes\ML\FastTree\MachineLearningModelBuilderFastTree.cs" />
     <Compile Include="Includes\Classes\ML\MLModelAbstract.cs" />
+    <Compile Include="Includes\Classes\ML\MLModelBuilderAbstract.cs" />
     <Compile Include="Includes\Classes\ML\SDCARegression\ConsumeModelSDCARegression.cs" />
     <Compile Include="Includes\Classes\ML\SDCARegression\MachineLearningModelBuilderSDCARegression.cs" />
     <Compile Include="Includes\Classes\ML\SDCARegression\ModelInputSDCARegression.cs" />

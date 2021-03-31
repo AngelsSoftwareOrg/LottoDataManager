@@ -12,11 +12,10 @@ using LottoDataManager.Includes.Utilities;
 
 namespace LottoDataManager.Includes.Classes.ML.FastTree
 {
-    public class MachineLearningModelBuilderFastTree
+    public class MachineLearningModelBuilderFastTree: MLModelBuilderAbstract
     {
-        public event EventHandler<String> ProcessingStatus;
-        //private static string TRAIN_DATA_FILEPATH = @"D:\Development\WorkSpace00002\LottoDataManager\DatabaseMain\ml_data_sets.csv";
         private static string MODEL_FILE = ConsumeModelFastTree.MLNetModelPath;
+        private static string OUTPUT_COLUMN_NAME = "RESULT";
 
         // Create MLContext to be shared across the model creation workflow objects 
         // Set a random seed for repeatable/deterministic results across multiple trainings.
@@ -27,7 +26,6 @@ namespace LottoDataManager.Includes.Classes.ML.FastTree
             // Load Data
             InvokeProcessingStatus(ResourcesUtils.GetMessage("mac_lrn_bldr_log_1"));
             IDataView trainingDataView = mlContext.Data.LoadFromTextFile<ModelInputFastTree>(
-                                            //path: TRAIN_DATA_FILEPATH,
                                             path: @mlDataSetsPath,
                                             hasHeader: true,
                                             separatorChar: ',',
@@ -43,7 +41,7 @@ namespace LottoDataManager.Includes.Classes.ML.FastTree
 
             // Evaluate quality of Model
             InvokeProcessingStatus(ResourcesUtils.GetMessage("mac_lrn_bldr_log_4"));
-            Evaluate(mlContext, trainingDataView, trainingPipeline);
+            Evaluate(mlContext, trainingDataView, trainingPipeline, OUTPUT_COLUMN_NAME);
 
             // Save model
             InvokeProcessingStatus("\r\n\r\n\r\n" + ResourcesUtils.GetMessage("mac_lrn_bldr_log_5"));
@@ -62,95 +60,6 @@ namespace LottoDataManager.Includes.Classes.ML.FastTree
             var trainingPipeline = dataProcessPipeline.Append(trainer);
 
             return trainingPipeline;
-        }
-
-        public ITransformer TrainModel(MLContext mlContext, IDataView trainingDataView, IEstimator<ITransformer> trainingPipeline)
-        {
-            using (StringWriter s = new StringWriter())
-            { 
-                s.Write("\r\n=============== Training  model ===============");
-                ITransformer model = trainingPipeline.Fit(trainingDataView);
-                s.Write("\r\n=============== End of training process ===============");
-                return model;
-            }
-        }
-
-        private void Evaluate(MLContext mlContext, IDataView trainingDataView, IEstimator<ITransformer> trainingPipeline)
-        {
-            // Cross-Validate with single dataset (since we don't have two datasets, one for training and for evaluate)
-            // in order to evaluate and get the model's accuracy metrics
-            using (StringWriter s = new StringWriter())
-            {
-                s.Write("\r\n=============== Cross-validating to get model's accuracy metrics ===============");
-                var crossValidationResults = mlContext.Regression.CrossValidate(trainingDataView, trainingPipeline, numberOfFolds: 5, labelColumnName: "RESULT");
-                InvokeProcessingStatus(s.ToString());
-                PrintRegressionFoldsAverageMetrics(crossValidationResults);
-            }
-        }
-
-        private void SaveModel(MLContext mlContext, ITransformer mlModel, string modelRelativePath, DataViewSchema modelInputSchema)
-        {
-            using (StringWriter s = new StringWriter())
-            {
-                // Save/persist the trained model to a .ZIP file
-                s.Write($"\r\n=============== Saving the model  ===============");
-                mlContext.Model.Save(mlModel, modelInputSchema, GetAbsolutePath(modelRelativePath));
-                s.Write("\r\nThe model is saved to {0}", GetAbsolutePath(modelRelativePath));
-                InvokeProcessingStatus(s.ToString());
-            }
-        }
-
-        public string GetAbsolutePath(string relativePath)
-        {
-            FileInfo _dataRoot = new FileInfo(typeof(Program).Assembly.Location);
-            string assemblyFolderPath = _dataRoot.Directory.FullName;
-            string fullPath = Path.Combine(assemblyFolderPath, relativePath);
-            return fullPath;
-        }
-
-        public void PrintRegressionMetrics(RegressionMetrics metrics)
-        {
-            using (StringWriter s = new StringWriter())
-            {
-                s.Write($"\r\n*************************************************");
-                s.Write($"\r\n*       Metrics for Regression model      ");
-                s.Write($"\r\n*------------------------------------------------");
-                s.Write($"\r\n*       LossFn:        {metrics.LossFunction:0.##}");
-                s.Write($"\r\n*       R2 Score:      {metrics.RSquared:0.##}");
-                s.Write($"\r\n*       Absolute loss: {metrics.MeanAbsoluteError:#.##}");
-                s.Write($"\r\n*       Squared loss:  {metrics.MeanSquaredError:#.##}");
-                s.Write($"\r\n*       RMS loss:      {metrics.RootMeanSquaredError:#.##}");
-                s.Write($"\r\n*************************************************");
-                InvokeProcessingStatus(s.ToString());
-            }
-        }
-
-        public void PrintRegressionFoldsAverageMetrics(IEnumerable<TrainCatalogBase.CrossValidationResult<RegressionMetrics>> crossValidationResults)
-        {
-            var L1 = crossValidationResults.Select(r => r.Metrics.MeanAbsoluteError);
-            var L2 = crossValidationResults.Select(r => r.Metrics.MeanSquaredError);
-            var RMS = crossValidationResults.Select(r => r.Metrics.RootMeanSquaredError);
-            var lossFunction = crossValidationResults.Select(r => r.Metrics.LossFunction);
-            var R2 = crossValidationResults.Select(r => r.Metrics.RSquared);
-
-            using (StringWriter s = new StringWriter())
-            {
-                s.Write($"\r\n*************************************************************************************************************");
-                s.Write($"\r\n*       Metrics for Regression model      ");
-                s.Write($"\r\n*------------------------------------------------------------------------------------------------------------");
-                s.Write($"\r\n*       Average L1 Loss:       {L1.Average():0.###} ");
-                s.Write($"\r\n*       Average L2 Loss:       {L2.Average():0.###}  ");
-                s.Write($"\r\n*       Average RMS:           {RMS.Average():0.###}  ");
-                s.Write($"\r\n*       Average Loss Function: {lossFunction.Average():0.###}  ");
-                s.Write($"\r\n*       Average R-squared:     {R2.Average():0.###}  ");
-                s.Write($"\r\n*************************************************************************************************************");
-                InvokeProcessingStatus(s.ToString());
-            }
-        }
-
-        private void InvokeProcessingStatus(String statusMessage)
-        {
-            ProcessingStatus.Invoke(this, statusMessage);
         }
     }
 }

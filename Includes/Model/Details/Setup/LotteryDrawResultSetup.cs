@@ -113,11 +113,11 @@ namespace LottoDataManager.Includes.Model.Details
 #endif
         }
 
-        public String GetMachineLearningDataSetEntry()
+        public String GetMachineLearningDataSetEntryFastTree()
         {
             //draw_date,num1,num2,num3,num4,num5,num6,game_cd,RESULT
             return String.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8}",
-                    DateTimeConverterUtils.ConvertToFormat(DrawDate,DateTimeConverterUtils.STANDARD_DATE_FORMAT),
+                    DateTimeConverterUtils.ConvertToFormat(DrawDate,DateTimeConverterUtils.STANDARD_DATE_FORMAT_DFLT_TIME),
                     Num1, Num2, Num3, Num4, Num5, Num6, GameCode, 
                     String.Format("{0}{1}{2}{3}{4}{5}", 
                         Num1.ToString().PadLeft(2, char.Parse("0")),
@@ -127,6 +127,16 @@ namespace LottoDataManager.Includes.Model.Details
                         Num5.ToString().PadLeft(2, char.Parse("0")),
                         Num6.ToString().PadLeft(2, char.Parse("0"))));
         }
-    
+
+        public String GetMachineLearningDataSetEntrySDCA()
+        {
+            //draw_date,num1,num2,num3,num4,num5,num6,PREDICT,winners,game_cd
+            return String.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9}",
+                    DateTimeConverterUtils.ConvertToFormat(DrawDate, DateTimeConverterUtils.STANDARD_DATE_FORMAT_DFLT_TIME),
+                    Num1, Num2, Num3, Num4, Num5, Num6, 
+                    (Num1 + Num2 + Num3 + Num4 + Num5 + Num6),
+                    Winners, GameCode);
+        }
+
     }
 }
