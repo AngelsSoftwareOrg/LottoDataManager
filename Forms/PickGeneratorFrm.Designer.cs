@@ -41,6 +41,8 @@ namespace LottoDataManager.Forms
             this.lvGenType = new BrightIdeasSoftware.ObjectListView();
             this.olvColDesc = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.grpbxActions = new System.Windows.Forms.GroupBox();
+            this.btnClearSel = new System.Windows.Forms.Button();
+            this.btnGenerate = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.grpbxOutput = new System.Windows.Forms.GroupBox();
             this.lvGenSeq = new System.Windows.Forms.ListView();
@@ -57,10 +59,8 @@ namespace LottoDataManager.Forms
             this.addBetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.grpbxFinalActions = new System.Windows.Forms.GroupBox();
             this.linkUncheckAll = new System.Windows.Forms.LinkLabel();
-            this.btnExit = new System.Windows.Forms.Button();
             this.btnAddSelected = new System.Windows.Forms.Button();
-            this.btnClearSel = new System.Windows.Forms.Button();
-            this.btnGenerate = new System.Windows.Forms.Button();
+            this.btnExit = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.grpbxParam.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -183,6 +183,38 @@ namespace LottoDataManager.Forms
             this.grpbxActions.TabStop = false;
             this.grpbxActions.Text = "Step 3: Actions";
             // 
+            // btnClearSel
+            // 
+            this.btnClearSel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnClearSel.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClearSel.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnClearSel.Image = global::LottoDataManager.Properties.Resources.erase_32px;
+            this.btnClearSel.Location = new System.Drawing.Point(181, 23);
+            this.btnClearSel.Name = "btnClearSel";
+            this.btnClearSel.Size = new System.Drawing.Size(181, 67);
+            this.btnClearSel.TabIndex = 1;
+            this.btnClearSel.Text = "Clear Selections";
+            this.btnClearSel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnClearSel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnClearSel.UseVisualStyleBackColor = true;
+            this.btnClearSel.Click += new System.EventHandler(this.btnClearSel_Click);
+            // 
+            // btnGenerate
+            // 
+            this.btnGenerate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnGenerate.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGenerate.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnGenerate.Image = global::LottoDataManager.Properties.Resources.Star5_32x;
+            this.btnGenerate.Location = new System.Drawing.Point(369, 23);
+            this.btnGenerate.Name = "btnGenerate";
+            this.btnGenerate.Size = new System.Drawing.Size(143, 67);
+            this.btnGenerate.TabIndex = 0;
+            this.btnGenerate.Text = "Generate";
+            this.btnGenerate.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnGenerate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnGenerate.UseVisualStyleBackColor = true;
+            this.btnGenerate.Click += new System.EventHandler(this.btnGenerate_Click);
+            // 
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -303,7 +335,7 @@ namespace LottoDataManager.Forms
             this.grpbxFinalActions.Size = new System.Drawing.Size(592, 100);
             this.grpbxFinalActions.TabIndex = 1;
             this.grpbxFinalActions.TabStop = false;
-            this.grpbxFinalActions.Text = "Step 5: Final Actions";
+            this.grpbxFinalActions.Text = "Step 5: Final Action";
             // 
             // linkUncheckAll
             // 
@@ -315,23 +347,6 @@ namespace LottoDataManager.Forms
             this.linkUncheckAll.TabStop = true;
             this.linkUncheckAll.Text = "Uncheck All";
             this.linkUncheckAll.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkUncheckAll_LinkClicked);
-            // 
-            // btnExit
-            // 
-            this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExit.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExit.ForeColor = System.Drawing.Color.Black;
-            this.btnExit.Image = global::LottoDataManager.Properties.Resources.Exit_32;
-            this.btnExit.Location = new System.Drawing.Point(440, 21);
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(142, 69);
-            this.btnExit.TabIndex = 0;
-            this.btnExit.Text = "Exit";
-            this.btnExit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnExit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnExit.UseVisualStyleBackColor = true;
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // btnAddSelected
             // 
@@ -350,37 +365,22 @@ namespace LottoDataManager.Forms
             this.btnAddSelected.UseVisualStyleBackColor = true;
             this.btnAddSelected.Click += new System.EventHandler(this.btnAddSelected_Click);
             // 
-            // btnClearSel
+            // btnExit
             // 
-            this.btnClearSel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClearSel.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClearSel.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnClearSel.Image = global::LottoDataManager.Properties.Resources.erase_32px;
-            this.btnClearSel.Location = new System.Drawing.Point(181, 23);
-            this.btnClearSel.Name = "btnClearSel";
-            this.btnClearSel.Size = new System.Drawing.Size(181, 67);
-            this.btnClearSel.TabIndex = 1;
-            this.btnClearSel.Text = "Clear Selections";
-            this.btnClearSel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnClearSel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnClearSel.UseVisualStyleBackColor = true;
-            this.btnClearSel.Click += new System.EventHandler(this.btnClearSel_Click);
-            // 
-            // btnGenerate
-            // 
-            this.btnGenerate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGenerate.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGenerate.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnGenerate.Image = global::LottoDataManager.Properties.Resources.Star5_32x;
-            this.btnGenerate.Location = new System.Drawing.Point(369, 23);
-            this.btnGenerate.Name = "btnGenerate";
-            this.btnGenerate.Size = new System.Drawing.Size(143, 67);
-            this.btnGenerate.TabIndex = 0;
-            this.btnGenerate.Text = "Generate";
-            this.btnGenerate.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnGenerate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnGenerate.UseVisualStyleBackColor = true;
-            this.btnGenerate.Click += new System.EventHandler(this.btnGenerate_Click);
+            this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExit.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExit.ForeColor = System.Drawing.Color.Black;
+            this.btnExit.Image = global::LottoDataManager.Properties.Resources.Exit_32;
+            this.btnExit.Location = new System.Drawing.Point(440, 21);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(142, 69);
+            this.btnExit.TabIndex = 0;
+            this.btnExit.Text = "Exit";
+            this.btnExit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnExit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // PickGeneratorFrm
             // 

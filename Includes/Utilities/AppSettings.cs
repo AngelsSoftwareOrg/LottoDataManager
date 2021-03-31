@@ -23,8 +23,16 @@ namespace LottoDataManager.Includes
                 return lotteryAppConfiguration.DBSourcePath;
             }
         }
-
-        public static String GetLootoScrapeSite
+        public static String GetMLModelSourcePath()
+        {
+            LotteryAppConfiguration lotteryAppConfiguration = LotteryAppConfiguration.GetInstance();
+            if (String.IsNullOrEmpty(lotteryAppConfiguration.MLModelPath) || !Directory.Exists(lotteryAppConfiguration.MLModelPath))
+            {
+                throw new Exception(String.Format("ML Model source path does not exist -> {0}", lotteryAppConfiguration.MLModelPath));
+            }
+            return lotteryAppConfiguration.MLModelPath;
+        }
+        public static String GetLottoScrapeSite
         {
             get
             {

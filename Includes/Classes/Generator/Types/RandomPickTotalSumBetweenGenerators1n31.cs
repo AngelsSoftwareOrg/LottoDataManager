@@ -56,7 +56,7 @@ namespace LottoDataManager.Includes.Classes.Generator.Types
                     {
                         sum += i;
                     }
-                    if (sum >= 104 && sum <= 176) break;
+                    if (sum >= IN_BETWEEN_SUM_MIN && sum <= IN_BETWEEN_SUM_MAX) break;
                     result = new int[lotteryTicketPanel.GetGameDigitCount()];
                 }
                 Array.Sort(result);

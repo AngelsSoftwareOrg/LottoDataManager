@@ -30,11 +30,11 @@ namespace LottoDataManager.Forms
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Configurations");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Lottery Outlet");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Lottery Winning Prizes/Amount");
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Lottery Sequence Generator");
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Lottery Schedule");
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Configurations");
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Lottery Outlet");
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Lottery Winning Prizes/Amount");
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Lottery Sequence Generator");
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Lottery Schedule");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LotterySettingsFrm));
             this.panelMainTop = new System.Windows.Forms.Panel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
@@ -175,31 +175,31 @@ namespace LottoDataManager.Forms
             this.mainMenuTreeView.ItemHeight = 40;
             this.mainMenuTreeView.Location = new System.Drawing.Point(0, 0);
             this.mainMenuTreeView.Name = "mainMenuTreeView";
-            treeNode1.ImageKey = "config_folders_32px.png";
-            treeNode1.Name = "nodeConfig";
-            treeNode1.SelectedImageKey = "config_folders_32px.png";
-            treeNode1.Text = "Configurations";
-            treeNode2.Name = "nodeLottoOutlet";
-            treeNode2.SelectedImageKey = "outlet_32px.png";
-            treeNode2.Text = "Lottery Outlet";
-            treeNode3.ImageIndex = 1;
-            treeNode3.Name = "nodeLotteryWinComb";
-            treeNode3.SelectedImageKey = "money_32px.png";
-            treeNode3.Text = "Lottery Winning Prizes/Amount";
-            treeNode4.ImageKey = "Star5_32x.png";
-            treeNode4.Name = "nodeLottoSeqGen";
-            treeNode4.SelectedImageKey = "Star5_32x.png";
-            treeNode4.Text = "Lottery Sequence Generator";
-            treeNode5.ImageKey = "schedule_32px.png";
-            treeNode5.Name = "nodeLottoSched";
-            treeNode5.SelectedImageKey = "schedule_32px.png";
-            treeNode5.Text = "Lottery Schedule";
+            treeNode6.ImageKey = "config_folders_32px.png";
+            treeNode6.Name = "nodeConfig";
+            treeNode6.SelectedImageKey = "config_folders_32px.png";
+            treeNode6.Text = "Configurations";
+            treeNode7.Name = "nodeLottoOutlet";
+            treeNode7.SelectedImageKey = "outlet_32px.png";
+            treeNode7.Text = "Lottery Outlet";
+            treeNode8.ImageIndex = 1;
+            treeNode8.Name = "nodeLotteryWinComb";
+            treeNode8.SelectedImageKey = "money_32px.png";
+            treeNode8.Text = "Lottery Winning Prizes/Amount";
+            treeNode9.ImageKey = "Star5_32x.png";
+            treeNode9.Name = "nodeLottoSeqGen";
+            treeNode9.SelectedImageKey = "Star5_32x.png";
+            treeNode9.Text = "Lottery Sequence Generator";
+            treeNode10.ImageKey = "schedule_32px.png";
+            treeNode10.Name = "nodeLottoSched";
+            treeNode10.SelectedImageKey = "schedule_32px.png";
+            treeNode10.Text = "Lottery Schedule";
             this.mainMenuTreeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2,
-            treeNode3,
-            treeNode4,
-            treeNode5});
+            treeNode6,
+            treeNode7,
+            treeNode8,
+            treeNode9,
+            treeNode10});
             this.mainMenuTreeView.SelectedImageIndex = 0;
             this.mainMenuTreeView.ShowRootLines = false;
             this.mainMenuTreeView.Size = new System.Drawing.Size(268, 436);
@@ -285,7 +285,8 @@ namespace LottoDataManager.Forms
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtConfigNotes.BackColor = System.Drawing.SystemColors.MenuBar;
             this.txtConfigNotes.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtConfigNotes.ForeColor = System.Drawing.Color.MediumBlue;
+            this.txtConfigNotes.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtConfigNotes.ForeColor = System.Drawing.Color.MidnightBlue;
             this.txtConfigNotes.Location = new System.Drawing.Point(12, 269);
             this.txtConfigNotes.Multiline = true;
             this.txtConfigNotes.Name = "txtConfigNotes";

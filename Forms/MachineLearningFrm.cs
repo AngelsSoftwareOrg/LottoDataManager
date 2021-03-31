@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using LottoDataManager.Includes.Classes;
 using LottoDataManager.Includes.Classes.ML;
+using LottoDataManager.Includes.Classes.ML.FastTree;
 using LottoDataManager.Includes.Model.Details;
 using LottoDataManager.Includes.Utilities;
 using LottoDataManagerML;
@@ -20,13 +21,13 @@ namespace LottoDataManager.Forms
     {
         private bool isUpdateProcessingStarted = false;
         private LotteryDataServices lotteryDataServices;
-        private MachineLearningModelBuilder machineLearningModelBuilder;
+        private MachineLearningModelBuilderFastTree machineLearningModelBuilder;
 
         public MachineLearningFrm(LotteryDataServices lotteryDataServices)
         {
             InitializeComponent();
             this.lotteryDataServices = lotteryDataServices;
-            this.machineLearningModelBuilder = new MachineLearningModelBuilder();
+            this.machineLearningModelBuilder = new MachineLearningModelBuilderFastTree();
             machineLearningModelBuilder.ProcessingStatus += MachineLearningModelBuilder_ProcessingStatus;
         }
 

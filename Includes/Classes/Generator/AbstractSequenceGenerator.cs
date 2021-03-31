@@ -15,6 +15,9 @@ namespace LottoDataManager.Includes.Classes.Generator
         private Random random = new Random();
         protected LotteryDataServices lotteryDataServices;
         protected LotteryTicketPanel lotteryTicketPanel;
+        protected static int IN_BETWEEN_SUM_MIN = 104;
+        protected static int IN_BETWEEN_SUM_MAX = 176;
+
         private GeneratorType seqGeneratorType;
         protected AbstractSequenceGenerator(LotteryDataServices lotteryDataServices)
         {

@@ -4,9 +4,11 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LottoDataManager.Includes.Classes.ML.FastTree;
+using LottoDataManager.Includes.Classes.ML.LightGbmRegression;
+using LottoDataManager.Includes.Classes.ML.SDCARegression;
 using LottoDataManager.Includes.Model.Details.Setup;
 using LottoDataManager.Includes.Utilities;
-using LottoDataManagerML.Model;
 
 namespace LottoDataManager.Includes.Model.Details
 {
@@ -70,9 +72,9 @@ namespace LottoDataManager.Includes.Model.Details
         {
             return (this.Num1 <= 0 && this.Num2 <= 0 && this.Num3 <= 0 && this.Num4 <= 0 && this.Num5 <= 0 && this.Num6 <= 0);
         }
-        public ModelInput GetModelInput()
+        public ModelInputFastTree GetModelInput()
         {
-            return new ModelInput()
+            return new ModelInputFastTree()
             {
                 Draw_date = GetDrawDateFormatted() + " 00:00:00.0",
                 Num1 = GetNum1(),
@@ -84,6 +86,21 @@ namespace LottoDataManager.Includes.Model.Details
                 Game_cd = GetGameCode()
             };
         }
+        public ModelInputSDCARegression GetModelInputSDCARegression()
+        {
+            return new ModelInputSDCARegression()
+            {
+                Draw_date = GetDrawDateFormatted() + " 00:00:00.0",
+                Num1 = GetNum1(),
+                Num2 = GetNum2(),
+                Num3 = GetNum3(),
+                Num4 = GetNum4(),
+                Num5 = GetNum5(),
+                Num6 = GetNum6(),
+                Game_cd = GetGameCode()
+            };
+        }
+
         override
         public String ToString()
         {

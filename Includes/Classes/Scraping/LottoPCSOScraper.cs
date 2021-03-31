@@ -24,7 +24,7 @@ namespace LottoDataManager.Includes.Classes.Scraping
         private List<LotteryDetails> lotteriesDetailsArr;
         private LotteryDetails currentLotteryDetailsProcess;
         private DateTime sinceWhenToScrape;
-        private readonly string webUrlToScrape = AppSettings.GetLootoScrapeSite;
+        private readonly string webUrlToScrape = AppSettings.GetLottoScrapeSite;
         
         public void StartScraping(List<LotteryDetails> lotteriesDetailsArr)
         {

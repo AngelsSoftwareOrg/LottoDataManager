@@ -64,6 +64,8 @@ namespace LottoDataManager.Forms
             DisplayGenerators(new RandomPickTotalSumBetweenGeneratorsUsingTopPickCurSeason(this.lotteryDataServices));
             DisplayGenerators(new RandomPrediction(this.lotteryDataServices));
             DisplayGenerators(new RandomPredictionDrawResults(this.lotteryDataServices));
+            DisplayGenerators(new RandomPredictionSDCARegression(this.lotteryDataServices));
+            DisplayGenerators(new RandomPredictionSDCARegressionInBetween(this.lotteryDataServices));
         }
         private void DisplayGenerators(SequenceGenerator seqGen)
         {

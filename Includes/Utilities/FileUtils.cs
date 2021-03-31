@@ -10,6 +10,7 @@ namespace LottoDataManager.Includes.Utilities
     public class FileUtils
     {
         public static String TEMP_FILE_MARKED = "Lotto_Data_manager_1234567890_";
+
         static FileUtils()
         {
         }

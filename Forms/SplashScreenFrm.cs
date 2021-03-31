@@ -39,14 +39,14 @@ namespace LottoDataManager.Forms
         }
         private void TestDatabaseSourceConnection()
         {
-            if (!IsDatabaseConnectionSuccessful())
+            if (!IsSourceFileComplete())
             {
                 //spoof a game, to have settings initiliaze
                 LotterySettingsFrm settings = new LotterySettingsFrm(null);
                 settings.LimitOptionsToConfig();
                 this.Hide();
                 settings.ShowDialog(this);
-                if (!IsDatabaseConnectionSuccessful())
+                if (!IsSourceFileComplete())
                 {
                     this.DialogResult = DialogResult.Abort;
                     return;
@@ -55,10 +55,11 @@ namespace LottoDataManager.Forms
             }
             this.DialogResult = DialogResult.Yes;
         }
-        private bool IsDatabaseConnectionSuccessful()
+        private bool IsSourceFileComplete()
         {
             LotteryAppConfiguration appConfig = LotteryAppConfiguration.GetInstance();
-            return appConfig.TestMainDatabaseSourceConnection(appConfig.DBSourcePath);
+            return appConfig.TestMainDatabaseSourceConnection(appConfig.DBSourcePath) 
+                && appConfig.TestMLMainModelFolderSource(appConfig.MLModelPath);
         }
     }
 }

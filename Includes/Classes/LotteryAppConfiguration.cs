@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LottoDataManager.Includes.Classes.ML.FastTree;
+using LottoDataManager.Includes.Classes.ML.SDCARegression;
 using LottoDataManager.Includes.Database.DAO.Impl;
 using LottoDataManager.Includes.Database.DAO.Interface;
 using LottoDataManager.Includes.Model.Details;
 using LottoDataManager.Includes.Utilities;
+using LottoDataManagerML.Model;
 
 namespace LottoDataManager.Includes.Classes
 {
@@ -67,10 +70,19 @@ namespace LottoDataManager.Includes.Classes
             if (String.IsNullOrEmpty(dbFilePath)) return false;
             return db.TestConnection(dbFilePath);
         }
+        public bool TestMLMainModelFolderSource(String folderPath)
+        {
+            if (ConsumeModelFastTree.IsMLModelExisting(folderPath) &&
+            ConsumeModelSDCARegression.IsMLModelExisting(folderPath)) return true;
+            return false;
+        }
+
         public String MLModelPath
         {
             set
             {
+                bool isSuccess = TestMLMainModelFolderSource(value);
+                if (!isSuccess) throw new Exception(ResourcesUtils.GetMessage("lott_app_config_msg2"));
                 SetConfigValue(ML_MODEL_CONFIG_KEY, value);
             }
             get

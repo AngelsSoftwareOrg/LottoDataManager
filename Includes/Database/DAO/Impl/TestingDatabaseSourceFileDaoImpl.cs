@@ -46,8 +46,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                return false;
+                throw ex;
             }
             return false;
         }
