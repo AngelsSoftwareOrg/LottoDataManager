@@ -382,6 +382,14 @@ namespace LottoDataManager
         }
         private void toolStripBtnNewBet_Click(object sender, EventArgs e)
         {
+            AddBet();
+        }
+        private void addBetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddBet();
+        }
+        private void AddBet()
+        {
             AddBetFrm betForm = new AddBetFrm(this.lotteryDataServices);
             betForm.ShowDialog(this);
             betForm.Dispose();
@@ -525,6 +533,10 @@ namespace LottoDataManager
         {
             ShowModifyBets();
         }
+        private void modifyBetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowModifyBets();
+        }
         private void editYourBetsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ShowModifyBets();
@@ -540,7 +552,11 @@ namespace LottoDataManager
         {
             ShowModifyClaimStatus();
         }
-        private void toolStripButton1_Click(object sender, EventArgs e)
+        private void toolStripModifyClaimStatus_Click(object sender, EventArgs e)
+        {
+            ShowModifyClaimStatus();
+        }
+        private void modifyClaimStatusToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ShowModifyClaimStatus();
         }
@@ -597,6 +613,30 @@ namespace LottoDataManager
         {
             CheckWinningBets();
         }
+        private void moveDrawDateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MoveDrawDate(true);
+        }
+        private void MoveDrawDate(bool fromContextMenu=false)
+        {
+            ModifyBetDateFrm m = new ModifyBetDateFrm(this.lotteryDataServices);
+            if (fromContextMenu)
+            {
+                foreach (LotteryBet bet in objectLstVwLatestBet.SelectedObjects)
+                {
+                    m.AddAutoSelectBet(bet.GetId(), bet.GetTargetDrawDate());
+                }
+            }
+            m.ShowDialog(this);
+        }
+        private void toolStripBtnMoveDrawDate_Click(object sender, EventArgs e)
+        {
+            MoveDrawDate();
+        }
+        private void moveDrawDateToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            MoveDrawDate();
+        }
         #endregion
 
         #region "Main Form"
@@ -620,6 +660,13 @@ namespace LottoDataManager
             SplashScreenFrm.GetIntance().DisposeInstance();
             this.Show();
         }
+
+
+
+
+
         #endregion
+
+
     }
 }

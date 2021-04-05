@@ -16,24 +16,19 @@ namespace LottoDataManager.Includes.Classes
     public class LotteryAppConfiguration
     {
         private Dictionary<String, String> kvpConfig;
-
         public static String DB_SOURCE_CONFIG_KEY = "db_source_ms_access_path";
         public static String ML_MODEL_CONFIG_KEY = "ml_model_source_path";
-
         private static LotteryAppConfiguration lotteryAppConfiguration;
-
         private LotteryAppConfiguration()
         {
             PopulateConfigFileContent();
         }
-
         public static LotteryAppConfiguration GetInstance()
         {
             if (lotteryAppConfiguration == null)
                 lotteryAppConfiguration = new LotteryAppConfiguration();
             return lotteryAppConfiguration;
         }
-
         public void ReloadConfigContents()
         {
             PopulateConfigFileContent();
@@ -42,7 +37,6 @@ namespace LottoDataManager.Includes.Classes
         {
             this.kvpConfig = FileUtils.GetFilePropertiesContent(FileUtils.GetConfigFileFullPath());
         }
-
         public String DBSourcePath
         {
             set
@@ -76,7 +70,6 @@ namespace LottoDataManager.Includes.Classes
             ConsumeModelSDCARegression.IsMLModelExisting(folderPath)) return true;
             return false;
         }
-
         public String MLModelPath
         {
             set
@@ -94,6 +87,11 @@ namespace LottoDataManager.Includes.Classes
         {
             FileUtils.SaveConfigurationFile(this.kvpConfig);
             ReloadConfigContents();
+        }
+        public bool IsDataSourceComplete()
+        {
+            return this.TestMainDatabaseSourceConnection(this.DBSourcePath)
+                && this.TestMLMainModelFolderSource(this.MLModelPath);
         }
         private void SetConfigValue(String key, String value)
         {

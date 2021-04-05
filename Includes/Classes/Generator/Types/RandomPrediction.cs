@@ -67,7 +67,10 @@ namespace LottoDataManager.Includes.Classes.Generator.Types
                 //    sampleData.Num1, sampleData.Num2, sampleData.Num3, sampleData.Num4, sampleData.Num5, sampleData.Num6,
                 //    sampleData.Game_cd.ToString(), predictionResult.Score.ToString()));
 
-                if (int.Parse(predictionResult.Score.ToString().Substring(0, 1)) >= selectedCoefficient)
+                float tmpScore = predictionResult.Score;
+                if (tmpScore <= 0) tmpScore = (tmpScore * -1) + 1;
+
+                if (int.Parse(tmpScore.ToString().Substring(0, 1)) >= selectedCoefficient)
                 {
                     results.Add(lp);
                 }

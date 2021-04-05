@@ -101,6 +101,12 @@
     <Compile Include="Forms\MachineLearningFrm.Designer.cs">
       <DependentUpon>MachineLearningFrm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ModifyBetDateFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ModifyBetDateFrm.Designer.cs">
+      <DependentUpon>ModifyBetDateFrm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ModifyClaimsFrm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -276,6 +282,9 @@
     <EmbeddedResource Include="Forms\MainFrm.resx">
       <DependentUpon>MainFrm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ModifyBetDateFrm.resx">
+      <DependentUpon>ModifyBetDateFrm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ModifyClaimsFrm.resx">
       <DependentUpon>ModifyClaimsFrm.cs</DependentUpon>
     </EmbeddedResource>
@@ -299,6 +308,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="DatabaseMain\MLModel_14_3H_Fast_Tree.zip" />
+    <None Include="DatabaseMain\MLModel_16_3H_SdcaRegression.zip" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -315,11 +326,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="DatabaseMain\" />
     <Folder Include="Includes\Session\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Clover_Icon.ico" />
+    <None Include="Resources\Icons\Paid_32x.png" />
+    <None Include="Resources\Icons\Edit_02_32x.png" />
+    <None Include="Resources\Icons\Toolbars\add_row_32.png" />
+    <None Include="Resources\Icons\cal_32px.png" />
     <None Include="Resources\Icons\money_32px.png" />
     <None Include="Resources\Icons\erase_32px.png" />
     <None Include="Resources\Icons\Available_Updates_32px.png" />

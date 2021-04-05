@@ -155,6 +155,10 @@ namespace LottoDataManager.Includes.Classes
             lotteryBetSetup.Id = newId;
             this.lotteryDataWorker.ProcessWinningBet(lotteryBetSetup);
         }
+        public bool IsLotteryBetExist(LotteryBet lotteryBet)
+        {
+            return (lotteryBetDao.IsBetExisting(lotteryBet));
+        }
         public void UpdateClaimStatus(LotteryWinningBet winBet)
         {
             lotteryWinningBetDao.UpdateClaimStatus(winBet);

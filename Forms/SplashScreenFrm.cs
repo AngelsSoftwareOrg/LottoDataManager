@@ -58,8 +58,7 @@ namespace LottoDataManager.Forms
         private bool IsSourceFileComplete()
         {
             LotteryAppConfiguration appConfig = LotteryAppConfiguration.GetInstance();
-            return appConfig.TestMainDatabaseSourceConnection(appConfig.DBSourcePath) 
-                && appConfig.TestMLMainModelFolderSource(appConfig.MLModelPath);
+            return appConfig.IsDataSourceComplete();
         }
     }
 }

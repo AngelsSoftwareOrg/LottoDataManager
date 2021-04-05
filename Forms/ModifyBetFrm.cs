@@ -30,8 +30,8 @@ namespace LottoDataManager.Forms
             this.lotteryDataServices = lotteryDataServices;
 
             //Debugging
-            if(lotteryDataServices==null)
-                this.lotteryDataServices = new LotteryDataServices(new Game642());
+            //if(lotteryDataServices==null)
+            //    this.lotteryDataServices = new LotteryDataServices(new Game642());
             //end debugging
 
             this.lotteryTicketPanel = this.lotteryDataServices.GetLotteryTicketPanel();

@@ -330,8 +330,10 @@ namespace LottoDataManager.Forms
             this.txtStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtStatus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.txtStatus.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtStatus.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtStatus.ForeColor = System.Drawing.Color.White;
             this.txtStatus.Location = new System.Drawing.Point(4, 276);
             this.txtStatus.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtStatus.Multiline = true;
@@ -564,7 +566,6 @@ namespace LottoDataManager.Forms
         private System.Windows.Forms.RadioButton radioBtnPreferredDate;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.TextBox txtStatus;
         private System.Windows.Forms.Panel panelTicketNumbers;
         private System.Windows.Forms.Panel panelTicketControls;
         private System.Windows.Forms.GroupBox groupBoxTicketPanel;
@@ -580,5 +581,6 @@ namespace LottoDataManager.Forms
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cmbSeqGenType;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox txtStatus;
     }
 }

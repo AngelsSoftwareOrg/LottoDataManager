@@ -325,5 +325,20 @@ namespace LottoDataManager.Includes.Classes.Generator
             Array.Sort(result);
             return result;
         }
+        protected String GetNumbersOnly(float sourceNum)
+        {
+            if (sourceNum < 0) sourceNum = sourceNum * -1;
+            String numbersOnly = "";
+            String tmpString = sourceNum.ToString("F0");
+            foreach (Char c in tmpString.ToCharArray())
+            {
+                int x;
+                if (int.TryParse(c.ToString(), out x))
+                {
+                    numbersOnly = String.Concat(numbersOnly, x);
+                }
+            }
+            return numbersOnly;
+        }
     }
 }

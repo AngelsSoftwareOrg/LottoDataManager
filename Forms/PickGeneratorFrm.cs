@@ -150,6 +150,8 @@ namespace LottoDataManager.Forms
         private void ClearSequenceGenParametersValue()
         {
             tblPnlLayParams.Controls.Clear();
+            lvGenSeq.ListViewItemSorter = null;
+            lvGenSeq.Tag = null;
             foreach (SequenceGenerator seqGen in lvGenType.Objects)
             {
                 seqGen.ResetParamsValue();

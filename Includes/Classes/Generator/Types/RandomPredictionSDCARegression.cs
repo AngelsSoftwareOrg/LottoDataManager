@@ -67,7 +67,10 @@ namespace LottoDataManager.Includes.Classes.Generator.Types
                 if (result.Sum() < totalSum)
                 {
                     if (result.Contains(random_n)) continue;
-                    result[arr_position] = random_n;
+                    if (random_n >= this.lotteryTicketPanel.GetMin() && random_n <= this.lotteryTicketPanel.GetMax())
+                        result[arr_position] = random_n;
+                    else
+                        continue;
                 }
 
                 //if there's only 1 more slot to fill up, maybe try to put the difference instead of random number
@@ -78,6 +81,7 @@ namespace LottoDataManager.Includes.Classes.Generator.Types
                         int leftDiff = totalSum - result.Sum();
                         if (leftDiff > this.lotteryTicketPanel.GetMax())
                             leftDiff = leftDiff - this.lotteryTicketPanel.GetMax();
+                        if (leftDiff <=0) continue;
                         if (result.Contains(leftDiff)) continue;
                         result[++arr_position] = leftDiff;
                         if (result.Sum() == totalSum) break;
@@ -88,7 +92,7 @@ namespace LottoDataManager.Includes.Classes.Generator.Types
                 //if over value, then repeat again
                 if (arr_position >= this.lotteryTicketPanel.GetGameDigitCount())
                 {
-                    if (result.Sum() == totalSum) break;
+                    if (result.Sum() == totalSum && !result.Contains(0)) break;
                     result = new int[this.lotteryTicketPanel.GetGameDigitCount()];
                     arr_position = 0;
                 }

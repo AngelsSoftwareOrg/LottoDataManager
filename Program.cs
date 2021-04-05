@@ -36,6 +36,7 @@ namespace LottoDataManager
                 //Application.Run(new SplashScreenFrm());
                 //Application.Run(new MachineLearningFrm(null));
                 //Application.Run(new LotterySettingsFrm(null));
+                //Application.Run(new ModifyBetDateFrm(null));
             }
         }
     }
