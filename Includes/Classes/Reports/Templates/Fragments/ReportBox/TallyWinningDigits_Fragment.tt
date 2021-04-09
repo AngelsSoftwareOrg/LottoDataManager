@@ -1,0 +1,27 @@
+﻿<#@ template language="C#" inherits="IndividualGameHTMLReportView" #>
+<div class="outline-container">
+    <div class="outline-title">
+        <span class="title-keyword">Tallying Winning Digits</span>
+        <span class="title-description">- Counting your winning combinations so far</span>
+    </div>
+    <div class="outline-content">
+        <table class="default-table" cellspacing="5">
+            <tbody>
+                <tr>
+                    <td>Tallying your combo wins</td>
+                    <td>
+                        <ul>
+                            <# foreach (var item in ProfitAndLossReport.TimesWonPerBetCombinationDict) { #>
+                                <li><#= item.Key #>: <#= item.Value #></li>
+                            <# } #>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>When was the last time you won: </td>
+                    <td><#= ProfitAndLossReport.WhenWasLastTimeYouWon #></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

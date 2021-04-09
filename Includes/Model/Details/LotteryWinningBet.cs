@@ -18,5 +18,6 @@ namespace LottoDataManager.Includes.Model.Details
         DateTime GetTargetDrawDate();
         String GetTargetDrawDateFormatted();
         String GetTargetDrawDateLongFormat();
+        String GetWinningAmountInCurrency();
     }
 }

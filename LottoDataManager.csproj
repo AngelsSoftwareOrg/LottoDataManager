@@ -42,6 +42,9 @@
     <ApplicationIcon>Clover_Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Itenso.TimePeriod, Version=2.1.1.0, Culture=neutral, PublicKeyToken=8cb6db75b4e81486, processorArchitecture=MSIL">
+      <HintPath>packages\TimePeriodLibrary.NET.2.1.1\lib\net46\Itenso.TimePeriod.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.ML, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.ML.1.5.5\lib\netstandard2.0\Microsoft.ML.dll</HintPath>
     </Reference>
@@ -71,58 +74,64 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Forms\AboutFrm.cs">
+    <Compile Include="Forms\Others\AboutFrm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\AboutFrm.Designer.cs">
+    <Compile Include="Forms\Others\AboutFrm.Designer.cs">
       <DependentUpon>AboutFrm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\AddBetFrm.cs">
+    <Compile Include="Forms\Reports\ProfitAndLossFrm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\AddBetFrm.Designer.cs">
+    <Compile Include="Forms\Reports\ProfitAndLossFrm.Designer.cs">
+      <DependentUpon>ProfitAndLossFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Ticket\AddBetFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Ticket\AddBetFrm.Designer.cs">
       <DependentUpon>AddBetFrm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\DrawAndBetMatchFrm.cs">
+    <Compile Include="Forms\Ticket\DrawAndBetMatchFrm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\DrawAndBetMatchFrm.Designer.cs">
+    <Compile Include="Forms\Ticket\DrawAndBetMatchFrm.Designer.cs">
       <DependentUpon>DrawAndBetMatchFrm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\LotterySettingsFrm.cs">
+    <Compile Include="Forms\Settings\LotterySettingsFrm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\LotterySettingsFrm.Designer.cs">
+    <Compile Include="Forms\Settings\LotterySettingsFrm.Designer.cs">
       <DependentUpon>LotterySettingsFrm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\MachineLearningFrm.cs">
+    <Compile Include="Forms\Others\MachineLearningFrm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\MachineLearningFrm.Designer.cs">
+    <Compile Include="Forms\Others\MachineLearningFrm.Designer.cs">
       <DependentUpon>MachineLearningFrm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ModifyBetDateFrm.cs">
+    <Compile Include="Forms\Ticket\ModifyBetDateFrm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\ModifyBetDateFrm.Designer.cs">
+    <Compile Include="Forms\Ticket\ModifyBetDateFrm.Designer.cs">
       <DependentUpon>ModifyBetDateFrm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ModifyClaimsFrm.cs">
+    <Compile Include="Forms\Ticket\ModifyClaimsFrm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\ModifyClaimsFrm.Designer.cs">
+    <Compile Include="Forms\Ticket\ModifyClaimsFrm.Designer.cs">
       <DependentUpon>ModifyClaimsFrm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ModifyBetFrm.cs">
+    <Compile Include="Forms\Ticket\ModifyBetFrm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\ModifyBetFrm.Designer.cs">
+    <Compile Include="Forms\Ticket\ModifyBetFrm.Designer.cs">
       <DependentUpon>ModifyBetFrm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\PickGeneratorFrm.cs">
+    <Compile Include="Forms\Ticket\PickGeneratorFrm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\PickGeneratorFrm.Designer.cs">
+    <Compile Include="Forms\Ticket\PickGeneratorFrm.Designer.cs">
       <DependentUpon>PickGeneratorFrm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\SplashScreenFrm.cs">
@@ -177,8 +186,76 @@
     <Compile Include="Includes\Classes\ML\SDCARegression\ModelInputSDCARegression.cs" />
     <Compile Include="Includes\Classes\ML\SDCARegression\ModelOutputSDCARegression.cs" />
     <Compile Include="Includes\Classes\Reports\DashboardReport.cs" />
+    <Compile Include="Includes\Classes\Reports\Engine\ProfitAndLossReport.cs" />
+    <Compile Include="Includes\Classes\Reports\ProfitAndLossReport.cs" />
     <Compile Include="Includes\Classes\Reports\ReportAbstract.cs" />
     <Compile Include="Includes\Classes\Reports\ReportDataServices.cs" />
+    <Compile Include="Includes\Classes\Reports\Templates\Fragments\CSS_Fragment.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CSS_Fragment.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Includes\Classes\Reports\Templates\Fragments\DashboardBox_Fragment.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DashboardBox_Fragment.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Includes\Classes\Reports\Templates\Fragments\Footer_Fragment.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Footer_Fragment.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Includes\Classes\Reports\Templates\Fragments\Header_Fragment1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Header_Fragment.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Includes\Classes\Reports\Templates\Fragments\ReportBox\Claims_Fragment.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Claims_Fragment.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Includes\Classes\Reports\Templates\Fragments\ReportBox\DaysOfWeekTally_Fragment.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DaysOfWeekTally_Fragment.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Includes\Classes\Reports\Templates\Fragments\ReportBox\Spending_Fragment.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Spending_Fragment.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Includes\Classes\Reports\Templates\Fragments\ReportBox\TallyBehavior_Fragment.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TallyBehavior_Fragment.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Includes\Classes\Reports\Templates\Fragments\ReportBox\TallyWinningDigits_Fragment1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TallyWinningDigits_Fragment.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Includes\Classes\Reports\Templates\Fragments\ReportBox\WinningDigits_Fragment.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WinningDigits_Fragment.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Includes\Classes\Reports\Templates\Fragments\ReportBox\YearlyBets_Fragment.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>YearlyBets_Fragment.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Includes\Classes\Reports\Templates\Fragments\Reportbox_Fragment.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reportbox_Fragment.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Includes\Classes\Reports\Templates\IndividualGameHtmlReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndividualGameHtmlReport.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Includes\Classes\Reports\Templates\IndividualGameHTMLReportView.cs" />
     <Compile Include="Includes\Classes\Scraping\LottoWebScraper.cs" />
     <Compile Include="Includes\Classes\Scraping\LottoPCSOScraper.cs" />
     <Compile Include="Includes\Classes\Scraping\LottoWebScraperEvent.cs" />
@@ -264,34 +341,37 @@
     <Compile Include="Includes\Utilities\StringUtils.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Forms\AboutFrm.resx">
+    <EmbeddedResource Include="Forms\Others\AboutFrm.resx">
       <DependentUpon>AboutFrm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\AddBetFrm.resx">
+    <EmbeddedResource Include="Forms\Reports\ProfitAndLossFrm.resx">
+      <DependentUpon>ProfitAndLossFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Ticket\AddBetFrm.resx">
       <DependentUpon>AddBetFrm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\DrawAndBetMatchFrm.resx">
+    <EmbeddedResource Include="Forms\Ticket\DrawAndBetMatchFrm.resx">
       <DependentUpon>DrawAndBetMatchFrm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LotterySettingsFrm.resx">
+    <EmbeddedResource Include="Forms\Settings\LotterySettingsFrm.resx">
       <DependentUpon>LotterySettingsFrm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\MachineLearningFrm.resx">
+    <EmbeddedResource Include="Forms\Others\MachineLearningFrm.resx">
       <DependentUpon>MachineLearningFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainFrm.resx">
       <DependentUpon>MainFrm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ModifyBetDateFrm.resx">
+    <EmbeddedResource Include="Forms\Ticket\ModifyBetDateFrm.resx">
       <DependentUpon>ModifyBetDateFrm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ModifyClaimsFrm.resx">
+    <EmbeddedResource Include="Forms\Ticket\ModifyClaimsFrm.resx">
       <DependentUpon>ModifyClaimsFrm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ModifyBetFrm.resx">
+    <EmbeddedResource Include="Forms\Ticket\ModifyBetFrm.resx">
       <DependentUpon>ModifyBetFrm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PickGeneratorFrm.resx">
+    <EmbeddedResource Include="Forms\Ticket\PickGeneratorFrm.resx">
       <DependentUpon>PickGeneratorFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SplashScreenFrm.resx">
@@ -330,6 +410,59 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Clover_Icon.ico" />
+    <Content Include="Includes\Classes\Reports\Templates\Fragments\CSS_Fragment.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>CSS_Fragment.cs</LastGenOutput>
+    </Content>
+    <Content Include="Includes\Classes\Reports\Templates\Fragments\DashboardBox_Fragment.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DashboardBox_Fragment.cs</LastGenOutput>
+    </Content>
+    <Content Include="Includes\Classes\Reports\Templates\Fragments\Footer_Fragment.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>Footer_Fragment.cs</LastGenOutput>
+    </Content>
+    <Content Include="Includes\Classes\Reports\Templates\Fragments\Header_Fragment.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>Header_Fragment1.cs</LastGenOutput>
+    </Content>
+    <Content Include="Includes\Classes\Reports\Templates\Fragments\ReportBox\Claims_Fragment.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>Claims_Fragment.cs</LastGenOutput>
+    </Content>
+    <Content Include="Includes\Classes\Reports\Templates\Fragments\ReportBox\DaysOfWeekTally_Fragment.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DaysOfWeekTally_Fragment.cs</LastGenOutput>
+    </Content>
+    <Content Include="Includes\Classes\Reports\Templates\Fragments\ReportBox\Spending_Fragment.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>Spending_Fragment.cs</LastGenOutput>
+    </Content>
+    <Content Include="Includes\Classes\Reports\Templates\Fragments\ReportBox\TallyBehavior_Fragment.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>TallyBehavior_Fragment.cs</LastGenOutput>
+    </Content>
+    <Content Include="Includes\Classes\Reports\Templates\Fragments\ReportBox\TallyWinningDigits_Fragment.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>TallyWinningDigits_Fragment1.cs</LastGenOutput>
+    </Content>
+    <Content Include="Includes\Classes\Reports\Templates\Fragments\ReportBox\WinningDigits_Fragment.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>WinningDigits_Fragment.cs</LastGenOutput>
+    </Content>
+    <Content Include="Includes\Classes\Reports\Templates\Fragments\ReportBox\YearlyBets_Fragment.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>YearlyBets_Fragment.cs</LastGenOutput>
+    </Content>
+    <Content Include="Includes\Classes\Reports\Templates\Fragments\Reportbox_Fragment.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>Reportbox_Fragment.cs</LastGenOutput>
+    </Content>
+    <Content Include="Includes\Classes\Reports\Templates\IndividualGameHtmlReport.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>IndividualGameHtmlReport.cs</LastGenOutput>
+    </Content>
+    <None Include="Resources\Icons\cal_32px-2.png" />
     <None Include="Resources\Icons\Paid_32x.png" />
     <None Include="Resources\Icons\Edit_02_32x.png" />
     <None Include="Resources\Icons\Toolbars\add_row_32.png" />
@@ -368,6 +501,9 @@
       <Project>{7D5BF5C1-FFB2-4290-BCA4-FA879B1E5F63}</Project>
       <Name>LottoDataManagerML.Model</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

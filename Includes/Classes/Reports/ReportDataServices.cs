@@ -81,5 +81,23 @@ namespace LottoDataManager.Includes.Classes.Reports
         {
             return this.lotteryBetDao.GetMonthlySpending(GameMode, year);
         }
+        public List<LotteryBet> GetAllClaims()
+        {
+            List<LotteryBet> merge = this.lotteryBetDao.GetAllRedeemedClaims(GameMode, true);
+            merge.AddRange(this.lotteryBetDao.GetAllRedeemedClaims(GameMode, false).ToArray());
+            return merge;
+        }
+        public DateTime[] GetMinMaxYearsOfBetting()
+        {
+            return this.lotteryBetDao.GetMinMaxYearsOfBetting(GameMode);
+        }
+        public List<double[]> GetTabularAllBetsSpending(List<int> gameCodes)
+        {
+            return this.lotteryBetDao.GetTabularAllBetsSpending(gameCodes);
+        }
+        public List<String[]> GetDaysOfWeekTally(List<int> gameCodes)
+        {
+            return this.lotteryWinningBetDao.GetDaysOfWeekTally(gameCodes);
+        }
     }
 }

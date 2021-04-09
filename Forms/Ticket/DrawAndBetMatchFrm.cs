@@ -29,12 +29,6 @@ namespace LottoDataManager.Forms
             this.betDateTime = betDateTime;
             this.lotteryDataServices = lotteryDataServices;
             this.betIdDefault = betIdDefault;
-
-            //Debugging
-            //if (lotteryDataServices == null) this.lotteryDataServices = new LotteryDataServices(new Game658());
-            //this.betDateTime = new DateTime(2021,01,3,0,0,0);
-            //end debugging
-
             this.lotteryTicketPanel = this.lotteryDataServices.GetLotteryTicketPanel();
             InitialzesContents();
         }

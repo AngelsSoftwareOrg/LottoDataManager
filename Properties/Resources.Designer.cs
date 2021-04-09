@@ -140,6 +140,16 @@ namespace LottoDataManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap cal_32px_2 {
+            get {
+                object obj = ResourceManager.GetObject("cal_32px-2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap cal_32px1 {
             get {
                 object obj = ResourceManager.GetObject("cal_32px1", resourceCulture);

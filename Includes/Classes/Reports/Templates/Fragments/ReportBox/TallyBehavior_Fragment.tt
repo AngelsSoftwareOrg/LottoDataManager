@@ -1,0 +1,21 @@
+﻿<#@ template language="C#" inherits="IndividualGameHTMLReportView" #>
+<div class="outline-container">
+    <div class="outline-title">
+        <span class="title-keyword">Tally Behavior</span>
+        <span class="title-description">- Counting your specific behavior on betting</span>
+    </div>
+    <div class="outline-content">
+        <table class="default-table" cellspacing="5">
+            <tbody>
+                <tr>
+                    <td>How many bets you made so far?</td>
+                    <td><#= ProfitAndLossReport.TotalBetsMade #> bets</td>
+                </tr>
+                <tr>
+                    <td>How much time pass since you started to bet: </td>
+                    <td><#= ProfitAndLossReport.ElapseTimeSinceEaliestBet #></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

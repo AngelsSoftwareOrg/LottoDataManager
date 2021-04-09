@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Itenso.TimePeriod;
 
 namespace LottoDataManager.Includes.Utilities
 {
@@ -24,6 +25,16 @@ namespace LottoDataManager.Includes.Utilities
             DateTime y2k = new DateTime(2011,1,1,0,0,0,DateTimeKind.Local);
             return y2k;
         }
-
+        public static String DateDifferencePeriod(DateTime earliestDate, DateTime latestDate)
+        {
+            DateDiff dateDiff = new DateDiff(earliestDate, latestDate);
+            return string.Format("{0} year{1}, {2} month{3}, {4} day{5}",
+                                    dateDiff.ElapsedYears,
+                                    (dateDiff.ElapsedYears > 1) ? "s":"",
+                                    dateDiff.ElapsedMonths,
+                                    (dateDiff.ElapsedMonths > 1) ? "s" : "",
+                                    dateDiff.ElapsedDays,
+                                    (dateDiff.ElapsedDays > 1) ? "s" : "");
+        }
     }
 }

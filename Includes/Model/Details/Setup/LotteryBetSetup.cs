@@ -20,6 +20,7 @@ namespace LottoDataManager.Includes.Model.Details
         private int matchNumCount;
         private LotteryOutlet lotteryOutlet;
         private LotterySequenceGenerator lotterySeqGen;
+        private LotteryWinningBet lotteryWinningBet;
 
         public LotteryBetSetup(): base() {}
         public int GameCode { get => gameCode; set => gameCode = value; }
@@ -31,6 +32,7 @@ namespace LottoDataManager.Includes.Model.Details
         public int MatchNumCount { get => matchNumCount; set => matchNumCount = value; }
         public LotteryOutlet LotteryOutlet { get => lotteryOutlet; set => lotteryOutlet = value; }
         public LotterySequenceGenerator LotterySeqGen { get => lotterySeqGen; set => lotterySeqGen = value; }
+        public LotteryWinningBet LotteryWinningBet { get => lotteryWinningBet; set => lotteryWinningBet = value; }
 
         public double GetBetAmount()
         {
@@ -106,6 +108,11 @@ namespace LottoDataManager.Includes.Model.Details
                 Num4.ToString().PadLeft(2, char.Parse("0")), 
                 Num5.ToString().PadLeft(2, char.Parse("0")), 
                 Num6.ToString().PadLeft(2, char.Parse("0")));
+        }
+
+        public LotteryWinningBet GetLotteryWinningBet()
+        {
+            return LotteryWinningBet;
         }
     }
 }

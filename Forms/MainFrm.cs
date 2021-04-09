@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
 using LottoDataManager.Forms;
+using LottoDataManager.Forms.Reports;
 using LottoDataManager.Includes;
 using LottoDataManager.Includes.Classes;
 using LottoDataManager.Includes.Classes.Reports;
@@ -637,6 +638,11 @@ namespace LottoDataManager
         {
             MoveDrawDate();
         }
+        private void lossProfitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ProfitAndLossFrm frm = new ProfitAndLossFrm(this.lotteryDataServices);
+            frm.ShowDialog();
+        }
         #endregion
 
         #region "Main Form"
@@ -660,6 +666,7 @@ namespace LottoDataManager
             SplashScreenFrm.GetIntance().DisposeInstance();
             this.Show();
         }
+
 
 
 

@@ -22,5 +22,6 @@ namespace LottoDataManager.Includes.Model.Details
         LotteryOutlet GetLotteryOutlet();
         LotterySequenceGenerator GetLotterySequenceGenerator();
         String GetGNUFormat();
+        LotteryWinningBet GetLotteryWinningBet();
     }
 }

@@ -24,6 +24,10 @@ namespace LottoDataManager.Includes.Utilities
         {
             return GetTempFilePathWithExtension(".csv");
         }
+        public static string GetHtmlTempFilePathName()
+        {
+            return GetTempFilePathWithExtension(".html");
+        }
         public static String GetConfigFileFullPath()
         {
             String complete = Path.Combine(GetAppDataFolder(), ResourcesUtils.AppDataConfigFileName);

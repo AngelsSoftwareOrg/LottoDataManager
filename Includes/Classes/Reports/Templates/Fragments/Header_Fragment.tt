@@ -1,0 +1,13 @@
+﻿<#@ template language="C#" #>
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <meta http-equiv='X-UA-Compatible'>
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+        <title> Lottery Report </title>
+        <#@include file="CSS_Fragment.tt" once="true" #>
+    </head>
+    <body>

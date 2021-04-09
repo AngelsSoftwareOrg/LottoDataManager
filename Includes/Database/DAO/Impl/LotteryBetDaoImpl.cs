@@ -348,7 +348,21 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                 lotterySeqGen.Description = reader["SEQ_DESCFRIPTION"].ToString();
                 bet.LotterySeqGen = lotterySeqGen;
             }
-
+            if (ColumnExists(reader, "WIN_BET_ID"))
+            {
+                LotteryWinningBetSetup winbet = new LotteryWinningBetSetup();
+                winbet.ClaimStatus = bool.Parse(reader["WIN_BET_CLAIM_STATUS"].ToString());
+                winbet.ID = long.Parse(reader["WIN_BET_ID"].ToString());
+                winbet.LotteryBetId= long.Parse(reader["WIN_BET_BET_ID"].ToString());
+                winbet.Num1 = int.Parse(reader["WIN_BET_NUM1"].ToString());
+                winbet.Num2 = int.Parse(reader["WIN_BET_NUM2"].ToString());
+                winbet.Num3 = int.Parse(reader["WIN_BET_NUM3"].ToString());
+                winbet.Num4 = int.Parse(reader["WIN_BET_NUM4"].ToString());
+                winbet.Num5 = int.Parse(reader["WIN_BET_NUM5"].ToString());
+                winbet.Num6 = int.Parse(reader["WIN_BET_NUM6"].ToString());
+                winbet.WinningAmount = double.Parse(reader["WIN_BET_WIN_AMT"].ToString());
+                bet.LotteryWinningBet = winbet;
+            }
             bet.SortNumbers();
             return bet;
         }
@@ -472,6 +486,44 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
             }
             return result;
         }
+        public List<LotteryBet> GetAllRedeemedClaims(GameMode gameMode, bool isGetClaimedStatus)
+        {
+            List<LotteryBet> result = new List<LotteryBet>();
+            using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
+            using (OleDbCommand command = new OleDbCommand())
+            {
+                command.CommandType = CommandType.Text;
+                command.CommandText = " SELECT a.*, " +
+                                     "		   b.ID AS[WIN_BET_ID], b.bet_id AS[WIN_BET_BET_ID], b.winning_amt AS[WIN_BET_WIN_AMT],    " +
+                                     "		   b.num1 AS[WIN_BET_NUM1],b.num2 AS[WIN_BET_NUM2],b.num3 AS[WIN_BET_NUM3],                " +
+                                     "		   b.num4 AS[WIN_BET_NUM4],b.num5 AS[WIN_BET_NUM5],b.num6 AS[WIN_BET_NUM6],                " +
+                                     "		   b.claim_status AS[WIN_BET_CLAIM_STATUS]                                                 " +
+                                     "   FROM lottery_bet a " +
+                                     "  INNER JOIN lottery_winning_bet b " +
+                                     "     ON a.ID = b.bet_ID " +
+                                     "  WHERE a.game_cd = @game_cd " +
+                                     "    AND a.active = true " +
+                                     "    AND b.active = true " +
+                                     "    AND b.winning_amt > 0 " +
+                                     "    AND b.claim_status = @claim_status " +
+                                     "  ORDER BY a.target_draw_date DESC";
+                command.Parameters.AddWithValue("@game_cd", (int)gameMode);
+                command.Parameters.AddWithValue("@claim_status", isGetClaimedStatus);
+                command.Connection = conn;
+                conn.Open();
+                using (OleDbDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            result.Add(GetInstanceDeriveLotteryBetSetup(reader));
+                        }
+                    }
+                }
+            }
+            return result;
+        }
         public double[] GetTotalLuckyPickWinAndLoose(GameMode gameMode)
         {
             double[] result = new double[2];
@@ -539,6 +591,39 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                 }
             }
             return 0;
+        }
+        public DateTime[] GetMinMaxYearsOfBetting(GameMode gameMode)
+        {
+            DateTime[] result = new DateTime[2];
+            using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
+            using (OleDbCommand command = new OleDbCommand())
+            {
+                command.CommandType = CommandType.Text;
+                command.CommandText = "SELECT a.min_date, a.max_date " +
+                                      "FROM (SELECT MIN(target_draw_date) as [min_date]," +
+                                      "             MAX (target_draw_date) as [max_date] " +
+                                      "        FROM lottery_bet " +
+                                      "       WHERE active = true " +
+                                      "         AND game_cd = @game_cd) a ";
+                command.Parameters.AddWithValue("@game_cd", (int)gameMode);
+                command.Connection = conn;
+                conn.Open();
+                using (OleDbDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            if (!String.IsNullOrEmpty(reader["min_date"].ToString()))
+                            {
+                                result[0] = DateTime.Parse(reader["min_date"].ToString());
+                                result[1] = DateTime.Parse(reader["max_date"].ToString());
+                            }
+                        }
+                    }
+                }
+            }
+            return result;
         }
         public DateTime GetLastTimeWon(GameMode gameMode)
         {
@@ -666,6 +751,84 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                 }
             }
             return result;
+        }
+        public List<double[]> GetTabularAllBetsSpending(List<int> gameCodes)
+        {
+            List<double[]> resultList = new List<double[]>();
+            using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
+            using (OleDbCommand command = new OleDbCommand())
+            {
+                command.CommandType = CommandType.Text;
+                command.CommandText =   " SELECT YEAR(target_draw_date) AS [year],                            " +
+                                        " 	     SUM(IIF(MONTH(target_draw_date) = 1, bet_amt, 0)) AS [jan],  " +
+                                        "        SUM(IIF(MONTH(target_draw_date) = 2, bet_amt, 0)) AS [feb],  " +
+                                        "        SUM(IIF(MONTH(target_draw_date) = 3, bet_amt, 0)) AS [mar],  " +
+                                        "        SUM(IIF(MONTH(target_draw_date) = 4, bet_amt, 0)) AS [apr],  " +
+                                        "        SUM(IIF(MONTH(target_draw_date) = 5, bet_amt, 0)) AS [may],  " +
+                                        "        SUM(IIF(MONTH(target_draw_date) = 6, bet_amt, 0)) AS [jun],  " +
+                                        "        SUM(IIF(MONTH(target_draw_date) = 7, bet_amt, 0)) AS [jul],  " +
+                                        "        SUM(IIF(MONTH(target_draw_date) = 8, bet_amt, 0)) AS [aug],  " +
+                                        "        SUM(IIF(MONTH(target_draw_date) = 9, bet_amt, 0)) AS [sep],  " +
+                                        "        SUM(IIF(MONTH(target_draw_date) = 0, bet_amt, 0)) AS [oct],  " +
+                                        "        SUM(IIF(MONTH(target_draw_date) = 11, bet_amt, 0)) AS [nov], " +
+                                        "        SUM(IIF(MONTH(target_draw_date) = 12, bet_amt, 0)) AS [dec], " +
+                                        "        SUM(bet_amt) AS[annual]                                      " +
+                                        "  FROM lottery_bet                                                   " +
+                                        " WHERE active = true                                                 " +
+                                        "   AND " + GetMultipleGameCodeSQLPredicate(gameCodes) +
+                                        " GROUP BY YEAR(target_draw_date)                                     " +
+                                        " UNION                                                               " +
+                                        " SELECT 0,                                                           " +
+                                        "        SUM(IIF(MONTH(target_draw_date) = 1, bet_amt, 0)) AS [jan],  " +
+                                        "        SUM(IIF(MONTH(target_draw_date) = 2, bet_amt, 0)) AS [feb],  " +
+                                        "        SUM(IIF(MONTH(target_draw_date) = 3, bet_amt, 0)) AS [mar],  " +
+                                        "        SUM(IIF(MONTH(target_draw_date) = 4, bet_amt, 0)) AS [apr],  " +
+                                        "        SUM(IIF(MONTH(target_draw_date) = 5, bet_amt, 0)) AS [may],  " +
+                                        "        SUM(IIF(MONTH(target_draw_date) = 6, bet_amt, 0)) AS [jun],  " +
+                                        "        SUM(IIF(MONTH(target_draw_date) = 7, bet_amt, 0)) AS [jul],  " +
+                                        "        SUM(IIF(MONTH(target_draw_date) = 8, bet_amt, 0)) AS [aug],  " +
+                                        "        SUM(IIF(MONTH(target_draw_date) = 9, bet_amt, 0)) AS [sep],  " +
+                                        "        SUM(IIF(MONTH(target_draw_date) = 0, bet_amt, 0)) AS [oct],  " +
+                                        "        SUM(IIF(MONTH(target_draw_date) = 11, bet_amt, 0)) AS [nov], " +
+                                        "        SUM(IIF(MONTH(target_draw_date) = 12, bet_amt, 0)) AS [dec], " +
+                                        "        SUM(bet_amt) AS[annual]                                      " +
+                                        "  FROM lottery_bet                                                   " +
+                                        " WHERE active = true                                                 " +
+                                        "   AND " + GetMultipleGameCodeSQLPredicate(gameCodes) +
+                                        " ORDER BY 1 DESC                                                     ";
+                //command.Parameters.AddWithValue("@game_cd", GetMultipleGameCodeSQLPredicate(gameCodes));
+                command.Connection = conn;
+                conn.Open();
+                using (OleDbDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            if (!String.IsNullOrEmpty(reader["jan"].ToString()))
+                            {
+                                double[] result = new double[14] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+                                result[0] = double.Parse(reader["year"].ToString());
+                                result[1] = double.Parse(reader["jan"].ToString());
+                                result[2] = double.Parse(reader["feb"].ToString());
+                                result[3] = double.Parse(reader["mar"].ToString());
+                                result[4] = double.Parse(reader["apr"].ToString());
+                                result[5] = double.Parse(reader["may"].ToString());
+                                result[6] = double.Parse(reader["jun"].ToString());
+                                result[7] = double.Parse(reader["jul"].ToString());
+                                result[8] = double.Parse(reader["aug"].ToString());
+                                result[9] = double.Parse(reader["sep"].ToString());
+                                result[10] = double.Parse(reader["aug"].ToString());
+                                result[11] = double.Parse(reader["nov"].ToString());
+                                result[12] = double.Parse(reader["dec"].ToString());
+                                result[13] = double.Parse(reader["annual"].ToString());
+                                resultList.Add(result);
+                            }
+                        }
+                    }
+                }
+            }
+            return resultList;
         }
     }
 }

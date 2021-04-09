@@ -232,7 +232,7 @@ namespace LottoDataManager
             // 
             // moveDrawDateToolStripMenuItem1
             // 
-            this.moveDrawDateToolStripMenuItem1.Image = global::LottoDataManager.Properties.Resources.cal_32px1;
+            this.moveDrawDateToolStripMenuItem1.Image = global::LottoDataManager.Properties.Resources.cal_32px_2;
             this.moveDrawDateToolStripMenuItem1.Name = "moveDrawDateToolStripMenuItem1";
             this.moveDrawDateToolStripMenuItem1.Size = new System.Drawing.Size(225, 26);
             this.moveDrawDateToolStripMenuItem1.Text = "Move Draw Date";
@@ -250,8 +250,9 @@ namespace LottoDataManager
             // 
             this.lossProfitToolStripMenuItem.Image = global::LottoDataManager.Properties.Resources.statistic_32;
             this.lossProfitToolStripMenuItem.Name = "lossProfitToolStripMenuItem";
-            this.lossProfitToolStripMenuItem.Size = new System.Drawing.Size(189, 26);
-            this.lossProfitToolStripMenuItem.Text = "Loss and Profit";
+            this.lossProfitToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.lossProfitToolStripMenuItem.Text = "Profit and Loss";
+            this.lossProfitToolStripMenuItem.Click += new System.EventHandler(this.lossProfitToolStripMenuItem_Click);
             // 
             // settingsToolStripMenuItem
             // 
@@ -968,11 +969,11 @@ namespace LottoDataManager
             // toolStripBtnMoveDrawDate
             // 
             this.toolStripBtnMoveDrawDate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripBtnMoveDrawDate.Image = global::LottoDataManager.Properties.Resources.cal_32px;
+            this.toolStripBtnMoveDrawDate.Image = global::LottoDataManager.Properties.Resources.cal_32px_2;
             this.toolStripBtnMoveDrawDate.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripBtnMoveDrawDate.Name = "toolStripBtnMoveDrawDate";
             this.toolStripBtnMoveDrawDate.Size = new System.Drawing.Size(34, 34);
-            this.toolStripBtnMoveDrawDate.Text = "toolStripButton1";
+            this.toolStripBtnMoveDrawDate.Text = "Modify Move Date";
             this.toolStripBtnMoveDrawDate.Click += new System.EventHandler(this.toolStripBtnMoveDrawDate_Click);
             // 
             // machineLearningToolStripButton2

@@ -1,0 +1,47 @@
+﻿<#@ template language="C#" inherits="IndividualGameHTMLReportView" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="LottoDataManager.Includes.Model.Details" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+
+<div class="outline-container">
+    <div class="outline-title">
+        <span class="title-keyword">Claims</span>
+        <span class="title-description">- Total money you win and gotcha</span>
+    </div>
+    <div class="outline-content">
+        <table class="default-table" cellspacing="5">
+            <tbody>
+                <tr>
+                    <td>Total number of claims pending: </td>
+                    <td><#= ProfitAndLossReport.TotalNumberOfClaims #> claims</td>
+                </tr>
+                <tr>
+                    <td>Total number of claims yet to redeem: </td>
+                    <td><#= ProfitAndLossReport.TotalNumberOfClaimsToRedeem #> out of <#= ProfitAndLossReport.TotalNumberOfClaims #> claims</td>
+                </tr>
+                <tr>
+                    <td>Details of the claims</td>
+                    <td>
+                        <# foreach (var item in ProfitAndLossReport.ClaimDetailsList) { #>
+                             <div class="claims-details-breakdown">
+                                <span><#= item.Key #></span>
+                                <# foreach (LotteryBet bet in (List<LotteryBet>) item.Value) { #>
+                                    <div>
+                                        <#=bet.GetTargetDrawDateFormatted() #> - 
+                                        <#=bet.GetGNUFormat() #>,
+                                        <#=bet.GetLotteryWinningBet().GetWinningAmountInCurrency() #>
+                                        <# if(!bet.GetLotteryWinningBet().IsClaimed()) { #>
+                                            , to redeem
+                                        <# } #>
+                                    </div>
+                                <# } #>
+                            </div>
+                        <# } #>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

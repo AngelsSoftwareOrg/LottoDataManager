@@ -28,12 +28,6 @@ namespace LottoDataManager.Forms
         {
             InitializeComponent();
             this.lotteryDataServices = lotteryDataServices;
-
-            //Debugging
-            //if(lotteryDataServices==null)
-            //    this.lotteryDataServices = new LotteryDataServices(new Game642());
-            //end debugging
-
             this.lotteryTicketPanel = this.lotteryDataServices.GetLotteryTicketPanel();
             this.lotteryOutletList = this.lotteryDataServices.GetLotteryOutlets();
             this.lotterySequenceGeneratorList = this.lotteryDataServices.GetAllSequenceGenerators();

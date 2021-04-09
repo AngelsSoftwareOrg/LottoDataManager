@@ -27,12 +27,7 @@ namespace LottoDataManager.Forms
         public ModifyBetDateFrm(LotteryDataServices lotteryDataServices)
         {
             InitializeComponent();
-
             this.lotteryDataServices = lotteryDataServices;
-            //Debugging
-            //if (lotteryDataServices == null)
-            //    this.lotteryDataServices = new LotteryDataServices(new Game642());
-            //end debugging
             this.lotteryTicketPanel = this.lotteryDataServices.GetLotteryTicketPanel();
             this.lotteryOutletArr = this.lotteryDataServices.GetLotteryOutlets();
             this.lotterySchedule = this.lotteryDataServices.GetLotterySchedule();

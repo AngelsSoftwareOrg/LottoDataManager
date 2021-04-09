@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using LottoDataManager.Forms;
+using LottoDataManager.Forms.Reports;
 
 namespace LottoDataManager
 {
@@ -37,6 +38,8 @@ namespace LottoDataManager
                 //Application.Run(new MachineLearningFrm(null));
                 //Application.Run(new LotterySettingsFrm(null));
                 //Application.Run(new ModifyBetDateFrm(null));
+                //splash.DisposeInstance();
+                //Application.Run(new ProfitAndLossFrm(null));
             }
         }
     }

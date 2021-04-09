@@ -11,8 +11,6 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
     public abstract class LotteryDaoImplCommon
     {
         protected readonly string QUERY_LAST_INSERT_ID = "Select @@Identity";
-
-
         protected int GetLastInsertedID(OleDbCommand command)
         {
             command.CommandText = QUERY_LAST_INSERT_ID;
@@ -25,6 +23,10 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                          .Rows
                          .OfType<DataRow>()
                          .Any(row => (String)row["ColumnName"] == columnName);
+        }
+        protected String GetMultipleGameCodeSQLPredicate(List<int> gameCodes)
+        {
+            return String.Format("game_cd IN ({0}) ", string.Join<int>(",", gameCodes));
         }
     }
 }
