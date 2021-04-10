@@ -340,5 +340,20 @@ namespace LottoDataManager.Includes.Classes.Generator
             }
             return numbersOnly;
         }
+
+        protected bool IsUniqueSequence(List<int[]> haystack, int[] search)
+        {
+            int[] matched = haystack.Find(seq => {
+                int hit = 0;
+                for (int ctr = 0; ctr < search.Length; ctr++)
+                {
+                    if (seq[ctr] == search[ctr]) hit++;
+                }
+                return (hit == search.Length);
+            });
+
+            if (matched == null) return true;
+            return false;
+        }
     }
 }

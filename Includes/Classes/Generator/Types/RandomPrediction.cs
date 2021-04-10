@@ -72,7 +72,7 @@ namespace LottoDataManager.Includes.Classes.Generator.Types
 
                 if (int.Parse(tmpScore.ToString().Substring(0, 1)) >= selectedCoefficient)
                 {
-                    results.Add(lp);
+                    if (IsUniqueSequence(results, lp)) results.Add(lp);
                 }
                 if (loopBreaker++ >= 100000) break;
                 if (results.Count >= maximumPickCount) break;

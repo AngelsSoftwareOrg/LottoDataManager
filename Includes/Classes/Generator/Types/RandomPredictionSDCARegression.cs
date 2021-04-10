@@ -49,8 +49,8 @@ namespace LottoDataManager.Includes.Classes.Generator.Types
                 //    sampleData.Game_cd.ToString(), predictionResult.Score.ToString()));
 
                 int totalSum = int.Parse(Math.Ceiling(decimal.Parse(predictionResult.Score.ToString())).ToString());
-                int[] converted = ConvertAndFillSequenceThatMakesUpToTotalSum(totalSum);
-                results.Add(converted);
+                int[] x = ConvertAndFillSequenceThatMakesUpToTotalSum(totalSum);
+                if (IsUniqueSequence(results, x)) results.Add(x);
             }
             return results;
         }

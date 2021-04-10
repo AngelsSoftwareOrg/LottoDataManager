@@ -393,5 +393,60 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
             }
             return resultList;
         }
+        public List<String[]> GetPickGeneratorsTally(List<int> gameCodes)
+        {
+            List<String[]> resultList = new List<string[]>();
+            using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
+            using (OleDbCommand command = new OleDbCommand())
+            {
+                command.CommandType = CommandType.Text;
+                command.CommandText = " SELECT a.seqgencd, s.description,                                                                         " +
+                                      " 	   SUM(a.bet_amt) as [total_spending],                                                                 " +
+                                      " 	   SUM(IIF(b.num1 > 0 AND b.num2=0 AND b.num3=0 AND b.num4=0 AND b.num5=0 AND b.num6=0,1,0)) AS [num1]," +
+                                      " 	   SUM(IIF(b.num1 > 0 AND b.num2>0 AND b.num3=0 AND b.num4=0 AND b.num5=0 AND b.num6=0,1,0)) AS [num2], " +
+                                      " 	   SUM(IIF(b.num1 > 0 AND b.num2>0 AND b.num3>0 AND b.num4=0 AND b.num5=0 AND b.num6=0,1,0)) AS [num3], " +
+                                      " 	   SUM(IIF(b.num1 > 0 AND b.num2>0 AND b.num3>0 AND b.num4>0 AND b.num5=0 AND b.num6=0,1,0)) AS [num4], " +
+                                      " 	   SUM(IIF(b.num1 > 0 AND b.num2>0 AND b.num3>0 AND b.num4>0 AND b.num5>0 AND b.num6=0,1,0)) AS [num5], " +
+                                      " 	   SUM(IIF(b.num1 > 0 AND b.num2>0 AND b.num3>0 AND b.num4>0 AND b.num5>0 AND b.num6>0,1,0)) AS [num6]  " +
+                                      "   FROM lottery_bet a                                                                                      " +
+                                      "  INNER JOIN lottery_winning_bet b                                                                         " +
+                                      "     ON a.ID = b.bet_ID                                                                                    " +
+                                      "   LEFT OUTER JOIN lottery_seq_gen s                                                                        " +
+                                      "     ON a.seqgencd = s.seqgencd                                                                             " +
+                                      "  WHERE a." + GetMultipleGameCodeSQLPredicate(gameCodes) +
+                                      "    AND a.active = true                                                                                    " +
+                                      "    AND b.active = true                                                                                    " +
+                                      "  GROUP BY a.seqgencd, s.description                                                                      " +
+                                      "  ORDER BY 2 ASC                                                                                          ";
+
+                //command.Parameters.AddWithValue("@game_cd", GetMultipleGameCodeSQLPredicate(gameCodes));
+                command.Connection = conn;
+                conn.Open();
+                using (OleDbDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            if (!String.IsNullOrWhiteSpace(reader["num1"].ToString()))
+                            {
+                                String[] result = new String[8] { "", "", "0", "0", "0", "0", "0", "0" };
+                                result[0] = reader["seqgencd"].ToString();
+                                result[1] = reader["description"].ToString();
+                                result[2] = reader["num1"].ToString();
+                                result[3] = reader["num2"].ToString();
+                                result[4] = reader["num3"].ToString();
+                                result[5] = reader["num4"].ToString();
+                                result[6] = reader["num5"].ToString();
+                                result[7] = reader["num6"].ToString();
+                                resultList.Add(result);
+                            }
+                        }
+                    }
+                }
+            }
+            return resultList;
+        }
+
     }
 }

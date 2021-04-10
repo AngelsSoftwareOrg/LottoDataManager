@@ -18,7 +18,7 @@ namespace LottoDataManager.Includes.Classes.Generator.Types
             SequenceParams.Add(new SequenceGeneratorParams()
             {
                 GeneratorParamType = GeneratorParamType.COUNT,
-                Description = ResourcesUtils.GetMessage("pick_class_random_prediction_dr_count"),
+                Description = ResourcesUtils.GetMessage("pick_class_random_prediction_fasttree_count"),
                 MaxCountValue=9999
             });
             SequenceParams.Add(new SequenceGeneratorParams()
@@ -58,7 +58,7 @@ namespace LottoDataManager.Includes.Classes.Generator.Types
                 if (int.Parse(tmpScore.ToString("G20").Substring(0, 1)) >= selectedCoefficient)
                 {
                     int[] x = ConvertAndFillSequence(predictionResult.Score);
-                    results.Add(x);
+                    if (IsUniqueSequence(results, x)) results.Add(x);
                 }
             }
             return results;

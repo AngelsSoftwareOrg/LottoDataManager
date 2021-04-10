@@ -51,8 +51,8 @@ namespace LottoDataManager.Includes.Classes.Generator.Types
                 int totalSum = int.Parse(Math.Ceiling(decimal.Parse(predictionResult.Score.ToString())).ToString());
                 if(totalSum>=IN_BETWEEN_SUM_MIN && totalSum <= IN_BETWEEN_SUM_MAX)
                 {
-                    int[] converted = ConvertAndFillSequenceThatMakesUpToTotalSum(totalSum);
-                    results.Add(converted);
+                    int[] x = ConvertAndFillSequenceThatMakesUpToTotalSum(totalSum);
+                    if (IsUniqueSequence(results, x)) results.Add(x);
                 }
             }
             return results;

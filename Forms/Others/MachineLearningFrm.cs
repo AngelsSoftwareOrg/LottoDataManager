@@ -35,6 +35,7 @@ namespace LottoDataManager.Forms
             machineLearningModelBuilderSDCARegression = new MachineLearningModelBuilderSDCARegression();
             machineLearningModelBuilderFastTree.ProcessingStatus += MachineLearningModelBuilder_ProcessingStatus;
             machineLearningModelBuilderSDCARegression.ProcessingStatus += MachineLearningModelBuilder_ProcessingStatus;
+            log(ResourcesUtils.GetMessage("mac_lrn_log_13"));
         }
         private void MachineLearningModelBuilder_ProcessingStatus(object sender, string e)
         {
