@@ -15,9 +15,9 @@ namespace LottoDataManager.Includes.Classes.Reports.Templates.Fragments.ReportBo
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\DaysOfWeekTally_Fragment.tt"
+    #line 1 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\PickGeneratorsTally_Fragment.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public partial class DaysOfWeekTally_Fragment : IndividualGameHTMLReportView
+    public partial class PickGeneratorsTally_Fragment : IndividualGameHTMLReportView
     {
 #line hidden
         /// <summary>
@@ -27,13 +27,13 @@ namespace LottoDataManager.Includes.Classes.Reports.Templates.Fragments.ReportBo
         {
             this.Write(@"<div class=""outline-container"">
     <div class=""outline-title"">
-        <span class=""title-keyword"">Days of Week Tally</span>
-        <span class=""title-description"">- Tallying weekdays behavior in betting</span>
+        <span class=""title-keyword"">Pick Generators Tally</span>
+        <span class=""title-description"">- Tallying pick generators, spending and winning digits</span>
     </div>
     <div class=""outline-content"">
         <table class=""table-stats-style"" cellspacing=""0"">
             <thead>
-                <th>Days</th>
+                <th>Chosen Pick Generator</th>
                 <th>Total Spending</th>
                 <th>1 Digit Win</th>
                 <th>2 Digit Win</th>
@@ -45,35 +45,35 @@ namespace LottoDataManager.Includes.Classes.Reports.Templates.Fragments.ReportBo
             <tbody>
                 ");
             
-            #line 20 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\DaysOfWeekTally_Fragment.tt"
- foreach (var item in ProfitAndLossReport.AllBetsInTabularModeDaysOfWeek) { 
+            #line 20 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\PickGeneratorsTally_Fragment.tt"
+ foreach (var item in ProfitAndLossReport.AllBetsInTabularModePickGen) { 
             
             #line default
             #line hidden
             this.Write("                     <tr>\r\n                        <td>");
             
-            #line 22 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\DaysOfWeekTally_Fragment.tt"
+            #line 22 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\PickGeneratorsTally_Fragment.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item[0]));
             
             #line default
             #line hidden
             this.Write("</td>\r\n                        <td>");
             
-            #line 23 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\DaysOfWeekTally_Fragment.tt"
+            #line 23 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\PickGeneratorsTally_Fragment.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(double.Parse(item[1]).ToString("C")));
             
             #line default
             #line hidden
             this.Write("</td>\r\n\r\n                        ");
             
-            #line 25 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\DaysOfWeekTally_Fragment.tt"
+            #line 25 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\PickGeneratorsTally_Fragment.tt"
  for (int x=2; x<=(item.Length-1); x++) { 
             
             #line default
             #line hidden
             this.Write("                            ");
             
-            #line 26 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\DaysOfWeekTally_Fragment.tt"
+            #line 26 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\PickGeneratorsTally_Fragment.tt"
  if(double.Parse(item[x])==0) { 
             
             #line default
@@ -81,35 +81,35 @@ namespace LottoDataManager.Includes.Classes.Reports.Templates.Fragments.ReportBo
             this.Write("                                <td class=\"zero-sum-color\">\r\n                    " +
                     "        ");
             
-            #line 28 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\DaysOfWeekTally_Fragment.tt"
+            #line 28 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\PickGeneratorsTally_Fragment.tt"
  }else{ 
             
             #line default
             #line hidden
             this.Write("                                <td>\r\n                            ");
             
-            #line 30 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\DaysOfWeekTally_Fragment.tt"
+            #line 30 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\PickGeneratorsTally_Fragment.tt"
  } 
             
             #line default
             #line hidden
             this.Write("                            ");
             
-            #line 31 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\DaysOfWeekTally_Fragment.tt"
+            #line 31 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\PickGeneratorsTally_Fragment.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item[x]));
             
             #line default
             #line hidden
             this.Write("</td>\r\n                        ");
             
-            #line 32 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\DaysOfWeekTally_Fragment.tt"
+            #line 32 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\PickGeneratorsTally_Fragment.tt"
  } 
             
             #line default
             #line hidden
             this.Write("                    </tr>\r\n                ");
             
-            #line 34 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\DaysOfWeekTally_Fragment.tt"
+            #line 34 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\PickGeneratorsTally_Fragment.tt"
  } 
             
             #line default

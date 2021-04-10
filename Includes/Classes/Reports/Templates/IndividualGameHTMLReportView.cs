@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LottoDataManager.Includes.Utilities;
 
 namespace LottoDataManager.Includes.Classes.Reports.Templates
 {
@@ -293,8 +294,7 @@ namespace LottoDataManager.Includes.Classes.Reports.Templates
 
         public virtual void Initialize() { }
 
-
-        public virtual ProfitAndLossReport ProfitAndLossReport
+        public ProfitAndLossReport ProfitAndLossReport
         {
             set
             {
@@ -306,9 +306,16 @@ namespace LottoDataManager.Includes.Classes.Reports.Templates
             }
         }
 
+        public String LBL(String labelName)
+        {
+            return ResourcesUtils.GetMessage(labelName);
+        }
+        public String AppTitleAndVersion()
+        {
+           return LBL("app_const_app_title") +  AppSettings.GetAppVersionWithPrefix();
+        }
+
         #endregion
-
-
 
     }
     #endregion

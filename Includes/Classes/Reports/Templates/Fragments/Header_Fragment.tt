@@ -1,4 +1,4 @@
-﻿<#@ template language="C#" #>
+﻿<#@ template language="C#" inherits="IndividualGameHTMLReportView" #>
 
 <!DOCTYPE html>
 <html>
@@ -11,3 +11,6 @@
         <#@include file="CSS_Fragment.tt" once="true" #>
     </head>
     <body>
+    <div class="report-header">
+        <td><#= AppTitleAndVersion() #></td>
+    </div>

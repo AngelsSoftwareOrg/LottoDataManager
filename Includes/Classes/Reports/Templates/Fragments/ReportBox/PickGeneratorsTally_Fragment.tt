@@ -1,13 +1,13 @@
 ﻿<#@ template language="C#" inherits="IndividualGameHTMLReportView" #>
 <div class="outline-container">
     <div class="outline-title">
-        <span class="title-keyword">Days of Week Tally</span>
-        <span class="title-description">- Tallying weekdays behavior in betting</span>
+        <span class="title-keyword">Pick Generators Tally</span>
+        <span class="title-description">- Tallying pick generators, spending and winning digits</span>
     </div>
     <div class="outline-content">
         <table class="table-stats-style" cellspacing="0">
             <thead>
-                <th>Days</th>
+                <th>Chosen Pick Generator</th>
                 <th>Total Spending</th>
                 <th>1 Digit Win</th>
                 <th>2 Digit Win</th>
@@ -17,7 +17,7 @@
                 <th>6 Digit Win</th>
             </thead>
             <tbody>
-                <# foreach (var item in ProfitAndLossReport.AllBetsInTabularModeDaysOfWeek) { #>
+                <# foreach (var item in ProfitAndLossReport.AllBetsInTabularModePickGen) { #>
                      <tr>
                         <td><#=item[0] #></td>
                         <td><#=double.Parse(item[1]).ToString("C") #></td>

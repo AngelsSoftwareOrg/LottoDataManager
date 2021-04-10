@@ -408,11 +408,11 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                                       " 	   SUM(IIF(b.num1 > 0 AND b.num2>0 AND b.num3>0 AND b.num4>0 AND b.num5=0 AND b.num6=0,1,0)) AS [num4], " +
                                       " 	   SUM(IIF(b.num1 > 0 AND b.num2>0 AND b.num3>0 AND b.num4>0 AND b.num5>0 AND b.num6=0,1,0)) AS [num5], " +
                                       " 	   SUM(IIF(b.num1 > 0 AND b.num2>0 AND b.num3>0 AND b.num4>0 AND b.num5>0 AND b.num6>0,1,0)) AS [num6]  " +
-                                      "   FROM lottery_bet a                                                                                      " +
+                                      "   FROM ((lottery_bet a                                                                                      " +
                                       "  INNER JOIN lottery_winning_bet b                                                                         " +
-                                      "     ON a.ID = b.bet_ID                                                                                    " +
+                                      "     ON a.ID = b.bet_ID)                                                                                   " +
                                       "   LEFT OUTER JOIN lottery_seq_gen s                                                                        " +
-                                      "     ON a.seqgencd = s.seqgencd                                                                             " +
+                                      "     ON a.seqgencd = s.seqgencd)                                                                             " +
                                       "  WHERE a." + GetMultipleGameCodeSQLPredicate(gameCodes) +
                                       "    AND a.active = true                                                                                    " +
                                       "    AND b.active = true                                                                                    " +
@@ -431,14 +431,159 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                             if (!String.IsNullOrWhiteSpace(reader["num1"].ToString()))
                             {
                                 String[] result = new String[8] { "", "", "0", "0", "0", "0", "0", "0" };
-                                result[0] = reader["seqgencd"].ToString();
-                                result[1] = reader["description"].ToString();
+                                result[0] = reader["description"].ToString();
+                                result[1] = reader["total_spending"].ToString();
                                 result[2] = reader["num1"].ToString();
                                 result[3] = reader["num2"].ToString();
                                 result[4] = reader["num3"].ToString();
                                 result[5] = reader["num4"].ToString();
                                 result[6] = reader["num5"].ToString();
                                 result[7] = reader["num6"].ToString();
+                                resultList.Add(result);
+                            }
+                        }
+                    }
+                }
+            }
+            return resultList;
+        }
+        public List<String[]> GetOutletTally(List<int> gameCodes)
+        {
+            List<String[]> resultList = new List<string[]>();
+            using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
+            using (OleDbCommand command = new OleDbCommand())
+            {
+                command.CommandType = CommandType.Text;
+                command.CommandText = " SELECT a.outlet_cd, o.description,                                                                        " +
+                                      " 	   SUM(a.bet_amt) as [total_spending],                                                                  " +
+                                      " 	   SUM(IIF(b.num1 > 0 AND b.num2=0 AND b.num3=0 AND b.num4=0 AND b.num5=0 AND b.num6=0,1,0)) AS [num1], " +
+                                      " 	   SUM(IIF(b.num1 > 0 AND b.num2>0 AND b.num3=0 AND b.num4=0 AND b.num5=0 AND b.num6=0,1,0)) AS [num2], " +
+                                      " 	   SUM(IIF(b.num1 > 0 AND b.num2>0 AND b.num3>0 AND b.num4=0 AND b.num5=0 AND b.num6=0,1,0)) AS [num3], " +
+                                      " 	   SUM(IIF(b.num1 > 0 AND b.num2>0 AND b.num3>0 AND b.num4>0 AND b.num5=0 AND b.num6=0,1,0)) AS [num4], " +
+                                      " 	   SUM(IIF(b.num1 > 0 AND b.num2>0 AND b.num3>0 AND b.num4>0 AND b.num5>0 AND b.num6=0,1,0)) AS [num5], " +
+                                      " 	   SUM(IIF(b.num1 > 0 AND b.num2>0 AND b.num3>0 AND b.num4>0 AND b.num5>0 AND b.num6>0,1,0)) AS [num6]  " +
+                                      "   FROM ((lottery_bet a                                                                                      " +
+                                      "  INNER JOIN lottery_winning_bet b                                                                         " +
+                                      "     ON a.ID = b.bet_ID)                                                                                    " +
+                                      "   LEFT OUTER JOIN lottery_outlet o                                                                        " +
+                                      "     ON a.outlet_cd = o.outlet_cd)                                                                          " +
+                                      "  WHERE a." + GetMultipleGameCodeSQLPredicate(gameCodes) +
+                                      "    AND a.active = true                                                                                    " +
+                                      "    AND b.active = true                                                                                    " +
+                                      "  GROUP BY a.outlet_cd, o.description                                                                      " +
+                                      "  ORDER BY 2 ASC  ";
+
+                //command.Parameters.AddWithValue("@game_cd", GetMultipleGameCodeSQLPredicate(gameCodes));
+                command.Connection = conn;
+                conn.Open();
+                using (OleDbDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            if (!String.IsNullOrWhiteSpace(reader["num1"].ToString()))
+                            {
+                                String[] result = new String[8] { "", "0", "0", "0", "0", "0", "0", "0" };
+                                result[0] = reader["description"].ToString();
+                                result[1] = reader["total_spending"].ToString();
+                                result[2] = reader["num1"].ToString();
+                                result[3] = reader["num2"].ToString();
+                                result[4] = reader["num3"].ToString();
+                                result[5] = reader["num4"].ToString();
+                                result[6] = reader["num5"].ToString();
+                                result[7] = reader["num6"].ToString();
+                                resultList.Add(result);
+                            }
+                        }
+                    }
+                }
+            }
+            return resultList;
+        }
+        public List<String[]> GetWinningBetDigitTally(List<int> gameCodes)
+        {
+            List<String[]> resultList = new List<string[]>();
+            using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
+            using (OleDbCommand command = new OleDbCommand())
+            {
+                command.CommandType = CommandType.Text;
+                command.CommandText = "  SELECT NUM,SUM(HIT) AS [HIT2]                      " +
+                                      "  FROM (                                            " +
+                                      "  	SELECT a.num1 AS [NUM],COUNT(a.num1) AS [HIT]        " +
+                                      "  	FROM lottery_winning_bet a                       " +
+                                      "  	LEFT OUTER JOIN lottery_bet b ON a.bet_id = b.ID " +
+                                      "  	WHERE " + GetMultipleGameCodeSQLPredicate(gameCodes) +
+                                      "  		AND a.active = true                          " +
+                                      "  		AND b.active = true                          " +
+                                      "  	GROUP BY a.num1,2                                  " +
+                                      "  	                                                 " +
+                                      "  	UNION                                            " +
+                                      "  	                                                 " +
+                                      "  	SELECT a.num2 AS [NUM],COUNT(a.num2) AS [HIT]        " +
+                                      "  	FROM lottery_winning_bet a                       " +
+                                      "  	LEFT OUTER JOIN lottery_bet b ON a.bet_id = b.ID " +
+                                      "  	WHERE " + GetMultipleGameCodeSQLPredicate(gameCodes) +
+                                      "  		AND a.active = true                          " +
+                                      "  		AND b.active = true                          " +
+                                      "  	GROUP BY a.num2,2                                  " +
+                                      "  	                                                 " +
+                                      "  	UNION                                            " +
+                                      "  	                                                 " +
+                                      "  	SELECT a.num3 AS [NUM],COUNT(a.num3) AS [HIT]        " +
+                                      "  	FROM lottery_winning_bet a                       " +
+                                      "  	LEFT OUTER JOIN lottery_bet b ON a.bet_id = b.ID " +
+                                      "  	WHERE " + GetMultipleGameCodeSQLPredicate(gameCodes) +
+                                      "  		AND a.active = true                          " +
+                                      "  		AND b.active = true                          " +
+                                      "  	GROUP BY a.num3,2                                  " +
+                                      "  	                                                 " +
+                                      "  	UNION                                            " +
+                                      "  	                                                 " +
+                                      "  	SELECT a.num4 AS [NUM],COUNT(a.num4) AS [HIT]        " +
+                                      "  	FROM lottery_winning_bet a                       " +
+                                      "  	LEFT OUTER JOIN lottery_bet b ON a.bet_id = b.ID " +
+                                      "  	WHERE " + GetMultipleGameCodeSQLPredicate(gameCodes) +
+                                      "  		AND a.active = true                          " +
+                                      "  		AND b.active = true                          " +
+                                      "  	GROUP BY a.num4,2                                  " +
+                                      "  	                                                 " +
+                                      "  	UNION                                            " +
+                                      "  	                                                 " +
+                                      "  	SELECT a.num5 AS [NUM],COUNT(a.num5) AS [HIT]        " +
+                                      "  	FROM lottery_winning_bet a                       " +
+                                      "  	LEFT OUTER JOIN lottery_bet b ON a.bet_id = b.ID " +
+                                      "  	WHERE " + GetMultipleGameCodeSQLPredicate(gameCodes) +
+                                      "  		AND a.active = true                          " +
+                                      "  		AND b.active = true                          " +
+                                      "  	GROUP BY a.num5,2                                  " +
+                                      "  	                                                 " +
+                                      "  	UNION                                            " +
+                                      "  	                                                 " +
+                                      "  	SELECT a.num6 AS [NUM],COUNT(a.num6) AS [HIT]        " +
+                                      "  	FROM lottery_winning_bet a                       " +
+                                      "  	LEFT OUTER JOIN lottery_bet b ON a.bet_id = b.ID " +
+                                      "  	WHERE " + GetMultipleGameCodeSQLPredicate(gameCodes) +
+                                      "  		AND a.active = true                          " +
+                                      "  		AND b.active = true                          " +
+                                      "  	GROUP BY a.num6,2                                  " +
+                                      "  	)                                                " +
+                                      "  WHERE NUM > 0                                     " +
+                                      "  GROUP BY NUM                                " +
+                                      "  ORDER BY 2 DESC,1 ASC                         ";
+                command.Connection = conn;
+                conn.Open();
+                using (OleDbDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            if (!String.IsNullOrWhiteSpace(reader["NUM"].ToString()))
+                            {
+                                String[] result = new String[2] { "0", "0"};
+                                result[0] = reader["NUM"].ToString();
+                                result[1] = reader["HIT2"].ToString();
                                 resultList.Add(result);
                             }
                         }

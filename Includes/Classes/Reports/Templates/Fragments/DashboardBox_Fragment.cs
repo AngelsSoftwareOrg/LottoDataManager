@@ -35,8 +35,15 @@ namespace LottoDataManager.Includes.Classes.Reports.Templates.Fragments
             #line default
             #line hidden
             this.Write("\r\n            </div>\r\n            <div class=\"dashboard-box-sub-title\">\r\n        " +
-                    "        Profit and Loss Report\r\n            </div>\r\n            <div class=\"dash" +
-                    "board-box-sub-title-combine\">\r\n                ");
+                    "        ");
+            
+            #line 10 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\DashboardBox_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_00001")));
+            
+            #line default
+            #line hidden
+            this.Write("\r\n            </div>\r\n            <div class=\"dashboard-box-sub-title-combine\">\r\n" +
+                    "                ");
             
             #line 13 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\DashboardBox_Fragment.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ProfitAndLossReport.ReportTitleGameList));
@@ -52,8 +59,14 @@ namespace LottoDataManager.Includes.Classes.Reports.Templates.Fragments
             #line default
             #line hidden
             this.Write("\r\n            </div>\r\n            <div class=\"dashboard-box-sub-winnings\">\r\n     " +
-                    "           Lifetime Winnings\r\n            </div>\r\n        </div>\r\n    </div>\r\n</" +
-                    "div>\r\n");
+                    "           ");
+            
+            #line 21 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\DashboardBox_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_00002")));
+            
+            #line default
+            #line hidden
+            this.Write("\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }

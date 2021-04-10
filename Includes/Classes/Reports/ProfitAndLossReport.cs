@@ -32,6 +32,9 @@ namespace LottoDataManager.Includes.Classes.Reports
         private DateTime whenWasLastTimeYouWon;
         private List<double[]> allBetsInTabularMode;
         private List<String[]> allBetsInTabularModeDaysOfWeek;
+        private List<String[]> allBetsInTabularModePickGen;
+        private List<String[]> allBetsInTabularModeOutlet;
+        private List<String[]> allBetsInTabularModeWinningBet;
 
         public ProfitAndLossReport(List<int> gameCodes) : base(null)
         {
@@ -43,12 +46,18 @@ namespace LottoDataManager.Includes.Classes.Reports
             this.timesWonPerBetCombinationDict = new Dictionary<string, object>();
             this.allBetsInTabularMode = new List<double[]>();
             this.allBetsInTabularModeDaysOfWeek = new List<String[]>();
+            this.allBetsInTabularModePickGen = new List<String[]>();
+            this.allBetsInTabularModeOutlet = new List<String[]>();
+            this.allBetsInTabularModeWinningBet = new List<String[]>();
             foreach (int gameCode in this.gameCodeList)
             {
                 InitializesAllValues(new LotteryDataServices(GameFactory.GetInstance(gameCode)));
             }
             GetTallyAllBetsInTabularMode(this.gameCodeList);
             GetDaysOfWeekTallyAllBetsInTabularMode(this.gameCodeList);
+            GetDaysOfWeekTallyPickGen(this.gameCodeList);
+            GetOutletTally(this.gameCodeList);
+            GetWinningBetDigitTally(this.gameCodeList);
         }
 
         private void InitializesAllValues(LotteryDataServices lotteryDataServices)
@@ -167,6 +176,20 @@ namespace LottoDataManager.Includes.Classes.Reports
         {
             this.allBetsInTabularModeDaysOfWeek = this.reportDataServices.GetDaysOfWeekTally(gameCodes);
         }
+        private void GetDaysOfWeekTallyPickGen(List<int> gameCodes)
+        {
+            this.allBetsInTabularModePickGen = this.reportDataServices.GetPickGeneratorsTally(gameCodes);
+        }
+        private void GetOutletTally(List<int> gameCodes)
+        {
+            this.allBetsInTabularModeOutlet = this.reportDataServices.GetOutletTally(gameCodes);
+        }
+        private void GetWinningBetDigitTally(List<int> gameCodes)
+        {
+            this.allBetsInTabularModeWinningBet = this.reportDataServices.GetWinningBetDigitTally(gameCodes);
+        }
+        
+
         #endregion
 
 
@@ -191,6 +214,9 @@ namespace LottoDataManager.Includes.Classes.Reports
         public String WhenWasLastTimeYouWon { get => DateTimeConverterUtils.ConvertToFormat(whenWasLastTimeYouWon, DateTimeConverterUtils.DATE_FORMAT_LONG); }
         public List<double[]> AllBetsInTabularMode { get => allBetsInTabularMode;  }
         public List<string[]> AllBetsInTabularModeDaysOfWeek { get => allBetsInTabularModeDaysOfWeek; }
+        public List<string[]> AllBetsInTabularModePickGen { get => allBetsInTabularModePickGen;  }
+        public List<string[]> AllBetsInTabularModeOutlet { get => allBetsInTabularModeOutlet; }
+        public List<string[]> AllBetsInTabularModeWinningBet { get => allBetsInTabularModeWinningBet; }
         #endregion
 
     }

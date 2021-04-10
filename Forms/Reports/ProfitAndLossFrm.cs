@@ -13,6 +13,7 @@ using LottoDataManager.Includes.Classes.Reports;
 using LottoDataManager.Includes.Classes.Reports.Templates;
 using LottoDataManager.Includes.Classes.Reports.Templates.Fragments;
 using LottoDataManager.Includes.Model;
+using LottoDataManager.Includes.Model.Details;
 using LottoDataManager.Includes.Utilities;
 
 namespace LottoDataManager.Forms.Reports
@@ -44,26 +45,41 @@ namespace LottoDataManager.Forms.Reports
         {
             btnExit.Text = ResourcesUtils.GetMessage("common_btn_exit");
             btnRunReport.Text = ResourcesUtils.GetMessage("pal_form_labels_run");
+            gbGameModes.Text = ResourcesUtils.GetMessage("pal_form_labels_groupbox_game_modes");
             this.Text = ResourcesUtils.GetMessage("pal_form_labels_title");
+            cblGameModes.Items.AddRange(this.lotteryDataServices.GetLotteries().ToArray());
+
+            //set checked the session chosen game as default
+            foreach (Lottery item in cblGameModes.Items)
+            {
+                if (item.GetGameMode().Equals(this.lotteryDataServices.LotteryDetails.GameMode))
+                {
+                    int idx = cblGameModes.Items.IndexOf(item);
+                    cblGameModes.SetItemChecked(idx, true);
+                    break;
+                }
+            }
         }
         #endregion
 
         #region Generates Report
+        private List<int> GetSelectedGameMode()
+        {
+            List<int> gameList = new List<int>();
+            foreach (Lottery item in cblGameModes.CheckedItems)
+            {
+                gameList.Add((int) item.GetGameMode());
+            }
+            return gameList;
+        }
         private void RunReport()
         {
             String fileName = FileUtils.GetHtmlTempFilePathName();
-
             //debugging
             Console.WriteLine(fileName);
-            List<int> gameList = new List<int>();
-            gameList.Add(1);
-            //gameList.Add(2);
-            //gameList.Add(3);
-            //gameList.Add(4);
-            //gameList.Add(5);
             //end
 
-            ProfitAndLossReport profitAndLossReport = new ProfitAndLossReport(gameList);
+            ProfitAndLossReport profitAndLossReport = new ProfitAndLossReport(GetSelectedGameMode());
             IndividualGameHtmlReport htmlReport = new IndividualGameHtmlReport();
             htmlReport.ProfitAndLossReport = profitAndLossReport;
             String content = htmlReport.TransformText();

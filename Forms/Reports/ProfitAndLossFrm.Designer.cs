@@ -31,35 +31,62 @@ namespace LottoDataManager.Forms.Reports
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProfitAndLossFrm));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.gbGameModes = new System.Windows.Forms.GroupBox();
+            this.cblGameModes = new System.Windows.Forms.CheckedListBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnRunReport = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
+            this.panel1.SuspendLayout();
+            this.gbGameModes.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.gbGameModes);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(800, 381);
+            this.panel1.Size = new System.Drawing.Size(576, 209);
             this.panel1.TabIndex = 0;
+            // 
+            // gbGameModes
+            // 
+            this.gbGameModes.Controls.Add(this.cblGameModes);
+            this.gbGameModes.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gbGameModes.Location = new System.Drawing.Point(0, 0);
+            this.gbGameModes.Name = "gbGameModes";
+            this.gbGameModes.Size = new System.Drawing.Size(576, 209);
+            this.gbGameModes.TabIndex = 0;
+            this.gbGameModes.TabStop = false;
+            this.gbGameModes.Text = "Select your Game Mode to include on the report";
+            // 
+            // cblGameModes
+            // 
+            this.cblGameModes.ColumnWidth = 2;
+            this.cblGameModes.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cblGameModes.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cblGameModes.FormattingEnabled = true;
+            this.cblGameModes.Location = new System.Drawing.Point(3, 18);
+            this.cblGameModes.Name = "cblGameModes";
+            this.cblGameModes.Size = new System.Drawing.Size(570, 188);
+            this.cblGameModes.TabIndex = 0;
             // 
             // panel2
             // 
             this.panel2.Controls.Add(this.btnRunReport);
             this.panel2.Controls.Add(this.btnExit);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 381);
+            this.panel2.Location = new System.Drawing.Point(0, 209);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(800, 69);
+            this.panel2.Size = new System.Drawing.Size(576, 69);
             this.panel2.TabIndex = 1;
             // 
             // btnRunReport
             // 
             this.btnRunReport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnRunReport.Image = global::LottoDataManager.Properties.Resources.statistic_32;
-            this.btnRunReport.Location = new System.Drawing.Point(440, 5);
+            this.btnRunReport.Location = new System.Drawing.Point(216, 5);
             this.btnRunReport.Name = "btnRunReport";
             this.btnRunReport.Size = new System.Drawing.Size(177, 59);
             this.btnRunReport.TabIndex = 1;
@@ -74,7 +101,7 @@ namespace LottoDataManager.Forms.Reports
             this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExit.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnExit.Image = global::LottoDataManager.Properties.Resources.Exit_32;
-            this.btnExit.Location = new System.Drawing.Point(620, 6);
+            this.btnExit.Location = new System.Drawing.Point(396, 6);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(177, 59);
             this.btnExit.TabIndex = 0;
@@ -89,7 +116,7 @@ namespace LottoDataManager.Forms.Reports
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnExit;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(576, 278);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -98,6 +125,8 @@ namespace LottoDataManager.Forms.Reports
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Profit And Loss Reports";
             this.Load += new System.EventHandler(this.ProfitAndLossFrm_Load);
+            this.panel1.ResumeLayout(false);
+            this.gbGameModes.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -109,5 +138,7 @@ namespace LottoDataManager.Forms.Reports
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Button btnRunReport;
+        private System.Windows.Forms.GroupBox gbGameModes;
+        private System.Windows.Forms.CheckedListBox cblGameModes;
     }
 }

@@ -99,5 +99,17 @@ namespace LottoDataManager.Includes.Classes.Reports
         {
             return this.lotteryWinningBetDao.GetDaysOfWeekTally(gameCodes);
         }
+        public List<String[]> GetPickGeneratorsTally(List<int> gameCodes)
+        {
+            return this.lotteryWinningBetDao.GetPickGeneratorsTally(gameCodes);
+        }
+        public List<String[]> GetOutletTally(List<int> gameCodes)
+        {
+            return this.lotteryWinningBetDao.GetOutletTally(gameCodes);
+        }
+        public List<String[]> GetWinningBetDigitTally(List<int> gameCodes)
+        {
+            return this.lotteryWinningBetDao.GetWinningBetDigitTally(gameCodes);
+        }
     }
 }

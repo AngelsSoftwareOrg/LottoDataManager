@@ -9,6 +9,10 @@
 // ------------------------------------------------------------------------------
 namespace LottoDataManager.Includes.Classes.Reports.Templates.Fragments
 {
+    using LottoDataManager.Includes.Model.Details;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
     using System;
     
     /// <summary>
@@ -17,16 +21,17 @@ namespace LottoDataManager.Includes.Classes.Reports.Templates.Fragments
     
     #line 1 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\Reportbox_Fragment.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public partial class Reportbox_Fragment : Reportbox_FragmentBase
+    public partial class Reportbox_Fragment : IndividualGameHTMLReportView
     {
 #line hidden
         /// <summary>
         /// Create the template output
         /// </summary>
-        public virtual string TransformText()
+        public override string TransformText()
         {
-            this.Write("<div class=\"report-box\">\r\n    ");
-            this.Write(@"<div class=""outline-container"">
+            this.Write("\r\n<div class=\"report-box\">\r\n    ");
+            this.Write(@"
+<div class=""outline-container"">
     <div class=""outline-title"">
         <span class=""title-keyword"">Winning Digits</span>
         <span class=""title-description"">- Counting your lucky winning digits</span>
@@ -36,24 +41,39 @@ namespace LottoDataManager.Includes.Classes.Reports.Templates.Fragments
             <tbody>
                 <tr>
                     <td>Lifetime Winnings: </td>
-                    <td>P 100,000,000.23</td>
-                </tr>
-                <tr>
-                    <td>Total Money you win so far: </td>
-                    <td>P 60.00</td>
-                </tr>
-                <tr>
-                    <td>Highest amount you won: </td>
-                    <td>P 100.00</td>
-                </tr>
-                <tr>
-                    <td>Lowest amount you won: </td>
-                    <td>P 60.00</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>");
+                    <td>");
+            
+            #line 13 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/WinningDigits_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ProfitAndLossReport.LifeTimeWinnings));
+            
+            #line default
+            #line hidden
+            this.Write("</td>\r\n                </tr>\r\n                <tr>\r\n                    <td>Total" +
+                    " Money you win so far: </td>\r\n                    <td>");
+            
+            #line 17 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/WinningDigits_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ProfitAndLossReport.TotalMoneyWinSoFar));
+            
+            #line default
+            #line hidden
+            this.Write("</td>\r\n                </tr>\r\n                <tr>\r\n                    <td>Highe" +
+                    "st amount you won: </td>\r\n                    <td>");
+            
+            #line 21 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/WinningDigits_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ProfitAndLossReport.HighestAmountWon));
+            
+            #line default
+            #line hidden
+            this.Write("</td>\r\n                </tr>\r\n                <tr>\r\n                    <td>Lowes" +
+                    "t amount you won: </td>\r\n                    <td>");
+            
+            #line 25 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/WinningDigits_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ProfitAndLossReport.LowestAmountWon));
+            
+            #line default
+            #line hidden
+            this.Write("</td>\r\n                </tr>\r\n            </tbody>\r\n        </table>\r\n    </div>\r" +
+                    "\n</div>");
             this.Write("\r\n    ");
             this.Write(@"<div class=""outline-container"">
     <div class=""outline-title"">
@@ -65,23 +85,34 @@ namespace LottoDataManager.Includes.Classes.Reports.Templates.Fragments
             <tbody>
                 <tr>
                     <td>Total money you spent: </td>
-                    <td>P 100,000,000.23</td>
-                </tr>
-                <tr>
-                    <td>Total Money you loose: </td>
-                    <td>P 123,456,789</td>
-                </tr>
-                <tr>
-                    <td>Yearly average of bet: </td>
-                    <td>P 123,456,789</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-");
+                    <td>");
+            
+            #line 12 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/Spending_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ProfitAndLossReport.TotalMoneySpentSoFar));
+            
+            #line default
+            #line hidden
+            this.Write("</td>\r\n                </tr>\r\n                <tr>\r\n                    <td>Total" +
+                    " Money you loose by Lucky Pick: </td>\r\n                    <td>");
+            
+            #line 16 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/Spending_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ProfitAndLossReport.TotalMoneyLooseSoFar));
+            
+            #line default
+            #line hidden
+            this.Write("</td>\r\n                </tr>\r\n                <tr>\r\n                    <td>Yearl" +
+                    "y average of bet: </td>\r\n                    <td>");
+            
+            #line 20 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/Spending_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ProfitAndLossReport.TotalMoneyBettedYearlyAverage));
+            
+            #line default
+            #line hidden
+            this.Write("</td>\r\n                </tr>\r\n            </tbody>\r\n        </table>\r\n    </div>\r" +
+                    "\n</div>\r\n");
             this.Write("\r\n    ");
-            this.Write(@"<div class=""outline-container"">
+            this.Write(@"
+<div class=""outline-container"">
     <div class=""outline-title"">
         <span class=""title-keyword"">Claims</span>
         <span class=""title-description"">- Total money you win and gotcha</span>
@@ -91,28 +122,105 @@ namespace LottoDataManager.Includes.Classes.Reports.Templates.Fragments
             <tbody>
                 <tr>
                     <td>Total number of claims pending: </td>
-                    <td>3 claims</td>
-                </tr>
-                <tr>
-                    <td>Total number of claims yet to pickup: </td>
-                    <td>2 out of 3 claims</td>
-                </tr>
-                <tr>
-                    <td>Details of the claims</td>
-                    <td>
-                        <div>
-                            <span> 6/42 - Super Lotto </span>
-                            <div>12/12/2020 - 01-23-42-33-12-09, P 20.00</div>
-                            <div>12/12/2020 - 01-23-42-33-12-09, P 20.00</div>
-                            <div>12/12/2020 - 01-23-42-33-12-09, P 20.00</div>
-                            <div>12/12/2020 - 01-23-42-33-12-09, P 20.00</div>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>");
+                    <td>");
+            
+            #line 18 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/Claims_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ProfitAndLossReport.TotalNumberOfClaims));
+            
+            #line default
+            #line hidden
+            this.Write(" claims</td>\r\n                </tr>\r\n                <tr>\r\n                    <t" +
+                    "d>Total number of claims yet to redeem: </td>\r\n                    <td>");
+            
+            #line 22 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/Claims_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ProfitAndLossReport.TotalNumberOfClaimsToRedeem));
+            
+            #line default
+            #line hidden
+            this.Write(" out of ");
+            
+            #line 22 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/Claims_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ProfitAndLossReport.TotalNumberOfClaims));
+            
+            #line default
+            #line hidden
+            this.Write(" claims</td>\r\n                </tr>\r\n                <tr>\r\n                    <t" +
+                    "d>Details of the claims</td>\r\n                    <td>\r\n                        " +
+                    "");
+            
+            #line 27 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/Claims_Fragment.tt"
+ foreach (var item in ProfitAndLossReport.ClaimDetailsList) { 
+            
+            #line default
+            #line hidden
+            this.Write("                             <div class=\"claims-details-breakdown\">\r\n            " +
+                    "                    <span>");
+            
+            #line 29 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/Claims_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item.Key));
+            
+            #line default
+            #line hidden
+            this.Write("</span>\r\n                                ");
+            
+            #line 30 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/Claims_Fragment.tt"
+ foreach (LotteryBet bet in (List<LotteryBet>) item.Value) { 
+            
+            #line default
+            #line hidden
+            this.Write("                                    <div>\r\n                                      " +
+                    "  ");
+            
+            #line 32 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/Claims_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(bet.GetTargetDrawDateFormatted()));
+            
+            #line default
+            #line hidden
+            this.Write(" - \r\n                                        ");
+            
+            #line 33 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/Claims_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(bet.GetGNUFormat()));
+            
+            #line default
+            #line hidden
+            this.Write(",\r\n                                        ");
+            
+            #line 34 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/Claims_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(bet.GetLotteryWinningBet().GetWinningAmountInCurrency()));
+            
+            #line default
+            #line hidden
+            this.Write("\r\n                                        ");
+            
+            #line 35 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/Claims_Fragment.tt"
+ if(!bet.GetLotteryWinningBet().IsClaimed()) { 
+            
+            #line default
+            #line hidden
+            this.Write("                                            , to redeem\r\n                        " +
+                    "                ");
+            
+            #line 37 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/Claims_Fragment.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("                                    </div>\r\n                                ");
+            
+            #line 39 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/Claims_Fragment.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("                            </div>\r\n                        ");
+            
+            #line 41 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/Claims_Fragment.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("                    </td>\r\n                </tr>\r\n            </tbody>\r\n        <" +
+                    "/table>\r\n    </div>\r\n</div>");
             this.Write("\r\n    ");
             this.Write(@"<div class=""outline-container"">
     <div class=""outline-title"">
@@ -124,20 +232,23 @@ namespace LottoDataManager.Includes.Classes.Reports.Templates.Fragments
             <tbody>
                 <tr>
                     <td>How many bets you made so far?</td>
-                    <td>150 bets</td>
-                </tr>
-                <tr>
-                    <td>Total Money you loose: </td>
-                    <td>P 123,456,789</td>
-                </tr>
-                <tr>
-                    <td>How much time pass since you started to bet: </td>
-                    <td>1 Year, 3 Months, 4 Days</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>");
+                    <td>");
+            
+            #line 12 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/TallyBehavior_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ProfitAndLossReport.TotalBetsMade));
+            
+            #line default
+            #line hidden
+            this.Write(" bets</td>\r\n                </tr>\r\n                <tr>\r\n                    <td>" +
+                    "How much time pass since you started to bet: </td>\r\n                    <td>");
+            
+            #line 16 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/TallyBehavior_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ProfitAndLossReport.ElapseTimeSinceEaliestBet));
+            
+            #line default
+            #line hidden
+            this.Write("</td>\r\n                </tr>\r\n            </tbody>\r\n        </table>\r\n    </div>\r" +
+                    "\n</div>");
             this.Write("\r\n    ");
             this.Write(@"<div class=""outline-container"">
     <div class=""outline-title"">
@@ -151,120 +262,471 @@ namespace LottoDataManager.Includes.Classes.Reports.Templates.Fragments
                     <td>Tallying your combo wins</td>
                     <td>
                         <ul>
-                            <li>1 Digit : 45</li>
-                            <li>2 Digits: 23</li>
-                            <li>3 Digits: 2</li>
-                            <li>4 Digits: 0</li>
-                            <li>5 Digits: 0</li>
-                            <li>6 Digits: 0</li>
-                        </ul>
-                    </td>
-                </tr>
-                <tr>
-                    <td>When was the last time you won: </td>
-                    <td>June 23, 2021 - Thursday, Silang Bayan</td>
-                </tr>
-                <tr>
-                    <td>How much time pass since you started to bet: </td>
-                    <td>1 Year, 3 Months, 4 Days</td>
-                </tr>
-            </tbody>
-        </table>
+                            ");
+            
+            #line 14 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/TallyWinningDigits_Fragment.tt"
+ foreach (var item in ProfitAndLossReport.TimesWonPerBetCombinationDict) { 
+            
+            #line default
+            #line hidden
+            this.Write("                                <li>");
+            
+            #line 15 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/TallyWinningDigits_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item.Key));
+            
+            #line default
+            #line hidden
+            this.Write(": ");
+            
+            #line 15 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/TallyWinningDigits_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item.Value));
+            
+            #line default
+            #line hidden
+            this.Write("</li>\r\n                            ");
+            
+            #line 16 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/TallyWinningDigits_Fragment.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("                        </ul>\r\n                    </td>\r\n                </tr>\r\n" +
+                    "                <tr>\r\n                    <td>When was the last time you won: </" +
+                    "td>\r\n                    <td>");
+            
+            #line 22 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/TallyWinningDigits_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(ProfitAndLossReport.WhenWasLastTimeYouWon));
+            
+            #line default
+            #line hidden
+            this.Write("</td>\r\n                </tr>\r\n            </tbody>\r\n        </table>\r\n    </div>\r" +
+                    "\n</div>");
+            this.Write("\r\n    ");
+            this.Write(@"<div class=""outline-container"">
+    <div class=""outline-title"">
+        <span class=""title-keyword"">Yearly Bets</span>
+        <span class=""title-description"">- Tallying of your yearly spending on bets</span>
     </div>
-</div>");
+    <div class=""outline-content"">
+        <table class=""table-stats-style yearly-tallying"" cellspacing=""0"">
+            <thead>
+                <th>Year</th>
+                <th>January</th>
+                <th>February</th>
+                <th>March</th>
+                <th>April</th>
+                <th>May</th>
+                <th>June</th>
+                <th>July</th>
+                <th>August</th>
+                <th>September</th>
+                <th>October</th>
+                <th>November</th>
+                <th>December</th>
+                <th>Annual</th>
+            </thead>
+            <tbody>
+                ");
+            
+            #line 26 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/YearlyBets_Fragment.tt"
+ foreach (var item in ProfitAndLossReport.AllBetsInTabularMode) { 
+            
+            #line default
+            #line hidden
+            this.Write("                    <tr>\r\n                        ");
+            
+            #line 28 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/YearlyBets_Fragment.tt"
+ if(item[0]==0) { 
+            
+            #line default
+            #line hidden
+            this.Write("                            <td>Total</td>\r\n                        ");
+            
+            #line 30 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/YearlyBets_Fragment.tt"
+ }else{ 
+            
+            #line default
+            #line hidden
+            this.Write("                            <td>");
+            
+            #line 31 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/YearlyBets_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item[0]));
+            
+            #line default
+            #line hidden
+            this.Write("</td>\r\n                        ");
+            
+            #line 32 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/YearlyBets_Fragment.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("\r\n                        ");
+            
+            #line 34 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/YearlyBets_Fragment.tt"
+ for (int x=1; x<=(item.Length-1); x++) { 
+            
+            #line default
+            #line hidden
+            this.Write("                            ");
+            
+            #line 35 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/YearlyBets_Fragment.tt"
+ if(item[x]==0) { 
+            
+            #line default
+            #line hidden
+            this.Write("                                <td class=\"zero-sum-color\">\r\n                    " +
+                    "        ");
+            
+            #line 37 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/YearlyBets_Fragment.tt"
+ }else{ 
+            
+            #line default
+            #line hidden
+            this.Write("                                <td>\r\n                            ");
+            
+            #line 39 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/YearlyBets_Fragment.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("                            ");
+            
+            #line 40 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/YearlyBets_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item[x].ToString("C")));
+            
+            #line default
+            #line hidden
+            this.Write("</td>\r\n                        ");
+            
+            #line 41 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/YearlyBets_Fragment.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("                    </tr>\r\n                ");
+            
+            #line 43 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/YearlyBets_Fragment.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("\r\n            </tbody>\r\n        </table>\r\n    </div>\r\n</div>");
             this.Write("\r\n    ");
-            this.Write("<div class=\"outline-container\">\r\n    <div class=\"outline-title\">\r\n        <span c" +
-                    "lass=\"title-keyword\">Yearly Bets</span>\r\n        <span class=\"title-description\"" +
-                    ">- Tallying of your yearly spending on bets</span>\r\n    </div>\r\n    <div class=\"" +
-                    "outline-content\">\r\n        <table class=\"table-stats-style yearly-tallying\" cell" +
-                    "spacing=\"0\">\r\n            <thead>\r\n                <th>Month</th>\r\n             " +
-                    "   <th>2021</th>\r\n                <th>2020</th>\r\n                <th>2019</th>\r\n" +
-                    "                <th>2018</th>\r\n                <th>2017</th>\r\n            </thea" +
-                    "d>\r\n            <tbody>\r\n                <tr>\r\n                    <td>January</" +
-                    "td>\r\n                    <td>P 2,345.00</td>\r\n                    <td>P 2,345.00" +
-                    "</td>\r\n                    <td>P 2,345.00</td>\r\n                    <td>P 2,345." +
-                    "00</td>\r\n                    <td>P 2,345.00</td>\r\n                </tr>\r\n       " +
-                    "         <tr>\r\n                    <td>February</td>\r\n                    <td>P " +
-                    "60.00</td>\r\n                    <td>P 60.00</td>\r\n                    <td>P 60.0" +
-                    "0</td>\r\n                    <td>P 60.00</td>\r\n                    <td>P 60.00</t" +
-                    "d>\r\n                </tr>\r\n                <tr>\r\n                    <td>March</" +
-                    "td>\r\n                    <td>P 60.00</td>\r\n                    <td>P 60.00</td>\r" +
-                    "\n                    <td>P 60.00</td>\r\n                    <td>P 60.00</td>\r\n   " +
-                    "                 <td>P 60.00</td>\r\n                </tr>\r\n                <tr>\r\n" +
-                    "                    <td>April</td>\r\n                    <td>P 60.00</td>\r\n      " +
-                    "              <td>P 60.00</td>\r\n                    <td>P 60.00</td>\r\n          " +
-                    "          <td>P 60.00</td>\r\n                    <td>P 60.00</td>\r\n              " +
-                    "  </tr>\r\n                <tr>\r\n                    <td>May</td>\r\n               " +
-                    "     <td>P 60.00</td>\r\n                    <td>P 60.00</td>\r\n                   " +
-                    " <td>P 60.00</td>\r\n                    <td>P 60.00</td>\r\n                    <td" +
-                    ">P 60.00</td>\r\n                </tr>\r\n                <tr>\r\n                    " +
-                    "<td>June</td>\r\n                    <td>P 60.00</td>\r\n                    <td>P 6" +
-                    "0.00</td>\r\n                    <td>P 60.00</td>\r\n                    <td>P 60.00" +
-                    "</td>\r\n                    <td>P 60.00</td>\r\n                </tr>\r\n            " +
-                    "    <tr>\r\n                    <td>July</td>\r\n                    <td>P 60.00</td" +
-                    ">\r\n                    <td>P 60.00</td>\r\n                    <td>P 60.00</td>\r\n " +
-                    "                   <td>P 60.00</td>\r\n                    <td>P 60.00</td>\r\n     " +
-                    "           </tr>\r\n                <tr>\r\n                    <td>August</td>\r\n   " +
-                    "                 <td>P 60.00</td>\r\n                    <td>P 60.00</td>\r\n       " +
-                    "             <td>P 60.00</td>\r\n                    <td>P 60.00</td>\r\n           " +
-                    "         <td>P 60.00</td>\r\n                </tr>\r\n                <tr>\r\n        " +
-                    "            <td>September</td>\r\n                    <td>P 60.00</td>\r\n          " +
-                    "          <td>P 60.00</td>\r\n                    <td>P 60.00</td>\r\n              " +
-                    "      <td>P 60.00</td>\r\n                    <td>P 60.00</td>\r\n                </" +
-                    "tr>\r\n                <tr>\r\n                    <td>October</td>\r\n               " +
-                    "     <td>P 60.00</td>\r\n                    <td>P 60.00</td>\r\n                   " +
-                    " <td>P 60.00</td>\r\n                    <td>P 60.00</td>\r\n                    <td" +
-                    ">P 60.00</td>\r\n                </tr>\r\n                <tr>\r\n                    " +
-                    "<td>November</td>\r\n                    <td>P 60.00</td>\r\n                    <td" +
-                    ">P 60.00</td>\r\n                    <td>P 60.00</td>\r\n                    <td>P 6" +
-                    "0.00</td>\r\n                    <td>P 60.00</td>\r\n                </tr>\r\n        " +
-                    "        <tr>\r\n                    <td>December</td>\r\n                    <td>P 6" +
-                    "0.00</td>\r\n                    <td>P 60.00</td>\r\n                    <td>P 60.00" +
-                    "</td>\r\n                    <td>P 60.00</td>\r\n                    <td>P 60.00</td" +
-                    ">\r\n                </tr>\r\n                <tr>\r\n                    <td>Total</t" +
-                    "d>\r\n                    <td>P 60.00</td>\r\n                    <td>P 60.00</td>\r\n" +
-                    "                    <td>P 60.00</td>\r\n                    <td>P 60.00</td>\r\n    " +
-                    "                <td>P 60.00</td>\r\n                </tr>\r\n            </tbody>\r\n " +
-                    "       </table>\r\n    </div>\r\n</div>");
+            this.Write(@"<div class=""outline-container"">
+    <div class=""outline-title"">
+        <span class=""title-keyword"">Days of Week Tally</span>
+        <span class=""title-description"">- Tallying weekdays behavior in betting</span>
+    </div>
+    <div class=""outline-content"">
+        <table class=""table-stats-style"" cellspacing=""0"">
+            <thead>
+                <th>Days</th>
+                <th>Total Spending</th>
+                <th>1 Digit Win</th>
+                <th>2 Digit Win</th>
+                <th>3 Digit Win</th>
+                <th>4 Digit Win</th>
+                <th>5 Digit Win</th>
+                <th>6 Digit Win</th>
+            </thead>
+            <tbody>
+                ");
+            
+            #line 20 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/DaysOfWeekTally_Fragment.tt"
+ foreach (var item in ProfitAndLossReport.AllBetsInTabularModeDaysOfWeek) { 
+            
+            #line default
+            #line hidden
+            this.Write("                     <tr>\r\n                        <td>");
+            
+            #line 22 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/DaysOfWeekTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item[0]));
+            
+            #line default
+            #line hidden
+            this.Write("</td>\r\n                        <td>");
+            
+            #line 23 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/DaysOfWeekTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(double.Parse(item[1]).ToString("C")));
+            
+            #line default
+            #line hidden
+            this.Write("</td>\r\n\r\n                        ");
+            
+            #line 25 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/DaysOfWeekTally_Fragment.tt"
+ for (int x=2; x<=(item.Length-1); x++) { 
+            
+            #line default
+            #line hidden
+            this.Write("                            ");
+            
+            #line 26 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/DaysOfWeekTally_Fragment.tt"
+ if(double.Parse(item[x])==0) { 
+            
+            #line default
+            #line hidden
+            this.Write("                                <td class=\"zero-sum-color\">\r\n                    " +
+                    "        ");
+            
+            #line 28 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/DaysOfWeekTally_Fragment.tt"
+ }else{ 
+            
+            #line default
+            #line hidden
+            this.Write("                                <td>\r\n                            ");
+            
+            #line 30 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/DaysOfWeekTally_Fragment.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("                            ");
+            
+            #line 31 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/DaysOfWeekTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item[x]));
+            
+            #line default
+            #line hidden
+            this.Write("</td>\r\n                        ");
+            
+            #line 32 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/DaysOfWeekTally_Fragment.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("                    </tr>\r\n                ");
+            
+            #line 34 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/DaysOfWeekTally_Fragment.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("            </tbody>\r\n        </table>\r\n    </div>\r\n</div>\r\n\r\n");
             this.Write("\r\n    ");
-            this.Write("<div class=\"outline-container\">\r\n    <div class=\"outline-title\">\r\n        <span c" +
-                    "lass=\"title-keyword\">Day of Week Tally</span>\r\n        <span class=\"title-descri" +
-                    "ption\">- Tallying weekdays behavior in betting</span>\r\n    </div>\r\n    <div clas" +
-                    "s=\"outline-content\">\r\n        <table class=\"table-stats-style\" cellspacing=\"0\">\r" +
-                    "\n            <thead>\r\n                <th>Days</th>\r\n                <th>Total S" +
-                    "pending</th>\r\n                <th>1 Digit Win</th>\r\n                <th>2 Digit " +
-                    "Win</th>\r\n                <th>3 Digit Win</th>\r\n                <th>4 Digit Win<" +
-                    "/th>\r\n                <th>5 Digit Win</th>\r\n                <th>6 Digit Win</th>" +
-                    "\r\n            </thead>\r\n            <tbody>\r\n                <tr>\r\n             " +
-                    "       <td>Monday</td>\r\n                    <td>P 2,345.00</td>\r\n               " +
-                    "     <td>21</td>\r\n                    <td>15</td>\r\n                    <td>1</td" +
-                    ">\r\n                    <td>0</td>\r\n                    <td>0</td>\r\n             " +
-                    "       <td>0</td>\r\n                </tr>\r\n                <tr>\r\n                " +
-                    "    <td>Tuesday</td>\r\n                    <td>P 2,345.00</td>\r\n                 " +
-                    "   <td>21</td>\r\n                    <td>15</td>\r\n                    <td>1</td>\r" +
-                    "\n                    <td>0</td>\r\n                    <td>0</td>\r\n               " +
-                    "     <td>0</td>\r\n                </tr>\r\n                <tr>\r\n                  " +
-                    "  <td>Wednesday</td>\r\n                    <td>P 2,345.00</td>\r\n                 " +
-                    "   <td>21</td>\r\n                    <td>15</td>\r\n                    <td>1</td>\r" +
-                    "\n                    <td>0</td>\r\n                    <td>0</td>\r\n               " +
-                    "     <td>0</td>\r\n                </tr>\r\n                <tr>\r\n                  " +
-                    "  <td>Thursday</td>\r\n                    <td>P 2,345.00</td>\r\n                  " +
-                    "  <td>21</td>\r\n                    <td>15</td>\r\n                    <td>1</td>\r\n" +
-                    "                    <td>0</td>\r\n                    <td>0</td>\r\n                " +
-                    "    <td>0</td>\r\n                </tr>\r\n                <tr>\r\n                   " +
-                    " <td>Friday</td>\r\n                    <td>P 2,345.00</td>\r\n                    <" +
-                    "td>21</td>\r\n                    <td>15</td>\r\n                    <td>1</td>\r\n   " +
-                    "                 <td>0</td>\r\n                    <td>0</td>\r\n                   " +
-                    " <td>0</td>\r\n                </tr>\r\n                <tr>\r\n                    <t" +
-                    "d>Saturday</td>\r\n                    <td>P 2,345.00</td>\r\n                    <t" +
-                    "d>21</td>\r\n                    <td>15</td>\r\n                    <td>1</td>\r\n    " +
-                    "                <td>0</td>\r\n                    <td>0</td>\r\n                    " +
-                    "<td>0</td>\r\n                </tr>\r\n                <tr>\r\n                    <td" +
-                    ">Sunday</td>\r\n                    <td>P 2,345.00</td>\r\n                    <td>2" +
-                    "1</td>\r\n                    <td>15</td>\r\n                    <td>1</td>\r\n       " +
-                    "             <td>0</td>\r\n                    <td>0</td>\r\n                    <td" +
-                    ">0</td>\r\n                </tr>\r\n            </tbody>\r\n        </table>\r\n    </di" +
-                    "v>\r\n</div>\r\n\r\n");
+            this.Write(@"<div class=""outline-container"">
+    <div class=""outline-title"">
+        <span class=""title-keyword"">Pick Generators Tally</span>
+        <span class=""title-description"">- Tallying pick generators, spending and winning digits</span>
+    </div>
+    <div class=""outline-content"">
+        <table class=""table-stats-style"" cellspacing=""0"">
+            <thead>
+                <th>Chosen Pick Generator</th>
+                <th>Total Spending</th>
+                <th>1 Digit Win</th>
+                <th>2 Digit Win</th>
+                <th>3 Digit Win</th>
+                <th>4 Digit Win</th>
+                <th>5 Digit Win</th>
+                <th>6 Digit Win</th>
+            </thead>
+            <tbody>
+                ");
+            
+            #line 20 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/PickGeneratorsTally_Fragment.tt"
+ foreach (var item in ProfitAndLossReport.AllBetsInTabularModePickGen) { 
+            
+            #line default
+            #line hidden
+            this.Write("                     <tr>\r\n                        <td>");
+            
+            #line 22 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/PickGeneratorsTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item[0]));
+            
+            #line default
+            #line hidden
+            this.Write("</td>\r\n                        <td>");
+            
+            #line 23 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/PickGeneratorsTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(double.Parse(item[1]).ToString("C")));
+            
+            #line default
+            #line hidden
+            this.Write("</td>\r\n\r\n                        ");
+            
+            #line 25 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/PickGeneratorsTally_Fragment.tt"
+ for (int x=2; x<=(item.Length-1); x++) { 
+            
+            #line default
+            #line hidden
+            this.Write("                            ");
+            
+            #line 26 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/PickGeneratorsTally_Fragment.tt"
+ if(double.Parse(item[x])==0) { 
+            
+            #line default
+            #line hidden
+            this.Write("                                <td class=\"zero-sum-color\">\r\n                    " +
+                    "        ");
+            
+            #line 28 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/PickGeneratorsTally_Fragment.tt"
+ }else{ 
+            
+            #line default
+            #line hidden
+            this.Write("                                <td>\r\n                            ");
+            
+            #line 30 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/PickGeneratorsTally_Fragment.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("                            ");
+            
+            #line 31 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/PickGeneratorsTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item[x]));
+            
+            #line default
+            #line hidden
+            this.Write("</td>\r\n                        ");
+            
+            #line 32 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/PickGeneratorsTally_Fragment.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("                    </tr>\r\n                ");
+            
+            #line 34 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/PickGeneratorsTally_Fragment.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("            </tbody>\r\n        </table>\r\n    </div>\r\n</div>\r\n\r\n");
+            this.Write("\r\n    ");
+            this.Write(@"<div class=""outline-container"">
+    <div class=""outline-title"">
+        <span class=""title-keyword"">Outlet Tally</span>
+        <span class=""title-description"">- Your favorite outlet and your winning counts</span>
+    </div>
+    <div class=""outline-content"">
+        <table class=""table-stats-style"" cellspacing=""0"">
+            <thead>
+                <th>Outlet where you bet</th>
+                <th>Total Spending</th>
+                <th>1 Digit Win</th>
+                <th>2 Digit Win</th>
+                <th>3 Digit Win</th>
+                <th>4 Digit Win</th>
+                <th>5 Digit Win</th>
+                <th>6 Digit Win</th>
+            </thead>
+            <tbody>
+                ");
+            
+            #line 20 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/OutletTally_Fragment.tt"
+ foreach (var item in ProfitAndLossReport.AllBetsInTabularModeOutlet) { 
+            
+            #line default
+            #line hidden
+            this.Write("                     <tr>\r\n                        <td>");
+            
+            #line 22 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/OutletTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item[0]));
+            
+            #line default
+            #line hidden
+            this.Write("</td>\r\n                        <td>");
+            
+            #line 23 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/OutletTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(double.Parse(item[1]).ToString("C")));
+            
+            #line default
+            #line hidden
+            this.Write("</td>\r\n\r\n                        ");
+            
+            #line 25 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/OutletTally_Fragment.tt"
+ for (int x=2; x<=(item.Length-1); x++) { 
+            
+            #line default
+            #line hidden
+            this.Write("                            ");
+            
+            #line 26 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/OutletTally_Fragment.tt"
+ if(double.Parse(item[x])==0) { 
+            
+            #line default
+            #line hidden
+            this.Write("                                <td class=\"zero-sum-color\">\r\n                    " +
+                    "        ");
+            
+            #line 28 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/OutletTally_Fragment.tt"
+ }else{ 
+            
+            #line default
+            #line hidden
+            this.Write("                                <td>\r\n                            ");
+            
+            #line 30 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/OutletTally_Fragment.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("                            ");
+            
+            #line 31 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/OutletTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item[x]));
+            
+            #line default
+            #line hidden
+            this.Write("</td>\r\n                        ");
+            
+            #line 32 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/OutletTally_Fragment.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("                    </tr>\r\n                ");
+            
+            #line 34 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/OutletTally_Fragment.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("            </tbody>\r\n        </table>\r\n    </div>\r\n</div>\r\n\r\n");
+            this.Write("\r\n    ");
+            this.Write(@"<div class=""outline-container"">
+    <div class=""outline-title"">
+        <span class=""title-keyword"">Winning Bet Tally</span>
+        <span class=""title-description"">- Counting which digits are your most lucky number for betting</span>
+    </div>
+    <div class=""outline-content"">
+        <table class=""table-stats-style"" cellspacing=""0"">
+            <thead>
+                <th>Lotto Number</th>
+                <th>Your total hits</th>
+            </thead>
+            <tbody>
+                ");
+            
+            #line 14 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/WinningBetTally_Fragment.tt"
+ foreach (var item in ProfitAndLossReport.AllBetsInTabularModeWinningBet) { 
+            
+            #line default
+            #line hidden
+            this.Write("                     <tr>\r\n                        <td>");
+            
+            #line 16 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/WinningBetTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item[0]));
+            
+            #line default
+            #line hidden
+            this.Write("</td>\r\n                        <td>");
+            
+            #line 17 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/WinningBetTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item[1]));
+            
+            #line default
+            #line hidden
+            this.Write("</td>\r\n                    </tr>\r\n                ");
+            
+            #line 19 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/WinningBetTally_Fragment.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("            </tbody>\r\n        </table>\r\n    </div>\r\n</div>\r\n\r\n");
             this.Write("\r\n    <div class=\"page-spacer\"></div>\r\n</div>");
             return this.GenerationEnvironment.ToString();
         }
@@ -272,276 +734,4 @@ namespace LottoDataManager.Includes.Classes.Reports.Templates.Fragments
     
     #line default
     #line hidden
-    #region Base class
-    /// <summary>
-    /// Base class for this transformation
-    /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public class Reportbox_FragmentBase
-    {
-        #region Fields
-        private global::System.Text.StringBuilder generationEnvironmentField;
-        private global::System.CodeDom.Compiler.CompilerErrorCollection errorsField;
-        private global::System.Collections.Generic.List<int> indentLengthsField;
-        private string currentIndentField = "";
-        private bool endsWithNewline;
-        private global::System.Collections.Generic.IDictionary<string, object> sessionField;
-        #endregion
-        #region Properties
-        /// <summary>
-        /// The string builder that generation-time code is using to assemble generated output
-        /// </summary>
-        protected System.Text.StringBuilder GenerationEnvironment
-        {
-            get
-            {
-                if ((this.generationEnvironmentField == null))
-                {
-                    this.generationEnvironmentField = new global::System.Text.StringBuilder();
-                }
-                return this.generationEnvironmentField;
-            }
-            set
-            {
-                this.generationEnvironmentField = value;
-            }
-        }
-        /// <summary>
-        /// The error collection for the generation process
-        /// </summary>
-        public System.CodeDom.Compiler.CompilerErrorCollection Errors
-        {
-            get
-            {
-                if ((this.errorsField == null))
-                {
-                    this.errorsField = new global::System.CodeDom.Compiler.CompilerErrorCollection();
-                }
-                return this.errorsField;
-            }
-        }
-        /// <summary>
-        /// A list of the lengths of each indent that was added with PushIndent
-        /// </summary>
-        private System.Collections.Generic.List<int> indentLengths
-        {
-            get
-            {
-                if ((this.indentLengthsField == null))
-                {
-                    this.indentLengthsField = new global::System.Collections.Generic.List<int>();
-                }
-                return this.indentLengthsField;
-            }
-        }
-        /// <summary>
-        /// Gets the current indent we use when adding lines to the output
-        /// </summary>
-        public string CurrentIndent
-        {
-            get
-            {
-                return this.currentIndentField;
-            }
-        }
-        /// <summary>
-        /// Current transformation session
-        /// </summary>
-        public virtual global::System.Collections.Generic.IDictionary<string, object> Session
-        {
-            get
-            {
-                return this.sessionField;
-            }
-            set
-            {
-                this.sessionField = value;
-            }
-        }
-        #endregion
-        #region Transform-time helpers
-        /// <summary>
-        /// Write text directly into the generated output
-        /// </summary>
-        public void Write(string textToAppend)
-        {
-            if (string.IsNullOrEmpty(textToAppend))
-            {
-                return;
-            }
-            // If we're starting off, or if the previous text ended with a newline,
-            // we have to append the current indent first.
-            if (((this.GenerationEnvironment.Length == 0) 
-                        || this.endsWithNewline))
-            {
-                this.GenerationEnvironment.Append(this.currentIndentField);
-                this.endsWithNewline = false;
-            }
-            // Check if the current text ends with a newline
-            if (textToAppend.EndsWith(global::System.Environment.NewLine, global::System.StringComparison.CurrentCulture))
-            {
-                this.endsWithNewline = true;
-            }
-            // This is an optimization. If the current indent is "", then we don't have to do any
-            // of the more complex stuff further down.
-            if ((this.currentIndentField.Length == 0))
-            {
-                this.GenerationEnvironment.Append(textToAppend);
-                return;
-            }
-            // Everywhere there is a newline in the text, add an indent after it
-            textToAppend = textToAppend.Replace(global::System.Environment.NewLine, (global::System.Environment.NewLine + this.currentIndentField));
-            // If the text ends with a newline, then we should strip off the indent added at the very end
-            // because the appropriate indent will be added when the next time Write() is called
-            if (this.endsWithNewline)
-            {
-                this.GenerationEnvironment.Append(textToAppend, 0, (textToAppend.Length - this.currentIndentField.Length));
-            }
-            else
-            {
-                this.GenerationEnvironment.Append(textToAppend);
-            }
-        }
-        /// <summary>
-        /// Write text directly into the generated output
-        /// </summary>
-        public void WriteLine(string textToAppend)
-        {
-            this.Write(textToAppend);
-            this.GenerationEnvironment.AppendLine();
-            this.endsWithNewline = true;
-        }
-        /// <summary>
-        /// Write formatted text directly into the generated output
-        /// </summary>
-        public void Write(string format, params object[] args)
-        {
-            this.Write(string.Format(global::System.Globalization.CultureInfo.CurrentCulture, format, args));
-        }
-        /// <summary>
-        /// Write formatted text directly into the generated output
-        /// </summary>
-        public void WriteLine(string format, params object[] args)
-        {
-            this.WriteLine(string.Format(global::System.Globalization.CultureInfo.CurrentCulture, format, args));
-        }
-        /// <summary>
-        /// Raise an error
-        /// </summary>
-        public void Error(string message)
-        {
-            System.CodeDom.Compiler.CompilerError error = new global::System.CodeDom.Compiler.CompilerError();
-            error.ErrorText = message;
-            this.Errors.Add(error);
-        }
-        /// <summary>
-        /// Raise a warning
-        /// </summary>
-        public void Warning(string message)
-        {
-            System.CodeDom.Compiler.CompilerError error = new global::System.CodeDom.Compiler.CompilerError();
-            error.ErrorText = message;
-            error.IsWarning = true;
-            this.Errors.Add(error);
-        }
-        /// <summary>
-        /// Increase the indent
-        /// </summary>
-        public void PushIndent(string indent)
-        {
-            if ((indent == null))
-            {
-                throw new global::System.ArgumentNullException("indent");
-            }
-            this.currentIndentField = (this.currentIndentField + indent);
-            this.indentLengths.Add(indent.Length);
-        }
-        /// <summary>
-        /// Remove the last indent that was added with PushIndent
-        /// </summary>
-        public string PopIndent()
-        {
-            string returnValue = "";
-            if ((this.indentLengths.Count > 0))
-            {
-                int indentLength = this.indentLengths[(this.indentLengths.Count - 1)];
-                this.indentLengths.RemoveAt((this.indentLengths.Count - 1));
-                if ((indentLength > 0))
-                {
-                    returnValue = this.currentIndentField.Substring((this.currentIndentField.Length - indentLength));
-                    this.currentIndentField = this.currentIndentField.Remove((this.currentIndentField.Length - indentLength));
-                }
-            }
-            return returnValue;
-        }
-        /// <summary>
-        /// Remove any indentation
-        /// </summary>
-        public void ClearIndent()
-        {
-            this.indentLengths.Clear();
-            this.currentIndentField = "";
-        }
-        #endregion
-        #region ToString Helpers
-        /// <summary>
-        /// Utility class to produce culture-oriented representation of an object as a string.
-        /// </summary>
-        public class ToStringInstanceHelper
-        {
-            private System.IFormatProvider formatProviderField  = global::System.Globalization.CultureInfo.InvariantCulture;
-            /// <summary>
-            /// Gets or sets format provider to be used by ToStringWithCulture method.
-            /// </summary>
-            public System.IFormatProvider FormatProvider
-            {
-                get
-                {
-                    return this.formatProviderField ;
-                }
-                set
-                {
-                    if ((value != null))
-                    {
-                        this.formatProviderField  = value;
-                    }
-                }
-            }
-            /// <summary>
-            /// This is called from the compile/run appdomain to convert objects within an expression block to a string
-            /// </summary>
-            public string ToStringWithCulture(object objectToConvert)
-            {
-                if ((objectToConvert == null))
-                {
-                    throw new global::System.ArgumentNullException("objectToConvert");
-                }
-                System.Type t = objectToConvert.GetType();
-                System.Reflection.MethodInfo method = t.GetMethod("ToString", new System.Type[] {
-                            typeof(System.IFormatProvider)});
-                if ((method == null))
-                {
-                    return objectToConvert.ToString();
-                }
-                else
-                {
-                    return ((string)(method.Invoke(objectToConvert, new object[] {
-                                this.formatProviderField })));
-                }
-            }
-        }
-        private ToStringInstanceHelper toStringHelperField = new ToStringInstanceHelper();
-        /// <summary>
-        /// Helper to produce culture-oriented representation of an object as a string
-        /// </summary>
-        public ToStringInstanceHelper ToStringHelper
-        {
-            get
-            {
-                return this.toStringHelperField;
-            }
-        }
-        #endregion
-    }
-    #endregion
 }

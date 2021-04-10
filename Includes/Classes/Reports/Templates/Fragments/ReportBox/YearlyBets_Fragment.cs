@@ -87,7 +87,7 @@ namespace LottoDataManager.Includes.Classes.Reports.Templates.Fragments.ReportBo
             this.Write("\r\n                        ");
             
             #line 34 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\YearlyBets_Fragment.tt"
- for (int x=1; x<=13; x++) { 
+ for (int x=1; x<=(item.Length-1); x++) { 
             
             #line default
             #line hidden

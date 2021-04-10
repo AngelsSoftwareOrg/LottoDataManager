@@ -35,50 +35,62 @@ namespace LottoDataManager.Includes.Classes.Reports.Templates
                     "device-width, initial-scale=1\'>\r\n\r\n        <title> Lottery Report </title>\r\n    " +
                     "    ");
             this.Write("\r\n<!--link rel=\"stylesheet\" href=\"main_style.css\" type=\"text/css\" media=\"all\" -->" +
-                    "\r\n<style>\r\n\r\nbody{\r\n    margin: 0px;\r\n}\r\n\r\n.dashboard-box{\r\n    width: 100%;\r\n  " +
-                    "  height: 300px;\r\n    background-color: cornflowerblue;\r\n}\r\n.dashboard-box-conte" +
-                    "nt{\r\n    vertical-align: middle;\r\n    /* border: 2px dashed #444; */\r\n    height" +
-                    ": 50%;\r\n    display: flex;\r\n    justify-content: space-between;\r\n    transform: " +
-                    "translate(0, 50%);\r\n}\r\n\r\n.dashboard-box-content .title-partition{\r\n    /* border" +
-                    ": 2px dashed #444; */\r\n    width: 100%;\r\n    height: 100%;\r\n    vertical-align: " +
-                    "middle;\r\n    margin: 0 10px 0 10px;\r\n\r\n}\r\n\r\n.dashboard-box-title{\r\n    font-weig" +
-                    "ht: bold;\r\n    color: ghostwhite;\r\n    font-size: 4em;\r\n    text-shadow: 0 2px 2" +
-                    "px rgba(0,0,0,.5);\r\n    font-family: Impact, Haettenschweiler, \'Arial Narrow Bol" +
-                    "d\', sans-serif;\r\n}\r\n.dashboard-box-sub-title{\r\n    font-size: 2em;\r\n    text-sha" +
-                    "dow: 0 2px 2px rgba(0,0,0,.5);\r\n    color: whitesmoke;\r\n    font-family: \'Trebuc" +
-                    "het MS\', \'Lucida Sans Unicode\', \'Lucida Grande\', \'Lucida Sans\', Arial, sans-seri" +
-                    "f;\r\n}\r\n\r\n.dashboard-box-sub-title-combine{\r\n    font-size: 1.2em;\r\n    text-shad" +
-                    "ow: 0 2px 2px rgba(0,0,0,.5);\r\n    color: whitesmoke;\r\n    font-family: \'Trebuch" +
-                    "et MS\', \'Lucida Sans Unicode\', \'Lucida Grande\', \'Lucida Sans\', Arial, sans-serif" +
-                    ";\r\n}\r\n\r\n\r\n\r\n\r\n.dashboard-box-winnings{\r\n    font-weight: bold;\r\n    color: green" +
-                    "yellow;\r\n    font-size: 5em;\r\n    text-shadow: 0 5px 1px rgba(101, 60, 60, 0.5);" +
-                    "\r\n    font-family: Impact, Haettenschweiler, \'Arial Narrow Bold\', sans-serif;\r\n " +
-                    "   text-align: center;\r\n}\r\n.dashboard-box-sub-winnings{\r\n    font-size: 1.3em;\r\n" +
-                    "    font-style: italic;\r\n    text-shadow: 0 2px 2px rgba(0,0,0,.5);\r\n    color: " +
-                    "whitesmoke;\r\n    font-family: \'Trebuchet MS\', \'Lucida Sans Unicode\', \'Lucida Gra" +
-                    "nde\', \'Lucida Sans\', Arial, sans-serif;\r\n    text-align: center;\r\n}\r\n.page-space" +
-                    "r{\r\n    width:100%;\r\n    height: 500px;\r\n}\r\n.zero-sum-color{\r\n    color: whitesm" +
-                    "oke;\r\n}\r\n\r\n\r\n/*\r\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" +
-                    "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n    REPORT BOX CONTENT\r\n*/\r\n.report-box{" +
-                    "\r\n    top: 50px;\r\n    font-family: Verdana, Geneva, Tahoma, sans-serif;\r\n}\r\n\r\n.o" +
-                    "utline-container{\r\n    margin: 50px 10px 0px 10px;\r\n}\r\n\r\n.title-keyword{\r\n    fo" +
-                    "nt-size: 1.5em;\r\n    color: mediumturquoise;\r\n    font-weight: bold;\r\n}\r\n\r\n.titl" +
-                    "e-description{\r\n    color: green;\r\n    font-weight: bold;\r\n}\r\n\r\n.report-box .def" +
-                    "ault-table {\r\n    width: 100%;\r\n    margin: 20px 30px 30px 30px;\r\n    border: 0p" +
-                    "x solid black;\r\n}\r\n\r\n.report-box .default-table tr td:first-of-type{\r\n    width:" +
-                    " 350px;\r\n    border: 0px solid black;\r\n}\r\n.report-box .default-table td{\r\n    bo" +
-                    "rder: 0px solid black;\r\n    vertical-align: top;\r\n}\r\n\r\n.report-box .yearly-tally" +
-                    "ing{\r\n    border: 2px solid black;\r\n    text-align: left;\r\n    width: 50%;\r\n    " +
-                    "\r\n}\r\n\r\n.report-box .table-stats-style{\r\n    table-layout:auto;\r\n    text-align: " +
-                    "left;\r\n    margin-left: 30px;\r\n    margin-top: 30px;\r\n}\r\n.table-stats-style tr t" +
-                    "d{\r\n    border: 2px solid rgb(194, 189, 189);\r\n}\r\n.table-stats-style th{\r\n    bo" +
-                    "rder: 2px solid rgb(194, 189, 189);\r\n    background-color:whitesmoke;\r\n}\r\n\r\n.tab" +
-                    "le-stats-style tbody{\r\n    table-layout:auto;\r\n}\r\n\r\n.table-stats-style tr td:fir" +
-                    "st-of-type{\r\n    min-width: 50px;\r\n}\r\n\r\n\r\n/*\r\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" +
-                    "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n    INDIVID" +
-                    "UAL CSS\r\n*/\r\n.claims-details-breakdown{\r\n    margin-bottom: 30px;\r\n}\r\n.claims-de" +
-                    "tails-breakdown span{\r\n    font-weight: bold;\r\n    color: green;\r\n}\r\n</style>");
-            this.Write("\r\n    </head>\r\n    <body>\r\n");
+                    "\r\n<style>\r\n\r\nbody{\r\n    margin: 0px;\r\n}\r\n.report-header{\r\n    width: 100%;\r\n    " +
+                    "height: 40px;\r\n    background-color: #354535;\r\n    font-weight: bold;\r\n    color" +
+                    ": ghostwhite;\r\n    font-size: 2em;\r\n    text-shadow: 0 2px 2px rgba(0,0,0,.5);\r\n" +
+                    "    font-family: -apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, Oxygen, " +
+                    "Ubuntu, Cantarell, \'Open Sans\', \'Helvetica Neue\', sans-serif;\r\n}\r\n\r\n.dashboard-b" +
+                    "ox{\r\n    width: 100%;\r\n    height: 300px;\r\n    background-color: #498aff;\r\n}\r\n.d" +
+                    "ashboard-box-content{\r\n    vertical-align: middle;\r\n    /* border: 2px dashed #4" +
+                    "44; */\r\n    height: 50%;\r\n    display: flex;\r\n    justify-content: space-between" +
+                    ";\r\n    transform: translate(0, 50%);\r\n}\r\n\r\n.dashboard-box-content .title-partiti" +
+                    "on{\r\n    /* border: 2px dashed #444; */\r\n    width: 100%;\r\n    height: 100%;\r\n  " +
+                    "  vertical-align: middle;\r\n    margin: 0 10px 0 10px;\r\n\r\n}\r\n\r\n.dashboard-box-tit" +
+                    "le{\r\n    font-weight: bold;\r\n    color: ghostwhite;\r\n    font-size: 4em;\r\n    te" +
+                    "xt-shadow: 0 2px 2px rgba(0,0,0,.5);\r\n    font-family: Impact, Haettenschweiler," +
+                    " \'Arial Narrow Bold\', sans-serif;\r\n}\r\n.dashboard-box-sub-title{\r\n    font-size: " +
+                    "2em;\r\n    text-shadow: 0 2px 2px rgba(0,0,0,.5);\r\n    color: whitesmoke;\r\n    fo" +
+                    "nt-family: \'Trebuchet MS\', \'Lucida Sans Unicode\', \'Lucida Grande\', \'Lucida Sans\'" +
+                    ", Arial, sans-serif;\r\n}\r\n\r\n.dashboard-box-sub-title-combine{\r\n    font-size: 1.2" +
+                    "em;\r\n    text-shadow: 0 2px 2px rgba(0,0,0,.5);\r\n    color: whitesmoke;\r\n    fon" +
+                    "t-family: \'Trebuchet MS\', \'Lucida Sans Unicode\', \'Lucida Grande\', \'Lucida Sans\'," +
+                    " Arial, sans-serif;\r\n}\r\n\r\n\r\n\r\n\r\n.dashboard-box-winnings{\r\n    font-weight: bold;" +
+                    "\r\n    color: greenyellow;\r\n    font-size: 5em;\r\n    text-shadow: 0 5px 1px rgba(" +
+                    "101, 60, 60, 0.5);\r\n    font-family: Impact, Haettenschweiler, \'Arial Narrow Bol" +
+                    "d\', sans-serif;\r\n    text-align: center;\r\n}\r\n.dashboard-box-sub-winnings{\r\n    f" +
+                    "ont-size: 1.3em;\r\n    font-style: italic;\r\n    text-shadow: 0 2px 2px rgba(0,0,0" +
+                    ",.5);\r\n    color: whitesmoke;\r\n    font-family: \'Trebuchet MS\', \'Lucida Sans Uni" +
+                    "code\', \'Lucida Grande\', \'Lucida Sans\', Arial, sans-serif;\r\n    text-align: cente" +
+                    "r;\r\n}\r\n.page-spacer{\r\n    width:100%;\r\n    height: 500px;\r\n}\r\n.zero-sum-color{\r\n" +
+                    "    color: whitesmoke;\r\n}\r\n\r\n\r\n/*\r\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" +
+                    "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n    REPORT BOX CONTENT" +
+                    "\r\n*/\r\n.report-box{\r\n    top: 50px;\r\n    font-family: Verdana, Geneva, Tahoma, sa" +
+                    "ns-serif;\r\n}\r\n\r\n.outline-container{\r\n    margin: 50px 10px 0px 10px;\r\n}\r\n\r\n.titl" +
+                    "e-keyword{\r\n    font-size: 1.5em;\r\n    color: mediumturquoise;\r\n    font-weight:" +
+                    " bold;\r\n}\r\n\r\n.title-description{\r\n    color: green;\r\n    font-weight: bold;\r\n}\r\n" +
+                    "\r\n.report-box .default-table {\r\n    width: 100%;\r\n    margin: 20px 30px 30px 30p" +
+                    "x;\r\n    border: 0px solid black;\r\n}\r\n\r\n.report-box .default-table tr td:first-of" +
+                    "-type{\r\n    width: 350px;\r\n    border: 0px solid black;\r\n}\r\n.report-box .default" +
+                    "-table td{\r\n    border: 0px solid black;\r\n    vertical-align: top;\r\n}\r\n\r\n.report" +
+                    "-box .yearly-tallying{\r\n    border: 2px solid black;\r\n    text-align: left;\r\n   " +
+                    " width: 50%;\r\n    \r\n}\r\n\r\n.report-box .table-stats-style{\r\n    table-layout:auto;" +
+                    "\r\n    text-align: left;\r\n    margin-left: 30px;\r\n    margin-top: 30px;\r\n}\r\n.tabl" +
+                    "e-stats-style tr td{\r\n    border: 2px solid rgb(194, 189, 189);\r\n}\r\n.table-stats" +
+                    "-style th{\r\n    border: 2px solid rgb(194, 189, 189);\r\n    background-color:whit" +
+                    "esmoke;\r\n}\r\n\r\n.table-stats-style tbody{\r\n    table-layout:auto;\r\n}\r\n\r\n.table-sta" +
+                    "ts-style tr td:first-of-type{\r\n    min-width: 50px;\r\n}\r\n\r\n\r\n/*\r\n    ~~~~~~~~~~~~" +
+                    "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" +
+                    "~~~~~\r\n    INDIVIDUAL CSS\r\n*/\r\n.claims-details-breakdown{\r\n    margin-bottom: 30" +
+                    "px;\r\n}\r\n.claims-details-breakdown span{\r\n    font-weight: bold;\r\n    color: gree" +
+                    "n;\r\n}\r\n</style>");
+            this.Write("\r\n    </head>\r\n    <body>\r\n    <div class=\"report-header\">\r\n        <td>");
+            
+            #line 15 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments/Header_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(AppTitleAndVersion()));
+            
+            #line default
+            #line hidden
+            this.Write("</td>\r\n    </div>\r\n");
             this.Write("\r\n");
             this.Write("\r\n<div class=\"dashboard-box\">\r\n    <div class=\"dashboard-box-content\">\r\n        <" +
                     "div class=\"title-partition\">\r\n            <div class=\"dashboard-box-title\">\r\n   " +
@@ -90,8 +102,15 @@ namespace LottoDataManager.Includes.Classes.Reports.Templates
             #line default
             #line hidden
             this.Write("\r\n            </div>\r\n            <div class=\"dashboard-box-sub-title\">\r\n        " +
-                    "        Profit and Loss Report\r\n            </div>\r\n            <div class=\"dash" +
-                    "board-box-sub-title-combine\">\r\n                ");
+                    "        ");
+            
+            #line 10 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments/DashboardBox_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_00001")));
+            
+            #line default
+            #line hidden
+            this.Write("\r\n            </div>\r\n            <div class=\"dashboard-box-sub-title-combine\">\r\n" +
+                    "                ");
             
             #line 13 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments/DashboardBox_Fragment.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ProfitAndLossReport.ReportTitleGameList));
@@ -107,10 +126,16 @@ namespace LottoDataManager.Includes.Classes.Reports.Templates
             #line default
             #line hidden
             this.Write("\r\n            </div>\r\n            <div class=\"dashboard-box-sub-winnings\">\r\n     " +
-                    "           Lifetime Winnings\r\n            </div>\r\n        </div>\r\n    </div>\r\n</" +
-                    "div>\r\n");
+                    "           ");
+            
+            #line 21 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments/DashboardBox_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_00002")));
+            
+            #line default
+            #line hidden
+            this.Write("\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n");
             this.Write("\r\n");
-            this.Write("<div class=\"report-box\">\r\n    ");
+            this.Write("\r\n<div class=\"report-box\">\r\n    ");
             this.Write(@"
 <div class=""outline-container"">
     <div class=""outline-title"">
@@ -445,7 +470,7 @@ namespace LottoDataManager.Includes.Classes.Reports.Templates
             this.Write("\r\n                        ");
             
             #line 34 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/YearlyBets_Fragment.tt"
- for (int x=1; x<=13; x++) { 
+ for (int x=1; x<=(item.Length-1); x++) { 
             
             #line default
             #line hidden
@@ -496,7 +521,7 @@ namespace LottoDataManager.Includes.Classes.Reports.Templates
             this.Write("\r\n    ");
             this.Write(@"<div class=""outline-container"">
     <div class=""outline-title"">
-        <span class=""title-keyword"">Day of Week Tally</span>
+        <span class=""title-keyword"">Days of Week Tally</span>
         <span class=""title-description"">- Tallying weekdays behavior in betting</span>
     </div>
     <div class=""outline-content"">
@@ -536,7 +561,7 @@ namespace LottoDataManager.Includes.Classes.Reports.Templates
             this.Write("</td>\r\n\r\n                        ");
             
             #line 25 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/DaysOfWeekTally_Fragment.tt"
- for (int x=2; x<=7; x++) { 
+ for (int x=2; x<=(item.Length-1); x++) { 
             
             #line default
             #line hidden
@@ -579,6 +604,230 @@ namespace LottoDataManager.Includes.Classes.Reports.Templates
             this.Write("                    </tr>\r\n                ");
             
             #line 34 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/DaysOfWeekTally_Fragment.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("            </tbody>\r\n        </table>\r\n    </div>\r\n</div>\r\n\r\n");
+            this.Write("\r\n    ");
+            this.Write(@"<div class=""outline-container"">
+    <div class=""outline-title"">
+        <span class=""title-keyword"">Pick Generators Tally</span>
+        <span class=""title-description"">- Tallying pick generators, spending and winning digits</span>
+    </div>
+    <div class=""outline-content"">
+        <table class=""table-stats-style"" cellspacing=""0"">
+            <thead>
+                <th>Chosen Pick Generator</th>
+                <th>Total Spending</th>
+                <th>1 Digit Win</th>
+                <th>2 Digit Win</th>
+                <th>3 Digit Win</th>
+                <th>4 Digit Win</th>
+                <th>5 Digit Win</th>
+                <th>6 Digit Win</th>
+            </thead>
+            <tbody>
+                ");
+            
+            #line 20 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/PickGeneratorsTally_Fragment.tt"
+ foreach (var item in ProfitAndLossReport.AllBetsInTabularModePickGen) { 
+            
+            #line default
+            #line hidden
+            this.Write("                     <tr>\r\n                        <td>");
+            
+            #line 22 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/PickGeneratorsTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item[0]));
+            
+            #line default
+            #line hidden
+            this.Write("</td>\r\n                        <td>");
+            
+            #line 23 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/PickGeneratorsTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(double.Parse(item[1]).ToString("C")));
+            
+            #line default
+            #line hidden
+            this.Write("</td>\r\n\r\n                        ");
+            
+            #line 25 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/PickGeneratorsTally_Fragment.tt"
+ for (int x=2; x<=(item.Length-1); x++) { 
+            
+            #line default
+            #line hidden
+            this.Write("                            ");
+            
+            #line 26 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/PickGeneratorsTally_Fragment.tt"
+ if(double.Parse(item[x])==0) { 
+            
+            #line default
+            #line hidden
+            this.Write("                                <td class=\"zero-sum-color\">\r\n                    " +
+                    "        ");
+            
+            #line 28 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/PickGeneratorsTally_Fragment.tt"
+ }else{ 
+            
+            #line default
+            #line hidden
+            this.Write("                                <td>\r\n                            ");
+            
+            #line 30 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/PickGeneratorsTally_Fragment.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("                            ");
+            
+            #line 31 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/PickGeneratorsTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item[x]));
+            
+            #line default
+            #line hidden
+            this.Write("</td>\r\n                        ");
+            
+            #line 32 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/PickGeneratorsTally_Fragment.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("                    </tr>\r\n                ");
+            
+            #line 34 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/PickGeneratorsTally_Fragment.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("            </tbody>\r\n        </table>\r\n    </div>\r\n</div>\r\n\r\n");
+            this.Write("\r\n    ");
+            this.Write(@"<div class=""outline-container"">
+    <div class=""outline-title"">
+        <span class=""title-keyword"">Outlet Tally</span>
+        <span class=""title-description"">- Your favorite outlet and your winning counts</span>
+    </div>
+    <div class=""outline-content"">
+        <table class=""table-stats-style"" cellspacing=""0"">
+            <thead>
+                <th>Outlet where you bet</th>
+                <th>Total Spending</th>
+                <th>1 Digit Win</th>
+                <th>2 Digit Win</th>
+                <th>3 Digit Win</th>
+                <th>4 Digit Win</th>
+                <th>5 Digit Win</th>
+                <th>6 Digit Win</th>
+            </thead>
+            <tbody>
+                ");
+            
+            #line 20 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/OutletTally_Fragment.tt"
+ foreach (var item in ProfitAndLossReport.AllBetsInTabularModeOutlet) { 
+            
+            #line default
+            #line hidden
+            this.Write("                     <tr>\r\n                        <td>");
+            
+            #line 22 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/OutletTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item[0]));
+            
+            #line default
+            #line hidden
+            this.Write("</td>\r\n                        <td>");
+            
+            #line 23 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/OutletTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(double.Parse(item[1]).ToString("C")));
+            
+            #line default
+            #line hidden
+            this.Write("</td>\r\n\r\n                        ");
+            
+            #line 25 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/OutletTally_Fragment.tt"
+ for (int x=2; x<=(item.Length-1); x++) { 
+            
+            #line default
+            #line hidden
+            this.Write("                            ");
+            
+            #line 26 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/OutletTally_Fragment.tt"
+ if(double.Parse(item[x])==0) { 
+            
+            #line default
+            #line hidden
+            this.Write("                                <td class=\"zero-sum-color\">\r\n                    " +
+                    "        ");
+            
+            #line 28 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/OutletTally_Fragment.tt"
+ }else{ 
+            
+            #line default
+            #line hidden
+            this.Write("                                <td>\r\n                            ");
+            
+            #line 30 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/OutletTally_Fragment.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("                            ");
+            
+            #line 31 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/OutletTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item[x]));
+            
+            #line default
+            #line hidden
+            this.Write("</td>\r\n                        ");
+            
+            #line 32 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/OutletTally_Fragment.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("                    </tr>\r\n                ");
+            
+            #line 34 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/OutletTally_Fragment.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("            </tbody>\r\n        </table>\r\n    </div>\r\n</div>\r\n\r\n");
+            this.Write("\r\n    ");
+            this.Write(@"<div class=""outline-container"">
+    <div class=""outline-title"">
+        <span class=""title-keyword"">Winning Bet Tally</span>
+        <span class=""title-description"">- Counting which digits are the most lucky numbers on your bets</span>
+    </div>
+    <div class=""outline-content"">
+        <table class=""table-stats-style"" cellspacing=""0"">
+            <thead>
+                <th>Lotto Number</th>
+                <th>Your total hits</th>
+            </thead>
+            <tbody>
+                ");
+            
+            #line 14 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/WinningBetTally_Fragment.tt"
+ foreach (var item in ProfitAndLossReport.AllBetsInTabularModeWinningBet) { 
+            
+            #line default
+            #line hidden
+            this.Write("                     <tr>\r\n                        <td>");
+            
+            #line 16 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/WinningBetTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item[0]));
+            
+            #line default
+            #line hidden
+            this.Write("</td>\r\n                        <td>");
+            
+            #line 17 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/WinningBetTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item[1]));
+            
+            #line default
+            #line hidden
+            this.Write("</td>\r\n                    </tr>\r\n                ");
+            
+            #line 19 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/WinningBetTally_Fragment.tt"
  } 
             
             #line default

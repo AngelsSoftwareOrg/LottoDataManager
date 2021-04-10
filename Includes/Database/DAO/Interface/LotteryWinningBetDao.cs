@@ -21,5 +21,7 @@ namespace LottoDataManager.Includes.Database.DAO.Interface
         int[] GetMinMaxWinningBetAmount(GameMode gameMode);
         List<String[]> GetDaysOfWeekTally(List<int> gameCodes);
         List<String[]> GetPickGeneratorsTally(List<int> gameCodes);
+        List<String[]> GetOutletTally(List<int> gameCodes);
+        List<String[]> GetWinningBetDigitTally(List<int> gameCodes);
     }
 }

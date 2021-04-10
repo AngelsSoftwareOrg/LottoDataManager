@@ -31,7 +31,7 @@
                             <td><#=item[0] #></td>
                         <# } #>
 
-                        <# for (int x=1; x<=13; x++) { #>
+                        <# for (int x=1; x<=(item.Length-1); x++) { #>
                             <# if(item[x]==0) { #>
                                 <td class="zero-sum-color">
                             <# }else{ #>

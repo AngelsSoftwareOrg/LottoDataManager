@@ -220,6 +220,21 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DaysOfWeekTally_Fragment.tt</DependentUpon>
     </Compile>
+    <Compile Include="Includes\Classes\Reports\Templates\Fragments\ReportBox\WinningBetTally_Fragment.cs">
+      <DependentUpon>WinningBetTally_Fragment.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Includes\Classes\Reports\Templates\Fragments\ReportBox\OutletTally_Fragment.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OutletTally_Fragment.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Includes\Classes\Reports\Templates\Fragments\ReportBox\PickGeneratorsTally_Fragment.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PickGeneratorsTally_Fragment.tt</DependentUpon>
+    </Compile>
     <Compile Include="Includes\Classes\Reports\Templates\Fragments\ReportBox\Spending_Fragment.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -433,6 +448,18 @@
     <Content Include="Includes\Classes\Reports\Templates\Fragments\ReportBox\DaysOfWeekTally_Fragment.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>DaysOfWeekTally_Fragment.cs</LastGenOutput>
+    </Content>
+    <Content Include="Includes\Classes\Reports\Templates\Fragments\ReportBox\WinningBetTally_Fragment.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>WinningBetTally_Fragment.cs</LastGenOutput>
+    </Content>
+    <Content Include="Includes\Classes\Reports\Templates\Fragments\ReportBox\OutletTally_Fragment.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>OutletTally_Fragment.cs</LastGenOutput>
+    </Content>
+    <Content Include="Includes\Classes\Reports\Templates\Fragments\ReportBox\PickGeneratorsTally_Fragment.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>PickGeneratorsTally_Fragment.cs</LastGenOutput>
     </Content>
     <Content Include="Includes\Classes\Reports\Templates\Fragments\ReportBox\Spending_Fragment.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>

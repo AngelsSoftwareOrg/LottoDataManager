@@ -7,7 +7,7 @@
                 <#=ProfitAndLossReport.ReportTitle #>
             </div>
             <div class="dashboard-box-sub-title">
-                Profit and Loss Report
+                <#=LBL("pal_form_labels_00001") #>
             </div>
             <div class="dashboard-box-sub-title-combine">
                 <#=ProfitAndLossReport.ReportTitleGameList #>
@@ -18,7 +18,7 @@
                 <#=ProfitAndLossReport.LifeTimeWinnings #>
             </div>
             <div class="dashboard-box-sub-winnings">
-                Lifetime Winnings
+                <#=LBL("pal_form_labels_00002") #>
             </div>
         </div>
     </div>
