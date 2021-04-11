@@ -35,7 +35,7 @@ namespace LottoDataManager.Includes.Utilities
         {
             String value;
             MESSAGES_DICTIONARY.TryGetValue(messageName, out value);
-            return value;
+            return value.TrimEnd('\r', '\n');
         }
         public static String ApplicationID { get { return GetSetting(RESOURCE_ID_APPLICATION_ID); } }
         public static String SourceDBFileExtension { get { return GetSetting(RESOURCE_ID_DB_SOURCE_FILE_TYPE_EXTENSION); } }

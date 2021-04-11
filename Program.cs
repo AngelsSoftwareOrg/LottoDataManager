@@ -19,6 +19,15 @@ namespace LottoDataManager
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
+
+            //DEBUGGING
+            for(int x=3;x<=60; x++)
+            {
+                Console.WriteLine(String.Format("lott_app_config_msg{0}=", x));
+            }
+            //DEBUGGING END
+
+
             SplashScreenFrm splash = SplashScreenFrm.GetIntance();
             splash.Show();
             if(splash.DialogResult == DialogResult.Abort)

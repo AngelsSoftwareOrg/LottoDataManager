@@ -40,10 +40,74 @@ namespace LottoDataManager.Forms
             this.lotteryAppConfiguration = LotteryAppConfiguration.GetInstance();
             txtConfigDBSource.Text = this.lotteryAppConfiguration.DBSourcePath;
             txtConfigFolderML.Text = this.lotteryAppConfiguration.MLModelPath;
-            txtConfigNotes.Text = ResourcesUtils.GetMessage("lott_app_config_notes");
+            txtConfigNotes.Text = String.Format(ResourcesUtils.GetMessage("lott_app_config_notes"),
+                Environment.NewLine + Environment.NewLine, Environment.NewLine + Environment.NewLine,
+                Environment.NewLine + Environment.NewLine, Environment.NewLine + Environment.NewLine);
         }
 
         #region MAIN FORM
+        private void SetupForms()
+        {
+            this.Text = ResourcesUtils.GetMessage("lott_app_config_msg3");
+            this.btnExit.Text = ResourcesUtils.GetMessage("common_btn_exit");
+            this.btnConfigSave.Text = ResourcesUtils.GetMessage("common_btn_save_changes");
+            this.btnLAWPASaveChanges.Text = ResourcesUtils.GetMessage("common_btn_save_changes");
+            this.btnLotSchedSave.Text = ResourcesUtils.GetMessage("common_btn_save_changes");
+            this.btnSaveModDesc.Text = ResourcesUtils.GetMessage("lott_app_config_msg4");
+            this.btnSaveLotteryOutlet.Text = ResourcesUtils.GetMessage("lott_app_config_msg5");
+            this.btnSeqGenSaveChanges.Text = ResourcesUtils.GetMessage("lott_app_config_msg6");
+
+            foreach (TreeNode node in this.mainMenuTreeView.Nodes)
+            {
+                if(node.Name.Equals("nodeConfig", StringComparison.OrdinalIgnoreCase)){
+                    node.Text = ResourcesUtils.GetMessage("lott_app_config_msg7");
+                }
+                else if (node.Name.Equals("nodeLottoOutlet", StringComparison.OrdinalIgnoreCase))
+                {
+                    node.Text = ResourcesUtils.GetMessage("lott_app_config_msg8");
+                }
+                else if (node.Name.Equals("nodeLotteryWinComb", StringComparison.OrdinalIgnoreCase))
+                {
+                    node.Text = ResourcesUtils.GetMessage("lott_app_config_msg9");
+                }
+                else if (node.Name.Equals("nodeLottoSeqGen", StringComparison.OrdinalIgnoreCase))
+                {
+                    node.Text = ResourcesUtils.GetMessage("lott_app_config_msg10");
+                }
+                else if (node.Name.Equals("nodeLottoSched", StringComparison.OrdinalIgnoreCase))
+                {
+                    node.Text = ResourcesUtils.GetMessage("lott_app_config_msg11");
+                }
+            }
+
+            //Configurations
+            this.groupBox4.Text = ResourcesUtils.GetMessage("lott_app_config_msg12");
+            this.label2.Text = ResourcesUtils.GetMessage("lott_app_config_msg13");
+            this.label4.Text = ResourcesUtils.GetMessage("lott_app_config_msg14");
+            this.lnkLblConfigDB.Text = ResourcesUtils.GetMessage("lott_app_config_msg15");
+
+            //Lotto Winning Prize Amount
+            this.lnkLblConfigML.Text = ResourcesUtils.GetMessage("lott_app_config_msg16");
+            this.gpbLWPA1.Text = ResourcesUtils.GetMessage("lott_app_config_msg17");
+            this.groupBox1.Text = ResourcesUtils.GetMessage("lott_app_config_msg18");
+            this.label1.Text = ResourcesUtils.GetMessage("lott_app_config_msg19");
+            this.label11.Text = ResourcesUtils.GetMessage("lott_app_config_msg20");
+            this.label10.Text = ResourcesUtils.GetMessage("lott_app_config_msg21");
+            this.label12.Text = ResourcesUtils.GetMessage("lott_app_config_msg22");
+
+            //Lottery Schedule
+            this.groupBox2.Text = ResourcesUtils.GetMessage("lott_app_config_msg23");
+            this.groupBox3.Text = ResourcesUtils.GetMessage("lott_app_config_msg24");
+            this.label3.Text = ResourcesUtils.GetMessage("lott_app_config_msg25");
+            this.chkbLotSchedMon.Text = ResourcesUtils.GetMessage("lott_app_config_msg26");
+            this.chkbLotSchedTue.Text = ResourcesUtils.GetMessage("lott_app_config_msg27");
+            this.chkbLotSchedWed.Text = ResourcesUtils.GetMessage("lott_app_config_msg28");
+            this.chkbLotSchedThurs.Text = ResourcesUtils.GetMessage("lott_app_config_msg29");
+            this.chkbLotSchedFri.Text = ResourcesUtils.GetMessage("lott_app_config_msg30");
+            this.chkbLotSchedSat.Text = ResourcesUtils.GetMessage("lott_app_config_msg31");
+            this.chkbLotSchedSun.Text = ResourcesUtils.GetMessage("lott_app_config_msg32");
+
+        }
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();

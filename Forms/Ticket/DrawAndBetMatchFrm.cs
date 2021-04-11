@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using LottoDataManager.Includes.Classes;
 using LottoDataManager.Includes.Model;
 using LottoDataManager.Includes.Model.Details;
+using LottoDataManager.Includes.Utilities;
 using LottoDataManager.Properties;
 
 namespace LottoDataManager.Forms
@@ -30,7 +31,16 @@ namespace LottoDataManager.Forms
             this.lotteryDataServices = lotteryDataServices;
             this.betIdDefault = betIdDefault;
             this.lotteryTicketPanel = this.lotteryDataServices.GetLotteryTicketPanel();
+            SetupForms();
             InitialzesContents();
+        }
+        private void SetupForms()
+        {
+            this.Text = ResourcesUtils.GetMessage("dabm_form_msg_1");
+            this.groupBoxDrawResult.Text = ResourcesUtils.GetMessage("dabm_form_msg_2");
+            this.groupBoxYourBet.Text = ResourcesUtils.GetMessage("dabm_form_msg_3");
+            this.label1.Text = ResourcesUtils.GetMessage("dabm_form_msg_4");
+            this.btnExit.Text = ResourcesUtils.GetMessage("common_btn_exit");
         }
         private void InitialzesContents()
         {

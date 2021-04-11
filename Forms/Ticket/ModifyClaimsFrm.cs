@@ -39,6 +39,7 @@ namespace LottoDataManager.Forms
 
         private void InitializesForms()
         {
+            SetupForms();
             dateTimePickerBets.Value = DateTime.Now.AddYears(-1);
             FillUpBetList();
             ResizeColumnsBetList();
@@ -46,6 +47,18 @@ namespace LottoDataManager.Forms
             objectListViewWinningBets.UseCellFormatEvents = false;
             toolStripProgBar.Visible = false;
             toolStripStatusLbl.Text = "";
+        }
+        private void SetupForms()
+        {
+            this.Text = ResourcesUtils.GetMessage("mod_clm_stat_msg_1");
+            this.label1.Text = ResourcesUtils.GetMessage("mod_clm_stat_msg_2");
+            this.linkLabelFilterNow.Text = ResourcesUtils.GetMessage("mod_clm_stat_msg_3");
+            this.label2.Text = ResourcesUtils.GetMessage("mod_clm_stat_msg_4");
+            this.linkCheckAll.Text = ResourcesUtils.GetMessage("common_link_check_all");
+            this.linkUnCheckAll.Text = ResourcesUtils.GetMessage("common_link_uncheck_all");
+            this.btnRestoreBack.Text = ResourcesUtils.GetMessage("common_btn_restore_back");
+            this.btnSaveChanges.Text = ResourcesUtils.GetMessage("common_btn_save_changes");
+            this.btnExit.Text = ResourcesUtils.GetMessage("common_btn_exit");
         }
 
         #region "Forms functions"
@@ -58,7 +71,7 @@ namespace LottoDataManager.Forms
                 {
                     int newValue = int.Parse(e.NewValue.ToString());
                     if (!lotteryTicketPanel.IsWithinMinMax(newValue)) 
-                        throw new Exception(String.Format("Input should be in between {0} and {1}", 
+                        throw new Exception(String.Format(ResourcesUtils.GetMessage("mod_clm_stat_msg_6"), 
                             lotteryTicketPanel.GetMin(), lotteryTicketPanel.GetMax()));
 
                     ObjectListView lv = (ObjectListView)sender;
@@ -71,7 +84,7 @@ namespace LottoDataManager.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Validation Message");
+                MessageBox.Show(ex.Message, ResourcesUtils.GetMessage("mod_clm_stat_msg_7"));
                 e.Cancel = true;
             }
             finally
@@ -123,8 +136,8 @@ namespace LottoDataManager.Forms
 
             try
             {
-                DialogResult dr = MessageBox.Show("Double check the changes and confirm if all is ok!",
-                         "Confirm Save Changes?", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                DialogResult dr = MessageBox.Show(ResourcesUtils.GetMessage("mod_clm_stat_msg_8"),
+                         ResourcesUtils.GetMessage("mod_clm_stat_msg_9"), MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
                 if (dr == DialogResult.OK)
                 {
                     toolStripProgBar.Value = 0;
@@ -134,7 +147,7 @@ namespace LottoDataManager.Forms
                     int totalCheckedObjects = modifiedWinBetsArr.Count;
                     foreach (LotteryWinningBet lotWinBet in modifiedWinBetsArr)
                     {
-                        toolStripStatusLbl.Text = String.Format("Saving winning bets with these details -> {0}", String.Join("-",lotWinBet.GetAllNumberSequence()));
+                        toolStripStatusLbl.Text = String.Format(ResourcesUtils.GetMessage("mod_clm_stat_msg_10"), String.Join("-",lotWinBet.GetAllNumberSequence()));
                         toolStripProgBar.Value = ConverterUtils.GetPercentageFloored(++ctr, totalCheckedObjects);
                         this.lotteryDataServices.UpdateClaimStatus(lotWinBet);
                         Application.DoEvents();
@@ -144,7 +157,7 @@ namespace LottoDataManager.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Save Change Error!");
+                MessageBox.Show(ex.Message, ResourcesUtils.GetMessage("mod_clm_stat_msg_11"));
                 FillUpBetList();
             }
             finally
@@ -235,8 +248,6 @@ namespace LottoDataManager.Forms
         {
             SaveLotteryBetsChanges();
         }
-
-
         #endregion
 
     }

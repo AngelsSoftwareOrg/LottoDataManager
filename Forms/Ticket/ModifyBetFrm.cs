@@ -35,6 +35,7 @@ namespace LottoDataManager.Forms
         }
         private void InitializesForms()
         {
+            SetupForms();
             dateTimePickerBets.Value = DateTime.Now.AddYears(-1);
             InitializesListViewColumns();
             FillUpBetList();
@@ -47,6 +48,16 @@ namespace LottoDataManager.Forms
             objectListViewBets.UseCellFormatEvents = false;
             toolStripProgBar.Visible = false;
             toolStripStatusLbl.Text = "";
+        }
+        private void SetupForms()
+        {
+            this.Text = ResourcesUtils.GetMessage("modfy_bets_msg_1");
+            this.label1.Text = ResourcesUtils.GetMessage("modfy_bets_msg_2");
+            this.linkLabelFilterNow.Text = ResourcesUtils.GetMessage("modfy_bets_msg_3");
+            this.label2.Text = ResourcesUtils.GetMessage("modfy_bets_msg_4");
+            this.btnRestoreBack.Text = ResourcesUtils.GetMessage("common_btn_restore_back");
+            this.btnSaveChanges.Text = ResourcesUtils.GetMessage("common_btn_save_changes");
+            this.btnExit.Text = ResourcesUtils.GetMessage("common_btn_exit");
         }
         private void InitializesListViewColumns()
         {
@@ -137,7 +148,7 @@ namespace LottoDataManager.Forms
                     {
                         int newValue = int.Parse(e.NewValue.ToString());
                         if (!lotteryTicketPanel.IsWithinMinMax(newValue))
-                            throw new Exception(String.Format("Input should be in between {0} and {1}",
+                            throw new Exception(String.Format(ResourcesUtils.GetMessage("modfy_bets_msg_5"),
                                 lotteryTicketPanel.GetMin(), lotteryTicketPanel.GetMax()));
 
                         ObjectListView lv = (ObjectListView)sender;
@@ -151,7 +162,7 @@ namespace LottoDataManager.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Validation Message");
+                MessageBox.Show(ex.Message, ResourcesUtils.GetMessage("modfy_bets_msg_6"));
                 e.Cancel = true;
             }
             finally
@@ -242,8 +253,8 @@ namespace LottoDataManager.Forms
             if (objectListViewBets.CheckedObjects.Count <= 0) return;
             try
             {
-                DialogResult dr = MessageBox.Show("Are you sure you want to delete the selected bets?",
-                         "Confirm Delete", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                DialogResult dr = MessageBox.Show(ResourcesUtils.GetMessage("modfy_bets_msg_7"),
+                         ResourcesUtils.GetMessage("modfy_bets_msg_8"), MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
                 if (dr == DialogResult.OK)
                 {
                     toolStripProgBar.Value = 0;
@@ -253,7 +264,7 @@ namespace LottoDataManager.Forms
                     int totalCheckedObjects = objectListViewBets.CheckedObjects.Count;
                     foreach (LotteryBet lotBet in objectListViewBets.CheckedObjects)
                     {
-                        toolStripStatusLbl.Text = String.Format("Removing bet with these details -> {0}", lotBet.GetSimpleContentDetails());
+                        toolStripStatusLbl.Text = String.Format(ResourcesUtils.GetMessage("modfy_bets_msg_9"), lotBet.GetSimpleContentDetails());
                         toolStripProgBar.Value = ConverterUtils.GetPercentageFloored(++ctr, totalCheckedObjects);
                         this.lotteryDataServices.DeleteLotteryBet(lotBet);
                         Application.DoEvents();
@@ -262,7 +273,7 @@ namespace LottoDataManager.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Deletion Error!");
+                MessageBox.Show(ex.Message, ResourcesUtils.GetMessage("modfy_bets_msg_10"));
             }
             finally
             {
@@ -287,8 +298,8 @@ namespace LottoDataManager.Forms
 
             try
             {
-                DialogResult dr = MessageBox.Show("Double check the changes and confirm if all is ok!",
-                         "Confirm Save Changes?", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                DialogResult dr = MessageBox.Show(ResourcesUtils.GetMessage("modfy_bets_msg_11"),
+                         ResourcesUtils.GetMessage("modfy_bets_msg_12"), MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
                 if (dr == DialogResult.OK)
                 {
 
@@ -299,7 +310,7 @@ namespace LottoDataManager.Forms
                     int totalCheckedObjects = modifiedBetsArr.Count;
                     foreach (LotteryBet lotBet in modifiedBetsArr)
                     {
-                        toolStripStatusLbl.Text = String.Format("Saving bets with these details -> {0}", lotBet.GetSimpleContentDetails());
+                        toolStripStatusLbl.Text = String.Format(ResourcesUtils.GetMessage("modfy_bets_msg_13"), lotBet.GetSimpleContentDetails());
                         toolStripProgBar.Value = ConverterUtils.GetPercentageFloored(++ctr, totalCheckedObjects);
                         this.lotteryDataServices.SaveLotteryBetChange(lotBet);
                         Application.DoEvents();
@@ -309,7 +320,7 @@ namespace LottoDataManager.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Save Change Error!");
+                MessageBox.Show(ex.Message, ResourcesUtils.GetMessage("modfy_bets_msg_14"));
                 FillUpBetList();
             }
             finally

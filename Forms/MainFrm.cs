@@ -38,6 +38,48 @@ namespace LottoDataManager
             InitializeComponent();
             this.lotteryDetails = GameFactory.GetPreviousOpenGameInstance();
             this.Text = String.Format("{0} - {1}",ResourcesUtils.GetMessage("mainf_title"), AppSettings.GetAppVersionWithPrefix());
+            this.label1.Text = ResourcesUtils.GetMessage("mainf_labels_1");
+            this.label3.Text = ResourcesUtils.GetMessage("mainf_labels_2");
+            this.label4.Text = ResourcesUtils.GetMessage("mainf_labels_3");
+            this.label5.Text = ResourcesUtils.GetMessage("mainf_labels_4");
+            this.toolStripStatusLblUpdater.Text = ResourcesUtils.GetMessage("mainf_labels_5");
+            this.tabPage1.Text = ResourcesUtils.GetMessage("mainf_labels_6");
+            this.groupBox1.Text = ResourcesUtils.GetMessage("mainf_labels_7");
+            this.groupBox2.Text = ResourcesUtils.GetMessage("mainf_labels_8");
+            this.label2.Text = ResourcesUtils.GetMessage("mainf_labels_9");
+            this.label6.Text = ResourcesUtils.GetMessage("mainf_labels_10");
+            this.linkFilterGoBet.Text = ResourcesUtils.GetMessage("mainf_labels_11");
+            this.linkLabelFilterDraw.Text = ResourcesUtils.GetMessage("mainf_labels_12");
+
+            this.fileToolStripMenuItem.Text = ResourcesUtils.GetMessage("mainf_labels_13");
+            this.ticketToolStripMenuItem.Text = ResourcesUtils.GetMessage("mainf_labels_14");
+            this.reportsToolStripMenuItem.Text = ResourcesUtils.GetMessage("mainf_labels_15");
+            this.settingsToolStripMenuItem.Text = ResourcesUtils.GetMessage("mainf_labels_16");
+            this.othersToolStripMenuItem.Text = ResourcesUtils.GetMessage("mainf_labels_17");
+
+            this.openLotteryToolStripMenuItem.Text = ResourcesUtils.GetMessage("mainf_labels_18");
+            this.exitToolStripMenuItem.Text = ResourcesUtils.GetMessage("mainf_labels_19");
+            this.seqGenToolStripMenuItem.Text = ResourcesUtils.GetMessage("mainf_labels_20");
+            this.addBetToolStripMenuItem.Text = ResourcesUtils.GetMessage("mainf_labels_21");
+            this.modifyBetToolStripMenuItem.Text = ResourcesUtils.GetMessage("mainf_labels_22");
+            this.modifyClaimStatusToolStripMenuItem.Text = ResourcesUtils.GetMessage("mainf_labels_23");
+            this.moveDrawDateToolStripMenuItem1.Text = ResourcesUtils.GetMessage("mainf_labels_24");
+            this.lossProfitToolStripMenuItem.Text = ResourcesUtils.GetMessage("mainf_labels_25");
+            this.lotterySettingToolStripMenuItem.Text = ResourcesUtils.GetMessage("mainf_labels_26");
+            this.checkWinningBetsToolStripMenuItem.Text = ResourcesUtils.GetMessage("mainf_labels_27");
+            this.checkLotteryUpdatesToolStripMenuItem.Text = ResourcesUtils.GetMessage("mainf_labels_28");
+            this.machineLearningToolStripMenuItem.Text = ResourcesUtils.GetMessage("mainf_labels_29");
+            this.aboutToolStripMenuItem1.Text = ResourcesUtils.GetMessage("mainf_labels_30");
+            this.toolStripBtnNewBet.ToolTipText = ResourcesUtils.GetMessage("mainf_labels_31");
+            this.toolStripBtnDefaultViewListing.ToolTipText = ResourcesUtils.GetMessage("mainf_labels_32");
+            this.toolStripBtnModifyBet.ToolTipText = ResourcesUtils.GetMessage("mainf_labels_33");
+            this.toolStripModifyClaimStatus.ToolTipText = ResourcesUtils.GetMessage("mainf_labels_34");
+            this.toolStripBtnMoveDrawDate.ToolTipText = ResourcesUtils.GetMessage("mainf_labels_35");
+            this.machineLearningToolStripButton2.ToolTipText = ResourcesUtils.GetMessage("mainf_labels_36");
+            this.pickGeneratorToolStripButton2.ToolTipText = ResourcesUtils.GetMessage("mainf_labels_37");
+            this.toolStripBtnWinBets.ToolTipText = ResourcesUtils.GetMessage("mainf_labels_38");
+            this.toolStripBtnDownloadResults.ToolTipText = ResourcesUtils.GetMessage("mainf_labels_39");
+
             ReinitateLotteryServices();
             GenerateLotteriesGameMenu();
             InitializesFormContent();
@@ -164,7 +206,7 @@ namespace LottoDataManager
         {
             try
             {
-                DisplayStatusLabel("Getting the listing of your bets");
+                DisplayStatusLabel(ResourcesUtils.GetMessage("mainf_labels_40"));
                 objectLstVwLatestBet.SetObjects(lotteryDataServices.GetLottoBets(dateTimePickerBets.Value));
                 this.olvColBetDrawDate.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
                 this.olvColBetNum1.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
@@ -201,15 +243,15 @@ namespace LottoDataManager
             lblGameMode.Text = this.lotteryDetails.Description;
 
             //Schedule Date
-            DisplayStatusLabel("Getting the next draw date");
+            DisplayStatusLabel(ResourcesUtils.GetMessage("mainf_labels_41"));
             lblNextDrawDate.Text = this.lotteryDataServices.GetNextDrawDateFormatted();
 
             //Total Winnings amount
-            DisplayStatusLabel("Getting your lifetime winnings for this game...");
+            DisplayStatusLabel(ResourcesUtils.GetMessage("mainf_labels_42"));
             lblLifetimeWinnins.Text = this.lotteryDataServices.GetTotalWinningsAmount().ToString("C");
 
             //Total Winnings amount this month
-            DisplayStatusLabel("Getting your winnings so far this month...");
+            DisplayStatusLabel(ResourcesUtils.GetMessage("mainf_labels_43"));
             lblWinningsThisMonth.Text = this.lotteryDataServices.GetTotalWinningsAmountThisMonth().ToString("C");
         }
         private OLVColumn[] GenerateOLVColumnForHighlighting()
@@ -456,7 +498,7 @@ namespace LottoDataManager
             try
             {
                 toolStripBtnDownloadResults.Enabled = false;
-                toolStripStatusLblUpdater.Text = "Lotto Draw Result Updater...";
+                toolStripStatusLblUpdater.Text = ResourcesUtils.GetMessage("mainf_labels_44");
                 toolStripStatusLblUpdater.Visible = true;
                 toolStripProgressBarUpdater.Value = 0;
                 Application.DoEvents();
@@ -654,7 +696,7 @@ namespace LottoDataManager
             }
             catch (Exception)
             {
-                MessageBox.Show("Error on saving the current session...");
+                MessageBox.Show(ResourcesUtils.GetMessage("mainf_labels_45"));
             }
         }
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)

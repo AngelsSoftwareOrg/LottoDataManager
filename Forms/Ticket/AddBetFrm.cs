@@ -35,21 +35,37 @@ namespace LottoDataManager.Forms
             this.lotteryOutletArr = this.lotteryDataServices.GetLotteryOutlets();
             this.lotterySchedule = this.lotteryDataServices.GetLotterySchedule();
             this.lotterySeqGenArr = this.lotteryDataServices.GetAllSequenceGenerators();
-
+            SetupForm();
             //need to place it here so that other form calling this form may preset the combo box before showing the form
             cmbOutlet.Items.AddRange(lotteryOutletArr.ToArray());
             cmbSeqGenType.Items.AddRange(lotterySeqGenArr.ToArray());
             GenerateTicketPanelNumbers();
         }
+        private void SetupForm()
+        {
+            this.Text = ResourcesUtils.GetMessage("abtmlt_form_msg_1");
+            this.tabPageDelimiters.Text = ResourcesUtils.GetMessage("abtmlt_form_msg_2");
+            this.tabPageClick.Text = ResourcesUtils.GetMessage("abtmlt_form_msg_3");
+            this.textBoxInstruction.Text = String.Format(ResourcesUtils.GetMessage("abtmlt_form_msg_4"), 
+                    lotteryTicketPanel.GetGameDigitCount(),Environment.NewLine, Environment.NewLine, Environment.NewLine);
+            this.btnAdd.Text = ResourcesUtils.GetMessage("common_btn_save_sequences");
+            this.btnExit.Text = ResourcesUtils.GetMessage("common_btn_exit");
+            this.groupDetails.Text = ResourcesUtils.GetMessage("abtmlt_form_msg_5");
+            this.label3.Text = ResourcesUtils.GetMessage("abtmlt_form_msg_6");
+            this.label4.Text = ResourcesUtils.GetMessage("abtmlt_form_msg_7");
+            this.label5.Text = ResourcesUtils.GetMessage("abtmlt_form_msg_8");
+            this.groupBoxDateSelection.Text = ResourcesUtils.GetMessage("abtmlt_form_msg_9");
+            this.radioBtnNextDrawDate.Text = ResourcesUtils.GetMessage("abtmlt_form_msg_10");
+            this.radioBtnPreferredDate.Text = ResourcesUtils.GetMessage("abtmlt_form_msg_11");
+            this.groupBox1.Text = ResourcesUtils.GetMessage("abtmlt_form_msg_12");
+            this.label1.Text = ResourcesUtils.GetMessage("abtmlt_form_msg_13");
+            this.label6.Text = ResourcesUtils.GetMessage("abtmlt_form_msg_14");
+            this.label2.Text = ResourcesUtils.GetMessage("abtmlt_form_msg_15");
+            this.linkLblClrSelNum.Text = ResourcesUtils.GetMessage("abtmlt_form_msg_16");
+            this.groupBoxTicketPanel.Text = ResourcesUtils.GetMessage("abtmlt_form_msg_17");
+        }
         private void AddBetFrm_Load(object sender, EventArgs e)
         {
-            textBoxInstruction.Text = "Please input your " + lotteryTicketPanel.GetGameDigitCount() +
-                                      " digits number in the textbox below per line, " +
-                                      "separated each numbers either with space, hypen or a tab. e.g. \r\n" +
-                                      "21 34 57 45 28 44 (spaces) \r\n" +
-                                      "22-25-48-55-18-15 (hypen) \r\n " +
-                                      "etc...";
-
             lblGameDesc.Text = lotteryDataServices.LotteryDetails.Description;
             lblNextDrawDate.Text = lotteryDataServices.GetNextDrawDateFormatted();
             lblDrawDateEvery.Text = lotterySchedule.DrawDateEvery();
@@ -94,27 +110,28 @@ namespace LottoDataManager.Forms
             try
             {
                 txtStatus.Clear();
-                DisplayLog("Preparing to add your bet....");
+                DisplayLog(ResourcesUtils.GetMessage("abtmlt_form_msg_18"));
                 Application.DoEvents();
                 InputFormDataValidation();
 
-                DialogResult dr = MessageBox.Show("Check your inputs and hit ok to continue...", "Double check please!", MessageBoxButtons.OKCancel);
+                DialogResult dr = MessageBox.Show(ResourcesUtils.GetMessage("abtmlt_form_msg_19"),
+                        ResourcesUtils.GetMessage("abtmlt_form_msg_20"), MessageBoxButtons.OKCancel);
                 if (dr == DialogResult.OK)
                 {
-                    DisplayLog("Compiling delimiter input bets...");
+                    DisplayLog(ResourcesUtils.GetMessage("abtmlt_form_msg_21"));
                     List<LotteryBet> lotteryBetArr = ValidateAndCompileData();
-                    DisplayLog("Saving your bets ...");
+                    DisplayLog(ResourcesUtils.GetMessage("abtmlt_form_msg_22"));
                     this.Enabled = false;
                     Application.DoEvents();
                     this.lotteryDataServices.SaveLotteryBets(lotteryBetArr);
-                    DisplayLog("FINISH SAVING your bets!!!!");
+                    DisplayLog(ResourcesUtils.GetMessage("abtmlt_form_msg_23"));
                     this.Enabled = true;
                     this.hasDataBeenSave = true;
                     Application.DoEvents();
                 }
                 else
                 {
-                    DisplayLog("Saving cancelled...");
+                    DisplayLog(ResourcesUtils.GetMessage("abtmlt_form_msg_24"));
                 }
             }
             catch (Exception ex)
@@ -122,7 +139,7 @@ namespace LottoDataManager.Forms
                 this.Enabled = true;
                 DisplayLog(ex.Message);
                 Application.DoEvents();
-                MessageBox.Show(ex.Message, "Error!");
+                MessageBox.Show(ex.Message, ResourcesUtils.GetMessage("abtmlt_form_msg_25"));
             }
         }
         private List<LotteryBet> ValidateAndCompileData()
@@ -135,7 +152,7 @@ namespace LottoDataManager.Forms
                     foreach (string line in StringUtils.GetLines(textBoxDelimitersInput.Text))
                     {
                         if (String.IsNullOrWhiteSpace(line)) continue;
-                        DisplayLog("Validating -> " + line);
+                        DisplayLog(ResourcesUtils.GetMessage("abtmlt_form_msg_26") + line);
                         //validation
                         String[] splitted = null;
                         foreach (String delimiter in StringUtils.COMMON_DELIMITERS)
@@ -150,12 +167,12 @@ namespace LottoDataManager.Forms
                         CompleteLotteryBetDetails(lotteryBet);
                         lotteryBetArr.Add(lotteryBet);
                     }
-                    if (lotteryBetArr.Count <= 0) throw new Exception("Please put your bet in sequence");
+                    if (lotteryBetArr.Count <= 0) throw new Exception(ResourcesUtils.GetMessage("abtmlt_form_msg_27"));
 
                 }
                 else if (tabControlInputs.SelectedTab == tabPageClick)
                 {
-                    DisplayLog("Validating selected numbers... ");
+                    DisplayLog(ResourcesUtils.GetMessage("abtmlt_form_msg_28"));
                     LotteryBetSetup lotteryBet = new LotteryBetSetup();
                     lotteryBet.PutNumberSequence(lblSelectedNumber.Text.Replace(" ", ""));
                     CompleteLotteryBetDetails(lotteryBet);
@@ -181,10 +198,10 @@ namespace LottoDataManager.Forms
             int convertedNum = 0;
             foreach (String num in numberSequence)
             {
-                if (!int.TryParse(num, out convertedNum)) throw new Exception("Input number is not accepted or out of bounds for the game minimum and maximum number range");
+                if (!int.TryParse(num, out convertedNum)) throw new Exception(ResourcesUtils.GetMessage("abtmlt_form_msg_29"));
                 if (convertedNum < this.lotteryTicketPanel.GetMin() || convertedNum > this.lotteryTicketPanel.GetMax())
                 {
-                    throw new Exception(String.Format("Input number should be between {0} and {1}.", this.lotteryTicketPanel.GetMin(), this.lotteryTicketPanel.GetMax()));
+                    throw new Exception(String.Format(ResourcesUtils.GetMessage("abtmlt_form_msg_30"), this.lotteryTicketPanel.GetMin(), this.lotteryTicketPanel.GetMax()));
                 }
             }
             return true;
@@ -193,29 +210,29 @@ namespace LottoDataManager.Forms
         {
             DateTime nextDrawDate = (radioBtnPreferredDate.Checked) ? dtPickPreferredDate.Value :
                                 this.lotteryDataServices.GetNextDrawDate();
-            DisplayLog("Checking selected draw date...");
+            DisplayLog(ResourcesUtils.GetMessage("abtmlt_form_msg_31"));
             //RADIO BUTTON
             if (nextDrawDate.Date.CompareTo(DateTime.Now.Date) < 0)
             {
-                DisplayLog("Selected date is a backdated date. Please be careful when choosing the date");
+                DisplayLog(ResourcesUtils.GetMessage("abtmlt_form_msg_32"));
             }
-            DisplayLog("Checking lotto outlet.");
+            DisplayLog(ResourcesUtils.GetMessage("abtmlt_form_msg_33"));
             if (cmbOutlet.SelectedItem == null || String.IsNullOrWhiteSpace(cmbOutlet.SelectedItem.ToString()))
-                throw new Exception("Please select the Lotto Outlet where you purchase the ticket.");
+                throw new Exception(ResourcesUtils.GetMessage("abtmlt_form_msg_34"));
 
-            DisplayLog("Checking Lotto Draw Date selection...");
+            DisplayLog(ResourcesUtils.GetMessage("abtmlt_form_msg_35"));
             if (!radioBtnNextDrawDate.Checked && !radioBtnPreferredDate.Checked)
             {
-                throw new Exception("Please select when your purchased ticket(s) draw date...");
+                throw new Exception(ResourcesUtils.GetMessage("abtmlt_form_msg_36"));
             }
             if (radioBtnPreferredDate.Checked)
             {
                 if (!lotterySchedule.IsDrawDateMatchLotterySchedule(dtPickPreferredDate.Value))
                 {
-                    String msg = String.Format("Please select the date where it match its scheduled draw date. \n" +
-                        "You selected {0}, but the draw date is every {1}.",
-                        dtPickPreferredDate.Value.Date.ToString("MMMM d - dddd"),
-                        this.lotterySchedule.DrawDateEvery());
+                    String msg = String.Format(ResourcesUtils.GetMessage("abtmlt_form_msg_37"), Environment.NewLine) +
+                        String.Format(ResourcesUtils.GetMessage("abtmlt_form_msg_38"),
+                            dtPickPreferredDate.Value.Date.ToString("MMMM d - dddd"),
+                            this.lotterySchedule.DrawDateEvery());
                     throw new Exception(msg);
                 }
             }

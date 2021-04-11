@@ -48,6 +48,7 @@ namespace LottoDataManager.Forms
             btnSaveChanges.Text = ResourcesUtils.GetMessage("common_btn_save_changes");
             lblDateEvery.Text = String.Format(ResourcesUtils.GetMessage("mdd_form_every_draw_dates"),lotterySchedule.DrawDateEvery());
             txtStatus.Text = "";
+            linkLabelFilterNow.Text = ResourcesUtils.GetMessage("common_link_filter_now");
         }
 
         #region MAIN FORMS
@@ -236,8 +237,6 @@ namespace LottoDataManager.Forms
                 }
             }
         }
-
         #endregion
-
     }
 }
