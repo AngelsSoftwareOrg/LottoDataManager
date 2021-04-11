@@ -25,17 +25,31 @@ namespace LottoDataManager.Includes.Classes.Reports.Templates.Fragments.ReportBo
         /// </summary>
         public override string TransformText()
         {
-            this.Write(@"<div class=""outline-container"">
-    <div class=""outline-title"">
-        <span class=""title-keyword"">Tally Behavior</span>
-        <span class=""title-description"">- Counting your specific behavior on betting</span>
-    </div>
-    <div class=""outline-content"">
-        <table class=""default-table"" cellspacing=""5"">
-            <tbody>
-                <tr>
-                    <td>How many bets you made so far?</td>
-                    <td>");
+            this.Write("<div class=\"outline-container\">\r\n    <div class=\"outline-title\">\r\n        <span c" +
+                    "lass=\"title-keyword\">");
+            
+            #line 4 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\TallyBehavior_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_tally_behv_1")));
+            
+            #line default
+            #line hidden
+            this.Write("</span>\r\n        <span class=\"title-description\">");
+            
+            #line 5 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\TallyBehavior_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_tally_behv_2")));
+            
+            #line default
+            #line hidden
+            this.Write("</span>\r\n    </div>\r\n    <div class=\"outline-content\">\r\n        <table class=\"def" +
+                    "ault-table\" cellspacing=\"5\">\r\n            <tbody>\r\n                <tr>\r\n       " +
+                    "             <td>");
+            
+            #line 11 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\TallyBehavior_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_tally_behv_3")));
+            
+            #line default
+            #line hidden
+            this.Write("</td>\r\n                    <td>");
             
             #line 12 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\TallyBehavior_Fragment.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ProfitAndLossReport.TotalBetsMade));
@@ -43,7 +57,14 @@ namespace LottoDataManager.Includes.Classes.Reports.Templates.Fragments.ReportBo
             #line default
             #line hidden
             this.Write(" bets</td>\r\n                </tr>\r\n                <tr>\r\n                    <td>" +
-                    "How much time pass since you started to bet: </td>\r\n                    <td>");
+                    "");
+            
+            #line 15 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\TallyBehavior_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_tally_behv_4")));
+            
+            #line default
+            #line hidden
+            this.Write("</td>\r\n                    <td>");
             
             #line 16 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\TallyBehavior_Fragment.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ProfitAndLossReport.ElapseTimeSinceEaliestBet));

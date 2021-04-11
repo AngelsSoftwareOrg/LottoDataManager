@@ -29,18 +29,31 @@ namespace LottoDataManager.Includes.Classes.Reports.Templates.Fragments.ReportBo
         /// </summary>
         public override string TransformText()
         {
-            this.Write(@"
-<div class=""outline-container"">
-    <div class=""outline-title"">
-        <span class=""title-keyword"">Claims</span>
-        <span class=""title-description"">- Total money you win and gotcha</span>
-    </div>
-    <div class=""outline-content"">
-        <table class=""default-table"" cellspacing=""5"">
-            <tbody>
-                <tr>
-                    <td>Total number of claims pending: </td>
-                    <td>");
+            this.Write("\r\n<div class=\"outline-container\">\r\n    <div class=\"outline-title\">\r\n        <span" +
+                    " class=\"title-keyword\">");
+            
+            #line 10 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\Claims_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_claims_1")));
+            
+            #line default
+            #line hidden
+            this.Write("</span>\r\n        <span class=\"title-description\">");
+            
+            #line 11 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\Claims_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_claims_2")));
+            
+            #line default
+            #line hidden
+            this.Write("</span>\r\n    </div>\r\n    <div class=\"outline-content\">\r\n        <table class=\"def" +
+                    "ault-table\" cellspacing=\"5\">\r\n            <tbody>\r\n                <tr>\r\n       " +
+                    "             <td>");
+            
+            #line 17 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\Claims_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_claims_3")));
+            
+            #line default
+            #line hidden
+            this.Write("</td>\r\n                    <td>");
             
             #line 18 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\Claims_Fragment.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ProfitAndLossReport.TotalNumberOfClaims));
@@ -48,23 +61,28 @@ namespace LottoDataManager.Includes.Classes.Reports.Templates.Fragments.ReportBo
             #line default
             #line hidden
             this.Write(" claims</td>\r\n                </tr>\r\n                <tr>\r\n                    <t" +
-                    "d>Total number of claims yet to redeem: </td>\r\n                    <td>");
+                    "d>");
             
-            #line 22 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\Claims_Fragment.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(ProfitAndLossReport.TotalNumberOfClaimsToRedeem));
-            
-            #line default
-            #line hidden
-            this.Write(" out of ");
-            
-            #line 22 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\Claims_Fragment.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(ProfitAndLossReport.TotalNumberOfClaims));
+            #line 21 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\Claims_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_claims_4")));
             
             #line default
             #line hidden
-            this.Write(" claims</td>\r\n                </tr>\r\n                <tr>\r\n                    <t" +
-                    "d>Details of the claims</td>\r\n                    <td>\r\n                        " +
-                    "");
+            this.Write("</td>\r\n                    <td>");
+            
+            #line 22 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\Claims_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(String.Format(LBL("pal_form_labels_rpt_box_claims_7"), ProfitAndLossReport.TotalNumberOfClaimsToRedeem,ProfitAndLossReport.TotalNumberOfClaims)));
+            
+            #line default
+            #line hidden
+            this.Write("</td>\r\n                </tr>\r\n                <tr>\r\n                    <td>");
+            
+            #line 25 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\Claims_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_claims_5")));
+            
+            #line default
+            #line hidden
+            this.Write("</td>\r\n                    <td>\r\n                        ");
             
             #line 27 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\Claims_Fragment.tt"
  foreach (var item in ProfitAndLossReport.ClaimDetailsList) { 
@@ -115,8 +133,14 @@ namespace LottoDataManager.Includes.Classes.Reports.Templates.Fragments.ReportBo
             
             #line default
             #line hidden
-            this.Write("                                            , to redeem\r\n                        " +
-                    "                ");
+            this.Write("                                            ");
+            
+            #line 36 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\Claims_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_claims_6")));
+            
+            #line default
+            #line hidden
+            this.Write("\r\n                                        ");
             
             #line 37 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\Claims_Fragment.tt"
  } 

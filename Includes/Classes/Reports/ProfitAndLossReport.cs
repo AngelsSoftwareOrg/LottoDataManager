@@ -59,7 +59,6 @@ namespace LottoDataManager.Includes.Classes.Reports
             GetOutletTally(this.gameCodeList);
             GetWinningBetDigitTally(this.gameCodeList);
         }
-
         private void InitializesAllValues(LotteryDataServices lotteryDataServices)
         {
             base.LotteryDataServices = lotteryDataServices;
@@ -76,7 +75,7 @@ namespace LottoDataManager.Includes.Classes.Reports
             GetNumberOfTimesWonPerBetCombination();
             GetWhenWasLastTimeYouWon();
         }
-
+        
         #region Initialization Region
         private void SetupReportTitle()
         {
@@ -188,10 +187,7 @@ namespace LottoDataManager.Includes.Classes.Reports
         {
             this.allBetsInTabularModeWinningBet = this.reportDataServices.GetWinningBetDigitTally(gameCodes);
         }
-        
-
         #endregion
-
 
         #region Setter and Getter
         public string LifeTimeWinnings { get => lifeTimeWinnings.ToString("C"); }
@@ -218,6 +214,5 @@ namespace LottoDataManager.Includes.Classes.Reports
         public List<string[]> AllBetsInTabularModeOutlet { get => allBetsInTabularModeOutlet; }
         public List<string[]> AllBetsInTabularModeWinningBet { get => allBetsInTabularModeWinningBet; }
         #endregion
-
     }
 }

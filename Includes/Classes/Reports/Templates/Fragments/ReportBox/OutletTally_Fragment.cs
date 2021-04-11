@@ -25,25 +25,79 @@ namespace LottoDataManager.Includes.Classes.Reports.Templates.Fragments.ReportBo
         /// </summary>
         public override string TransformText()
         {
-            this.Write(@"<div class=""outline-container"">
-    <div class=""outline-title"">
-        <span class=""title-keyword"">Outlet Tally</span>
-        <span class=""title-description"">- Your favorite outlet and your winning counts</span>
-    </div>
-    <div class=""outline-content"">
-        <table class=""table-stats-style"" cellspacing=""0"">
-            <thead>
-                <th>Outlet where you bet</th>
-                <th>Total Spending</th>
-                <th>1 Digit Win</th>
-                <th>2 Digit Win</th>
-                <th>3 Digit Win</th>
-                <th>4 Digit Win</th>
-                <th>5 Digit Win</th>
-                <th>6 Digit Win</th>
-            </thead>
-            <tbody>
-                ");
+            this.Write("<div class=\"outline-container\">\r\n    <div class=\"outline-title\">\r\n        <span c" +
+                    "lass=\"title-keyword\">");
+            
+            #line 4 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\OutletTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_outlt_1")));
+            
+            #line default
+            #line hidden
+            this.Write("</span>\r\n        <span class=\"title-description\">");
+            
+            #line 5 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\OutletTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_outlt_2")));
+            
+            #line default
+            #line hidden
+            this.Write("</span>\r\n    </div>\r\n    <div class=\"outline-content\">\r\n        <table class=\"tab" +
+                    "le-stats-style\" cellspacing=\"0\">\r\n            <thead>\r\n                <th>");
+            
+            #line 10 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\OutletTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_outlt_3")));
+            
+            #line default
+            #line hidden
+            this.Write("</th>\r\n                <th>");
+            
+            #line 11 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\OutletTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_outlt_4")));
+            
+            #line default
+            #line hidden
+            this.Write("</th>\r\n                <th>");
+            
+            #line 12 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\OutletTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_outlt_5")));
+            
+            #line default
+            #line hidden
+            this.Write("</th>\r\n                <th>");
+            
+            #line 13 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\OutletTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_outlt_6")));
+            
+            #line default
+            #line hidden
+            this.Write("</th>\r\n                <th>");
+            
+            #line 14 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\OutletTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_outlt_7")));
+            
+            #line default
+            #line hidden
+            this.Write("</th>\r\n                <th>");
+            
+            #line 15 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\OutletTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_outlt_8")));
+            
+            #line default
+            #line hidden
+            this.Write("</th>\r\n                <th>");
+            
+            #line 16 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\OutletTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_outlt_9")));
+            
+            #line default
+            #line hidden
+            this.Write("</th>\r\n                <th>");
+            
+            #line 17 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\OutletTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_outlt_10")));
+            
+            #line default
+            #line hidden
+            this.Write("</th>\r\n            </thead>\r\n            <tbody>\r\n                ");
             
             #line 20 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\OutletTally_Fragment.tt"
  foreach (var item in ProfitAndLossReport.AllBetsInTabularModeOutlet) { 

@@ -1,18 +1,18 @@
 ﻿<#@ template language="C#" inherits="IndividualGameHTMLReportView" #>
 <div class="outline-container">
     <div class="outline-title">
-        <span class="title-keyword">Tally Behavior</span>
-        <span class="title-description">- Counting your specific behavior on betting</span>
+        <span class="title-keyword"><#=LBL("pal_form_labels_rpt_box_tally_behv_1") #></span>
+        <span class="title-description"><#=LBL("pal_form_labels_rpt_box_tally_behv_2") #></span>
     </div>
     <div class="outline-content">
         <table class="default-table" cellspacing="5">
             <tbody>
                 <tr>
-                    <td>How many bets you made so far?</td>
+                    <td><#=LBL("pal_form_labels_rpt_box_tally_behv_3") #></td>
                     <td><#= ProfitAndLossReport.TotalBetsMade #> bets</td>
                 </tr>
                 <tr>
-                    <td>How much time pass since you started to bet: </td>
+                    <td><#=LBL("pal_form_labels_rpt_box_tally_behv_4") #></td>
                     <td><#= ProfitAndLossReport.ElapseTimeSinceEaliestBet #></td>
                 </tr>
             </tbody>

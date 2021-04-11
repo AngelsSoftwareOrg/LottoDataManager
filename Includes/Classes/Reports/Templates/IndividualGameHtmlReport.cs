@@ -32,60 +32,70 @@ namespace LottoDataManager.Includes.Classes.Reports.Templates
             this.Write("\r\n\r\n\r\n");
             this.Write("\r\n<!DOCTYPE html>\r\n<html>\r\n    <head>\r\n        <meta charset=\'utf-8\'>\r\n        <m" +
                     "eta http-equiv=\'X-UA-Compatible\'>\r\n        <meta name=\'viewport\' content=\'width=" +
-                    "device-width, initial-scale=1\'>\r\n\r\n        <title> Lottery Report </title>\r\n    " +
-                    "    ");
+                    "device-width, initial-scale=1\'>\r\n        <title> ");
+            
+            #line 9 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments/Header_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_title_window")));
+            
+            #line default
+            #line hidden
+            this.Write(" </title>\r\n        ");
             this.Write("\r\n<!--link rel=\"stylesheet\" href=\"main_style.css\" type=\"text/css\" media=\"all\" -->" +
-                    "\r\n<style>\r\n\r\nbody{\r\n    margin: 0px;\r\n}\r\n.report-header{\r\n    width: 100%;\r\n    " +
-                    "height: 40px;\r\n    background-color: #354535;\r\n    font-weight: bold;\r\n    color" +
-                    ": ghostwhite;\r\n    font-size: 2em;\r\n    text-shadow: 0 2px 2px rgba(0,0,0,.5);\r\n" +
-                    "    font-family: -apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, Oxygen, " +
-                    "Ubuntu, Cantarell, \'Open Sans\', \'Helvetica Neue\', sans-serif;\r\n}\r\n\r\n.dashboard-b" +
-                    "ox{\r\n    width: 100%;\r\n    height: 300px;\r\n    background-color: #498aff;\r\n}\r\n.d" +
-                    "ashboard-box-content{\r\n    vertical-align: middle;\r\n    /* border: 2px dashed #4" +
-                    "44; */\r\n    height: 50%;\r\n    display: flex;\r\n    justify-content: space-between" +
-                    ";\r\n    transform: translate(0, 50%);\r\n}\r\n\r\n.dashboard-box-content .title-partiti" +
-                    "on{\r\n    /* border: 2px dashed #444; */\r\n    width: 100%;\r\n    height: 100%;\r\n  " +
-                    "  vertical-align: middle;\r\n    margin: 0 10px 0 10px;\r\n\r\n}\r\n\r\n.dashboard-box-tit" +
-                    "le{\r\n    font-weight: bold;\r\n    color: ghostwhite;\r\n    font-size: 4em;\r\n    te" +
-                    "xt-shadow: 0 2px 2px rgba(0,0,0,.5);\r\n    font-family: Impact, Haettenschweiler," +
-                    " \'Arial Narrow Bold\', sans-serif;\r\n}\r\n.dashboard-box-sub-title{\r\n    font-size: " +
-                    "2em;\r\n    text-shadow: 0 2px 2px rgba(0,0,0,.5);\r\n    color: whitesmoke;\r\n    fo" +
-                    "nt-family: \'Trebuchet MS\', \'Lucida Sans Unicode\', \'Lucida Grande\', \'Lucida Sans\'" +
-                    ", Arial, sans-serif;\r\n}\r\n\r\n.dashboard-box-sub-title-combine{\r\n    font-size: 1.2" +
-                    "em;\r\n    text-shadow: 0 2px 2px rgba(0,0,0,.5);\r\n    color: whitesmoke;\r\n    fon" +
-                    "t-family: \'Trebuchet MS\', \'Lucida Sans Unicode\', \'Lucida Grande\', \'Lucida Sans\'," +
-                    " Arial, sans-serif;\r\n}\r\n\r\n\r\n\r\n\r\n.dashboard-box-winnings{\r\n    font-weight: bold;" +
-                    "\r\n    color: greenyellow;\r\n    font-size: 5em;\r\n    text-shadow: 0 5px 1px rgba(" +
-                    "101, 60, 60, 0.5);\r\n    font-family: Impact, Haettenschweiler, \'Arial Narrow Bol" +
-                    "d\', sans-serif;\r\n    text-align: center;\r\n}\r\n.dashboard-box-sub-winnings{\r\n    f" +
-                    "ont-size: 1.3em;\r\n    font-style: italic;\r\n    text-shadow: 0 2px 2px rgba(0,0,0" +
-                    ",.5);\r\n    color: whitesmoke;\r\n    font-family: \'Trebuchet MS\', \'Lucida Sans Uni" +
-                    "code\', \'Lucida Grande\', \'Lucida Sans\', Arial, sans-serif;\r\n    text-align: cente" +
-                    "r;\r\n}\r\n.page-spacer{\r\n    width:100%;\r\n    height: 500px;\r\n}\r\n.zero-sum-color{\r\n" +
-                    "    color: whitesmoke;\r\n}\r\n\r\n\r\n/*\r\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" +
-                    "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n    REPORT BOX CONTENT" +
-                    "\r\n*/\r\n.report-box{\r\n    top: 50px;\r\n    font-family: Verdana, Geneva, Tahoma, sa" +
-                    "ns-serif;\r\n}\r\n\r\n.outline-container{\r\n    margin: 50px 10px 0px 10px;\r\n}\r\n\r\n.titl" +
-                    "e-keyword{\r\n    font-size: 1.5em;\r\n    color: mediumturquoise;\r\n    font-weight:" +
-                    " bold;\r\n}\r\n\r\n.title-description{\r\n    color: green;\r\n    font-weight: bold;\r\n}\r\n" +
-                    "\r\n.report-box .default-table {\r\n    width: 100%;\r\n    margin: 20px 30px 30px 30p" +
-                    "x;\r\n    border: 0px solid black;\r\n}\r\n\r\n.report-box .default-table tr td:first-of" +
-                    "-type{\r\n    width: 350px;\r\n    border: 0px solid black;\r\n}\r\n.report-box .default" +
-                    "-table td{\r\n    border: 0px solid black;\r\n    vertical-align: top;\r\n}\r\n\r\n.report" +
-                    "-box .yearly-tallying{\r\n    border: 2px solid black;\r\n    text-align: left;\r\n   " +
-                    " width: 50%;\r\n    \r\n}\r\n\r\n.report-box .table-stats-style{\r\n    table-layout:auto;" +
-                    "\r\n    text-align: left;\r\n    margin-left: 30px;\r\n    margin-top: 30px;\r\n}\r\n.tabl" +
-                    "e-stats-style tr td{\r\n    border: 2px solid rgb(194, 189, 189);\r\n}\r\n.table-stats" +
-                    "-style th{\r\n    border: 2px solid rgb(194, 189, 189);\r\n    background-color:whit" +
-                    "esmoke;\r\n}\r\n\r\n.table-stats-style tbody{\r\n    table-layout:auto;\r\n}\r\n\r\n.table-sta" +
-                    "ts-style tr td:first-of-type{\r\n    min-width: 50px;\r\n}\r\n\r\n\r\n/*\r\n    ~~~~~~~~~~~~" +
+                    "\r\n<style>\r\n\r\nbody{\r\n    margin: 0px;\r\n}\r\nfooter{\r\n    margin: 0px;\r\n    width: 1" +
+                    "00%;\r\n    height: 50px;\r\n    background-color: #4c533f;\r\n    font-size: 1.2em;\r\n" +
+                    "    text-shadow: 0 2px 2px rgba(0,0,0,.5);\r\n    color: whitesmoke;\r\n    font-fam" +
+                    "ily: \'Trebuchet MS\', \'Lucida Sans Unicode\', \'Lucida Grande\', \'Lucida Sans\', Aria" +
+                    "l, sans-serif;\r\n    vertical-align: middle;\r\n}\r\n\r\n.report-header{\r\n    width: 10" +
+                    "0%;\r\n    height: 40px;\r\n    background-color: #354535;\r\n    font-weight: bold;\r\n" +
+                    "    color: ghostwhite;\r\n    font-size: 2em;\r\n    text-shadow: 0 2px 2px rgba(0,0" +
+                    ",0,.5);\r\n    font-family: -apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto," +
+                    " Oxygen, Ubuntu, Cantarell, \'Open Sans\', \'Helvetica Neue\', sans-serif;\r\n}\r\n\r\n.da" +
+                    "shboard-box{\r\n    width: 100%;\r\n    height: 300px;\r\n    background-color: #498af" +
+                    "f;\r\n}\r\n.dashboard-box-content{\r\n    vertical-align: middle;\r\n    /* border: 2px " +
+                    "dashed #444; */\r\n    height: 50%;\r\n    display: flex;\r\n    justify-content: spac" +
+                    "e-between;\r\n    transform: translate(0, 50%);\r\n}\r\n\r\n.dashboard-box-content .titl" +
+                    "e-partition{\r\n    /* border: 2px dashed #444; */\r\n    width: 100%;\r\n    height: " +
+                    "100%;\r\n    vertical-align: middle;\r\n    margin: 0 10px 0 10px;\r\n\r\n}\r\n\r\n.dashboar" +
+                    "d-box-title{\r\n    font-weight: bold;\r\n    color: ghostwhite;\r\n    font-size: 4em" +
+                    ";\r\n    text-shadow: 0 2px 2px rgba(0,0,0,.5);\r\n    font-family: Impact, Haettens" +
+                    "chweiler, \'Arial Narrow Bold\', sans-serif;\r\n}\r\n.dashboard-box-sub-title{\r\n    fo" +
+                    "nt-size: 2em;\r\n    text-shadow: 0 2px 2px rgba(0,0,0,.5);\r\n    color: whitesmoke" +
+                    ";\r\n    font-family: \'Trebuchet MS\', \'Lucida Sans Unicode\', \'Lucida Grande\', \'Luc" +
+                    "ida Sans\', Arial, sans-serif;\r\n}\r\n\r\n.dashboard-box-sub-title-combine{\r\n    font-" +
+                    "size: 1.2em;\r\n    text-shadow: 0 2px 2px rgba(0,0,0,.5);\r\n    color: whitesmoke;" +
+                    "\r\n    font-family: \'Trebuchet MS\', \'Lucida Sans Unicode\', \'Lucida Grande\', \'Luci" +
+                    "da Sans\', Arial, sans-serif;\r\n}\r\n\r\n\r\n\r\n\r\n.dashboard-box-winnings{\r\n    font-weig" +
+                    "ht: bold;\r\n    color: greenyellow;\r\n    font-size: 5em;\r\n    text-shadow: 0 5px " +
+                    "1px rgba(101, 60, 60, 0.5);\r\n    font-family: Impact, Haettenschweiler, \'Arial N" +
+                    "arrow Bold\', sans-serif;\r\n    text-align: center;\r\n}\r\n.dashboard-box-sub-winning" +
+                    "s{\r\n    font-size: 1.3em;\r\n    font-style: italic;\r\n    text-shadow: 0 2px 2px r" +
+                    "gba(0,0,0,.5);\r\n    color: whitesmoke;\r\n    font-family: \'Trebuchet MS\', \'Lucida" +
+                    " Sans Unicode\', \'Lucida Grande\', \'Lucida Sans\', Arial, sans-serif;\r\n    text-ali" +
+                    "gn: center;\r\n}\r\n.page-spacer{\r\n    width:100%;\r\n    height: 100px;\r\n}\r\n.zero-sum" +
+                    "-color{\r\n    color: whitesmoke;\r\n}\r\n\r\n\r\n/*\r\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" +
+                    "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n    REPORT BO" +
+                    "X CONTENT\r\n*/\r\n.report-box{\r\n    top: 50px;\r\n    font-family: Verdana, Geneva, T" +
+                    "ahoma, sans-serif;\r\n}\r\n\r\n.outline-container{\r\n    margin: 50px 10px 0px 10px;\r\n}" +
+                    "\r\n\r\n.title-keyword{\r\n    font-size: 1.5em;\r\n    color: mediumturquoise;\r\n    fon" +
+                    "t-weight: bold;\r\n}\r\n\r\n.title-description{\r\n    color: green;\r\n    font-weight: b" +
+                    "old;\r\n}\r\n\r\n.report-box .default-table {\r\n    width: 100%;\r\n    margin: 20px 30px" +
+                    " 30px 30px;\r\n    border: 0px solid black;\r\n}\r\n\r\n.report-box .default-table tr td" +
+                    ":first-of-type{\r\n    width: 350px;\r\n    border: 0px solid black;\r\n}\r\n.report-box" +
+                    " .default-table td{\r\n    border: 0px solid black;\r\n    vertical-align: top;\r\n}\r\n" +
+                    "\r\n.report-box .yearly-tallying{\r\n    border: 2px solid black;\r\n    text-align: l" +
+                    "eft;\r\n    width: 50%;\r\n    \r\n}\r\n\r\n.report-box .table-stats-style{\r\n    table-lay" +
+                    "out:auto;\r\n    text-align: left;\r\n    margin-left: 30px;\r\n    margin-top: 30px;\r" +
+                    "\n}\r\n.table-stats-style tr td{\r\n    border: 2px solid rgb(194, 189, 189);\r\n}\r\n.ta" +
+                    "ble-stats-style th{\r\n    border: 2px solid rgb(194, 189, 189);\r\n    background-c" +
+                    "olor:whitesmoke;\r\n}\r\n\r\n.table-stats-style tbody{\r\n    table-layout:auto;\r\n}\r\n\r\n." +
+                    "table-stats-style tr td:first-of-type{\r\n    min-width: 50px;\r\n}\r\n\r\n\r\n/*\r\n    ~~~" +
                     "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" +
-                    "~~~~~\r\n    INDIVIDUAL CSS\r\n*/\r\n.claims-details-breakdown{\r\n    margin-bottom: 30" +
-                    "px;\r\n}\r\n.claims-details-breakdown span{\r\n    font-weight: bold;\r\n    color: gree" +
-                    "n;\r\n}\r\n</style>");
+                    "~~~~~~~~~~~~~~\r\n    INDIVIDUAL CSS\r\n*/\r\n.claims-details-breakdown{\r\n    margin-b" +
+                    "ottom: 30px;\r\n}\r\n.claims-details-breakdown span{\r\n    font-weight: bold;\r\n    co" +
+                    "lor: green;\r\n}\r\n</style>");
             this.Write("\r\n    </head>\r\n    <body>\r\n    <div class=\"report-header\">\r\n        <td>");
             
-            #line 15 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments/Header_Fragment.tt"
+            #line 14 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments/Header_Fragment.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(AppTitleAndVersion()));
             
             #line default
@@ -136,42 +146,73 @@ namespace LottoDataManager.Includes.Classes.Reports.Templates
             this.Write("\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n");
             this.Write("\r\n");
             this.Write("\r\n<div class=\"report-box\">\r\n    ");
-            this.Write(@"
-<div class=""outline-container"">
-    <div class=""outline-title"">
-        <span class=""title-keyword"">Winning Digits</span>
-        <span class=""title-description"">- Counting your lucky winning digits</span>
-    </div>
-    <div class=""outline-content"">
-        <table class=""default-table"" cellspacing=""5"">
-            <tbody>
-                <tr>
-                    <td>Lifetime Winnings: </td>
-                    <td>");
+            this.Write("\r\n<div class=\"outline-container\">\r\n    <div class=\"outline-title\">\r\n        <span" +
+                    " class=\"title-keyword\">");
+            
+            #line 5 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/WinningDigits_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_win_dg_1")));
+            
+            #line default
+            #line hidden
+            this.Write("</span>\r\n        <span class=\"title-description\">");
+            
+            #line 6 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/WinningDigits_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_win_dg_2")));
+            
+            #line default
+            #line hidden
+            this.Write("</span>\r\n    </div>\r\n    <div class=\"outline-content\">\r\n        <table class=\"def" +
+                    "ault-table\" cellspacing=\"5\">\r\n            <tbody>\r\n                <tr>\r\n       " +
+                    "             <td>");
+            
+            #line 12 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/WinningDigits_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_win_dg_3")));
+            
+            #line default
+            #line hidden
+            this.Write("</td>\r\n                    <td>");
             
             #line 13 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/WinningDigits_Fragment.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ProfitAndLossReport.LifeTimeWinnings));
             
             #line default
             #line hidden
-            this.Write("</td>\r\n                </tr>\r\n                <tr>\r\n                    <td>Total" +
-                    " Money you win so far: </td>\r\n                    <td>");
+            this.Write("</td>\r\n                </tr>\r\n                <tr>\r\n                    <td>");
+            
+            #line 16 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/WinningDigits_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_win_dg_4")));
+            
+            #line default
+            #line hidden
+            this.Write("</td>\r\n                    <td>");
             
             #line 17 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/WinningDigits_Fragment.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ProfitAndLossReport.TotalMoneyWinSoFar));
             
             #line default
             #line hidden
-            this.Write("</td>\r\n                </tr>\r\n                <tr>\r\n                    <td>Highe" +
-                    "st amount you won: </td>\r\n                    <td>");
+            this.Write("</td>\r\n                </tr>\r\n                <tr>\r\n                    <td>");
+            
+            #line 20 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/WinningDigits_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_win_dg_5")));
+            
+            #line default
+            #line hidden
+            this.Write("</td>\r\n                    <td>");
             
             #line 21 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/WinningDigits_Fragment.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ProfitAndLossReport.HighestAmountWon));
             
             #line default
             #line hidden
-            this.Write("</td>\r\n                </tr>\r\n                <tr>\r\n                    <td>Lowes" +
-                    "t amount you won: </td>\r\n                    <td>");
+            this.Write("</td>\r\n                </tr>\r\n                <tr>\r\n                    <td>");
+            
+            #line 24 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/WinningDigits_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_win_dg_6")));
+            
+            #line default
+            #line hidden
+            this.Write("</td>\r\n                    <td>");
             
             #line 25 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/WinningDigits_Fragment.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ProfitAndLossReport.LowestAmountWon));
@@ -181,33 +222,59 @@ namespace LottoDataManager.Includes.Classes.Reports.Templates
             this.Write("</td>\r\n                </tr>\r\n            </tbody>\r\n        </table>\r\n    </div>\r" +
                     "\n</div>");
             this.Write("\r\n    ");
-            this.Write(@"<div class=""outline-container"">
-    <div class=""outline-title"">
-        <span class=""title-keyword"">Spending</span>
-        <span class=""title-description"">- Your total spending categorized</span>
-    </div>
-    <div class=""outline-content"">
-        <table class=""default-table"" cellspacing=""5"">
-            <tbody>
-                <tr>
-                    <td>Total money you spent: </td>
-                    <td>");
+            this.Write("<div class=\"outline-container\">\r\n    <div class=\"outline-title\">\r\n        <span c" +
+                    "lass=\"title-keyword\">");
+            
+            #line 4 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/Spending_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_spending_1")));
+            
+            #line default
+            #line hidden
+            this.Write("</span>\r\n        <span class=\"title-description\">");
+            
+            #line 5 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/Spending_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_spending_2")));
+            
+            #line default
+            #line hidden
+            this.Write("</span>\r\n    </div>\r\n    <div class=\"outline-content\">\r\n        <table class=\"def" +
+                    "ault-table\" cellspacing=\"5\">\r\n            <tbody>\r\n                <tr>\r\n       " +
+                    "             <td>");
+            
+            #line 11 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/Spending_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_spending_3")));
+            
+            #line default
+            #line hidden
+            this.Write("</td>\r\n                    <td>");
             
             #line 12 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/Spending_Fragment.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ProfitAndLossReport.TotalMoneySpentSoFar));
             
             #line default
             #line hidden
-            this.Write("</td>\r\n                </tr>\r\n                <tr>\r\n                    <td>Total" +
-                    " Money you loose by Lucky Pick: </td>\r\n                    <td>");
+            this.Write("</td>\r\n                </tr>\r\n                <tr>\r\n                    <td>");
+            
+            #line 15 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/Spending_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_spending_4")));
+            
+            #line default
+            #line hidden
+            this.Write("</td>\r\n                    <td>");
             
             #line 16 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/Spending_Fragment.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ProfitAndLossReport.TotalMoneyLooseSoFar));
             
             #line default
             #line hidden
-            this.Write("</td>\r\n                </tr>\r\n                <tr>\r\n                    <td>Yearl" +
-                    "y average of bet: </td>\r\n                    <td>");
+            this.Write("</td>\r\n                </tr>\r\n                <tr>\r\n                    <td>");
+            
+            #line 19 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/Spending_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_spending_5")));
+            
+            #line default
+            #line hidden
+            this.Write("</td>\r\n                    <td>");
             
             #line 20 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/Spending_Fragment.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ProfitAndLossReport.TotalMoneyBettedYearlyAverage));
@@ -217,18 +284,31 @@ namespace LottoDataManager.Includes.Classes.Reports.Templates
             this.Write("</td>\r\n                </tr>\r\n            </tbody>\r\n        </table>\r\n    </div>\r" +
                     "\n</div>\r\n");
             this.Write("\r\n    ");
-            this.Write(@"
-<div class=""outline-container"">
-    <div class=""outline-title"">
-        <span class=""title-keyword"">Claims</span>
-        <span class=""title-description"">- Total money you win and gotcha</span>
-    </div>
-    <div class=""outline-content"">
-        <table class=""default-table"" cellspacing=""5"">
-            <tbody>
-                <tr>
-                    <td>Total number of claims pending: </td>
-                    <td>");
+            this.Write("\r\n<div class=\"outline-container\">\r\n    <div class=\"outline-title\">\r\n        <span" +
+                    " class=\"title-keyword\">");
+            
+            #line 10 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/Claims_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_claims_1")));
+            
+            #line default
+            #line hidden
+            this.Write("</span>\r\n        <span class=\"title-description\">");
+            
+            #line 11 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/Claims_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_claims_2")));
+            
+            #line default
+            #line hidden
+            this.Write("</span>\r\n    </div>\r\n    <div class=\"outline-content\">\r\n        <table class=\"def" +
+                    "ault-table\" cellspacing=\"5\">\r\n            <tbody>\r\n                <tr>\r\n       " +
+                    "             <td>");
+            
+            #line 17 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/Claims_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_claims_3")));
+            
+            #line default
+            #line hidden
+            this.Write("</td>\r\n                    <td>");
             
             #line 18 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/Claims_Fragment.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ProfitAndLossReport.TotalNumberOfClaims));
@@ -236,23 +316,28 @@ namespace LottoDataManager.Includes.Classes.Reports.Templates
             #line default
             #line hidden
             this.Write(" claims</td>\r\n                </tr>\r\n                <tr>\r\n                    <t" +
-                    "d>Total number of claims yet to redeem: </td>\r\n                    <td>");
+                    "d>");
             
-            #line 22 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/Claims_Fragment.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(ProfitAndLossReport.TotalNumberOfClaimsToRedeem));
-            
-            #line default
-            #line hidden
-            this.Write(" out of ");
-            
-            #line 22 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/Claims_Fragment.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(ProfitAndLossReport.TotalNumberOfClaims));
+            #line 21 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/Claims_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_claims_4")));
             
             #line default
             #line hidden
-            this.Write(" claims</td>\r\n                </tr>\r\n                <tr>\r\n                    <t" +
-                    "d>Details of the claims</td>\r\n                    <td>\r\n                        " +
-                    "");
+            this.Write("</td>\r\n                    <td>");
+            
+            #line 22 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/Claims_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(String.Format(LBL("pal_form_labels_rpt_box_claims_7"), ProfitAndLossReport.TotalNumberOfClaimsToRedeem,ProfitAndLossReport.TotalNumberOfClaims)));
+            
+            #line default
+            #line hidden
+            this.Write("</td>\r\n                </tr>\r\n                <tr>\r\n                    <td>");
+            
+            #line 25 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/Claims_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_claims_5")));
+            
+            #line default
+            #line hidden
+            this.Write("</td>\r\n                    <td>\r\n                        ");
             
             #line 27 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/Claims_Fragment.tt"
  foreach (var item in ProfitAndLossReport.ClaimDetailsList) { 
@@ -303,8 +388,14 @@ namespace LottoDataManager.Includes.Classes.Reports.Templates
             
             #line default
             #line hidden
-            this.Write("                                            , to redeem\r\n                        " +
-                    "                ");
+            this.Write("                                            ");
+            
+            #line 36 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/Claims_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_claims_6")));
+            
+            #line default
+            #line hidden
+            this.Write("\r\n                                        ");
             
             #line 37 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/Claims_Fragment.tt"
  } 
@@ -328,17 +419,31 @@ namespace LottoDataManager.Includes.Classes.Reports.Templates
             this.Write("                    </td>\r\n                </tr>\r\n            </tbody>\r\n        <" +
                     "/table>\r\n    </div>\r\n</div>");
             this.Write("\r\n    ");
-            this.Write(@"<div class=""outline-container"">
-    <div class=""outline-title"">
-        <span class=""title-keyword"">Tally Behavior</span>
-        <span class=""title-description"">- Counting your specific behavior on betting</span>
-    </div>
-    <div class=""outline-content"">
-        <table class=""default-table"" cellspacing=""5"">
-            <tbody>
-                <tr>
-                    <td>How many bets you made so far?</td>
-                    <td>");
+            this.Write("<div class=\"outline-container\">\r\n    <div class=\"outline-title\">\r\n        <span c" +
+                    "lass=\"title-keyword\">");
+            
+            #line 4 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/TallyBehavior_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_tally_behv_1")));
+            
+            #line default
+            #line hidden
+            this.Write("</span>\r\n        <span class=\"title-description\">");
+            
+            #line 5 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/TallyBehavior_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_tally_behv_2")));
+            
+            #line default
+            #line hidden
+            this.Write("</span>\r\n    </div>\r\n    <div class=\"outline-content\">\r\n        <table class=\"def" +
+                    "ault-table\" cellspacing=\"5\">\r\n            <tbody>\r\n                <tr>\r\n       " +
+                    "             <td>");
+            
+            #line 11 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/TallyBehavior_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_tally_behv_3")));
+            
+            #line default
+            #line hidden
+            this.Write("</td>\r\n                    <td>");
             
             #line 12 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/TallyBehavior_Fragment.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ProfitAndLossReport.TotalBetsMade));
@@ -346,7 +451,14 @@ namespace LottoDataManager.Includes.Classes.Reports.Templates
             #line default
             #line hidden
             this.Write(" bets</td>\r\n                </tr>\r\n                <tr>\r\n                    <td>" +
-                    "How much time pass since you started to bet: </td>\r\n                    <td>");
+                    "");
+            
+            #line 15 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/TallyBehavior_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_tally_behv_4")));
+            
+            #line default
+            #line hidden
+            this.Write("</td>\r\n                    <td>");
             
             #line 16 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/TallyBehavior_Fragment.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ProfitAndLossReport.ElapseTimeSinceEaliestBet));
@@ -356,19 +468,32 @@ namespace LottoDataManager.Includes.Classes.Reports.Templates
             this.Write("</td>\r\n                </tr>\r\n            </tbody>\r\n        </table>\r\n    </div>\r" +
                     "\n</div>");
             this.Write("\r\n    ");
-            this.Write(@"<div class=""outline-container"">
-    <div class=""outline-title"">
-        <span class=""title-keyword"">Tallying Winning Digits</span>
-        <span class=""title-description"">- Counting your winning combinations so far</span>
-    </div>
-    <div class=""outline-content"">
-        <table class=""default-table"" cellspacing=""5"">
-            <tbody>
-                <tr>
-                    <td>Tallying your combo wins</td>
-                    <td>
-                        <ul>
-                            ");
+            this.Write("<div class=\"outline-container\">\r\n    <div class=\"outline-title\">\r\n        <span c" +
+                    "lass=\"title-keyword\">");
+            
+            #line 4 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/TallyWinningDigits_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_tally_win_dg_1")));
+            
+            #line default
+            #line hidden
+            this.Write("</span>\r\n        <span class=\"title-description\">");
+            
+            #line 5 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/TallyWinningDigits_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_tally_win_dg_2")));
+            
+            #line default
+            #line hidden
+            this.Write("</span>\r\n    </div>\r\n    <div class=\"outline-content\">\r\n        <table class=\"def" +
+                    "ault-table\" cellspacing=\"5\">\r\n            <tbody>\r\n                <tr>\r\n       " +
+                    "             <td>");
+            
+            #line 11 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/TallyWinningDigits_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_tally_win_dg_3")));
+            
+            #line default
+            #line hidden
+            this.Write("</td>\r\n                    <td>\r\n                        <ul>\r\n                  " +
+                    "          ");
             
             #line 14 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/TallyWinningDigits_Fragment.tt"
  foreach (var item in ProfitAndLossReport.TimesWonPerBetCombinationDict) { 
@@ -397,8 +522,14 @@ namespace LottoDataManager.Includes.Classes.Reports.Templates
             #line default
             #line hidden
             this.Write("                        </ul>\r\n                    </td>\r\n                </tr>\r\n" +
-                    "                <tr>\r\n                    <td>When was the last time you won: </" +
-                    "td>\r\n                    <td>");
+                    "                <tr>\r\n                    <td>");
+            
+            #line 21 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/TallyWinningDigits_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_tally_win_dg_4")));
+            
+            #line default
+            #line hidden
+            this.Write("</td>\r\n                    <td>");
             
             #line 22 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/TallyWinningDigits_Fragment.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ProfitAndLossReport.WhenWasLastTimeYouWon));
@@ -519,25 +650,79 @@ namespace LottoDataManager.Includes.Classes.Reports.Templates
             #line hidden
             this.Write("\r\n            </tbody>\r\n        </table>\r\n    </div>\r\n</div>");
             this.Write("\r\n    ");
-            this.Write(@"<div class=""outline-container"">
-    <div class=""outline-title"">
-        <span class=""title-keyword"">Days of Week Tally</span>
-        <span class=""title-description"">- Tallying weekdays behavior in betting</span>
-    </div>
-    <div class=""outline-content"">
-        <table class=""table-stats-style"" cellspacing=""0"">
-            <thead>
-                <th>Days</th>
-                <th>Total Spending</th>
-                <th>1 Digit Win</th>
-                <th>2 Digit Win</th>
-                <th>3 Digit Win</th>
-                <th>4 Digit Win</th>
-                <th>5 Digit Win</th>
-                <th>6 Digit Win</th>
-            </thead>
-            <tbody>
-                ");
+            this.Write("<div class=\"outline-container\">\r\n    <div class=\"outline-title\">\r\n        <span c" +
+                    "lass=\"title-keyword\">");
+            
+            #line 4 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/DaysOfWeekTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_dow_1")));
+            
+            #line default
+            #line hidden
+            this.Write("</span>\r\n        <span class=\"title-description\">");
+            
+            #line 5 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/DaysOfWeekTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_dow_2")));
+            
+            #line default
+            #line hidden
+            this.Write("</span>\r\n    </div>\r\n    <div class=\"outline-content\">\r\n        <table class=\"tab" +
+                    "le-stats-style\" cellspacing=\"0\">\r\n            <thead>\r\n                <th>");
+            
+            #line 10 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/DaysOfWeekTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_dow_3")));
+            
+            #line default
+            #line hidden
+            this.Write("</th>\r\n                <th>");
+            
+            #line 11 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/DaysOfWeekTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_dow_4")));
+            
+            #line default
+            #line hidden
+            this.Write("</th>\r\n                <th>");
+            
+            #line 12 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/DaysOfWeekTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_dow_5")));
+            
+            #line default
+            #line hidden
+            this.Write("</th>\r\n                <th>");
+            
+            #line 13 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/DaysOfWeekTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_dow_6")));
+            
+            #line default
+            #line hidden
+            this.Write("</th>\r\n                <th>");
+            
+            #line 14 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/DaysOfWeekTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_dow_7")));
+            
+            #line default
+            #line hidden
+            this.Write("</th>\r\n                <th>");
+            
+            #line 15 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/DaysOfWeekTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_dow_8")));
+            
+            #line default
+            #line hidden
+            this.Write("</th>\r\n                <th>");
+            
+            #line 16 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/DaysOfWeekTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_dow_9")));
+            
+            #line default
+            #line hidden
+            this.Write("</th>\r\n                <th>");
+            
+            #line 17 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/DaysOfWeekTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_dow_10")));
+            
+            #line default
+            #line hidden
+            this.Write("</th>\r\n            </thead>\r\n            <tbody>\r\n                ");
             
             #line 20 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/DaysOfWeekTally_Fragment.tt"
  foreach (var item in ProfitAndLossReport.AllBetsInTabularModeDaysOfWeek) { 
@@ -610,25 +795,79 @@ namespace LottoDataManager.Includes.Classes.Reports.Templates
             #line hidden
             this.Write("            </tbody>\r\n        </table>\r\n    </div>\r\n</div>\r\n\r\n");
             this.Write("\r\n    ");
-            this.Write(@"<div class=""outline-container"">
-    <div class=""outline-title"">
-        <span class=""title-keyword"">Pick Generators Tally</span>
-        <span class=""title-description"">- Tallying pick generators, spending and winning digits</span>
-    </div>
-    <div class=""outline-content"">
-        <table class=""table-stats-style"" cellspacing=""0"">
-            <thead>
-                <th>Chosen Pick Generator</th>
-                <th>Total Spending</th>
-                <th>1 Digit Win</th>
-                <th>2 Digit Win</th>
-                <th>3 Digit Win</th>
-                <th>4 Digit Win</th>
-                <th>5 Digit Win</th>
-                <th>6 Digit Win</th>
-            </thead>
-            <tbody>
-                ");
+            this.Write("<div class=\"outline-container\">\r\n    <div class=\"outline-title\">\r\n        <span c" +
+                    "lass=\"title-keyword\">");
+            
+            #line 4 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/PickGeneratorsTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_pickgen_1")));
+            
+            #line default
+            #line hidden
+            this.Write("</span>\r\n        <span class=\"title-description\">");
+            
+            #line 5 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/PickGeneratorsTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_pickgen_2")));
+            
+            #line default
+            #line hidden
+            this.Write("</span>\r\n    </div>\r\n    <div class=\"outline-content\">\r\n        <table class=\"tab" +
+                    "le-stats-style\" cellspacing=\"0\">\r\n            <thead>\r\n                <th>");
+            
+            #line 10 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/PickGeneratorsTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_pickgen_3")));
+            
+            #line default
+            #line hidden
+            this.Write("</th>\r\n                <th>");
+            
+            #line 11 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/PickGeneratorsTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_pickgen_4")));
+            
+            #line default
+            #line hidden
+            this.Write("</th>\r\n                <th>");
+            
+            #line 12 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/PickGeneratorsTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_pickgen_5")));
+            
+            #line default
+            #line hidden
+            this.Write("</th>\r\n                <th>");
+            
+            #line 13 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/PickGeneratorsTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_pickgen_6")));
+            
+            #line default
+            #line hidden
+            this.Write("</th>\r\n                <th>");
+            
+            #line 14 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/PickGeneratorsTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_pickgen_7")));
+            
+            #line default
+            #line hidden
+            this.Write("</th>\r\n                <th>");
+            
+            #line 15 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/PickGeneratorsTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_pickgen_8")));
+            
+            #line default
+            #line hidden
+            this.Write("</th>\r\n                <th>");
+            
+            #line 16 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/PickGeneratorsTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_pickgen_9")));
+            
+            #line default
+            #line hidden
+            this.Write("</th>\r\n                <th>");
+            
+            #line 17 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/PickGeneratorsTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_pickgen_10")));
+            
+            #line default
+            #line hidden
+            this.Write("</th>\r\n            </thead>\r\n            <tbody>\r\n                ");
             
             #line 20 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/PickGeneratorsTally_Fragment.tt"
  foreach (var item in ProfitAndLossReport.AllBetsInTabularModePickGen) { 
@@ -701,25 +940,79 @@ namespace LottoDataManager.Includes.Classes.Reports.Templates
             #line hidden
             this.Write("            </tbody>\r\n        </table>\r\n    </div>\r\n</div>\r\n\r\n");
             this.Write("\r\n    ");
-            this.Write(@"<div class=""outline-container"">
-    <div class=""outline-title"">
-        <span class=""title-keyword"">Outlet Tally</span>
-        <span class=""title-description"">- Your favorite outlet and your winning counts</span>
-    </div>
-    <div class=""outline-content"">
-        <table class=""table-stats-style"" cellspacing=""0"">
-            <thead>
-                <th>Outlet where you bet</th>
-                <th>Total Spending</th>
-                <th>1 Digit Win</th>
-                <th>2 Digit Win</th>
-                <th>3 Digit Win</th>
-                <th>4 Digit Win</th>
-                <th>5 Digit Win</th>
-                <th>6 Digit Win</th>
-            </thead>
-            <tbody>
-                ");
+            this.Write("<div class=\"outline-container\">\r\n    <div class=\"outline-title\">\r\n        <span c" +
+                    "lass=\"title-keyword\">");
+            
+            #line 4 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/OutletTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_outlt_1")));
+            
+            #line default
+            #line hidden
+            this.Write("</span>\r\n        <span class=\"title-description\">");
+            
+            #line 5 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/OutletTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_outlt_2")));
+            
+            #line default
+            #line hidden
+            this.Write("</span>\r\n    </div>\r\n    <div class=\"outline-content\">\r\n        <table class=\"tab" +
+                    "le-stats-style\" cellspacing=\"0\">\r\n            <thead>\r\n                <th>");
+            
+            #line 10 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/OutletTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_outlt_3")));
+            
+            #line default
+            #line hidden
+            this.Write("</th>\r\n                <th>");
+            
+            #line 11 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/OutletTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_outlt_4")));
+            
+            #line default
+            #line hidden
+            this.Write("</th>\r\n                <th>");
+            
+            #line 12 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/OutletTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_outlt_5")));
+            
+            #line default
+            #line hidden
+            this.Write("</th>\r\n                <th>");
+            
+            #line 13 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/OutletTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_outlt_6")));
+            
+            #line default
+            #line hidden
+            this.Write("</th>\r\n                <th>");
+            
+            #line 14 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/OutletTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_outlt_7")));
+            
+            #line default
+            #line hidden
+            this.Write("</th>\r\n                <th>");
+            
+            #line 15 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/OutletTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_outlt_8")));
+            
+            #line default
+            #line hidden
+            this.Write("</th>\r\n                <th>");
+            
+            #line 16 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/OutletTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_outlt_9")));
+            
+            #line default
+            #line hidden
+            this.Write("</th>\r\n                <th>");
+            
+            #line 17 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/OutletTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_outlt_10")));
+            
+            #line default
+            #line hidden
+            this.Write("</th>\r\n            </thead>\r\n            <tbody>\r\n                ");
             
             #line 20 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/OutletTally_Fragment.tt"
  foreach (var item in ProfitAndLossReport.AllBetsInTabularModeOutlet) { 
@@ -792,19 +1085,37 @@ namespace LottoDataManager.Includes.Classes.Reports.Templates
             #line hidden
             this.Write("            </tbody>\r\n        </table>\r\n    </div>\r\n</div>\r\n\r\n");
             this.Write("\r\n    ");
-            this.Write(@"<div class=""outline-container"">
-    <div class=""outline-title"">
-        <span class=""title-keyword"">Winning Bet Tally</span>
-        <span class=""title-description"">- Counting which digits are the most lucky numbers on your bets</span>
-    </div>
-    <div class=""outline-content"">
-        <table class=""table-stats-style"" cellspacing=""0"">
-            <thead>
-                <th>Lotto Number</th>
-                <th>Your total hits</th>
-            </thead>
-            <tbody>
-                ");
+            this.Write("<div class=\"outline-container\">\r\n    <div class=\"outline-title\">\r\n        <span c" +
+                    "lass=\"title-keyword\">");
+            
+            #line 4 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/WinningBetTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_tally_win_bet_1")));
+            
+            #line default
+            #line hidden
+            this.Write("</span>\r\n        <span class=\"title-description\">");
+            
+            #line 5 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/WinningBetTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_tally_win_bet_2")));
+            
+            #line default
+            #line hidden
+            this.Write("</span>\r\n    </div>\r\n    <div class=\"outline-content\">\r\n        <table class=\"tab" +
+                    "le-stats-style\" cellspacing=\"0\">\r\n            <thead>\r\n                <th>");
+            
+            #line 10 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/WinningBetTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_tally_win_bet_3")));
+            
+            #line default
+            #line hidden
+            this.Write("</th>\r\n                <th>");
+            
+            #line 11 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/WinningBetTally_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_tally_win_bet_4")));
+            
+            #line default
+            #line hidden
+            this.Write("</th>\r\n            </thead>\r\n            <tbody>\r\n                ");
             
             #line 14 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox/WinningBetTally_Fragment.tt"
  foreach (var item in ProfitAndLossReport.AllBetsInTabularModeWinningBet) { 
@@ -835,7 +1146,14 @@ namespace LottoDataManager.Includes.Classes.Reports.Templates
             this.Write("            </tbody>\r\n        </table>\r\n    </div>\r\n</div>\r\n\r\n");
             this.Write("\r\n    <div class=\"page-spacer\"></div>\r\n</div>");
             this.Write("\r\n");
-            this.Write("        </body>\r\n</html>");
+            this.Write("        <footer>\r\n            ");
+            
+            #line 3 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments/Footer_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_footer")));
+            
+            #line default
+            #line hidden
+            this.Write("\r\n        </footer>\r\n        </body>\r\n</html>");
             this.Write("\r\n");
             return this.GenerationEnvironment.ToString();
         }

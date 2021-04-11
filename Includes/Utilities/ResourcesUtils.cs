@@ -62,7 +62,14 @@ namespace LottoDataManager.Includes.Utilities
                     String[] splitted = lineStr.Split("=".ToCharArray());
                     if (splitted == null) continue;
                     if (splitted.Length <= 1) continue;
-                    MESSAGES_DICTIONARY.Add(splitted[0], splitted[1]);
+                    String key = splitted[0];
+                    String value = splitted[1];
+
+                    if (MESSAGES_DICTIONARY.ContainsKey(key))
+                    {
+                        throw new Exception(String.Format("The key [{0}] already exist. Please avoid duplicate entries on your messages_x.properties",key));
+                    }
+                    MESSAGES_DICTIONARY.Add(key, value);
                 }
             }
         }

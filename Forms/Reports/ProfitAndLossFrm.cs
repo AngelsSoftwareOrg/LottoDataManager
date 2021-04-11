@@ -26,11 +26,9 @@ namespace LottoDataManager.Forms.Reports
         {
             InitializeComponent();
             this.lotteryDataServices = lotteryDataServices;
-
             //Debugging
-            if(lotteryDataServices==null) this.lotteryDataServices = new LotteryDataServices(new Game642());
+            //if(lotteryDataServices==null) this.lotteryDataServices = new LotteryDataServices(new Game642());
             //End Debugging
-
         }
 
         #region Main Form
@@ -75,15 +73,11 @@ namespace LottoDataManager.Forms.Reports
         private void RunReport()
         {
             String fileName = FileUtils.GetHtmlTempFilePathName();
-            //debugging
-            Console.WriteLine(fileName);
-            //end
-
             ProfitAndLossReport profitAndLossReport = new ProfitAndLossReport(GetSelectedGameMode());
             IndividualGameHtmlReport htmlReport = new IndividualGameHtmlReport();
             htmlReport.ProfitAndLossReport = profitAndLossReport;
-            String content = htmlReport.TransformText();
 
+            String content = htmlReport.TransformText();
             using (FileStream fs = File.Create(fileName))
             {
                 byte[] info = new UTF8Encoding(true).GetBytes(content);
@@ -92,12 +86,10 @@ namespace LottoDataManager.Forms.Reports
             }
             System.Diagnostics.Process.Start(fileName);
         }
-
-
         #endregion
 
         #region Buttons
-            private void btnExit_Click(object sender, EventArgs e)
+        private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
         }
@@ -106,6 +98,5 @@ namespace LottoDataManager.Forms.Reports
             RunReport();
         }
         #endregion
-
     }
 }

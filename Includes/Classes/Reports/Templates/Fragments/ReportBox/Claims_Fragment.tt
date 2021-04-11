@@ -7,22 +7,22 @@
 
 <div class="outline-container">
     <div class="outline-title">
-        <span class="title-keyword">Claims</span>
-        <span class="title-description">- Total money you win and gotcha</span>
+        <span class="title-keyword"><#=LBL("pal_form_labels_rpt_box_claims_1") #></span>
+        <span class="title-description"><#=LBL("pal_form_labels_rpt_box_claims_2") #></span>
     </div>
     <div class="outline-content">
         <table class="default-table" cellspacing="5">
             <tbody>
                 <tr>
-                    <td>Total number of claims pending: </td>
+                    <td><#=LBL("pal_form_labels_rpt_box_claims_3") #></td>
                     <td><#= ProfitAndLossReport.TotalNumberOfClaims #> claims</td>
                 </tr>
                 <tr>
-                    <td>Total number of claims yet to redeem: </td>
-                    <td><#= ProfitAndLossReport.TotalNumberOfClaimsToRedeem #> out of <#= ProfitAndLossReport.TotalNumberOfClaims #> claims</td>
+                    <td><#=LBL("pal_form_labels_rpt_box_claims_4") #></td>
+                    <td><#= String.Format(LBL("pal_form_labels_rpt_box_claims_7"), ProfitAndLossReport.TotalNumberOfClaimsToRedeem,ProfitAndLossReport.TotalNumberOfClaims) #></td>
                 </tr>
                 <tr>
-                    <td>Details of the claims</td>
+                    <td><#=LBL("pal_form_labels_rpt_box_claims_5") #></td>
                     <td>
                         <# foreach (var item in ProfitAndLossReport.ClaimDetailsList) { #>
                              <div class="claims-details-breakdown">
@@ -33,7 +33,7 @@
                                         <#=bet.GetGNUFormat() #>,
                                         <#=bet.GetLotteryWinningBet().GetWinningAmountInCurrency() #>
                                         <# if(!bet.GetLotteryWinningBet().IsClaimed()) { #>
-                                            , to redeem
+                                            <#=LBL("pal_form_labels_rpt_box_claims_6") #>
                                         <# } #>
                                     </div>
                                 <# } #>

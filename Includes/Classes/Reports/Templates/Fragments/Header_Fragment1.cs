@@ -27,8 +27,14 @@ namespace LottoDataManager.Includes.Classes.Reports.Templates.Fragments
         {
             this.Write("\r\n<!DOCTYPE html>\r\n<html>\r\n    <head>\r\n        <meta charset=\'utf-8\'>\r\n        <m" +
                     "eta http-equiv=\'X-UA-Compatible\'>\r\n        <meta name=\'viewport\' content=\'width=" +
-                    "device-width, initial-scale=1\'>\r\n\r\n        <title> Lottery Report </title>\r\n    " +
-                    "    ");
+                    "device-width, initial-scale=1\'>\r\n        <title> ");
+            
+            #line 9 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\Header_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_title_window")));
+            
+            #line default
+            #line hidden
+            this.Write(" </title>\r\n        ");
             this.Write("\r\n<!--link rel=\"stylesheet\" href=\"main_style.css\" type=\"text/css\" media=\"all\" -->" +
                     "\r\n<style>\r\n\r\nbody{\r\n    margin: 0px;\r\n}\r\n.report-header{\r\n    width: 100%;\r\n    " +
                     "height: 40px;\r\n    background-color: #354535;\r\n    font-weight: bold;\r\n    color" +
@@ -80,7 +86,7 @@ namespace LottoDataManager.Includes.Classes.Reports.Templates.Fragments
                     "n;\r\n}\r\n</style>");
             this.Write("\r\n    </head>\r\n    <body>\r\n    <div class=\"report-header\">\r\n        <td>");
             
-            #line 15 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\Header_Fragment.tt"
+            #line 14 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\Header_Fragment.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(AppTitleAndVersion()));
             
             #line default
