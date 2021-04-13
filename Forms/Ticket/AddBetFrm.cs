@@ -95,11 +95,7 @@ namespace LottoDataManager.Forms
         {
             this.Close();
             if (!this.hasDataBeenSave) return;
-            if (ClassReflectionUtil.IsMainForm(this.Owner))
-            {
-                MainForm f = (MainForm)this.Owner;
-                f.RefreshBets();
-            }
+            ClassReflectionUtil.RefreshMainFormBets(this);
         }
         private void DisplayLog(String log)
         {

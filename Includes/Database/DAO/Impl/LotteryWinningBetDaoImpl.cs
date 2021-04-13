@@ -9,6 +9,7 @@ using LottoDataManager.Includes.Database.DAO.Interface;
 using LottoDataManager.Includes.Model.Details;
 using LottoDataManager.Includes.Model.Details.Setup;
 using LottoDataManager.Includes.Model.Structs;
+using LottoDataManager.Includes.Utilities;
 
 namespace LottoDataManager.Includes.Database.DAO.Impl
 {
@@ -82,8 +83,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                 if (result < 0)
                 {
                     transaction.Rollback();
-                    throw new Exception("Target Bet ID: " + lotteryWinningBet.GetLotteryBetId()
-                        + " | Error inserting data into Lottery Winning Bet Database! ");
+                    throw new Exception(String.Format(ResourcesUtils.GetMessage("lot_dao_impl_msg10"), lotteryWinningBet.GetLotteryBetId()));
                 }
                 transaction.Commit();
             }
@@ -171,7 +171,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                 if (result < 0)
                 {
                     transaction.Rollback();
-                    throw new Exception("Removing Lottery Winning Bet ID: " + betId + " | Error updating data into Lottery Bet Database! ");
+                    throw new Exception(String.Format(ResourcesUtils.GetMessage("lot_dao_impl_msg11"), betId));
                 }
                 transaction.Commit();
             }
@@ -256,7 +256,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                 if (result < 0)
                 {
                     transaction.Rollback();
-                    throw new Exception("Updating Target Win Bet ID: " + winBet.GetID() + " | Error updating data into Lottery Bet Database! ");
+                    throw new Exception(String.Format(ResourcesUtils.GetMessage("lot_dao_impl_msg12"), winBet.GetID()));
                 }
                 transaction.Commit();
             }

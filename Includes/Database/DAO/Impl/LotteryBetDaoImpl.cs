@@ -174,7 +174,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                 if (result < 0)
                 {
                     transaction.Rollback();
-                    throw new Exception("Updating Target Bet ID: " + id + " | Error updating data into Lottery Bet Database! ");
+                    throw new Exception(String.Format(ResourcesUtils.GetMessage("lot_dao_impl_msg6"),id));
                 }
                 transaction.Commit();
             }
@@ -259,7 +259,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                     if (result < 0)
                     {
                         transaction.Rollback();
-                        throw new Exception("Error in inserting data into Lottery Bet Database! ");
+                        throw new Exception(ResourcesUtils.GetMessage("lot_dao_impl_msg7"));
                     }
                     else
                     {
@@ -303,7 +303,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                 if (result < 0)
                 {
                     transaction.Rollback();
-                    throw new Exception("Error in inserting data into Lottery Bet Database! ");
+                    throw new Exception(ResourcesUtils.GetMessage("lot_dao_impl_msg7"));
                 }
                 else
                 {
@@ -384,7 +384,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                 if (result < 0)
                 {
                     transaction.Rollback();
-                    throw new Exception("Removing Lottery Bet ID: " + id + " | Error updating data into Lottery Bet Database! ");
+                    throw new Exception(String.Format(ResourcesUtils.GetMessage("lot_dao_impl_msg8"),id));
                 }
                 transaction.Commit();
             }

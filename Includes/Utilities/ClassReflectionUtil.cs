@@ -46,6 +46,13 @@ namespace LottoDataManager.Includes.Utilities
             if (IsMainForm(form2)) return form2;
             return null;
         }
-    
+        public static void RefreshMainFormBets(Form owner)
+        {
+            if (IsMainForm(owner.Owner))
+            {
+                MainForm f = (MainForm)owner.Owner;
+                f.RefreshBets();
+            }
+        }
     }
 }

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using LottoDataManager.Includes.Classes;
 using LottoDataManager.Includes.Database.Engine;
+using LottoDataManager.Includes.Utilities;
 
 namespace LottoDataManager.Includes
 {
@@ -28,7 +29,7 @@ namespace LottoDataManager.Includes
             LotteryAppConfiguration lotteryAppConfiguration = LotteryAppConfiguration.GetInstance();
             if (String.IsNullOrEmpty(lotteryAppConfiguration.MLModelPath) || !Directory.Exists(lotteryAppConfiguration.MLModelPath))
             {
-                throw new Exception(String.Format("ML Model source path does not exist -> {0}", lotteryAppConfiguration.MLModelPath));
+                throw new Exception(String.Format(ResourcesUtils.GetMessage("app_settings_msg_1"), lotteryAppConfiguration.MLModelPath));
             }
             return lotteryAppConfiguration.MLModelPath;
         }

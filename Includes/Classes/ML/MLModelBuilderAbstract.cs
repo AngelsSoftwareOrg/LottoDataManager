@@ -1,4 +1,5 @@
-﻿using Microsoft.ML;
+﻿using LottoDataManager.Includes.Utilities;
+using Microsoft.ML;
 using Microsoft.ML.Data;
 using System;
 using System.Collections.Generic;
@@ -28,15 +29,15 @@ namespace LottoDataManager.Includes.Classes.ML
 
             using (StringWriter s = new StringWriter())
             {
-                s.Write($"\r\n*************************************************************************************************************");
-                s.Write($"\r\n*       Metrics for Regression model      ");
-                s.Write($"\r\n*------------------------------------------------------------------------------------------------------------");
-                s.Write($"\r\n*       Average L1 Loss:       {L1.Average():0.###} ");
-                s.Write($"\r\n*       Average L2 Loss:       {L2.Average():0.###}  ");
-                s.Write($"\r\n*       Average RMS:           {RMS.Average():0.###}  ");
-                s.Write($"\r\n*       Average Loss Function: {lossFunction.Average():0.###}  ");
-                s.Write($"\r\n*       Average R-squared:     {R2.Average():0.###}  ");
-                s.Write($"\r\n*************************************************************************************************************");
+                s.Write($"\r\n" + ResourcesUtils.GetMessage("mac_lrn_bldr_reg_fold_ave_metrics_1"));
+                s.Write($"\r\n" + ResourcesUtils.GetMessage("mac_lrn_bldr_reg_fold_ave_metrics_2"));
+                s.Write($"\r\n" + ResourcesUtils.GetMessage("mac_lrn_bldr_reg_fold_ave_metrics_3"));
+                s.Write($"\r\n" + ResourcesUtils.GetMessage("mac_lrn_bldr_reg_fold_ave_metrics_4") + $" {L1.Average():0.###} ");
+                s.Write($"\r\n" + ResourcesUtils.GetMessage("mac_lrn_bldr_reg_fold_ave_metrics_5") + $" {L2.Average():0.###} ");
+                s.Write($"\r\n" + ResourcesUtils.GetMessage("mac_lrn_bldr_reg_fold_ave_metrics_6") + $" {RMS.Average():0.###} ");
+                s.Write($"\r\n" + ResourcesUtils.GetMessage("mac_lrn_bldr_reg_fold_ave_metrics_7") + $" {lossFunction.Average():0.###} ");
+                s.Write($"\r\n" + ResourcesUtils.GetMessage("mac_lrn_bldr_reg_fold_ave_metrics_8") + $" {R2.Average():0.###} ");
+                s.Write($"\r\n" + ResourcesUtils.GetMessage("mac_lrn_bldr_reg_fold_ave_metrics_1"));
                 InvokeProcessingStatus(s.ToString());
             }
         }
@@ -44,15 +45,15 @@ namespace LottoDataManager.Includes.Classes.ML
         {
             using (StringWriter s = new StringWriter())
             {
-                s.Write($"\r\n*************************************************");
-                s.Write($"\r\n*       Metrics for Regression model      ");
-                s.Write($"\r\n*------------------------------------------------");
-                s.Write($"\r\n*       LossFn:        {metrics.LossFunction:0.##}");
-                s.Write($"\r\n*       R2 Score:      {metrics.RSquared:0.##}");
-                s.Write($"\r\n*       Absolute loss: {metrics.MeanAbsoluteError:#.##}");
-                s.Write($"\r\n*       Squared loss:  {metrics.MeanSquaredError:#.##}");
-                s.Write($"\r\n*       RMS loss:      {metrics.RootMeanSquaredError:#.##}");
-                s.Write($"\r\n*************************************************");
+                s.Write($"\r\n" + ResourcesUtils.GetMessage("mac_lrn_bldr_reg_metrics_1"));
+                s.Write($"\r\n" + ResourcesUtils.GetMessage("mac_lrn_bldr_reg_metrics_2"));
+                s.Write($"\r\n" + ResourcesUtils.GetMessage("mac_lrn_bldr_reg_metrics_3"));
+                s.Write($"\r\n" + ResourcesUtils.GetMessage("mac_lrn_bldr_reg_metrics_4") + $" {metrics.LossFunction:0.##}");
+                s.Write($"\r\n" + ResourcesUtils.GetMessage("mac_lrn_bldr_reg_metrics_5") + $" {metrics.RSquared:0.##}");
+                s.Write($"\r\n" + ResourcesUtils.GetMessage("mac_lrn_bldr_reg_metrics_6") + $" {metrics.MeanAbsoluteError:#.##}");
+                s.Write($"\r\n" + ResourcesUtils.GetMessage("mac_lrn_bldr_reg_metrics_7") + $" {metrics.MeanSquaredError:#.##}");
+                s.Write($"\r\n" + ResourcesUtils.GetMessage("mac_lrn_bldr_reg_metrics_8") + $" {metrics.RootMeanSquaredError:#.##}");
+                s.Write($"\r\n" + ResourcesUtils.GetMessage("mac_lrn_bldr_reg_metrics_1"));
                 InvokeProcessingStatus(s.ToString());
             }
         }
@@ -69,9 +70,9 @@ namespace LottoDataManager.Includes.Classes.ML
             using (StringWriter s = new StringWriter())
             {
                 // Save/persist the trained model to a .ZIP file
-                s.Write($"\r\n=============== Saving the model  ===============");
+                s.Write($"\r\n" + ResourcesUtils.GetMessage("mac_lrn_bldr_save_model_1"));
                 mlContext.Model.Save(mlModel, modelInputSchema, GetAbsolutePath(modelRelativePath));
-                s.Write("\r\nThe model is saved to {0}", GetAbsolutePath(modelRelativePath));
+                s.Write("\r\n" + ResourcesUtils.GetMessage("mac_lrn_bldr_save_model_2"), GetAbsolutePath(modelRelativePath));
                 InvokeProcessingStatus(s.ToString());
             }
         }
@@ -79,9 +80,9 @@ namespace LottoDataManager.Includes.Classes.ML
         {
             using (StringWriter s = new StringWriter())
             {
-                s.Write("\r\n=============== Training  model ===============");
+                s.Write("\r\n" + ResourcesUtils.GetMessage("mac_lrn_bldr_train_model_1"));
                 ITransformer model = trainingPipeline.Fit(trainingDataView);
-                s.Write("\r\n=============== End of training process ===============");
+                s.Write("\r\n" + ResourcesUtils.GetMessage("mac_lrn_bldr_train_model_2"));
                 return model;
             }
         }
@@ -91,7 +92,7 @@ namespace LottoDataManager.Includes.Classes.ML
             // in order to evaluate and get the model's accuracy metrics
             using (StringWriter s = new StringWriter())
             {
-                s.Write("\r\n=============== Cross-validating to get model's accuracy metrics ===============");
+                s.Write("\r\n" + ResourcesUtils.GetMessage("mac_lrn_bldr_evaluate_model_1"));
                 var crossValidationResults = mlContext.Regression.CrossValidate(trainingDataView, trainingPipeline, numberOfFolds: 5, labelColumnName: labelColumnName);
                 InvokeProcessingStatus(s.ToString());
                 PrintRegressionFoldsAverageMetrics(crossValidationResults);

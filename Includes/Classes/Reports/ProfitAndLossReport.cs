@@ -81,7 +81,7 @@ namespace LottoDataManager.Includes.Classes.Reports
         {
             if (gameCodeList.Count > 1)
             {
-                this.reportTitle = "Combine Game Mode";
+                this.reportTitle = ResourcesUtils.GetMessage("palc_msg_1");
                 if (String.IsNullOrEmpty(reportTitleGameList)) reportTitleGameList = "";
                 if (this.reportTitleGameList.Length > 0) this.reportTitleGameList += ", ";
                 this.reportTitleGameList += LotteryDataServices.LotteryDetails.Description;

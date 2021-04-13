@@ -65,6 +65,7 @@ namespace LottoDataManager.Forms
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
+            ClassReflectionUtil.RefreshMainFormBets(this);
         }
         private void btnSaveChanges_Click(object sender, EventArgs e)
         {

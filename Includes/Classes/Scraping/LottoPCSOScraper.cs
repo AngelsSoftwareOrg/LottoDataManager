@@ -182,31 +182,31 @@ namespace LottoDataManager.Includes.Classes.Scraping
 
             if (stage == LottoWebScrapingStages.INIT)
             {
-                lottoWebScraperEvent.CustomStatusMessage = "*** Initializing Lotto Webscraper for " + currentLotteryDetailsProcess.Description + "...";
+                lottoWebScraperEvent.CustomStatusMessage = String.Format(ResourcesUtils.GetMessage("pcso_scrape_cls_msg_1"), currentLotteryDetailsProcess.Description);
             }
             else if (stage == LottoWebScrapingStages.CONNECTING)
             {
-                lottoWebScraperEvent.CustomStatusMessage = "*** Connecting to Lotto Website...";
+                lottoWebScraperEvent.CustomStatusMessage = ResourcesUtils.GetMessage("pcso_scrape_cls_msg_2");
             }
             else if (stage == LottoWebScrapingStages.SESSION_CREATION)
             {
-                lottoWebScraperEvent.CustomStatusMessage = "*** Creating Dummy Session data for query purposes...";
+                lottoWebScraperEvent.CustomStatusMessage = ResourcesUtils.GetMessage("pcso_scrape_cls_msg_3");
             }
             else if (stage == LottoWebScrapingStages.SEARCHING_DATA)
             {
-                lottoWebScraperEvent.CustomStatusMessage = "*** Querying for lotto draw result updates...";
+                lottoWebScraperEvent.CustomStatusMessage = ResourcesUtils.GetMessage("pcso_scrape_cls_msg_4");
             }
             else if (stage == LottoWebScrapingStages.SCRAPING)
             {
-                lottoWebScraperEvent.CustomStatusMessage = "*** Scraping for lotto results draw updates...";
+                lottoWebScraperEvent.CustomStatusMessage = ResourcesUtils.GetMessage("pcso_scrape_cls_msg_5");
             }
             else if (stage == LottoWebScrapingStages.INSERT)
             {
-                lottoWebScraperEvent.CustomStatusMessage = "*** Inserting scraped data...";
+                lottoWebScraperEvent.CustomStatusMessage = ResourcesUtils.GetMessage("pcso_scrape_cls_msg_6");
             }
             else if (stage == LottoWebScrapingStages.FINISH)
             {
-                lottoWebScraperEvent.CustomStatusMessage = "*** Finished!";
+                lottoWebScraperEvent.CustomStatusMessage = ResourcesUtils.GetMessage("pcso_scrape_cls_msg_7");
             }
 
             WebScrapingStatus.Invoke(this, lottoWebScraperEvent);

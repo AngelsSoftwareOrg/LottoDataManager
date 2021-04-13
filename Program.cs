@@ -19,15 +19,6 @@ namespace LottoDataManager
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-
-            //DEBUGGING
-            for(int x=3;x<=60; x++)
-            {
-                Console.WriteLine(String.Format("lott_app_config_msg{0}=", x));
-            }
-            //DEBUGGING END
-
-
             SplashScreenFrm splash = SplashScreenFrm.GetIntance();
             splash.Show();
             if(splash.DialogResult == DialogResult.Abort)
@@ -37,16 +28,6 @@ namespace LottoDataManager
             else
             {
                 Application.Run(new MainForm());
-                //Application.Run(new ModifyBetFrm(null));
-                //Application.Run(new AddBetFrm());
-                //Application.Run(new DrawAndBetMatchFrm(null, DateTime.Now));
-                //Application.Run(new ModifyClaimsFrm(null));
-                //Application.Run(new PickGeneratorFrm(null));
-                //Application.Run(new AboutFrm());
-                //Application.Run(new SplashScreenFrm());
-                //Application.Run(new MachineLearningFrm(null));
-                //Application.Run(new LotterySettingsFrm(null));
-                //Application.Run(new ModifyBetDateFrm(null));
                 //splash.DisposeInstance();
                 //Application.Run(new ProfitAndLossFrm(null));
             }

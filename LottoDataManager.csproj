@@ -186,7 +186,6 @@
     <Compile Include="Includes\Classes\ML\SDCARegression\ModelInputSDCARegression.cs" />
     <Compile Include="Includes\Classes\ML\SDCARegression\ModelOutputSDCARegression.cs" />
     <Compile Include="Includes\Classes\Reports\DashboardReport.cs" />
-    <Compile Include="Includes\Classes\Reports\Engine\ProfitAndLossReport.cs" />
     <Compile Include="Includes\Classes\Reports\ProfitAndLossReport.cs" />
     <Compile Include="Includes\Classes\Reports\ReportAbstract.cs" />
     <Compile Include="Includes\Classes\Reports\ReportDataServices.cs" />

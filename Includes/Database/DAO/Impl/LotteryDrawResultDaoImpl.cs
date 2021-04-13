@@ -200,7 +200,7 @@ namespace LottoDataManager.Includes.Database.DAO
                 if (result < 0)
                 {
                     transaction.Rollback();
-                    throw new Exception("Error inserting data into Lottery result database!");
+                    throw new Exception(ResourcesUtils.GetMessage("lot_dao_impl_msg9"));
                 }
                 transaction.Commit();
             }

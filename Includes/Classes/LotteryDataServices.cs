@@ -54,7 +54,7 @@ namespace LottoDataManager.Includes.Classes
         public LotteryDetails LotteryDetails { get => lotteryDetails; }
         public List<LotteryDrawResult> GetLotteryDrawResults(DateTime startingDate)
         {
-            if (startingDate >= DateTime.Now) throw new Exception("Date should be backdated when getting new Draw Results!");
+            if (startingDate >= DateTime.Now) throw new Exception(ResourcesUtils.GetMessage("lot_data_srv_cls_msg_1"));
             return lotteryDrawResultDao.GetDrawResultsFromStartingDate(GameMode, startingDate);
         }
         public LotteryDrawResult GetLotteryDrawResultByDrawDate(DateTime drawDate)
@@ -63,7 +63,7 @@ namespace LottoDataManager.Includes.Classes
         }
         public List<LotteryBet> GetLottoBets(DateTime sinceWhen)
         {
-            if (sinceWhen >= DateTime.Now) throw new Exception("Date should be backdated when getting new Draw Bets!");
+            if (sinceWhen >= DateTime.Now) throw new Exception(ResourcesUtils.GetMessage("lot_data_srv_cls_msg_2"));
             LotteryBetDao betDao = LotteryBetDaoImpl.GetInstance();
             return betDao.GetDashboardLatestBets(GameMode, sinceWhen);
         }
@@ -101,7 +101,7 @@ namespace LottoDataManager.Includes.Classes
         {
             String result = "";
             DateTime nextScheduledDate = GetNextDrawDate();
-            if (nextScheduledDate.Date == DateTime.Today) result = "Today! ";
+            if (nextScheduledDate.Date == DateTime.Today) result = ResourcesUtils.GetMessage("lot_data_srv_cls_msg_3");
             return (result + nextScheduledDate.ToString(DateTimeConverterUtils.DATE_FORMAT_LONG));
         }
         public LotteryTicketPanel GetLotteryTicketPanel()
