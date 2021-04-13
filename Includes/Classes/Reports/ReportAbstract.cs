@@ -9,12 +9,22 @@ namespace LottoDataManager.Includes.Classes.Reports
 {
     public abstract class ReportAbstract
     {
-        protected LotteryDataServices lotteryDataServices;
+        private LotteryDataServices lotteryDataServices;
         protected ReportDataServices reportDataServices;
+
         protected ReportAbstract(LotteryDataServices lotteryDataServices)
         {
-            this.lotteryDataServices = lotteryDataServices;
-            this.reportDataServices = new ReportDataServices(lotteryDataServices.LotteryDetails);
+            this.LotteryDataServices = lotteryDataServices;
+        }
+
+        protected LotteryDataServices LotteryDataServices 
+        { 
+            get => lotteryDataServices; 
+            set 
+            {
+                lotteryDataServices = value;
+                if(value != null) this.reportDataServices = new ReportDataServices(lotteryDataServices.LotteryDetails);
+            }
         }
     }
 }

@@ -4,7 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LottoDataManager.Includes.Classes;
 using LottoDataManager.Includes.Database.Engine;
+using LottoDataManager.Includes.Utilities;
 
 namespace LottoDataManager.Includes
 {
@@ -14,11 +16,24 @@ namespace LottoDataManager.Includes
         {
             get
             {
-                return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\.." + Properties.Settings.Default.msaccess_datasource_path);
+                LotteryAppConfiguration lotteryAppConfiguration = LotteryAppConfiguration.GetInstance();
+                if (String.IsNullOrEmpty(lotteryAppConfiguration.DBSourcePath) || !File.Exists(lotteryAppConfiguration.DBSourcePath))
+                {
+                    return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\.." + Properties.Settings.Default.msaccess_datasource_path);
+                }
+                return lotteryAppConfiguration.DBSourcePath;
             }
         }
-
-        public static String GetLootoScrapeSite
+        public static String GetMLModelSourcePath()
+        {
+            LotteryAppConfiguration lotteryAppConfiguration = LotteryAppConfiguration.GetInstance();
+            if (String.IsNullOrEmpty(lotteryAppConfiguration.MLModelPath) || !Directory.Exists(lotteryAppConfiguration.MLModelPath))
+            {
+                throw new Exception(String.Format(ResourcesUtils.GetMessage("app_settings_msg_1"), lotteryAppConfiguration.MLModelPath));
+            }
+            return lotteryAppConfiguration.MLModelPath;
+        }
+        public static String GetLottoScrapeSite
         {
             get
             {
@@ -44,6 +59,10 @@ namespace LottoDataManager.Includes
                 Properties.Settings.Default.version_minor,
                 Properties.Settings.Default.version_patch,
                 Properties.Settings.Default.version_release);
+        }
+        public static String GetAppVersionWithPrefix()
+        {
+            return String.Format("v{0}", GetAppVersion());
         }
 
     }

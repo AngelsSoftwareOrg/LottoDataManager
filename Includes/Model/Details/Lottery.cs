@@ -13,5 +13,6 @@ namespace LottoDataManager.Includes.Model.Details
         String GetDescription();
         double GetPricePerBet();
         int GetWebScrapeGameCode();
+        Lottery Clone();
     }
 }

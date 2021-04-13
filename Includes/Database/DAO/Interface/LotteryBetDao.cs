@@ -26,5 +26,8 @@ namespace LottoDataManager.Includes.Database.DAO.Interface
         double[] GetTotalLuckyPickWinAndLoose(GameMode gameMode);
         double[] GetMonthlySpending(GameMode gameMode, int year);
         List<LotteryBet> GetLotteryBetsCurrentSeason(GameMode gameMode);
+        List<LotteryBet> GetAllRedeemedClaims(GameMode gameMode, bool isGetClaimedStatus);
+        DateTime[] GetMinMaxYearsOfBetting(GameMode gameMode);
+        List<double[]> GetTabularAllBetsSpending(List<int> gameCodes);
     }
 }

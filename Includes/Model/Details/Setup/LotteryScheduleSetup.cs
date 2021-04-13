@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LottoDataManager.Includes.Model.Structs;
 
 namespace LottoDataManager.Includes.Model.Details
 {
@@ -15,6 +16,9 @@ namespace LottoDataManager.Includes.Model.Details
         private bool friday;
         private bool saturday;
         private bool sunday;
+        private int Id;
+        private GameMode gameMode;
+
         public bool Monday { get => monday; set => monday = value; }
         public bool Tuesday { get => tuesday; set => tuesday = value; }
         public bool Wednesday { get => wednesday; set => wednesday = value; }
@@ -22,6 +26,9 @@ namespace LottoDataManager.Includes.Model.Details
         public bool Friday { get => friday; set => friday = value; }
         public bool Saturday { get => saturday; set => saturday = value; }
         public bool Sunday { get => sunday; set => sunday = value; }
+        public int ID { get => Id; set => Id = value; }
+        public GameMode GameMode { get => gameMode; set => gameMode = value; }
+
         public bool IsFriday()
         {
             return this.Friday;
@@ -84,6 +91,29 @@ namespace LottoDataManager.Includes.Model.Details
 #else
             return base.ToString();
 #endif
+        }
+        public int GetID()
+        {
+            return ID;
+        }
+        public GameMode GetGameMode()
+        {
+            return GameMode;
+        }
+        public bool IsEqualSchedule(LotterySchedule compareTo)
+        {
+            if(this.IsMonday() == compareTo.IsMonday() &&
+                this.IsTuesday() == compareTo.IsTuesday() &&
+                this.IsWednesday() == compareTo.IsWednesday() &&
+                this.IsThursday() == compareTo.IsThursday() &&
+                this.IsFriday() == compareTo.IsFriday() &&
+                this.IsSaturday() == compareTo.IsSaturday() &&
+                this.IsSunday() == compareTo.IsSunday() &&
+                this.GetGameMode().Equals(compareTo.GetGameMode()))
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

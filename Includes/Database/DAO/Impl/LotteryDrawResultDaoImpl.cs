@@ -200,7 +200,7 @@ namespace LottoDataManager.Includes.Database.DAO
                 if (result < 0)
                 {
                     transaction.Rollback();
-                    throw new Exception("Error inserting data into Lottery result database!");
+                    throw new Exception(ResourcesUtils.GetMessage("lot_dao_impl_msg9"));
                 }
                 transaction.Commit();
             }
@@ -480,7 +480,7 @@ namespace LottoDataManager.Includes.Database.DAO
                 "  FROM draw_results " +
                 " WHERE game_cd = @game_cd ";
         }
-        public List<LotteryDrawResult> GetMachineLearningDataSet(GameMode gameMode, DateTime startingDate)
+        public List<LotteryDrawResult> GetMachineLearningDataSetFastTree(GameMode gameMode, DateTime startingDate)
         {
             List<LotteryDrawResult> results = new List<LotteryDrawResult>();
             using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
@@ -490,6 +490,32 @@ namespace LottoDataManager.Includes.Database.DAO
                 command.CommandText = " SELECT TOP 500 jackpot_amt,ID,draw_date,num1,num2,num3,num4,num5,num6,winners,game_cd, " +
                                         " 	     FORMAT(num1,'00') + FORMAT(num2,'00') + FORMAT(num3,'00') +  " +
                                         " 	     FORMAT(num4,'00') + FORMAT(num5,'00') + FORMAT(num6,'00') AS ['result'] " +
+                                        "   FROM draw_results " +
+                                        "  WHERE game_cd = @game_cd " +
+                                        " 	 AND `draw_date` > CDATE(@startingDate) " +
+                                        "  ORDER BY `draw_date` ASC ";
+                command.Parameters.AddWithValue("@game_cd", gameMode);
+                command.Parameters.AddWithValue("@startingDate", startingDate.Date.ToString());
+                command.Connection = conn;
+                conn.Open();
+                using (OleDbDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        results.Add(GetLotteryDrawResultSetup(reader, gameMode));
+                    }
+                }
+            }
+            return results;
+        }
+        public List<LotteryDrawResult> GetMachineLearningDataSetSDCA(GameMode gameMode, DateTime startingDate)
+        {
+            List<LotteryDrawResult> results = new List<LotteryDrawResult>();
+            using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
+            using (OleDbCommand command = new OleDbCommand())
+            {
+                command.CommandType = CommandType.Text;
+                command.CommandText = " SELECT TOP 500 * " +
                                         "   FROM draw_results " +
                                         "  WHERE game_cd = @game_cd " +
                                         " 	 AND `draw_date` > CDATE(@startingDate) " +

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LottoDataManager.Includes.Model.Structs;
 
 namespace LottoDataManager.Includes.Model.Details
 {
@@ -15,6 +16,8 @@ namespace LottoDataManager.Includes.Model.Details
         private double match4;
         private double match5;
         private double match6;
+        private int Id;
+        private GameMode gameMode;
         public double Match0 { get => match0; set => match0 = value; }
         public double Match1 { get => match1; set => match1 = value; }
         public double Match2 { get => match2; set => match2 = value; }
@@ -22,6 +25,33 @@ namespace LottoDataManager.Includes.Model.Details
         public double Match4 { get => match4; set => match4 = value; }
         public double Match5 { get => match5; set => match5 = value; }
         public double Match6 { get => match6; set => match6 = value; }
+        public int ID { get => Id; set => Id = value; }
+        public GameMode GameMode { get => gameMode; set => gameMode = value; }
+        public object Clone()
+        {
+            LotteryWinningCombinationSetup s = new LotteryWinningCombinationSetup()
+            {
+                ID = this.ID,
+                GameMode = this.GameMode,
+                Match0 = this.Match0,
+                Match1 = this.Match1,
+                Match2 = this.Match2,
+                Match3 = this.Match3,
+                Match4 = this.Match4,
+                Match5 = this.Match5,
+                Match6 = this.Match6,
+            };
+            return s;
+        }
+
+        public GameMode GetGameMode()
+        {
+            return GameMode;
+        }
+        public int GetID()
+        {
+            return ID;
+        }
         public double GetMatch0()
         {
             return this.Match0;
@@ -60,7 +90,6 @@ namespace LottoDataManager.Includes.Model.Details
             if (matchingCount == 6) return this.Match6;
             return 0;
         }
-
         override
         public String ToString()
         {

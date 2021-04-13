@@ -35,6 +35,10 @@ namespace LottoDataManager.Includes.Model.Details.Setup
         {
             return WinningAmount;
         }
+        public String GetWinningAmountInCurrency()
+        {
+            return WinningAmount.ToString("C");
+        }
         public bool IsClaimed()
         {
             return ClaimStatus;

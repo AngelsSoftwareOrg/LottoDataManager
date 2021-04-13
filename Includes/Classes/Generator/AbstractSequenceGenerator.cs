@@ -15,6 +15,9 @@ namespace LottoDataManager.Includes.Classes.Generator
         private Random random = new Random();
         protected LotteryDataServices lotteryDataServices;
         protected LotteryTicketPanel lotteryTicketPanel;
+        protected static int IN_BETWEEN_SUM_MIN = 104;
+        protected static int IN_BETWEEN_SUM_MAX = 176;
+
         private GeneratorType seqGeneratorType;
         protected AbstractSequenceGenerator(LotteryDataServices lotteryDataServices)
         {
@@ -321,6 +324,36 @@ namespace LottoDataManager.Includes.Classes.Generator
             }
             Array.Sort(result);
             return result;
+        }
+        protected String GetNumbersOnly(float sourceNum)
+        {
+            if (sourceNum < 0) sourceNum = sourceNum * -1;
+            String numbersOnly = "";
+            String tmpString = sourceNum.ToString("F0");
+            foreach (Char c in tmpString.ToCharArray())
+            {
+                int x;
+                if (int.TryParse(c.ToString(), out x))
+                {
+                    numbersOnly = String.Concat(numbersOnly, x);
+                }
+            }
+            return numbersOnly;
+        }
+
+        protected bool IsUniqueSequence(List<int[]> haystack, int[] search)
+        {
+            int[] matched = haystack.Find(seq => {
+                int hit = 0;
+                for (int ctr = 0; ctr < search.Length; ctr++)
+                {
+                    if (seq[ctr] == search[ctr]) hit++;
+                }
+                return (hit == search.Length);
+            });
+
+            if (matched == null) return true;
+            return false;
         }
     }
 }

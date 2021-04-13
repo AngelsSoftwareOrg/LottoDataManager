@@ -1,0 +1,184 @@
+﻿<#@ template language="C#" inherits="IndividualGameHTMLReportView" #>
+
+<!--link rel="stylesheet" href="main_style.css" type="text/css" media="all" -->
+<style>
+
+body{
+    margin: 0px;
+}
+footer{
+    margin: 0px;
+    width: 100%;
+    height: 50px;
+    background-color: #4c533f;
+    font-size: 1.2em;
+    text-shadow: 0 2px 2px rgba(0,0,0,.5);
+    color: whitesmoke;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    vertical-align: middle;
+}
+
+.report-header{
+    width: 100%;
+    height: 40px;
+    background-color: #354535;
+    font-weight: bold;
+    color: ghostwhite;
+    font-size: 2em;
+    text-shadow: 0 2px 2px rgba(0,0,0,.5);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.dashboard-box{
+    width: 100%;
+    height: 300px;
+    background-color: #498aff;
+}
+.dashboard-box-content{
+    vertical-align: middle;
+    /* border: 2px dashed #444; */
+    height: 50%;
+    display: flex;
+    justify-content: space-between;
+    transform: translate(0, 50%);
+}
+
+.dashboard-box-content .title-partition{
+    /* border: 2px dashed #444; */
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+    margin: 0 10px 0 10px;
+
+}
+
+.dashboard-box-title{
+    font-weight: bold;
+    color: ghostwhite;
+    font-size: 4em;
+    text-shadow: 0 2px 2px rgba(0,0,0,.5);
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+.dashboard-box-sub-title{
+    font-size: 2em;
+    text-shadow: 0 2px 2px rgba(0,0,0,.5);
+    color: whitesmoke;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.dashboard-box-sub-title-combine{
+    font-size: 1.2em;
+    text-shadow: 0 2px 2px rgba(0,0,0,.5);
+    color: whitesmoke;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+
+
+
+.dashboard-box-winnings{
+    font-weight: bold;
+    color: greenyellow;
+    font-size: 5em;
+    text-shadow: 0 5px 1px rgba(101, 60, 60, 0.5);
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    text-align: center;
+}
+.dashboard-box-sub-winnings{
+    font-size: 1.3em;
+    font-style: italic;
+    text-shadow: 0 2px 2px rgba(0,0,0,.5);
+    color: whitesmoke;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    text-align: center;
+}
+.page-spacer{
+    width:100%;
+    height: 100px;
+}
+.zero-sum-color{
+    color: whitesmoke;
+}
+
+
+/*
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    REPORT BOX CONTENT
+*/
+.report-box{
+    top: 50px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.outline-container{
+    margin: 50px 10px 0px 10px;
+}
+
+.title-keyword{
+    font-size: 1.5em;
+    color: mediumturquoise;
+    font-weight: bold;
+}
+
+.title-description{
+    color: green;
+    font-weight: bold;
+}
+
+.report-box .default-table {
+    width: 100%;
+    margin: 20px 30px 30px 30px;
+    border: 0px solid black;
+}
+
+.report-box .default-table tr td:first-of-type{
+    width: 350px;
+    border: 0px solid black;
+}
+.report-box .default-table td{
+    border: 0px solid black;
+    vertical-align: top;
+}
+
+.report-box .yearly-tallying{
+    border: 2px solid black;
+    text-align: left;
+    width: 50%;
+    
+}
+
+.report-box .table-stats-style{
+    table-layout:auto;
+    text-align: left;
+    margin-left: 30px;
+    margin-top: 30px;
+}
+.table-stats-style tr td{
+    border: 2px solid rgb(194, 189, 189);
+}
+.table-stats-style th{
+    border: 2px solid rgb(194, 189, 189);
+    background-color:whitesmoke;
+}
+
+.table-stats-style tbody{
+    table-layout:auto;
+}
+
+.table-stats-style tr td:first-of-type{
+    min-width: 50px;
+}
+
+
+/*
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    INDIVIDUAL CSS
+*/
+.claims-details-breakdown{
+    margin-bottom: 30px;
+}
+.claims-details-breakdown span{
+    font-weight: bold;
+    color: green;
+}
+</style>

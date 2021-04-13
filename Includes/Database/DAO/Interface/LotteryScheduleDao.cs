@@ -11,5 +11,7 @@ namespace LottoDataManager.Includes.Database.DAO
     public interface LotteryScheduleDao
     {
         LotterySchedule GetLotterySchedule(GameMode gameMode);
+        void RemoveLotterySchedule(LotterySchedule lsched);
+        int InsertLotterySchedule(LotterySchedule lsched);
     }
 }

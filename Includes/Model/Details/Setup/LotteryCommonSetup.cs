@@ -76,11 +76,11 @@ namespace LottoDataManager.Includes.Model.Details.Setup
         }
         public void FillNumberBySeq(int seq, int number)
         {
-            if (seq < 1 || seq > 6) throw new Exception("Sequence should be between 1-6.");
+            if (seq < 1 || seq > 6) throw new Exception(ResourcesUtils.GetMessage("lott_comm_setup_cls_msg_1"));
 
             foreach(int n in allNumbers)
             {
-                if (n > 0 && n == number) throw new Exception("Duplicate number is not valid.");
+                if (n > 0 && n == number) throw new Exception(ResourcesUtils.GetMessage("lott_comm_setup_cls_msg_2"));
             }
 
             allNumbers[seq - 1] = number;
@@ -117,7 +117,7 @@ namespace LottoDataManager.Includes.Model.Details.Setup
         {
             try
             {
-                if (String.IsNullOrWhiteSpace(sequence)) throw new Exception("Parameter should contain a sequence of number for parsing");
+                if (String.IsNullOrWhiteSpace(sequence)) throw new Exception(ResourcesUtils.GetMessage("lott_comm_setup_cls_msg_3"));
                 string[] sequenceDeliminator = StringUtils.COMMON_DELIMITERS;
                 foreach (String del in sequenceDeliminator)
                 {
@@ -129,12 +129,22 @@ namespace LottoDataManager.Includes.Model.Details.Setup
                     }
                 }
                 //test if sequence has been filled up
-                if(this.Num6 <=0) throw new Exception("Parameter should contain a sequence of number for parsing");
+                if(this.Num6 <=0) throw new Exception(ResourcesUtils.GetMessage("lott_comm_setup_cls_msg_3"));
             }
             catch (Exception e) 
             {
                 throw e;
             }
+        }
+        public String GetGNUFormat()
+        {
+            return String.Format("{0}-{1}-{2}-{3}-{4}-{5}",
+                Num1.ToString().PadLeft(2, char.Parse("0")),
+                Num2.ToString().PadLeft(2, char.Parse("0")),
+                Num3.ToString().PadLeft(2, char.Parse("0")),
+                Num4.ToString().PadLeft(2, char.Parse("0")),
+                Num5.ToString().PadLeft(2, char.Parse("0")),
+                Num6.ToString().PadLeft(2, char.Parse("0")));
         }
     }
 }

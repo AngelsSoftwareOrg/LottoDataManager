@@ -1,0 +1,15 @@
+﻿<#@ template language="C#" inherits="IndividualGameHTMLReportView" #>
+
+<div class="report-box">
+    <#@include file="ReportBox/WinningDigits_Fragment.tt" once="false" #>
+    <#@include file="ReportBox/Spending_Fragment.tt" once="false" #>
+    <#@include file="ReportBox/Claims_Fragment.tt" once="false" #>
+    <#@include file="ReportBox/TallyBehavior_Fragment.tt" once="false" #>
+    <#@include file="ReportBox/TallyWinningDigits_Fragment.tt" once="false" #>
+    <#@include file="ReportBox/YearlyBets_Fragment.tt" once="false" #>
+    <#@include file="ReportBox/DaysOfWeekTally_Fragment.tt" once="false" #>
+    <#@include file="ReportBox/PickGeneratorsTally_Fragment.tt" once="false" #>
+    <#@include file="ReportBox/OutletTally_Fragment.tt" once="false" #>
+    <#@include file="ReportBox/WinningBetTally_Fragment.tt" once="false" #>
+    <div class="page-spacer"></div>
+</div>

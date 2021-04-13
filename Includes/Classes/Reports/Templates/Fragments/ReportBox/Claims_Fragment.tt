@@ -1,0 +1,47 @@
+﻿<#@ template language="C#" inherits="IndividualGameHTMLReportView" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="LottoDataManager.Includes.Model.Details" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+
+<div class="outline-container">
+    <div class="outline-title">
+        <span class="title-keyword"><#=LBL("pal_form_labels_rpt_box_claims_1") #></span>
+        <span class="title-description"><#=LBL("pal_form_labels_rpt_box_claims_2") #></span>
+    </div>
+    <div class="outline-content">
+        <table class="default-table" cellspacing="5">
+            <tbody>
+                <tr>
+                    <td><#=LBL("pal_form_labels_rpt_box_claims_3") #></td>
+                    <td><#= ProfitAndLossReport.TotalNumberOfClaims #> claims</td>
+                </tr>
+                <tr>
+                    <td><#=LBL("pal_form_labels_rpt_box_claims_4") #></td>
+                    <td><#= String.Format(LBL("pal_form_labels_rpt_box_claims_7"), ProfitAndLossReport.TotalNumberOfClaimsToRedeem,ProfitAndLossReport.TotalNumberOfClaims) #></td>
+                </tr>
+                <tr>
+                    <td><#=LBL("pal_form_labels_rpt_box_claims_5") #></td>
+                    <td>
+                        <# foreach (var item in ProfitAndLossReport.ClaimDetailsList) { #>
+                             <div class="claims-details-breakdown">
+                                <span><#= item.Key #></span>
+                                <# foreach (LotteryBet bet in (List<LotteryBet>) item.Value) { #>
+                                    <div>
+                                        <#=bet.GetTargetDrawDateFormatted() #> - 
+                                        <#=bet.GetGNUFormat() #>,
+                                        <#=bet.GetLotteryWinningBet().GetWinningAmountInCurrency() #>
+                                        <# if(!bet.GetLotteryWinningBet().IsClaimed()) { #>
+                                            <#=LBL("pal_form_labels_rpt_box_claims_6") #>
+                                        <# } #>
+                                    </div>
+                                <# } #>
+                            </div>
+                        <# } #>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+﻿<#@ template language="C#" inherits="IndividualGameHTMLReportView" #>
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <meta http-equiv='X-UA-Compatible'>
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+        <title> <#=LBL("pal_form_labels_title_window") #> </title>
+        <#@include file="CSS_Fragment.tt" once="true" #>
+    </head>
+    <body>
+    <div class="report-header">
+        <td><#= AppTitleAndVersion() #></td>
+    </div>

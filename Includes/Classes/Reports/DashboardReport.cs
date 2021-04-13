@@ -12,7 +12,7 @@ using LottoDataManager.Includes.Utilities;
 
 namespace LottoDataManager.Includes.Classes.Reports
 {
-    public class DashboardReport: ReportAbstract
+    public class DashboardReport : ReportAbstract
     {
         private List<DashboardReportItemSetup> dashboardReportList = new List<DashboardReportItemSetup>();
         public DashboardReport(LotteryDataServices lotteryDataServices) : base(lotteryDataServices)
@@ -36,7 +36,7 @@ namespace LottoDataManager.Includes.Classes.Reports
             GetMonthlyAndAnnualSpending();
             return dashboardReportList;
         }
-        
+
         private void GetTotalBetsMade()
         {
             String key = ResourcesUtils.GetMessage("drpt_how_many_bet_you_made");
@@ -80,7 +80,7 @@ namespace LottoDataManager.Includes.Classes.Reports
         {
             int years = reportDataServices.GetTotalYearsBetting();
             double totalMoney = reportDataServices.GetTotalMoneyBetted();
-            if(years > 0) totalMoney = totalMoney / years;
+            if (years > 0) totalMoney = totalMoney / years;
             String key = ResourcesUtils.GetMessage("drpt_total_money_betted_yearly");
             String value = totalMoney.ToString("C");
             dashboardReportList.Add(GenModel(key, value));
@@ -95,7 +95,7 @@ namespace LottoDataManager.Includes.Classes.Reports
         {
             int[] result = this.reportDataServices.GetWinningBetTally();
 
-            for(int ctr=0; ctr < result.Length; ctr++)
+            for (int ctr = 0; ctr < result.Length; ctr++)
             {
                 String key = ResourcesUtils.GetMessage(String.Format("drpt_x_time_{0}_won", ctr + 1));
                 String value = result[ctr].ToString();
@@ -129,9 +129,9 @@ namespace LottoDataManager.Includes.Classes.Reports
 
             //monthly
             for (int ctr = 0; ctr < resultLastYear.Length - 1; ctr++)
-            {     
+            {
                 String msg = ResourcesUtils.GetMessage(String.Format("drpt_monthly_spending_{0}", ctr + 1));
-                String key = String.Format(msg,thisyear,lastyear);
+                String key = String.Format(msg, thisyear, lastyear);
                 String value = String.Format("{0} / {1}", resultThisYear[ctr].ToString("C"), resultLastYear[ctr].ToString("C"));
                 dashboardReportList.Add(GenModel(key, value));
             }
@@ -145,13 +145,13 @@ namespace LottoDataManager.Includes.Classes.Reports
         private void GetNextDrawDates()
         {
             int ctrDays = 14;
-            LotterySchedule lotterySchedule = lotteryDataServices.GetLotterySchedule();
+            LotterySchedule lotterySchedule = LotteryDataServices.GetLotterySchedule();
             DateTime dateStartingTommorow = DateTime.Now.AddDays(1);
             int idxLabel = 1;
-            for (int ctr=1; ctr<= ctrDays; ctr++)
+            for (int ctr = 1; ctr <= ctrDays; ctr++)
             {
-                if (lotterySchedule.IsDrawDateMatchLotterySchedule(dateStartingTommorow)){
-                    String key = String.Format("{0} ({1})",ResourcesUtils.GetMessage("drpt_next_lottery_sched"), idxLabel++);
+                if (lotterySchedule.IsDrawDateMatchLotterySchedule(dateStartingTommorow)) {
+                    String key = String.Format("{0} ({1})", ResourcesUtils.GetMessage("drpt_next_lottery_sched"), idxLabel++);
                     String value = DateTimeConverterUtils.ConvertToFormat(dateStartingTommorow, DateTimeConverterUtils.DATE_FORMAT_LONG);
                     dashboardReportList.Add(GenModel(key, value));
                 }
@@ -161,7 +161,7 @@ namespace LottoDataManager.Includes.Classes.Reports
         private void GetPreviousDrawDates()
         {
             int ctrDays = 14;
-            LotterySchedule lotterySchedule = lotteryDataServices.GetLotterySchedule();
+            LotterySchedule lotterySchedule = LotteryDataServices.GetLotterySchedule();
             DateTime dateLastXDays = DateTime.Now.AddDays(-ctrDays);
             int idxLabel = 1;
             //for one week schedule only
@@ -178,7 +178,13 @@ namespace LottoDataManager.Includes.Classes.Reports
                 dateLastXDays = dateLastXDays.AddDays(1);
             }
         }
-
+        public String ReportTitle
+        {
+            get
+            {
+                return this.LotteryDataServices.LotteryDetails.Description;
+            }
+        }
         private DashboardReportItemSetup GenModel(String key, String value)
         {
             return new DashboardReportItemSetup() { Description = key, Value = value };

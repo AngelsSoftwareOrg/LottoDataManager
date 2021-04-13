@@ -1,0 +1,6 @@
+﻿<#@ template language="C#" inherits="IndividualGameHTMLReportView" #>
+        <footer>
+            <#=LBL("pal_form_labels_footer") #>
+        </footer>
+        </body>
+</html>

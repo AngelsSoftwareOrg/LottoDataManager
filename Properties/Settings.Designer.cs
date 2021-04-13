@@ -25,7 +25,7 @@ namespace LottoDataManager.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\\DatabaseMain\\Lotto_Main_DB.accdb")]
+        [global::System.Configuration.DefaultSettingValueAttribute("\\DatabaseMain\\Lotto_Main_DB_BACKUP.accdb")]
         public string msaccess_datasource_path {
             get {
                 return ((string)(this["msaccess_datasource_path"]));

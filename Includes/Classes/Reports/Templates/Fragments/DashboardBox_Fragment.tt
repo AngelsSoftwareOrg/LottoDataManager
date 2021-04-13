@@ -1,0 +1,25 @@
+﻿<#@ template language="C#" inherits="IndividualGameHTMLReportView" #>
+
+<div class="dashboard-box">
+    <div class="dashboard-box-content">
+        <div class="title-partition">
+            <div class="dashboard-box-title">
+                <#=ProfitAndLossReport.ReportTitle #>
+            </div>
+            <div class="dashboard-box-sub-title">
+                <#=LBL("pal_form_labels_00001") #>
+            </div>
+            <div class="dashboard-box-sub-title-combine">
+                <#=ProfitAndLossReport.ReportTitleGameList #>
+            </div>
+        </div>
+        <div class="title-partition">
+            <div class="dashboard-box-winnings">
+                <#=ProfitAndLossReport.LifeTimeWinnings #>
+            </div>
+            <div class="dashboard-box-sub-winnings">
+                <#=LBL("pal_form_labels_00002") #>
+            </div>
+        </div>
+    </div>
+</div>

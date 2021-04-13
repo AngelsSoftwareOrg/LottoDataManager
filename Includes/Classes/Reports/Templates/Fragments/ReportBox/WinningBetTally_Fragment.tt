@@ -1,0 +1,24 @@
+﻿<#@ template language="C#" inherits="IndividualGameHTMLReportView" #>
+<div class="outline-container">
+    <div class="outline-title">
+        <span class="title-keyword"><#=LBL("pal_form_labels_rpt_box_tally_win_bet_1") #></span>
+        <span class="title-description"><#=LBL("pal_form_labels_rpt_box_tally_win_bet_2") #></span>
+    </div>
+    <div class="outline-content">
+        <table class="table-stats-style" cellspacing="0">
+            <thead>
+                <th><#=LBL("pal_form_labels_rpt_box_tally_win_bet_3") #></th>
+                <th><#=LBL("pal_form_labels_rpt_box_tally_win_bet_4") #></th>
+            </thead>
+            <tbody>
+                <# foreach (var item in ProfitAndLossReport.AllBetsInTabularModeWinningBet) { #>
+                     <tr>
+                        <td><#=item[0] #></td>
+                        <td><#=item[1] #></td>
+                    </tr>
+                <# } #>
+            </tbody>
+        </table>
+    </div>
+</div>
+

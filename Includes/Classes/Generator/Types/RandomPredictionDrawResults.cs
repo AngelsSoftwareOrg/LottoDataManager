@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using LottoDataManager.Includes.Classes.ML.FastTree;
 using LottoDataManager.Includes.Model.Details;
 using LottoDataManager.Includes.Utilities;
-using LottoDataManagerML.Model;
+
 
 namespace LottoDataManager.Includes.Classes.Generator.Types
 {
@@ -19,7 +18,7 @@ namespace LottoDataManager.Includes.Classes.Generator.Types
             SequenceParams.Add(new SequenceGeneratorParams()
             {
                 GeneratorParamType = GeneratorParamType.COUNT,
-                Description = ResourcesUtils.GetMessage("pick_class_random_prediction_dr_count"),
+                Description = ResourcesUtils.GetMessage("pick_class_random_prediction_fasttree_count"),
                 MaxCountValue=9999
             });
             SequenceParams.Add(new SequenceGeneratorParams()
@@ -47,17 +46,19 @@ namespace LottoDataManager.Includes.Classes.Generator.Types
 
             foreach(LotteryDrawResult lotDraw in lotteryDrawResults)
             {
-                ModelInput sampleData = lotDraw.GetModelInput();
-                var predictionResult = ConsumeModel.Predict(sampleData);
+                ModelInputFastTree sampleData = lotDraw.GetModelInput();
+                var predictionResult = ConsumeModelFastTree.Predict(sampleData);
 
                 //Console.WriteLine(String.Format("Data: {0}, {1},{2},{3},{4},{5},{6},{7},{8} ", sampleData.Draw_date,
                 //    sampleData.Num1, sampleData.Num2, sampleData.Num3, sampleData.Num4, sampleData.Num5, sampleData.Num6,
                 //    sampleData.Game_cd.ToString(), predictionResult.Score.ToString("G20")));
 
-                if (int.Parse(predictionResult.Score.ToString().Substring(0, 1)) >= selectedCoefficient)
+                float tmpScore = predictionResult.Score;
+                if (tmpScore <= 0) tmpScore = (tmpScore * -1) + 1;
+                if (int.Parse(tmpScore.ToString("G20").Substring(0, 1)) >= selectedCoefficient)
                 {
                     int[] x = ConvertAndFillSequence(predictionResult.Score);
-                    results.Add(x);
+                    if (IsUniqueSequence(results, x)) results.Add(x);
                 }
             }
             return results;
@@ -66,7 +67,7 @@ namespace LottoDataManager.Includes.Classes.Generator.Types
         private int[] ConvertAndFillSequence(float sourceNum)
         {
             int[] result = new int[this.lotteryTicketPanel.GetGameDigitCount()];
-            String numbers = sourceNum.ToString("G20");
+            String numbers = GetNumbersOnly(sourceNum);
             if (numbers.Length < 12) numbers = numbers.PadLeft(12, char.Parse("0"));
 
             Random rand = new Random();
@@ -90,6 +91,8 @@ namespace LottoDataManager.Includes.Classes.Generator.Types
                         result[x / 2] = n;
                         break;
                     }
+                    if (n == 0)
+                        Console.WriteLine(true);
                 }
                 x += 2;
                 if ((x + 2) > numbers.Length) break;

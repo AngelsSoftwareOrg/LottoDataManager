@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using LottoDataManager.Includes.Model.Details;
+using LottoDataManager.Includes.Classes.ML.FastTree;
 using LottoDataManager.Includes.Utilities;
-using LottoDataManagerML.Model;
 
 namespace LottoDataManager.Includes.Classes.Generator.Types
 {
@@ -39,7 +35,7 @@ namespace LottoDataManager.Includes.Classes.Generator.Types
         public List<int[]> GenerateSequence()
         {
             String drawDate = DateTimeConverterUtils.ConvertToFormat(this.lotteryDataServices.GetNextDrawDate(), 
-                DateTimeConverterUtils.STANDARD_DATE_FORMAT) + " 00:00:00.0";
+                                    DateTimeConverterUtils.STANDARD_DATE_FORMAT) + " 00:00:00.0";
             List<int[]> results = new List<int[]>();
 
             int selectedCoefficient = GetFieldParamValueForCount(1);
@@ -52,7 +48,7 @@ namespace LottoDataManager.Includes.Classes.Generator.Types
                 int[] lp = LuckyPickGenerator(rnd);
 
                 // Create single instance of sample data from first line of dataset for model input
-                ModelInput sampleData = new ModelInput()
+                ModelInputFastTree sampleData = new ModelInputFastTree()
                 {
                     Draw_date = drawDate,
                     Num1 = lp[0],
@@ -65,15 +61,18 @@ namespace LottoDataManager.Includes.Classes.Generator.Types
                 };
 
                 // Make a single prediction on the sample data and print results
-                var predictionResult = ConsumeModel.Predict(sampleData);
+                var predictionResult = ConsumeModelFastTree.Predict(sampleData);
 
                 //Console.WriteLine(String.Format("Data: {0}, {1},{2},{3},{4},{5},{6},{7},{8} ", sampleData.Draw_date,
                 //    sampleData.Num1, sampleData.Num2, sampleData.Num3, sampleData.Num4, sampleData.Num5, sampleData.Num6,
                 //    sampleData.Game_cd.ToString(), predictionResult.Score.ToString()));
 
-                if (int.Parse(predictionResult.Score.ToString().Substring(0, 1)) >= selectedCoefficient)
+                float tmpScore = predictionResult.Score;
+                if (tmpScore <= 0) tmpScore = (tmpScore * -1) + 1;
+
+                if (int.Parse(tmpScore.ToString().Substring(0, 1)) >= selectedCoefficient)
                 {
-                    results.Add(lp);
+                    if (IsUniqueSequence(results, lp)) results.Add(lp);
                 }
                 if (loopBreaker++ >= 100000) break;
                 if (results.Count >= maximumPickCount) break;

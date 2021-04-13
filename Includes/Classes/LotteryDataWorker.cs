@@ -20,14 +20,14 @@ namespace LottoDataManager.Includes.Classes
         }
         public void ProcessCheckingForWinningBets(GameMode gameMode)
         {
-            RaiseEvent(LotteryDataWorkerEventStages.INIT, "Process Checking initialization...");
+            RaiseEvent(LotteryDataWorkerEventStages.INIT, ResourcesUtils.GetMessage("lot_data_worker_cls_msg_1"));
             LotteryBetDao lotteryBetDao = LotteryBetDaoImpl.GetInstance();
             List<LotteryBet> lotteryBetArr = lotteryBetDao.ExtractLotteryBetsCheckWinningNumber(gameMode);
             foreach (LotteryBet lotteryBet in lotteryBetArr)
             {
                 ProcessWinningBet(lotteryBet);
             }
-            RaiseEvent(LotteryDataWorkerEventStages.FINISH, "Finished");
+            RaiseEvent(LotteryDataWorkerEventStages.FINISH, ResourcesUtils.GetMessage("lot_data_worker_cls_msg_2"));
         }
         public void ProcessWinningBet(LotteryBet lotteryBet)
         {
@@ -35,9 +35,9 @@ namespace LottoDataManager.Includes.Classes
             LotteryWinningCombinationDao lotteryWinningCombinationDao = LotteryWinningCombinationDaoImpl.GetInstance();
             LotteryWinningCombination lotteryWinningCombination = lotteryWinningCombinationDao.GetLotteryWinningCombination(gameMode);
 
-            RaiseEvent(LotteryDataWorkerEventStages.EXTRACTING, "Extracting your bets...");
+            RaiseEvent(LotteryDataWorkerEventStages.EXTRACTING, ResourcesUtils.GetMessage("lot_data_worker_cls_msg_3"));
             LotteryWinningBetDao lotteryWinningBetDao = LotteryWinningBetDaoImpl.GetInstance();
-            RaiseEvent(LotteryDataWorkerEventStages.EXTRACTING, "Extracting draw results...");
+            RaiseEvent(LotteryDataWorkerEventStages.EXTRACTING, ResourcesUtils.GetMessage("lot_data_worker_cls_msg_4"));
             LotteryDrawResultDao lotteryDrawResultDao = LotteryDrawResultDaoImpl.GetInstance();
 
             LotteryDrawResult betDrawResult = lotteryDrawResultDao.GetLotteryDrawResultByDrawDate(
@@ -67,7 +67,7 @@ namespace LottoDataManager.Includes.Classes
                 lotteryWinningBet.WinningAmount = lotteryWinningCombination.GetWinningAmount(matchingNumberCtr);
             }
 
-            RaiseEvent(LotteryDataWorkerEventStages.INSERT, "Inserting bets and draw match result");
+            RaiseEvent(LotteryDataWorkerEventStages.INSERT, ResourcesUtils.GetMessage("lot_data_worker_cls_msg_5"));
             lotteryWinningBetDao.InsertWinningBet(lotteryWinningBet);
         }
         public void ProcessAdjustCorrectTargetDrawDate(GameMode gameMode)

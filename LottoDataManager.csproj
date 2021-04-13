@@ -1,5 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="packages\LightGBM.2.2.3\build\LightGBM.props" Condition="Exists('packages\LightGBM.2.2.3\build\LightGBM.props')" />
+  <Import Project="packages\Microsoft.ML.FastTree.1.5.5\build\netstandard2.0\Microsoft.ML.FastTree.props" Condition="Exists('packages\Microsoft.ML.FastTree.1.5.5\build\netstandard2.0\Microsoft.ML.FastTree.props')" />
+  <Import Project="packages\Microsoft.ML.1.5.5\build\netstandard2.0\Microsoft.ML.props" Condition="Exists('packages\Microsoft.ML.1.5.5\build\netstandard2.0\Microsoft.ML.props')" />
+  <Import Project="packages\Microsoft.ML.CpuMath.1.5.5\build\netstandard2.0\Microsoft.ML.CpuMath.props" Condition="Exists('packages\Microsoft.ML.CpuMath.1.5.5\build\netstandard2.0\Microsoft.ML.CpuMath.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -12,9 +16,11 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -36,8 +42,26 @@
     <ApplicationIcon>Clover_Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Itenso.TimePeriod, Version=2.1.1.0, Culture=neutral, PublicKeyToken=8cb6db75b4e81486, processorArchitecture=MSIL">
+      <HintPath>packages\TimePeriodLibrary.NET.2.1.1\lib\net46\Itenso.TimePeriod.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ML, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.ML.1.5.5\lib\netstandard2.0\Microsoft.ML.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ML.LightGbm, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.ML.LightGbm.1.5.5\lib\netstandard2.0\Microsoft.ML.LightGbm.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Numerics.Vectors.4.4.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -50,46 +74,70 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Forms\AboutFrm.cs">
+    <Compile Include="Forms\Others\AboutFrm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\AboutFrm.Designer.cs">
+    <Compile Include="Forms\Others\AboutFrm.Designer.cs">
       <DependentUpon>AboutFrm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\AddBetFrm.cs">
+    <Compile Include="Forms\ProcessingStatusLogFrm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\AddBetFrm.Designer.cs">
+    <Compile Include="Forms\ProcessingStatusLogFrm.Designer.cs">
+      <DependentUpon>ProcessingStatusLogFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Reports\ProfitAndLossFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Reports\ProfitAndLossFrm.Designer.cs">
+      <DependentUpon>ProfitAndLossFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Ticket\AddBetFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Ticket\AddBetFrm.Designer.cs">
       <DependentUpon>AddBetFrm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\DrawAndBetMatchFrm.cs">
+    <Compile Include="Forms\Ticket\DrawAndBetMatchFrm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\DrawAndBetMatchFrm.Designer.cs">
+    <Compile Include="Forms\Ticket\DrawAndBetMatchFrm.Designer.cs">
       <DependentUpon>DrawAndBetMatchFrm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\MachineLearningFrm.cs">
+    <Compile Include="Forms\Settings\LotterySettingsFrm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\MachineLearningFrm.Designer.cs">
+    <Compile Include="Forms\Settings\LotterySettingsFrm.Designer.cs">
+      <DependentUpon>LotterySettingsFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Others\MachineLearningFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Others\MachineLearningFrm.Designer.cs">
       <DependentUpon>MachineLearningFrm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ModifyClaimsFrm.cs">
+    <Compile Include="Forms\Ticket\ModifyBetDateFrm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\ModifyClaimsFrm.Designer.cs">
+    <Compile Include="Forms\Ticket\ModifyBetDateFrm.Designer.cs">
+      <DependentUpon>ModifyBetDateFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Ticket\ModifyClaimsFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Ticket\ModifyClaimsFrm.Designer.cs">
       <DependentUpon>ModifyClaimsFrm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ModifyBetFrm.cs">
+    <Compile Include="Forms\Ticket\ModifyBetFrm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\ModifyBetFrm.Designer.cs">
+    <Compile Include="Forms\Ticket\ModifyBetFrm.Designer.cs">
       <DependentUpon>ModifyBetFrm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\PickGeneratorFrm.cs">
+    <Compile Include="Forms\Ticket\PickGeneratorFrm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\PickGeneratorFrm.Designer.cs">
+    <Compile Include="Forms\Ticket\PickGeneratorFrm.Designer.cs">
       <DependentUpon>PickGeneratorFrm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\SplashScreenFrm.cs">
@@ -116,33 +164,134 @@
     <Compile Include="Includes\Classes\Generator\Types\RandomPickTotalSumBetweenGenerators.cs" />
     <Compile Include="Includes\Classes\Generator\Types\RandomPickTotalSumBetweenGenerators1n31.cs" />
     <Compile Include="Includes\Classes\Generator\Types\RandomPickTotalSumBetweenGeneratorsUsingTopPickCurSeason.cs" />
+    <Compile Include="Includes\Classes\Generator\Types\RandomPredictionSDCARegressionInBetween.cs" />
+    <Compile Include="Includes\Classes\Generator\Types\RandomPredictionSDCARegression.cs" />
     <Compile Include="Includes\Classes\Generator\Types\RandomPredictionDrawResults.cs" />
     <Compile Include="Includes\Classes\Generator\Types\RandomPrediction.cs" />
     <Compile Include="Includes\Classes\Generator\Types\TopDrawCurrentSeasonGenerator.cs" />
     <Compile Include="Includes\Classes\Generator\Types\TopDrawnNumbersFromJackpotGenerator.cs" />
     <Compile Include="Includes\Classes\Generator\Types\TopDrawNumbersFromDateRange.cs" />
     <Compile Include="Includes\Classes\Generator\Types\TopDrawPreviousSeasonGenerator.cs" />
+    <Compile Include="Includes\Classes\LotteryAppConfiguration.cs" />
     <Compile Include="Includes\Classes\LotteryDataServices.cs" />
     <Compile Include="Includes\Classes\LotteryDataWorker.cs" />
     <Compile Include="Includes\Classes\LotteryDataWorkerEvent.cs" />
     <Compile Include="Includes\Classes\LotteryDataWorkerEventStages.cs" />
-    <Compile Include="Includes\Classes\ML\MachineLearningModelBuilder.cs" />
+    <Compile Include="Includes\Classes\ML\FastTree\ConsumeModelFastTree.cs" />
+    <Compile Include="Includes\Classes\ML\FastTree\ModelInputFastTree.cs" />
+    <Compile Include="Includes\Classes\ML\FastTree\ModelOutputFastTree.cs" />
+    <Compile Include="Includes\Classes\ML\LightGbmRegression\ConsumeModelLightGbmRegression.cs" />
+    <Compile Include="Includes\Classes\ML\LightGbmRegression\MachineLearningModelBuilderLightGbmRegression.cs" />
+    <Compile Include="Includes\Classes\ML\LightGbmRegression\ModelInputLightGbmRegression.cs" />
+    <Compile Include="Includes\Classes\ML\LightGbmRegression\ModelOutputLightGbmRegression.cs" />
+    <Compile Include="Includes\Classes\ML\FastTree\MachineLearningModelBuilderFastTree.cs" />
+    <Compile Include="Includes\Classes\ML\MLModelAbstract.cs" />
+    <Compile Include="Includes\Classes\ML\MLModelBuilderAbstract.cs" />
+    <Compile Include="Includes\Classes\ML\SDCARegression\ConsumeModelSDCARegression.cs" />
+    <Compile Include="Includes\Classes\ML\SDCARegression\MachineLearningModelBuilderSDCARegression.cs" />
+    <Compile Include="Includes\Classes\ML\SDCARegression\ModelInputSDCARegression.cs" />
+    <Compile Include="Includes\Classes\ML\SDCARegression\ModelOutputSDCARegression.cs" />
     <Compile Include="Includes\Classes\Reports\DashboardReport.cs" />
+    <Compile Include="Includes\Classes\Reports\ProfitAndLossReport.cs" />
     <Compile Include="Includes\Classes\Reports\ReportAbstract.cs" />
     <Compile Include="Includes\Classes\Reports\ReportDataServices.cs" />
+    <Compile Include="Includes\Classes\Reports\Templates\Fragments\CSS_Fragment.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CSS_Fragment.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Includes\Classes\Reports\Templates\Fragments\DashboardBox_Fragment.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DashboardBox_Fragment.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Includes\Classes\Reports\Templates\Fragments\Footer_Fragment.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Footer_Fragment.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Includes\Classes\Reports\Templates\Fragments\Header_Fragment1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Header_Fragment.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Includes\Classes\Reports\Templates\Fragments\ReportBox\Claims_Fragment.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Claims_Fragment.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Includes\Classes\Reports\Templates\Fragments\ReportBox\DaysOfWeekTally_Fragment.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DaysOfWeekTally_Fragment.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Includes\Classes\Reports\Templates\Fragments\ReportBox\WinningBetTally_Fragment.cs">
+      <DependentUpon>WinningBetTally_Fragment.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Includes\Classes\Reports\Templates\Fragments\ReportBox\OutletTally_Fragment.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OutletTally_Fragment.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Includes\Classes\Reports\Templates\Fragments\ReportBox\PickGeneratorsTally_Fragment.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PickGeneratorsTally_Fragment.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Includes\Classes\Reports\Templates\Fragments\ReportBox\Spending_Fragment.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Spending_Fragment.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Includes\Classes\Reports\Templates\Fragments\ReportBox\TallyBehavior_Fragment.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TallyBehavior_Fragment.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Includes\Classes\Reports\Templates\Fragments\ReportBox\TallyWinningDigits_Fragment1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TallyWinningDigits_Fragment.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Includes\Classes\Reports\Templates\Fragments\ReportBox\WinningDigits_Fragment.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WinningDigits_Fragment.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Includes\Classes\Reports\Templates\Fragments\ReportBox\YearlyBets_Fragment.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>YearlyBets_Fragment.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Includes\Classes\Reports\Templates\Fragments\Reportbox_Fragment.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reportbox_Fragment.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Includes\Classes\Reports\Templates\IndividualGameHtmlReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndividualGameHtmlReport.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Includes\Classes\Reports\Templates\IndividualGameHTMLReportView.cs" />
     <Compile Include="Includes\Classes\Scraping\LottoWebScraper.cs" />
     <Compile Include="Includes\Classes\Scraping\LottoPCSOScraper.cs" />
     <Compile Include="Includes\Classes\Scraping\LottoWebScraperEvent.cs" />
     <Compile Include="Includes\Classes\Scraping\LottoWebScrapingStages.cs" />
     <Compile Include="Includes\Classes\Scraping\WebLottoScraperFactory.cs" />
     <Compile Include="Includes\Classes\UserSettings.cs" />
+    <Compile Include="Includes\Database\DAO\Impl\AppVersioningDaoImpl.cs" />
     <Compile Include="Includes\Database\DAO\Impl\LotteryBetDaoImpl.cs" />
     <Compile Include="Includes\Database\DAO\Impl\LotteryDaoImplCommon.cs" />
     <Compile Include="Includes\Database\DAO\Impl\LotteryOutletDaoImpl.cs" />
     <Compile Include="Includes\Database\DAO\Impl\LotterySequenceGenDaoImpl.cs" />
     <Compile Include="Includes\Database\DAO\Impl\LotteryWinningBetDaoImpl.cs" />
     <Compile Include="Includes\Database\DAO\Impl\LotteryDaoImpl.cs" />
+    <Compile Include="Includes\Database\DAO\Impl\TestingDatabaseSourceFileDaoImpl.cs" />
     <Compile Include="Includes\Database\DAO\Impl\UserSettingDaoImpl.cs" />
+    <Compile Include="Includes\Database\DAO\Interface\AppVersioningDao.cs" />
     <Compile Include="Includes\Database\DAO\Interface\LotteryBetDao.cs" />
     <Compile Include="Includes\Database\DAO\Interface\LotteryOutletDao.cs" />
     <Compile Include="Includes\Database\DAO\Interface\LotterySequenceGenDao.cs" />
@@ -152,8 +301,11 @@
     <Compile Include="Includes\Database\DAO\Impl\LotteryDrawResultDaoImpl.cs" />
     <Compile Include="Includes\Database\DAO\Interface\LotteryWinningCombinationDao.cs" />
     <Compile Include="Includes\Database\DAO\Impl\LotteryWinningCombinationDaoImpl.cs" />
+    <Compile Include="Includes\Database\DAO\Interface\TestingDatabaseSourceFileDao.cs" />
     <Compile Include="Includes\Database\DAO\Interface\UserSettingDao.cs" />
+    <Compile Include="Includes\Model\Details\AppVersioning.cs" />
     <Compile Include="Includes\Model\Details\LotterySequenceGenerator.cs" />
+    <Compile Include="Includes\Model\Details\Setup\AppVersioningSetup.cs" />
     <Compile Include="Includes\Model\Details\Setup\LotterySequenceGeneratorSetup.cs" />
     <Compile Include="Includes\Model\Reports\DashboardReportItem.cs" />
     <Compile Include="Includes\Model\Reports\Setup\DashboardReportItemSetup.cs" />
@@ -209,32 +361,45 @@
     <Compile Include="Includes\Utilities\StringUtils.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Forms\AboutFrm.resx">
+    <EmbeddedResource Include="Forms\Others\AboutFrm.resx">
       <DependentUpon>AboutFrm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\AddBetFrm.resx">
+    <EmbeddedResource Include="Forms\ProcessingStatusLogFrm.resx">
+      <DependentUpon>ProcessingStatusLogFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Reports\ProfitAndLossFrm.resx">
+      <DependentUpon>ProfitAndLossFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Ticket\AddBetFrm.resx">
       <DependentUpon>AddBetFrm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\DrawAndBetMatchFrm.resx">
+    <EmbeddedResource Include="Forms\Ticket\DrawAndBetMatchFrm.resx">
       <DependentUpon>DrawAndBetMatchFrm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\MachineLearningFrm.resx">
+    <EmbeddedResource Include="Forms\Settings\LotterySettingsFrm.resx">
+      <DependentUpon>LotterySettingsFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Others\MachineLearningFrm.resx">
       <DependentUpon>MachineLearningFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainFrm.resx">
       <DependentUpon>MainFrm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ModifyClaimsFrm.resx">
+    <EmbeddedResource Include="Forms\Ticket\ModifyBetDateFrm.resx">
+      <DependentUpon>ModifyBetDateFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Ticket\ModifyClaimsFrm.resx">
       <DependentUpon>ModifyClaimsFrm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ModifyBetFrm.resx">
+    <EmbeddedResource Include="Forms\Ticket\ModifyBetFrm.resx">
       <DependentUpon>ModifyBetFrm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PickGeneratorFrm.resx">
+    <EmbeddedResource Include="Forms\Ticket\PickGeneratorFrm.resx">
       <DependentUpon>PickGeneratorFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SplashScreenFrm.resx">
       <DependentUpon>SplashScreenFrm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -246,6 +411,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="DatabaseMain\MLModel_14_3H_Fast_Tree.zip" />
+    <None Include="DatabaseMain\MLModel_16_3H_SdcaRegression.zip" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -266,9 +433,87 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Clover_Icon.ico" />
-    <Content Include="DatabaseMain\Lotto_Main_DB.accdb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <Content Include="Includes\Classes\Reports\Templates\Fragments\CSS_Fragment.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>CSS_Fragment.cs</LastGenOutput>
     </Content>
+    <Content Include="Includes\Classes\Reports\Templates\Fragments\DashboardBox_Fragment.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DashboardBox_Fragment.cs</LastGenOutput>
+    </Content>
+    <Content Include="Includes\Classes\Reports\Templates\Fragments\Footer_Fragment.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>Footer_Fragment.cs</LastGenOutput>
+    </Content>
+    <Content Include="Includes\Classes\Reports\Templates\Fragments\Header_Fragment.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>Header_Fragment1.cs</LastGenOutput>
+    </Content>
+    <Content Include="Includes\Classes\Reports\Templates\Fragments\ReportBox\Claims_Fragment.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>Claims_Fragment.cs</LastGenOutput>
+    </Content>
+    <Content Include="Includes\Classes\Reports\Templates\Fragments\ReportBox\DaysOfWeekTally_Fragment.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DaysOfWeekTally_Fragment.cs</LastGenOutput>
+    </Content>
+    <Content Include="Includes\Classes\Reports\Templates\Fragments\ReportBox\WinningBetTally_Fragment.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>WinningBetTally_Fragment.cs</LastGenOutput>
+    </Content>
+    <Content Include="Includes\Classes\Reports\Templates\Fragments\ReportBox\OutletTally_Fragment.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>OutletTally_Fragment.cs</LastGenOutput>
+    </Content>
+    <Content Include="Includes\Classes\Reports\Templates\Fragments\ReportBox\PickGeneratorsTally_Fragment.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>PickGeneratorsTally_Fragment.cs</LastGenOutput>
+    </Content>
+    <Content Include="Includes\Classes\Reports\Templates\Fragments\ReportBox\Spending_Fragment.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>Spending_Fragment.cs</LastGenOutput>
+    </Content>
+    <Content Include="Includes\Classes\Reports\Templates\Fragments\ReportBox\TallyBehavior_Fragment.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>TallyBehavior_Fragment.cs</LastGenOutput>
+    </Content>
+    <Content Include="Includes\Classes\Reports\Templates\Fragments\ReportBox\TallyWinningDigits_Fragment.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>TallyWinningDigits_Fragment1.cs</LastGenOutput>
+    </Content>
+    <Content Include="Includes\Classes\Reports\Templates\Fragments\ReportBox\WinningDigits_Fragment.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>WinningDigits_Fragment.cs</LastGenOutput>
+    </Content>
+    <Content Include="Includes\Classes\Reports\Templates\Fragments\ReportBox\YearlyBets_Fragment.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>YearlyBets_Fragment.cs</LastGenOutput>
+    </Content>
+    <Content Include="Includes\Classes\Reports\Templates\Fragments\Reportbox_Fragment.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>Reportbox_Fragment.cs</LastGenOutput>
+    </Content>
+    <Content Include="Includes\Classes\Reports\Templates\IndividualGameHtmlReport.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>IndividualGameHtmlReport.cs</LastGenOutput>
+    </Content>
+    <None Include="Resources\Icons\terminal_32px.png" />
+    <None Include="Resources\Icons\broom_32.png" />
+    <None Include="Resources\Icons\cal_32px-2.png" />
+    <None Include="Resources\Icons\Paid_32x.png" />
+    <None Include="Resources\Icons\Edit_02_32x.png" />
+    <None Include="Resources\Icons\Toolbars\add_row_32.png" />
+    <None Include="Resources\Icons\cal_32px.png" />
+    <None Include="Resources\Icons\money_32px.png" />
+    <None Include="Resources\Icons\erase_32px.png" />
+    <None Include="Resources\Icons\Available_Updates_32px.png" />
+    <None Include="Resources\Icons\Button-Close-icon_32px.png" />
+    <None Include="Resources\Icons\stop_20.png" />
+    <None Include="Resources\Icons\Trash_32x.png" />
+    <None Include="Resources\Icons\Edit_01_32x.png" />
+    <None Include="Resources\Icons\save_v1_32.png" />
+    <None Include="Resources\Icons\Star5_32x.png" />
+    <None Include="Resources\Icons\Star5_256x.png" />
     <None Include="Resources\Icons\bot_01_32px.png" />
     <None Include="Resources\Design\CloverBig.png" />
     <None Include="Resources\Icons\gear-32px.png" />
@@ -294,5 +539,21 @@
       <Name>LottoDataManagerML.Model</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\Microsoft.ML.CpuMath.1.5.5\build\netstandard2.0\Microsoft.ML.CpuMath.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.ML.CpuMath.1.5.5\build\netstandard2.0\Microsoft.ML.CpuMath.props'))" />
+    <Error Condition="!Exists('packages\Microsoft.ML.1.5.5\build\netstandard2.0\Microsoft.ML.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.ML.1.5.5\build\netstandard2.0\Microsoft.ML.props'))" />
+    <Error Condition="!Exists('packages\Microsoft.ML.1.5.5\build\netstandard2.0\Microsoft.ML.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.ML.1.5.5\build\netstandard2.0\Microsoft.ML.targets'))" />
+    <Error Condition="!Exists('packages\Microsoft.ML.FastTree.1.5.5\build\netstandard2.0\Microsoft.ML.FastTree.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.ML.FastTree.1.5.5\build\netstandard2.0\Microsoft.ML.FastTree.props'))" />
+    <Error Condition="!Exists('packages\LightGBM.2.2.3\build\LightGBM.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\LightGBM.2.2.3\build\LightGBM.props'))" />
+    <Error Condition="!Exists('packages\LightGBM.2.2.3\build\LightGBM.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\LightGBM.2.2.3\build\LightGBM.targets'))" />
+  </Target>
+  <Import Project="packages\Microsoft.ML.1.5.5\build\netstandard2.0\Microsoft.ML.targets" Condition="Exists('packages\Microsoft.ML.1.5.5\build\netstandard2.0\Microsoft.ML.targets')" />
+  <Import Project="packages\LightGBM.2.2.3\build\LightGBM.targets" Condition="Exists('packages\LightGBM.2.2.3\build\LightGBM.targets')" />
 </Project>

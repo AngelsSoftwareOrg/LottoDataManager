@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
 using LottoDataManager.Forms;
+using LottoDataManager.Forms.Reports;
+using LottoDataManager.Includes;
 using LottoDataManager.Includes.Classes;
 using LottoDataManager.Includes.Classes.Reports;
 using LottoDataManager.Includes.Classes.Scraping;
@@ -30,11 +32,62 @@ namespace LottoDataManager
         private LotteryDataServices lotteryDataServices;
         private LotteryDataWorker lotteryDataWorker;
         private DashboardReport dashboardReport;
+        private ProcessingStatusLogFrm processingStatusLogFrm;
+        private String LOG_STATUS_MODULE_NAME_WEBSCRAP = "Web Scraping";
+        private String LOG_STATUS_MODULE_NAME_GRID_CONTENT = "Grid Content";
+        private String LOG_STATUS_MODULE_NAME_FIELD_DETAILS = "Refreshing Field Details";
+        private String LOG_STATUS_MODULE_NAME_WINNING_BETS = "Processing Winning Bets";
+        private String LOG_STATUS_MODULE_NAME_DRAWN_RESULT = "Download drawn results";
 
         public MainForm()
         {
             InitializeComponent();
             this.lotteryDetails = GameFactory.GetPreviousOpenGameInstance();
+            this.processingStatusLogFrm = new ProcessingStatusLogFrm();
+            this.Text = String.Format("{0} - {1}",ResourcesUtils.GetMessage("mainf_title"), AppSettings.GetAppVersionWithPrefix());
+            this.label1.Text = ResourcesUtils.GetMessage("mainf_labels_1");
+            this.label3.Text = ResourcesUtils.GetMessage("mainf_labels_2");
+            this.label4.Text = ResourcesUtils.GetMessage("mainf_labels_3");
+            this.label5.Text = ResourcesUtils.GetMessage("mainf_labels_4");
+            AddProcessingStatusLogs(LOG_STATUS_MODULE_NAME_WEBSCRAP,ResourcesUtils.GetMessage("mainf_labels_5"));
+            this.toolStripProcessingLogs.Text = ResourcesUtils.GetMessage("mainf_labels_46");
+            this.tabPage1.Text = ResourcesUtils.GetMessage("mainf_labels_6");
+            this.groupBox1.Text = ResourcesUtils.GetMessage("mainf_labels_7");
+            this.groupBox2.Text = ResourcesUtils.GetMessage("mainf_labels_8");
+            this.label2.Text = ResourcesUtils.GetMessage("mainf_labels_9");
+            this.label6.Text = ResourcesUtils.GetMessage("mainf_labels_10");
+            this.linkFilterGoBet.Text = ResourcesUtils.GetMessage("mainf_labels_11");
+            this.linkLabelFilterDraw.Text = ResourcesUtils.GetMessage("mainf_labels_12");
+
+            this.fileToolStripMenuItem.Text = ResourcesUtils.GetMessage("mainf_labels_13");
+            this.ticketToolStripMenuItem.Text = ResourcesUtils.GetMessage("mainf_labels_14");
+            this.reportsToolStripMenuItem.Text = ResourcesUtils.GetMessage("mainf_labels_15");
+            this.settingsToolStripMenuItem.Text = ResourcesUtils.GetMessage("mainf_labels_16");
+            this.othersToolStripMenuItem.Text = ResourcesUtils.GetMessage("mainf_labels_17");
+
+            this.openLotteryToolStripMenuItem.Text = ResourcesUtils.GetMessage("mainf_labels_18");
+            this.exitToolStripMenuItem.Text = ResourcesUtils.GetMessage("mainf_labels_19");
+            this.seqGenToolStripMenuItem.Text = ResourcesUtils.GetMessage("mainf_labels_20");
+            this.addBetToolStripMenuItem.Text = ResourcesUtils.GetMessage("mainf_labels_21");
+            this.modifyBetToolStripMenuItem.Text = ResourcesUtils.GetMessage("mainf_labels_22");
+            this.modifyClaimStatusToolStripMenuItem.Text = ResourcesUtils.GetMessage("mainf_labels_23");
+            this.moveDrawDateToolStripMenuItem1.Text = ResourcesUtils.GetMessage("mainf_labels_24");
+            this.lossProfitToolStripMenuItem.Text = ResourcesUtils.GetMessage("mainf_labels_25");
+            this.lotterySettingToolStripMenuItem.Text = ResourcesUtils.GetMessage("mainf_labels_26");
+            this.checkWinningBetsToolStripMenuItem.Text = ResourcesUtils.GetMessage("mainf_labels_27");
+            this.checkLotteryUpdatesToolStripMenuItem.Text = ResourcesUtils.GetMessage("mainf_labels_28");
+            this.machineLearningToolStripMenuItem.Text = ResourcesUtils.GetMessage("mainf_labels_29");
+            this.aboutToolStripMenuItem1.Text = ResourcesUtils.GetMessage("mainf_labels_30");
+            this.toolStripBtnNewBet.ToolTipText = ResourcesUtils.GetMessage("mainf_labels_31");
+            this.toolStripBtnDefaultViewListing.ToolTipText = ResourcesUtils.GetMessage("mainf_labels_32");
+            this.toolStripBtnModifyBet.ToolTipText = ResourcesUtils.GetMessage("mainf_labels_33");
+            this.toolStripModifyClaimStatus.ToolTipText = ResourcesUtils.GetMessage("mainf_labels_34");
+            this.toolStripBtnMoveDrawDate.ToolTipText = ResourcesUtils.GetMessage("mainf_labels_35");
+            this.machineLearningToolStripButton2.ToolTipText = ResourcesUtils.GetMessage("mainf_labels_36");
+            this.pickGeneratorToolStripButton2.ToolTipText = ResourcesUtils.GetMessage("mainf_labels_37");
+            this.toolStripBtnWinBets.ToolTipText = ResourcesUtils.GetMessage("mainf_labels_38");
+            this.toolStripBtnDownloadResults.ToolTipText = ResourcesUtils.GetMessage("mainf_labels_39");
+
             ReinitateLotteryServices();
             GenerateLotteriesGameMenu();
             InitializesFormContent();
@@ -52,10 +105,6 @@ namespace LottoDataManager
         }
         private void ClearAllForms()
         {
-            toolStripStatusLblUpdater.Text = "";
-            toolStripStatusLblUpdater.Visible = false;
-            toolStripProgressBarUpdater.Value = 0;
-            toolStripProgressBarUpdater.Visible = false;
             lblGameMode.Text = "";
             lblLifetimeWinnins.Text = "";
             lblNextDrawDate.Text = "";
@@ -113,8 +162,6 @@ namespace LottoDataManager
                 RefreshFieldDetails();
                 SetBetsAndResultDefaultList();
                 RefreshWinningNumbersGridContent();
-                DisplayStatusLabel();
-
             }
             catch (Exception ex)
             {
@@ -133,7 +180,7 @@ namespace LottoDataManager
         {
             try
             {
-                DisplayStatusLabel(ResourcesUtils.GetMessage("mainf_win_num_grid_cont"));
+                AddProcessingStatusLogs(LOG_STATUS_MODULE_NAME_GRID_CONTENT, ResourcesUtils.GetMessage("mainf_win_num_grid_cont"));
                 objListVwWinningNum.SetObjects(lotteryDataServices.GetLotteryDrawResults(dateTimePickerDrawResult.Value));
                 this.olvColDrawDate.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
                 this.olvColNum1.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
@@ -152,16 +199,12 @@ namespace LottoDataManager
             {
                 MessageBox.Show(e.Message);
             }
-            finally
-            {
-                DisplayStatusLabel();
-            }
         }
         private void RefreshBetListViewGridContent()
         {
             try
             {
-                DisplayStatusLabel("Getting the listing of your bets");
+                AddProcessingStatusLogs(LOG_STATUS_MODULE_NAME_GRID_CONTENT, ResourcesUtils.GetMessage("mainf_labels_40"));
                 objectLstVwLatestBet.SetObjects(lotteryDataServices.GetLottoBets(dateTimePickerBets.Value));
                 this.olvColBetDrawDate.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
                 this.olvColBetNum1.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
@@ -175,10 +218,6 @@ namespace LottoDataManager
             catch (Exception e)
             {
                 MessageBox.Show(e.Message);
-            }
-            finally
-            {
-                DisplayStatusLabel();
             }
         }
         private void RefreshDrawResultListViewGridContent()
@@ -198,15 +237,15 @@ namespace LottoDataManager
             lblGameMode.Text = this.lotteryDetails.Description;
 
             //Schedule Date
-            DisplayStatusLabel("Getting the next draw date");
+            AddProcessingStatusLogs(LOG_STATUS_MODULE_NAME_FIELD_DETAILS,ResourcesUtils.GetMessage("mainf_labels_41"));
             lblNextDrawDate.Text = this.lotteryDataServices.GetNextDrawDateFormatted();
 
             //Total Winnings amount
-            DisplayStatusLabel("Getting your lifetime winnings for this game...");
+            AddProcessingStatusLogs(LOG_STATUS_MODULE_NAME_FIELD_DETAILS, ResourcesUtils.GetMessage("mainf_labels_42"));
             lblLifetimeWinnins.Text = this.lotteryDataServices.GetTotalWinningsAmount().ToString("C");
 
             //Total Winnings amount this month
-            DisplayStatusLabel("Getting your winnings so far this month...");
+            AddProcessingStatusLogs(LOG_STATUS_MODULE_NAME_FIELD_DETAILS, ResourcesUtils.GetMessage("mainf_labels_43"));
             lblWinningsThisMonth.Text = this.lotteryDataServices.GetTotalWinningsAmountThisMonth().ToString("C");
         }
         private OLVColumn[] GenerateOLVColumnForHighlighting()
@@ -319,16 +358,11 @@ namespace LottoDataManager
         #endregion
 
         #region "Status Strip"
-        private void DisplayStatusLabel(String status="")
+
+        private void AddProcessingStatusLogs(String moduleName, String logs="")
         {
-            if (String.IsNullOrWhiteSpace(status))
-            {
-                statusLabelLoading.Text = "";
-            }
-            else
-            {
-                statusLabelLoading.Text = "*** " + status;
-            }
+            if (String.IsNullOrWhiteSpace(logs)) return;
+            processingStatusLogFrm.AddStatusLogs(moduleName, logs);
             Application.DoEvents();
         }
         #endregion
@@ -342,7 +376,7 @@ namespace LottoDataManager
             RefreshWinningNumbersGridContent();
             RefreshBets();
         }
-        private void RefreshBets()
+        public void RefreshBets()
         {
             RefreshFieldDetails();
             RefreshBetListViewGridContent();
@@ -363,21 +397,30 @@ namespace LottoDataManager
         }
         private void toolStripBtnWinBets_Click(object sender, EventArgs e)
         {
-            statusLabelLoading.Visible = true;
-            //RefreshSubscription();
+            CheckWinningBets();
+        }
+        private void CheckWinningBets()
+        {
             lotteryDataWorker.ProcessCheckingForWinningBets(this.lotteryDetails.GameMode);
-            statusLabelLoading.Text = "";
             RefreshBets();
         }
         private void LotteryDataWorker_LotteryDataWorkerProcessingStatus(object sender, LotteryDataWorkerEvent e)
         {
-            statusLabelLoading.Text = e.CustomStatusMessage;
+            AddProcessingStatusLogs(LOG_STATUS_MODULE_NAME_WINNING_BETS, e.CustomStatusMessage);
             Application.DoEvents();
         }
         private void toolStripBtnNewBet_Click(object sender, EventArgs e)
         {
+            AddBet();
+        }
+        private void addBetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddBet();
+        }
+        private void AddBet()
+        {
             AddBetFrm betForm = new AddBetFrm(this.lotteryDataServices);
-            betForm.ShowDialog();
+            betForm.ShowDialog(this);
             betForm.Dispose();
             RefreshBets();
         }
@@ -441,9 +484,7 @@ namespace LottoDataManager
             try
             {
                 toolStripBtnDownloadResults.Enabled = false;
-                toolStripStatusLblUpdater.Text = "Lotto Draw Result Updater...";
-                toolStripStatusLblUpdater.Visible = true;
-                toolStripProgressBarUpdater.Value = 0;
+                AddProcessingStatusLogs(LOG_STATUS_MODULE_NAME_DRAWN_RESULT, ResourcesUtils.GetMessage("mainf_labels_44"));
                 Application.DoEvents();
                 List<LotteryDetails> lotteryArr = new List<LotteryDetails>();
                 lotteryArr.Add(this.lotteryDetails);
@@ -458,25 +499,13 @@ namespace LottoDataManager
         }
         private void LottoWebScraper_WebScrapingStatus(object sender, LottoWebScraperEvent e)
         {
-            toolStripStatusLblUpdater.Text = e.CustomStatusMessage;
-            toolStripProgressBarUpdater.Value = e.Progress;
-            if (e.LottoWebScrapingStage == LottoWebScrapingStages.INSERT)
-            {
-                if(!toolStripProgressBarUpdater.Visible) toolStripProgressBarUpdater.Visible = true;
-            }
-            else if (e.LottoWebScrapingStage == LottoWebScrapingStages.FINISH)
+            AddProcessingStatusLogs(LOG_STATUS_MODULE_NAME_WEBSCRAP, e.CustomStatusMessage);
+
+            if (e.LottoWebScrapingStage == LottoWebScrapingStages.FINISH)
             {
                 toolStripBtnDownloadResults.Enabled = true;
-                toolStripStatusLblUpdater.Text = "";
-                toolStripStatusLblUpdater.Visible = false;
-                toolStripProgressBarUpdater.Value = 0;
-                toolStripProgressBarUpdater.Visible = false;
                 RefreshWinningNumbersGridContent();
                 RefreshBets();
-            }
-            else
-            {
-                if (toolStripProgressBarUpdater.Visible) toolStripProgressBarUpdater.Visible = false;
             }
             Application.DoEvents();
         }
@@ -519,6 +548,10 @@ namespace LottoDataManager
         {
             ShowModifyBets();
         }
+        private void modifyBetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowModifyBets();
+        }
         private void editYourBetsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ShowModifyBets();
@@ -534,7 +567,11 @@ namespace LottoDataManager
         {
             ShowModifyClaimStatus();
         }
-        private void toolStripButton1_Click(object sender, EventArgs e)
+        private void toolStripModifyClaimStatus_Click(object sender, EventArgs e)
+        {
+            ShowModifyClaimStatus();
+        }
+        private void modifyClaimStatusToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ShowModifyClaimStatus();
         }
@@ -547,8 +584,12 @@ namespace LottoDataManager
         }
         private void seqGenToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            ShowPickGeneratorForm();
+        }
+        private void ShowPickGeneratorForm()
+        {
             PickGeneratorFrm pick = new PickGeneratorFrm(lotteryDataServices);
-            pick.ShowDialog();
+            pick.ShowDialog(this);
             pick.Dispose();
         }
         private void aboutToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -573,7 +614,49 @@ namespace LottoDataManager
             MachineLearningFrm m = new MachineLearningFrm(this.lotteryDataServices);
             m.ShowDialog();
         }
-
+        private void pickGeneratorToolStripButton2_Click(object sender, EventArgs e)
+        {
+            ShowPickGeneratorForm();
+        }
+        private void lotterySettingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LotterySettingsFrm settings = new LotterySettingsFrm(lotteryDataServices);
+            settings.ShowDialog(this);
+            RefreshBets();
+        }
+        private void checkWinningBetsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CheckWinningBets();
+        }
+        private void moveDrawDateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MoveDrawDate(true);
+        }
+        private void MoveDrawDate(bool fromContextMenu=false)
+        {
+            ModifyBetDateFrm m = new ModifyBetDateFrm(this.lotteryDataServices);
+            if (fromContextMenu)
+            {
+                foreach (LotteryBet bet in objectLstVwLatestBet.SelectedObjects)
+                {
+                    m.AddAutoSelectBet(bet.GetId(), bet.GetTargetDrawDate());
+                }
+            }
+            m.ShowDialog(this);
+        }
+        private void toolStripBtnMoveDrawDate_Click(object sender, EventArgs e)
+        {
+            MoveDrawDate();
+        }
+        private void moveDrawDateToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            MoveDrawDate();
+        }
+        private void lossProfitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ProfitAndLossFrm frm = new ProfitAndLossFrm(this.lotteryDataServices);
+            frm.ShowDialog();
+        }
         #endregion
 
         #region "Main Form"
@@ -585,7 +668,7 @@ namespace LottoDataManager
             }
             catch (Exception)
             {
-                MessageBox.Show("Error on saving the current session...");
+                MessageBox.Show(ResourcesUtils.GetMessage("mainf_labels_45"));
             }
         }
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -598,10 +681,17 @@ namespace LottoDataManager
             this.Show();
         }
 
+
+
+
+
+
+
         #endregion
 
-
-
-
+        private void toolStripProcessingLogs_Click(object sender, EventArgs e)
+        {
+            processingStatusLogFrm.ShowDialog(this);
+        }
     }
 }

@@ -26,6 +26,7 @@ namespace LottoDataManager.Includes.Classes
         private LotteryDataWorker lotteryDataWorker;
         private LotteryDrawResultDao lotteryDrawResultDao;
         private LotterySequenceGenDao lotterySeqGenDao;
+        private LotteryWinningCombinationDao lotteryWinningCombinationDao;
         private UserSettings userSetting;
         public LotteryDataServices(LotteryDetails lotteryDetails)
         {
@@ -41,6 +42,7 @@ namespace LottoDataManager.Includes.Classes
             this.lotteryDataWorker = new LotteryDataWorker();
             this.lotteryDrawResultDao = LotteryDrawResultDaoImpl.GetInstance();
             this.lotterySeqGenDao = LotterySequenceGenDaoImpl.GetInstance();
+            this.lotteryWinningCombinationDao = LotteryWinningCombinationDaoImpl.GetInstance();
         }
         private GameMode GameMode {
 
@@ -52,7 +54,7 @@ namespace LottoDataManager.Includes.Classes
         public LotteryDetails LotteryDetails { get => lotteryDetails; }
         public List<LotteryDrawResult> GetLotteryDrawResults(DateTime startingDate)
         {
-            if (startingDate >= DateTime.Now) throw new Exception("Date should be backdated when getting new Draw Results!");
+            if (startingDate >= DateTime.Now) throw new Exception(ResourcesUtils.GetMessage("lot_data_srv_cls_msg_1"));
             return lotteryDrawResultDao.GetDrawResultsFromStartingDate(GameMode, startingDate);
         }
         public LotteryDrawResult GetLotteryDrawResultByDrawDate(DateTime drawDate)
@@ -61,7 +63,7 @@ namespace LottoDataManager.Includes.Classes
         }
         public List<LotteryBet> GetLottoBets(DateTime sinceWhen)
         {
-            if (sinceWhen >= DateTime.Now) throw new Exception("Date should be backdated when getting new Draw Bets!");
+            if (sinceWhen >= DateTime.Now) throw new Exception(ResourcesUtils.GetMessage("lot_data_srv_cls_msg_2"));
             LotteryBetDao betDao = LotteryBetDaoImpl.GetInstance();
             return betDao.GetDashboardLatestBets(GameMode, sinceWhen);
         }
@@ -99,7 +101,7 @@ namespace LottoDataManager.Includes.Classes
         {
             String result = "";
             DateTime nextScheduledDate = GetNextDrawDate();
-            if (nextScheduledDate.Date == DateTime.Today) result = "Today! ";
+            if (nextScheduledDate.Date == DateTime.Today) result = ResourcesUtils.GetMessage("lot_data_srv_cls_msg_3");
             return (result + nextScheduledDate.ToString(DateTimeConverterUtils.DATE_FORMAT_LONG));
         }
         public LotteryTicketPanel GetLotteryTicketPanel()
@@ -118,6 +120,20 @@ namespace LottoDataManager.Includes.Classes
         {
             return this.lotteryScheduleDao.GetLotterySchedule(this.GameMode);
         }
+        public LotterySchedule GetLotterySchedule(GameMode gameMode)
+        {
+            return this.lotteryScheduleDao.GetLotterySchedule(gameMode);
+        }
+        public int AddNewLotterySchedule(LotterySchedule lotterySchedule)
+        {
+            LotterySchedule original = this.lotteryScheduleDao.GetLotterySchedule(lotterySchedule.GetGameMode());
+            if(original.IsEqualSchedule(lotterySchedule)){
+                throw new Exception(ResourcesUtils.GetMessage("lott_sched_msg1"));
+            }
+            this.lotteryScheduleDao.RemoveLotterySchedule(lotterySchedule);
+            return this.lotteryScheduleDao.InsertLotterySchedule(lotterySchedule);
+        }
+
         public void DeleteLotteryBet(List<LotteryBet> lotteryBets)
         {
             foreach(LotteryBet lotteryBet in lotteryBets)
@@ -138,6 +154,10 @@ namespace LottoDataManager.Includes.Classes
             LotteryBetSetup lotteryBetSetup = (LotteryBetSetup) lotteryBet;
             lotteryBetSetup.Id = newId;
             this.lotteryDataWorker.ProcessWinningBet(lotteryBetSetup);
+        }
+        public bool IsLotteryBetExist(LotteryBet lotteryBet)
+        {
+            return (lotteryBetDao.IsBetExisting(lotteryBet));
         }
         public void UpdateClaimStatus(LotteryWinningBet winBet)
         {
@@ -171,13 +191,46 @@ namespace LottoDataManager.Includes.Classes
         {
             return lotterySeqGenDao.GetAllSeqGenerators();
         }
+        public void UpdateDescriptionLotterySequenceGenerator(LotterySequenceGenerator updatedModel)
+        {
+            if (this.lotterySeqGenDao.IsDescriptionExisting(updatedModel.GetDescription()))
+            {
+                throw new Exception(ResourcesUtils.GetMessage("lott_seq_gen_msg1"));
+            }
+            this.lotterySeqGenDao.UpdateDescription(updatedModel);
+        }
         public List<LotteryDrawResult> GetLatestLotteryResult(int howManyDraws)
         {
             return this.lotteryDrawResultDao.GetLatestLotteryResult(this.lotteryDetails.GameMode, howManyDraws);
         }
-        public List<LotteryDrawResult> GetMachineLearningDataSet(GameMode gameMode, DateTime startingDate)
+        public List<LotteryDrawResult> GetMachineLearningDataSetFastTree(GameMode gameMode, DateTime startingDate)
         {
-            return this.lotteryDrawResultDao.GetMachineLearningDataSet(gameMode, startingDate);
+            return this.lotteryDrawResultDao.GetMachineLearningDataSetFastTree(gameMode, startingDate);
+        }
+        public List<LotteryDrawResult> GetMachineLearningDataSetSDCA(GameMode gameMode, DateTime startingDate)
+        {
+            return this.lotteryDrawResultDao.GetMachineLearningDataSetSDCA(gameMode, startingDate);
+        }
+        public void UpdateLotteryOutletDescription(LotteryOutlet updatedModel)
+        {
+            this.lotteryOutletDao.UpdateDescription(updatedModel);
+        }
+        public void RemoveLotteryOutlet(LotteryOutlet removeModel)
+        {
+            this.lotteryOutletDao.RemoveOutlet(removeModel);
+        }
+        public int AddLotteryOutlet(String outletDescription)
+        {
+            return this.lotteryOutletDao.InsertLotteryOutlet(outletDescription);
+        }
+        public LotteryWinningCombination GetLotteryWinningCombinations(GameMode gameMode)
+        {
+            return this.lotteryWinningCombinationDao.GetLotteryWinningCombination(gameMode);
+        }
+        public void SaveWinningCombination(LotteryWinningCombination lotteryUpdated)
+        {
+            this.lotteryWinningCombinationDao.RemoveWinningCombination(lotteryUpdated);
+            this.lotteryWinningCombinationDao.InsertWinningCombination(lotteryUpdated);
         }
     }
 }

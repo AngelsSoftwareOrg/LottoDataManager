@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LottoDataManager.Includes.Database.DAO.Interface;
+using LottoDataManager.Includes.Utilities;
 
 namespace LottoDataManager.Includes.Database.DAO.Impl
 {
@@ -59,7 +60,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                 if (result < 0)
                 {
                     transaction.Rollback();
-                    throw new Exception("SaveLastOpenedLottery: Error updating data into user setting Database! ");
+                    throw new Exception(ResourcesUtils.GetMessage("lot_dao_impl_msg13"));
                 }
                 transaction.Commit();
             }
@@ -102,7 +103,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                 if (result < 0)
                 {
                     transaction.Rollback();
-                    throw new Exception("SaveMLDataSetDirectoryPath: Error updating data into user setting Database! ");
+                    throw new Exception(ResourcesUtils.GetMessage("lot_dao_impl_msg14"));
                 }
                 transaction.Commit();
             }
