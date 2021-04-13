@@ -51,9 +51,7 @@ namespace LottoDataManager
             this.machineLearningToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.mainStatusStrip = new System.Windows.Forms.StatusStrip();
-            this.statusLabelLoading = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLblUpdater = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripProgressBarUpdater = new System.Windows.Forms.ToolStripProgressBar();
+            this.toolStripProcessingLogs = new System.Windows.Forms.ToolStripStatusLabel();
             this.mainSplitContainer = new System.Windows.Forms.SplitContainer();
             this.mainLeftTabControl = new System.Windows.Forms.TabControl();
             this.tabDashboard = new System.Windows.Forms.TabPage();
@@ -168,7 +166,7 @@ namespace LottoDataManager
             this.openLotteryToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 26);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // openLotteryToolStripMenuItem
@@ -186,7 +184,7 @@ namespace LottoDataManager
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
-            // generatorsToolStripMenuItem
+            // ticketToolStripMenuItem
             // 
             this.ticketToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.seqGenToolStripMenuItem,
@@ -194,8 +192,8 @@ namespace LottoDataManager
             this.modifyBetToolStripMenuItem,
             this.modifyClaimStatusToolStripMenuItem,
             this.moveDrawDateToolStripMenuItem1});
-            this.ticketToolStripMenuItem.Name = "generatorsToolStripMenuItem";
-            this.ticketToolStripMenuItem.Size = new System.Drawing.Size(62, 26);
+            this.ticketToolStripMenuItem.Name = "ticketToolStripMenuItem";
+            this.ticketToolStripMenuItem.Size = new System.Drawing.Size(62, 24);
             this.ticketToolStripMenuItem.Text = "Ticket";
             // 
             // seqGenToolStripMenuItem
@@ -243,7 +241,7 @@ namespace LottoDataManager
             this.reportsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lossProfitToolStripMenuItem});
             this.reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
-            this.reportsToolStripMenuItem.Size = new System.Drawing.Size(74, 26);
+            this.reportsToolStripMenuItem.Size = new System.Drawing.Size(74, 24);
             this.reportsToolStripMenuItem.Text = "Reports";
             // 
             // lossProfitToolStripMenuItem
@@ -259,7 +257,7 @@ namespace LottoDataManager
             this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lotterySettingToolStripMenuItem});
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(76, 26);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(76, 24);
             this.settingsToolStripMenuItem.Text = "Settings";
             // 
             // lotterySettingToolStripMenuItem
@@ -278,7 +276,7 @@ namespace LottoDataManager
             this.machineLearningToolStripMenuItem,
             this.aboutToolStripMenuItem1});
             this.othersToolStripMenuItem.Name = "othersToolStripMenuItem";
-            this.othersToolStripMenuItem.Size = new System.Drawing.Size(66, 26);
+            this.othersToolStripMenuItem.Size = new System.Drawing.Size(66, 24);
             this.othersToolStripMenuItem.Text = "Others";
             // 
             // checkWinningBetsToolStripMenuItem
@@ -317,32 +315,22 @@ namespace LottoDataManager
             // 
             this.mainStatusStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.mainStatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.statusLabelLoading,
-            this.toolStripStatusLblUpdater,
-            this.toolStripProgressBarUpdater});
+            this.toolStripProcessingLogs});
             this.mainStatusStrip.Location = new System.Drawing.Point(0, 556);
             this.mainStatusStrip.Name = "mainStatusStrip";
+            this.mainStatusStrip.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.mainStatusStrip.Size = new System.Drawing.Size(1233, 26);
             this.mainStatusStrip.TabIndex = 1;
             this.mainStatusStrip.Text = "statusStrip1";
             // 
-            // statusLabelLoading
+            // toolStripProcessingLogs
             // 
-            this.statusLabelLoading.Name = "statusLabelLoading";
-            this.statusLabelLoading.Size = new System.Drawing.Size(93, 20);
-            this.statusLabelLoading.Text = "                     ";
-            // 
-            // toolStripStatusLblUpdater
-            // 
-            this.toolStripStatusLblUpdater.Name = "toolStripStatusLblUpdater";
-            this.toolStripStatusLblUpdater.Size = new System.Drawing.Size(166, 20);
-            this.toolStripStatusLblUpdater.Text = "Web Scraping Updater: ";
-            this.toolStripStatusLblUpdater.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // toolStripProgressBarUpdater
-            // 
-            this.toolStripProgressBarUpdater.Name = "toolStripProgressBarUpdater";
-            this.toolStripProgressBarUpdater.Size = new System.Drawing.Size(150, 18);
+            this.toolStripProcessingLogs.Image = global::LottoDataManager.Properties.Resources.terminal_32px;
+            this.toolStripProcessingLogs.IsLink = true;
+            this.toolStripProcessingLogs.Name = "toolStripProcessingLogs";
+            this.toolStripProcessingLogs.Size = new System.Drawing.Size(173, 20);
+            this.toolStripProcessingLogs.Text = "Processing status logs";
+            this.toolStripProcessingLogs.Click += new System.EventHandler(this.toolStripProcessingLogs_Click);
             // 
             // mainSplitContainer
             // 
@@ -1089,7 +1077,6 @@ namespace LottoDataManager
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem checkLotteryUpdatesToolStripMenuItem;
         private System.Windows.Forms.StatusStrip mainStatusStrip;
-        private System.Windows.Forms.ToolStripStatusLabel statusLabelLoading;
         private System.Windows.Forms.ToolStripMenuItem lotterySettingToolStripMenuItem;
         private System.Windows.Forms.SplitContainer mainSplitContainer;
         private System.Windows.Forms.ToolStripMenuItem ticketToolStripMenuItem;
@@ -1146,8 +1133,6 @@ namespace LottoDataManager
         private System.Windows.Forms.ToolStripButton toolStripBtnNewBet;
         private System.Windows.Forms.ToolStripButton toolStripBtnDefaultViewListing;
         private System.Windows.Forms.ToolStripButton toolStripBtnDownloadResults;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLblUpdater;
-        private System.Windows.Forms.ToolStripProgressBar toolStripProgressBarUpdater;
         private System.Windows.Forms.ToolStripMenuItem checkWinningBetsToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton toolStripBtnWinBets;
         private System.Windows.Forms.ToolStripButton toolStripBtnModifyBet;
@@ -1171,6 +1156,7 @@ namespace LottoDataManager
         private System.Windows.Forms.ToolStripMenuItem modifyClaimStatusToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem moveDrawDateToolStripMenuItem1;
         private System.Windows.Forms.ToolStripButton toolStripBtnMoveDrawDate;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripProcessingLogs;
     }
 }
 

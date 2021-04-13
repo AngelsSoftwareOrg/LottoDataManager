@@ -80,6 +80,12 @@
     <Compile Include="Forms\Others\AboutFrm.Designer.cs">
       <DependentUpon>AboutFrm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ProcessingStatusLogFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ProcessingStatusLogFrm.Designer.cs">
+      <DependentUpon>ProcessingStatusLogFrm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Reports\ProfitAndLossFrm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -358,6 +364,9 @@
     <EmbeddedResource Include="Forms\Others\AboutFrm.resx">
       <DependentUpon>AboutFrm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ProcessingStatusLogFrm.resx">
+      <DependentUpon>ProcessingStatusLogFrm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Reports\ProfitAndLossFrm.resx">
       <DependentUpon>ProfitAndLossFrm.cs</DependentUpon>
     </EmbeddedResource>
@@ -488,6 +497,8 @@
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>IndividualGameHtmlReport.cs</LastGenOutput>
     </Content>
+    <None Include="Resources\Icons\terminal_32px.png" />
+    <None Include="Resources\Icons\broom_32.png" />
     <None Include="Resources\Icons\cal_32px-2.png" />
     <None Include="Resources\Icons\Paid_32x.png" />
     <None Include="Resources\Icons\Edit_02_32x.png" />

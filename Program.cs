@@ -30,6 +30,7 @@ namespace LottoDataManager
                 Application.Run(new MainForm());
                 //splash.DisposeInstance();
                 //Application.Run(new ProfitAndLossFrm(null));
+                //Application.Run(new ProcessingStatusLogFrm());
             }
         }
     }

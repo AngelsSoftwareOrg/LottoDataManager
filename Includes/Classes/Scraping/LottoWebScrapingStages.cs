@@ -14,6 +14,7 @@ namespace LottoDataManager.Includes.Classes.Scraping
         SEARCHING_DATA=3,
         SCRAPING=4,
         INSERT=5,
-        FINISH=6
+        ERROR=6,
+        FINISH=7
     }
 }

@@ -86,9 +86,9 @@ namespace LottoDataManager.Forms.Reports
             // 
             this.btnRunReport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnRunReport.Image = global::LottoDataManager.Properties.Resources.statistic_32;
-            this.btnRunReport.Location = new System.Drawing.Point(216, 5);
+            this.btnRunReport.Location = new System.Drawing.Point(216, 2);
             this.btnRunReport.Name = "btnRunReport";
-            this.btnRunReport.Size = new System.Drawing.Size(177, 59);
+            this.btnRunReport.Size = new System.Drawing.Size(177, 63);
             this.btnRunReport.TabIndex = 1;
             this.btnRunReport.Text = "Run Report";
             this.btnRunReport.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -101,9 +101,9 @@ namespace LottoDataManager.Forms.Reports
             this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExit.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnExit.Image = global::LottoDataManager.Properties.Resources.Exit_32;
-            this.btnExit.Location = new System.Drawing.Point(396, 6);
+            this.btnExit.Location = new System.Drawing.Point(396, 3);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(177, 59);
+            this.btnExit.Size = new System.Drawing.Size(177, 63);
             this.btnExit.TabIndex = 0;
             this.btnExit.Text = "Exit";
             this.btnExit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;

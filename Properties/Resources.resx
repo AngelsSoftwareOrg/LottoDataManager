@@ -117,30 +117,33 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="money_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons\money_32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="APPLICATION_ID" xml:space="preserve">
     <value>LOTTO_DATA_MANAGER</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="erase_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Icons\erase_32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Stars4_20x" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Icons\Stars4_20x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="lotto-32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\lotto-32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Open_Document_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Icons\Open_Document_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="money_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\money_32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="cal_32px-2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons\cal_32px-2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="APP_DATA_FOLDER_CONFIG_FILE_NAME" xml:space="preserve">
     <value>lotto_data_manager_ini.config</value>
   </data>
   <data name="torch_24x" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Icons\torch_24x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Stars2_20x" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons\Star2_20x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Trash_32x" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Icons\Trash_32x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -193,8 +196,8 @@
   <data name="Paid_32x" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Icons\Paid_32x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Stars2_20x" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\Star2_20x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="lotto-32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons\lotto-32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Edit_01_32x" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Icons\Edit_01_32x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -204,6 +207,12 @@
   </data>
   <data name="stop_20" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Icons\stop_20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PROCESS_LOGS_MAX_LINE_CONTENT" xml:space="preserve">
+    <value>100000</value>
+  </data>
+  <data name="broom_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons\broom_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="cal_32px1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Icons\cal_32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -226,7 +235,7 @@
   <data name="Stars6_20x" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Icons\Stars6_20x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="cal_32px-2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\cal_32px-2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="terminal_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons\terminal_32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

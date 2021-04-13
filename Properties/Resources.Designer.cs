@@ -120,6 +120,16 @@ namespace LottoDataManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap broom_32 {
+            get {
+                object obj = ResourceManager.GetObject("broom_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Button_Close_icon_32px {
             get {
                 object obj = ResourceManager.GetObject("Button-Close-icon_32px", resourceCulture);
@@ -304,6 +314,15 @@ namespace LottoDataManager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 100000.
+        /// </summary>
+        internal static string PROCESS_LOGS_MAX_LINE_CONTENT {
+            get {
+                return ResourceManager.GetString("PROCESS_LOGS_MAX_LINE_CONTENT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap save_v1_32 {
@@ -399,6 +418,16 @@ namespace LottoDataManager.Properties {
         internal static System.Drawing.Bitmap stop_20 {
             get {
                 object obj = ResourceManager.GetObject("stop_20", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap terminal_32px {
+            get {
+                object obj = ResourceManager.GetObject("terminal_32px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

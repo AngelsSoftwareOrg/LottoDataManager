@@ -21,5 +21,7 @@ namespace LottoDataManager.Includes.Model.Details
         ModelInputSDCARegression GetModelInputSDCARegression();
         String GetMachineLearningDataSetEntryFastTree();
         String GetMachineLearningDataSetEntrySDCA();
+        String GetGNUFormat();
+        String GetExtractedDrawnResultDetails();
     }
 }

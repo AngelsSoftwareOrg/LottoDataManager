@@ -99,17 +99,6 @@ namespace LottoDataManager.Includes.Model.Details
         {
             return LotterySeqGen;
         }
-        public String GetGNUFormat()
-        {
-            return String.Format("{0}-{1}-{2}-{3}-{4}-{5}", 
-                Num1.ToString().PadLeft(2, char.Parse("0")), 
-                Num2.ToString().PadLeft(2, char.Parse("0")), 
-                Num3.ToString().PadLeft(2, char.Parse("0")), 
-                Num4.ToString().PadLeft(2, char.Parse("0")), 
-                Num5.ToString().PadLeft(2, char.Parse("0")), 
-                Num6.ToString().PadLeft(2, char.Parse("0")));
-        }
-
         public LotteryWinningBet GetLotteryWinningBet()
         {
             return LotteryWinningBet;

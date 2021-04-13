@@ -131,12 +131,13 @@ namespace LottoDataManager.Includes.Classes.Scraping
                     {
                         lotteryDao.InsertDrawDate(scrapeResult);
                     }
-                    RaiseEvent(LottoWebScrapingStages.INSERT, ConverterUtils.GetPercentageFloored(countCtr++, lotteryDrawResultArr.Count));
+                    RaiseEvent(LottoWebScrapingStages.INSERT, ConverterUtils.GetPercentageFloored(countCtr++, lotteryDrawResultArr.Count), scrapeResult.GetExtractedDrawnResultDetails());
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                RaiseEvent(LottoWebScrapingStages.ERROR,0,ex.Message);
             }
             finally
             {
@@ -174,7 +175,7 @@ namespace LottoDataManager.Includes.Classes.Scraping
             return lotteryDrawResultArr;
         }
 
-        private void RaiseEvent(LottoWebScrapingStages stage, int progress = 0)
+        private void RaiseEvent(LottoWebScrapingStages stage, int progress = 0, String addedInfo="")
         {
             lottoWebScraperEvent.LottoWebScrapingStage = stage;
             lottoWebScraperEvent.GameMode = currentLotteryDetailsProcess.GameMode;
@@ -202,7 +203,11 @@ namespace LottoDataManager.Includes.Classes.Scraping
             }
             else if (stage == LottoWebScrapingStages.INSERT)
             {
-                lottoWebScraperEvent.CustomStatusMessage = ResourcesUtils.GetMessage("pcso_scrape_cls_msg_6");
+                lottoWebScraperEvent.CustomStatusMessage = String.Format(ResourcesUtils.GetMessage("pcso_scrape_cls_msg_6"), addedInfo);
+            }
+            else if (stage == LottoWebScrapingStages.ERROR)
+            {
+                lottoWebScraperEvent.CustomStatusMessage = String.Format(ResourcesUtils.GetMessage("pcso_scrape_cls_msg_8"), addedInfo);
             }
             else if (stage == LottoWebScrapingStages.FINISH)
             {

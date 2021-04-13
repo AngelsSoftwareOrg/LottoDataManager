@@ -100,6 +100,12 @@ namespace LottoDataManager.Includes.Model.Details
                 Game_cd = GetGameCode()
             };
         }
+        public String GetExtractedDrawnResultDetails()
+        {
+            return String.Format("{0}, {1}",
+                DateTimeConverterUtils.ConvertToFormat(this.DrawDate, DateTimeConverterUtils.STANDARD_DATE_FORMAT), 
+                this.GetGNUFormat());
+        }
 
         override
         public String ToString()
@@ -117,7 +123,7 @@ namespace LottoDataManager.Includes.Model.Details
         {
             //draw_date,num1,num2,num3,num4,num5,num6,game_cd,RESULT
             return String.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8}",
-                    DateTimeConverterUtils.ConvertToFormat(DrawDate,DateTimeConverterUtils.STANDARD_DATE_FORMAT_DFLT_TIME),
+                    DateTimeConverterUtils.ConvertToFormat(DrawDate,DateTimeConverterUtils.STANDARD_DATE_FORMAT_DFLT_TIME_ZERO),
                     Num1, Num2, Num3, Num4, Num5, Num6, GameCode, 
                     String.Format("{0}{1}{2}{3}{4}{5}", 
                         Num1.ToString().PadLeft(2, char.Parse("0")),
@@ -132,7 +138,7 @@ namespace LottoDataManager.Includes.Model.Details
         {
             //draw_date,num1,num2,num3,num4,num5,num6,PREDICT,winners,game_cd
             return String.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9}",
-                    DateTimeConverterUtils.ConvertToFormat(DrawDate, DateTimeConverterUtils.STANDARD_DATE_FORMAT_DFLT_TIME),
+                    DateTimeConverterUtils.ConvertToFormat(DrawDate, DateTimeConverterUtils.STANDARD_DATE_FORMAT_DFLT_TIME_ZERO),
                     Num1, Num2, Num3, Num4, Num5, Num6, 
                     (Num1 + Num2 + Num3 + Num4 + Num5 + Num6),
                     Winners, GameCode);
