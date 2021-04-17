@@ -64,3 +64,4 @@ by: Ryan Seth Roldan
 ## Profit and Loss Report
 - You can see some statistic here about your spending and lucky numbers, and etc...
 ![enter image description here](https://i.imgur.com/F2aInft.png)
+
