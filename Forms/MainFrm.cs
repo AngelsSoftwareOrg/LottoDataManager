@@ -38,6 +38,7 @@ namespace LottoDataManager
         private String LOG_STATUS_MODULE_NAME_FIELD_DETAILS = "Refreshing Field Details";
         private String LOG_STATUS_MODULE_NAME_WINNING_BETS = "Processing Winning Bets";
         private String LOG_STATUS_MODULE_NAME_DRAWN_RESULT = "Download drawn results";
+        private int processingLogStatusCtr = 0;
 
         public MainForm()
         {
@@ -99,6 +100,7 @@ namespace LottoDataManager
         }
         private void ReinitateLotteryServices()
         {
+            processingLogStatusCtr = 0;
             this.lotteryDataServices = new LotteryDataServices(this.lotteryDetails);
             this.lotteryDataWorker = new LotteryDataWorker();
             this.dashboardReport = new DashboardReport(this.lotteryDataServices);
@@ -358,12 +360,29 @@ namespace LottoDataManager
         #endregion
 
         #region "Status Strip"
-
         private void AddProcessingStatusLogs(String moduleName, String logs="")
         {
             if (String.IsNullOrWhiteSpace(logs)) return;
+            processingLogStatusCtr++;
             processingStatusLogFrm.AddStatusLogs(moduleName, logs);
+            UpdateProcessingStatusLogsLabel();
             Application.DoEvents();
+        }
+        private void toolStripProcessingLogs_Click(object sender, EventArgs e)
+        {
+            processingStatusLogFrm.ShowDialog(this);
+            processingLogStatusCtr = 0;
+            UpdateProcessingStatusLogsLabel();
+        }
+        private void UpdateProcessingStatusLogsLabel()
+        {
+            if (processingLogStatusCtr > 0)
+            {
+                this.toolStripProcessingLogs.Text = String.Format("({0})* {1}",
+                processingLogStatusCtr, ResourcesUtils.GetMessage("mainf_labels_46"));
+                return;
+            }
+            this.toolStripProcessingLogs.Text = ResourcesUtils.GetMessage("mainf_labels_46");
         }
         #endregion
 
@@ -680,18 +699,7 @@ namespace LottoDataManager
             SplashScreenFrm.GetIntance().DisposeInstance();
             this.Show();
         }
-
-
-
-
-
-
-
         #endregion
 
-        private void toolStripProcessingLogs_Click(object sender, EventArgs e)
-        {
-            processingStatusLogFrm.ShowDialog(this);
-        }
     }
 }
