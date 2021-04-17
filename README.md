@@ -2,11 +2,11 @@
 > By: **Ryan Seth Roldan**
 
 # Lotto Data Manager
-An application that let as your "Lotto Data Management Hub" with the following features
+An application that let it be as your "Lotto Data Management Hub" with the following features
 1. Add your bet, including which outlet you buy your ticket, and the kind of number generator you use to your bet.
-2. With a single click, it will download the latest drawn result and equivalent jackpot amount.
-3. With a quick glance dashboard, it will let you know the nearest previous draw dates, and nearest next draw dates, the statistic spending amount and more.
-4. Random Sequence Generator using Machine Learning (this is totally a random number base on my silly interpretation of the Machine Learning Results)
+2. With a single click, it will download the latest drawn result and jackpot amount.
+3. With a quick glance dashboard, it will let you know the nearest previous and next draw dates, your spending amount and more.
+4. Random Sequence Generator using Machine Learning (this is totally a random number base on my silly interpretation of the Machine Learning results)
 5. Quick comparison between your selected bet and how its fare to the drawn result.
 6. Profit and Loss Report generation. 
 
@@ -18,15 +18,16 @@ An application that let as your "Lotto Data Management Hub" with the following f
 
 # How it works
 This application will track your bet and how it fares to the drawn result.
-It will track your spending habit, compute your spending habit by monthly or annually and it will report it to you. 
-The Generated Report will also tells you which number is always matching to drawn result. It will also layout the spending habit you out into your bet to monitor how are you lucky in betting on your selected Lottery Game.
+
+It will track your spending habit, compute your annually or monthly spending and also display it on the Profit and Loss Report for you.
+ 
+The report will also shows you which number were always matching to drawn result. It also has a tabular spending marks for your bets for you to monitor how lucky you are in betting on your selected Lottery Game.
 
 # Technologies
-It was written using the following Technologies
+By using the following Technologies
 1. [Visual Studio Community Edition 2019](https://visualstudio.microsoft.com/downloads/)
 2. MS Access 2016
 3. [.NET Framework 4.7](https://dotnet.microsoft.com/download/dotnet-framework/net47)
-4. 64-Bit
 
 ## Supporting Technologies
 1. [Smart Git - Free Edition](https://www.syntevo.com/smartgit/)
@@ -42,11 +43,12 @@ CC0-1.0 License
 
 # Author
 by: Ryan Seth Roldan
+
 **Free Angelic Software, Yeah! **
 
 # Sample Screenshots
 ## Main Form
-- Here you will see at quick glance whats happening in your bet compared to drawn result and your spending habit
+- Here, you will see at quick glance whats happening in your bet compared to drawn result and your spending habit
 ![Main Form](https://i.imgur.com/dATG9GO.png)
 ## Add Bet Form
 - Here's how you add your new bet
