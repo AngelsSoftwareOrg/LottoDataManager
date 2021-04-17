@@ -82,7 +82,7 @@ namespace LottoDataManager.Forms
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(530, 573);
+            this.panel1.Size = new System.Drawing.Size(580, 573);
             this.panel1.TabIndex = 0;
             // 
             // grpbxParam
@@ -93,7 +93,7 @@ namespace LottoDataManager.Forms
             this.grpbxParam.ForeColor = System.Drawing.Color.Navy;
             this.grpbxParam.Location = new System.Drawing.Point(0, 264);
             this.grpbxParam.Name = "grpbxParam";
-            this.grpbxParam.Size = new System.Drawing.Size(526, 205);
+            this.grpbxParam.Size = new System.Drawing.Size(576, 205);
             this.grpbxParam.TabIndex = 1;
             this.grpbxParam.TabStop = false;
             this.grpbxParam.Text = "Step 2: Enter Parameter for the Chosen Generator";
@@ -105,7 +105,7 @@ namespace LottoDataManager.Forms
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(3, 20);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(520, 182);
+            this.panel3.Size = new System.Drawing.Size(570, 182);
             this.panel3.TabIndex = 0;
             // 
             // tblPnlLayParams
@@ -122,7 +122,7 @@ namespace LottoDataManager.Forms
             this.tblPnlLayParams.RowCount = 2;
             this.tblPnlLayParams.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tblPnlLayParams.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tblPnlLayParams.Size = new System.Drawing.Size(520, 182);
+            this.tblPnlLayParams.Size = new System.Drawing.Size(570, 182);
             this.tblPnlLayParams.TabIndex = 0;
             // 
             // grpbxGenType
@@ -134,7 +134,7 @@ namespace LottoDataManager.Forms
             this.grpbxGenType.ForeColor = System.Drawing.Color.Navy;
             this.grpbxGenType.Location = new System.Drawing.Point(0, 0);
             this.grpbxGenType.Name = "grpbxGenType";
-            this.grpbxGenType.Size = new System.Drawing.Size(526, 264);
+            this.grpbxGenType.Size = new System.Drawing.Size(576, 264);
             this.grpbxGenType.TabIndex = 0;
             this.grpbxGenType.TabStop = false;
             this.grpbxGenType.Text = "Step 1. Choose Generator Type";
@@ -155,7 +155,7 @@ namespace LottoDataManager.Forms
             this.lvGenType.MultiSelect = false;
             this.lvGenType.Name = "lvGenType";
             this.lvGenType.ShowGroups = false;
-            this.lvGenType.Size = new System.Drawing.Size(520, 241);
+            this.lvGenType.Size = new System.Drawing.Size(570, 241);
             this.lvGenType.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.lvGenType.TabIndex = 0;
             this.lvGenType.UseCompatibleStateImageBehavior = false;
@@ -178,7 +178,7 @@ namespace LottoDataManager.Forms
             this.grpbxActions.ForeColor = System.Drawing.Color.Navy;
             this.grpbxActions.Location = new System.Drawing.Point(0, 469);
             this.grpbxActions.Name = "grpbxActions";
-            this.grpbxActions.Size = new System.Drawing.Size(526, 100);
+            this.grpbxActions.Size = new System.Drawing.Size(576, 100);
             this.grpbxActions.TabIndex = 2;
             this.grpbxActions.TabStop = false;
             this.grpbxActions.Text = "Step 3: Actions";
@@ -189,7 +189,7 @@ namespace LottoDataManager.Forms
             this.btnClearSel.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClearSel.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnClearSel.Image = global::LottoDataManager.Properties.Resources.erase_32px;
-            this.btnClearSel.Location = new System.Drawing.Point(181, 23);
+            this.btnClearSel.Location = new System.Drawing.Point(231, 23);
             this.btnClearSel.Name = "btnClearSel";
             this.btnClearSel.Size = new System.Drawing.Size(181, 67);
             this.btnClearSel.TabIndex = 1;
@@ -205,7 +205,7 @@ namespace LottoDataManager.Forms
             this.btnGenerate.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGenerate.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnGenerate.Image = global::LottoDataManager.Properties.Resources.Star5_32x;
-            this.btnGenerate.Location = new System.Drawing.Point(369, 23);
+            this.btnGenerate.Location = new System.Drawing.Point(419, 23);
             this.btnGenerate.Name = "btnGenerate";
             this.btnGenerate.Size = new System.Drawing.Size(143, 67);
             this.btnGenerate.TabIndex = 0;
@@ -221,9 +221,9 @@ namespace LottoDataManager.Forms
             this.panel2.Controls.Add(this.grpbxOutput);
             this.panel2.Controls.Add(this.grpbxFinalActions);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(530, 0);
+            this.panel2.Location = new System.Drawing.Point(580, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(596, 573);
+            this.panel2.Size = new System.Drawing.Size(546, 573);
             this.panel2.TabIndex = 1;
             // 
             // grpbxOutput
@@ -234,7 +234,7 @@ namespace LottoDataManager.Forms
             this.grpbxOutput.ForeColor = System.Drawing.Color.Navy;
             this.grpbxOutput.Location = new System.Drawing.Point(0, 0);
             this.grpbxOutput.Name = "grpbxOutput";
-            this.grpbxOutput.Size = new System.Drawing.Size(592, 469);
+            this.grpbxOutput.Size = new System.Drawing.Size(542, 469);
             this.grpbxOutput.TabIndex = 0;
             this.grpbxOutput.TabStop = false;
             this.grpbxOutput.Text = "Step 4: Output";
@@ -257,7 +257,7 @@ namespace LottoDataManager.Forms
             this.lvGenSeq.HideSelection = false;
             this.lvGenSeq.Location = new System.Drawing.Point(3, 20);
             this.lvGenSeq.Name = "lvGenSeq";
-            this.lvGenSeq.Size = new System.Drawing.Size(586, 446);
+            this.lvGenSeq.Size = new System.Drawing.Size(536, 446);
             this.lvGenSeq.TabIndex = 0;
             this.lvGenSeq.UseCompatibleStateImageBehavior = false;
             this.lvGenSeq.View = System.Windows.Forms.View.Details;
@@ -332,7 +332,7 @@ namespace LottoDataManager.Forms
             this.grpbxFinalActions.ForeColor = System.Drawing.Color.Navy;
             this.grpbxFinalActions.Location = new System.Drawing.Point(0, 469);
             this.grpbxFinalActions.Name = "grpbxFinalActions";
-            this.grpbxFinalActions.Size = new System.Drawing.Size(592, 100);
+            this.grpbxFinalActions.Size = new System.Drawing.Size(542, 100);
             this.grpbxFinalActions.TabIndex = 1;
             this.grpbxFinalActions.TabStop = false;
             this.grpbxFinalActions.Text = "Step 5: Final Action";
@@ -355,7 +355,7 @@ namespace LottoDataManager.Forms
             this.btnAddSelected.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddSelected.ForeColor = System.Drawing.Color.Black;
             this.btnAddSelected.Image = global::LottoDataManager.Properties.Resources.money_32px;
-            this.btnAddSelected.Location = new System.Drawing.Point(233, 21);
+            this.btnAddSelected.Location = new System.Drawing.Point(183, 21);
             this.btnAddSelected.Name = "btnAddSelected";
             this.btnAddSelected.Size = new System.Drawing.Size(201, 69);
             this.btnAddSelected.TabIndex = 1;
@@ -372,7 +372,7 @@ namespace LottoDataManager.Forms
             this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExit.ForeColor = System.Drawing.Color.Black;
             this.btnExit.Image = global::LottoDataManager.Properties.Resources.Exit_32;
-            this.btnExit.Location = new System.Drawing.Point(440, 21);
+            this.btnExit.Location = new System.Drawing.Point(390, 21);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(142, 69);
             this.btnExit.TabIndex = 0;
