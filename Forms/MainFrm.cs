@@ -681,7 +681,7 @@ namespace LottoDataManager
         {
             try
             {
-                UpdatesFrm updateFrm = new UpdatesFrm(AppSettings.GetRepositoryName);
+                UpdatesFrm updateFrm = new UpdatesFrm(AppSettings.GetRepositoryName, AppSettings.GetAppVersion());
                 updateFrm.ShowDialog();
             }
             catch (Exception ex)
