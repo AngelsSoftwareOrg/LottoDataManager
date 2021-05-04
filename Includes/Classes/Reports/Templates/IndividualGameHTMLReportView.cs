@@ -286,7 +286,6 @@ namespace LottoDataManager.Includes.Classes.Reports.Templates
             }
         }
         #endregion
-
         #region PERSONAL PROPERTIES AND IMPLEMENTATIONS
         private ProfitAndLossReport profitAndLossReport;
 
@@ -312,11 +311,9 @@ namespace LottoDataManager.Includes.Classes.Reports.Templates
         }
         public String AppTitleAndVersion()
         {
-           return LBL("app_const_app_title") +  AppSettings.GetAppVersionWithPrefix();
+           return String.Format("{0} {1}",LBL("app_const_app_title"), AppSettings.GetAppVersionWithPrefix());
         }
-
         #endregion
-
     }
     #endregion
 }

@@ -50,6 +50,7 @@ namespace LottoDataManager
             this.checkLotteryUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.machineLearningToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.updatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainStatusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripProcessingLogs = new System.Windows.Forms.ToolStripStatusLabel();
             this.mainSplitContainer = new System.Windows.Forms.SplitContainer();
@@ -274,7 +275,8 @@ namespace LottoDataManager
             this.checkWinningBetsToolStripMenuItem,
             this.checkLotteryUpdatesToolStripMenuItem,
             this.machineLearningToolStripMenuItem,
-            this.aboutToolStripMenuItem1});
+            this.aboutToolStripMenuItem1,
+            this.updatesToolStripMenuItem});
             this.othersToolStripMenuItem.Name = "othersToolStripMenuItem";
             this.othersToolStripMenuItem.Size = new System.Drawing.Size(66, 24);
             this.othersToolStripMenuItem.Text = "Others";
@@ -310,6 +312,14 @@ namespace LottoDataManager
             this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(240, 26);
             this.aboutToolStripMenuItem1.Text = "About";
             this.aboutToolStripMenuItem1.Click += new System.EventHandler(this.aboutToolStripMenuItem1_Click);
+            // 
+            // updatesToolStripMenuItem
+            // 
+            this.updatesToolStripMenuItem.Image = global::LottoDataManager.Properties.Resources.Updates_32px;
+            this.updatesToolStripMenuItem.Name = "updatesToolStripMenuItem";
+            this.updatesToolStripMenuItem.Size = new System.Drawing.Size(240, 26);
+            this.updatesToolStripMenuItem.Text = "Updates";
+            this.updatesToolStripMenuItem.Click += new System.EventHandler(this.updatesToolStripMenuItem_Click);
             // 
             // mainStatusStrip
             // 
@@ -1157,6 +1167,7 @@ namespace LottoDataManager
         private System.Windows.Forms.ToolStripMenuItem moveDrawDateToolStripMenuItem1;
         private System.Windows.Forms.ToolStripButton toolStripBtnMoveDrawDate;
         private System.Windows.Forms.ToolStripStatusLabel toolStripProcessingLogs;
+        private System.Windows.Forms.ToolStripMenuItem updatesToolStripMenuItem;
     }
 }
 

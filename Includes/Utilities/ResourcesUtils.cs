@@ -21,6 +21,7 @@ namespace LottoDataManager.Includes.Utilities
         private static readonly String RESOURCE_ID_ML_MODEL_FILE_TYPE_EXTENSION_DESC = "ML_MODEL_FILE_TYPE_EXTENSION_DESC";
         private static readonly String RESOURCE_ID_APP_DATA_FOLDER = "APP_DATA_FOLDER";
         private static readonly String RESOURCE_ID_APP_DATA_FOLDER_CONFIG_FILE_NAME = "APP_DATA_FOLDER_CONFIG_FILE_NAME";
+        private static readonly String RESOURCE_ID_APP_DATA_FOLDER_CONFIG_FILE_NAME_DEBUG = "APP_DATA_FOLDER_CONFIG_FILE_NAME_DEBUG";
         private static readonly String RESOURCE_ID_PROCESS_LOGS_MAX_LINE_CONTENT = "PROCESS_LOGS_MAX_LINE_CONTENT";
 
         
@@ -47,7 +48,17 @@ namespace LottoDataManager.Includes.Utilities
         public static String MachineLearningModelFileExtension { get { return GetSetting(RESOURCE_ID_ML_MODEL_FILE_TYPE_EXTENSION); } }
         public static String MachineLearningModelFileExtensionDescription { get { return GetSetting(RESOURCE_ID_ML_MODEL_FILE_TYPE_EXTENSION_DESC); } }
         public static String AppDataFolderName { get { return GetSetting(RESOURCE_ID_APP_DATA_FOLDER); } }
-        public static String AppDataConfigFileName { get { return GetSetting(RESOURCE_ID_APP_DATA_FOLDER_CONFIG_FILE_NAME); } }
+        public static String AppDataConfigFileName 
+        { 
+            get 
+            {
+                #if DEBUG
+                    return GetSetting(RESOURCE_ID_APP_DATA_FOLDER_CONFIG_FILE_NAME_DEBUG);
+                #else
+                    return GetSetting(RESOURCE_ID_APP_DATA_FOLDER_CONFIG_FILE_NAME); 
+                #endif
+            }
+        }
         public static int ProcessLogsMaximumLineContent{ get { return int.Parse(GetSetting(RESOURCE_ID_PROCESS_LOGS_MAX_LINE_CONTENT)); } }
         public void Dispose()
         {
