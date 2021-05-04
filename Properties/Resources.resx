@@ -241,4 +241,7 @@
   <data name="Updates_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Icons\Updates_32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="APP_DATA_FOLDER_CONFIG_FILE_NAME_DEBUG" xml:space="preserve">
+    <value>lotto_data_manager_ini_debug.config</value>
+  </data>
 </root>

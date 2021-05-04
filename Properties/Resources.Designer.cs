@@ -89,6 +89,15 @@ namespace LottoDataManager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to lotto_data_manager_ini_debug.config.
+        /// </summary>
+        internal static string APP_DATA_FOLDER_CONFIG_FILE_NAME_DEBUG {
+            get {
+                return ResourceManager.GetString("APP_DATA_FOLDER_CONFIG_FILE_NAME_DEBUG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to LOTTO_DATA_MANAGER.
         /// </summary>
         internal static string APPLICATION_ID {
