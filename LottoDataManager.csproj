@@ -30,7 +30,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -40,6 +40,9 @@
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>Clover_Icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Itenso.TimePeriod, Version=2.1.1.0, Culture=neutral, PublicKeyToken=8cb6db75b4e81486, processorArchitecture=MSIL">
@@ -497,6 +500,7 @@
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>IndividualGameHtmlReport.cs</LastGenOutput>
     </Content>
+    <None Include="Resources\Icons\Updates_32px.png" />
     <None Include="Resources\Icons\terminal_32px.png" />
     <None Include="Resources\Icons\broom_32.png" />
     <None Include="Resources\Icons\cal_32px-2.png" />
@@ -534,13 +538,13 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LottoDataManagerML.Model\LottoDataManagerML.Model.csproj">
-      <Project>{7D5BF5C1-FFB2-4290-BCA4-FA879B1E5F63}</Project>
-      <Name>LottoDataManagerML.Model</Name>
-    </ProjectReference>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <ProjectReference Include="..\AngelsRepositoryLib\AngelsRepositoryLib.csproj">
+      <Project>{2bdf0f2d-b753-49e4-836c-fbf071c0c066}</Project>
+      <Name>AngelsRepositoryLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

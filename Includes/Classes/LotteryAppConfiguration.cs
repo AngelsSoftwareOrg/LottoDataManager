@@ -9,7 +9,6 @@ using LottoDataManager.Includes.Database.DAO.Impl;
 using LottoDataManager.Includes.Database.DAO.Interface;
 using LottoDataManager.Includes.Model.Details;
 using LottoDataManager.Includes.Utilities;
-using LottoDataManagerML.Model;
 
 namespace LottoDataManager.Includes.Classes
 {

@@ -40,7 +40,6 @@ namespace LottoDataManager.Includes
                 return Properties.Settings.Default.lotto_scrape_site;
             }
         }
-
         public static DatabaseType GetDatabaseType()
         {
             String db = Properties.Settings.Default.db_type;
@@ -51,7 +50,6 @@ namespace LottoDataManager.Includes
             }
             return DatabaseType.MS_ACCESS;
         }
-
         public static String GetAppVersion()
         {
             return String.Format("{0}.{1}.{2}.{3}",
@@ -64,6 +62,12 @@ namespace LottoDataManager.Includes
         {
             return String.Format("v{0}", GetAppVersion());
         }
-
+        public static String GetRepositoryName
+        {
+            get
+            {
+                return Properties.Settings.Default.repository_name;
+            }
+        }
     }
 }

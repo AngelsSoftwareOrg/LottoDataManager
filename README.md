@@ -28,6 +28,7 @@ By using the following Technologies
 1. [Visual Studio Community Edition 2019](https://visualstudio.microsoft.com/downloads/)
 2. MS Access 2016
 3. [.NET Framework 4.7](https://dotnet.microsoft.com/download/dotnet-framework/net47)
+4. Object List View
 
 ## Supporting Technologies
 1. [Smart Git - Free Edition](https://www.syntevo.com/smartgit/)

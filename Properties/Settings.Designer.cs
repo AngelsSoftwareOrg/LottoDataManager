@@ -73,7 +73,7 @@ namespace LottoDataManager.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
         public string version_major {
             get {
                 return ((string)(this["version_major"]));
@@ -97,7 +97,7 @@ namespace LottoDataManager.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public string version_patch {
             get {
                 return ((string)(this["version_patch"]));
@@ -109,13 +109,25 @@ namespace LottoDataManager.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("r0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
         public string version_release {
             get {
                 return ((string)(this["version_release"]));
             }
             set {
                 this["version_release"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("LottoDataManager")]
+        public string repository_name {
+            get {
+                return ((string)(this["repository_name"]));
+            }
+            set {
+                this["repository_name"] = value;
             }
         }
     }

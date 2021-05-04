@@ -6,7 +6,6 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using Microsoft.ML;
-using LottoDataManagerML.Model;
 
 namespace LottoDataManager.Includes.Classes.ML.FastTree
 {
