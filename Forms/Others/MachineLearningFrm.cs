@@ -15,7 +15,6 @@ using LottoDataManager.Includes.Classes.ML.SDCARegression;
 using LottoDataManager.Includes.Model.Details;
 using LottoDataManager.Includes.Model.Structs;
 using LottoDataManager.Includes.Utilities;
-using LottoDataManagerML;
 
 namespace LottoDataManager.Forms
 {

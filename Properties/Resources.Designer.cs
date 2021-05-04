@@ -89,6 +89,15 @@ namespace LottoDataManager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to lotto_data_manager_ini_debug.config.
+        /// </summary>
+        internal static string APP_DATA_FOLDER_CONFIG_FILE_NAME_DEBUG {
+            get {
+                return ResourceManager.GetString("APP_DATA_FOLDER_CONFIG_FILE_NAME_DEBUG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to LOTTO_DATA_MANAGER.
         /// </summary>
         internal static string APPLICATION_ID {
@@ -448,6 +457,16 @@ namespace LottoDataManager.Properties {
         internal static System.Drawing.Bitmap Trash_32x {
             get {
                 object obj = ResourceManager.GetObject("Trash_32x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Updates_32px {
+            get {
+                object obj = ResourceManager.GetObject("Updates_32px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

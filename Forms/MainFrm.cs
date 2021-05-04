@@ -21,6 +21,7 @@ using LottoDataManager.Includes.Model.Game;
 using LottoDataManager.Includes.Model.Reports;
 using LottoDataManager.Includes.Model.Structs;
 using LottoDataManager.Includes.Utilities;
+using AngelsRepositoryLib;
 
 namespace LottoDataManager
 {
@@ -45,12 +46,12 @@ namespace LottoDataManager
             InitializeComponent();
             this.lotteryDetails = GameFactory.GetPreviousOpenGameInstance();
             this.processingStatusLogFrm = new ProcessingStatusLogFrm();
-            this.Text = String.Format("{0} - {1}",ResourcesUtils.GetMessage("mainf_title"), AppSettings.GetAppVersionWithPrefix());
+            this.Text = String.Format("{0} - {1}", ResourcesUtils.GetMessage("mainf_title"), AppSettings.GetAppVersionWithPrefix());
             this.label1.Text = ResourcesUtils.GetMessage("mainf_labels_1");
             this.label3.Text = ResourcesUtils.GetMessage("mainf_labels_2");
             this.label4.Text = ResourcesUtils.GetMessage("mainf_labels_3");
             this.label5.Text = ResourcesUtils.GetMessage("mainf_labels_4");
-            AddProcessingStatusLogs(LOG_STATUS_MODULE_NAME_WEBSCRAP,ResourcesUtils.GetMessage("mainf_labels_5"));
+            AddProcessingStatusLogs(LOG_STATUS_MODULE_NAME_WEBSCRAP, ResourcesUtils.GetMessage("mainf_labels_5"));
             this.toolStripProcessingLogs.Text = ResourcesUtils.GetMessage("mainf_labels_46");
             this.tabPage1.Text = ResourcesUtils.GetMessage("mainf_labels_6");
             this.groupBox1.Text = ResourcesUtils.GetMessage("mainf_labels_7");
@@ -239,7 +240,7 @@ namespace LottoDataManager
             lblGameMode.Text = this.lotteryDetails.Description;
 
             //Schedule Date
-            AddProcessingStatusLogs(LOG_STATUS_MODULE_NAME_FIELD_DETAILS,ResourcesUtils.GetMessage("mainf_labels_41"));
+            AddProcessingStatusLogs(LOG_STATUS_MODULE_NAME_FIELD_DETAILS, ResourcesUtils.GetMessage("mainf_labels_41"));
             lblNextDrawDate.Text = this.lotteryDataServices.GetNextDrawDateFormatted();
 
             //Total Winnings amount
@@ -252,7 +253,7 @@ namespace LottoDataManager
         }
         private OLVColumn[] GenerateOLVColumnForHighlighting()
         {
-            if (this.olvColumnTargetFilter !=null && this.olvColumnTargetFilter.Length > 0) return this.olvColumnTargetFilter;
+            if (this.olvColumnTargetFilter != null && this.olvColumnTargetFilter.Length > 0) return this.olvColumnTargetFilter;
             List<OLVColumn> tmpOLVColumns = new List<OLVColumn>();
             tmpOLVColumns.Add(objListVwWinningNum.GetColumn(1));
             tmpOLVColumns.Add(objListVwWinningNum.GetColumn(2));
@@ -273,7 +274,7 @@ namespace LottoDataManager
                 itm.SubItems.Add(dpitm.GetValue());
                 itm.Tag = dpitm;
                 if (dpitm.IsHighlight()) itm.BackColor = dpitm.GetHighlightColor();
-                if (dpitm.GetFontColor() != Color.Black) itm.ForeColor= dpitm.GetFontColor();
+                if (dpitm.GetFontColor() != Color.Black) itm.ForeColor = dpitm.GetFontColor();
                 listViewOtherDetails.Items.Add(itm);
             }
             listViewOtherDetails.EndUpdate();
@@ -290,14 +291,14 @@ namespace LottoDataManager
             }
 
             DashboardReportItem rptItem = (DashboardReportItem)item.Tag;
-            if(rptItem.GetDashboardReportItemActions() != DashboardReportItemActions.NONE)
+            if (rptItem.GetDashboardReportItemActions() != DashboardReportItemActions.NONE)
             {
                 ActionableDashboardReportItem(rptItem);
             }
         }
         private void ActionableDashboardReportItem(DashboardReportItem rptItem)
         {
-            if(rptItem.GetDashboardReportItemActions() == DashboardReportItemActions.OPEN_CLAIM_FORM)
+            if (rptItem.GetDashboardReportItemActions() == DashboardReportItemActions.OPEN_CLAIM_FORM)
             {
                 ShowModifyClaimStatus();
             }
@@ -360,7 +361,7 @@ namespace LottoDataManager
         #endregion
 
         #region "Status Strip"
-        private void AddProcessingStatusLogs(String moduleName, String logs="")
+        private void AddProcessingStatusLogs(String moduleName, String logs = "")
         {
             if (String.IsNullOrWhiteSpace(logs)) return;
             processingLogStatusCtr++;
@@ -454,7 +455,7 @@ namespace LottoDataManager
         private void copySelectedAsLinearCSVToolStripMenuItem_Click(object sender, EventArgs e)
         {
             StringBuilder sb = new StringBuilder();
-            foreach(LotteryBet bet in objectLstVwLatestBet.SelectedObjects)
+            foreach (LotteryBet bet in objectLstVwLatestBet.SelectedObjects)
             {
                 if (sb.Length > 0) sb.Append(",");
                 sb.Append(bet.GetGNUFormat());
@@ -481,13 +482,13 @@ namespace LottoDataManager
         {
             LotteryBet bet = (LotteryBet)objectLstVwLatestBet.SelectedObject;
             if (bet == null) return;
-            OpenBetsAndDrawResultMatchMakingForm(bet.GetTargetDrawDate(),bet.GetId());
+            OpenBetsAndDrawResultMatchMakingForm(bet.GetTargetDrawDate(), bet.GetId());
         }
         private void SelectDrawResultAndOpenMatchMakingForm()
         {
             LotteryDrawResult drawResult = (LotteryDrawResult)objListVwWinningNum.SelectedObject;
             if (drawResult == null) return;
-            OpenBetsAndDrawResultMatchMakingForm(drawResult.GetDrawDate(),0);
+            OpenBetsAndDrawResultMatchMakingForm(drawResult.GetDrawDate(), 0);
         }
         private void OpenBetsAndDrawResultMatchMakingForm(DateTime dateRef, long betIdDefault)
         {
@@ -533,7 +534,7 @@ namespace LottoDataManager
         #region "Main Menu"
         private void GenerateLotteriesGameMenu()
         {
-            foreach(Lottery lottery in this.lotteryDataServices.GetLotteries())
+            foreach (Lottery lottery in this.lotteryDataServices.GetLotteries())
             {
                 ToolStripMenuItem lottoGameMenu = new ToolStripMenuItem(lottery.GetDescription());
                 lottoGameMenu.Tag = lottery;
@@ -546,7 +547,7 @@ namespace LottoDataManager
             try
             {
                 ClearAllForms();
-                ToolStripMenuItem lottoGameMenu = (ToolStripMenuItem) sender;
+                ToolStripMenuItem lottoGameMenu = (ToolStripMenuItem)sender;
                 Lottery lottery = (Lottery)lottoGameMenu.Tag;
                 this.lotteryDetails = new LotteryDetails(lottery.GetGameMode());
                 ReinitateLotteryServices();
@@ -651,7 +652,7 @@ namespace LottoDataManager
         {
             MoveDrawDate(true);
         }
-        private void MoveDrawDate(bool fromContextMenu=false)
+        private void MoveDrawDate(bool fromContextMenu = false)
         {
             ModifyBetDateFrm m = new ModifyBetDateFrm(this.lotteryDataServices);
             if (fromContextMenu)
@@ -675,6 +676,18 @@ namespace LottoDataManager
         {
             ProfitAndLossFrm frm = new ProfitAndLossFrm(this.lotteryDataServices);
             frm.ShowDialog();
+        }
+        private void updatesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                UpdatesFrm updateFrm = new UpdatesFrm(AppSettings.GetRepositoryName);
+                updateFrm.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
         #endregion
 
@@ -700,6 +713,7 @@ namespace LottoDataManager
             this.Show();
         }
         #endregion
+
 
     }
 }
