@@ -80,7 +80,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                                         "    AND (SELECT DISTINCT b.draw_date FROM draw_results b  " +
                                         "   	   WHERE a.target_draw_date = b.draw_date  " +
                                         "            AND a.game_cd = b.game_cd) IS NULL  " +
-                                        "  ORDER BY a.target_draw_date DESC ";
+                                        "  ORDER BY a.target_draw_date DESC, a.ID DESC ";
                 command.Parameters.AddWithValue("@game_cd", OleDbType.Integer).Value = gameMode;
                 command.Parameters.AddWithValue("@sinceWhen", OleDbType.DBDate).Value = sinceWhen.Date.ToString();
                 command.Parameters.AddWithValue("@game_cd", OleDbType.Integer).Value = gameMode;
@@ -109,7 +109,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                                       " WHERE game_cd = @game_cd " +
                                       "   AND target_draw_date = CDATE(@sinceWhen) " +
                                       "   AND active = true " +
-                                      " ORDER BY target_draw_date DESC";
+                                      " ORDER BY target_draw_date DESC, ID DESC ";
                 command.Parameters.AddWithValue("@game_cd", OleDbType.Integer).Value = gameMode;
                 command.Parameters.AddWithValue("@sinceWhen", OleDbType.DBDate).Value = betDrawDate.Date.ToString();
                 command.Connection = conn;
@@ -140,7 +140,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                                       "   AND a.active = true " +
                                       "   AND b.active IS NULL " +
                                       "   AND a.game_cd = @game_cd " +
-                                      " ORDER BY a.target_draw_date DESC ";
+                                      " ORDER BY a.target_draw_date DESC, a.ID DESC  ";
                 command.Parameters.AddWithValue("@game_cd", gameMode);
                 command.Connection = conn;
                 conn.Open();
@@ -506,7 +506,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                                      "    AND b.active = true " +
                                      "    AND b.winning_amt > 0 " +
                                      "    AND b.claim_status = @claim_status " +
-                                     "  ORDER BY a.target_draw_date DESC";
+                                     "  ORDER BY a.target_draw_date DESC, a.ID DESC ";
                 command.Parameters.AddWithValue("@game_cd", (int)gameMode);
                 command.Parameters.AddWithValue("@claim_status", isGetClaimedStatus);
                 command.Connection = conn;

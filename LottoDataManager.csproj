@@ -119,6 +119,12 @@
     <Compile Include="Forms\Others\MachineLearningFrm.Designer.cs">
       <DependentUpon>MachineLearningFrm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Ticket\HitComparisonFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Ticket\HitComparisonFrm.Designer.cs">
+      <DependentUpon>HitComparisonFrm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Ticket\ModifyBetDateFrm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -388,6 +394,9 @@
     <EmbeddedResource Include="Forms\MainFrm.resx">
       <DependentUpon>MainFrm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Ticket\HitComparisonFrm.resx">
+      <DependentUpon>HitComparisonFrm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Ticket\ModifyBetDateFrm.resx">
       <DependentUpon>ModifyBetDateFrm.cs</DependentUpon>
     </EmbeddedResource>
@@ -500,6 +509,8 @@
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>IndividualGameHtmlReport.cs</LastGenOutput>
     </Content>
+    <None Include="Resources\Icons\hit_compare_32_a_px.png" />
+    <None Include="Resources\Icons\hit_compare_32px.png" />
     <None Include="Resources\Icons\Updates_32px.png" />
     <None Include="Resources\Icons\terminal_32px.png" />
     <None Include="Resources\Icons\broom_32.png" />

@@ -112,11 +112,11 @@ namespace LottoDataManager.Includes.Classes.Reports
         {
             int[] result = this.reportDataServices.GetMinMaxWinningBetAmount();
             String key = ResourcesUtils.GetMessage("drpt_low_amt_money_won");
-            String value = result[0].ToString();
+            String value = result[0].ToString("C");
             dashboardReportList.Add(GenModel(key, value));
 
             key = ResourcesUtils.GetMessage("drpt_high_amt_money_won");
-            value = result[1].ToString();
+            value = result[1].ToString("C");
             dashboardReportList.Add(GenModel(key, value));
         }
         private void GetMonthlyAndAnnualSpending()

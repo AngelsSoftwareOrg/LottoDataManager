@@ -184,6 +184,9 @@
   <data name="Star5_256x" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Icons\Star5_256x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Updates_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons\Updates_32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Exit_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Icons\Exit_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -223,6 +226,9 @@
   <data name="cal_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Icons\cal_32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="APP_DATA_FOLDER_CONFIG_FILE_NAME_DEBUG" xml:space="preserve">
+    <value>lotto_data_manager_ini_debug.config</value>
+  </data>
   <data name="Star5_20x" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Icons\Star5_20x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -238,10 +244,7 @@
   <data name="Stars6_20x" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Icons\Stars6_20x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Updates_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\Updates_32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="APP_DATA_FOLDER_CONFIG_FILE_NAME_DEBUG" xml:space="preserve">
-    <value>lotto_data_manager_ini_debug.config</value>
+  <data name="hit_compare_32_a_px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons\hit_compare_32_a_px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

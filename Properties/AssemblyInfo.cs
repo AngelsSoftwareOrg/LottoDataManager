@@ -5,13 +5,13 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("LottoDataManager")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Lotto Data Manager")]
+[assembly: AssemblyDescription("Lottery data management software to track your spending and your luck.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("LottoDataManager")]
+[assembly: AssemblyCompany("Angels Software")]
+[assembly: AssemblyProduct("Lotto Data Manager")]
 [assembly: AssemblyCopyright("Copyright ©  2021")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyTrademark("Angels Software")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible
