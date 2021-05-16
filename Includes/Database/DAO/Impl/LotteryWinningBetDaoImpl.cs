@@ -153,7 +153,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
             }
             return 0.00;
         }
-        public void RemoveLotteryWinningBet(long betId)
+        public void RemoveLotteryWinningBet(long Id)
         {
             using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
             using (OleDbCommand command = new OleDbCommand())
@@ -161,7 +161,30 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                 command.CommandType = CommandType.Text;
                 command.CommandText = " UPDATE lottery_winning_bet SET active = 0 " +
                                       " WHERE ID = @id";
-                command.Parameters.AddWithValue("@id", OleDbType.BigInt).Value = (long)betId;
+                command.Parameters.AddWithValue("@id", OleDbType.BigInt).Value = (long)Id;
+                command.Connection = conn;
+                conn.Open();
+                OleDbTransaction transaction = conn.BeginTransaction();
+                command.Transaction = transaction;
+                int result = command.ExecuteNonQuery();
+
+                if (result < 0)
+                {
+                    transaction.Rollback();
+                    throw new Exception(String.Format(ResourcesUtils.GetMessage("lot_dao_impl_msg11"), Id));
+                }
+                transaction.Commit();
+            }
+        }
+        public void RemoveLotteryWinningBetByBetId(long betId)
+        {
+            using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
+            using (OleDbCommand command = new OleDbCommand())
+            {
+                command.CommandType = CommandType.Text;
+                command.CommandText = " UPDATE lottery_winning_bet SET active = 0 " +
+                                      " WHERE bet_id = @id";
+                command.Parameters.AddWithValue("@bet_id", OleDbType.BigInt).Value = (long)betId;
                 command.Connection = conn;
                 conn.Open();
                 OleDbTransaction transaction = conn.BeginTransaction();
@@ -176,6 +199,9 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                 transaction.Commit();
             }
         }
+
+
+
         public List<LotteryWinningBet> GetLotteryWinningBet(GameMode gameMode, DateTime sinceWhen)
         {
             List<LotteryWinningBet> lotteryWinningBetArr = new List<LotteryWinningBet>();

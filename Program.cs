@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using LottoDataManager.Forms;
 using LottoDataManager.Forms.Reports;
+using LottoDataManager.Forms.Ticket;
 
 namespace LottoDataManager
 {
@@ -30,7 +31,7 @@ namespace LottoDataManager
                 Application.Run(new MainForm());
                 //splash.DisposeInstance();
                 //Application.Run(new ProfitAndLossFrm(null));
-                //Application.Run(new ProcessingStatusLogFrm());
+                //Application.Run(new HitComparisonFrm(null));
             }
         }
     }

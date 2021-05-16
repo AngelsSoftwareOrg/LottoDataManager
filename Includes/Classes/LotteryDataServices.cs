@@ -64,13 +64,11 @@ namespace LottoDataManager.Includes.Classes
         public List<LotteryBet> GetLottoBets(DateTime sinceWhen)
         {
             if (sinceWhen >= DateTime.Now) throw new Exception(ResourcesUtils.GetMessage("lot_data_srv_cls_msg_2"));
-            LotteryBetDao betDao = LotteryBetDaoImpl.GetInstance();
-            return betDao.GetDashboardLatestBets(GameMode, sinceWhen);
+            return lotteryBetDao.GetDashboardLatestBets(GameMode, sinceWhen);
         }
         public List<LotteryBet> GetLottoBetsByDrawDate(DateTime betDrawDate)
         {
-            LotteryBetDao betDao = LotteryBetDaoImpl.GetInstance();
-            return betDao.GetLotteryBets(GameMode, betDrawDate);
+            return lotteryBetDao.GetLotteryBets(GameMode, betDrawDate);
         }
         public double GetTotalWinningsAmount()
         {
@@ -144,7 +142,7 @@ namespace LottoDataManager.Includes.Classes
         public void DeleteLotteryBet(LotteryBet lotteryBet)
         {
             this.lotteryBetDao.RemoveLotteryBet(lotteryBet.GetId());
-            this.lotteryWinningBetDao.RemoveLotteryWinningBet(lotteryBet.GetId());
+            this.lotteryWinningBetDao.RemoveLotteryWinningBetByBetId(lotteryBet.GetId());
         }
         public void SaveLotteryBetChange(LotteryBet lotteryBet)
         {

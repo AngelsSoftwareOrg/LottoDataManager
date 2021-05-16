@@ -49,6 +49,7 @@ namespace LottoDataManager
             this.checkWinningBetsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkLotteryUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.machineLearningToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.hitComparisonToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.updatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainStatusStrip = new System.Windows.Forms.StatusStrip();
@@ -84,11 +85,15 @@ namespace LottoDataManager
             this.ctxMenuBet = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.compareDrawResultAndBetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.hitComparisonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.editYourBetsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editClaimStatusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.selectAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.copySelectedAsLinearCSVToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.moveDrawDateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.selectAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.copySelectedAsLinearCSVToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel3 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -119,8 +124,10 @@ namespace LottoDataManager
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.pickGeneratorToolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripBtnHitCompare = new System.Windows.Forms.ToolStripButton();
             this.toolStripBtnWinBets = new System.Windows.Forms.ToolStripButton();
             this.toolStripBtnDownloadResults = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.mainMenuStrip.SuspendLayout();
             this.mainStatusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mainSplitContainer)).BeginInit();
@@ -275,6 +282,7 @@ namespace LottoDataManager
             this.checkWinningBetsToolStripMenuItem,
             this.checkLotteryUpdatesToolStripMenuItem,
             this.machineLearningToolStripMenuItem,
+            this.hitComparisonToolStripMenuItem1,
             this.aboutToolStripMenuItem1,
             this.updatesToolStripMenuItem});
             this.othersToolStripMenuItem.Name = "othersToolStripMenuItem";
@@ -304,6 +312,14 @@ namespace LottoDataManager
             this.machineLearningToolStripMenuItem.Size = new System.Drawing.Size(240, 26);
             this.machineLearningToolStripMenuItem.Text = "Machine Learning";
             this.machineLearningToolStripMenuItem.Click += new System.EventHandler(this.machineLearningToolStripMenuItem_Click);
+            // 
+            // hitComparisonToolStripMenuItem1
+            // 
+            this.hitComparisonToolStripMenuItem1.Image = global::LottoDataManager.Properties.Resources.hit_compare_32_a_px;
+            this.hitComparisonToolStripMenuItem1.Name = "hitComparisonToolStripMenuItem1";
+            this.hitComparisonToolStripMenuItem1.Size = new System.Drawing.Size(240, 26);
+            this.hitComparisonToolStripMenuItem1.Text = "Hit Comparison";
+            this.hitComparisonToolStripMenuItem1.Click += new System.EventHandler(this.hitComparisonToolStripMenuItem1_Click);
             // 
             // aboutToolStripMenuItem1
             // 
@@ -645,13 +661,17 @@ namespace LottoDataManager
             this.ctxMenuBet.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.refreshToolStripMenuItem,
             this.compareDrawResultAndBetToolStripMenuItem,
+            this.hitComparisonToolStripMenuItem,
+            this.toolStripSeparator5,
             this.editYourBetsToolStripMenuItem,
             this.editClaimStatusToolStripMenuItem,
+            this.toolStripSeparator4,
+            this.moveDrawDateToolStripMenuItem,
             this.selectAllToolStripMenuItem,
-            this.copySelectedAsLinearCSVToolStripMenuItem,
-            this.moveDrawDateToolStripMenuItem});
+            this.toolStripSeparator3,
+            this.copySelectedAsLinearCSVToolStripMenuItem});
             this.ctxMenuBet.Name = "ctxMenuBet";
-            this.ctxMenuBet.Size = new System.Drawing.Size(278, 172);
+            this.ctxMenuBet.Size = new System.Drawing.Size(278, 214);
             // 
             // refreshToolStripMenuItem
             // 
@@ -667,6 +687,18 @@ namespace LottoDataManager
             this.compareDrawResultAndBetToolStripMenuItem.Text = "Compare Draw Result and Bet";
             this.compareDrawResultAndBetToolStripMenuItem.Click += new System.EventHandler(this.compareDrawResultAndBetToolStripMenuItem_Click);
             // 
+            // hitComparisonToolStripMenuItem
+            // 
+            this.hitComparisonToolStripMenuItem.Name = "hitComparisonToolStripMenuItem";
+            this.hitComparisonToolStripMenuItem.Size = new System.Drawing.Size(277, 24);
+            this.hitComparisonToolStripMenuItem.Text = "Hit Comparison";
+            this.hitComparisonToolStripMenuItem.Click += new System.EventHandler(this.hitComparisonToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(274, 6);
+            // 
             // editYourBetsToolStripMenuItem
             // 
             this.editYourBetsToolStripMenuItem.Name = "editYourBetsToolStripMenuItem";
@@ -681,19 +713,10 @@ namespace LottoDataManager
             this.editClaimStatusToolStripMenuItem.Text = "Edit Claim Status";
             this.editClaimStatusToolStripMenuItem.Click += new System.EventHandler(this.editClaimStatusToolStripMenuItem_Click);
             // 
-            // selectAllToolStripMenuItem
+            // toolStripSeparator4
             // 
-            this.selectAllToolStripMenuItem.Name = "selectAllToolStripMenuItem";
-            this.selectAllToolStripMenuItem.Size = new System.Drawing.Size(277, 24);
-            this.selectAllToolStripMenuItem.Text = "Select All";
-            this.selectAllToolStripMenuItem.Click += new System.EventHandler(this.selectAllToolStripMenuItem_Click);
-            // 
-            // copySelectedAsLinearCSVToolStripMenuItem
-            // 
-            this.copySelectedAsLinearCSVToolStripMenuItem.Name = "copySelectedAsLinearCSVToolStripMenuItem";
-            this.copySelectedAsLinearCSVToolStripMenuItem.Size = new System.Drawing.Size(277, 24);
-            this.copySelectedAsLinearCSVToolStripMenuItem.Text = "Copy selected as Linear CSV";
-            this.copySelectedAsLinearCSVToolStripMenuItem.Click += new System.EventHandler(this.copySelectedAsLinearCSVToolStripMenuItem_Click);
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(274, 6);
             // 
             // moveDrawDateToolStripMenuItem
             // 
@@ -701,6 +724,25 @@ namespace LottoDataManager
             this.moveDrawDateToolStripMenuItem.Size = new System.Drawing.Size(277, 24);
             this.moveDrawDateToolStripMenuItem.Text = "Move Draw Date";
             this.moveDrawDateToolStripMenuItem.Click += new System.EventHandler(this.moveDrawDateToolStripMenuItem_Click);
+            // 
+            // selectAllToolStripMenuItem
+            // 
+            this.selectAllToolStripMenuItem.Name = "selectAllToolStripMenuItem";
+            this.selectAllToolStripMenuItem.Size = new System.Drawing.Size(277, 24);
+            this.selectAllToolStripMenuItem.Text = "Select All";
+            this.selectAllToolStripMenuItem.Click += new System.EventHandler(this.selectAllToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(274, 6);
+            // 
+            // copySelectedAsLinearCSVToolStripMenuItem
+            // 
+            this.copySelectedAsLinearCSVToolStripMenuItem.Name = "copySelectedAsLinearCSVToolStripMenuItem";
+            this.copySelectedAsLinearCSVToolStripMenuItem.Size = new System.Drawing.Size(277, 24);
+            this.copySelectedAsLinearCSVToolStripMenuItem.Text = "Copy selected as Linear CSV";
+            this.copySelectedAsLinearCSVToolStripMenuItem.Click += new System.EventHandler(this.copySelectedAsLinearCSVToolStripMenuItem_Click);
             // 
             // panel3
             // 
@@ -917,8 +959,10 @@ namespace LottoDataManager
             this.toolStripSeparator1,
             this.pickGeneratorToolStripButton2,
             this.toolStripSeparator2,
+            this.toolStripBtnHitCompare,
             this.toolStripBtnWinBets,
-            this.toolStripBtnDownloadResults});
+            this.toolStripBtnDownloadResults,
+            this.toolStripSeparator6});
             this.toolStripBetsAndResults.Location = new System.Drawing.Point(0, 0);
             this.toolStripBetsAndResults.Name = "toolStripBetsAndResults";
             this.toolStripBetsAndResults.Size = new System.Drawing.Size(899, 37);
@@ -1005,6 +1049,16 @@ namespace LottoDataManager
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 37);
             // 
+            // toolStripBtnHitCompare
+            // 
+            this.toolStripBtnHitCompare.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripBtnHitCompare.Image = global::LottoDataManager.Properties.Resources.hit_compare_32_a_px;
+            this.toolStripBtnHitCompare.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripBtnHitCompare.Name = "toolStripBtnHitCompare";
+            this.toolStripBtnHitCompare.Size = new System.Drawing.Size(34, 34);
+            this.toolStripBtnHitCompare.Text = "Hit Comparison";
+            this.toolStripBtnHitCompare.Click += new System.EventHandler(this.toolStripBtnHitCompare_Click);
+            // 
             // toolStripBtnWinBets
             // 
             this.toolStripBtnWinBets.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -1025,6 +1079,11 @@ namespace LottoDataManager
             this.toolStripBtnDownloadResults.Text = "DownloadDrawResults";
             this.toolStripBtnDownloadResults.ToolTipText = "Download Draw Results";
             this.toolStripBtnDownloadResults.Click += new System.EventHandler(this.toolStripBtnDownloadResults_Click);
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 37);
             // 
             // MainForm
             // 
@@ -1168,6 +1227,13 @@ namespace LottoDataManager
         private System.Windows.Forms.ToolStripButton toolStripBtnMoveDrawDate;
         private System.Windows.Forms.ToolStripStatusLabel toolStripProcessingLogs;
         private System.Windows.Forms.ToolStripMenuItem updatesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem hitComparisonToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem hitComparisonToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+        private System.Windows.Forms.ToolStripButton toolStripBtnHitCompare;
     }
 }
 
