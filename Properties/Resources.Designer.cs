@@ -257,6 +257,16 @@ namespace LottoDataManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap hit_compare_32_a_px {
+            get {
+                object obj = ResourceManager.GetObject("hit_compare_32_a_px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap lotto_32px {
             get {
                 object obj = ResourceManager.GetObject("lotto-32px", resourceCulture);

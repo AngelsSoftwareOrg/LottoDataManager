@@ -22,6 +22,7 @@ using LottoDataManager.Includes.Model.Reports;
 using LottoDataManager.Includes.Model.Structs;
 using LottoDataManager.Includes.Utilities;
 using AngelsRepositoryLib;
+using LottoDataManager.Forms.Ticket;
 
 namespace LottoDataManager
 {
@@ -315,12 +316,10 @@ namespace LottoDataManager
             filter.Columns = GenerateOLVColumnForHighlighting();
 
             List<String> regex = new List<string>();
-            regex.Add("^" + lotteryDrawResult.GetNum1().ToString() + "$");
-            regex.Add("^" + lotteryDrawResult.GetNum2().ToString() + "$");
-            regex.Add("^" + lotteryDrawResult.GetNum3().ToString() + "$");
-            regex.Add("^" + lotteryDrawResult.GetNum4().ToString() + "$");
-            regex.Add("^" + lotteryDrawResult.GetNum5().ToString() + "$");
-            regex.Add("^" + lotteryDrawResult.GetNum6().ToString() + "$");
+            foreach (int n in lotteryDrawResult.GetAllNumberSequenceSorted())
+            {
+                regex.Add("^" + n.ToString() + "$");
+            }
             filter.RegexStrings = regex;
 
             HighlightTextRenderer highlightTextRenderer = new HighlightTextRenderer(filter);
@@ -332,6 +331,7 @@ namespace LottoDataManager
             this.objListVwWinningNum.ModelFilter = filter;
             this.objListVwWinningNum.DefaultRenderer = highlightTextRenderer;
             this.objListVwWinningNum.SelectedForeColor = Color.Black;
+            this.objListVwWinningNum.Refresh();
         }
         private void objectLstVwLatestBet_SelectionChanged(object sender, EventArgs e)
         {
@@ -340,12 +340,10 @@ namespace LottoDataManager
             TextMatchFilter filter = new TextMatchFilter(this.objectLstVwLatestBet);
 
             List<String> regex = new List<string>();
-            regex.Add("^" + lotteryBet.GetNum1().ToString() + "$");
-            regex.Add("^" + lotteryBet.GetNum2().ToString() + "$");
-            regex.Add("^" + lotteryBet.GetNum3().ToString() + "$");
-            regex.Add("^" + lotteryBet.GetNum4().ToString() + "$");
-            regex.Add("^" + lotteryBet.GetNum5().ToString() + "$");
-            regex.Add("^" + lotteryBet.GetNum6().ToString() + "$");
+            foreach (int n in lotteryBet.GetAllNumberSequenceSorted())
+            {
+                regex.Add("^" + n.ToString() + "$");
+            }
             filter.RegexStrings = regex;
 
             HighlightTextRenderer highlightTextRenderer = new HighlightTextRenderer(filter);
@@ -357,6 +355,7 @@ namespace LottoDataManager
             this.objectLstVwLatestBet.ModelFilter = filter;
             this.objectLstVwLatestBet.DefaultRenderer = highlightTextRenderer;
             this.objectLstVwLatestBet.SelectedForeColor = Color.Black;
+            this.objectLstVwLatestBet.Refresh();
         }
         #endregion
 
@@ -681,13 +680,30 @@ namespace LottoDataManager
         {
             try
             {
-                UpdatesFrm updateFrm = new UpdatesFrm(AppSettings.GetRepositoryName);
+                UpdatesFrm updateFrm = new UpdatesFrm(AppSettings.GetRepositoryName, AppSettings.GetAppVersion());
                 updateFrm.ShowDialog();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+        private void hitComparisonToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowHitComparisonForm();
+        }
+        private void toolStripBtnHitCompare_Click(object sender, EventArgs e)
+        {
+            ShowHitComparisonForm();
+        }
+        private void hitComparisonToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            ShowHitComparisonForm();
+        }
+        private void ShowHitComparisonForm()
+        {
+            HitComparisonFrm hitFrm = new HitComparisonFrm(this.lotteryDataServices);
+            hitFrm.ShowDialog();
         }
         #endregion
 
@@ -712,6 +728,8 @@ namespace LottoDataManager
             SplashScreenFrm.GetIntance().DisposeInstance();
             this.Show();
         }
+
+
         #endregion
 
 
