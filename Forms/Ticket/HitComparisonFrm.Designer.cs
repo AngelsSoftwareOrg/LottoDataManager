@@ -52,14 +52,14 @@ namespace LottoDataManager.Forms.Ticket
             this.olvColDrawWinner = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColDrawMatch = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.panelBottom = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.btnExit = new System.Windows.Forms.Button();
             this.panelTop = new System.Windows.Forms.Panel();
             this.lnkFilter = new System.Windows.Forms.LinkLabel();
             this.dateTimePickerFrom = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.panelMiddle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerMain)).BeginInit();
             this.splitContainerMain.Panel1.SuspendLayout();
@@ -126,7 +126,10 @@ namespace LottoDataManager.Forms.Ticket
             this.objListVwBet.Location = new System.Drawing.Point(0, 0);
             this.objListVwBet.MultiSelect = false;
             this.objListVwBet.Name = "objListVwBet";
+            this.objListVwBet.ShowGroups = false;
             this.objListVwBet.Size = new System.Drawing.Size(297, 392);
+            this.objListVwBet.SortGroupItemsByPrimaryColumn = false;
+            this.objListVwBet.Sorting = System.Windows.Forms.SortOrder.Descending;
             this.objListVwBet.TabIndex = 2;
             this.objListVwBet.UseCompatibleStateImageBehavior = false;
             this.objListVwBet.View = System.Windows.Forms.View.Details;
@@ -135,48 +138,40 @@ namespace LottoDataManager.Forms.Ticket
             // olvColBetTargetDate
             // 
             this.olvColBetTargetDate.AspectName = "GetTargetDrawDateFormatted";
-            this.olvColBetTargetDate.Groupable = false;
             this.olvColBetTargetDate.Text = "Target Date";
             // 
             // olvColBetN1
             // 
             this.olvColBetN1.AspectName = "GetNum1";
-            this.olvColBetN1.Groupable = false;
             this.olvColBetN1.Text = "#1";
             // 
             // olvColBetN2
             // 
             this.olvColBetN2.AspectName = "GetNum2";
-            this.olvColBetN2.Groupable = false;
             this.olvColBetN2.Text = "#2";
             // 
             // olvColBetN3
             // 
             this.olvColBetN3.AspectName = "GetNum3";
-            this.olvColBetN3.Groupable = false;
             this.olvColBetN3.Text = "#3";
             // 
             // olvColBetN4
             // 
             this.olvColBetN4.AspectName = "GetNum4";
-            this.olvColBetN4.Groupable = false;
             this.olvColBetN4.Text = "#4";
             // 
             // olvColBetN5
             // 
             this.olvColBetN5.AspectName = "GetNum5";
-            this.olvColBetN5.Groupable = false;
             this.olvColBetN5.Text = "#5";
             // 
             // olvColBetN6
             // 
             this.olvColBetN6.AspectName = "GetNum6";
-            this.olvColBetN6.Groupable = false;
             this.olvColBetN6.Text = "#6";
             // 
             // olvColBetMatch
             // 
-            this.olvColBetMatch.Groupable = false;
             this.olvColBetMatch.Text = "Match";
             this.olvColBetMatch.Width = 120;
             // 
@@ -210,7 +205,10 @@ namespace LottoDataManager.Forms.Ticket
             this.objListVwDrawResult.HideSelection = false;
             this.objListVwDrawResult.Location = new System.Drawing.Point(0, 0);
             this.objListVwDrawResult.Name = "objListVwDrawResult";
+            this.objListVwDrawResult.ShowGroups = false;
             this.objListVwDrawResult.Size = new System.Drawing.Size(591, 392);
+            this.objListVwDrawResult.SortGroupItemsByPrimaryColumn = false;
+            this.objListVwDrawResult.Sorting = System.Windows.Forms.SortOrder.Descending;
             this.objListVwDrawResult.TabIndex = 1;
             this.objListVwDrawResult.UseCompatibleStateImageBehavior = false;
             this.objListVwDrawResult.View = System.Windows.Forms.View.Details;
@@ -218,7 +216,6 @@ namespace LottoDataManager.Forms.Ticket
             // olvColDrawResultDate
             // 
             this.olvColDrawResultDate.AspectName = "GetDrawDateFormatted";
-            this.olvColDrawResultDate.Groupable = false;
             this.olvColDrawResultDate.Searchable = false;
             this.olvColDrawResultDate.Text = "Draw Date";
             this.olvColDrawResultDate.UseFiltering = false;
@@ -226,49 +223,42 @@ namespace LottoDataManager.Forms.Ticket
             // olvColDrawN1
             // 
             this.olvColDrawN1.AspectName = "GetNum1";
-            this.olvColDrawN1.Groupable = false;
             this.olvColDrawN1.Text = "#1";
             // 
             // olvColDrawN2
             // 
             this.olvColDrawN2.AspectName = "GetNum2";
-            this.olvColDrawN2.Groupable = false;
             this.olvColDrawN2.Text = "#2";
             // 
             // olvColDrawN3
             // 
             this.olvColDrawN3.AspectName = "GetNum3";
-            this.olvColDrawN3.Groupable = false;
             this.olvColDrawN3.Text = "#3";
             // 
             // olvColDrawN4
             // 
             this.olvColDrawN4.AspectName = "GetNum4";
-            this.olvColDrawN4.Groupable = false;
             this.olvColDrawN4.Text = "#4";
             // 
             // olvColDrawN5
             // 
             this.olvColDrawN5.AspectName = "GetNum5";
-            this.olvColDrawN5.Groupable = false;
             this.olvColDrawN5.Text = "#5";
             // 
             // olvColDrawN6
             // 
             this.olvColDrawN6.AspectName = "GetNum6";
-            this.olvColDrawN6.Groupable = false;
             this.olvColDrawN6.Text = "#6";
             // 
             // olvColDrawWinner
             // 
-            this.olvColDrawWinner.Groupable = false;
             this.olvColDrawWinner.Searchable = false;
             this.olvColDrawWinner.Text = "Winner";
             this.olvColDrawWinner.UseFiltering = false;
+            this.olvColDrawWinner.Width = 172;
             // 
             // olvColDrawMatch
             // 
-            this.olvColDrawMatch.Groupable = false;
             this.olvColDrawMatch.Searchable = false;
             this.olvColDrawMatch.Text = "Match";
             this.olvColDrawMatch.UseFiltering = false;
@@ -285,6 +275,37 @@ namespace LottoDataManager.Forms.Ticket
             this.panelBottom.Name = "panelBottom";
             this.panelBottom.Size = new System.Drawing.Size(892, 81);
             this.panelBottom.TabIndex = 1;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.label4.Location = new System.Drawing.Point(3, 55);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(574, 17);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "*Right table are drawn results. Selecting a bet will show the matching numbers on" +
+    " the right";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.label3.Location = new System.Drawing.Point(3, 32);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(193, 17);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "*Left table are all filtered bets";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.label2.Location = new System.Drawing.Point(3, 9);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(328, 17);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "*See how your bet fares to to other drawn results...";
             // 
             // btnExit
             // 
@@ -338,34 +359,6 @@ namespace LottoDataManager.Forms.Ticket
             this.label1.Size = new System.Drawing.Size(161, 17);
             this.label1.TabIndex = 0;
             this.label1.Text = "Show data starting from:";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 9);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(328, 17);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "*See how your bet fares to to other drawn results...";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 32);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(193, 17);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "*Left table are all filtered bets";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 55);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(574, 17);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "*Right table are drawn results. Selecting a bet will show the matching numbers on" +
-    " the right";
             // 
             // HitComparisonFrm
             // 

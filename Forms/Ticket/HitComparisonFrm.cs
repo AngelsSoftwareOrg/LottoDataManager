@@ -12,9 +12,7 @@ namespace LottoDataManager.Forms.Ticket
 {
     public partial class HitComparisonFrm : Form
     { 
-
         private LotteryDataServices lotteryDataServices;
-
         public HitComparisonFrm(LotteryDataServices lotteryDataServices)
         {
             InitializeComponent();
@@ -78,6 +76,7 @@ namespace LottoDataManager.Forms.Ticket
             {
                 this.objListVwDrawResult.RefreshObject(item.RowObject);
             }
+            this.objListVwDrawResult.Sort();
         }
         #endregion
 
