@@ -59,6 +59,11 @@
       <HintPath>packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Collections.NonGeneric, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Collections.NonGeneric.4.3.0\lib\net46\System.Collections.NonGeneric.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Core" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.Numerics.Vectors, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -119,10 +124,10 @@
     <Compile Include="Forms\Others\MachineLearningFrm.Designer.cs">
       <DependentUpon>MachineLearningFrm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Ticket\HitComparisonFrm.cs">
+    <Compile Include="Forms\Others\HitComparisonFrm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Ticket\HitComparisonFrm.Designer.cs">
+    <Compile Include="Forms\Others\HitComparisonFrm.Designer.cs">
       <DependentUpon>HitComparisonFrm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Ticket\ModifyBetDateFrm.cs">
@@ -394,7 +399,7 @@
     <EmbeddedResource Include="Forms\MainFrm.resx">
       <DependentUpon>MainFrm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Ticket\HitComparisonFrm.resx">
+    <EmbeddedResource Include="Forms\Others\HitComparisonFrm.resx">
       <DependentUpon>HitComparisonFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Ticket\ModifyBetDateFrm.resx">
@@ -509,6 +514,12 @@
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>IndividualGameHtmlReport.cs</LastGenOutput>
     </Content>
+    <None Include="Resources\Icons\uncheck_32px.png" />
+    <None Include="Resources\Icons\check_32px.png" />
+    <None Include="Resources\Icons\uncheckall_32px.png" />
+    <None Include="Resources\Icons\save_to_clipboard_32px.png" />
+    <None Include="Resources\Icons\checkall_32px.png" />
+    <None Include="Resources\Icons\matching_32px.png" />
     <None Include="Resources\Icons\hit_compare_32_a_px.png" />
     <None Include="Resources\Icons\hit_compare_32px.png" />
     <None Include="Resources\Icons\Updates_32px.png" />

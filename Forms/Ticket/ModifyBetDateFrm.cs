@@ -47,6 +47,8 @@ namespace LottoDataManager.Forms
             btnRefresh.Text = ResourcesUtils.GetMessage("common_btn_refresh");
             btnSaveChanges.Text = ResourcesUtils.GetMessage("common_btn_save_changes");
             lblDateEvery.Text = String.Format(ResourcesUtils.GetMessage("mdd_form_every_draw_dates"),lotterySchedule.DrawDateEvery());
+            label1.Text = ResourcesUtils.GetMessage("common_cal_date_from");
+            label2.Text = ResourcesUtils.GetMessage("common_cal_date_to");
             txtStatus.Text = "";
             linkLabelFilterNow.Text = ResourcesUtils.GetMessage("common_link_filter_now");
         }
@@ -55,6 +57,7 @@ namespace LottoDataManager.Forms
         private void ModifyBetDateFrm_Load(object sender, EventArgs e)
         {
             dateTimePickerBets.Value = DateTime.Now.AddYears(-1);
+            dateTimePickerBetsTo.Value = DateTime.Now.Date;
             FillUpBetList();
             ResizeColumnsBetList();
             LoadTheAutoSelect();
@@ -169,8 +172,15 @@ namespace LottoDataManager.Forms
         }
         private void FillUpBetList()
         {
-            oblViewBets.SetObjects(lotteryDataServices.GetLottoBets(dateTimePickerBets.Value));
-            oblViewBets.Sort(olvColDrawDate, SortOrder.Descending);
+            try
+            {
+                oblViewBets.SetObjects(lotteryDataServices.GetLottoBets(dateTimePickerBets.Value, dateTimePickerBetsTo.Value));
+                oblViewBets.Sort(olvColDrawDate, SortOrder.Descending);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
         }
         private void ResizeColumnsBetList()
         {

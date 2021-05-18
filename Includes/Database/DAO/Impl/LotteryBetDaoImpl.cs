@@ -26,7 +26,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
             }
             return lotteryBetDaoImpl;
         }
-        public List<LotteryBet> GetDashboardLatestBets(GameMode gameMode, DateTime sinceWhen)
+        public List<LotteryBet> GetDashboardLatestBets(GameMode gameMode, DateTime sinceWhen, DateTime dateTo)
         {
             List<LotteryBet> lotteryBet = new List<LotteryBet>();
             using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
@@ -56,9 +56,8 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                                         "   ON a.seqgencd = s.seqgencd) " +
                                         " WHERE a.game_cd = @game_cd " +
                                         "   AND a.game_cd = b.game_cd  " +
-                                        "   AND a.target_draw_date >= CDATE(@sinceWhen)  " +
+                                        "   AND a.target_draw_date BETWEEN CDATE(@sinceWhen) AND CDATE(@dateTo)  " +
                                         "   AND a.active = true  " +
-                                        //"   AND o.active = true " +
                                         " UNION  " +
                                         " SELECT a.*,  " +
                                         "        0, " +
@@ -74,17 +73,18 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                                         "   LEFT OUTER JOIN lottery_seq_gen s " +
                                         "     ON a.seqgencd = s.seqgencd) " +
                                         "  WHERE a.game_cd = @game_cd " +
-                                        "    AND a.target_draw_date >= CDATE(@sinceWhen)  " +
+                                        "    AND a.target_draw_date BETWEEN CDATE(@sinceWhen) AND CDATE(@dateTo)" +
                                         "    AND a.active = true  " +
-                                        //"    AND o.active = true " +
                                         "    AND (SELECT DISTINCT b.draw_date FROM draw_results b  " +
                                         "   	   WHERE a.target_draw_date = b.draw_date  " +
                                         "            AND a.game_cd = b.game_cd) IS NULL  " +
                                         "  ORDER BY a.target_draw_date DESC, a.ID DESC ";
                 command.Parameters.AddWithValue("@game_cd", OleDbType.Integer).Value = gameMode;
                 command.Parameters.AddWithValue("@sinceWhen", OleDbType.DBDate).Value = sinceWhen.Date.ToString();
+                command.Parameters.AddWithValue("@dateTo", OleDbType.DBDate).Value = dateTo.Date.ToString();
                 command.Parameters.AddWithValue("@game_cd", OleDbType.Integer).Value = gameMode;
                 command.Parameters.AddWithValue("@sinceWhen", OleDbType.DBDate).Value = sinceWhen.Date.ToString();
+                command.Parameters.AddWithValue("@dateTo", OleDbType.DBDate).Value = dateTo.Date.ToString();
                 command.Connection = conn;
                 conn.Open();
 

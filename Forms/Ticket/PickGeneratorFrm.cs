@@ -259,10 +259,9 @@ namespace LottoDataManager.Forms
                 sequence.Clear();
             }
 
+            if (lvGenSeq.Tag !=null) bet.SelectedSequenceGenerator = ((SequenceGenerator)lvGenSeq.Tag).GetSequenceGeneratorType();
             Form refToMainForm = ClassReflectionUtil.GetMainFormObj(this, this.Owner);
             if (refToMainForm == null) refToMainForm = this;
-
-            if (lvGenSeq.Tag !=null) bet.SelectedSequenceGenerator = ((SequenceGenerator)lvGenSeq.Tag).GetSequenceGeneratorType();
             bet.ShowDialog(refToMainForm);
             bet.Dispose();
         }

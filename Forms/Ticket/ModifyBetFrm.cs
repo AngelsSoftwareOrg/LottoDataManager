@@ -37,6 +37,7 @@ namespace LottoDataManager.Forms
         {
             SetupForms();
             dateTimePickerBets.Value = DateTime.Now.AddYears(-1);
+            dateTimePickerBetsTo.Value = DateTime.Now.Date;
             InitializesListViewColumns();
             FillUpBetList();
             ResizeColumnsBetList();
@@ -87,6 +88,7 @@ namespace LottoDataManager.Forms
                 return seqgen.GetDescription();
             };
         }
+        
         #region "Forms functions"
         private LotteryOutlet GetOutletObject(int outletCd)
         {
@@ -335,7 +337,14 @@ namespace LottoDataManager.Forms
         #region "List View Bets"
         private void FillUpBetList()
         {
-            objectListViewBets.SetObjects(lotteryDataServices.GetLottoBets(dateTimePickerBets.Value));
+            try
+            {
+                objectListViewBets.SetObjects(lotteryDataServices.GetLottoBets(dateTimePickerBets.Value, dateTimePickerBetsTo.Value));
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
         }
         private void ResizeColumnsBetList()
         {
