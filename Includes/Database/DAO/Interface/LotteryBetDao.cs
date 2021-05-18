@@ -10,7 +10,7 @@ namespace LottoDataManager.Includes.Database.DAO.Interface
 {
     public interface LotteryBetDao
     {
-        List<LotteryBet> GetDashboardLatestBets(GameMode gameMode, DateTime sinceWhen);
+        List<LotteryBet> GetDashboardLatestBets(GameMode gameMode, DateTime sinceWhen, DateTime dateTo);
         List<LotteryBet> ExtractLotteryBetsCheckWinningNumber(GameMode gameMode);
         void UpdateTargetDrawDate(long id, DateTime newTargetDrawDate);
         void InsertLotteryBet(List<LotteryBet> lotteryBetArr);

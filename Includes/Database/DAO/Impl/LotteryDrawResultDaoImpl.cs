@@ -121,7 +121,7 @@ namespace LottoDataManager.Includes.Database.DAO
             }
             return results;
         }
-        public List<LotteryDrawResult> GetDrawResultsFromStartingDate(GameMode gameMode, DateTime startingDrawDate)
+        public List<LotteryDrawResult> GetDrawResultsFromStartingDate(GameMode gameMode, DateTime startingDrawDate, DateTime endingDate)
         {
             List<LotteryDrawResult> results = new List<LotteryDrawResult>();
             using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
@@ -129,10 +129,12 @@ namespace LottoDataManager.Includes.Database.DAO
             {
                 command.CommandType = CommandType.Text;
                 command.CommandText = GetStandardSelectQuery() +
-                                      " AND draw_date >= CDATE(@startingDrawDate) " +
+                                      " AND draw_date BETWEEN CDATE(@startingDrawDate) AND CDATE(@endingDate) " +
                                       " ORDER BY draw_date DESC";
                 command.Parameters.AddWithValue("@game_cd", (int) gameMode);
                 command.Parameters.AddWithValue("@startingDrawDate", startingDrawDate.ToString());
+                command.Parameters.AddWithValue("@endingDate", endingDate.ToString());
+
                 command.Connection = conn;
                 conn.Open();
                 using (OleDbDataReader reader = command.ExecuteReader())

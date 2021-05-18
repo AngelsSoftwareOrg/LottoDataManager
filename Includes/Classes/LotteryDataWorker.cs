@@ -72,10 +72,10 @@ namespace LottoDataManager.Includes.Classes
         }
         public void ProcessAdjustCorrectTargetDrawDate(GameMode gameMode)
         {
-            LotteryWinningCombinationDao lotteryWinningCombinationDao = LotteryWinningCombinationDaoImpl.GetInstance();
+            //LotteryWinningCombinationDao lotteryWinningCombinationDao = LotteryWinningCombinationDaoImpl.GetInstance();
             LotteryBetDao lotteryBetDao = LotteryBetDaoImpl.GetInstance();
             LotteryDrawResultDao lotteryDrawResultDao = LotteryDrawResultDaoImpl.GetInstance();
-            List<LotteryBet> lotteryBetArr = lotteryBetDao.GetDashboardLatestBets(gameMode, DateTime.Now.AddDays(-9999));
+            List<LotteryBet> lotteryBetArr = lotteryBetDao.GetDashboardLatestBets(gameMode, DateTime.Now.AddDays(-9999), DateTime.Now);
 
             foreach(LotteryBet lotteryBet in lotteryBetArr)
             {

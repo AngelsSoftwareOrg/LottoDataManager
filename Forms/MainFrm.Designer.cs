@@ -73,6 +73,7 @@ namespace LottoDataManager
             this.tabControlRight = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.splitContainerWinningAndBet = new System.Windows.Forms.SplitContainer();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.objectLstVwLatestBet = new BrightIdeasSoftware.FastObjectListView();
             this.olvColBetDrawDate = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColBetNum1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -94,11 +95,7 @@ namespace LottoDataManager
             this.selectAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.copySelectedAsLinearCSVToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.linkFilterGoBet = new System.Windows.Forms.LinkLabel();
-            this.dateTimePickerBets = new System.Windows.Forms.DateTimePicker();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.objListVwWinningNum = new BrightIdeasSoftware.FastObjectListView();
             this.olvColDrawDate = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColNum1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -110,7 +107,17 @@ namespace LottoDataManager
             this.olvColJackpot = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColWinners = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColWinStamp = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.tabControlFilter = new System.Windows.Forms.TabControl();
+            this.tabPageBetFilter = new System.Windows.Forms.TabPage();
+            this.label7 = new System.Windows.Forms.Label();
+            this.dateTimePickerBetsTo = new System.Windows.Forms.DateTimePicker();
+            this.label2 = new System.Windows.Forms.Label();
+            this.linkFilterGoBet = new System.Windows.Forms.LinkLabel();
+            this.dateTimePickerBets = new System.Windows.Forms.DateTimePicker();
+            this.tabPageDrawFilter = new System.Windows.Forms.TabPage();
+            this.dateTimePickerDrawResultTo = new System.Windows.Forms.DateTimePicker();
+            this.label8 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.linkLabelFilterDraw = new System.Windows.Forms.LinkLabel();
             this.dateTimePickerDrawResult = new System.Windows.Forms.DateTimePicker();
@@ -144,12 +151,15 @@ namespace LottoDataManager
             this.splitContainerWinningAndBet.Panel1.SuspendLayout();
             this.splitContainerWinningAndBet.Panel2.SuspendLayout();
             this.splitContainerWinningAndBet.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.objectLstVwLatestBet)).BeginInit();
             this.ctxMenuBet.SuspendLayout();
-            this.panel3.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.objListVwWinningNum)).BeginInit();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.objListVwWinningNum)).BeginInit();
+            this.panel4.SuspendLayout();
+            this.tabControlFilter.SuspendLayout();
+            this.tabPageBetFilter.SuspendLayout();
+            this.tabPageDrawFilter.SuspendLayout();
             this.toolStripBetsAndResults.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -546,6 +556,7 @@ namespace LottoDataManager
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.splitContainerWinningAndBet);
+            this.tabPage1.Controls.Add(this.panel4);
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -557,21 +568,32 @@ namespace LottoDataManager
             // splitContainerWinningAndBet
             // 
             this.splitContainerWinningAndBet.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainerWinningAndBet.Location = new System.Drawing.Point(3, 3);
+            this.splitContainerWinningAndBet.Location = new System.Drawing.Point(3, 68);
             this.splitContainerWinningAndBet.Name = "splitContainerWinningAndBet";
             // 
             // splitContainerWinningAndBet.Panel1
             // 
-            this.splitContainerWinningAndBet.Panel1.Controls.Add(this.objectLstVwLatestBet);
-            this.splitContainerWinningAndBet.Panel1.Controls.Add(this.panel3);
+            this.splitContainerWinningAndBet.Panel1.Controls.Add(this.groupBox1);
             // 
             // splitContainerWinningAndBet.Panel2
             // 
-            this.splitContainerWinningAndBet.Panel2.Controls.Add(this.objListVwWinningNum);
             this.splitContainerWinningAndBet.Panel2.Controls.Add(this.groupBox2);
-            this.splitContainerWinningAndBet.Size = new System.Drawing.Size(885, 456);
-            this.splitContainerWinningAndBet.SplitterDistance = 347;
+            this.splitContainerWinningAndBet.Size = new System.Drawing.Size(885, 391);
+            this.splitContainerWinningAndBet.SplitterDistance = 350;
             this.splitContainerWinningAndBet.TabIndex = 12;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.objectLstVwLatestBet);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.ForeColor = System.Drawing.Color.Green;
+            this.groupBox1.Location = new System.Drawing.Point(0, 0);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(350, 391);
+            this.groupBox1.TabIndex = 20;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Latest List";
             // 
             // objectLstVwLatestBet
             // 
@@ -600,14 +622,14 @@ namespace LottoDataManager
             this.objectLstVwLatestBet.FullRowSelect = true;
             this.objectLstVwLatestBet.GridLines = true;
             this.objectLstVwLatestBet.HideSelection = false;
-            this.objectLstVwLatestBet.Location = new System.Drawing.Point(0, 73);
+            this.objectLstVwLatestBet.Location = new System.Drawing.Point(3, 23);
             this.objectLstVwLatestBet.Name = "objectLstVwLatestBet";
             this.objectLstVwLatestBet.SelectedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.objectLstVwLatestBet.SelectedColumnTint = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.objectLstVwLatestBet.SelectedForeColor = System.Drawing.Color.White;
             this.objectLstVwLatestBet.ShowGroups = false;
-            this.objectLstVwLatestBet.Size = new System.Drawing.Size(347, 383);
-            this.objectLstVwLatestBet.TabIndex = 11;
+            this.objectLstVwLatestBet.Size = new System.Drawing.Size(344, 365);
+            this.objectLstVwLatestBet.TabIndex = 12;
             this.objectLstVwLatestBet.UseCompatibleStateImageBehavior = false;
             this.objectLstVwLatestBet.View = System.Windows.Forms.View.Details;
             this.objectLstVwLatestBet.VirtualMode = true;
@@ -671,133 +693,99 @@ namespace LottoDataManager
             this.toolStripSeparator3,
             this.copySelectedAsLinearCSVToolStripMenuItem});
             this.ctxMenuBet.Name = "ctxMenuBet";
-            this.ctxMenuBet.Size = new System.Drawing.Size(278, 214);
+            this.ctxMenuBet.Size = new System.Drawing.Size(282, 230);
             // 
             // refreshToolStripMenuItem
             // 
+            this.refreshToolStripMenuItem.Image = global::LottoDataManager.Properties.Resources.Available_Updates_32px;
             this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
-            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(277, 24);
+            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(281, 26);
             this.refreshToolStripMenuItem.Text = "Refresh Dashboard";
             this.refreshToolStripMenuItem.Click += new System.EventHandler(this.refreshToolStripMenuItem_Click);
             // 
             // compareDrawResultAndBetToolStripMenuItem
             // 
+            this.compareDrawResultAndBetToolStripMenuItem.Image = global::LottoDataManager.Properties.Resources.matching_32px;
             this.compareDrawResultAndBetToolStripMenuItem.Name = "compareDrawResultAndBetToolStripMenuItem";
-            this.compareDrawResultAndBetToolStripMenuItem.Size = new System.Drawing.Size(277, 24);
+            this.compareDrawResultAndBetToolStripMenuItem.Size = new System.Drawing.Size(281, 26);
             this.compareDrawResultAndBetToolStripMenuItem.Text = "Compare Draw Result and Bet";
             this.compareDrawResultAndBetToolStripMenuItem.Click += new System.EventHandler(this.compareDrawResultAndBetToolStripMenuItem_Click);
             // 
             // hitComparisonToolStripMenuItem
             // 
+            this.hitComparisonToolStripMenuItem.Image = global::LottoDataManager.Properties.Resources.hit_compare_32_a_px;
             this.hitComparisonToolStripMenuItem.Name = "hitComparisonToolStripMenuItem";
-            this.hitComparisonToolStripMenuItem.Size = new System.Drawing.Size(277, 24);
+            this.hitComparisonToolStripMenuItem.Size = new System.Drawing.Size(281, 26);
             this.hitComparisonToolStripMenuItem.Text = "Hit Comparison";
             this.hitComparisonToolStripMenuItem.Click += new System.EventHandler(this.hitComparisonToolStripMenuItem_Click);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(274, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(278, 6);
             // 
             // editYourBetsToolStripMenuItem
             // 
+            this.editYourBetsToolStripMenuItem.Image = global::LottoDataManager.Properties.Resources.Edit_02_32x;
             this.editYourBetsToolStripMenuItem.Name = "editYourBetsToolStripMenuItem";
-            this.editYourBetsToolStripMenuItem.Size = new System.Drawing.Size(277, 24);
+            this.editYourBetsToolStripMenuItem.Size = new System.Drawing.Size(281, 26);
             this.editYourBetsToolStripMenuItem.Text = "Edit your Bets...";
             this.editYourBetsToolStripMenuItem.Click += new System.EventHandler(this.editYourBetsToolStripMenuItem_Click);
             // 
             // editClaimStatusToolStripMenuItem
             // 
+            this.editClaimStatusToolStripMenuItem.Image = global::LottoDataManager.Properties.Resources.Paid_32x;
             this.editClaimStatusToolStripMenuItem.Name = "editClaimStatusToolStripMenuItem";
-            this.editClaimStatusToolStripMenuItem.Size = new System.Drawing.Size(277, 24);
+            this.editClaimStatusToolStripMenuItem.Size = new System.Drawing.Size(281, 26);
             this.editClaimStatusToolStripMenuItem.Text = "Edit Claim Status";
             this.editClaimStatusToolStripMenuItem.Click += new System.EventHandler(this.editClaimStatusToolStripMenuItem_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(274, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(278, 6);
             // 
             // moveDrawDateToolStripMenuItem
             // 
+            this.moveDrawDateToolStripMenuItem.Image = global::LottoDataManager.Properties.Resources.cal_32px1;
             this.moveDrawDateToolStripMenuItem.Name = "moveDrawDateToolStripMenuItem";
-            this.moveDrawDateToolStripMenuItem.Size = new System.Drawing.Size(277, 24);
+            this.moveDrawDateToolStripMenuItem.Size = new System.Drawing.Size(281, 26);
             this.moveDrawDateToolStripMenuItem.Text = "Move Draw Date";
             this.moveDrawDateToolStripMenuItem.Click += new System.EventHandler(this.moveDrawDateToolStripMenuItem_Click);
             // 
             // selectAllToolStripMenuItem
             // 
+            this.selectAllToolStripMenuItem.Image = global::LottoDataManager.Properties.Resources.checkall_32px;
             this.selectAllToolStripMenuItem.Name = "selectAllToolStripMenuItem";
-            this.selectAllToolStripMenuItem.Size = new System.Drawing.Size(277, 24);
+            this.selectAllToolStripMenuItem.Size = new System.Drawing.Size(281, 26);
             this.selectAllToolStripMenuItem.Text = "Select All";
             this.selectAllToolStripMenuItem.Click += new System.EventHandler(this.selectAllToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(274, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(278, 6);
             // 
             // copySelectedAsLinearCSVToolStripMenuItem
             // 
+            this.copySelectedAsLinearCSVToolStripMenuItem.Image = global::LottoDataManager.Properties.Resources.save_to_clipboard_32px;
             this.copySelectedAsLinearCSVToolStripMenuItem.Name = "copySelectedAsLinearCSVToolStripMenuItem";
-            this.copySelectedAsLinearCSVToolStripMenuItem.Size = new System.Drawing.Size(277, 24);
+            this.copySelectedAsLinearCSVToolStripMenuItem.Size = new System.Drawing.Size(281, 26);
             this.copySelectedAsLinearCSVToolStripMenuItem.Text = "Copy selected as Linear CSV";
             this.copySelectedAsLinearCSVToolStripMenuItem.Click += new System.EventHandler(this.copySelectedAsLinearCSVToolStripMenuItem_Click);
             // 
-            // panel3
+            // groupBox2
             // 
-            this.panel3.Controls.Add(this.groupBox1);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel3.Location = new System.Drawing.Point(0, 0);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(347, 73);
-            this.panel3.TabIndex = 14;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.linkFilterGoBet);
-            this.groupBox1.Controls.Add(this.dateTimePickerBets);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.ForeColor = System.Drawing.Color.Green;
-            this.groupBox1.Location = new System.Drawing.Point(0, 0);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(347, 73);
-            this.groupBox1.TabIndex = 19;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Latest Bets : ";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label2.Location = new System.Drawing.Point(7, 22);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(96, 17);
-            this.label2.TabIndex = 21;
-            this.label2.Text = "Filter by Date:";
-            // 
-            // linkFilterGoBet
-            // 
-            this.linkFilterGoBet.AutoSize = true;
-            this.linkFilterGoBet.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linkFilterGoBet.Location = new System.Drawing.Point(265, 49);
-            this.linkFilterGoBet.Name = "linkFilterGoBet";
-            this.linkFilterGoBet.Size = new System.Drawing.Size(74, 17);
-            this.linkFilterGoBet.TabIndex = 20;
-            this.linkFilterGoBet.TabStop = true;
-            this.linkFilterGoBet.Text = "Filter Bets!";
-            this.linkFilterGoBet.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkFilterGoBet_LinkClicked);
-            // 
-            // dateTimePickerBets
-            // 
-            this.dateTimePickerBets.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePickerBets.Location = new System.Drawing.Point(6, 45);
-            this.dateTimePickerBets.Name = "dateTimePickerBets";
-            this.dateTimePickerBets.Size = new System.Drawing.Size(253, 22);
-            this.dateTimePickerBets.TabIndex = 19;
+            this.groupBox2.Controls.Add(this.objListVwWinningNum);
+            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox2.ForeColor = System.Drawing.Color.Tomato;
+            this.groupBox2.Location = new System.Drawing.Point(0, 0);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(531, 391);
+            this.groupBox2.TabIndex = 20;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Draw Results List";
             // 
             // objListVwWinningNum
             // 
@@ -829,15 +817,15 @@ namespace LottoDataManager
             this.objListVwWinningNum.FullRowSelect = true;
             this.objListVwWinningNum.GridLines = true;
             this.objListVwWinningNum.HideSelection = false;
-            this.objListVwWinningNum.Location = new System.Drawing.Point(0, 73);
+            this.objListVwWinningNum.Location = new System.Drawing.Point(3, 23);
             this.objListVwWinningNum.MultiSelect = false;
             this.objListVwWinningNum.Name = "objListVwWinningNum";
             this.objListVwWinningNum.SelectedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.objListVwWinningNum.SelectedColumnTint = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.objListVwWinningNum.SelectedForeColor = System.Drawing.Color.White;
             this.objListVwWinningNum.ShowGroups = false;
-            this.objListVwWinningNum.Size = new System.Drawing.Size(534, 383);
-            this.objListVwWinningNum.TabIndex = 1;
+            this.objListVwWinningNum.Size = new System.Drawing.Size(525, 365);
+            this.objListVwWinningNum.TabIndex = 2;
             this.objListVwWinningNum.UseCompatibleStateImageBehavior = false;
             this.objListVwWinningNum.View = System.Windows.Forms.View.Details;
             this.objListVwWinningNum.VirtualMode = true;
@@ -899,40 +887,150 @@ namespace LottoDataManager
             // 
             this.olvColWinStamp.Text = "";
             // 
-            // groupBox2
+            // panel4
             // 
-            this.groupBox2.Controls.Add(this.label6);
-            this.groupBox2.Controls.Add(this.linkLabelFilterDraw);
-            this.groupBox2.Controls.Add(this.dateTimePickerDrawResult);
-            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.ForeColor = System.Drawing.Color.Tomato;
-            this.groupBox2.Location = new System.Drawing.Point(0, 0);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(534, 73);
-            this.groupBox2.TabIndex = 20;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Draw Results : ";
+            this.panel4.Controls.Add(this.tabControlFilter);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel4.Location = new System.Drawing.Point(3, 3);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(885, 65);
+            this.panel4.TabIndex = 16;
+            // 
+            // tabControlFilter
+            // 
+            this.tabControlFilter.Controls.Add(this.tabPageBetFilter);
+            this.tabControlFilter.Controls.Add(this.tabPageDrawFilter);
+            this.tabControlFilter.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlFilter.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
+            this.tabControlFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
+            this.tabControlFilter.Location = new System.Drawing.Point(0, 0);
+            this.tabControlFilter.Name = "tabControlFilter";
+            this.tabControlFilter.SelectedIndex = 0;
+            this.tabControlFilter.Size = new System.Drawing.Size(885, 65);
+            this.tabControlFilter.TabIndex = 1;
+            this.tabControlFilter.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControlFilter_DrawItem);
+            // 
+            // tabPageBetFilter
+            // 
+            this.tabPageBetFilter.Controls.Add(this.label7);
+            this.tabPageBetFilter.Controls.Add(this.dateTimePickerBetsTo);
+            this.tabPageBetFilter.Controls.Add(this.label2);
+            this.tabPageBetFilter.Controls.Add(this.linkFilterGoBet);
+            this.tabPageBetFilter.Controls.Add(this.dateTimePickerBets);
+            this.tabPageBetFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold);
+            this.tabPageBetFilter.ForeColor = System.Drawing.Color.Green;
+            this.tabPageBetFilter.Location = new System.Drawing.Point(4, 29);
+            this.tabPageBetFilter.Name = "tabPageBetFilter";
+            this.tabPageBetFilter.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageBetFilter.Size = new System.Drawing.Size(877, 32);
+            this.tabPageBetFilter.TabIndex = 0;
+            this.tabPageBetFilter.Text = "Latest Bets Filter";
+            this.tabPageBetFilter.UseVisualStyleBackColor = true;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label7.Location = new System.Drawing.Point(356, 8);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(63, 17);
+            this.label7.TabIndex = 33;
+            this.label7.Text = "Date To:";
+            // 
+            // dateTimePickerBetsTo
+            // 
+            this.dateTimePickerBetsTo.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePickerBetsTo.Location = new System.Drawing.Point(433, 4);
+            this.dateTimePickerBetsTo.Name = "dateTimePickerBetsTo";
+            this.dateTimePickerBetsTo.Size = new System.Drawing.Size(251, 22);
+            this.dateTimePickerBetsTo.TabIndex = 32;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label2.Location = new System.Drawing.Point(6, 8);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(78, 17);
+            this.label2.TabIndex = 31;
+            this.label2.Text = "Date From:";
+            // 
+            // linkFilterGoBet
+            // 
+            this.linkFilterGoBet.AutoSize = true;
+            this.linkFilterGoBet.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.linkFilterGoBet.Location = new System.Drawing.Point(690, 6);
+            this.linkFilterGoBet.Name = "linkFilterGoBet";
+            this.linkFilterGoBet.Size = new System.Drawing.Size(74, 17);
+            this.linkFilterGoBet.TabIndex = 30;
+            this.linkFilterGoBet.TabStop = true;
+            this.linkFilterGoBet.Text = "Filter Bets!";
+            this.linkFilterGoBet.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkFilterGoBet_LinkClicked);
+            // 
+            // dateTimePickerBets
+            // 
+            this.dateTimePickerBets.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePickerBets.Location = new System.Drawing.Point(90, 4);
+            this.dateTimePickerBets.Name = "dateTimePickerBets";
+            this.dateTimePickerBets.Size = new System.Drawing.Size(256, 22);
+            this.dateTimePickerBets.TabIndex = 29;
+            // 
+            // tabPageDrawFilter
+            // 
+            this.tabPageDrawFilter.Controls.Add(this.dateTimePickerDrawResultTo);
+            this.tabPageDrawFilter.Controls.Add(this.label8);
+            this.tabPageDrawFilter.Controls.Add(this.label6);
+            this.tabPageDrawFilter.Controls.Add(this.linkLabelFilterDraw);
+            this.tabPageDrawFilter.Controls.Add(this.dateTimePickerDrawResult);
+            this.tabPageDrawFilter.ForeColor = System.Drawing.Color.Tomato;
+            this.tabPageDrawFilter.Location = new System.Drawing.Point(4, 29);
+            this.tabPageDrawFilter.Name = "tabPageDrawFilter";
+            this.tabPageDrawFilter.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageDrawFilter.Size = new System.Drawing.Size(877, 32);
+            this.tabPageDrawFilter.TabIndex = 1;
+            this.tabPageDrawFilter.Text = "Draw Result List Filter";
+            this.tabPageDrawFilter.UseVisualStyleBackColor = true;
+            // 
+            // dateTimePickerDrawResultTo
+            // 
+            this.dateTimePickerDrawResultTo.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePickerDrawResultTo.Location = new System.Drawing.Point(433, 4);
+            this.dateTimePickerDrawResultTo.Name = "dateTimePickerDrawResultTo";
+            this.dateTimePickerDrawResultTo.Size = new System.Drawing.Size(251, 22);
+            this.dateTimePickerDrawResultTo.TabIndex = 28;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label8.Location = new System.Drawing.Point(356, 8);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(63, 17);
+            this.label8.TabIndex = 27;
+            this.label8.Text = "Date To:";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label6.Location = new System.Drawing.Point(7, 22);
+            this.label6.Location = new System.Drawing.Point(6, 8);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(96, 17);
-            this.label6.TabIndex = 21;
-            this.label6.Text = "Filter by Date:";
+            this.label6.Size = new System.Drawing.Size(78, 17);
+            this.label6.TabIndex = 26;
+            this.label6.Text = "Date From:";
             // 
             // linkLabelFilterDraw
             // 
             this.linkLabelFilterDraw.AutoSize = true;
             this.linkLabelFilterDraw.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linkLabelFilterDraw.Location = new System.Drawing.Point(265, 49);
+            this.linkLabelFilterDraw.Location = new System.Drawing.Point(689, 6);
             this.linkLabelFilterDraw.Name = "linkLabelFilterDraw";
             this.linkLabelFilterDraw.Size = new System.Drawing.Size(85, 17);
-            this.linkLabelFilterDraw.TabIndex = 20;
+            this.linkLabelFilterDraw.TabIndex = 25;
             this.linkLabelFilterDraw.TabStop = true;
             this.linkLabelFilterDraw.Text = "Filter Draws!";
             this.linkLabelFilterDraw.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelFilterDraw_LinkClicked);
@@ -940,10 +1038,10 @@ namespace LottoDataManager
             // dateTimePickerDrawResult
             // 
             this.dateTimePickerDrawResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePickerDrawResult.Location = new System.Drawing.Point(6, 45);
+            this.dateTimePickerDrawResult.Location = new System.Drawing.Point(90, 4);
             this.dateTimePickerDrawResult.Name = "dateTimePickerDrawResult";
-            this.dateTimePickerDrawResult.Size = new System.Drawing.Size(253, 22);
-            this.dateTimePickerDrawResult.TabIndex = 19;
+            this.dateTimePickerDrawResult.Size = new System.Drawing.Size(256, 22);
+            this.dateTimePickerDrawResult.TabIndex = 24;
             // 
             // toolStripBetsAndResults
             // 
@@ -1120,14 +1218,17 @@ namespace LottoDataManager
             this.splitContainerWinningAndBet.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerWinningAndBet)).EndInit();
             this.splitContainerWinningAndBet.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.objectLstVwLatestBet)).EndInit();
             this.ctxMenuBet.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.objListVwWinningNum)).EndInit();
             this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.objListVwWinningNum)).EndInit();
+            this.panel4.ResumeLayout(false);
+            this.tabControlFilter.ResumeLayout(false);
+            this.tabPageBetFilter.ResumeLayout(false);
+            this.tabPageBetFilter.PerformLayout();
+            this.tabPageDrawFilter.ResumeLayout(false);
+            this.tabPageDrawFilter.PerformLayout();
             this.toolStripBetsAndResults.ResumeLayout(false);
             this.toolStripBetsAndResults.PerformLayout();
             this.ResumeLayout(false);
@@ -1150,39 +1251,10 @@ namespace LottoDataManager
         private System.Windows.Forms.SplitContainer mainSplitContainer;
         private System.Windows.Forms.ToolStripMenuItem ticketToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem seqGenToolStripMenuItem;
-        private BrightIdeasSoftware.FastObjectListView objListVwWinningNum;
-        private BrightIdeasSoftware.OLVColumn olvColDrawDate;
-        private BrightIdeasSoftware.OLVColumn olvColNum1;
-        private BrightIdeasSoftware.OLVColumn olvColNum2;
-        private BrightIdeasSoftware.OLVColumn olvColNum3;
-        private BrightIdeasSoftware.OLVColumn olvColNum4;
-        private BrightIdeasSoftware.OLVColumn olvColNum5;
-        private BrightIdeasSoftware.OLVColumn olvColNum6;
-        private BrightIdeasSoftware.OLVColumn olvColJackpot;
-        private BrightIdeasSoftware.OLVColumn olvColWinners;
         private System.Windows.Forms.ToolStripMenuItem reportsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem lossProfitToolStripMenuItem;
         private System.Windows.Forms.TabControl tabControlRight;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.SplitContainer splitContainerWinningAndBet;
-        private BrightIdeasSoftware.FastObjectListView objectLstVwLatestBet;
-        private BrightIdeasSoftware.OLVColumn olvColBetDrawDate;
-        private BrightIdeasSoftware.OLVColumn olvColBetNum1;
-        private BrightIdeasSoftware.OLVColumn olvColBetNum2;
-        private BrightIdeasSoftware.OLVColumn olvColBetNum3;
-        private BrightIdeasSoftware.OLVColumn olvColBetNum4;
-        private BrightIdeasSoftware.OLVColumn olvColBetNum5;
-        private BrightIdeasSoftware.OLVColumn olvColBetNum6;
-        private BrightIdeasSoftware.OLVColumn olvColBetResult;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.DateTimePicker dateTimePickerBets;
-        private System.Windows.Forms.LinkLabel linkFilterGoBet;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.LinkLabel linkLabelFilterDraw;
-        private System.Windows.Forms.DateTimePicker dateTimePickerDrawResult;
         private System.Windows.Forms.TabControl mainLeftTabControl;
         private System.Windows.Forms.TabPage tabDashboard;
         private System.Windows.Forms.Panel panel2;
@@ -1210,7 +1282,6 @@ namespace LottoDataManager
         private System.Windows.Forms.ToolStripMenuItem compareDrawResultAndBetToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editClaimStatusToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton toolStripModifyClaimStatus;
-        private BrightIdeasSoftware.OLVColumn olvColWinStamp;
         private System.Windows.Forms.ToolStripMenuItem selectAllToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem copySelectedAsLinearCSVToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem refreshToolStripMenuItem;
@@ -1234,6 +1305,43 @@ namespace LottoDataManager
         private System.Windows.Forms.ToolStripMenuItem hitComparisonToolStripMenuItem1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripButton toolStripBtnHitCompare;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.TabControl tabControlFilter;
+        private System.Windows.Forms.TabPage tabPageBetFilter;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.DateTimePicker dateTimePickerBetsTo;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.LinkLabel linkFilterGoBet;
+        private System.Windows.Forms.DateTimePicker dateTimePickerBets;
+        private System.Windows.Forms.TabPage tabPageDrawFilter;
+        private System.Windows.Forms.SplitContainer splitContainerWinningAndBet;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private BrightIdeasSoftware.FastObjectListView objectLstVwLatestBet;
+        private BrightIdeasSoftware.OLVColumn olvColBetDrawDate;
+        private BrightIdeasSoftware.OLVColumn olvColBetNum1;
+        private BrightIdeasSoftware.OLVColumn olvColBetNum2;
+        private BrightIdeasSoftware.OLVColumn olvColBetNum3;
+        private BrightIdeasSoftware.OLVColumn olvColBetNum4;
+        private BrightIdeasSoftware.OLVColumn olvColBetNum5;
+        private BrightIdeasSoftware.OLVColumn olvColBetNum6;
+        private BrightIdeasSoftware.OLVColumn olvColBetResult;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private BrightIdeasSoftware.FastObjectListView objListVwWinningNum;
+        private BrightIdeasSoftware.OLVColumn olvColDrawDate;
+        private BrightIdeasSoftware.OLVColumn olvColNum1;
+        private BrightIdeasSoftware.OLVColumn olvColNum2;
+        private BrightIdeasSoftware.OLVColumn olvColNum3;
+        private BrightIdeasSoftware.OLVColumn olvColNum4;
+        private BrightIdeasSoftware.OLVColumn olvColNum5;
+        private BrightIdeasSoftware.OLVColumn olvColNum6;
+        private BrightIdeasSoftware.OLVColumn olvColJackpot;
+        private BrightIdeasSoftware.OLVColumn olvColWinners;
+        private BrightIdeasSoftware.OLVColumn olvColWinStamp;
+        private System.Windows.Forms.DateTimePicker dateTimePickerDrawResultTo;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.LinkLabel linkLabelFilterDraw;
+        private System.Windows.Forms.DateTimePicker dateTimePickerDrawResult;
     }
 }
 

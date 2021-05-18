@@ -50,18 +50,21 @@ namespace LottoDataManager.Forms
             this.checkAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.uncheckAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.dateTimePickerBetsTo = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.linkLabelFilterNow = new System.Windows.Forms.LinkLabel();
             this.dateTimePickerBets = new System.Windows.Forms.DateTimePicker();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripProgBar = new System.Windows.Forms.ToolStripProgressBar();
-            this.toolStripStatusLbl = new System.Windows.Forms.ToolStripStatusLabel();
-            this.btnExit = new System.Windows.Forms.Button();
             this.btnRestoreBack = new System.Windows.Forms.Button();
             this.btnDeleteChecked = new System.Windows.Forms.Button();
             this.btnSaveChanges = new System.Windows.Forms.Button();
+            this.btnExit = new System.Windows.Forms.Button();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripProgBar = new System.Windows.Forms.ToolStripProgressBar();
+            this.toolStripStatusLbl = new System.Windows.Forms.ToolStripStatusLabel();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.objectListViewBets)).BeginInit();
             this.ctxMenuLvBet.SuspendLayout();
@@ -112,10 +115,10 @@ namespace LottoDataManager.Forms
             this.objectListViewBets.FullRowSelect = true;
             this.objectListViewBets.GridLines = true;
             this.objectListViewBets.HideSelection = false;
-            this.objectListViewBets.Location = new System.Drawing.Point(0, 68);
+            this.objectListViewBets.Location = new System.Drawing.Point(0, 65);
             this.objectListViewBets.Name = "objectListViewBets";
             this.objectListViewBets.ShowGroups = false;
-            this.objectListViewBets.Size = new System.Drawing.Size(945, 361);
+            this.objectListViewBets.Size = new System.Drawing.Size(945, 364);
             this.objectListViewBets.TabIndex = 0;
             this.objectListViewBets.UseCompatibleStateImageBehavior = false;
             this.objectListViewBets.View = System.Windows.Forms.View.Details;
@@ -193,45 +196,53 @@ namespace LottoDataManager.Forms
             this.checkAllToolStripMenuItem,
             this.uncheckAllToolStripMenuItem});
             this.ctxMenuLvBet.Name = "ctxMenuLvBet";
-            this.ctxMenuLvBet.Size = new System.Drawing.Size(231, 124);
+            this.ctxMenuLvBet.Size = new System.Drawing.Size(219, 134);
             // 
             // refreshToolStripMenuItem
             // 
+            this.refreshToolStripMenuItem.Image = global::LottoDataManager.Properties.Resources.Available_Updates_32px;
             this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
-            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(230, 24);
+            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(218, 26);
             this.refreshToolStripMenuItem.Text = "Refresh";
             this.refreshToolStripMenuItem.Click += new System.EventHandler(this.refreshToolStripMenuItem_Click);
             // 
             // checkedHighlightedToolStripMenuItem
             // 
+            this.checkedHighlightedToolStripMenuItem.Image = global::LottoDataManager.Properties.Resources.check_32px;
             this.checkedHighlightedToolStripMenuItem.Name = "checkedHighlightedToolStripMenuItem";
-            this.checkedHighlightedToolStripMenuItem.Size = new System.Drawing.Size(230, 24);
+            this.checkedHighlightedToolStripMenuItem.Size = new System.Drawing.Size(218, 26);
             this.checkedHighlightedToolStripMenuItem.Text = "Checked highlighted";
             this.checkedHighlightedToolStripMenuItem.Click += new System.EventHandler(this.checkedHighlightedToolStripMenuItem_Click);
             // 
             // uncheckedIghlightedToolStripMenuItem
             // 
+            this.uncheckedIghlightedToolStripMenuItem.Image = global::LottoDataManager.Properties.Resources.uncheck_32px;
             this.uncheckedIghlightedToolStripMenuItem.Name = "uncheckedIghlightedToolStripMenuItem";
-            this.uncheckedIghlightedToolStripMenuItem.Size = new System.Drawing.Size(230, 24);
-            this.uncheckedIghlightedToolStripMenuItem.Text = "Unchecked highlighted";
+            this.uncheckedIghlightedToolStripMenuItem.Size = new System.Drawing.Size(218, 26);
+            this.uncheckedIghlightedToolStripMenuItem.Text = "Uncheck highlighted";
             this.uncheckedIghlightedToolStripMenuItem.Click += new System.EventHandler(this.uncheckedIghlightedToolStripMenuItem_Click);
             // 
             // checkAllToolStripMenuItem
             // 
+            this.checkAllToolStripMenuItem.Image = global::LottoDataManager.Properties.Resources.checkall_32px;
             this.checkAllToolStripMenuItem.Name = "checkAllToolStripMenuItem";
-            this.checkAllToolStripMenuItem.Size = new System.Drawing.Size(230, 24);
+            this.checkAllToolStripMenuItem.Size = new System.Drawing.Size(218, 26);
             this.checkAllToolStripMenuItem.Text = "Check All";
             this.checkAllToolStripMenuItem.Click += new System.EventHandler(this.checkAllToolStripMenuItem_Click);
             // 
             // uncheckAllToolStripMenuItem
             // 
+            this.uncheckAllToolStripMenuItem.Image = global::LottoDataManager.Properties.Resources.uncheckall_32px;
             this.uncheckAllToolStripMenuItem.Name = "uncheckAllToolStripMenuItem";
-            this.uncheckAllToolStripMenuItem.Size = new System.Drawing.Size(230, 24);
+            this.uncheckAllToolStripMenuItem.Size = new System.Drawing.Size(218, 26);
             this.uncheckAllToolStripMenuItem.Text = "Uncheck All";
             this.uncheckAllToolStripMenuItem.Click += new System.EventHandler(this.uncheckAllToolStripMenuItem_Click);
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.label4);
+            this.panel2.Controls.Add(this.label3);
+            this.panel2.Controls.Add(this.dateTimePickerBetsTo);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.label1);
             this.panel2.Controls.Add(this.linkLabelFilterNow);
@@ -239,8 +250,33 @@ namespace LottoDataManager.Forms
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(945, 68);
+            this.panel2.Size = new System.Drawing.Size(945, 65);
             this.panel2.TabIndex = 2;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(385, 42);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(67, 17);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "Date To: ";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(3, 42);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(82, 17);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Date From: ";
+            // 
+            // dateTimePickerBetsTo
+            // 
+            this.dateTimePickerBetsTo.Location = new System.Drawing.Point(458, 37);
+            this.dateTimePickerBetsTo.Name = "dateTimePickerBetsTo";
+            this.dateTimePickerBetsTo.Size = new System.Drawing.Size(270, 22);
+            this.dateTimePickerBetsTo.TabIndex = 7;
             // 
             // label2
             // 
@@ -248,7 +284,7 @@ namespace LottoDataManager.Forms
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.DarkBlue;
-            this.label2.Location = new System.Drawing.Point(461, 40);
+            this.label2.Location = new System.Drawing.Point(455, 12);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(478, 17);
             this.label2.TabIndex = 6;
@@ -266,7 +302,7 @@ namespace LottoDataManager.Forms
             // linkLabelFilterNow
             // 
             this.linkLabelFilterNow.AutoSize = true;
-            this.linkLabelFilterNow.Location = new System.Drawing.Point(279, 39);
+            this.linkLabelFilterNow.Location = new System.Drawing.Point(734, 42);
             this.linkLabelFilterNow.Name = "linkLabelFilterNow";
             this.linkLabelFilterNow.Size = new System.Drawing.Size(73, 17);
             this.linkLabelFilterNow.TabIndex = 3;
@@ -276,7 +312,7 @@ namespace LottoDataManager.Forms
             // 
             // dateTimePickerBets
             // 
-            this.dateTimePickerBets.Location = new System.Drawing.Point(3, 36);
+            this.dateTimePickerBets.Location = new System.Drawing.Point(91, 37);
             this.dateTimePickerBets.Name = "dateTimePickerBets";
             this.dateTimePickerBets.Size = new System.Drawing.Size(270, 22);
             this.dateTimePickerBets.TabIndex = 2;
@@ -292,45 +328,6 @@ namespace LottoDataManager.Forms
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(945, 81);
             this.panel3.TabIndex = 3;
-            // 
-            // statusStrip1
-            // 
-            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripProgBar,
-            this.toolStripStatusLbl});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 510);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(945, 26);
-            this.statusStrip1.TabIndex = 10;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // toolStripProgBar
-            // 
-            this.toolStripProgBar.Name = "toolStripProgBar";
-            this.toolStripProgBar.Size = new System.Drawing.Size(100, 18);
-            this.toolStripProgBar.Visible = false;
-            // 
-            // toolStripStatusLbl
-            // 
-            this.toolStripStatusLbl.Name = "toolStripStatusLbl";
-            this.toolStripStatusLbl.Size = new System.Drawing.Size(89, 20);
-            this.toolStripStatusLbl.Text = "Hello World";
-            // 
-            // btnExit
-            // 
-            this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExit.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnExit.Image = global::LottoDataManager.Properties.Resources.Exit_32;
-            this.btnExit.Location = new System.Drawing.Point(793, 14);
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(146, 56);
-            this.btnExit.TabIndex = 6;
-            this.btnExit.Text = "Exit";
-            this.btnExit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnExit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnExit.UseVisualStyleBackColor = true;
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // btnRestoreBack
             // 
@@ -370,6 +367,45 @@ namespace LottoDataManager.Forms
             this.btnSaveChanges.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSaveChanges.UseVisualStyleBackColor = true;
             this.btnSaveChanges.Click += new System.EventHandler(this.btnSaveChanges_Click);
+            // 
+            // btnExit
+            // 
+            this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExit.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnExit.Image = global::LottoDataManager.Properties.Resources.Exit_32;
+            this.btnExit.Location = new System.Drawing.Point(793, 14);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(146, 56);
+            this.btnExit.TabIndex = 6;
+            this.btnExit.Text = "Exit";
+            this.btnExit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnExit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripProgBar,
+            this.toolStripStatusLbl});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 510);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(945, 26);
+            this.statusStrip1.TabIndex = 10;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripProgBar
+            // 
+            this.toolStripProgBar.Name = "toolStripProgBar";
+            this.toolStripProgBar.Size = new System.Drawing.Size(100, 18);
+            this.toolStripProgBar.Visible = false;
+            // 
+            // toolStripStatusLbl
+            // 
+            this.toolStripStatusLbl.Name = "toolStripStatusLbl";
+            this.toolStripStatusLbl.Size = new System.Drawing.Size(89, 20);
+            this.toolStripStatusLbl.Text = "Hello World";
             // 
             // ModifyBetFrm
             // 
@@ -431,5 +467,8 @@ namespace LottoDataManager.Forms
         private System.Windows.Forms.ToolStripProgressBar toolStripProgBar;
         private BrightIdeasSoftware.OLVColumn olvLottoOutlet;
         private BrightIdeasSoftware.OLVColumn olvLottoSeqGen;
+        private System.Windows.Forms.DateTimePicker dateTimePickerBetsTo;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
     }
 }

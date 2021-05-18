@@ -59,6 +59,8 @@ namespace LottoDataManager
             this.groupBox2.Text = ResourcesUtils.GetMessage("mainf_labels_8");
             this.label2.Text = ResourcesUtils.GetMessage("mainf_labels_9");
             this.label6.Text = ResourcesUtils.GetMessage("mainf_labels_10");
+            this.label7.Text = ResourcesUtils.GetMessage("mainf_labels_47");
+            this.label7.Text = ResourcesUtils.GetMessage("mainf_labels_48");
             this.linkFilterGoBet.Text = ResourcesUtils.GetMessage("mainf_labels_11");
             this.linkLabelFilterDraw.Text = ResourcesUtils.GetMessage("mainf_labels_12");
 
@@ -90,6 +92,9 @@ namespace LottoDataManager
             this.pickGeneratorToolStripButton2.ToolTipText = ResourcesUtils.GetMessage("mainf_labels_37");
             this.toolStripBtnWinBets.ToolTipText = ResourcesUtils.GetMessage("mainf_labels_38");
             this.toolStripBtnDownloadResults.ToolTipText = ResourcesUtils.GetMessage("mainf_labels_39");
+
+            this.tabPageBetFilter.Text = ResourcesUtils.GetMessage("mainf_labels_49");
+            this.tabPageDrawFilter.Text = ResourcesUtils.GetMessage("mainf_labels_50");
 
             ReinitateLotteryServices();
             GenerateLotteriesGameMenu();
@@ -185,7 +190,7 @@ namespace LottoDataManager
             try
             {
                 AddProcessingStatusLogs(LOG_STATUS_MODULE_NAME_GRID_CONTENT, ResourcesUtils.GetMessage("mainf_win_num_grid_cont"));
-                objListVwWinningNum.SetObjects(lotteryDataServices.GetLotteryDrawResults(dateTimePickerDrawResult.Value));
+                objListVwWinningNum.SetObjects(lotteryDataServices.GetLotteryDrawResults(dateTimePickerDrawResult.Value, dateTimePickerDrawResultTo.Value));
                 this.olvColDrawDate.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
                 this.olvColNum1.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
                 this.olvColNum2.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
@@ -209,7 +214,7 @@ namespace LottoDataManager
             try
             {
                 AddProcessingStatusLogs(LOG_STATUS_MODULE_NAME_GRID_CONTENT, ResourcesUtils.GetMessage("mainf_labels_40"));
-                objectLstVwLatestBet.SetObjects(lotteryDataServices.GetLottoBets(dateTimePickerBets.Value));
+                objectLstVwLatestBet.SetObjects(lotteryDataServices.GetLottoBets(dateTimePickerBets.Value, dateTimePickerBetsTo.Value));
                 this.olvColBetDrawDate.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
                 this.olvColBetNum1.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
                 this.olvColBetNum2.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
@@ -392,6 +397,8 @@ namespace LottoDataManager
             //Prepare the Dates
             dateTimePickerDrawResult.Value = DateTime.Now.AddYears(-1);
             dateTimePickerBets.Value = DateTime.Now.AddYears(-1);
+            dateTimePickerBetsTo.Value = DateTime.Now.Date;
+            dateTimePickerDrawResultTo.Value = DateTime.Now.Date;
             RefreshWinningNumbersGridContent();
             RefreshBets();
         }
@@ -728,10 +735,21 @@ namespace LottoDataManager
             SplashScreenFrm.GetIntance().DisposeInstance();
             this.Show();
         }
+        private void tabControlFilter_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            TabPage page = tabControlFilter.TabPages[e.Index];
+            Color fontColor = e.Index == 0 ? Color.Green : Color.Tomato;
+            e.Graphics.FillRectangle(new SolidBrush(Color.Transparent), e.Bounds);
 
+            Font font = new System.Drawing.Font("Microsoft Sans Serif", 9F, 
+                FontStyle.Bold, GraphicsUnit.Point, ((byte)(0)));
 
+            Rectangle paddedBounds = e.Bounds;
+            int yOffset = (e.State == DrawItemState.Selected) ? -2 : 1;
+            paddedBounds.Offset(1, yOffset);
+            TextRenderer.DrawText(e.Graphics, page.Text, font, paddedBounds, fontColor);
+        }
         #endregion
-
 
     }
 }

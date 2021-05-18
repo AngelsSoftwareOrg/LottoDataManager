@@ -193,40 +193,45 @@ namespace LottoDataManager.Forms
             this.checkAllToolStripMenuItem,
             this.uncheckAllToolStripMenuItem});
             this.ctxMenuLvBet.Name = "ctxMenuLvBet";
-            this.ctxMenuLvBet.Size = new System.Drawing.Size(231, 124);
+            this.ctxMenuLvBet.Size = new System.Drawing.Size(219, 162);
             // 
             // refreshToolStripMenuItem
             // 
+            this.refreshToolStripMenuItem.Image = global::LottoDataManager.Properties.Resources.Available_Updates_32px;
             this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
-            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(230, 24);
+            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(218, 26);
             this.refreshToolStripMenuItem.Text = "Refresh";
             this.refreshToolStripMenuItem.Click += new System.EventHandler(this.refreshToolStripMenuItem_Click);
             // 
             // checkedHighlightedToolStripMenuItem
             // 
+            this.checkedHighlightedToolStripMenuItem.Image = global::LottoDataManager.Properties.Resources.check_32px;
             this.checkedHighlightedToolStripMenuItem.Name = "checkedHighlightedToolStripMenuItem";
-            this.checkedHighlightedToolStripMenuItem.Size = new System.Drawing.Size(230, 24);
+            this.checkedHighlightedToolStripMenuItem.Size = new System.Drawing.Size(218, 26);
             this.checkedHighlightedToolStripMenuItem.Text = "Checked highlighted";
             this.checkedHighlightedToolStripMenuItem.Click += new System.EventHandler(this.checkedHighlightedToolStripMenuItem_Click);
             // 
             // uncheckedIghlightedToolStripMenuItem
             // 
+            this.uncheckedIghlightedToolStripMenuItem.Image = global::LottoDataManager.Properties.Resources.uncheck_32px;
             this.uncheckedIghlightedToolStripMenuItem.Name = "uncheckedIghlightedToolStripMenuItem";
-            this.uncheckedIghlightedToolStripMenuItem.Size = new System.Drawing.Size(230, 24);
-            this.uncheckedIghlightedToolStripMenuItem.Text = "Unchecked highlighted";
+            this.uncheckedIghlightedToolStripMenuItem.Size = new System.Drawing.Size(218, 26);
+            this.uncheckedIghlightedToolStripMenuItem.Text = "Uncheck highlighted";
             this.uncheckedIghlightedToolStripMenuItem.Click += new System.EventHandler(this.uncheckedIghlightedToolStripMenuItem_Click);
             // 
             // checkAllToolStripMenuItem
             // 
+            this.checkAllToolStripMenuItem.Image = global::LottoDataManager.Properties.Resources.checkall_32px;
             this.checkAllToolStripMenuItem.Name = "checkAllToolStripMenuItem";
-            this.checkAllToolStripMenuItem.Size = new System.Drawing.Size(230, 24);
+            this.checkAllToolStripMenuItem.Size = new System.Drawing.Size(218, 26);
             this.checkAllToolStripMenuItem.Text = "Check All";
             this.checkAllToolStripMenuItem.Click += new System.EventHandler(this.checkAllToolStripMenuItem_Click);
             // 
             // uncheckAllToolStripMenuItem
             // 
+            this.uncheckAllToolStripMenuItem.Image = global::LottoDataManager.Properties.Resources.uncheckall_32px;
             this.uncheckAllToolStripMenuItem.Name = "uncheckAllToolStripMenuItem";
-            this.uncheckAllToolStripMenuItem.Size = new System.Drawing.Size(230, 24);
+            this.uncheckAllToolStripMenuItem.Size = new System.Drawing.Size(218, 26);
             this.uncheckAllToolStripMenuItem.Text = "Uncheck All";
             this.uncheckAllToolStripMenuItem.Click += new System.EventHandler(this.uncheckAllToolStripMenuItem_Click);
             // 

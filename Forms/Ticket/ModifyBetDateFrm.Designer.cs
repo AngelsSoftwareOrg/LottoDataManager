@@ -39,6 +39,9 @@ namespace LottoDataManager.Forms
             this.olvLottoSeqGen = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.panel2 = new System.Windows.Forms.Panel();
             this.gbStartingDates = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.dateTimePickerBetsTo = new System.Windows.Forms.DateTimePicker();
             this.linkLabelFilterNow = new System.Windows.Forms.LinkLabel();
             this.dateTimePickerBets = new System.Windows.Forms.DateTimePicker();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
@@ -74,7 +77,7 @@ namespace LottoDataManager.Forms
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(521, 414);
+            this.panel1.Size = new System.Drawing.Size(521, 420);
             this.panel1.TabIndex = 1;
             // 
             // oblViewBets
@@ -98,10 +101,10 @@ namespace LottoDataManager.Forms
             this.oblViewBets.FullRowSelect = true;
             this.oblViewBets.GridLines = true;
             this.oblViewBets.HideSelection = false;
-            this.oblViewBets.Location = new System.Drawing.Point(0, 68);
+            this.oblViewBets.Location = new System.Drawing.Point(0, 81);
             this.oblViewBets.Name = "oblViewBets";
             this.oblViewBets.ShowGroups = false;
-            this.oblViewBets.Size = new System.Drawing.Size(521, 346);
+            this.oblViewBets.Size = new System.Drawing.Size(521, 339);
             this.oblViewBets.Sorting = System.Windows.Forms.SortOrder.Descending;
             this.oblViewBets.TabIndex = 0;
             this.oblViewBets.UseCompatibleStateImageBehavior = false;
@@ -145,25 +148,53 @@ namespace LottoDataManager.Forms
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(521, 68);
+            this.panel2.Size = new System.Drawing.Size(521, 81);
             this.panel2.TabIndex = 2;
             // 
             // gbStartingDates
             // 
+            this.gbStartingDates.Controls.Add(this.label2);
+            this.gbStartingDates.Controls.Add(this.label1);
+            this.gbStartingDates.Controls.Add(this.dateTimePickerBetsTo);
             this.gbStartingDates.Controls.Add(this.linkLabelFilterNow);
             this.gbStartingDates.Controls.Add(this.dateTimePickerBets);
-            this.gbStartingDates.Dock = System.Windows.Forms.DockStyle.Top;
+            this.gbStartingDates.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbStartingDates.Location = new System.Drawing.Point(0, 0);
             this.gbStartingDates.Name = "gbStartingDates";
-            this.gbStartingDates.Size = new System.Drawing.Size(521, 62);
+            this.gbStartingDates.Size = new System.Drawing.Size(521, 81);
             this.gbStartingDates.TabIndex = 5;
             this.gbStartingDates.TabStop = false;
             this.gbStartingDates.Text = "Show you bets starting from the date below";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(8, 49);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(33, 17);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "To: ";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(8, 21);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(48, 17);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "From: ";
+            // 
+            // dateTimePickerBetsTo
+            // 
+            this.dateTimePickerBetsTo.Location = new System.Drawing.Point(95, 49);
+            this.dateTimePickerBetsTo.Name = "dateTimePickerBetsTo";
+            this.dateTimePickerBetsTo.Size = new System.Drawing.Size(270, 22);
+            this.dateTimePickerBetsTo.TabIndex = 4;
+            // 
             // linkLabelFilterNow
             // 
             this.linkLabelFilterNow.AutoSize = true;
-            this.linkLabelFilterNow.Location = new System.Drawing.Point(285, 36);
+            this.linkLabelFilterNow.Location = new System.Drawing.Point(371, 54);
             this.linkLabelFilterNow.Name = "linkLabelFilterNow";
             this.linkLabelFilterNow.Size = new System.Drawing.Size(73, 17);
             this.linkLabelFilterNow.TabIndex = 3;
@@ -173,7 +204,7 @@ namespace LottoDataManager.Forms
             // 
             // dateTimePickerBets
             // 
-            this.dateTimePickerBets.Location = new System.Drawing.Point(9, 31);
+            this.dateTimePickerBets.Location = new System.Drawing.Point(95, 21);
             this.dateTimePickerBets.Name = "dateTimePickerBets";
             this.dateTimePickerBets.Size = new System.Drawing.Size(270, 22);
             this.dateTimePickerBets.TabIndex = 2;
@@ -181,7 +212,7 @@ namespace LottoDataManager.Forms
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 19);
+            this.splitContainer1.Location = new System.Drawing.Point(0, 13);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -193,7 +224,7 @@ namespace LottoDataManager.Forms
             this.splitContainer1.Panel2.Controls.Add(this.gbSelectedDate);
             this.splitContainer1.Panel2.Controls.Add(this.gbTargetDrawDate);
             this.splitContainer1.Panel2.Controls.Add(this.gbDateCal);
-            this.splitContainer1.Size = new System.Drawing.Size(1035, 414);
+            this.splitContainer1.Size = new System.Drawing.Size(1035, 420);
             this.splitContainer1.SplitterDistance = 521;
             this.splitContainer1.TabIndex = 5;
             // 
@@ -203,7 +234,7 @@ namespace LottoDataManager.Forms
             this.gbSelectedDate.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbSelectedDate.Location = new System.Drawing.Point(0, 123);
             this.gbSelectedDate.Name = "gbSelectedDate";
-            this.gbSelectedDate.Size = new System.Drawing.Size(510, 291);
+            this.gbSelectedDate.Size = new System.Drawing.Size(510, 297);
             this.gbSelectedDate.TabIndex = 2;
             this.gbSelectedDate.TabStop = false;
             this.gbSelectedDate.Text = "Processing status....";
@@ -218,7 +249,7 @@ namespace LottoDataManager.Forms
             this.txtStatus.Name = "txtStatus";
             this.txtStatus.ReadOnly = true;
             this.txtStatus.ShowSelectionMargin = true;
-            this.txtStatus.Size = new System.Drawing.Size(504, 270);
+            this.txtStatus.Size = new System.Drawing.Size(504, 276);
             this.txtStatus.TabIndex = 1;
             this.txtStatus.Text = "";
             // 
@@ -322,7 +353,7 @@ namespace LottoDataManager.Forms
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(1035, 19);
+            this.panel4.Size = new System.Drawing.Size(1035, 13);
             this.panel4.TabIndex = 4;
             // 
             // ModifyBetDateFrm
@@ -383,5 +414,8 @@ namespace LottoDataManager.Forms
         private System.Windows.Forms.Button btnSaveChanges;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DateTimePicker dateTimePickerBetsTo;
     }
 }

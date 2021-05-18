@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -22,11 +23,14 @@ namespace LottoDataManager.Forms.Ticket
             //Debugging
             //#if DEBUG
             //if(lotteryDataServices==null)
-            //    this.lotteryDataServices = new LotteryDataServices(new Game642());
+            //   this.lotteryDataServices = new LotteryDataServices(new Game642());
             //#endif
             //end debugging
 
             dateTimePickerFrom.Value = DateTime.Now.AddYears(-1);
+            toolStripProgBarRefresh.Value = 0;
+            toolStripProgBarRefresh.Visible = false;
+            toolStripStatusLbl.Visible = false;
             InitializesObjectListViewDataBinding();
             StartInitialization();
         }
@@ -36,7 +40,7 @@ namespace LottoDataManager.Forms.Ticket
         {
             try
             {
-                objListVwBet.SetObjects(lotteryDataServices.GetLottoBets(dateTimePickerFrom.Value));
+                objListVwBet.SetObjects(lotteryDataServices.GetLottoBets(dateTimePickerFrom.Value, dateTimePickerTo.Value));
                 this.olvColBetTargetDate.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
                 this.olvColBetN1.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
                 this.olvColBetN2.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
@@ -72,11 +76,24 @@ namespace LottoDataManager.Forms.Ticket
             this.objListVwDrawResult.ModelFilter = filter;
             this.objListVwDrawResult.DefaultRenderer = highlightTextRenderer;
             this.objListVwDrawResult.SelectedForeColor = Color.Black;
+
+            int itemProcessCtr = 0;
+            toolStripProgBarRefresh.Value = 0;
+            toolStripProgBarRefresh.Visible = true;
+            toolStripStatusLbl.Visible = true;
+            this.objListVwDrawResult.BeginUpdate();
             foreach (OLVListItem item in this.objListVwDrawResult.Items)
             {
+                toolStripProgBarRefresh.Value = ConverterUtils.GetPercentageFloored(++itemProcessCtr, this.objListVwDrawResult.Items.Count);
                 this.objListVwDrawResult.RefreshObject(item.RowObject);
+                if(itemProcessCtr%50==0) Application.DoEvents();
             }
+
+            this.objListVwDrawResult.EndUpdate();
             this.objListVwDrawResult.Sort();
+            toolStripProgBarRefresh.Value = 0;
+            toolStripProgBarRefresh.Visible = false;
+            toolStripStatusLbl.Visible = false;
         }
         #endregion
 
@@ -85,7 +102,7 @@ namespace LottoDataManager.Forms.Ticket
         {
             try
             {
-                objListVwDrawResult.SetObjects(lotteryDataServices.GetLotteryDrawResults(dateTimePickerFrom.Value));
+                objListVwDrawResult.SetObjects(lotteryDataServices.GetLotteryDrawResults(dateTimePickerFrom.Value, dateTimePickerTo.Value));
                 this.olvColDrawResultDate.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
                 this.olvColDrawN1.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
                 this.olvColDrawN2.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
@@ -112,6 +129,8 @@ namespace LottoDataManager.Forms.Ticket
             this.label2.Text = ResourcesUtils.GetMessage("hit_comp_frm_msg2");
             this.label3.Text = ResourcesUtils.GetMessage("hit_comp_frm_msg3");
             this.label4.Text = ResourcesUtils.GetMessage("hit_comp_frm_msg4");
+            this.label5.Text = ResourcesUtils.GetMessage("hit_comp_frm_msg5");
+            toolStripStatusLbl.Text = ResourcesUtils.GetMessage("hit_comp_frm_msg6");
         }
         private void StartInitialization()
         {
@@ -142,6 +161,32 @@ namespace LottoDataManager.Forms.Ticket
                 return String.Empty;
             };
 
+            this.olvColBetOutlet.AspectGetter = delegate (object rowObject)
+            {
+                LotteryBet lotteryBet = (LotteryBet)rowObject;
+                LotteryOutlet outlet = lotteryBet.GetLotteryOutlet();
+                return outlet;
+            };
+
+            this.olvColBetOutlet.AspectToStringConverter = delegate (object rowObject)
+            {
+                LotteryOutlet outlet = (LotteryOutlet)rowObject;
+                return outlet.GetDescription();
+            };
+
+            this.olvColBetSeqGen.AspectGetter = delegate (object rowObject)
+            {
+                LotteryBet lotteryBet = (LotteryBet)rowObject;
+                LotterySequenceGenerator outlet = lotteryBet.GetLotterySequenceGenerator();
+                return outlet;
+            };
+
+            this.olvColBetSeqGen.AspectToStringConverter = delegate (object rowObject)
+            {
+                LotterySequenceGenerator seqgen = (LotterySequenceGenerator)rowObject;
+                return seqgen.GetDescription();
+            };
+
             this.olvColDrawWinner.ImageGetter = delegate (object rowObject) {
                 if (rowObject == null) return 0;
                 LotteryDrawResult p = (LotteryDrawResult)rowObject;
@@ -170,7 +215,6 @@ namespace LottoDataManager.Forms.Ticket
             this.olvColDrawMatch.AspectToStringConverter = delegate (object rowObject) {
                 return String.Empty;
             };
-
         }
         private int CountMatchingBetToDrawnResult(object rowObject)
         {
@@ -192,7 +236,6 @@ namespace LottoDataManager.Forms.Ticket
         {
             StartInitialization();
         }
-
         #endregion
     }
 }
