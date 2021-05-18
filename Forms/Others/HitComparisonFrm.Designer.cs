@@ -57,9 +57,16 @@ namespace LottoDataManager.Forms.Ticket
             this.label2 = new System.Windows.Forms.Label();
             this.btnExit = new System.Windows.Forms.Button();
             this.panelTop = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.dateTimePickerTo = new System.Windows.Forms.DateTimePicker();
             this.lnkFilter = new System.Windows.Forms.LinkLabel();
             this.dateTimePickerFrom = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
+            this.statusStripMain = new System.Windows.Forms.StatusStrip();
+            this.toolStripProgBarRefresh = new System.Windows.Forms.ToolStripProgressBar();
+            this.toolStripStatusLbl = new System.Windows.Forms.ToolStripStatusLabel();
+            this.olvColBetOutlet = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColBetSeqGen = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.panelMiddle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerMain)).BeginInit();
             this.splitContainerMain.Panel1.SuspendLayout();
@@ -69,6 +76,7 @@ namespace LottoDataManager.Forms.Ticket
             ((System.ComponentModel.ISupportInitialize)(this.objListVwDrawResult)).BeginInit();
             this.panelBottom.SuspendLayout();
             this.panelTop.SuspendLayout();
+            this.statusStripMain.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelMiddle
@@ -77,7 +85,7 @@ namespace LottoDataManager.Forms.Ticket
             this.panelMiddle.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelMiddle.Location = new System.Drawing.Point(0, 38);
             this.panelMiddle.Name = "panelMiddle";
-            this.panelMiddle.Size = new System.Drawing.Size(892, 392);
+            this.panelMiddle.Size = new System.Drawing.Size(892, 368);
             this.panelMiddle.TabIndex = 0;
             // 
             // splitContainerMain
@@ -93,7 +101,7 @@ namespace LottoDataManager.Forms.Ticket
             // splitContainerMain.Panel2
             // 
             this.splitContainerMain.Panel2.Controls.Add(this.objListVwDrawResult);
-            this.splitContainerMain.Size = new System.Drawing.Size(892, 392);
+            this.splitContainerMain.Size = new System.Drawing.Size(892, 368);
             this.splitContainerMain.SplitterDistance = 297;
             this.splitContainerMain.TabIndex = 0;
             // 
@@ -107,6 +115,8 @@ namespace LottoDataManager.Forms.Ticket
             this.objListVwBet.AllColumns.Add(this.olvColBetN5);
             this.objListVwBet.AllColumns.Add(this.olvColBetN6);
             this.objListVwBet.AllColumns.Add(this.olvColBetMatch);
+            this.objListVwBet.AllColumns.Add(this.olvColBetOutlet);
+            this.objListVwBet.AllColumns.Add(this.olvColBetSeqGen);
             this.objListVwBet.CellEditUseWholeCell = false;
             this.objListVwBet.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColBetTargetDate,
@@ -116,7 +126,9 @@ namespace LottoDataManager.Forms.Ticket
             this.olvColBetN4,
             this.olvColBetN5,
             this.olvColBetN6,
-            this.olvColBetMatch});
+            this.olvColBetMatch,
+            this.olvColBetOutlet,
+            this.olvColBetSeqGen});
             this.objListVwBet.Cursor = System.Windows.Forms.Cursors.Default;
             this.objListVwBet.Dock = System.Windows.Forms.DockStyle.Fill;
             this.objListVwBet.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
@@ -127,7 +139,7 @@ namespace LottoDataManager.Forms.Ticket
             this.objListVwBet.MultiSelect = false;
             this.objListVwBet.Name = "objListVwBet";
             this.objListVwBet.ShowGroups = false;
-            this.objListVwBet.Size = new System.Drawing.Size(297, 392);
+            this.objListVwBet.Size = new System.Drawing.Size(297, 368);
             this.objListVwBet.SortGroupItemsByPrimaryColumn = false;
             this.objListVwBet.Sorting = System.Windows.Forms.SortOrder.Descending;
             this.objListVwBet.TabIndex = 2;
@@ -206,7 +218,7 @@ namespace LottoDataManager.Forms.Ticket
             this.objListVwDrawResult.Location = new System.Drawing.Point(0, 0);
             this.objListVwDrawResult.Name = "objListVwDrawResult";
             this.objListVwDrawResult.ShowGroups = false;
-            this.objListVwDrawResult.Size = new System.Drawing.Size(591, 392);
+            this.objListVwDrawResult.Size = new System.Drawing.Size(591, 368);
             this.objListVwDrawResult.SortGroupItemsByPrimaryColumn = false;
             this.objListVwDrawResult.Sorting = System.Windows.Forms.SortOrder.Descending;
             this.objListVwDrawResult.TabIndex = 1;
@@ -271,9 +283,9 @@ namespace LottoDataManager.Forms.Ticket
             this.panelBottom.Controls.Add(this.label2);
             this.panelBottom.Controls.Add(this.btnExit);
             this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelBottom.Location = new System.Drawing.Point(0, 430);
+            this.panelBottom.Location = new System.Drawing.Point(0, 406);
             this.panelBottom.Name = "panelBottom";
-            this.panelBottom.Size = new System.Drawing.Size(892, 81);
+            this.panelBottom.Size = new System.Drawing.Size(892, 79);
             this.panelBottom.TabIndex = 1;
             // 
             // label4
@@ -312,7 +324,7 @@ namespace LottoDataManager.Forms.Ticket
             this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExit.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnExit.Image = global::LottoDataManager.Properties.Resources.Exit_32;
-            this.btnExit.Location = new System.Drawing.Point(713, 9);
+            this.btnExit.Location = new System.Drawing.Point(710, 9);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(170, 63);
             this.btnExit.TabIndex = 0;
@@ -324,6 +336,8 @@ namespace LottoDataManager.Forms.Ticket
             // 
             // panelTop
             // 
+            this.panelTop.Controls.Add(this.label5);
+            this.panelTop.Controls.Add(this.dateTimePickerTo);
             this.panelTop.Controls.Add(this.lnkFilter);
             this.panelTop.Controls.Add(this.dateTimePickerFrom);
             this.panelTop.Controls.Add(this.label1);
@@ -333,10 +347,27 @@ namespace LottoDataManager.Forms.Ticket
             this.panelTop.Size = new System.Drawing.Size(892, 38);
             this.panelTop.TabIndex = 3;
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(486, 14);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(32, 17);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "To:";
+            // 
+            // dateTimePickerTo
+            // 
+            this.dateTimePickerTo.Location = new System.Drawing.Point(530, 11);
+            this.dateTimePickerTo.Name = "dateTimePickerTo";
+            this.dateTimePickerTo.Size = new System.Drawing.Size(242, 22);
+            this.dateTimePickerTo.TabIndex = 3;
+            // 
             // lnkFilter
             // 
             this.lnkFilter.AutoSize = true;
-            this.lnkFilter.Location = new System.Drawing.Point(516, 11);
+            this.lnkFilter.Location = new System.Drawing.Point(780, 12);
             this.lnkFilter.Name = "lnkFilter";
             this.lnkFilter.Size = new System.Drawing.Size(39, 17);
             this.lnkFilter.TabIndex = 2;
@@ -346,19 +377,63 @@ namespace LottoDataManager.Forms.Ticket
             // 
             // dateTimePickerFrom
             // 
-            this.dateTimePickerFrom.Location = new System.Drawing.Point(170, 10);
+            this.dateTimePickerFrom.Location = new System.Drawing.Point(195, 11);
             this.dateTimePickerFrom.Name = "dateTimePickerFrom";
-            this.dateTimePickerFrom.Size = new System.Drawing.Size(340, 22);
+            this.dateTimePickerFrom.Size = new System.Drawing.Size(242, 22);
             this.dateTimePickerFrom.TabIndex = 1;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 11);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(3, 13);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(161, 17);
+            this.label1.Size = new System.Drawing.Size(185, 17);
             this.label1.TabIndex = 0;
             this.label1.Text = "Show data starting from:";
+            // 
+            // statusStripMain
+            // 
+            this.statusStripMain.AutoSize = false;
+            this.statusStripMain.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.statusStripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripProgBarRefresh,
+            this.toolStripStatusLbl});
+            this.statusStripMain.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
+            this.statusStripMain.Location = new System.Drawing.Point(0, 485);
+            this.statusStripMain.Name = "statusStripMain";
+            this.statusStripMain.Size = new System.Drawing.Size(892, 26);
+            this.statusStripMain.TabIndex = 4;
+            // 
+            // toolStripProgBarRefresh
+            // 
+            this.toolStripProgBarRefresh.Name = "toolStripProgBarRefresh";
+            this.toolStripProgBarRefresh.Overflow = System.Windows.Forms.ToolStripItemOverflow.Always;
+            this.toolStripProgBarRefresh.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.toolStripProgBarRefresh.Size = new System.Drawing.Size(250, 18);
+            // 
+            // toolStripStatusLbl
+            // 
+            this.toolStripStatusLbl.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripStatusLbl.ForeColor = System.Drawing.Color.Tomato;
+            this.toolStripStatusLbl.Name = "toolStripStatusLbl";
+            this.toolStripStatusLbl.Size = new System.Drawing.Size(107, 20);
+            this.toolStripStatusLbl.Spring = true;
+            this.toolStripStatusLbl.Text = "Sample Words";
+            this.toolStripStatusLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // olvColBetOutlet
+            // 
+            this.olvColBetOutlet.Searchable = false;
+            this.olvColBetOutlet.Text = "Outlet";
+            this.olvColBetOutlet.Width = 250;
+            this.olvColBetOutlet.WordWrap = true;
+            // 
+            // olvColBetSeqGen
+            // 
+            this.olvColBetSeqGen.Searchable = false;
+            this.olvColBetSeqGen.Text = "Sequence Generator";
+            this.olvColBetSeqGen.Width = 700;
             // 
             // HitComparisonFrm
             // 
@@ -369,6 +444,7 @@ namespace LottoDataManager.Forms.Ticket
             this.Controls.Add(this.panelMiddle);
             this.Controls.Add(this.panelTop);
             this.Controls.Add(this.panelBottom);
+            this.Controls.Add(this.statusStripMain);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimizeBox = false;
             this.Name = "HitComparisonFrm";
@@ -385,6 +461,8 @@ namespace LottoDataManager.Forms.Ticket
             this.panelBottom.PerformLayout();
             this.panelTop.ResumeLayout(false);
             this.panelTop.PerformLayout();
+            this.statusStripMain.ResumeLayout(false);
+            this.statusStripMain.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -421,5 +499,12 @@ namespace LottoDataManager.Forms.Ticket
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.DateTimePicker dateTimePickerTo;
+        private System.Windows.Forms.StatusStrip statusStripMain;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ToolStripProgressBar toolStripProgBarRefresh;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLbl;
+        private BrightIdeasSoftware.OLVColumn olvColBetOutlet;
+        private BrightIdeasSoftware.OLVColumn olvColBetSeqGen;
     }
 }

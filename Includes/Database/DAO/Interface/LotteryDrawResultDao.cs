@@ -17,7 +17,7 @@ namespace LottoDataManager.Includes.Database.DAO
         DateTime GetNextDrawDate(GameMode gameMode, DateTime betDate);
         void InsertDrawDate(LotteryDrawResult lotteryDrawResult);
         DateTime GetLatestDrawDate(GameMode gameMode);
-        List<LotteryDrawResult> GetDrawResultsFromStartingDate(GameMode gameMode, DateTime startingDrawDate);
+        List<LotteryDrawResult> GetDrawResultsFromStartingDate(GameMode gameMode, DateTime startingDrawDate, DateTime endingDate);
         List<int> GetTopDrawnDigitResults(GameMode gameMode);
         List<LotteryDrawResult> GetJackpotDrawResults(GameMode gameMode);
         List<int> GetTopDrawnPreviousSeasonDigitResults(GameMode gameMode);

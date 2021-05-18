@@ -29,7 +29,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
         {
             List<LotterySequenceGenerator> lotterySeqGenList = new List<LotterySequenceGenerator>();
             using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
-            using (OleDbCommand command = new OleDbCommand("SELECT * FROM lottery_seq_gen WHERE active = true;", conn))
+            using (OleDbCommand command = new OleDbCommand("SELECT * FROM lottery_seq_gen WHERE active = true ORDER BY description ASC", conn))
             {
                 conn.Open();
                 using (OleDbDataReader reader = command.ExecuteReader())

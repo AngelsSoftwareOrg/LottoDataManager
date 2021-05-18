@@ -299,26 +299,29 @@ namespace LottoDataManager.Forms
             this.uncheckAllToolStripMenuItem,
             this.addBetToolStripMenuItem});
             this.ctxMenuBet.Name = "ctxMenuBet";
-            this.ctxMenuBet.Size = new System.Drawing.Size(156, 76);
+            this.ctxMenuBet.Size = new System.Drawing.Size(160, 82);
             // 
             // checkToolStripMenuItem
             // 
+            this.checkToolStripMenuItem.Image = global::LottoDataManager.Properties.Resources.check_32px;
             this.checkToolStripMenuItem.Name = "checkToolStripMenuItem";
-            this.checkToolStripMenuItem.Size = new System.Drawing.Size(155, 24);
+            this.checkToolStripMenuItem.Size = new System.Drawing.Size(159, 26);
             this.checkToolStripMenuItem.Text = "Check";
             this.checkToolStripMenuItem.Click += new System.EventHandler(this.checkToolStripMenuItem_Click);
             // 
             // uncheckAllToolStripMenuItem
             // 
+            this.uncheckAllToolStripMenuItem.Image = global::LottoDataManager.Properties.Resources.uncheckall_32px;
             this.uncheckAllToolStripMenuItem.Name = "uncheckAllToolStripMenuItem";
-            this.uncheckAllToolStripMenuItem.Size = new System.Drawing.Size(155, 24);
+            this.uncheckAllToolStripMenuItem.Size = new System.Drawing.Size(159, 26);
             this.uncheckAllToolStripMenuItem.Text = "Uncheck All";
             this.uncheckAllToolStripMenuItem.Click += new System.EventHandler(this.uncheckAllToolStripMenuItem_Click);
             // 
             // addBetToolStripMenuItem
             // 
+            this.addBetToolStripMenuItem.Image = global::LottoDataManager.Properties.Resources.add_row_32;
             this.addBetToolStripMenuItem.Name = "addBetToolStripMenuItem";
-            this.addBetToolStripMenuItem.Size = new System.Drawing.Size(155, 24);
+            this.addBetToolStripMenuItem.Size = new System.Drawing.Size(159, 26);
             this.addBetToolStripMenuItem.Text = "Add Bet";
             this.addBetToolStripMenuItem.Click += new System.EventHandler(this.addBetToolStripMenuItem_Click);
             // 
@@ -391,6 +394,7 @@ namespace LottoDataManager.Forms
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MinimizeBox = false;
             this.Name = "PickGeneratorFrm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Pick Generator";

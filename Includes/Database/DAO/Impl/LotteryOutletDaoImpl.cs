@@ -34,7 +34,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
             using (OleDbCommand command = new OleDbCommand())
             {
                 command.CommandType = CommandType.Text;
-                command.CommandText = "SELECT * FROM lottery_outlet WHERE active = true";
+                command.CommandText = "SELECT * FROM lottery_outlet WHERE active = true ORDER BY description ASC";
                 command.Connection = conn;
                 conn.Open();
 

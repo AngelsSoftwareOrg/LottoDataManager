@@ -117,10 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="check_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons\check_32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="APPLICATION_ID" xml:space="preserve">
     <value>LOTTO_DATA_MANAGER</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="erase_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Icons\erase_32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -129,6 +132,12 @@
   </data>
   <data name="lotto-32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Icons\lotto-32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="hit_compare_32_a_px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons\hit_compare_32_a_px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="matching_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons\matching_32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Open_Document_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Icons\Open_Document_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -166,6 +175,12 @@
   <data name="gear-32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Icons\gear-32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="LOTTERY_OUTLET_DEFAULT_CODE" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="checkall_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons\checkall_32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Button-Close-icon_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Icons\Button-Close-icon_32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -201,6 +216,9 @@
   </data>
   <data name="Stars2_20x" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Icons\Star2_20x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="save_to_clipboard_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons\save_to_clipboard_32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="money_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Icons\money_32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -244,7 +262,10 @@
   <data name="Stars6_20x" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Icons\Stars6_20x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="hit_compare_32_a_px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\hit_compare_32_a_px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="uncheckall_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons\uncheckall_32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="uncheck_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons\uncheck_32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

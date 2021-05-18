@@ -52,19 +52,28 @@ namespace LottoDataManager.Includes.Classes
             }
         }
         public LotteryDetails LotteryDetails { get => lotteryDetails; }
-        public List<LotteryDrawResult> GetLotteryDrawResults(DateTime startingDate)
+        public List<LotteryDrawResult> GetLotteryDrawResults(DateTime startingDate, DateTime endingDate)
         {
-            if (startingDate >= DateTime.Now) throw new Exception(ResourcesUtils.GetMessage("lot_data_srv_cls_msg_1"));
-            return lotteryDrawResultDao.GetDrawResultsFromStartingDate(GameMode, startingDate);
+            //if later than
+            if (startingDate.Date.CompareTo(endingDate.Date) > 0) throw new Exception(ResourcesUtils.GetMessage("lot_data_srv_cls_msg_4"));
+
+            //earlier than
+            if (endingDate.Date.CompareTo(startingDate.Date) < 0) throw new Exception(ResourcesUtils.GetMessage("lot_data_srv_cls_msg_4"));
+            return lotteryDrawResultDao.GetDrawResultsFromStartingDate(GameMode, startingDate, endingDate);
         }
         public LotteryDrawResult GetLotteryDrawResultByDrawDate(DateTime drawDate)
         {
             return lotteryDrawResultDao.GetLotteryDrawResultByDrawDate(GameMode, drawDate);
         }
-        public List<LotteryBet> GetLottoBets(DateTime sinceWhen)
+        public List<LotteryBet> GetLottoBets(DateTime sinceWhen, DateTime dateTo)
         {
-            if (sinceWhen >= DateTime.Now) throw new Exception(ResourcesUtils.GetMessage("lot_data_srv_cls_msg_2"));
-            return lotteryBetDao.GetDashboardLatestBets(GameMode, sinceWhen);
+            //if later than
+            if (sinceWhen.Date.CompareTo(dateTo.Date)>0) throw new Exception(ResourcesUtils.GetMessage("lot_data_srv_cls_msg_4"));
+            
+            //earlier than
+            if (dateTo.Date.CompareTo(sinceWhen.Date)<0) throw new Exception(ResourcesUtils.GetMessage("lot_data_srv_cls_msg_4"));
+
+            return lotteryBetDao.GetDashboardLatestBets(GameMode, sinceWhen, dateTo);
         }
         public List<LotteryBet> GetLottoBetsByDrawDate(DateTime betDrawDate)
         {
@@ -215,6 +224,10 @@ namespace LottoDataManager.Includes.Classes
         }
         public void RemoveLotteryOutlet(LotteryOutlet removeModel)
         {
+            if(removeModel.GetId() == ResourcesUtils.LotteryOutletDefaultCode)
+            {
+                throw new Exception(String.Format(ResourcesUtils.GetMessage("lot_sett_val_lot_out_msg5"), removeModel.GetDescription()));
+            }
             this.lotteryOutletDao.RemoveOutlet(removeModel);
         }
         public int AddLotteryOutlet(String outletDescription)

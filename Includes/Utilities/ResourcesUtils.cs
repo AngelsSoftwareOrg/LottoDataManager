@@ -23,7 +23,7 @@ namespace LottoDataManager.Includes.Utilities
         private static readonly String RESOURCE_ID_APP_DATA_FOLDER_CONFIG_FILE_NAME = "APP_DATA_FOLDER_CONFIG_FILE_NAME";
         private static readonly String RESOURCE_ID_APP_DATA_FOLDER_CONFIG_FILE_NAME_DEBUG = "APP_DATA_FOLDER_CONFIG_FILE_NAME_DEBUG";
         private static readonly String RESOURCE_ID_PROCESS_LOGS_MAX_LINE_CONTENT = "PROCESS_LOGS_MAX_LINE_CONTENT";
-
+        private static readonly String RESOURCE_ID_LOTTERY_OUTLET_DEFAULT_CODE = "LOTTERY_OUTLET_DEFAULT_CODE";
         
 
         static ResourcesUtils()
@@ -48,6 +48,7 @@ namespace LottoDataManager.Includes.Utilities
         public static String MachineLearningModelFileExtension { get { return GetSetting(RESOURCE_ID_ML_MODEL_FILE_TYPE_EXTENSION); } }
         public static String MachineLearningModelFileExtensionDescription { get { return GetSetting(RESOURCE_ID_ML_MODEL_FILE_TYPE_EXTENSION_DESC); } }
         public static String AppDataFolderName { get { return GetSetting(RESOURCE_ID_APP_DATA_FOLDER); } }
+        public static int LotteryOutletDefaultCode { get { return int.Parse(GetSetting(RESOURCE_ID_LOTTERY_OUTLET_DEFAULT_CODE)); } }
         public static String AppDataConfigFileName 
         { 
             get 
