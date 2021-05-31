@@ -36,8 +36,8 @@ namespace LottoDataManager.Forms
         private void InitializesForms()
         {
             SetupForms();
-            dateTimePickerBets.Value = DateTime.Now.AddYears(-1);
-            dateTimePickerBetsTo.Value = DateTime.Now.Date;
+            dateTimePickerBets.Value = DateTimeConverterUtils.GetDefaultFilterDateFrom();
+            dateTimePickerBetsTo.Value = DateTimeConverterUtils.GetDefaultFilterDateTo();
             InitializesListViewColumns();
             FillUpBetList();
             ResizeColumnsBetList();
