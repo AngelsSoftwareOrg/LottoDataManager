@@ -56,8 +56,8 @@ namespace LottoDataManager.Forms
         #region MAIN FORMS
         private void ModifyBetDateFrm_Load(object sender, EventArgs e)
         {
-            dateTimePickerBets.Value = DateTime.Now.AddYears(-1);
-            dateTimePickerBetsTo.Value = DateTime.Now.Date;
+            dateTimePickerBets.Value = DateTimeConverterUtils.GetDefaultFilterDateFrom();
+            dateTimePickerBetsTo.Value = DateTimeConverterUtils.GetDefaultFilterDateTo();
             FillUpBetList();
             ResizeColumnsBetList();
             LoadTheAutoSelect();

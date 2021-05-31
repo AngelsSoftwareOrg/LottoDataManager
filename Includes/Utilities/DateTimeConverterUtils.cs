@@ -41,5 +41,13 @@ namespace LottoDataManager.Includes.Utilities
                                     dateDiff.ElapsedDays,
                                     (dateDiff.ElapsedDays > 1) ? "s" : "");
         }
+        public static DateTime GetDefaultFilterDateFrom()
+        {
+            return DateTime.Now.AddYears(-1);
+        }
+        public static DateTime GetDefaultFilterDateTo()
+        {
+            return DateTime.Now.AddYears(1);
+        }
     }
 }

@@ -11,7 +11,7 @@ An application that let it be as your "Lotto Data Management Hub" with the follo
 6. Profit and Loss Report generation. 
 
 # Limitations
-1. Only works at "PHILIPPINE" lottery setting
+1. Only works at "PHILIPPINES" lottery setting
 2. Only programmed to serve the 6 digits number lottery game
 3. Only works at Windows 10 with up to date .NET framework installed
 4. For the Database, it needs a driver for MS Access preferably version starting from MS Access 2016 and higher
@@ -28,7 +28,7 @@ By using the following Technologies
 1. [Visual Studio Community Edition 2019](https://visualstudio.microsoft.com/downloads/)
 2. MS Access 2016
 3. [.NET Framework 4.7](https://dotnet.microsoft.com/download/dotnet-framework/net47)
-4. Object List View
+4. [Object List View 2.0](http://objectlistview.sourceforge.net/cs/index.html)
 
 ## Supporting Technologies
 1. [Smart Git - Free Edition](https://www.syntevo.com/smartgit/)
@@ -37,6 +37,7 @@ By using the following Technologies
 4. [Gimp](https://www.gimp.org/)
 5. [SQuirreL SQL Client](http://squirrel-sql.sourceforge.net/)
 6. [Notepad++](https://notepad-plus-plus.org/downloads/)
+7. [Inno Setup Compiler 6.12](https://jrsoftware.org/isinfo.php)
 
 
 # License
@@ -50,7 +51,7 @@ by: Ryan Seth Roldan
 # Sample Screenshots
 ## Main Form
 - Here, you will see at quick glance whats happening in your bet compared to drawn result and your spending habit
-![Main Form](https://i.imgur.com/dATG9GO.png)
+![Main Form](https://i.imgur.com/ojhVdUW.png)
 ## Add Bet Form
 - Here's how you add your new bet
 ![enter image description here](https://i.imgur.com/LJwhIjr.png)

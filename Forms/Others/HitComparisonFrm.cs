@@ -27,7 +27,8 @@ namespace LottoDataManager.Forms.Ticket
             //#endif
             //end debugging
 
-            dateTimePickerFrom.Value = DateTime.Now.AddYears(-1);
+            dateTimePickerFrom.Value = DateTimeConverterUtils.GetDefaultFilterDateFrom();
+            dateTimePickerTo.Value = DateTimeConverterUtils.GetDefaultFilterDateTo();
             toolStripProgBarRefresh.Value = 0;
             toolStripProgBarRefresh.Visible = false;
             toolStripStatusLbl.Visible = false;

@@ -395,10 +395,10 @@ namespace LottoDataManager
         private void SetBetsAndResultDefaultList()
         {
             //Prepare the Dates
-            dateTimePickerDrawResult.Value = DateTime.Now.AddYears(-1);
-            dateTimePickerBets.Value = DateTime.Now.AddYears(-1);
-            dateTimePickerBetsTo.Value = DateTime.Now.Date;
-            dateTimePickerDrawResultTo.Value = DateTime.Now.Date;
+            dateTimePickerDrawResult.Value = DateTimeConverterUtils.GetDefaultFilterDateFrom();
+            dateTimePickerBets.Value = DateTimeConverterUtils.GetDefaultFilterDateFrom();
+            dateTimePickerBetsTo.Value = DateTimeConverterUtils.GetDefaultFilterDateTo();
+            dateTimePickerDrawResultTo.Value = DateTimeConverterUtils.GetDefaultFilterDateTo();
             RefreshWinningNumbersGridContent();
             RefreshBets();
         }
