@@ -163,6 +163,7 @@
     <Compile Include="Includes\Classes\Comparers\AbstractSorter.cs" />
     <Compile Include="Includes\Classes\Comparers\ListviewIntSorter.cs" />
     <Compile Include="Includes\Classes\Comparers\ListviewTextSorter.cs" />
+    <Compile Include="Includes\Classes\Extensions\ControlExtensions.cs" />
     <Compile Include="Includes\Classes\Generator\AbstractSequenceGenerator.cs" />
     <Compile Include="Includes\Classes\Generator\GeneratorParamType.cs" />
     <Compile Include="Includes\Classes\Generator\GeneratorType.cs" />
