@@ -133,6 +133,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                                       " WHERE a.active = true " +
                                       "   AND b.game_cd = @game_cd " +
                                       "   AND MONTH(target_draw_date) = MONTH(NOW()) " +
+                                      "   AND YEAR(target_draw_date) = YEAR(NOW()) " + 
                                       "   AND a.claim_status = true";
                 command.Parameters.AddWithValue("@game_cd", (int)gameMode);
                 command.Connection = conn;

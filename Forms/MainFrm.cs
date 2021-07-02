@@ -23,6 +23,7 @@ using LottoDataManager.Includes.Model.Structs;
 using LottoDataManager.Includes.Utilities;
 using AngelsRepositoryLib;
 using LottoDataManager.Forms.Ticket;
+using LottoDataManager.Includes.Classes.Extensions;
 
 namespace LottoDataManager
 {
@@ -35,11 +36,11 @@ namespace LottoDataManager
         private LotteryDataWorker lotteryDataWorker;
         private DashboardReport dashboardReport;
         private ProcessingStatusLogFrm processingStatusLogFrm;
-        private String LOG_STATUS_MODULE_NAME_WEBSCRAP = "Web Scraping";
-        private String LOG_STATUS_MODULE_NAME_GRID_CONTENT = "Grid Content";
-        private String LOG_STATUS_MODULE_NAME_FIELD_DETAILS = "Refreshing Field Details";
-        private String LOG_STATUS_MODULE_NAME_WINNING_BETS = "Processing Winning Bets";
-        private String LOG_STATUS_MODULE_NAME_DRAWN_RESULT = "Download drawn results";
+        private String LOG_STATUS_MODULE_NAME_WEBSCRAP;
+        private String LOG_STATUS_MODULE_NAME_GRID_CONTENT;
+        private String LOG_STATUS_MODULE_NAME_FIELD_DETAILS;
+        private String LOG_STATUS_MODULE_NAME_WINNING_BETS;
+        private String LOG_STATUS_MODULE_NAME_DRAWN_RESULT;
         private int processingLogStatusCtr = 0;
 
         public MainForm()
@@ -47,12 +48,13 @@ namespace LottoDataManager
             InitializeComponent();
             this.lotteryDetails = GameFactory.GetPreviousOpenGameInstance();
             this.processingStatusLogFrm = new ProcessingStatusLogFrm();
+
             this.Text = String.Format("{0} - {1}", ResourcesUtils.GetMessage("mainf_title"), AppSettings.GetAppVersionWithPrefix());
             this.label1.Text = ResourcesUtils.GetMessage("mainf_labels_1");
             this.label3.Text = ResourcesUtils.GetMessage("mainf_labels_2");
             this.label4.Text = ResourcesUtils.GetMessage("mainf_labels_3");
             this.label5.Text = ResourcesUtils.GetMessage("mainf_labels_4");
-            AddProcessingStatusLogs(LOG_STATUS_MODULE_NAME_WEBSCRAP, ResourcesUtils.GetMessage("mainf_labels_5"));
+            
             this.toolStripProcessingLogs.Text = ResourcesUtils.GetMessage("mainf_labels_46");
             this.tabPage1.Text = ResourcesUtils.GetMessage("mainf_labels_6");
             this.groupBox1.Text = ResourcesUtils.GetMessage("mainf_labels_7");
@@ -95,6 +97,13 @@ namespace LottoDataManager
 
             this.tabPageBetFilter.Text = ResourcesUtils.GetMessage("mainf_labels_49");
             this.tabPageDrawFilter.Text = ResourcesUtils.GetMessage("mainf_labels_50");
+
+            this.LOG_STATUS_MODULE_NAME_WEBSCRAP = ResourcesUtils.GetMessage("mainf_labels_51");
+            this.LOG_STATUS_MODULE_NAME_GRID_CONTENT = ResourcesUtils.GetMessage("mainf_labels_52");
+            this.LOG_STATUS_MODULE_NAME_FIELD_DETAILS = ResourcesUtils.GetMessage("mainf_labels_53");
+            this.LOG_STATUS_MODULE_NAME_WINNING_BETS = ResourcesUtils.GetMessage("mainf_labels_54");
+            this.LOG_STATUS_MODULE_NAME_DRAWN_RESULT = ResourcesUtils.GetMessage("mainf_labels_55");
+            AddProcessingStatusLogs(LOG_STATUS_MODULE_NAME_WEBSCRAP, ResourcesUtils.GetMessage("mainf_labels_5"));
 
             ReinitateLotteryServices();
             GenerateLotteriesGameMenu();

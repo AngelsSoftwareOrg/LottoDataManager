@@ -1,6 +1,7 @@
 ﻿using LottoDataManager.Includes;
 using LottoDataManager.Includes.Classes;
 using LottoDataManager.Includes.Model;
+using LottoDataManager.Includes.Utilities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -35,6 +36,7 @@ namespace LottoDataManager.Forms
         private void SplashScreen_Load(object sender, EventArgs e)
         {
             lblVersion.Text = AppSettings.GetAppVersionWithPrefix();
+            this.Text = ResourcesUtils.GetMessage("app_const_app_title");
             TestDatabaseSourceConnection();
         }
         private void TestDatabaseSourceConnection()
