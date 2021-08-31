@@ -25,10 +25,11 @@ namespace LottoDataManager.Forms
         private List<Button> selTcktPnlNum = new List<Button>();
         private LotterySchedule lotterySchedule;
         private bool hasDataBeenSave = false;
-
+        
         public AddBetFrm(LotteryDataServices lotteryDataServices)
         {
             InitializeComponent();
+
             this.lotteryDataServices = lotteryDataServices;
 
             this.lotteryTicketPanel = this.lotteryDataServices.GetLotteryTicketPanel();
@@ -43,7 +44,8 @@ namespace LottoDataManager.Forms
         }
         private void SetupForm()
         {
-            this.Text = ResourcesUtils.GetMessage("abtmlt_form_msg_1");
+            this.Text = String.Format(ResourcesUtils.GetMessage("abtmlt_form_msg_1"),
+                this.lotteryDataServices.LotteryDetails.Description);
             this.tabPageDelimiters.Text = ResourcesUtils.GetMessage("abtmlt_form_msg_2");
             this.tabPageClick.Text = ResourcesUtils.GetMessage("abtmlt_form_msg_3");
             this.textBoxInstruction.Text = String.Format(ResourcesUtils.GetMessage("abtmlt_form_msg_4"), 
@@ -369,7 +371,6 @@ namespace LottoDataManager.Forms
             dtPickPreferredDate.Visible = false;
             Application.DoEvents();
         }
-
 
         #region Public Interface"
         public void AddSequenceEntry(String sequence)

@@ -119,6 +119,10 @@ namespace LottoDataManager.Includes.Classes
         {
             return lotteryOutletDao.GetLotteryOutlets();
         }
+        public LotteryOutlet GetDefaultLotteryOutlet()
+        {
+            return lotteryOutletDao.GetDefaultLotteryOutlet();
+        }
         public void SaveLotteryBets(List<LotteryBet> lotteryBets)
         {
             this.lotteryBetDao.InsertLotteryBet(lotteryBets);

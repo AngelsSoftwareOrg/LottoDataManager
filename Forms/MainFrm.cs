@@ -22,7 +22,7 @@ using LottoDataManager.Includes.Model.Reports;
 using LottoDataManager.Includes.Model.Structs;
 using LottoDataManager.Includes.Utilities;
 using AngelsRepositoryLib;
-using LottoDataManager.Forms.Ticket;
+using LottoDataManager.Forms.Others;
 using LottoDataManager.Includes.Classes.Extensions;
 
 namespace LottoDataManager

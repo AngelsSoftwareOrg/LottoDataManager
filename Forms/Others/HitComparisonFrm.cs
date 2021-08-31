@@ -9,15 +9,16 @@ using LottoDataManager.Includes.Model;
 using LottoDataManager.Includes.Model.Details;
 using LottoDataManager.Includes.Utilities;
 
-namespace LottoDataManager.Forms.Ticket
+namespace LottoDataManager.Forms.Others
 {
     public partial class HitComparisonFrm : Form
-    { 
+    {
         private LotteryDataServices lotteryDataServices;
+        private List<LotteryBet> userDefinedLotteryBets;
+
         public HitComparisonFrm(LotteryDataServices lotteryDataServices)
         {
             InitializeComponent();
-            SetupFormLabels();
             this.lotteryDataServices = lotteryDataServices;
 
             //Debugging
@@ -26,22 +27,25 @@ namespace LottoDataManager.Forms.Ticket
             //   this.lotteryDataServices = new LotteryDataServices(new Game642());
             //#endif
             //end debugging
-
-            dateTimePickerFrom.Value = DateTimeConverterUtils.GetDefaultFilterDateFrom();
-            dateTimePickerTo.Value = DateTimeConverterUtils.GetDefaultFilterDateTo();
-            toolStripProgBarRefresh.Value = 0;
-            toolStripProgBarRefresh.Visible = false;
-            toolStripStatusLbl.Visible = false;
-            InitializesObjectListViewDataBinding();
-            StartInitialization();
         }
 
         #region BET LISTVIEW
-        private void InitialieBetListView()
+        private void SetupLotteryBetsObject()
+        {
+            if (userDefinedLotteryBets == null || userDefinedLotteryBets.Count <= 0)
+            {
+                objListVwBet.SetObjects(lotteryDataServices.GetLottoBets(dateTimePickerFrom.Value, dateTimePickerTo.Value));
+            }
+            else
+            {
+                objListVwBet.SetObjects(userDefinedLotteryBets);
+            }
+        }
+        private void InitializeBetListView()
         {
             try
             {
-                objListVwBet.SetObjects(lotteryDataServices.GetLottoBets(dateTimePickerFrom.Value, dateTimePickerTo.Value));
+                SetupLotteryBetsObject();
                 this.olvColBetTargetDate.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
                 this.olvColBetN1.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
                 this.olvColBetN2.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
@@ -87,7 +91,7 @@ namespace LottoDataManager.Forms.Ticket
             {
                 toolStripProgBarRefresh.Value = ConverterUtils.GetPercentageFloored(++itemProcessCtr, this.objListVwDrawResult.Items.Count);
                 this.objListVwDrawResult.RefreshObject(item.RowObject);
-                if(itemProcessCtr%50==0) Application.DoEvents();
+                if (itemProcessCtr % 50 == 0) Application.DoEvents();
             }
 
             this.objListVwDrawResult.EndUpdate();
@@ -121,9 +125,22 @@ namespace LottoDataManager.Forms.Ticket
         #endregion
 
         #region MAIN FORM
+
+        private void HitComparisonFrm_Load(object sender, EventArgs e)
+        {
+            SetupFormLabels();
+            dateTimePickerFrom.Value = DateTimeConverterUtils.GetDefaultFilterDateFrom();
+            dateTimePickerTo.Value = DateTimeConverterUtils.GetDefaultFilterDateTo();
+            toolStripProgBarRefresh.Value = 0;
+            toolStripProgBarRefresh.Visible = false;
+            toolStripStatusLbl.Visible = false;
+            InitializesObjectListViewDataBinding();
+            StartInitialization();
+        }
         private void SetupFormLabels()
         {
-            this.Text = ResourcesUtils.GetMessage("hit_comp_frm_title");
+            this.Text = String.Format(ResourcesUtils.GetMessage("hit_comp_frm_title"),
+                this.lotteryDataServices.LotteryDetails.Description);
             this.btnExit.Text = ResourcesUtils.GetMessage("common_btn_exit");
             this.label1.Text = ResourcesUtils.GetMessage("hit_comp_frm_msg1");
             this.lnkFilter.Text = ResourcesUtils.GetMessage("common_link_filter_now");
@@ -137,7 +154,7 @@ namespace LottoDataManager.Forms.Ticket
         {
             try
             {
-                InitialieBetListView();
+                InitializeBetListView();
                 InitialieDrawResultListView();
             }
             catch (Exception e)
@@ -171,6 +188,7 @@ namespace LottoDataManager.Forms.Ticket
 
             this.olvColBetOutlet.AspectToStringConverter = delegate (object rowObject)
             {
+                if (rowObject == null) return String.Empty;
                 LotteryOutlet outlet = (LotteryOutlet)rowObject;
                 return outlet.GetDescription();
             };
@@ -184,6 +202,7 @@ namespace LottoDataManager.Forms.Ticket
 
             this.olvColBetSeqGen.AspectToStringConverter = delegate (object rowObject)
             {
+                if (rowObject == null) return String.Empty;
                 LotterySequenceGenerator seqgen = (LotterySequenceGenerator)rowObject;
                 return seqgen.GetDescription();
             };
@@ -238,5 +257,24 @@ namespace LottoDataManager.Forms.Ticket
             StartInitialization();
         }
         #endregion
+
+
+        #region PUBLIC FUNCTIONS
+        //List<LotteryBet>
+
+
+        public List<LotteryBet> UserDefinedLotteryBets
+        {
+            set
+            {
+                userDefinedLotteryBets = value;
+            }
+        }
+        public void ClearUserDefinedLotteryBets()
+        {
+            userDefinedLotteryBets = null;
+        }
+        #endregion
+
     }
 }

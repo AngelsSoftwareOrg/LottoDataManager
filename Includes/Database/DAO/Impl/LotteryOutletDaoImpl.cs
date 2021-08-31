@@ -48,6 +48,29 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
             }
             return lotteryOutletArr;
         }
+        public LotteryOutlet GetDefaultLotteryOutlet()
+        {
+            LotteryOutlet lotteryOutlet = null;
+            using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
+            using (OleDbCommand command = new OleDbCommand())
+            {
+                command.CommandType = CommandType.Text;
+                command.CommandText = "SELECT * FROM lottery_outlet WHERE outlet_cd = @outlet_cd AND active = true ORDER BY description ASC";
+                command.Parameters.AddWithValue("@outlet_cd", ResourcesUtils.LotteryOutletDefaultCode);
+                command.Connection = conn;
+                conn.Open();
+
+                using (OleDbDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        lotteryOutlet = CreateModel(reader);
+                    }
+                }
+            }
+            return lotteryOutlet;
+        }
+
         public void UpdateDescription(LotteryOutlet updatedModel)
         {
             using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())

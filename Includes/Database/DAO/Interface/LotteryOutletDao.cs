@@ -17,5 +17,6 @@ namespace LottoDataManager.Includes.Database.DAO.Interface
         bool IsDescriptionExisting(String outletDescription);
         int InsertLotteryOutlet(String outletDescription);
         int GetNextOutletCode();
+        LotteryOutlet GetDefaultLotteryOutlet();
     }
 }

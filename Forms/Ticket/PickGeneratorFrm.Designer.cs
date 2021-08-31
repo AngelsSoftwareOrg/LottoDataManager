@@ -45,22 +45,23 @@ namespace LottoDataManager.Forms
             this.btnGenerate = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.grpbxOutput = new System.Windows.Forms.GroupBox();
-            this.lvGenSeq = new System.Windows.Forms.ListView();
-            this.lvColSeqIdx = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.lvColSeq1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.lvColSeq2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.lvColSeq3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.lvColSeq4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.lvColSeq5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.lvColSeq6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ctxMenuBet = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.checkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.uncheckAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addBetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.grpbxFinalActions = new System.Windows.Forms.GroupBox();
+            this.btnViewCompareHits = new System.Windows.Forms.Button();
             this.linkUncheckAll = new System.Windows.Forms.LinkLabel();
             this.btnAddSelected = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
+            this.objLvGenSeq = new BrightIdeasSoftware.ObjectListView();
+            this.olvSeq = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvNum1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvNum2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvNum3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvNum4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvNum5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvNum6 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.panel1.SuspendLayout();
             this.grpbxParam.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -71,6 +72,7 @@ namespace LottoDataManager.Forms
             this.grpbxOutput.SuspendLayout();
             this.ctxMenuBet.SuspendLayout();
             this.grpbxFinalActions.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.objLvGenSeq)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -228,68 +230,16 @@ namespace LottoDataManager.Forms
             // 
             // grpbxOutput
             // 
-            this.grpbxOutput.Controls.Add(this.lvGenSeq);
+            this.grpbxOutput.Controls.Add(this.objLvGenSeq);
             this.grpbxOutput.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grpbxOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpbxOutput.ForeColor = System.Drawing.Color.Navy;
             this.grpbxOutput.Location = new System.Drawing.Point(0, 0);
             this.grpbxOutput.Name = "grpbxOutput";
-            this.grpbxOutput.Size = new System.Drawing.Size(542, 469);
+            this.grpbxOutput.Size = new System.Drawing.Size(542, 439);
             this.grpbxOutput.TabIndex = 0;
             this.grpbxOutput.TabStop = false;
             this.grpbxOutput.Text = "Step 4: Output";
-            // 
-            // lvGenSeq
-            // 
-            this.lvGenSeq.CheckBoxes = true;
-            this.lvGenSeq.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.lvColSeqIdx,
-            this.lvColSeq1,
-            this.lvColSeq2,
-            this.lvColSeq3,
-            this.lvColSeq4,
-            this.lvColSeq5,
-            this.lvColSeq6});
-            this.lvGenSeq.ContextMenuStrip = this.ctxMenuBet;
-            this.lvGenSeq.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lvGenSeq.FullRowSelect = true;
-            this.lvGenSeq.GridLines = true;
-            this.lvGenSeq.HideSelection = false;
-            this.lvGenSeq.Location = new System.Drawing.Point(3, 20);
-            this.lvGenSeq.Name = "lvGenSeq";
-            this.lvGenSeq.Size = new System.Drawing.Size(536, 446);
-            this.lvGenSeq.TabIndex = 0;
-            this.lvGenSeq.UseCompatibleStateImageBehavior = false;
-            this.lvGenSeq.View = System.Windows.Forms.View.Details;
-            this.lvGenSeq.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lvGenSeq_ColumnClick);
-            // 
-            // lvColSeqIdx
-            // 
-            this.lvColSeqIdx.Text = "#";
-            // 
-            // lvColSeq1
-            // 
-            this.lvColSeq1.Text = "#1";
-            // 
-            // lvColSeq2
-            // 
-            this.lvColSeq2.Text = "#2";
-            // 
-            // lvColSeq3
-            // 
-            this.lvColSeq3.Text = "#3";
-            // 
-            // lvColSeq4
-            // 
-            this.lvColSeq4.Text = "#4";
-            // 
-            // lvColSeq5
-            // 
-            this.lvColSeq5.Text = "#5";
-            // 
-            // lvColSeq6
-            // 
-            this.lvColSeq6.Text = "#6";
             // 
             // ctxMenuBet
             // 
@@ -307,7 +257,7 @@ namespace LottoDataManager.Forms
             this.checkToolStripMenuItem.Name = "checkToolStripMenuItem";
             this.checkToolStripMenuItem.Size = new System.Drawing.Size(159, 26);
             this.checkToolStripMenuItem.Text = "Check";
-            this.checkToolStripMenuItem.Click += new System.EventHandler(this.checkToolStripMenuItem_Click);
+            this.checkToolStripMenuItem.Click += new System.EventHandler(this.checkToolStripMenuItem_CheckSelected);
             // 
             // uncheckAllToolStripMenuItem
             // 
@@ -327,23 +277,41 @@ namespace LottoDataManager.Forms
             // 
             // grpbxFinalActions
             // 
+            this.grpbxFinalActions.Controls.Add(this.btnViewCompareHits);
             this.grpbxFinalActions.Controls.Add(this.linkUncheckAll);
             this.grpbxFinalActions.Controls.Add(this.btnAddSelected);
             this.grpbxFinalActions.Controls.Add(this.btnExit);
             this.grpbxFinalActions.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.grpbxFinalActions.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpbxFinalActions.ForeColor = System.Drawing.Color.Navy;
-            this.grpbxFinalActions.Location = new System.Drawing.Point(0, 469);
+            this.grpbxFinalActions.Location = new System.Drawing.Point(0, 439);
             this.grpbxFinalActions.Name = "grpbxFinalActions";
-            this.grpbxFinalActions.Size = new System.Drawing.Size(542, 100);
+            this.grpbxFinalActions.Size = new System.Drawing.Size(542, 130);
             this.grpbxFinalActions.TabIndex = 1;
             this.grpbxFinalActions.TabStop = false;
             this.grpbxFinalActions.Text = "Step 5: Final Action";
             // 
+            // btnViewCompareHits
+            // 
+            this.btnViewCompareHits.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnViewCompareHits.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnViewCompareHits.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnViewCompareHits.ForeColor = System.Drawing.Color.Black;
+            this.btnViewCompareHits.Image = global::LottoDataManager.Properties.Resources.hit_compare_32_a_px;
+            this.btnViewCompareHits.Location = new System.Drawing.Point(63, 53);
+            this.btnViewCompareHits.Name = "btnViewCompareHits";
+            this.btnViewCompareHits.Size = new System.Drawing.Size(174, 69);
+            this.btnViewCompareHits.TabIndex = 3;
+            this.btnViewCompareHits.Text = "Compare Hits";
+            this.btnViewCompareHits.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnViewCompareHits.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnViewCompareHits.UseVisualStyleBackColor = true;
+            this.btnViewCompareHits.Click += new System.EventHandler(this.btnViewCompareHits_Click);
+            // 
             // linkUncheckAll
             // 
             this.linkUncheckAll.AutoSize = true;
-            this.linkUncheckAll.Location = new System.Drawing.Point(6, 46);
+            this.linkUncheckAll.Location = new System.Drawing.Point(6, 27);
             this.linkUncheckAll.Name = "linkUncheckAll";
             this.linkUncheckAll.Size = new System.Drawing.Size(86, 18);
             this.linkUncheckAll.TabIndex = 2;
@@ -358,7 +326,7 @@ namespace LottoDataManager.Forms
             this.btnAddSelected.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddSelected.ForeColor = System.Drawing.Color.Black;
             this.btnAddSelected.Image = global::LottoDataManager.Properties.Resources.money_32px;
-            this.btnAddSelected.Location = new System.Drawing.Point(183, 21);
+            this.btnAddSelected.Location = new System.Drawing.Point(243, 53);
             this.btnAddSelected.Name = "btnAddSelected";
             this.btnAddSelected.Size = new System.Drawing.Size(201, 69);
             this.btnAddSelected.TabIndex = 1;
@@ -375,15 +343,81 @@ namespace LottoDataManager.Forms
             this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExit.ForeColor = System.Drawing.Color.Black;
             this.btnExit.Image = global::LottoDataManager.Properties.Resources.Exit_32;
-            this.btnExit.Location = new System.Drawing.Point(390, 21);
+            this.btnExit.Location = new System.Drawing.Point(450, 53);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(142, 69);
+            this.btnExit.Size = new System.Drawing.Size(89, 69);
             this.btnExit.TabIndex = 0;
             this.btnExit.Text = "Exit";
             this.btnExit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnExit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            // 
+            // objLvGenSeq
+            // 
+            this.objLvGenSeq.AllColumns.Add(this.olvSeq);
+            this.objLvGenSeq.AllColumns.Add(this.olvNum1);
+            this.objLvGenSeq.AllColumns.Add(this.olvNum2);
+            this.objLvGenSeq.AllColumns.Add(this.olvNum3);
+            this.objLvGenSeq.AllColumns.Add(this.olvNum4);
+            this.objLvGenSeq.AllColumns.Add(this.olvNum5);
+            this.objLvGenSeq.AllColumns.Add(this.olvNum6);
+            this.objLvGenSeq.CellEditUseWholeCell = false;
+            this.objLvGenSeq.CheckBoxes = true;
+            this.objLvGenSeq.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.olvSeq,
+            this.olvNum1,
+            this.olvNum2,
+            this.olvNum3,
+            this.olvNum4,
+            this.olvNum5,
+            this.olvNum6});
+            this.objLvGenSeq.ContextMenuStrip = this.ctxMenuBet;
+            this.objLvGenSeq.Cursor = System.Windows.Forms.Cursors.Default;
+            this.objLvGenSeq.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.objLvGenSeq.FullRowSelect = true;
+            this.objLvGenSeq.GridLines = true;
+            this.objLvGenSeq.HasCollapsibleGroups = false;
+            this.objLvGenSeq.HideSelection = false;
+            this.objLvGenSeq.Location = new System.Drawing.Point(3, 20);
+            this.objLvGenSeq.Name = "objLvGenSeq";
+            this.objLvGenSeq.SelectedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.objLvGenSeq.SelectedColumnTint = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.objLvGenSeq.SelectedForeColor = System.Drawing.Color.White;
+            this.objLvGenSeq.ShowGroups = false;
+            this.objLvGenSeq.Size = new System.Drawing.Size(536, 416);
+            this.objLvGenSeq.TabIndex = 1;
+            this.objLvGenSeq.UseCompatibleStateImageBehavior = false;
+            this.objLvGenSeq.View = System.Windows.Forms.View.Details;
+            this.objLvGenSeq.SelectionChanged += new System.EventHandler(this.objLvGenSeq_SelectionChanged);
+            // 
+            // olvSeq
+            // 
+            this.olvSeq.Text = "#";
+            // 
+            // olvNum1
+            // 
+            this.olvNum1.Text = "#1";
+            // 
+            // olvNum2
+            // 
+            this.olvNum2.Text = "#2";
+            // 
+            // olvNum3
+            // 
+            this.olvNum3.Text = "#3";
+            // 
+            // olvNum4
+            // 
+            this.olvNum4.Text = "#4";
+            // 
+            // olvNum5
+            // 
+            this.olvNum5.Text = "#5";
+            // 
+            // olvNum6
+            // 
+            this.olvNum6.Text = "#6";
             // 
             // PickGeneratorFrm
             // 
@@ -398,6 +432,7 @@ namespace LottoDataManager.Forms
             this.Name = "PickGeneratorFrm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Pick Generator";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PickGeneratorFrm_FormClosing);
             this.Load += new System.EventHandler(this.PickGeneratorFrm_Load);
             this.panel1.ResumeLayout(false);
             this.grpbxParam.ResumeLayout(false);
@@ -411,6 +446,7 @@ namespace LottoDataManager.Forms
             this.ctxMenuBet.ResumeLayout(false);
             this.grpbxFinalActions.ResumeLayout(false);
             this.grpbxFinalActions.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.objLvGenSeq)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -430,14 +466,6 @@ namespace LottoDataManager.Forms
         private System.Windows.Forms.Button btnGenerate;
         private ObjectListView lvGenType;
         private OLVColumn olvColDesc;
-        private System.Windows.Forms.ListView lvGenSeq;
-        private System.Windows.Forms.ColumnHeader lvColSeqIdx;
-        private System.Windows.Forms.ColumnHeader lvColSeq1;
-        private System.Windows.Forms.ColumnHeader lvColSeq2;
-        private System.Windows.Forms.ColumnHeader lvColSeq3;
-        private System.Windows.Forms.ColumnHeader lvColSeq4;
-        private System.Windows.Forms.ColumnHeader lvColSeq5;
-        private System.Windows.Forms.ColumnHeader lvColSeq6;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Button btnAddSelected;
         private System.Windows.Forms.LinkLabel linkUncheckAll;
@@ -445,5 +473,14 @@ namespace LottoDataManager.Forms
         private System.Windows.Forms.ToolStripMenuItem checkToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem uncheckAllToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addBetToolStripMenuItem;
+        private System.Windows.Forms.Button btnViewCompareHits;
+        private ObjectListView objLvGenSeq;
+        private OLVColumn olvSeq;
+        private OLVColumn olvNum1;
+        private OLVColumn olvNum2;
+        private OLVColumn olvNum3;
+        private OLVColumn olvNum4;
+        private OLVColumn olvNum5;
+        private OLVColumn olvNum6;
     }
 }
