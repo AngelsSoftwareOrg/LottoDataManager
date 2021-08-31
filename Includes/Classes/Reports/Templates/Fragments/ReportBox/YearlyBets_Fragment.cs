@@ -25,75 +25,173 @@ namespace LottoDataManager.Includes.Classes.Reports.Templates.Fragments.ReportBo
         /// </summary>
         public override string TransformText()
         {
-            this.Write(@"<div class=""outline-container"">
-    <div class=""outline-title"">
-        <span class=""title-keyword"">Yearly Bets</span>
-        <span class=""title-description"">- Tallying of your yearly spending on bets</span>
-    </div>
-    <div class=""outline-content"">
-        <table class=""table-stats-style yearly-tallying"" cellspacing=""0"">
-            <thead>
-                <th>Year</th>
-                <th>January</th>
-                <th>February</th>
-                <th>March</th>
-                <th>April</th>
-                <th>May</th>
-                <th>June</th>
-                <th>July</th>
-                <th>August</th>
-                <th>September</th>
-                <th>October</th>
-                <th>November</th>
-                <th>December</th>
-                <th>Annual</th>
-            </thead>
-            <tbody>
-                ");
+            this.Write("\r\n<div class=\"outline-container\">\r\n    <div class=\"outline-title\">\r\n        <span" +
+                    " class=\"title-keyword\">");
             
-            #line 26 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\YearlyBets_Fragment.tt"
+            #line 5 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\YearlyBets_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_yr_bets_1")));
+            
+            #line default
+            #line hidden
+            this.Write("</span>\r\n        <span class=\"title-description\">");
+            
+            #line 6 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\YearlyBets_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_yr_bets_2")));
+            
+            #line default
+            #line hidden
+            this.Write("</span>\r\n    </div>\r\n    <div class=\"outline-content\">\r\n        <table class=\"tab" +
+                    "le-stats-style yearly-tallying\" cellspacing=\"0\">\r\n            <thead>\r\n         " +
+                    "       <th>");
+            
+            #line 11 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\YearlyBets_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("common_calendar_month_lbl_year")));
+            
+            #line default
+            #line hidden
+            this.Write("</th>\r\n                <th>");
+            
+            #line 12 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\YearlyBets_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("common_calendar_month_lbl_1")));
+            
+            #line default
+            #line hidden
+            this.Write("</th>\r\n                <th>");
+            
+            #line 13 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\YearlyBets_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("common_calendar_month_lbl_2")));
+            
+            #line default
+            #line hidden
+            this.Write("</th>\r\n                <th>");
+            
+            #line 14 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\YearlyBets_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("common_calendar_month_lbl_3")));
+            
+            #line default
+            #line hidden
+            this.Write("</th>\r\n                <th>");
+            
+            #line 15 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\YearlyBets_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("common_calendar_month_lbl_4")));
+            
+            #line default
+            #line hidden
+            this.Write("</th>\r\n                <th>");
+            
+            #line 16 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\YearlyBets_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("common_calendar_month_lbl_5")));
+            
+            #line default
+            #line hidden
+            this.Write("</th>\r\n                <th>");
+            
+            #line 17 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\YearlyBets_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("common_calendar_month_lbl_6")));
+            
+            #line default
+            #line hidden
+            this.Write("</th>\r\n                <th>");
+            
+            #line 18 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\YearlyBets_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("common_calendar_month_lbl_7")));
+            
+            #line default
+            #line hidden
+            this.Write("</th>\r\n                <th>");
+            
+            #line 19 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\YearlyBets_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("common_calendar_month_lbl_8")));
+            
+            #line default
+            #line hidden
+            this.Write("</th>\r\n                <th>");
+            
+            #line 20 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\YearlyBets_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("common_calendar_month_lbl_9")));
+            
+            #line default
+            #line hidden
+            this.Write("</th>\r\n                <th>");
+            
+            #line 21 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\YearlyBets_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("common_calendar_month_lbl_10")));
+            
+            #line default
+            #line hidden
+            this.Write("</th>\r\n                <th>");
+            
+            #line 22 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\YearlyBets_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("common_calendar_month_lbl_11")));
+            
+            #line default
+            #line hidden
+            this.Write("</th>\r\n                <th>");
+            
+            #line 23 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\YearlyBets_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("common_calendar_month_lbl_12")));
+            
+            #line default
+            #line hidden
+            this.Write("</th>\r\n                <th>");
+            
+            #line 24 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\YearlyBets_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("common_calendar_month_lbl_annual")));
+            
+            #line default
+            #line hidden
+            this.Write("</th>\r\n            </thead>\r\n            <tbody>\r\n                ");
+            
+            #line 27 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\YearlyBets_Fragment.tt"
  foreach (var item in ProfitAndLossReport.AllBetsInTabularMode) { 
             
             #line default
             #line hidden
             this.Write("                    <tr>\r\n                        ");
             
-            #line 28 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\YearlyBets_Fragment.tt"
+            #line 29 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\YearlyBets_Fragment.tt"
  if(item[0]==0) { 
             
             #line default
             #line hidden
-            this.Write("                            <td>Total</td>\r\n                        ");
+            this.Write("                            <td>");
             
             #line 30 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\YearlyBets_Fragment.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(LBL("pal_form_labels_rpt_box_yr_bets_3")));
+            
+            #line default
+            #line hidden
+            this.Write("</td>\r\n                        ");
+            
+            #line 31 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\YearlyBets_Fragment.tt"
  }else{ 
             
             #line default
             #line hidden
             this.Write("                            <td>");
             
-            #line 31 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\YearlyBets_Fragment.tt"
+            #line 32 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\YearlyBets_Fragment.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item[0]));
             
             #line default
             #line hidden
             this.Write("</td>\r\n                        ");
             
-            #line 32 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\YearlyBets_Fragment.tt"
+            #line 33 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\YearlyBets_Fragment.tt"
  } 
             
             #line default
             #line hidden
             this.Write("\r\n                        ");
             
-            #line 34 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\YearlyBets_Fragment.tt"
+            #line 35 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\YearlyBets_Fragment.tt"
  for (int x=1; x<=(item.Length-1); x++) { 
             
             #line default
             #line hidden
             this.Write("                            ");
             
-            #line 35 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\YearlyBets_Fragment.tt"
+            #line 36 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\YearlyBets_Fragment.tt"
  if(item[x]==0) { 
             
             #line default
@@ -101,35 +199,35 @@ namespace LottoDataManager.Includes.Classes.Reports.Templates.Fragments.ReportBo
             this.Write("                                <td class=\"zero-sum-color\">\r\n                    " +
                     "        ");
             
-            #line 37 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\YearlyBets_Fragment.tt"
+            #line 38 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\YearlyBets_Fragment.tt"
  }else{ 
             
             #line default
             #line hidden
             this.Write("                                <td>\r\n                            ");
             
-            #line 39 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\YearlyBets_Fragment.tt"
+            #line 40 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\YearlyBets_Fragment.tt"
  } 
             
             #line default
             #line hidden
             this.Write("                            ");
             
-            #line 40 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\YearlyBets_Fragment.tt"
+            #line 41 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\YearlyBets_Fragment.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item[x].ToString("C")));
             
             #line default
             #line hidden
             this.Write("</td>\r\n                        ");
             
-            #line 41 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\YearlyBets_Fragment.tt"
+            #line 42 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\YearlyBets_Fragment.tt"
  } 
             
             #line default
             #line hidden
             this.Write("                    </tr>\r\n                ");
             
-            #line 43 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\YearlyBets_Fragment.tt"
+            #line 44 "D:\Development\WorkSpace00002\LottoDataManager\Includes\Classes\Reports\Templates\Fragments\ReportBox\YearlyBets_Fragment.tt"
  } 
             
             #line default

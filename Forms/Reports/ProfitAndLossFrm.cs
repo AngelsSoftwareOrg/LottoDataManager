@@ -44,9 +44,15 @@ namespace LottoDataManager.Forms.Reports
             btnExit.Text = ResourcesUtils.GetMessage("common_btn_exit");
             btnRunReport.Text = ResourcesUtils.GetMessage("pal_form_labels_run");
             gbGameModes.Text = ResourcesUtils.GetMessage("pal_form_labels_groupbox_game_modes");
+            linkLblCheckAll.Text = ResourcesUtils.GetMessage("common_link_check_all");
+            linkLblReset.Text = ResourcesUtils.GetMessage("common_link_reset");
             this.Text = ResourcesUtils.GetMessage("pal_form_labels_title");
-            cblGameModes.Items.AddRange(this.lotteryDataServices.GetLotteries().ToArray());
 
+            cblGameModes.Items.AddRange(this.lotteryDataServices.GetLotteries().ToArray());
+            SetCheckTheGameSessionLottery();
+        }
+        private void SetCheckTheGameSessionLottery()
+        {
             //set checked the session chosen game as default
             foreach (Lottery item in cblGameModes.Items)
             {
@@ -88,7 +94,7 @@ namespace LottoDataManager.Forms.Reports
         }
         #endregion
 
-        #region Buttons
+        #region Actions
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -97,6 +103,26 @@ namespace LottoDataManager.Forms.Reports
         {
             RunReport();
         }
+
+        private void CheckboxStateChange(Boolean isCheck)
+        {
+            for (int x = 0; x < cblGameModes.Items.Count; x++) 
+            {
+                cblGameModes.SetItemChecked(x, isCheck);
+            }
+        }
+
+        private void linkLblCheckAll_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            CheckboxStateChange(true);
+        }
+
+        private void linkLblUnCheckAll_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            CheckboxStateChange(false);
+            SetCheckTheGameSessionLottery();
+        }
         #endregion
+
     }
 }

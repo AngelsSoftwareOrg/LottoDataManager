@@ -741,7 +741,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                                 result[6] = double.Parse(reader["jul"].ToString());
                                 result[7] = double.Parse(reader["aug"].ToString());
                                 result[8] = double.Parse(reader["sep"].ToString());
-                                result[9] = double.Parse(reader["aug"].ToString());
+                                result[9] = double.Parse(reader["oct"].ToString());
                                 result[10] = double.Parse(reader["nov"].ToString());
                                 result[11] = double.Parse(reader["dec"].ToString());
                                 result[12] = double.Parse(reader["annual"].ToString());
@@ -818,7 +818,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                                 result[7] = double.Parse(reader["jul"].ToString());
                                 result[8] = double.Parse(reader["aug"].ToString());
                                 result[9] = double.Parse(reader["sep"].ToString());
-                                result[10] = double.Parse(reader["aug"].ToString());
+                                result[10] = double.Parse(reader["oct"].ToString());
                                 result[11] = double.Parse(reader["nov"].ToString());
                                 result[12] = double.Parse(reader["dec"].ToString());
                                 result[13] = double.Parse(reader["annual"].ToString());
