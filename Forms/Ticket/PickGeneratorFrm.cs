@@ -357,6 +357,7 @@ namespace LottoDataManager.Forms
         }
         private void btnViewCompareHits_Click(object sender, EventArgs e)
         {
+            if (objLvGenSeq.Objects == null) return;
             HitComparisonFrm hitComparisonFrm = new HitComparisonFrm(this.lotteryDataServices);
             List<LotteryBet> arrBet = new List<LotteryBet>();
             LotteryOutlet outlet = this.lotteryDataServices.GetDefaultLotteryOutlet();

@@ -30,7 +30,7 @@ namespace LottoDataManager.Forms
 
             //Debugging
             //if(lotteryDataServices==null)
-            //    this.lotteryDataServices = new LotteryDataServices(new Game649());
+            //    this.lotteryDataServices = new LotteryDataServices(new Game658());
             //end debugging
 
             this.lotteryTicketPanel = this.lotteryDataServices.GetLotteryTicketPanel();
@@ -50,7 +50,8 @@ namespace LottoDataManager.Forms
         }
         private void SetupForms()
         {
-            this.Text = ResourcesUtils.GetMessage("mod_clm_stat_msg_1");
+            this.Text = String.Format(ResourcesUtils.GetMessage("mod_clm_stat_msg_1"),
+                this.lotteryDataServices.LotteryDetails.Description);
             this.label1.Text = ResourcesUtils.GetMessage("mod_clm_stat_msg_2");
             this.linkLabelFilterNow.Text = ResourcesUtils.GetMessage("mod_clm_stat_msg_3");
             this.label2.Text = ResourcesUtils.GetMessage("mod_clm_stat_msg_4");
@@ -96,7 +97,10 @@ namespace LottoDataManager.Forms
         {
             if (IsListViewItemModified(item))
             {
-                item.BackColor = Color.Tomato;
+                for(int x=0; x<item.SubItems.Count; x++)
+                {
+                    item.GetSubItem(x).BackColor = Color.Tomato;
+                }
             }
         }
         private bool IsListViewItemModified(OLVListItem item)
@@ -187,6 +191,20 @@ namespace LottoDataManager.Forms
                 item.Checked = bet.IsClaimed();
             }
         }
+        private void objectListViewWinningBets_FormatRow(object sender, FormatRowEventArgs e)
+        {
+            e.UseCellFormatEvents = true;
+        }
+        private void objectListViewWinningBets_FormatCell(object sender, FormatCellEventArgs e)
+        {
+            if (e.CellValue == null) return;
+            if (e.ColumnIndex < 3 || e.ColumnIndex > 8) return;
+            LotteryWinningBet bet = (LotteryWinningBet)e.Model;
+            if (bet.IsWinningNum(int.Parse(e.CellValue.ToString())))
+            {
+                e.SubItem.BackColor = Color.LightGoldenrodYellow;
+            }
+        }
         private void ResizeColumnsBetList()
         {
             this.olvColChkbox.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
@@ -249,6 +267,7 @@ namespace LottoDataManager.Forms
             SaveLotteryBetsChanges();
         }
         #endregion
+
 
     }
 }

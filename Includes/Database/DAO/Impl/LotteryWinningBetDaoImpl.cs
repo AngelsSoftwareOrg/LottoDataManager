@@ -49,6 +49,12 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                         lotteryWinningBet.Num4 = int.Parse(reader["num4"].ToString());
                         lotteryWinningBet.Num5 = int.Parse(reader["num5"].ToString());
                         lotteryWinningBet.Num6 = int.Parse(reader["num6"].ToString());
+                        lotteryWinningBet.AddWinningNumber(int.Parse(reader["num1"].ToString()));
+                        lotteryWinningBet.AddWinningNumber(int.Parse(reader["num2"].ToString()));
+                        lotteryWinningBet.AddWinningNumber(int.Parse(reader["num3"].ToString()));
+                        lotteryWinningBet.AddWinningNumber(int.Parse(reader["num4"].ToString()));
+                        lotteryWinningBet.AddWinningNumber(int.Parse(reader["num5"].ToString()));
+                        lotteryWinningBet.AddWinningNumber(int.Parse(reader["num6"].ToString()));
                         lotteryWinningBet.ClaimStatus = bool.Parse(reader["claim_status"].ToString());
                     }
                 }
@@ -200,9 +206,6 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                 transaction.Commit();
             }
         }
-
-
-
         public List<LotteryWinningBet> GetLotteryWinningBet(GameMode gameMode, DateTime sinceWhen)
         {
             List<LotteryWinningBet> lotteryWinningBetArr = new List<LotteryWinningBet>();
@@ -258,6 +261,12 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                         lotteryWinningBet.ClaimStatus = bool.Parse(reader["b_claim_status"].ToString());
                         lotteryWinningBet.OutletCd = int.Parse(reader["c_outlet_cd"].ToString());
                         lotteryWinningBet.OutletDesc = reader["c_description"].ToString();
+                        lotteryWinningBet.AddWinningNumber(int.Parse(reader["b_num1"].ToString()));
+                        lotteryWinningBet.AddWinningNumber(int.Parse(reader["b_num2"].ToString()));
+                        lotteryWinningBet.AddWinningNumber(int.Parse(reader["b_num3"].ToString()));
+                        lotteryWinningBet.AddWinningNumber(int.Parse(reader["b_num4"].ToString()));
+                        lotteryWinningBet.AddWinningNumber(int.Parse(reader["b_num5"].ToString()));
+                        lotteryWinningBet.AddWinningNumber(int.Parse(reader["b_num6"].ToString()));
                         lotteryWinningBetArr.Add(lotteryWinningBet);
                     }
                 }
