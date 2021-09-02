@@ -29,9 +29,7 @@ namespace LottoDataManager.Forms
         public AddBetFrm(LotteryDataServices lotteryDataServices)
         {
             InitializeComponent();
-
             this.lotteryDataServices = lotteryDataServices;
-
             this.lotteryTicketPanel = this.lotteryDataServices.GetLotteryTicketPanel();
             this.lotteryOutletArr = this.lotteryDataServices.GetLotteryOutlets();
             this.lotterySchedule = this.lotteryDataServices.GetLotterySchedule();
@@ -70,6 +68,7 @@ namespace LottoDataManager.Forms
         {
             lblGameDesc.Text = lotteryDataServices.LotteryDetails.Description;
             lblNextDrawDate.Text = lotteryDataServices.GetNextDrawDateFormatted();
+            dtPickPreferredDate.Value = lotteryDataServices.GetNextDrawDate();
             lblDrawDateEvery.Text = lotterySchedule.DrawDateEvery();
             AddSelectedTicketPanelNumber();
             radioBtnNextDrawDate.Checked = true;

@@ -98,11 +98,30 @@ namespace LottoDataManager.Includes.Classes
         }
         public DateTime GetNextDrawDate()
         {
-            return lotteryDataDerivation.GetNextDrawDate();
+            bool isPastCutoff = this.userSetting.IsPastTicketSellingCutoffTime(GetTicketCutoffTime());
+            DateTime basisDate = DateTime.Now;
+            if (isPastCutoff) basisDate = basisDate.AddDays(1);
+            return lotteryDataDerivation.GetNextDrawDate(basisDate);
         }
         public void SaveLastOpenedLottery()
         {
             this.userSetting.SaveLastOpenedLottery(this.lotteryDetails.GameCode);
+        }
+        public void SaveTicketCutoffTime(DateTime newCutoffTime)
+        {
+            this.userSetting.SaveTicketCutoffTime(newCutoffTime);
+        }
+        public DateTime GetTicketCutoffTime()
+        {
+            return this.userSetting.GetTicketCutoffTime();
+        }
+        public int GetTicketCutoffNotifyTime()
+        {
+            return this.userSetting.GetTicketCutoffNotifyTime();
+        }
+        public void SaveTicketCutoffNotifyTime(int newValue)
+        {
+            this.userSetting.SaveTicketCutoffNotifyTime(newValue);
         }
         public String GetNextDrawDateFormatted()
         {
@@ -144,7 +163,6 @@ namespace LottoDataManager.Includes.Classes
             this.lotteryScheduleDao.RemoveLotterySchedule(lotterySchedule);
             return this.lotteryScheduleDao.InsertLotterySchedule(lotterySchedule);
         }
-
         public void DeleteLotteryBet(List<LotteryBet> lotteryBets)
         {
             foreach(LotteryBet lotteryBet in lotteryBets)

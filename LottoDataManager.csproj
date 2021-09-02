@@ -320,6 +320,7 @@
     <Compile Include="Includes\Database\DAO\Interface\UserSettingDao.cs" />
     <Compile Include="Includes\Model\Details\AppVersioning.cs" />
     <Compile Include="Includes\Model\Details\LotterySequenceGenerator.cs" />
+    <Compile Include="Includes\Model\Details\Options\UserSettingsConfig.cs" />
     <Compile Include="Includes\Model\Details\Setup\AppVersioningSetup.cs" />
     <Compile Include="Includes\Model\Details\Setup\LotterySequenceGeneratorSetup.cs" />
     <Compile Include="Includes\Model\Reports\DashboardReportItem.cs" />

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ namespace LottoDataManager.Includes.Utilities
 {
     public class DateTimeConverterUtils
     {
+        public static readonly String DEFAULT_GLOBALIZATION = "en-PH";
         public static readonly String DATE_FORMAT_LONG = "MMMM dd, yyyy - dddd";
         public static readonly String STANDARD_DATE_FORMAT = "yyyy-MM-dd";
         public static readonly String STANDARD_DATE_FORMAT_DFLT_TIME_ZERO = "yyyy-MM-dd 00:00:00.0";
@@ -48,6 +50,10 @@ namespace LottoDataManager.Includes.Utilities
         public static DateTime GetDefaultFilterDateTo()
         {
             return DateTime.Now.AddYears(1);
+        }
+        public static DateTime GetDateTimeInstance(String dateTimeValue,String dateTimeFormat)
+        {
+            return DateTime.ParseExact(dateTimeValue, dateTimeFormat, new CultureInfo(DEFAULT_GLOBALIZATION));
         }
     }
 }

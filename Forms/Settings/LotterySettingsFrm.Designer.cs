@@ -30,18 +30,19 @@ namespace LottoDataManager.Forms
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Configurations");
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Lottery Outlet");
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Lottery Winning Prizes/Amount");
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Lottery Sequence Generator");
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Lottery Schedule");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Configurations");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Lottery Outlet");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Lottery Winning Prizes/Amount");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Lottery Sequence Generator");
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Lottery Schedule");
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Other Options");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LotterySettingsFrm));
             this.panelMainTop = new System.Windows.Forms.Panel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.mainMenuTreeView = new System.Windows.Forms.TreeView();
             this.imageListForTreeView = new System.Windows.Forms.ImageList(this.components);
             this.mainTabControl = new System.Windows.Forms.TabControl();
-            this.lotteryConfig = new System.Windows.Forms.TabPage();
+            this.lotteryConfigTabPage = new System.Windows.Forms.TabPage();
             this.btnConfigSave = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.txtConfigNotes = new System.Windows.Forms.TextBox();
@@ -105,6 +106,14 @@ namespace LottoDataManager.Forms
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.cmbLotSchedLotteries = new System.Windows.Forms.ComboBox();
             this.btnLotSchedSave = new System.Windows.Forms.Button();
+            this.lotteryOptionsTabPage = new System.Windows.Forms.TabPage();
+            this.btnSaveOtherOptions = new System.Windows.Forms.Button();
+            this.gbLottoBuyCutOff = new System.Windows.Forms.GroupBox();
+            this.lblNotifyDesc = new System.Windows.Forms.Label();
+            this.lblNotify = new System.Windows.Forms.Label();
+            this.lblCutoff = new System.Windows.Forms.Label();
+            this.numNotify = new System.Windows.Forms.NumericUpDown();
+            this.dtCutoffTime = new System.Windows.Forms.DateTimePicker();
             this.mainPanelBottom = new System.Windows.Forms.Panel();
             this.btnExit = new System.Windows.Forms.Button();
             this.panelMainTop.SuspendLayout();
@@ -113,7 +122,7 @@ namespace LottoDataManager.Forms
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.mainTabControl.SuspendLayout();
-            this.lotteryConfig.SuspendLayout();
+            this.lotteryConfigTabPage.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.lotteryOutletTabPage.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -133,6 +142,9 @@ namespace LottoDataManager.Forms
             this.lotterySchedTabPage.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.lotteryOptionsTabPage.SuspendLayout();
+            this.gbLottoBuyCutOff.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numNotify)).BeginInit();
             this.mainPanelBottom.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -175,31 +187,36 @@ namespace LottoDataManager.Forms
             this.mainMenuTreeView.ItemHeight = 40;
             this.mainMenuTreeView.Location = new System.Drawing.Point(0, 0);
             this.mainMenuTreeView.Name = "mainMenuTreeView";
-            treeNode6.ImageKey = "config_folders_32px.png";
-            treeNode6.Name = "nodeConfig";
-            treeNode6.SelectedImageKey = "config_folders_32px.png";
-            treeNode6.Text = "Configurations";
-            treeNode7.Name = "nodeLottoOutlet";
-            treeNode7.SelectedImageKey = "outlet_32px.png";
-            treeNode7.Text = "Lottery Outlet";
-            treeNode8.ImageIndex = 1;
-            treeNode8.Name = "nodeLotteryWinComb";
-            treeNode8.SelectedImageKey = "money_32px.png";
-            treeNode8.Text = "Lottery Winning Prizes/Amount";
-            treeNode9.ImageKey = "Star5_32x.png";
-            treeNode9.Name = "nodeLottoSeqGen";
-            treeNode9.SelectedImageKey = "Star5_32x.png";
-            treeNode9.Text = "Lottery Sequence Generator";
-            treeNode10.ImageKey = "schedule_32px.png";
-            treeNode10.Name = "nodeLottoSched";
-            treeNode10.SelectedImageKey = "schedule_32px.png";
-            treeNode10.Text = "Lottery Schedule";
+            treeNode1.ImageKey = "config_folders_32px.png";
+            treeNode1.Name = "nodeConfig";
+            treeNode1.SelectedImageKey = "config_folders_32px.png";
+            treeNode1.Text = "Configurations";
+            treeNode2.Name = "nodeLottoOutlet";
+            treeNode2.SelectedImageKey = "outlet_32px.png";
+            treeNode2.Text = "Lottery Outlet";
+            treeNode3.ImageIndex = 1;
+            treeNode3.Name = "nodeLotteryWinComb";
+            treeNode3.SelectedImageKey = "money_32px.png";
+            treeNode3.Text = "Lottery Winning Prizes/Amount";
+            treeNode4.ImageKey = "Star5_32x.png";
+            treeNode4.Name = "nodeLottoSeqGen";
+            treeNode4.SelectedImageKey = "Star5_32x.png";
+            treeNode4.Text = "Lottery Sequence Generator";
+            treeNode5.ImageKey = "schedule_32px.png";
+            treeNode5.Name = "nodeLottoSched";
+            treeNode5.SelectedImageKey = "schedule_32px.png";
+            treeNode5.Text = "Lottery Schedule";
+            treeNode6.ImageKey = "others_32px.png";
+            treeNode6.Name = "nodeOthers";
+            treeNode6.SelectedImageKey = "others_32px.png";
+            treeNode6.Text = "Other Options";
             this.mainMenuTreeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode6,
-            treeNode7,
-            treeNode8,
-            treeNode9,
-            treeNode10});
+            treeNode1,
+            treeNode2,
+            treeNode3,
+            treeNode4,
+            treeNode5,
+            treeNode6});
             this.mainMenuTreeView.SelectedImageIndex = 0;
             this.mainMenuTreeView.ShowRootLines = false;
             this.mainMenuTreeView.Size = new System.Drawing.Size(268, 436);
@@ -217,14 +234,16 @@ namespace LottoDataManager.Forms
             this.imageListForTreeView.Images.SetKeyName(2, "schedule_32px.png");
             this.imageListForTreeView.Images.SetKeyName(3, "Star5_32x.png");
             this.imageListForTreeView.Images.SetKeyName(4, "config_folders_32px.png");
+            this.imageListForTreeView.Images.SetKeyName(5, "others_32px.png");
             // 
             // mainTabControl
             // 
-            this.mainTabControl.Controls.Add(this.lotteryConfig);
+            this.mainTabControl.Controls.Add(this.lotteryConfigTabPage);
             this.mainTabControl.Controls.Add(this.lotteryOutletTabPage);
             this.mainTabControl.Controls.Add(this.lotteryWinPrizeTabPage);
             this.mainTabControl.Controls.Add(this.lotterySeqGenTabPage);
             this.mainTabControl.Controls.Add(this.lotterySchedTabPage);
+            this.mainTabControl.Controls.Add(this.lotteryOptionsTabPage);
             this.mainTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mainTabControl.Location = new System.Drawing.Point(0, 0);
             this.mainTabControl.Multiline = true;
@@ -234,16 +253,16 @@ namespace LottoDataManager.Forms
             this.mainTabControl.TabIndex = 0;
             this.mainTabControl.TabStop = false;
             // 
-            // lotteryConfig
+            // lotteryConfigTabPage
             // 
-            this.lotteryConfig.Controls.Add(this.btnConfigSave);
-            this.lotteryConfig.Controls.Add(this.groupBox4);
-            this.lotteryConfig.Location = new System.Drawing.Point(4, 25);
-            this.lotteryConfig.Name = "lotteryConfig";
-            this.lotteryConfig.Size = new System.Drawing.Size(789, 407);
-            this.lotteryConfig.TabIndex = 4;
-            this.lotteryConfig.Text = "Configurations";
-            this.lotteryConfig.UseVisualStyleBackColor = true;
+            this.lotteryConfigTabPage.Controls.Add(this.btnConfigSave);
+            this.lotteryConfigTabPage.Controls.Add(this.groupBox4);
+            this.lotteryConfigTabPage.Location = new System.Drawing.Point(4, 25);
+            this.lotteryConfigTabPage.Name = "lotteryConfigTabPage";
+            this.lotteryConfigTabPage.Size = new System.Drawing.Size(789, 407);
+            this.lotteryConfigTabPage.TabIndex = 4;
+            this.lotteryConfigTabPage.Text = "Configurations";
+            this.lotteryConfigTabPage.UseVisualStyleBackColor = true;
             // 
             // btnConfigSave
             // 
@@ -990,6 +1009,106 @@ namespace LottoDataManager.Forms
             this.btnLotSchedSave.UseVisualStyleBackColor = true;
             this.btnLotSchedSave.Click += new System.EventHandler(this.btnLotSchedSave_Click);
             // 
+            // lotteryOptionsTabPage
+            // 
+            this.lotteryOptionsTabPage.Controls.Add(this.btnSaveOtherOptions);
+            this.lotteryOptionsTabPage.Controls.Add(this.gbLottoBuyCutOff);
+            this.lotteryOptionsTabPage.Location = new System.Drawing.Point(4, 25);
+            this.lotteryOptionsTabPage.Name = "lotteryOptionsTabPage";
+            this.lotteryOptionsTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.lotteryOptionsTabPage.Size = new System.Drawing.Size(789, 407);
+            this.lotteryOptionsTabPage.TabIndex = 5;
+            this.lotteryOptionsTabPage.Text = "Other Options";
+            this.lotteryOptionsTabPage.UseVisualStyleBackColor = true;
+            // 
+            // btnSaveOtherOptions
+            // 
+            this.btnSaveOtherOptions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSaveOtherOptions.Image = global::LottoDataManager.Properties.Resources.save_v1_32;
+            this.btnSaveOtherOptions.Location = new System.Drawing.Point(602, 339);
+            this.btnSaveOtherOptions.Name = "btnSaveOtherOptions";
+            this.btnSaveOtherOptions.Size = new System.Drawing.Size(179, 62);
+            this.btnSaveOtherOptions.TabIndex = 5;
+            this.btnSaveOtherOptions.Text = "Save changes";
+            this.btnSaveOtherOptions.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnSaveOtherOptions.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSaveOtherOptions.UseVisualStyleBackColor = true;
+            this.btnSaveOtherOptions.Click += new System.EventHandler(this.btnSaveOtherOptions_Click);
+            // 
+            // gbLottoBuyCutOff
+            // 
+            this.gbLottoBuyCutOff.Controls.Add(this.lblNotifyDesc);
+            this.gbLottoBuyCutOff.Controls.Add(this.lblNotify);
+            this.gbLottoBuyCutOff.Controls.Add(this.lblCutoff);
+            this.gbLottoBuyCutOff.Controls.Add(this.numNotify);
+            this.gbLottoBuyCutOff.Controls.Add(this.dtCutoffTime);
+            this.gbLottoBuyCutOff.Dock = System.Windows.Forms.DockStyle.Top;
+            this.gbLottoBuyCutOff.Location = new System.Drawing.Point(3, 3);
+            this.gbLottoBuyCutOff.Name = "gbLottoBuyCutOff";
+            this.gbLottoBuyCutOff.Size = new System.Drawing.Size(783, 132);
+            this.gbLottoBuyCutOff.TabIndex = 0;
+            this.gbLottoBuyCutOff.TabStop = false;
+            this.gbLottoBuyCutOff.Text = "Lotto Ticketing Selling Cut Off Time";
+            // 
+            // lblNotifyDesc
+            // 
+            this.lblNotifyDesc.AutoSize = true;
+            this.lblNotifyDesc.Location = new System.Drawing.Point(32, 93);
+            this.lblNotifyDesc.Name = "lblNotifyDesc";
+            this.lblNotifyDesc.Size = new System.Drawing.Size(369, 17);
+            this.lblNotifyDesc.TabIndex = 4;
+            this.lblNotifyDesc.Text = "*** Notify the user the total minutes before the cutoff time.";
+            // 
+            // lblNotify
+            // 
+            this.lblNotify.AutoSize = true;
+            this.lblNotify.Location = new System.Drawing.Point(7, 68);
+            this.lblNotify.Name = "lblNotify";
+            this.lblNotify.Size = new System.Drawing.Size(138, 17);
+            this.lblNotify.TabIndex = 3;
+            this.lblNotify.Text = "Notify before Cutoff: ";
+            // 
+            // lblCutoff
+            // 
+            this.lblCutoff.AutoSize = true;
+            this.lblCutoff.Location = new System.Drawing.Point(7, 35);
+            this.lblCutoff.Name = "lblCutoff";
+            this.lblCutoff.Size = new System.Drawing.Size(92, 17);
+            this.lblCutoff.TabIndex = 2;
+            this.lblCutoff.Text = "Cut off Time: ";
+            // 
+            // numNotify
+            // 
+            this.numNotify.Location = new System.Drawing.Point(160, 68);
+            this.numNotify.Maximum = new decimal(new int[] {
+            600,
+            0,
+            0,
+            0});
+            this.numNotify.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numNotify.Name = "numNotify";
+            this.numNotify.Size = new System.Drawing.Size(120, 22);
+            this.numNotify.TabIndex = 1;
+            this.numNotify.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // dtCutoffTime
+            // 
+            this.dtCutoffTime.CustomFormat = "hh:mm tt";
+            this.dtCutoffTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtCutoffTime.Location = new System.Drawing.Point(160, 35);
+            this.dtCutoffTime.Name = "dtCutoffTime";
+            this.dtCutoffTime.ShowUpDown = true;
+            this.dtCutoffTime.Size = new System.Drawing.Size(120, 22);
+            this.dtCutoffTime.TabIndex = 0;
+            // 
             // mainPanelBottom
             // 
             this.mainPanelBottom.Controls.Add(this.btnExit);
@@ -1035,7 +1154,7 @@ namespace LottoDataManager.Forms
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.mainTabControl.ResumeLayout(false);
-            this.lotteryConfig.ResumeLayout(false);
+            this.lotteryConfigTabPage.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.lotteryOutletTabPage.ResumeLayout(false);
@@ -1060,6 +1179,10 @@ namespace LottoDataManager.Forms
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
+            this.lotteryOptionsTabPage.ResumeLayout(false);
+            this.gbLottoBuyCutOff.ResumeLayout(false);
+            this.gbLottoBuyCutOff.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numNotify)).EndInit();
             this.mainPanelBottom.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -1128,7 +1251,7 @@ namespace LottoDataManager.Forms
         private System.Windows.Forms.CheckBox chkbLotSchedWed;
         private System.Windows.Forms.CheckBox chkbLotSchedTue;
         private System.Windows.Forms.CheckBox chkbLotSchedMon;
-        private System.Windows.Forms.TabPage lotteryConfig;
+        private System.Windows.Forms.TabPage lotteryConfigTabPage;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Button btnConfigSave;
         private System.Windows.Forms.LinkLabel lnkLblConfigDB;
@@ -1138,5 +1261,13 @@ namespace LottoDataManager.Forms
         private System.Windows.Forms.TextBox txtConfigFolderML;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtConfigNotes;
+        private System.Windows.Forms.TabPage lotteryOptionsTabPage;
+        private System.Windows.Forms.GroupBox gbLottoBuyCutOff;
+        private System.Windows.Forms.DateTimePicker dtCutoffTime;
+        private System.Windows.Forms.Button btnSaveOtherOptions;
+        private System.Windows.Forms.Label lblCutoff;
+        private System.Windows.Forms.NumericUpDown numNotify;
+        private System.Windows.Forms.Label lblNotify;
+        private System.Windows.Forms.Label lblNotifyDesc;
     }
 }
