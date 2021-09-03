@@ -462,7 +462,7 @@ namespace LottoDataManager.Forms
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(6, 76);
+            this.label5.Location = new System.Drawing.Point(6, 78);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(121, 17);
             this.label5.TabIndex = 7;
@@ -484,7 +484,7 @@ namespace LottoDataManager.Forms
             this.lblNextDrawDate.AutoSize = true;
             this.lblNextDrawDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNextDrawDate.ForeColor = System.Drawing.Color.Tomato;
-            this.lblNextDrawDate.Location = new System.Drawing.Point(113, 49);
+            this.lblNextDrawDate.Location = new System.Drawing.Point(118, 49);
             this.lblNextDrawDate.Name = "lblNextDrawDate";
             this.lblNextDrawDate.Size = new System.Drawing.Size(206, 18);
             this.lblNextDrawDate.TabIndex = 5;
@@ -494,7 +494,7 @@ namespace LottoDataManager.Forms
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(5, 50);
+            this.label4.Location = new System.Drawing.Point(5, 52);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(114, 17);
             this.label4.TabIndex = 4;

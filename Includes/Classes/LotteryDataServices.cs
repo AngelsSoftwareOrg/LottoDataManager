@@ -98,7 +98,7 @@ namespace LottoDataManager.Includes.Classes
         }
         public DateTime GetNextDrawDate()
         {
-            bool isPastCutoff = this.userSetting.IsPastTicketSellingCutoffTime(GetTicketCutoffTime());
+            bool isPastCutoff = IsPastTicketSellingCutoffTime();
             DateTime basisDate = DateTime.Now;
             if (isPastCutoff) basisDate = basisDate.AddDays(1);
             return lotteryDataDerivation.GetNextDrawDate(basisDate);
@@ -111,8 +111,13 @@ namespace LottoDataManager.Includes.Classes
         {
             this.userSetting.SaveTicketCutoffTime(newCutoffTime);
         }
-        public DateTime GetTicketCutoffTime()
+        public DateTime GetTicketCutoffTime(bool useDateToday=false)
         {
+            if(useDateToday)
+            {
+                return this.userSetting.GetTicketCutoffTimeUsingCurrentDate();
+            }
+
             return this.userSetting.GetTicketCutoffTime();
         }
         public int GetTicketCutoffNotifyTime()
@@ -122,6 +127,30 @@ namespace LottoDataManager.Includes.Classes
         public void SaveTicketCutoffNotifyTime(int newValue)
         {
             this.userSetting.SaveTicketCutoffNotifyTime(newValue);
+        }
+        public bool IsUserToNotifyTicketCutoffIsNear()
+        {
+            int totalMinutesBeforeCutoff = GetTicketCutoffNotifyTime();
+            DateTime cutoffTime = GetTicketCutoffTime(true);
+
+            if (this.userSetting.IsPastTicketSellingCutoffTime(cutoffTime)) return false;
+
+            DateTime dateNow = DateTime.Now;
+            TimeSpan ts = cutoffTime - dateNow;
+
+            //DEBUGGING
+            //Console.WriteLine("No. of Minutes (Difference) = {0}, {1}, {2}", ts.TotalMinutes, totalMinutesBeforeCutoff, (totalMinutesBeforeCutoff > ts.TotalMinutes));
+
+            if (totalMinutesBeforeCutoff > ts.TotalMinutes) return true;
+            return false;
+        }
+        public String GetTicketCutOffTimeOnly()
+        {
+            return GetTicketCutoffTime().ToString(DateTimeConverterUtils.DT_TICKET_CUTOFF_TIME_FORMAT_TIME_ONLY_FOR_UI).ToUpper();
+        }
+        public bool IsPastTicketSellingCutoffTime()
+        {
+            return this.userSetting.IsPastTicketSellingCutoffTime(GetTicketCutoffTime(true));
         }
         public String GetNextDrawDateFormatted()
         {

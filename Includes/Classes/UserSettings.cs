@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ namespace LottoDataManager.Includes.Classes
 {
     public class UserSettings
     {
+        
         private UserSettingDao userSettingDao;
         public UserSettings()
         {
@@ -78,6 +80,13 @@ namespace LottoDataManager.Includes.Classes
 
             return UserSettingsConfig.ConvertCutoffTimeToDateTime(currentCutOffTime);
         }
+        public DateTime GetTicketCutoffTimeUsingCurrentDate()
+        {
+            return DateTime.ParseExact(DateTime.Now.ToString(DateTimeConverterUtils.STANDARD_DATE_FORMAT) + " " +
+                                    GetTicketCutoffTime().ToString(DateTimeConverterUtils.STANDARD_TIME_FORMAT),
+                DateTimeConverterUtils.STANDARD_DATE_TIME_FORMAT,
+                new CultureInfo(DateTimeConverterUtils.DEFAULT_GLOBALIZATION));
+        }
         public int GetTicketCutoffNotifyTime()
         {
             String currentCutOffNotifyTime = this.userSettingDao.GetSetting(UserSettingsConfig.CFG_TICKETING_CUTOFF_NOTIFY);
@@ -95,8 +104,7 @@ namespace LottoDataManager.Includes.Classes
         public bool IsPastTicketSellingCutoffTime(DateTime cutOffTime)
         {
             long timenow = long.Parse(DateTime.Now.ToString("yyyyMMddHHmmss"));
-            long cutoffTime = long.Parse(DateTime.Now.ToString("yyyyMMdd") + cutOffTime.ToString("HHmm00"));
-            Console.WriteLine(timenow + " >= " + cutoffTime + " = " + ((timenow >= cutoffTime)));
+            long cutoffTime = long.Parse(DateTime.Now.ToString("yyyyMMdd") + cutOffTime.ToString(DateTimeConverterUtils.DT_TICKET_CUTOFF_TIME_FORMAT_TIME_ONLY));
             return (timenow >= cutoffTime);
         }
         private void ValidateConfigDetails(String configName, String configValue)

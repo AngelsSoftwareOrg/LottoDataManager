@@ -15,6 +15,10 @@ namespace LottoDataManager.Includes.Utilities
         public static readonly String STANDARD_DATE_FORMAT = "yyyy-MM-dd";
         public static readonly String STANDARD_DATE_FORMAT_DFLT_TIME_ZERO = "yyyy-MM-dd 00:00:00.0";
         public static readonly String STANDARD_DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
+        public static readonly String STANDARD_TIME_FORMAT = "HH:mm:ss";
+        public static readonly String DT_TICKET_CUTOFF_TIME_FORMAT_TIME_ONLY = "HHmm00";
+        public static readonly String DT_TICKET_CUTOFF_TIME_FORMAT_TIME_ONLY_FOR_UI = "hh:mm tt";
+
         public static String ConvertToFormat(DateTime dateSource, String outputFormat)
         {
             return dateSource.ToString(outputFormat);
