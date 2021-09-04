@@ -47,8 +47,8 @@ namespace LottoDataManager.Forms
                 this.lotteryDataServices.LotteryDetails.Description);
             this.tabPageDelimiters.Text = ResourcesUtils.GetMessage("abtmlt_form_msg_2");
             this.tabPageClick.Text = ResourcesUtils.GetMessage("abtmlt_form_msg_3");
-            this.textBoxInstruction.Text = String.Format(ResourcesUtils.GetMessage("abtmlt_form_msg_4"), 
-                    lotteryTicketPanel.GetGameDigitCount(),Environment.NewLine, Environment.NewLine, Environment.NewLine);
+            this.textBoxInstruction.Text = ResourcesUtils.GetMessage("abtmlt_form_msg_4", lotteryTicketPanel.GetGameDigitCount().ToString(),
+                Environment.NewLine, Environment.NewLine, Environment.NewLine);
             this.btnAdd.Text = ResourcesUtils.GetMessage("common_btn_save_sequences");
             this.btnExit.Text = ResourcesUtils.GetMessage("common_btn_exit");
             this.groupDetails.Text = ResourcesUtils.GetMessage("abtmlt_form_msg_5");
@@ -64,13 +64,15 @@ namespace LottoDataManager.Forms
             this.label2.Text = ResourcesUtils.GetMessage("abtmlt_form_msg_15");
             this.linkLblClrSelNum.Text = ResourcesUtils.GetMessage("abtmlt_form_msg_16");
             this.groupBoxTicketPanel.Text = ResourcesUtils.GetMessage("abtmlt_form_msg_17");
+            this.lblCutoffTime.Text = ResourcesUtils.GetMessage("abtmlt_form_msg_44");
+            this.lblTicketCutoffTimeValue.Text = this.lotteryDataServices.GetTicketCutOffTimeOnly();
         }
         private void AddBetFrm_Load(object sender, EventArgs e)
         {
             lblGameDesc.Text = lotteryDataServices.LotteryDetails.Description;
             RefreshSelectedDrawDate();
             dtPickPreferredDate.Value = lotteryDataServices.GetNextDrawDate();
-            preSelectedDrawDateOnLoad = dtPickPreferredDate.Value;
+            preSelectedDrawDateOnLoad = DateTime.Now; //dtPickPreferredDate.Value;
             lblDrawDateEvery.Text = lotterySchedule.DrawDateEvery();
             AddSelectedTicketPanelNumber();
             radioBtnNextDrawDate.Checked = true;
@@ -198,10 +200,10 @@ namespace LottoDataManager.Forms
                 MessageBox.Show(msg, ResourcesUtils.GetMessage("abtmlt_form_msg_20"), MessageBoxButtons.OK);
                 DisplayLog(msg);
             }
-
+            DateTime currentDate = DateTime.Now;
             DateTime selectedTargetDate = GetUserSelectedDrawDate();
 
-            if(preSelectedDrawDateOnLoad.Date.CompareTo(selectedTargetDate.Date) ==0 && 
+            if (preSelectedDrawDateOnLoad.Date.CompareTo(selectedTargetDate.Date) == 0 && 
                     this.lotteryDataServices.IsPastTicketSellingCutoffTime())
             {
                 String msg = ResourcesUtils.GetMessage("abtmlt_form_msg_40");

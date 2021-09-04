@@ -138,9 +138,6 @@ namespace LottoDataManager.Includes.Classes
             DateTime dateNow = DateTime.Now;
             TimeSpan ts = cutoffTime - dateNow;
 
-            //DEBUGGING
-            //Console.WriteLine("No. of Minutes (Difference) = {0}, {1}, {2}", ts.TotalMinutes, totalMinutesBeforeCutoff, (totalMinutesBeforeCutoff > ts.TotalMinutes));
-
             if (totalMinutesBeforeCutoff > ts.TotalMinutes) return true;
             return false;
         }

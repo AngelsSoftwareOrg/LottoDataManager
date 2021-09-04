@@ -35,11 +35,18 @@ namespace LottoDataManager.Includes.Utilities
         {
             return RESOURCE_MANAGER.GetString(settingName);
         }
-        public static string GetMessage(String messageName)
+        public static string GetMessage(String messageName, params String[] p)
         {
             String value;
             MESSAGES_DICTIONARY.TryGetValue(messageName, out value);
-            return value.TrimEnd('\r', '\n');
+            value = value.TrimEnd('\r', '\n');
+
+            if (p.Length > 0)
+            {
+                value = String.Format(value, p);
+            }
+
+            return value;
         }
         public static String ApplicationID { get { return GetSetting(RESOURCE_ID_APPLICATION_ID); } }
         public static String SourceDBFileExtension { get { return GetSetting(RESOURCE_ID_DB_SOURCE_FILE_TYPE_EXTENSION); } }

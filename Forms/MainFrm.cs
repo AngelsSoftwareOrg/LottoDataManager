@@ -371,6 +371,17 @@ namespace LottoDataManager
             this.objectLstVwLatestBet.SelectedForeColor = Color.Black;
             this.objectLstVwLatestBet.Refresh();
         }
+        private void objListVwWinningNum_FormatRow(object sender, FormatRowEventArgs e)
+        {
+            LotteryDrawResult result = (LotteryDrawResult)e.Model;
+            if(result.GetWinners() > 0)
+            {
+                e.Item.BackColor = Color.GreenYellow;
+                e.Item.ForeColor = Color.Black;
+            }
+        }
+
+
         #endregion
 
         #region "Status Strip"
@@ -759,6 +770,7 @@ namespace LottoDataManager
             TextRenderer.DrawText(e.Graphics, page.Text, font, paddedBounds, fontColor);
         }
         #endregion
+
 
     }
 }
