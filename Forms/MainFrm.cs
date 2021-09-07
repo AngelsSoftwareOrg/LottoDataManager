@@ -41,6 +41,7 @@ namespace LottoDataManager
         private String LOG_STATUS_MODULE_NAME_FIELD_DETAILS;
         private String LOG_STATUS_MODULE_NAME_WINNING_BETS;
         private String LOG_STATUS_MODULE_NAME_DRAWN_RESULT;
+        private String LOG_STATUS_MODULE_NAME_CLIPBOARD_COPY;
         private int processingLogStatusCtr = 0;
 
         public MainForm()
@@ -103,6 +104,8 @@ namespace LottoDataManager
             this.LOG_STATUS_MODULE_NAME_FIELD_DETAILS = ResourcesUtils.GetMessage("mainf_labels_53");
             this.LOG_STATUS_MODULE_NAME_WINNING_BETS = ResourcesUtils.GetMessage("mainf_labels_54");
             this.LOG_STATUS_MODULE_NAME_DRAWN_RESULT = ResourcesUtils.GetMessage("mainf_labels_55");
+            this.LOG_STATUS_MODULE_NAME_CLIPBOARD_COPY = ResourcesUtils.GetMessage("mainf_labels_56");
+
             AddProcessingStatusLogs(LOG_STATUS_MODULE_NAME_WEBSCRAP, ResourcesUtils.GetMessage("mainf_labels_5"));
 
             ReinitateLotteryServices();
@@ -172,6 +175,23 @@ namespace LottoDataManager
                 };
                 this.olvColWinStamp.AspectToStringConverter = delegate (object rowObject) {
                     return String.Empty;
+                };
+
+                //DASHBOARD TAB GROUP
+                this.olvdbDesc.AspectGetter = delegate (object rowObject) {
+                    if (rowObject == null) return 0;
+                    DashboardReportItem g = (DashboardReportItem)rowObject;
+                    return g.GetDescription();
+                };
+                this.olvdbValue.AspectGetter = delegate (object rowObject) {
+                    if (rowObject == null) return 0;
+                    DashboardReportItem g = (DashboardReportItem)rowObject;
+                    return g.GetValue();
+                };
+                this.olvdbDesc.GroupKeyGetter = delegate (object rowObject) {
+                    if (rowObject == null) return 0;
+                    DashboardReportItem g = (DashboardReportItem)rowObject;
+                    return g.GetGroupKeyName();
                 };
 
                 this.Enabled = false;
@@ -318,7 +338,16 @@ namespace LottoDataManager
                 ShowModifyClaimStatus();
             }
         }
+        #endregion
 
+
+        #region "Tab Dashboard Group"
+        private void RefreshDashboardGroupReport()
+        {
+            this.objLVDashboard.SetObjects(dashboardReport.GetDashboardReport());
+            this.olvdbDesc.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
+            this.olvdbValue.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
+        }
         #endregion
 
         #region "Draw Result"
@@ -427,6 +456,7 @@ namespace LottoDataManager
             RefreshFieldDetails();
             RefreshBetListViewGridContent();
             RefreshDashboardReport();
+            RefreshDashboardGroupReport();
             Application.DoEvents();
         }
         private void linkFilterGoBet_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -480,13 +510,27 @@ namespace LottoDataManager
         }
         private void copySelectedAsLinearCSVToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            StringBuilder sb = new StringBuilder();
-            foreach (LotteryBet bet in objectLstVwLatestBet.SelectedObjects)
+            try
             {
-                if (sb.Length > 0) sb.Append(",");
-                sb.Append(bet.GetGNUFormat());
+                StringBuilder sb = new StringBuilder();
+                foreach (LotteryBet bet in objectLstVwLatestBet.SelectedObjects)
+                {
+                    if (sb.Length > 0) sb.Append(",");
+                    sb.Append(bet.GetGNUFormat());
+                }
+                if (sb.Length > 0)
+                {
+                    Clipboard.SetDataObject(
+                        sb.ToString(), // Text to store in clipboard
+                        false,         // Do not keep after our application exits
+                        10,            // Retry 10 times
+                        100);          // 100 ms delay between retries
+                }
             }
-            if (sb.Length > 0) Clipboard.SetText(sb.ToString());
+            catch (Exception ex)
+            {
+                AddProcessingStatusLogs(LOG_STATUS_MODULE_NAME_CLIPBOARD_COPY, ResourcesUtils.GetMessage("mainf_labels_57", ex.Message));
+            }
         }
         private void objectLstVwLatestBet_DoubleClick(object sender, EventArgs e)
         {
@@ -550,10 +594,14 @@ namespace LottoDataManager
             if (e.LottoWebScrapingStage == LottoWebScrapingStages.FINISH)
             {
                 toolStripBtnDownloadResults.Enabled = true;
-                RefreshWinningNumbersGridContent();
-                RefreshBets();
+                if (e.NewRecordsCount > 0)
+                {
+                    CheckWinningBets();
+                    RefreshWinningNumbersGridContent();
+                    RefreshBets(); //includes RefreshDashboardReport();
+                }
             }
-            Application.DoEvents();
+            //Application.DoEvents();
         }
         #endregion
 

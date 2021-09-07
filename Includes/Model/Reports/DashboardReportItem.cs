@@ -16,5 +16,6 @@ namespace LottoDataManager.Includes.Model.Reports
         Color GetHighlightColor();
         DashboardReportItemActions GetDashboardReportItemActions();
         Color GetFontColor();
+        string GetGroupKeyName();
     }
 }

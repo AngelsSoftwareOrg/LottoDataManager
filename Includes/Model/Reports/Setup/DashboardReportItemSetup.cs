@@ -15,7 +15,7 @@ namespace LottoDataManager.Includes.Model.Reports
         private Color highlightColor;
         private bool isHighlightColor;
         private Color fontColor;
-
+        private String groupKeyName;
 
         private DashboardReportItemActions dashboardReportItemAction;
         public DashboardReportItemSetup()
@@ -33,6 +33,7 @@ namespace LottoDataManager.Includes.Model.Reports
         public bool IsHighlightColor { get => isHighlightColor; set => isHighlightColor = value; }
         public DashboardReportItemActions DashboardReportItemAction { get => dashboardReportItemAction; set => dashboardReportItemAction = value; }
         public Color FontColor { get => fontColor; set => fontColor = value; }
+        public string GroupKeyName { get => groupKeyName; set => groupKeyName = value; }
 
         public string GetDescription()
         {
@@ -57,6 +58,11 @@ namespace LottoDataManager.Includes.Model.Reports
         public Color GetFontColor()
         {
             return FontColor;
+        }
+
+        public string GetGroupKeyName()
+        {
+            return GroupKeyName;
         }
     }
 }

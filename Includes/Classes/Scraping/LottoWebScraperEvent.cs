@@ -14,5 +14,6 @@ namespace LottoDataManager.Includes.Classes.Scraping
         public LottoWebScrapingStages LottoWebScrapingStage { get; set; }
         public int Progress { get; set; }
         public String CustomStatusMessage { get; set; }
+        public int NewRecordsCount { get; set; }
     }
 }
