@@ -15,6 +15,7 @@ namespace LottoDataManager.Includes.Classes.Reports
 {
     public class DashboardReport : ReportAbstract
     {
+
         private List<DashboardReportItemSetup> dashboardReportList = new List<DashboardReportItemSetup>();
         public DashboardReport(LotteryDataServices lotteryDataServices) : base(lotteryDataServices)
         {
@@ -22,6 +23,7 @@ namespace LottoDataManager.Includes.Classes.Reports
         public List<DashboardReportItemSetup> GetDashboardReport()
         {
             dashboardReportList = new List<DashboardReportItemSetup>();
+            dashboardReportList.AddRange(GetLotteryBetsInQueue());
             dashboardReportList.AddRange(GetPreviousDrawDates());
             dashboardReportList.AddRange(GetNextDrawDates());
             dashboardReportList.Add(GetTotalBetsMade());
@@ -95,7 +97,6 @@ namespace LottoDataManager.Includes.Classes.Reports
 
             return dbGroup;
         }
-
         private DashboardReportItemSetup GetTotalBetsMade()
         {
             String key = ResourcesUtils.GetMessage("drpt_how_many_bet_you_made_value");
@@ -114,9 +115,10 @@ namespace LottoDataManager.Includes.Classes.Reports
             DashboardReportItemSetup dshSetup1 = GenModel(ResourcesUtils.GetMessage("drpt_total_claims_to_pick_up"), result[1].ToString());
             if (result[1] > 0)
             {
-                dshSetup1.IsHighlightColor = true;
-                dshSetup1.HighlightColor = Color.GreenYellow;
+                dshSetup1.ReportItemDecoration.IsHighlightColor = true;
+                dshSetup1.ReportItemDecoration.HighlightColor = ReportItemDecoration.COLOR_ATTENTION_HIGHLIGHT;
                 dshSetup1.DashboardReportItemAction = DashboardReportItemActions.OPEN_CLAIM_FORM;
+                dshSetup1.GroupTaskLabel = ResourcesUtils.GetMessage("drpt_total_claims_related_group_lbl_task");
             }
             dshSetup0.GroupKeyName = groupKeyName;
             dshSetup1.GroupKeyName = groupKeyName;
@@ -169,7 +171,7 @@ namespace LottoDataManager.Includes.Classes.Reports
         private DashboardReportItemSetup GetTotalYearsOfBetting()
         {
             String key = ResourcesUtils.GetMessage("drpt_total_years_betting");
-            String value = reportDataServices.GetTotalYearsBetting().ToString();
+            String value = ResourcesUtils.GetMessage("drpt_total_years_betting_value", reportDataServices.GetTotalYearsBetting().ToString());
             DashboardReportItemSetup itm = GenModel(key, value);
             itm.GroupKeyName = ResourcesUtils.GetMessage("drpt_total_money_betted_related");
             return itm;
@@ -223,24 +225,29 @@ namespace LottoDataManager.Includes.Classes.Reports
             double[] resultLastYear = this.reportDataServices.GetMonthlySpending(lastyear);
             double[] resultThisYear = this.reportDataServices.GetMonthlySpending(thisyear);
 
+            DateTime sampleDate = DateTimeConverterUtils.GetYear2011();
+            int dataOrder = 97;
             //monthly
             for (int ctr = 0; ctr < resultLastYear.Length - 1; ctr++)
             {
                 String msg = ResourcesUtils.GetMessage(String.Format("drpt_monthly_spending_{0}", ctr + 1));
+                msg = String.Format(msg, Char.ConvertFromUtf32(dataOrder++), sampleDate.AddMonths(ctr).ToString("MMMM"));
                 String key = String.Format(msg, thisyear, lastyear);
                 String value = String.Format("{0} / {1}", resultThisYear[ctr].ToString("C"), resultLastYear[ctr].ToString("C"));
 
                 DashboardReportItemSetup mntly = GenModel(key, value);
-                mntly.GroupKeyName = ResourcesUtils.GetMessage("drpt_spending_details");
+                mntly.GroupKeyName = ResourcesUtils.GetMessage("drpt_spending_details", thisyear.ToString(), lastyear.ToString());
+                if (resultThisYear[ctr] == 0 && resultLastYear[ctr] == 0) mntly.ReportItemDecoration.FontColor = ReportItemDecoration.COLOR_NO_FOCUS;
                 itemsList.Add(mntly);
             }
 
             //annual
             String msg2 = ResourcesUtils.GetMessage("drpt_annual_spending");
+            msg2 = String.Format(msg2, Char.ConvertFromUtf32(dataOrder++));
             String key2 = String.Format(msg2, thisyear, lastyear);
             String value2 = String.Format("{0} / {1}", resultThisYear[12].ToString("C"), resultLastYear[12].ToString("C"));
             DashboardReportItemSetup mntly1 = GenModel(key2, value2);
-            mntly1.GroupKeyName = ResourcesUtils.GetMessage("drpt_spending_details");
+            mntly1.GroupKeyName = ResourcesUtils.GetMessage("drpt_spending_details", thisyear.ToString(), lastyear.ToString());
             itemsList.Add(mntly1);
 
             return itemsList;
@@ -281,7 +288,7 @@ namespace LottoDataManager.Includes.Classes.Reports
                     String key = String.Format("{0} ({1})", ResourcesUtils.GetMessage("drpt_prev_lottery_sched"), idxLabel++);
                     String value = DateTimeConverterUtils.ConvertToFormat(dateLastXDays, DateTimeConverterUtils.DATE_FORMAT_LONG);
                     DashboardReportItemSetup dshSetup = GenModel(key, value);
-                    dshSetup.FontColor = Color.Gray;
+                    dshSetup.ReportItemDecoration.FontColor = ReportItemDecoration.COLOR_NO_FOCUS;
                     dshSetup.GroupKeyName = ResourcesUtils.GetMessage("drpt_lottery_schedules");
                     itemsList.Add(dshSetup);
                 }
@@ -289,6 +296,33 @@ namespace LottoDataManager.Includes.Classes.Reports
             }
             return itemsList;
         }
+        private List<DashboardReportItemSetup> GetLotteryBetsInQueue()
+        {
+            List<DashboardReportItemSetup> itemsList = new List<DashboardReportItemSetup>();
+            LotteryDetails lotteryDetails = LotteryDataServices.LotteryDetails;
+            foreach (Lottery lottery in LotteryDataServices.GetLotteries())
+            {
+                if(lotteryDetails.GameMode != lottery.GetGameMode())
+                {
+                    List<LotteryBet> lotteryBetList = LotteryDataServices.GetLotterybetsQueued(lottery.GetGameMode());
+                    if (lotteryBetList.Count <= 0) continue;
+                    foreach(LotteryBet bet in lotteryBetList)
+                    {
+                        String key = bet.GetTargetDrawDateFormatted();
+                        String value = bet.GetGNUFormat();
+                        DashboardReportItemSetup dshSetup = GenModel(key, value);
+                        dshSetup.DashboardReportItemAction = DashboardReportItemActions.OPEN_LOTTERY_GAME;
+                        dshSetup.Tag = lottery.GetGameMode();
+                        dshSetup.ReportItemDecoration.FontColor = ReportItemDecoration.COLOR_LINK_CLICKABLE;
+                        dshSetup.GroupTaskLabel = ResourcesUtils.GetMessage("drpt_lot_bet_group_lbl_task");
+                        dshSetup.GroupKeyName = ResourcesUtils.GetMessage("drpt_lot_bet_group_lbl", lottery.GetDescription(), lotteryBetList.Count.ToString());
+                        itemsList.Add(dshSetup);
+                    }
+                }
+            }
+            return itemsList;
+        }
+
         public String ReportTitle
         {
             get

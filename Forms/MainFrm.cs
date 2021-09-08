@@ -57,7 +57,6 @@ namespace LottoDataManager
             this.label5.Text = ResourcesUtils.GetMessage("mainf_labels_4");
             
             this.toolStripProcessingLogs.Text = ResourcesUtils.GetMessage("mainf_labels_46");
-            this.tabPage1.Text = ResourcesUtils.GetMessage("mainf_labels_6");
             this.groupBox1.Text = ResourcesUtils.GetMessage("mainf_labels_7");
             this.groupBox2.Text = ResourcesUtils.GetMessage("mainf_labels_8");
             this.label2.Text = ResourcesUtils.GetMessage("mainf_labels_9");
@@ -130,7 +129,7 @@ namespace LottoDataManager
             lblLifetimeWinnins.Text = "";
             lblNextDrawDate.Text = "";
             lblWinningsThisMonth.Text = "";
-            listViewOtherDetails.Items.Clear();
+            objLVDashboard.SetObjects(null);
             objectLstVwLatestBet.SetObjects(null);
             objListVwWinningNum.SetObjects(null);
         }
@@ -193,6 +192,15 @@ namespace LottoDataManager
                     DashboardReportItem g = (DashboardReportItem)rowObject;
                     return g.GetGroupKeyName();
                 };
+                this.olvdbDesc.GroupFormatter = (/*OLVGroup*/ group, /*GroupingParameters*/ parms) =>
+                {
+                    if (group.Items.Count > 0)
+                    {
+                        DashboardReportItem item = (DashboardReportItem) group.Items[0].RowObject;
+                        group.Task = item.GetGroupTaskLabel();
+                    }
+                };
+                
 
                 this.Enabled = false;
                 ClearAllForms();
@@ -258,17 +266,6 @@ namespace LottoDataManager
                 MessageBox.Show(e.Message);
             }
         }
-        private void RefreshDrawResultListViewGridContent()
-        {
-            this.olvColBetDrawDate.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
-            this.olvColBetNum1.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
-            this.olvColBetNum2.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
-            this.olvColBetNum3.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
-            this.olvColBetNum4.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
-            this.olvColBetNum5.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
-            this.olvColBetNum6.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
-            this.olvColBetResult.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
-        }
         private void RefreshFieldDetails()
         {
             //Game642 Mode
@@ -299,33 +296,48 @@ namespace LottoDataManager
             this.olvColumnTargetFilter = tmpOLVColumns.ToArray();
             return this.olvColumnTargetFilter;
         }
-        private void RefreshDashboardReport()
+        #endregion
+
+        #region "Tab Dashboard Group List View"
+        private void RefreshDashboardGroupReport()
         {
-            listViewOtherDetails.BeginUpdate();
-            listViewOtherDetails.Items.Clear();
-            foreach (DashboardReportItem dpitm in dashboardReport.GetDashboardReport())
-            {
-                ListViewItem itm = new ListViewItem(dpitm.GetDescription());
-                itm.SubItems.Add(dpitm.GetValue());
-                itm.Tag = dpitm;
-                if (dpitm.IsHighlight()) itm.BackColor = dpitm.GetHighlightColor();
-                if (dpitm.GetFontColor() != Color.Black) itm.ForeColor = dpitm.GetFontColor();
-                listViewOtherDetails.Items.Add(itm);
-            }
-            listViewOtherDetails.EndUpdate();
+            this.objLVDashboard.SetObjects(dashboardReport.GetDashboardReport());
+            this.olvdbDesc.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
+            this.olvdbValue.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
-        private void listViewOtherDetails_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void objLVDashboard_FormatRow(object sender, FormatRowEventArgs e)
         {
-            ListViewHitTestInfo info = listViewOtherDetails.HitTest(e.X, e.Y);
+            if (e == null) return;
+            DashboardReportItem item = (DashboardReportItem)e.Model;
+            if (item.GetReportItemDecoration().IsHighlightColor)
+            {
+                e.Item.BackColor = item.GetReportItemDecoration().HighlightColor;
+            }
+            e.UseCellFormatEvents = true;
+        }
+        private void objLVDashboard_FormatCell(object sender, FormatCellEventArgs e)
+        {
+            if (e == null) return;
+            DashboardReportItem item = (DashboardReportItem)e.Model;
+            if (e.SubItem.ForeColor != item.GetReportItemDecoration().FontColor){
+                e.SubItem.ForeColor = item.GetReportItemDecoration().FontColor;
+            }
+
+            e.Item.Text = "  " + e.Item.Text;
+        }
+        private void objLVDashboard_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+
+            ListViewHitTestInfo info = objLVDashboard.HitTest(e.X, e.Y);
             ListViewItem item = info.Item;
 
-            if (item == null)
+            if (objLVDashboard.SelectedItems.Count > 1)
             {
-                this.listViewOtherDetails.SelectedItems.Clear();
+                this.objLVDashboard.SelectedItems.Clear();
                 return;
             }
 
-            DashboardReportItem rptItem = (DashboardReportItem)item.Tag;
+            DashboardReportItem rptItem = (DashboardReportItem)objLVDashboard.SelectedItem.RowObject;
             if (rptItem.GetDashboardReportItemActions() != DashboardReportItemActions.NONE)
             {
                 ActionableDashboardReportItem(rptItem);
@@ -336,17 +348,20 @@ namespace LottoDataManager
             if (rptItem.GetDashboardReportItemActions() == DashboardReportItemActions.OPEN_CLAIM_FORM)
             {
                 ShowModifyClaimStatus();
+            } 
+            else if (rptItem.GetDashboardReportItemActions() == DashboardReportItemActions.OPEN_LOTTERY_GAME)
+            {
+                GameMode gameMode = (GameMode) rptItem.GetTag();
+                OpenLotteryGame(gameMode);
             }
         }
-        #endregion
-
-
-        #region "Tab Dashboard Group"
-        private void RefreshDashboardGroupReport()
+        private void objLVDashboard_GroupTaskClicked(object sender, GroupTaskClickedEventArgs e)
         {
-            this.objLVDashboard.SetObjects(dashboardReport.GetDashboardReport());
-            this.olvdbDesc.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
-            this.olvdbValue.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
+            if (e.Group.Items.Count > 0)
+            {
+                DashboardReportItem item = (DashboardReportItem)e.Group.Items[0].RowObject;
+                ActionableDashboardReportItem(item);
+            }
         }
         #endregion
 
@@ -402,6 +417,7 @@ namespace LottoDataManager
         }
         private void objListVwWinningNum_FormatRow(object sender, FormatRowEventArgs e)
         {
+            if (e.Model == null) return;
             LotteryDrawResult result = (LotteryDrawResult)e.Model;
             if(result.GetWinners() > 0)
             {
@@ -409,7 +425,6 @@ namespace LottoDataManager
                 e.Item.ForeColor = Color.Black;
             }
         }
-
 
         #endregion
 
@@ -455,7 +470,6 @@ namespace LottoDataManager
         {
             RefreshFieldDetails();
             RefreshBetListViewGridContent();
-            RefreshDashboardReport();
             RefreshDashboardGroupReport();
             Application.DoEvents();
         }
@@ -623,16 +637,20 @@ namespace LottoDataManager
                 ClearAllForms();
                 ToolStripMenuItem lottoGameMenu = (ToolStripMenuItem)sender;
                 Lottery lottery = (Lottery)lottoGameMenu.Tag;
-                this.lotteryDetails = new LotteryDetails(lottery.GetGameMode());
-                ReinitateLotteryServices();
-                Application.DoEvents();
-                InitializesFormContent();
-                this.lotteryDataServices.SaveLastOpenedLottery();
+                OpenLotteryGame(lottery.GetGameMode());
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+        private void OpenLotteryGame(GameMode gameMode)
+        {
+            this.lotteryDetails = new LotteryDetails(gameMode);
+            ReinitateLotteryServices();
+            Application.DoEvents();
+            InitializesFormContent();
+            this.lotteryDataServices.SaveLastOpenedLottery();
         }
         private void checkLotteryUpdatesToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -817,6 +835,10 @@ namespace LottoDataManager
             paddedBounds.Offset(1, yOffset);
             TextRenderer.DrawText(e.Graphics, page.Text, font, paddedBounds, fontColor);
         }
+
+
+
+
         #endregion
 
 

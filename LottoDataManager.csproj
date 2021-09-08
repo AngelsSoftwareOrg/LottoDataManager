@@ -345,6 +345,7 @@
     <Compile Include="Includes\Model\Game\Game649.cs" />
     <Compile Include="Includes\Model\Game\Game645.cs" />
     <Compile Include="Includes\Model\Game\GameFactory.cs" />
+    <Compile Include="Includes\Model\Reports\Setup\ReportItemDecoration.cs" />
     <Compile Include="Includes\Model\Structs\DashboardReportItemActions.cs" />
     <Compile Include="Includes\Utilities\AppSettings.cs" />
     <Compile Include="Includes\Database\DAO\Interface\LotteryScheduleDao.cs" />

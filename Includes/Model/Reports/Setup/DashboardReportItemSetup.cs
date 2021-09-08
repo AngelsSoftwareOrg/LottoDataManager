@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LottoDataManager.Includes.Model.Reports.Setup;
 using LottoDataManager.Includes.Model.Structs;
 
 namespace LottoDataManager.Includes.Model.Reports
@@ -12,40 +13,29 @@ namespace LottoDataManager.Includes.Model.Reports
     {
         private String value;
         private String description;
-        private Color highlightColor;
-        private bool isHighlightColor;
-        private Color fontColor;
+        private ReportItemDecoration reportItemDecoration;
         private String groupKeyName;
-
         private DashboardReportItemActions dashboardReportItemAction;
+        private Object tag;
+        private String groupTaskLabel;
+
         public DashboardReportItemSetup()
         {
             Value = "";
             description = "";
-            HighlightColor = Color.Empty;
-            isHighlightColor = false;
-            FontColor = Color.Black;
             DashboardReportItemAction = DashboardReportItemActions.NONE;
+            reportItemDecoration = new ReportItemDecoration();
         }
         public string Value { get => value; set => this.value = value; }
         public string Description { get => description; set => description = value; }
-        public Color HighlightColor { get => highlightColor; set => highlightColor = value; }
-        public bool IsHighlightColor { get => isHighlightColor; set => isHighlightColor = value; }
         public DashboardReportItemActions DashboardReportItemAction { get => dashboardReportItemAction; set => dashboardReportItemAction = value; }
-        public Color FontColor { get => fontColor; set => fontColor = value; }
         public string GroupKeyName { get => groupKeyName; set => groupKeyName = value; }
-
+        public ReportItemDecoration ReportItemDecoration { get => reportItemDecoration; set => reportItemDecoration = value; }
+        public object Tag { get => tag; set => tag = value; }
+        public string GroupTaskLabel { get => groupTaskLabel; set => groupTaskLabel = value; }
         public string GetDescription()
         {
             return Description;
-        }
-        public Color GetHighlightColor()
-        {
-            return highlightColor;
-        }
-        public bool IsHighlight()
-        {
-            return IsHighlightColor;
         }
         public string GetValue()
         {
@@ -55,14 +45,21 @@ namespace LottoDataManager.Includes.Model.Reports
         {
             return DashboardReportItemAction;
         }
-        public Color GetFontColor()
-        {
-            return FontColor;
-        }
-
         public string GetGroupKeyName()
         {
             return GroupKeyName;
+        }
+        public ReportItemDecoration GetReportItemDecoration()
+        {
+            return ReportItemDecoration;
+        }
+        public object GetTag()
+        {
+            return Tag;
+        }
+        public string GetGroupTaskLabel()
+        {
+            return GroupTaskLabel;
         }
     }
 }

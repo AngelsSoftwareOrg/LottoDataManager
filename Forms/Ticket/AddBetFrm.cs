@@ -166,7 +166,7 @@ namespace LottoDataManager.Forms
                         {
                             splitted = line.Split(delimiter.ToCharArray());
                             if (splitted == null) continue;
-                            if (splitted.Length != 6) continue;
+                            if (splitted.Length != lotteryTicketPanel.GetGameDigitCount()) continue;
                             if (IsNumberSequenceValid(splitted)) break;
                         }
                         LotteryBetSetup lotteryBet = new LotteryBetSetup();
@@ -200,7 +200,7 @@ namespace LottoDataManager.Forms
                 MessageBox.Show(msg, ResourcesUtils.GetMessage("abtmlt_form_msg_20"), MessageBoxButtons.OK);
                 DisplayLog(msg);
             }
-            DateTime currentDate = DateTime.Now;
+            //DateTime currentDate = DateTime.Now;
             DateTime selectedTargetDate = GetUserSelectedDrawDate();
 
             if (preSelectedDrawDateOnLoad.Date.CompareTo(selectedTargetDate.Date) == 0 && 
@@ -252,7 +252,7 @@ namespace LottoDataManager.Forms
             int convertedNum = 0;
             foreach (String num in numberSequence)
             {
-                if (!int.TryParse(num, out convertedNum)) throw new Exception(ResourcesUtils.GetMessage("abtmlt_form_msg_29"));
+                if (!int.TryParse(num.Trim(), out convertedNum)) throw new Exception(ResourcesUtils.GetMessage("abtmlt_form_msg_29"));
                 if (convertedNum < this.lotteryTicketPanel.GetMin() || convertedNum > this.lotteryTicketPanel.GetMax())
                 {
                     throw new Exception(String.Format(ResourcesUtils.GetMessage("abtmlt_form_msg_30"), this.lotteryTicketPanel.GetMin(), this.lotteryTicketPanel.GetMax()));

@@ -696,6 +696,36 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
             }
             return lotteryBet;
         }
+        public List<LotteryBet> GetLotterybetsQueued(GameMode gameMode)
+        {
+            List<LotteryBet> lotteryBet = new List<LotteryBet>();
+            using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
+            using (OleDbCommand command = new OleDbCommand())
+            {
+                command.CommandType = CommandType.Text;
+                command.CommandText =   " SELECT *                                             " +
+                                        "   FROM `lottery_bet` a                               " +
+                                        "  WHERE a.`game_cd` = @game_cd                        " +
+                                        "    AND a.`active` = TRUE                             " +
+                                        "    AND (SELECT b.`draw_date` FROM `draw_results` b   " +
+                                        "  WHERE b.game_cd = a.game_cd                         " +
+                                        "    AND b.`draw_date` = a.target_draw_date) IS NULL   " +
+                                        "  ORDER BY a.target_draw_date ASC                     ";
+
+                command.Parameters.AddWithValue("@game_cd", (int) gameMode);
+                command.Connection = conn;
+                conn.Open();
+
+                using (OleDbDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        lotteryBet.Add(GetInstanceDeriveLotteryBetSetup(reader));
+                    }
+                }
+            }
+            return lotteryBet;
+        }
         public double[] GetMonthlySpending(GameMode gameMode, int year)
         {
             double[] result = new double[13] {0,0,0,0,0,0,0,0,0,0,0,0,0};

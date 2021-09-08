@@ -124,7 +124,7 @@ namespace LottoDataManager.Includes.Model.Details.Setup
                     if (tokens.Length < 6) continue;
                     for (int ctr = 0; ctr < tokens.Length; ctr++)
                     {
-                        FillNumberBySeq(ctr + 1, int.Parse(tokens[ctr]));
+                        FillNumberBySeq(ctr + 1, int.Parse(tokens[ctr].Trim()));
                     }
                 }
                 //test if sequence has been filled up

@@ -29,5 +29,6 @@ namespace LottoDataManager.Includes.Database.DAO.Interface
         List<LotteryBet> GetAllRedeemedClaims(GameMode gameMode, bool isGetClaimedStatus);
         DateTime[] GetMinMaxYearsOfBetting(GameMode gameMode);
         List<double[]> GetTabularAllBetsSpending(List<int> gameCodes);
+        List<LotteryBet> GetLotterybetsQueued(GameMode gameMode);
     }
 }
