@@ -616,10 +616,9 @@ namespace LottoDataManager
                 {
                     CheckWinningBets();
                     RefreshWinningNumbersGridContent();
-                    RefreshBets(); //includes RefreshDashboardReport();
+                    RefreshBets();
                 }
             }
-            //Application.DoEvents();
         }
         #endregion
 

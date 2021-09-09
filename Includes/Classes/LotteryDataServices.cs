@@ -246,6 +246,10 @@ namespace LottoDataManager.Includes.Classes
         {
             return this.lotteryBetDao.GetLotterybetsQueued(gameMode);
         }
+        public List<LotteryBet> GetLotteryBetsByMonthy(GameMode gameMode, int year, int month)
+        {
+            return this.lotteryBetDao.GetLotteryBetsByMonthy(gameMode, year, month);
+        }
         public List<LotterySequenceGenerator> GetAllSequenceGenerators()
         {
             return lotterySeqGenDao.GetAllSeqGenerators();

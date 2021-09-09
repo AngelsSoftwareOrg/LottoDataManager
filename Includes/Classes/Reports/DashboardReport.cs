@@ -37,6 +37,7 @@ namespace LottoDataManager.Includes.Classes.Reports
             dashboardReportList.Add(GetLastTimeYouWon());
             dashboardReportList.AddRange(GetMinMaxWinningBetAmount());
             dashboardReportList.AddRange(GetMonthlyAndAnnualSpending());
+            dashboardReportList.AddRange(GetLotteryBetsCurrentMonth());
             return dashboardReportList;
         }
         public List<DashboardReportGroup> GetDashboardReportInGroup()
@@ -308,7 +309,7 @@ namespace LottoDataManager.Includes.Classes.Reports
                     if (lotteryBetList.Count <= 0) continue;
                     foreach(LotteryBet bet in lotteryBetList)
                     {
-                        String key = bet.GetTargetDrawDateFormatted();
+                        String key = DateTimeConverterUtils.ConvertToFormat(bet.GetTargetDrawDate(), DateTimeConverterUtils.STANDARD_DATE_FORMAT_WITH_DAYOFWEEK);
                         String value = bet.GetGNUFormat();
                         DashboardReportItemSetup dshSetup = GenModel(key, value);
                         dshSetup.DashboardReportItemAction = DashboardReportItemActions.OPEN_LOTTERY_GAME;
@@ -320,6 +321,46 @@ namespace LottoDataManager.Includes.Classes.Reports
                     }
                 }
             }
+            return itemsList;
+        }
+        private List<DashboardReportItemSetup> GetLotteryBetsCurrentMonth()
+        {
+            DateTime today = DateTime.Now;
+            List<DashboardReportItemSetup> itemsList = new List<DashboardReportItemSetup>();
+            LotteryDetails lotteryDetails = LotteryDataServices.LotteryDetails;
+            List<LotteryBet> lotteryBetList = LotteryDataServices.GetLotteryBetsByMonthy(lotteryDetails.GameMode, today.Year, today.Month);
+            List<DateTime[]> weeklyRangeList = DateTimeConverterUtils.GetWeeklyDateRange(today.Year, today.Month);
+
+            int weekNumber = 1;
+            foreach (DateTime[] weekRange in weeklyRangeList)
+            {
+                DateTime startDate = weekRange[0].AddDays(-1);//initially -1 to solve iteration problem below
+                DateTime endDate = weekRange[1];
+
+                double sumAmount = 0;
+                do
+                {
+                    startDate = startDate.AddDays(1);
+                    foreach(LotteryBet bet in lotteryBetList)
+                    {
+                        if(bet.GetTargetDrawDate().Day == startDate.Day)
+                        {
+                            sumAmount += bet.GetBetAmount();
+                        }
+                    }
+                } while (startDate.Day != endDate.Day);
+
+                String key = ResourcesUtils.GetMessage("drpt_lot_bet_current_month_desc", weekNumber++.ToString(),
+                                            weekRange[0].ToString("MMM"), weekRange[0].ToString("dd"), weekRange[1].ToString("dd"));
+                String value = sumAmount.ToString("C");
+                DashboardReportItemSetup dshSetup = GenModel(key, value);
+                dshSetup.GroupKeyName = ResourcesUtils.GetMessage("drpt_lot_bet_current_month_group_lbl", 
+                                            today.Year.ToString(), today.ToString("MMM"));
+                if(sumAmount <=0.00) dshSetup.ReportItemDecoration.FontColor = ReportItemDecoration.COLOR_NO_FOCUS;
+
+                itemsList.Add(dshSetup);
+            }
+
             return itemsList;
         }
 

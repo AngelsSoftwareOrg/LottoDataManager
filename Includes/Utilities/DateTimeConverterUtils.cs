@@ -13,6 +13,7 @@ namespace LottoDataManager.Includes.Utilities
         public static readonly String DEFAULT_GLOBALIZATION = "en-PH";
         public static readonly String DATE_FORMAT_LONG = "MMMM dd, yyyy - dddd";
         public static readonly String STANDARD_DATE_FORMAT = "yyyy-MM-dd";
+        public static readonly String STANDARD_DATE_FORMAT_WITH_DAYOFWEEK = "yyyy-MM-dd, dddd";
         public static readonly String STANDARD_DATE_FORMAT_DFLT_TIME_ZERO = "yyyy-MM-dd 00:00:00.0";
         public static readonly String STANDARD_DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
         public static readonly String STANDARD_TIME_FORMAT = "HH:mm:ss";
@@ -58,6 +59,46 @@ namespace LottoDataManager.Includes.Utilities
         public static DateTime GetDateTimeInstance(String dateTimeValue,String dateTimeFormat)
         {
             return DateTime.ParseExact(dateTimeValue, dateTimeFormat, new CultureInfo(DEFAULT_GLOBALIZATION));
+        }
+        public static List<DateTime[]> GetWeeklyDateRange(int year, int month)
+        {
+            List<DateTime[]> weeklyRangeList = new List<DateTime[]>();
+            DateTime currentDay = new DateTime(year, month, 1);
+            int daysInMoth = DateTime.DaysInMonth(year, month);
+
+            DateTime startOfWeek = currentDay;
+            DateTime endOfWeek = currentDay;
+
+            //For now, lets start the startdate to last month, to solve the iteration below
+            currentDay = currentDay.AddDays(-1);
+
+            for (int dayCtr = 1; dayCtr <= daysInMoth; dayCtr++)
+            {
+                currentDay = currentDay.AddDays(1);
+                if (currentDay.DayOfWeek == DayOfWeek.Sunday)
+                {
+                    endOfWeek = currentDay;
+                    DateTime[] newWeek = new DateTime[2];
+                    newWeek[0] = startOfWeek;
+                    newWeek[1] = endOfWeek;
+                    weeklyRangeList.Add(newWeek);
+                }
+                else if (currentDay.DayOfWeek == DayOfWeek.Monday)
+                {
+                    startOfWeek = currentDay;
+                }
+            }
+
+            //Last week
+            DateTime lastDayOfMonth = new DateTime(year, month, daysInMoth);
+            if(lastDayOfMonth.Day != endOfWeek.Day)
+            {
+                DateTime[] lastweek = new DateTime[2];
+                lastweek[0] = startOfWeek;
+                lastweek[1] = lastDayOfMonth;
+                weeklyRangeList.Add(lastweek);
+            }
+            return weeklyRangeList;
         }
     }
 }

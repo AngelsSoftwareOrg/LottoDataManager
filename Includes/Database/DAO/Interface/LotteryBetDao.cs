@@ -30,5 +30,6 @@ namespace LottoDataManager.Includes.Database.DAO.Interface
         DateTime[] GetMinMaxYearsOfBetting(GameMode gameMode);
         List<double[]> GetTabularAllBetsSpending(List<int> gameCodes);
         List<LotteryBet> GetLotterybetsQueued(GameMode gameMode);
+        List<LotteryBet> GetLotteryBetsByMonthy(GameMode gameMode, int year, int month);
     }
 }

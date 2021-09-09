@@ -125,6 +125,36 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
             }
             return lotteryBet;
         }
+        public List<LotteryBet> GetLotteryBetsByMonthy(GameMode gameMode, int year, int month)
+        {
+            List<LotteryBet> lotteryBet = new List<LotteryBet>();
+            using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
+            using (OleDbCommand command = new OleDbCommand())
+            {
+                command.CommandType = CommandType.Text;
+                command.CommandText = " SELECT * " +
+                                      "   FROM lottery_bet " +
+                                      "  WHERE game_cd = @game_cd " +
+                                      "    AND YEAR(target_draw_date)  = @year " +
+                                      "    AND MONTH(target_draw_date) = @month " +
+                                      "    AND active = true " +
+                                      "  ORDER BY target_draw_date DESC, ID DESC ";
+                command.Parameters.AddWithValue("@game_cd", OleDbType.Integer).Value = gameMode;
+                command.Parameters.AddWithValue("@year", year);
+                command.Parameters.AddWithValue("@month", month);
+                command.Connection = conn;
+                conn.Open();
+
+                using (OleDbDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        lotteryBet.Add(GetInstanceDeriveLotteryBetSetup(reader));
+                    }
+                }
+            }
+            return lotteryBet;
+        }
         public List<LotteryBet> ExtractLotteryBetsCheckWinningNumber(GameMode gameMode)
         {
             List<LotteryBet> lotteryBet = new List<LotteryBet>();
@@ -742,7 +772,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                                       "        SUM(IIF(MONTH(target_draw_date) = 7, bet_amt, 0)) AS [jul], " +
                                       "        SUM(IIF(MONTH(target_draw_date) = 8, bet_amt, 0)) AS [aug], " +
                                       "        SUM(IIF(MONTH(target_draw_date) = 9, bet_amt, 0)) AS [sep], " +
-                                      "        SUM(IIF(MONTH(target_draw_date) = 0, bet_amt, 0)) AS [oct], " +
+                                      "        SUM(IIF(MONTH(target_draw_date) = 10, bet_amt, 0)) AS [oct], " +
                                       "        SUM(IIF(MONTH(target_draw_date) = 11, bet_amt, 0)) AS [nov], " +
                                       "        SUM(IIF(MONTH(target_draw_date) = 12, bet_amt, 0)) AS [dec], " +
                                       "        SUM(bet_amt) AS[annual] " +
@@ -799,7 +829,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                                         "        SUM(IIF(MONTH(target_draw_date) = 7, bet_amt, 0)) AS [jul],  " +
                                         "        SUM(IIF(MONTH(target_draw_date) = 8, bet_amt, 0)) AS [aug],  " +
                                         "        SUM(IIF(MONTH(target_draw_date) = 9, bet_amt, 0)) AS [sep],  " +
-                                        "        SUM(IIF(MONTH(target_draw_date) = 0, bet_amt, 0)) AS [oct],  " +
+                                        "        SUM(IIF(MONTH(target_draw_date) = 10, bet_amt, 0)) AS [oct],  " +
                                         "        SUM(IIF(MONTH(target_draw_date) = 11, bet_amt, 0)) AS [nov], " +
                                         "        SUM(IIF(MONTH(target_draw_date) = 12, bet_amt, 0)) AS [dec], " +
                                         "        SUM(bet_amt) AS[annual]                                      " +
@@ -826,7 +856,6 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                                         " WHERE active = true                                                 " +
                                         "   AND " + GetMultipleGameCodeSQLPredicate(gameCodes) +
                                         " ORDER BY 1 DESC                                                     ";
-                //command.Parameters.AddWithValue("@game_cd", GetMultipleGameCodeSQLPredicate(gameCodes));
                 command.Connection = conn;
                 conn.Open();
                 using (OleDbDataReader reader = command.ExecuteReader())
