@@ -43,6 +43,7 @@ namespace LottoDataManager
         private String LOG_STATUS_MODULE_NAME_DRAWN_RESULT;
         private String LOG_STATUS_MODULE_NAME_CLIPBOARD_COPY;
         private int processingLogStatusCtr = 0;
+        private int dashboardContentIndention = 3;
 
         public MainForm()
         {
@@ -106,6 +107,8 @@ namespace LottoDataManager
             this.LOG_STATUS_MODULE_NAME_CLIPBOARD_COPY = ResourcesUtils.GetMessage("mainf_labels_56");
 
             AddProcessingStatusLogs(LOG_STATUS_MODULE_NAME_WEBSCRAP, ResourcesUtils.GetMessage("mainf_labels_5"));
+
+            dashboardContentIndention = ResourcesUtils.DashboardReportGroupedContentIndention;
 
             ReinitateLotteryServices();
             GenerateLotteriesGameMenu();
@@ -323,7 +326,8 @@ namespace LottoDataManager
                 e.SubItem.ForeColor = item.GetReportItemDecoration().FontColor;
             }
 
-            e.Item.Text = "  " + e.Item.Text;
+            //indention on dashboard report grouped 
+            e.Item.Text = "  ".PadLeft(dashboardContentIndention) + e.Item.Text;
         }
         private void objLVDashboard_MouseDoubleClick(object sender, MouseEventArgs e)
         {
@@ -511,8 +515,8 @@ namespace LottoDataManager
         {
             AddBetFrm betForm = new AddBetFrm(this.lotteryDataServices);
             betForm.ShowDialog(this);
+            if (betForm.HasDataUpdates) RefreshBets();
             betForm.Dispose();
-            RefreshBets();
         }
         private void compareDrawResultAndBetToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -672,8 +676,8 @@ namespace LottoDataManager
         {
             ModifyBetFrm bet = new ModifyBetFrm(lotteryDataServices);
             bet.ShowDialog();
+            if(bet.HasDataUpdates) RefreshBets();
             bet.Dispose();
-            RefreshBets();
         }
         private void editClaimStatusToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -691,8 +695,8 @@ namespace LottoDataManager
         {
             ModifyClaimsFrm m = new ModifyClaimsFrm(this.lotteryDataServices);
             m.ShowDialog();
+            if (m.IsClaimsHaveDataUpdates) RefreshBets();
             m.Dispose();
-            RefreshBets();
         }
         private void seqGenToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -755,6 +759,8 @@ namespace LottoDataManager
                 }
             }
             m.ShowDialog(this);
+            if (m.HasDataUpdates) RefreshBets();
+            m.Dispose();
         }
         private void toolStripBtnMoveDrawDate_Click(object sender, EventArgs e)
         {

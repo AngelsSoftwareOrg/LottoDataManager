@@ -20,6 +20,9 @@ namespace LottoDataManager.Forms
 {
     public partial class MachineLearningFrm : Form
     {
+        private delegate void SetTextCallback(string text);
+        private delegate void SetFormsAvailabilityOnRun(Boolean isUpdateStarted = false);
+        private delegate void StopRun();
         private bool isUpdateProcessingStarted = false;
         private LotteryDataServices lotteryDataServices;
         private MachineLearningModelBuilderFastTree machineLearningModelBuilderFastTree;
@@ -47,20 +50,25 @@ namespace LottoDataManager.Forms
         }
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            IsUpdateStarted(true);
             txtStatus.Text = "";
             StartUpdate();
-            IsUpdateStarted(false);
         }
-        private void StartUpdate()
+        internal async void StartUpdate()
         {
-            log(ResourcesUtils.GetMessage("mac_lrn_log_6"));
-            log(ResourcesUtils.GetMessage("mac_lrn_log_11"));
-            ConsumeFastTreeTrainerModel();
-            log(ResourcesUtils.GetMessage("mac_lrn_log_6"));
-            log(ResourcesUtils.GetMessage("mac_lrn_log_12"));
-            ConsumeSDCATrainerModel();
-            log(ResourcesUtils.GetMessage("mac_lrn_log_6"));
+            await Task.Run(() =>
+            {
+                IsUpdateStarted(true);
+                log(ResourcesUtils.GetMessage("mac_lrn_log_6"));
+                log(ResourcesUtils.GetMessage("mac_lrn_log_11"));
+                ConsumeFastTreeTrainerModel();
+                if (!isUpdateProcessingStarted) { log(ResourcesUtils.GetMessage("mac_lrn_log_14")); return; }
+                log(ResourcesUtils.GetMessage("mac_lrn_log_6"));
+                log(ResourcesUtils.GetMessage("mac_lrn_log_12"));
+                ConsumeSDCATrainerModel();
+                log(ResourcesUtils.GetMessage("mac_lrn_log_6"));
+                if (!isUpdateProcessingStarted) log(ResourcesUtils.GetMessage("mac_lrn_log_14"));
+                IsUpdateStarted(false);
+            });
         }
         private void ConsumeFastTreeTrainerModel()
         {
@@ -72,8 +80,10 @@ namespace LottoDataManager.Forms
             String headers = "draw_date,num1,num2,num3,num4,num5,num6,PREDICT,winners,game_cd\r\n";
             CommonTrainerModel(DATASET_SDCA, headers);
         }
-        private void CommonTrainerModel(String dataSetType, String headers)
+        internal void CommonTrainerModel(String dataSetType, String headers)
         {
+            if (!isUpdateProcessingStarted) return;
+
             log(ResourcesUtils.GetMessage("mac_lrn_log_1"));
             String fileName = FileUtils.GetCSVTempFilePathName();
 
@@ -121,6 +131,7 @@ namespace LottoDataManager.Forms
         {
             try
             {
+                if (!isUpdateProcessingStarted) return;
                 log(ResourcesUtils.GetMessage("mac_lrn_log_7") + "\r\n\r\n");
                 if (DATASET_SDCA.Equals(dataSetType, StringComparison.OrdinalIgnoreCase))
                 {
@@ -156,10 +167,28 @@ namespace LottoDataManager.Forms
         }
         private void log(String msg)
         {
-            txtStatus.AppendText("\r\n" + msg);
+            // InvokeRequired required compares the thread ID of the
+            // calling thread to the thread ID of the creating thread.
+            // If these threads are different, it returns true.
+            if (this.txtStatus.InvokeRequired)
+            {
+                SetTextCallback d = new SetTextCallback(log);
+                this.Invoke(d, new object[] { msg });
+            }
+            else
+            {
+                txtStatus.AppendText("\r\n" + msg);
+            }
         }
         private void IsUpdateStarted(bool isUpdateStarted = false)
         {
+            if (this.btnStop.InvokeRequired)
+            {
+                SetFormsAvailabilityOnRun d = new SetFormsAvailabilityOnRun(IsUpdateStarted);
+                this.Invoke(d, new object[] { isUpdateStarted });
+                return;
+            }
+
             if (isUpdateStarted)
             {
                 btnExit.Visible = false;
@@ -182,7 +211,17 @@ namespace LottoDataManager.Forms
         }
         private void btnStop_Click(object sender, EventArgs e)
         {
-            IsUpdateStarted(false);
+            StopRunNow();
+        }
+        private void StopRunNow()
+        {
+            if (this.btnStop.InvokeRequired)
+            {
+                StopRun d = new StopRun(StopRunNow);
+                this.Invoke(d, new object[] { });
+                return;
+            }
+            isUpdateProcessingStarted = false;
         }
     }
 }

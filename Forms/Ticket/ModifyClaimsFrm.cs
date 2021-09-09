@@ -22,7 +22,7 @@ namespace LottoDataManager.Forms
         private LotteryDataServices lotteryDataServices;
         private LotteryTicketPanel lotteryTicketPanel;
         private readonly String MODIFIED_TAG = "modified";
-
+        private bool hasClaimsStatusChange = false;
         public ModifyClaimsFrm(LotteryDataServices lotteryDataServices)
         {
             InitializeComponent();
@@ -154,6 +154,7 @@ namespace LottoDataManager.Forms
                         toolStripStatusLbl.Text = String.Format(ResourcesUtils.GetMessage("mod_clm_stat_msg_10"), String.Join("-",lotWinBet.GetAllNumberSequence()));
                         toolStripProgBar.Value = ConverterUtils.GetPercentageFloored(++ctr, totalCheckedObjects);
                         this.lotteryDataServices.UpdateClaimStatus(lotWinBet);
+                        hasClaimsStatusChange = true;
                         Application.DoEvents();
                     }
                     FillUpBetList();
@@ -265,6 +266,13 @@ namespace LottoDataManager.Forms
         private void btnSaveChanges_Click(object sender, EventArgs e)
         {
             SaveLotteryBetsChanges();
+        }
+        #endregion
+
+        #region Forms Others
+        public bool IsClaimsHaveDataUpdates
+        {
+            get { return hasClaimsStatusChange; }
         }
         #endregion
 

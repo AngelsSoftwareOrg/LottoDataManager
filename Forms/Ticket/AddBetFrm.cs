@@ -26,6 +26,7 @@ namespace LottoDataManager.Forms
         private LotterySchedule lotterySchedule;
         private bool hasDataBeenSave = false;
         private DateTime preSelectedDrawDateOnLoad;
+        private bool hasDataUpdates = false;
         
         public AddBetFrm(LotteryDataServices lotteryDataServices)
         {
@@ -131,6 +132,7 @@ namespace LottoDataManager.Forms
                     this.Enabled = false;
                     Application.DoEvents();
                     this.lotteryDataServices.SaveLotteryBets(lotteryBetArr);
+                    hasDataUpdates = true;
                     DisplayLog(ResourcesUtils.GetMessage("abtmlt_form_msg_23"));
                     this.Enabled = true;
                     this.hasDataBeenSave = true;
@@ -191,6 +193,10 @@ namespace LottoDataManager.Forms
                 throw ex;
             }
             return lotteryBetArr;
+        }
+        public bool HasDataUpdates
+        {
+            get { return hasDataUpdates; }
         }
         private bool ValidateCutoffTime()
         {
