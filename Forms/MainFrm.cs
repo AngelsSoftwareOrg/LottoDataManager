@@ -367,6 +367,25 @@ namespace LottoDataManager
                 ActionableDashboardReportItem(item);
             }
         }
+        private void objLVDashboard_IsHyperlink(object sender, IsHyperlinkEventArgs e)
+        {
+            if (e.Model == null) return;
+            DashboardReportItem item = (DashboardReportItem)e.Model;
+            if (!item.GetReportItemDecoration().IsHyperLink)
+            {
+                e.IsHyperlink = false;
+                e.Url = null;
+            }
+        }
+        private void objLVDashboard_HyperlinkClicked(object sender, HyperlinkClickedEventArgs e)
+        {
+            if (e.Model == null) return;
+            DashboardReportItem item = (DashboardReportItem)e.Model;
+            if (item.GetReportItemDecoration().IsHyperLink)
+            {
+                ActionableDashboardReportItem(item);
+            }
+        }
         #endregion
 
         #region "Draw Result"
@@ -844,8 +863,9 @@ namespace LottoDataManager
 
 
 
-        #endregion
 
+
+        #endregion
 
     }
 }

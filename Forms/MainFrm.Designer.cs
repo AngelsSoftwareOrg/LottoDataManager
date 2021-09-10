@@ -439,10 +439,13 @@ namespace LottoDataManager
             this.objLVDashboard.SortGroupItemsByPrimaryColumn = false;
             this.objLVDashboard.TabIndex = 4;
             this.objLVDashboard.UseCompatibleStateImageBehavior = false;
+            this.objLVDashboard.UseHyperlinks = true;
             this.objLVDashboard.View = System.Windows.Forms.View.Details;
             this.objLVDashboard.FormatCell += new System.EventHandler<BrightIdeasSoftware.FormatCellEventArgs>(this.objLVDashboard_FormatCell);
             this.objLVDashboard.FormatRow += new System.EventHandler<BrightIdeasSoftware.FormatRowEventArgs>(this.objLVDashboard_FormatRow);
+            this.objLVDashboard.HyperlinkClicked += new System.EventHandler<BrightIdeasSoftware.HyperlinkClickedEventArgs>(this.objLVDashboard_HyperlinkClicked);
             this.objLVDashboard.GroupTaskClicked += new System.EventHandler<BrightIdeasSoftware.GroupTaskClickedEventArgs>(this.objLVDashboard_GroupTaskClicked);
+            this.objLVDashboard.IsHyperlink += new System.EventHandler<BrightIdeasSoftware.IsHyperlinkEventArgs>(this.objLVDashboard_IsHyperlink);
             this.objLVDashboard.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.objLVDashboard_MouseDoubleClick);
             // 
             // olvdbDesc
@@ -452,6 +455,7 @@ namespace LottoDataManager
             // 
             // olvdbValue
             // 
+            this.olvdbValue.Hyperlink = true;
             this.olvdbValue.Text = "Value";
             this.olvdbValue.Width = 200;
             // 

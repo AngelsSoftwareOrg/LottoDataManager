@@ -274,6 +274,22 @@ namespace LottoDataManager.Includes.Classes
         {
             return this.lotteryDrawResultDao.GetMachineLearningDataSetSDCA(gameMode, startingDate);
         }
+        
+        /// <summary>
+        /// Get all latest draw dates available in each lottery games.
+        /// </summary>
+        /// <param name="gameCd">If null, then all lottery games will be extracted</param>
+        /// <returns></returns>
+        public List<LotteryDrawResult> GetLatestDrawResults(int[] gameCd = null)
+        {
+            if(gameCd == null) gameCd = GetLotteries().Select(x => (int)x.GetGameMode()).ToArray();
+            List<LotteryDrawResult> drList = new List<LotteryDrawResult>();
+            foreach(int gmcd in gameCd)
+            {
+                drList.Add(lotteryDrawResultDao.GetLatestDrawResults(gmcd));
+            }
+            return drList;
+        }
         public void UpdateLotteryOutletDescription(LotteryOutlet updatedModel)
         {
             this.lotteryOutletDao.UpdateDescription(updatedModel);

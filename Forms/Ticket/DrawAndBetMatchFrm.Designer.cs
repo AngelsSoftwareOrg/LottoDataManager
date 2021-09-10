@@ -181,6 +181,7 @@ namespace LottoDataManager.Forms
             this.objListViewBet.HideSelection = false;
             this.objListViewBet.Location = new System.Drawing.Point(0, 0);
             this.objListViewBet.Name = "objListViewBet";
+            this.objListViewBet.ShowGroups = false;
             this.objListViewBet.Size = new System.Drawing.Size(941, 197);
             this.objListViewBet.TabIndex = 0;
             this.objListViewBet.UseCompatibleStateImageBehavior = false;

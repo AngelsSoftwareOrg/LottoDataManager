@@ -99,6 +99,30 @@ namespace LottoDataManager.Includes.Database.DAO
             }
             return results;
         }
+        public LotteryDrawResult GetLatestDrawResults(int gameCd)
+        {
+            using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
+            using (OleDbCommand command = new OleDbCommand())
+            {
+                command.CommandType = CommandType.Text;
+                command.CommandText = " SELECT TOP 1 * " +
+                                      "   FROM `draw_results` " +
+                                      "  WHERE `game_cd`= @game_cd " +
+                                      "  ORDER BY `draw_date` DESC";
+                command.Parameters.AddWithValue("@game_cd", gameCd.ToString());
+                command.Connection = conn;
+                conn.Open();
+                using (OleDbDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        return GetLotteryDrawResultSetup(reader, 
+                            ClassReflectionUtil.FindGameMode(int.Parse(reader["game_cd"].ToString())));
+                    }
+                }
+            }
+            return null; ;
+        }
         public List<LotteryDrawResult> GetLatestLotteryResult(GameMode gameMode, int howManyDraws)
         {
             List<LotteryDrawResult> results = new List<LotteryDrawResult>();

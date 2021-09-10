@@ -16,14 +16,17 @@ namespace LottoDataManager.Includes.Model.Reports.Setup
         private Color highlightColor;
         private bool isHighlightColor;
         private Color fontColor;
+        private bool isHyperLink;
         public ReportItemDecoration()
         {
             HighlightColor = Color.Empty;
             IsHighlightColor = false;
             FontColor = Color.Black;
+            IsHyperLink = false;
         }
         public Color HighlightColor { get => highlightColor; set => highlightColor = value; }
         public bool IsHighlightColor { get => isHighlightColor; set => isHighlightColor = value; }
         public Color FontColor { get => fontColor; set => fontColor = value; }
+        public bool IsHyperLink { get => isHyperLink; set => isHyperLink = value; }
     }
 }

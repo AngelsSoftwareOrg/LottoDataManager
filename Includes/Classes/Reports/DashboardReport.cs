@@ -38,6 +38,7 @@ namespace LottoDataManager.Includes.Classes.Reports
             dashboardReportList.AddRange(GetMinMaxWinningBetAmount());
             dashboardReportList.AddRange(GetMonthlyAndAnnualSpending());
             dashboardReportList.AddRange(GetLotteryBetsCurrentMonth());
+            dashboardReportList.AddRange(GetLatestDrawResultsPerLotteryGame());
             return dashboardReportList;
         }
         public List<DashboardReportGroup> GetDashboardReportInGroup()
@@ -317,6 +318,7 @@ namespace LottoDataManager.Includes.Classes.Reports
                         dshSetup.ReportItemDecoration.FontColor = ReportItemDecoration.COLOR_LINK_CLICKABLE;
                         dshSetup.GroupTaskLabel = ResourcesUtils.GetMessage("drpt_lot_bet_group_lbl_task");
                         dshSetup.GroupKeyName = ResourcesUtils.GetMessage("drpt_lot_bet_group_lbl", lottery.GetDescription(), lotteryBetList.Count.ToString());
+                        dshSetup.ReportItemDecoration.IsHyperLink = true;
                         itemsList.Add(dshSetup);
                     }
                 }
@@ -363,7 +365,31 @@ namespace LottoDataManager.Includes.Classes.Reports
 
             return itemsList;
         }
+        private List<DashboardReportItemSetup> GetLatestDrawResultsPerLotteryGame()
+        {
+            List<DashboardReportItemSetup> itemsList = new List<DashboardReportItemSetup>();
+            List<LotteryDrawResult> latestDrawResults = LotteryDataServices.GetLatestDrawResults();
+            List<Lottery> lotteriesGameList = LotteryDataServices.GetLotteries();
 
+            foreach(LotteryDrawResult draw in latestDrawResults)
+            {
+                Lottery lottery = lotteriesGameList.Find((lotteryObj) => (int)lotteryObj.GetGameMode() == draw.GetGameCode());
+                DateTime today = DateTime.Now;
+                TimeSpan diffWithToday = today - draw.GetDrawDate();
+                String key = lottery.GetDescription();
+                String value = ResourcesUtils.GetMessage("drpt_lot_draw_value", 
+                                                DateTimeConverterUtils.ConvertToFormat(draw.GetDrawDate(), 
+                                                DateTimeConverterUtils.STANDARD_DATE_FORMAT_WITH_DAYOFWEEK),
+                                                ((int)diffWithToday.TotalDays).ToString());
+                DashboardReportItemSetup itm = GenModel(key, value);
+                itm.GroupKeyName = ResourcesUtils.GetMessage("drpt_lot_draw_group_lbl");
+                itm.ReportItemDecoration.IsHyperLink = true;
+                itm.DashboardReportItemAction = DashboardReportItemActions.OPEN_LOTTERY_GAME;
+                itm.Tag = lottery.GetGameMode();
+                itemsList.Add(itm);
+            }
+            return itemsList;
+        }
         public String ReportTitle
         {
             get
