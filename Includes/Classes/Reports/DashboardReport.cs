@@ -15,30 +15,50 @@ namespace LottoDataManager.Includes.Classes.Reports
 {
     public class DashboardReport : ReportAbstract
     {
+        public event EventHandler<DashboardReportEvent> DashboardReportingEvents;
+        private DashboardReportEvent dashboardReportEvent;
 
         private List<DashboardReportItemSetup> dashboardReportList = new List<DashboardReportItemSetup>();
         public DashboardReport(LotteryDataServices lotteryDataServices) : base(lotteryDataServices)
         {
+            dashboardReportEvent = new DashboardReportEvent();
+            dashboardReportEvent.ModuleName = ResourcesUtils.GetMessage("drpt_lot_trigger_logs_module_name");
         }
         public List<DashboardReportItemSetup> GetDashboardReport()
         {
             dashboardReportList = new List<DashboardReportItemSetup>();
             dashboardReportList.AddRange(GetLotteryBetsInQueue());
+            TriggerLogs(ResourcesUtils.GetMessage("drpt_lot_trigger_logs_1"));
             dashboardReportList.AddRange(GetPreviousDrawDates());
+            TriggerLogs(ResourcesUtils.GetMessage("drpt_lot_trigger_logs_2"));
             dashboardReportList.AddRange(GetNextDrawDates());
+            TriggerLogs(ResourcesUtils.GetMessage("drpt_lot_trigger_logs_3"));
             dashboardReportList.Add(GetTotalBetsMade());
+            TriggerLogs(ResourcesUtils.GetMessage("drpt_lot_trigger_logs_4"));
             dashboardReportList.AddRange(GetTotalClaimsCount());
+            TriggerLogs(ResourcesUtils.GetMessage("drpt_lot_trigger_logs_5"));
             dashboardReportList.AddRange(GetTotalLuckypickWinAndLoose());
+            TriggerLogs(ResourcesUtils.GetMessage("drpt_lot_trigger_logs_6"));
             dashboardReportList.Add(GetTotalMoneyBetted());
+            TriggerLogs(ResourcesUtils.GetMessage("drpt_lot_trigger_logs_7"));
             dashboardReportList.Add(GetTotalMoneyBettedLastYear());
+            TriggerLogs(ResourcesUtils.GetMessage("drpt_lot_trigger_logs_8"));
             dashboardReportList.Add(GetTotalYearsOfBetting());
+            TriggerLogs(ResourcesUtils.GetMessage("drpt_lot_trigger_logs_9"));
             dashboardReportList.Add(GetTotalMoneyBettedYearlyAverage());
+            TriggerLogs(ResourcesUtils.GetMessage("drpt_lot_trigger_logs_10"));
             dashboardReportList.AddRange(GetNumberOfTimeWonADigitSequence());
+            TriggerLogs(ResourcesUtils.GetMessage("drpt_lot_trigger_logs_11"));
             dashboardReportList.Add(GetLastTimeYouWon());
+            TriggerLogs(ResourcesUtils.GetMessage("drpt_lot_trigger_logs_12"));
             dashboardReportList.AddRange(GetMinMaxWinningBetAmount());
+            TriggerLogs(ResourcesUtils.GetMessage("drpt_lot_trigger_logs_13"));
             dashboardReportList.AddRange(GetMonthlyAndAnnualSpending());
+            TriggerLogs(ResourcesUtils.GetMessage("drpt_lot_trigger_logs_14"));
             dashboardReportList.AddRange(GetLotteryBetsCurrentMonth());
+            TriggerLogs(ResourcesUtils.GetMessage("drpt_lot_trigger_logs_15"));
             dashboardReportList.AddRange(GetLatestDrawResultsPerLotteryGame());
+            TriggerLogs(ResourcesUtils.GetMessage("drpt_lot_trigger_logs_16"));
             return dashboardReportList;
         }
         public List<DashboardReportGroup> GetDashboardReportInGroup()
@@ -315,7 +335,6 @@ namespace LottoDataManager.Includes.Classes.Reports
                         DashboardReportItemSetup dshSetup = GenModel(key, value);
                         dshSetup.DashboardReportItemAction = DashboardReportItemActions.OPEN_LOTTERY_GAME;
                         dshSetup.Tag = lottery.GetGameMode();
-                        dshSetup.ReportItemDecoration.FontColor = ReportItemDecoration.COLOR_LINK_CLICKABLE;
                         dshSetup.GroupTaskLabel = ResourcesUtils.GetMessage("drpt_lot_bet_group_lbl_task");
                         dshSetup.GroupKeyName = ResourcesUtils.GetMessage("drpt_lot_bet_group_lbl", lottery.GetDescription(), lotteryBetList.Count.ToString());
                         dshSetup.ReportItemDecoration.IsHyperLink = true;
@@ -400,6 +419,11 @@ namespace LottoDataManager.Includes.Classes.Reports
         private DashboardReportItemSetup GenModel(String key, String value)
         {
             return new DashboardReportItemSetup() { Description = key, Value = value };
+        }
+        private void TriggerLogs(String logs)
+        {
+            dashboardReportEvent.ReportLogs = logs;
+            DashboardReportingEvents.Invoke(this, dashboardReportEvent);
         }
     }
 }

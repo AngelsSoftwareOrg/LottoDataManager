@@ -61,7 +61,12 @@ namespace LottoDataManager.Forms
                 log(ResourcesUtils.GetMessage("mac_lrn_log_6"));
                 log(ResourcesUtils.GetMessage("mac_lrn_log_11"));
                 ConsumeFastTreeTrainerModel();
-                if (!isUpdateProcessingStarted) { log(ResourcesUtils.GetMessage("mac_lrn_log_14")); return; }
+                if (!isUpdateProcessingStarted) 
+                { 
+                    log(ResourcesUtils.GetMessage("mac_lrn_log_14"));
+                    IsUpdateStarted(false);
+                    return; 
+                }
                 log(ResourcesUtils.GetMessage("mac_lrn_log_6"));
                 log(ResourcesUtils.GetMessage("mac_lrn_log_12"));
                 ConsumeSDCATrainerModel();

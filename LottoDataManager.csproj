@@ -323,6 +323,7 @@
     <Compile Include="Includes\Model\Details\Options\UserSettingsConfig.cs" />
     <Compile Include="Includes\Model\Details\Setup\AppVersioningSetup.cs" />
     <Compile Include="Includes\Model\Details\Setup\LotterySequenceGeneratorSetup.cs" />
+    <Compile Include="Includes\Model\Reports\DashboardReportEvent.cs" />
     <Compile Include="Includes\Model\Reports\DashboardReportGroup.cs" />
     <Compile Include="Includes\Model\Reports\DashboardReportItem.cs" />
     <Compile Include="Includes\Model\Reports\Setup\DashboardReportGroupSetup.cs" />

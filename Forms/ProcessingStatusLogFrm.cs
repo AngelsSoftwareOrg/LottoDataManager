@@ -29,10 +29,16 @@ namespace LottoDataManager.Forms
             this.btnExit.Text = ResourcesUtils.GetMessage("common_btn_exit");
             this.btnClear.Text = ResourcesUtils.GetMessage("common_btn_clear");
         }
+        private void ProcessingStatusLogFrm_Load(object sender, EventArgs e)
+        {
+            richtbLogs.SelectionStart = 0;
+            richtbLogs.SelectionLength = 0;
+            richtbLogs.ScrollToCaret();
+        }
         #endregion
 
         #region Logging Functions
-        
+
         public void AddStatusLogs(String moduleName, String logs)
         {
             AddRichtextMessage(DateTimeConverterUtils.GetDateTimeNowStandardFormat() + " : ", Color.Yellow);
@@ -86,5 +92,7 @@ namespace LottoDataManager.Forms
             ClearLogs();
         }
         #endregion
+
+
     }
 }

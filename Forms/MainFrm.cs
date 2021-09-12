@@ -107,14 +107,13 @@ namespace LottoDataManager
             this.LOG_STATUS_MODULE_NAME_CLIPBOARD_COPY = ResourcesUtils.GetMessage("mainf_labels_56");
 
             AddProcessingStatusLogs(LOG_STATUS_MODULE_NAME_WEBSCRAP, ResourcesUtils.GetMessage("mainf_labels_5"));
-
             dashboardContentIndention = ResourcesUtils.DashboardReportGroupedContentIndention;
-
             ReinitateLotteryServices();
             GenerateLotteriesGameMenu();
             InitializesFormContent();
             RefreshSubscription();
         }
+
         private void RefreshSubscription()
         {
             this.lottoWebScraper.WebScrapingStatus += LottoWebScraper_WebScrapingStatus;
@@ -125,6 +124,7 @@ namespace LottoDataManager
             this.lotteryDataServices = new LotteryDataServices(this.lotteryDetails);
             this.lotteryDataWorker = new LotteryDataWorker();
             this.dashboardReport = new DashboardReport(this.lotteryDataServices);
+            this.dashboardReport.DashboardReportingEvents += DashboardReport_DashboardReportingEvents;
         }
         private void ClearAllForms()
         {
@@ -386,6 +386,10 @@ namespace LottoDataManager
                 ActionableDashboardReportItem(item);
             }
         }
+        private void DashboardReport_DashboardReportingEvents(object sender, DashboardReportEvent e)
+        {
+            processingStatusLogFrm.AddStatusLogs(e.ModuleName,e.ReportLogs);
+        }
         #endregion
 
         #region "Draw Result"
@@ -515,7 +519,6 @@ namespace LottoDataManager
         private void CheckWinningBets()
         {
             lotteryDataWorker.ProcessCheckingForWinningBets(this.lotteryDetails.GameMode);
-            RefreshBets();
         }
         private void LotteryDataWorker_LotteryDataWorkerProcessingStatus(object sender, LotteryDataWorkerEvent e)
         {
