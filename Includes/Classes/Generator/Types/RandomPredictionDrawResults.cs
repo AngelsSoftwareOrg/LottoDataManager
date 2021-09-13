@@ -55,7 +55,8 @@ namespace LottoDataManager.Includes.Classes.Generator.Types
 
                 float tmpScore = predictionResult.Score;
                 if (tmpScore <= 0) tmpScore = (tmpScore * -1) + 1;
-                if (int.Parse(tmpScore.ToString("G20").Substring(0, 1)) >= selectedCoefficient)
+
+                if (int.Parse((tmpScore * 1000).ToString("G20").Substring(0, 1)) >= selectedCoefficient)
                 {
                     int[] x = ConvertAndFillSequence(predictionResult.Score);
                     if (IsUniqueSequence(results, x)) results.Add(x);
