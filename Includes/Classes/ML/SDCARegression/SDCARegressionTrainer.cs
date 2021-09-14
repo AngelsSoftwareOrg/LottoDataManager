@@ -11,19 +11,19 @@ using Microsoft.ML.Trainers;
 
 namespace LottoDataManager.Includes.Classes.ML.SDCARegression
 {
-    public class MachineLearningModelBuilderSDCARegression: MLModelBuilderAbstract
+    public class SDCARegressionTrainer: MLModelBuilderAbstract
     {
-        private static string MODEL_FILE = ConsumeModelSDCARegression.MLNetModelPath;
+        private static string MODEL_FILE = SDCARegressionPredictor.MLNetModelPath;
         private static string OUTPUT_COLUMN_NAME = "PREDICT";
 
         // Create MLContext to be shared across the model creation workflow objects 
         // Set a random seed for repeatable/deterministic results across multiple trainings.
         private static MLContext mlContext = new MLContext(seed: 1);
 
-        public void CreateModel(String trainDataFilePath)
+        public override void CreateModel(String trainDataFilePath)
         {
             InvokeProcessingStatus(ResourcesUtils.GetMessage("mac_lrn_bldr_log_1"));
-            IDataView trainingDataView = mlContext.Data.LoadFromTextFile<ModelInputSDCARegression>(
+            IDataView trainingDataView = mlContext.Data.LoadFromTextFile<SDCARegressionInputModel>(
                                             path: @trainDataFilePath,
                                             hasHeader: true,
                                             separatorChar: ',',
@@ -34,7 +34,7 @@ namespace LottoDataManager.Includes.Classes.ML.SDCARegression
             IEstimator<ITransformer> trainingPipeline = BuildTrainingPipeline(mlContext);
 
             // Train Model
-            ITransformer mlModel = TrainModel(mlContext, trainingDataView, trainingPipeline);
+            ITransformer mlModel = RetrainModel(mlContext, trainingDataView, trainingPipeline);
 
             // Evaluate quality of Model
             Evaluate(mlContext, trainingDataView, trainingPipeline, OUTPUT_COLUMN_NAME);

@@ -11,7 +11,10 @@ using System.Windows.Forms;
 using LottoDataManager.Includes.Classes;
 using LottoDataManager.Includes.Classes.ML;
 using LottoDataManager.Includes.Classes.ML.FastTree;
+using LottoDataManager.Includes.Classes.ML.FastTreeRegression.LottoMatchCount;
 using LottoDataManager.Includes.Classes.ML.SDCARegression;
+using LottoDataManager.Includes.Classes.ML.TrainerProcessor;
+using LottoDataManager.Includes.Model;
 using LottoDataManager.Includes.Model.Details;
 using LottoDataManager.Includes.Model.Structs;
 using LottoDataManager.Includes.Utilities;
@@ -25,18 +28,39 @@ namespace LottoDataManager.Forms
         private delegate void StopRun();
         private bool isUpdateProcessingStarted = false;
         private LotteryDataServices lotteryDataServices;
-        private MachineLearningModelBuilderFastTree machineLearningModelBuilderFastTree;
-        private MachineLearningModelBuilderSDCARegression machineLearningModelBuilderSDCARegression;
+        private FastTreeTrainer machineLearningModelBuilderFastTree;
+        private SDCARegressionTrainer machineLearningModelBuilderSDCARegression;
         private readonly static String DATASET_SDCA = "DataSetSDCA";
         private readonly static String DATASET_FAST_TREE = "DataSetFastTree";
+        private readonly static String DATASET_LOTTO_COUNT_MATCH = "DataSetLottoCountMatch";
+        private List<TrainerProcessorAbstract> trainerProcessorAbstractList;
+
+
+
         public MachineLearningFrm(LotteryDataServices lotteryDataServices)
         {
             InitializeComponent();
+
+            //Debugging
+            //if (lotteryDataServices == null)
+            //    lotteryDataServices = new LotteryDataServices(new Game642());
+            //end debugging
+
+
             this.lotteryDataServices = lotteryDataServices;
-            this.machineLearningModelBuilderFastTree = new MachineLearningModelBuilderFastTree();
-            machineLearningModelBuilderSDCARegression = new MachineLearningModelBuilderSDCARegression();
+            this.machineLearningModelBuilderFastTree = new FastTreeTrainer();
+            this.machineLearningModelBuilderSDCARegression = new SDCARegressionTrainer();
+            this.trainerProcessorAbstractList = new List<TrainerProcessorAbstract>();
+
+            //trainerProcessorAbstractList.Add(new FastTreeTrainerDataIntake(this.lotteryDataServices));
+            //trainerProcessorAbstractList.Add(new SDCARegressionTrainerDataIntake(this.lotteryDataServices));
+            trainerProcessorAbstractList.Add(new LottoMatchCountTrainerDataIntake(this.lotteryDataServices));
+            
+
             machineLearningModelBuilderFastTree.ProcessingStatus += MachineLearningModelBuilder_ProcessingStatus;
             machineLearningModelBuilderSDCARegression.ProcessingStatus += MachineLearningModelBuilder_ProcessingStatus;
+
+
             log(ResourcesUtils.GetMessage("mac_lrn_log_13"));
         }
         private void MachineLearningModelBuilder_ProcessingStatus(object sender, string e)
@@ -60,32 +84,59 @@ namespace LottoDataManager.Forms
                 IsUpdateStarted(true);
                 log(ResourcesUtils.GetMessage("mac_lrn_log_6"));
                 log(ResourcesUtils.GetMessage("mac_lrn_log_11"));
-                ConsumeFastTreeTrainerModel();
-                if (!isUpdateProcessingStarted) 
-                { 
-                    log(ResourcesUtils.GetMessage("mac_lrn_log_14"));
-                    IsUpdateStarted(false);
-                    return; 
+                //ConsumeFastTreeTrainerModel();
+                
+                foreach(TrainerProcessorAbstract trainer in trainerProcessorAbstractList)
+                {
+                    trainer.TrainerProcessorProcessingStatus += Trainer_TrainerProcessorProcessingStatus;
+                    trainer.StartUpdate();
                 }
-                log(ResourcesUtils.GetMessage("mac_lrn_log_6"));
+                
+                if(IsProcessingStop()) return;
+/*                log(ResourcesUtils.GetMessage("mac_lrn_log_6"));
                 log(ResourcesUtils.GetMessage("mac_lrn_log_12"));
                 ConsumeSDCATrainerModel();
+                if (IsProcessingStop()) return;
                 log(ResourcesUtils.GetMessage("mac_lrn_log_6"));
+                log(ResourcesUtils.GetMessage("mac_lrn_log_12"));
+                ConsumeLottoCountMatchTrainerModel();
+                log(ResourcesUtils.GetMessage("mac_lrn_log_6"));*/
                 if (!isUpdateProcessingStarted) log(ResourcesUtils.GetMessage("mac_lrn_log_14"));
                 IsUpdateStarted(false);
             });
         }
+
+        private void Trainer_TrainerProcessorProcessingStatus(object sender, string e)
+        {
+            log(e);
+        }
+
+        private bool IsProcessingStop()
+        {
+            if (!isUpdateProcessingStarted)
+            {
+                log(ResourcesUtils.GetMessage("mac_lrn_log_14"));
+                IsUpdateStarted(false);
+                return true; ;
+            }
+            return false;
+        }
         private void ConsumeFastTreeTrainerModel()
         {
             String headers = "draw_date,num1,num2,num3,num4,num5,num6,game_cd,RESULT\r\n";
-            CommonTrainerModel(DATASET_FAST_TREE, headers);
+            CommonTrainerModelDrawResults(DATASET_FAST_TREE, headers);
         }
         private void ConsumeSDCATrainerModel()
         {
             String headers = "draw_date,num1,num2,num3,num4,num5,num6,PREDICT,winners,game_cd\r\n";
-            CommonTrainerModel(DATASET_SDCA, headers);
+            CommonTrainerModelDrawResults(DATASET_SDCA, headers);
         }
-        internal void CommonTrainerModel(String dataSetType, String headers)
+        private void ConsumeLottoCountMatchTrainerModel()
+        {
+            String headers = "game_cd,num1,num2,num3,num4,num5,num6,match_cntr\n";
+            CommonTrainerModelDrawResults(DATASET_LOTTO_COUNT_MATCH, headers);
+        }
+        internal void CommonTrainerModelDrawResults(String dataSetType, String headers)
         {
             if (!isUpdateProcessingStarted) return;
 
@@ -111,7 +162,7 @@ namespace LottoDataManager.Forms
                         int ctrEvent = 0;
                         foreach (LotteryDrawResult result in lotteryDrawResults)
                         {
-                            String content = result.GetMachineLearningDataSetEntrySDCA() + "\r\n";
+                            String content = result.GetSCDARegressionModelDataIntake() + "\r\n";
                             fs.Write(Encoding.UTF8.GetBytes(content), 0, content.Length);
                             if (startingDateTime.CompareTo(result.GetDrawDate()) < 0)
                             {
@@ -146,7 +197,10 @@ namespace LottoDataManager.Forms
                 {
                     machineLearningModelBuilderFastTree.CreateModel(fileName);
                 }
-                
+                else if (DATASET_LOTTO_COUNT_MATCH.Equals(dataSetType, StringComparison.OrdinalIgnoreCase))
+                {
+                    machineLearningModelBuilderFastTree.CreateModel(fileName);
+                }
                 log(ResourcesUtils.GetMessage("mac_lrn_log_6"));
                 log(ResourcesUtils.GetMessage("mac_lrn_log_8") + fileName + "\r\n\r\n");
                 if (fileName.Contains(FileUtils.TEMP_FILE_MARKED)) File.Delete(fileName);
@@ -155,7 +209,6 @@ namespace LottoDataManager.Forms
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
                 log(e.StackTrace);
             }
         }
@@ -163,10 +216,10 @@ namespace LottoDataManager.Forms
         {
             if (DATASET_SDCA.Equals(dataSetType, StringComparison.OrdinalIgnoreCase))
             {
-                return lotteryDataServices.GetMachineLearningDataSetSDCA(gameMode, startingDateTime);
+                return lotteryDataServices.GetSDCAMLDataSet(gameMode, startingDateTime);
             }else if(DATASET_FAST_TREE.Equals(dataSetType, StringComparison.OrdinalIgnoreCase))
             {
-                return lotteryDataServices.GetMachineLearningDataSetFastTree(gameMode, startingDateTime);
+                return lotteryDataServices.GetFastTreeMLDataSet(gameMode, startingDateTime);
             }
             return null;
         }

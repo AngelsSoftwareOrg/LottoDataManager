@@ -266,15 +266,18 @@ namespace LottoDataManager.Includes.Classes
         {
             return this.lotteryDrawResultDao.GetLatestLotteryResult(this.lotteryDetails.GameMode, howManyDraws);
         }
-        public List<LotteryDrawResult> GetMachineLearningDataSetFastTree(GameMode gameMode, DateTime startingDate)
+        public List<LotteryDrawResult> GetFastTreeMLDataSet(GameMode gameMode, DateTime startingDate)
         {
-            return this.lotteryDrawResultDao.GetMachineLearningDataSetFastTree(gameMode, startingDate);
+            return this.lotteryDrawResultDao.GetFastTreeMLDataSet(gameMode, startingDate);
         }
-        public List<LotteryDrawResult> GetMachineLearningDataSetSDCA(GameMode gameMode, DateTime startingDate)
+        public List<LotteryDrawResult> GetSDCAMLDataSet(GameMode gameMode, DateTime startingDate)
         {
-            return this.lotteryDrawResultDao.GetMachineLearningDataSetSDCA(gameMode, startingDate);
+            return this.lotteryDrawResultDao.GetSDCAMLDataSet(gameMode, startingDate);
         }
-        
+        public List<LotteryBet> GetLottoCountMatchMLDataset(GameMode gameMode, DateTime startingDate)
+        {
+            return this.lotteryBetDao.GetLottoCountMatchMLDataset(gameMode, startingDate);
+        }
         /// <summary>
         /// Get all latest draw dates available in each lottery games.
         /// </summary>

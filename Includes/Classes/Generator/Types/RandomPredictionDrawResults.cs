@@ -46,8 +46,8 @@ namespace LottoDataManager.Includes.Classes.Generator.Types
 
             foreach(LotteryDrawResult lotDraw in lotteryDrawResults)
             {
-                ModelInputFastTree sampleData = lotDraw.GetModelInput();
-                var predictionResult = ConsumeModelFastTree.Predict(sampleData);
+                FastTreeInputModel sampleData = lotDraw.GetFastTreeInputModel();
+                var predictionResult = FastTreePredictor.Predict(sampleData);
 
                 //Console.WriteLine(String.Format("Data: {0}, {1},{2},{3},{4},{5},{6},{7},{8} ", sampleData.Draw_date,
                 //    sampleData.Num1, sampleData.Num2, sampleData.Num3, sampleData.Num4, sampleData.Num5, sampleData.Num6,

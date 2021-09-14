@@ -48,7 +48,7 @@ namespace LottoDataManager.Includes.Classes.Generator.Types
                 int[] lp = LuckyPickGenerator(rnd);
 
                 // Create single instance of sample data from first line of dataset for model input
-                ModelInputFastTree sampleData = new ModelInputFastTree()
+                FastTreeInputModel sampleData = new FastTreeInputModel()
                 {
                     Draw_date = drawDate,
                     Num1 = lp[0],
@@ -61,7 +61,7 @@ namespace LottoDataManager.Includes.Classes.Generator.Types
                 };
 
                 // Make a single prediction on the sample data and print results
-                var predictionResult = ConsumeModelFastTree.Predict(sampleData);
+                var predictionResult = FastTreePredictor.Predict(sampleData);
 
                 //Console.WriteLine(String.Format("Data: {0}, {1},{2},{3},{4},{5},{6},{7},{8} ", sampleData.Draw_date,
                 //    sampleData.Num1, sampleData.Num2, sampleData.Num3, sampleData.Num4, sampleData.Num5, sampleData.Num6,

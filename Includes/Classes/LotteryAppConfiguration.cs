@@ -65,8 +65,8 @@ namespace LottoDataManager.Includes.Classes
         }
         public bool TestMLMainModelFolderSource(String folderPath)
         {
-            if (ConsumeModelFastTree.IsMLModelExisting(folderPath) &&
-            ConsumeModelSDCARegression.IsMLModelExisting(folderPath)) return true;
+            if (FastTreePredictor.IsMLModelExisting(folderPath) &&
+            SDCARegressionPredictor.IsMLModelExisting(folderPath)) return true;
             return false;
         }
         public String MLModelPath

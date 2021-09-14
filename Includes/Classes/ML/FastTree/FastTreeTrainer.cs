@@ -11,20 +11,20 @@ using LottoDataManager.Includes.Utilities;
 
 namespace LottoDataManager.Includes.Classes.ML.FastTree
 {
-    public class MachineLearningModelBuilderFastTree: MLModelBuilderAbstract
+    public class FastTreeTrainer: MLModelBuilderAbstract
     {
-        private static string MODEL_FILE = ConsumeModelFastTree.MLNetModelPath;
+        private static string MODEL_FILE = FastTreePredictor.MLNetModelPath;
         private static string OUTPUT_COLUMN_NAME = "RESULT";
 
         // Create MLContext to be shared across the model creation workflow objects 
         // Set a random seed for repeatable/deterministic results across multiple trainings.
         private static MLContext mlContext = new MLContext(seed: 1);
 
-        public void CreateModel(String mlDataSetsPath)
+        public override void CreateModel(String mlDataSetsPath)
         {
             // Load Data
             InvokeProcessingStatus(ResourcesUtils.GetMessage("mac_lrn_bldr_log_1"));
-            IDataView trainingDataView = mlContext.Data.LoadFromTextFile<ModelInputFastTree>(
+            IDataView trainingDataView = mlContext.Data.LoadFromTextFile<FastTreeInputModel>(
                                             path: @mlDataSetsPath,
                                             hasHeader: true,
                                             separatorChar: ',',
@@ -36,7 +36,7 @@ namespace LottoDataManager.Includes.Classes.ML.FastTree
 
             // Train Model
             InvokeProcessingStatus(ResourcesUtils.GetMessage("mac_lrn_bldr_log_3"));
-            ITransformer mlModel = TrainModel(mlContext, trainingDataView, trainingPipeline);
+            ITransformer mlModel = RetrainModel(mlContext, trainingDataView, trainingPipeline);
 
             // Evaluate quality of Model
             InvokeProcessingStatus(ResourcesUtils.GetMessage("mac_lrn_bldr_log_4"));

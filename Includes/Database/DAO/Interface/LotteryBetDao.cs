@@ -31,5 +31,6 @@ namespace LottoDataManager.Includes.Database.DAO.Interface
         List<double[]> GetTabularAllBetsSpending(List<int> gameCodes);
         List<LotteryBet> GetLotterybetsQueued(GameMode gameMode);
         List<LotteryBet> GetLotteryBetsByMonthy(GameMode gameMode, int year, int month);
+        List<LotteryBet> GetLottoCountMatchMLDataset(GameMode gameMode, DateTime startingDate);
     }
 }

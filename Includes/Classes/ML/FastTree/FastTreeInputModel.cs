@@ -4,7 +4,7 @@ using Microsoft.ML.Data;
 
 namespace LottoDataManager.Includes.Classes.ML.FastTree
 {
-    public class ModelInputFastTree
+    public class FastTreeInputModel
     {
         [ColumnName("draw_date"), LoadColumn(0)]
         public string Draw_date { get; set; }

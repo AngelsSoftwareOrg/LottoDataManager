@@ -357,9 +357,15 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
             bet.Num4 = int.Parse(reader["num4"].ToString());
             bet.Num5 = int.Parse(reader["num5"].ToString());
             bet.Num6 = int.Parse(reader["num6"].ToString());
-            if (ColumnExists(reader,"O_OUTLET_CD")){
+            if (ColumnExists(reader, "O_OUTLET_CD"))
+            {
                 bet.MatchNumCount = int.Parse(reader["match_cnt"].ToString());
             }
+            else if (ColumnExists(reader, "match_cnt"))
+            { 
+                bet.MatchNumCount = int.Parse(reader["match_cnt"].ToString());
+            }
+            
             if (ColumnExists(reader, "O_OUTLET_CD"))
             {
                 LotteryOutletSetup o = new LotteryOutletSetup()
@@ -888,6 +894,48 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                 }
             }
             return resultList;
+        }
+        public List<LotteryBet> GetLottoCountMatchMLDataset(GameMode gameMode, DateTime startingDate)
+        {
+            List<LotteryBet> lotteryBet = new List<LotteryBet>();
+            using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
+            using (OleDbCommand command = new OleDbCommand())
+            {
+                command.CommandType = CommandType.Text;
+                command.CommandText = " SELECT a.*, " +
+                                      "       (   IIF(a.num1 IN(b.num1, b.num2, b.num3, b.num4, b.num5, b.num6), 1, 0) +    " +
+                                      "           IIF(a.num2 IN(b.num1, b.num2, b.num3, b.num4, b.num5, b.num6), 1, 0) +    " +
+                                      "           IIF(a.num3 IN(b.num1, b.num2, b.num3, b.num4, b.num5, b.num6), 1, 0) +    " +
+                                      "            IIF(a.num4 IN(b.num1, b.num2, b.num3, b.num4, b.num5, b.num6), 1, 0) +   " +
+                                      "           IIF(a.num5 IN(b.num1, b.num2, b.num3, b.num4, b.num5, b.num6), 1, 0) +    " +
+                                      "           IIF(a.num6 IN(b.num1, b.num2, b.num3, b.num4, b.num5, b.num6), 1, 0)      " +
+                                      "       ) AS [match_cnt] " +
+                                      "  FROM (((lottery_bet a   " +
+                                      "  LEFT OUTER JOIN draw_results b   " +
+                                      "    ON a.target_draw_date = b.draw_date)   " +
+                                      "  LEFT OUTER JOIN lottery_outlet o   " +
+                                      "    ON o.outlet_cd = a.outlet_cd)  " +
+                                      "  LEFT OUTER JOIN lottery_seq_gen s  " +
+                                      "   ON a.seqgencd = s.seqgencd)  " +
+                                      " WHERE a.game_cd = @game_cd " +
+                                      "   AND a.game_cd = b.game_cd " +
+                                      "   AND a.target_draw_date > CDATE(@startingDate) " +
+                                      "   AND a.active = true   " +
+                                      " ORDER BY a.game_cd ASC ";
+                command.Parameters.AddWithValue("@game_cd", gameMode);
+                command.Parameters.AddWithValue("@startingDate", startingDate.Date.ToString());
+                command.Connection = conn;
+                conn.Open();
+
+                using (OleDbDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        lotteryBet.Add(GetInstanceDeriveLotteryBetSetup(reader));
+                    }
+                }
+            }
+            return lotteryBet;
         }
     }
 }

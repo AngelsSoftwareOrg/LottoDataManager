@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LottoDataManager.Includes.Classes.ML.FastTreeRegression;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -23,5 +24,7 @@ namespace LottoDataManager.Includes.Model.Details
         LotterySequenceGenerator GetLotterySequenceGenerator();
         String GetGNUFormat();
         LotteryWinningBet GetLotteryWinningBet();
+        LottoMatchCountInputModel GetLottoMatchCountInputModel();
+        String GetLottoMatchCountTrainerModelDataIntake();
     }
 }

@@ -17,10 +17,10 @@ namespace LottoDataManager.Includes.Model.Details
         bool IsDrawResulDetailsEmpty();
         void PutNumberSequence(String sequence);
         bool IsDrawResulSequenceEmpty();
-        ModelInputFastTree GetModelInput();
-        ModelInputSDCARegression GetModelInputSDCARegression();
-        String GetMachineLearningDataSetEntryFastTree();
-        String GetMachineLearningDataSetEntrySDCA();
+        FastTreeInputModel GetFastTreeInputModel();
+        SDCARegressionInputModel GetSDCARegressionInputModel();
+        String GetFastTreeTrainerModelDataIntake();
+        String GetSCDARegressionModelDataIntake();
         String GetGNUFormat();
         String GetExtractedDrawnResultDetails();
     }

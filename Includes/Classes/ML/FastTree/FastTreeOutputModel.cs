@@ -3,9 +3,9 @@
 using System;
 using Microsoft.ML.Data;
 
-namespace LottoDataManager.Includes.Classes.ML.SDCARegression
+namespace LottoDataManager.Includes.Classes.ML.FastTree
 {
-    public class ModelOutputSDCARegression
+    public class FastTreeOutputModel
     {
         public float Score { get; set; }
     }

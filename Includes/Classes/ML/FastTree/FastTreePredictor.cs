@@ -9,9 +9,9 @@ using Microsoft.ML;
 
 namespace LottoDataManager.Includes.Classes.ML.FastTree
 {
-    public class ConsumeModelFastTree: MLModelAbstract
+    public class FastTreePredictor: MLModelAbstract
     {
-        private static Lazy<PredictionEngine<ModelInputFastTree, ModelOutputFastTree>> PredictionEngine = new Lazy<PredictionEngine<ModelInputFastTree, ModelOutputFastTree>>(CreatePredictionEngine);
+        private static Lazy<PredictionEngine<FastTreeInputModel, FastTreeOutputModel>> PredictionEngine = new Lazy<PredictionEngine<FastTreeInputModel, FastTreeOutputModel>>(CreatePredictionEngine);
         private static readonly String MODEL_NAME = "MLModel_14_3H_Fast_Tree.zip";
 
         public static String MLNetModelPath
@@ -29,20 +29,20 @@ namespace LottoDataManager.Includes.Classes.ML.FastTree
 
         // For more info on consuming ML.NET models, visit https://aka.ms/mlnet-consume
         // Method for consuming model in your app
-        public static ModelOutputFastTree Predict(ModelInputFastTree input)
+        public static FastTreeOutputModel Predict(FastTreeInputModel input)
         {
-            ModelOutputFastTree result = PredictionEngine.Value.Predict(input);
+            FastTreeOutputModel result = PredictionEngine.Value.Predict(input);
             return result;
         }
 
-        public static PredictionEngine<ModelInputFastTree, ModelOutputFastTree> CreatePredictionEngine()
+        public static PredictionEngine<FastTreeInputModel, FastTreeOutputModel> CreatePredictionEngine()
         {
             // Create new MLContext
             MLContext mlContext = new MLContext();
 
             // Load model & create prediction engine
             ITransformer mlModel = mlContext.Model.Load(MLNetModelPath, out var modelInputSchema);
-            var predEngine = mlContext.Model.CreatePredictionEngine<ModelInputFastTree, ModelOutputFastTree>(mlModel);
+            var predEngine = mlContext.Model.CreatePredictionEngine<FastTreeInputModel, FastTreeOutputModel>(mlModel);
 
             return predEngine;
         }

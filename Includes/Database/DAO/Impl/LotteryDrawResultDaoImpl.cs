@@ -506,7 +506,7 @@ namespace LottoDataManager.Includes.Database.DAO
                 "  FROM draw_results " +
                 " WHERE game_cd = @game_cd ";
         }
-        public List<LotteryDrawResult> GetMachineLearningDataSetFastTree(GameMode gameMode, DateTime startingDate)
+        public List<LotteryDrawResult> GetFastTreeMLDataSet(GameMode gameMode, DateTime startingDate)
         {
             List<LotteryDrawResult> results = new List<LotteryDrawResult>();
             using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
@@ -534,7 +534,7 @@ namespace LottoDataManager.Includes.Database.DAO
             }
             return results;
         }
-        public List<LotteryDrawResult> GetMachineLearningDataSetSDCA(GameMode gameMode, DateTime startingDate)
+        public List<LotteryDrawResult> GetSDCAMLDataSet(GameMode gameMode, DateTime startingDate)
         {
             List<LotteryDrawResult> results = new List<LotteryDrawResult>();
             using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
