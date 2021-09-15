@@ -38,11 +38,8 @@ namespace LottoDataManager.Includes.Classes.ML.TrainerProcessor
         protected abstract void CreateTrainerModel(String fileName);
         protected abstract String GetDataSetEntry(Object lotteryModel);
         protected abstract DateTime GetDrawDateEquivalent(Object lotteryObject);
-
         protected void CommonTrainerModelDrawResults()
         {
-            //if (!isUpdateProcessingStarted) return;
-
             log(ResourcesUtils.GetMessage("mac_lrn_log_1"));
             String fileName = FileUtils.GetCSVTempFilePathName();
             TrainerDataIntakeModel intakeModel = new TrainerDataIntakeModel();
@@ -74,11 +71,9 @@ namespace LottoDataManager.Includes.Classes.ML.TrainerProcessor
                             {
                                 startingDateTime = GetDrawDateEquivalent(result);
                             }
-                            //if (!isUpdateProcessingStarted) break;
                         }
 
                         if (lotteryObjResults.Count <= 0) break;
-                        //if (!isUpdateProcessingStarted) break;
                     }
                     log(ResourcesUtils.GetMessage("mac_lrn_log_5"));
                     log(ResourcesUtils.GetMessage("mac_lrn_log_6"));
@@ -91,7 +86,6 @@ namespace LottoDataManager.Includes.Classes.ML.TrainerProcessor
         {
             try
             {
-                //if (!isUpdateProcessingStarted) return;
                 log(ResourcesUtils.GetMessage("mac_lrn_log_7") + "\r\n\r\n");
                 modelBuilderAbstract.CreateModel(fileName);
                 log(ResourcesUtils.GetMessage("mac_lrn_log_6"));

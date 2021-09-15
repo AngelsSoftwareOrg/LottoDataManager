@@ -45,6 +45,14 @@ namespace LottoDataManager.Forms
             this.btnGenerate = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.grpbxOutput = new System.Windows.Forms.GroupBox();
+            this.objLvGenSeq = new BrightIdeasSoftware.ObjectListView();
+            this.olvSeq = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvNum1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvNum2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvNum3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvNum4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvNum5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvNum6 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.ctxMenuBet = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.checkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.uncheckAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,14 +62,6 @@ namespace LottoDataManager.Forms
             this.linkUncheckAll = new System.Windows.Forms.LinkLabel();
             this.btnAddSelected = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
-            this.objLvGenSeq = new BrightIdeasSoftware.ObjectListView();
-            this.olvSeq = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvNum1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvNum2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvNum3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvNum4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvNum5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvNum6 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.panel1.SuspendLayout();
             this.grpbxParam.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -70,16 +70,16 @@ namespace LottoDataManager.Forms
             this.grpbxActions.SuspendLayout();
             this.panel2.SuspendLayout();
             this.grpbxOutput.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.objLvGenSeq)).BeginInit();
             this.ctxMenuBet.SuspendLayout();
             this.grpbxFinalActions.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.objLvGenSeq)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel1.Controls.Add(this.grpbxParam);
             this.panel1.Controls.Add(this.grpbxGenType);
+            this.panel1.Controls.Add(this.grpbxParam);
             this.panel1.Controls.Add(this.grpbxActions);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
@@ -90,7 +90,7 @@ namespace LottoDataManager.Forms
             // grpbxParam
             // 
             this.grpbxParam.Controls.Add(this.panel3);
-            this.grpbxParam.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grpbxParam.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.grpbxParam.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpbxParam.ForeColor = System.Drawing.Color.Navy;
             this.grpbxParam.Location = new System.Drawing.Point(0, 264);
@@ -130,7 +130,7 @@ namespace LottoDataManager.Forms
             // grpbxGenType
             // 
             this.grpbxGenType.Controls.Add(this.lvGenType);
-            this.grpbxGenType.Dock = System.Windows.Forms.DockStyle.Top;
+            this.grpbxGenType.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grpbxGenType.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.grpbxGenType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpbxGenType.ForeColor = System.Drawing.Color.Navy;
@@ -225,7 +225,7 @@ namespace LottoDataManager.Forms
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(580, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(546, 573);
+            this.panel2.Size = new System.Drawing.Size(597, 573);
             this.panel2.TabIndex = 1;
             // 
             // grpbxOutput
@@ -236,10 +236,76 @@ namespace LottoDataManager.Forms
             this.grpbxOutput.ForeColor = System.Drawing.Color.Navy;
             this.grpbxOutput.Location = new System.Drawing.Point(0, 0);
             this.grpbxOutput.Name = "grpbxOutput";
-            this.grpbxOutput.Size = new System.Drawing.Size(542, 439);
+            this.grpbxOutput.Size = new System.Drawing.Size(593, 439);
             this.grpbxOutput.TabIndex = 0;
             this.grpbxOutput.TabStop = false;
             this.grpbxOutput.Text = "Step 4: Output";
+            // 
+            // objLvGenSeq
+            // 
+            this.objLvGenSeq.AllColumns.Add(this.olvSeq);
+            this.objLvGenSeq.AllColumns.Add(this.olvNum1);
+            this.objLvGenSeq.AllColumns.Add(this.olvNum2);
+            this.objLvGenSeq.AllColumns.Add(this.olvNum3);
+            this.objLvGenSeq.AllColumns.Add(this.olvNum4);
+            this.objLvGenSeq.AllColumns.Add(this.olvNum5);
+            this.objLvGenSeq.AllColumns.Add(this.olvNum6);
+            this.objLvGenSeq.CellEditUseWholeCell = false;
+            this.objLvGenSeq.CheckBoxes = true;
+            this.objLvGenSeq.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.olvSeq,
+            this.olvNum1,
+            this.olvNum2,
+            this.olvNum3,
+            this.olvNum4,
+            this.olvNum5,
+            this.olvNum6});
+            this.objLvGenSeq.ContextMenuStrip = this.ctxMenuBet;
+            this.objLvGenSeq.Cursor = System.Windows.Forms.Cursors.Default;
+            this.objLvGenSeq.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.objLvGenSeq.FullRowSelect = true;
+            this.objLvGenSeq.GridLines = true;
+            this.objLvGenSeq.HasCollapsibleGroups = false;
+            this.objLvGenSeq.HideSelection = false;
+            this.objLvGenSeq.Location = new System.Drawing.Point(3, 20);
+            this.objLvGenSeq.Name = "objLvGenSeq";
+            this.objLvGenSeq.SelectedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.objLvGenSeq.SelectedColumnTint = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.objLvGenSeq.SelectedForeColor = System.Drawing.Color.White;
+            this.objLvGenSeq.ShowGroups = false;
+            this.objLvGenSeq.Size = new System.Drawing.Size(587, 416);
+            this.objLvGenSeq.TabIndex = 1;
+            this.objLvGenSeq.UseCompatibleStateImageBehavior = false;
+            this.objLvGenSeq.View = System.Windows.Forms.View.Details;
+            this.objLvGenSeq.SelectionChanged += new System.EventHandler(this.objLvGenSeq_SelectionChanged);
+            // 
+            // olvSeq
+            // 
+            this.olvSeq.Text = "#";
+            // 
+            // olvNum1
+            // 
+            this.olvNum1.Text = "#1";
+            // 
+            // olvNum2
+            // 
+            this.olvNum2.Text = "#2";
+            // 
+            // olvNum3
+            // 
+            this.olvNum3.Text = "#3";
+            // 
+            // olvNum4
+            // 
+            this.olvNum4.Text = "#4";
+            // 
+            // olvNum5
+            // 
+            this.olvNum5.Text = "#5";
+            // 
+            // olvNum6
+            // 
+            this.olvNum6.Text = "#6";
             // 
             // ctxMenuBet
             // 
@@ -286,7 +352,7 @@ namespace LottoDataManager.Forms
             this.grpbxFinalActions.ForeColor = System.Drawing.Color.Navy;
             this.grpbxFinalActions.Location = new System.Drawing.Point(0, 439);
             this.grpbxFinalActions.Name = "grpbxFinalActions";
-            this.grpbxFinalActions.Size = new System.Drawing.Size(542, 130);
+            this.grpbxFinalActions.Size = new System.Drawing.Size(593, 130);
             this.grpbxFinalActions.TabIndex = 1;
             this.grpbxFinalActions.TabStop = false;
             this.grpbxFinalActions.Text = "Step 5: Final Action";
@@ -298,7 +364,7 @@ namespace LottoDataManager.Forms
             this.btnViewCompareHits.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnViewCompareHits.ForeColor = System.Drawing.Color.Black;
             this.btnViewCompareHits.Image = global::LottoDataManager.Properties.Resources.hit_compare_32_a_px;
-            this.btnViewCompareHits.Location = new System.Drawing.Point(63, 53);
+            this.btnViewCompareHits.Location = new System.Drawing.Point(114, 53);
             this.btnViewCompareHits.Name = "btnViewCompareHits";
             this.btnViewCompareHits.Size = new System.Drawing.Size(174, 69);
             this.btnViewCompareHits.TabIndex = 3;
@@ -326,7 +392,7 @@ namespace LottoDataManager.Forms
             this.btnAddSelected.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddSelected.ForeColor = System.Drawing.Color.Black;
             this.btnAddSelected.Image = global::LottoDataManager.Properties.Resources.money_32px;
-            this.btnAddSelected.Location = new System.Drawing.Point(243, 53);
+            this.btnAddSelected.Location = new System.Drawing.Point(294, 53);
             this.btnAddSelected.Name = "btnAddSelected";
             this.btnAddSelected.Size = new System.Drawing.Size(201, 69);
             this.btnAddSelected.TabIndex = 1;
@@ -343,7 +409,7 @@ namespace LottoDataManager.Forms
             this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExit.ForeColor = System.Drawing.Color.Black;
             this.btnExit.Image = global::LottoDataManager.Properties.Resources.Exit_32;
-            this.btnExit.Location = new System.Drawing.Point(450, 53);
+            this.btnExit.Location = new System.Drawing.Point(501, 53);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(89, 69);
             this.btnExit.TabIndex = 0;
@@ -353,78 +419,12 @@ namespace LottoDataManager.Forms
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
-            // objLvGenSeq
-            // 
-            this.objLvGenSeq.AllColumns.Add(this.olvSeq);
-            this.objLvGenSeq.AllColumns.Add(this.olvNum1);
-            this.objLvGenSeq.AllColumns.Add(this.olvNum2);
-            this.objLvGenSeq.AllColumns.Add(this.olvNum3);
-            this.objLvGenSeq.AllColumns.Add(this.olvNum4);
-            this.objLvGenSeq.AllColumns.Add(this.olvNum5);
-            this.objLvGenSeq.AllColumns.Add(this.olvNum6);
-            this.objLvGenSeq.CellEditUseWholeCell = false;
-            this.objLvGenSeq.CheckBoxes = true;
-            this.objLvGenSeq.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.olvSeq,
-            this.olvNum1,
-            this.olvNum2,
-            this.olvNum3,
-            this.olvNum4,
-            this.olvNum5,
-            this.olvNum6});
-            this.objLvGenSeq.ContextMenuStrip = this.ctxMenuBet;
-            this.objLvGenSeq.Cursor = System.Windows.Forms.Cursors.Default;
-            this.objLvGenSeq.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.objLvGenSeq.FullRowSelect = true;
-            this.objLvGenSeq.GridLines = true;
-            this.objLvGenSeq.HasCollapsibleGroups = false;
-            this.objLvGenSeq.HideSelection = false;
-            this.objLvGenSeq.Location = new System.Drawing.Point(3, 20);
-            this.objLvGenSeq.Name = "objLvGenSeq";
-            this.objLvGenSeq.SelectedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.objLvGenSeq.SelectedColumnTint = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.objLvGenSeq.SelectedForeColor = System.Drawing.Color.White;
-            this.objLvGenSeq.ShowGroups = false;
-            this.objLvGenSeq.Size = new System.Drawing.Size(536, 416);
-            this.objLvGenSeq.TabIndex = 1;
-            this.objLvGenSeq.UseCompatibleStateImageBehavior = false;
-            this.objLvGenSeq.View = System.Windows.Forms.View.Details;
-            this.objLvGenSeq.SelectionChanged += new System.EventHandler(this.objLvGenSeq_SelectionChanged);
-            // 
-            // olvSeq
-            // 
-            this.olvSeq.Text = "#";
-            // 
-            // olvNum1
-            // 
-            this.olvNum1.Text = "#1";
-            // 
-            // olvNum2
-            // 
-            this.olvNum2.Text = "#2";
-            // 
-            // olvNum3
-            // 
-            this.olvNum3.Text = "#3";
-            // 
-            // olvNum4
-            // 
-            this.olvNum4.Text = "#4";
-            // 
-            // olvNum5
-            // 
-            this.olvNum5.Text = "#5";
-            // 
-            // olvNum6
-            // 
-            this.olvNum6.Text = "#6";
-            // 
             // PickGeneratorFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnExit;
-            this.ClientSize = new System.Drawing.Size(1126, 573);
+            this.ClientSize = new System.Drawing.Size(1177, 573);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -443,10 +443,10 @@ namespace LottoDataManager.Forms
             this.grpbxActions.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.grpbxOutput.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.objLvGenSeq)).EndInit();
             this.ctxMenuBet.ResumeLayout(false);
             this.grpbxFinalActions.ResumeLayout(false);
             this.grpbxFinalActions.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.objLvGenSeq)).EndInit();
             this.ResumeLayout(false);
 
         }

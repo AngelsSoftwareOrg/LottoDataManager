@@ -84,6 +84,21 @@ namespace LottoDataManager.Includes.Model.Details.Setup
 
             allNumbers[seq - 1] = number;
         }
+        public void FillNumberBySeq(int[] seq)
+        {
+            for(int x=1; x<= seq.Length; x++)
+            {
+                FillNumberBySeq(x, seq[x - 1]);
+            }
+        }
+        public void ResetSequenceToZero()
+        {
+            for(int x=0; x < allNumbers.Length; x++)
+            {
+                allNumbers[x] = 0;
+                allNumbersOriginalOrder[x] = 0;
+            }
+        }
         public bool IsNumberSequenceMatchesAll(int[] toMatchNumSeq)
         {
             if (allNumbers.Length != toMatchNumSeq.Length) return false;

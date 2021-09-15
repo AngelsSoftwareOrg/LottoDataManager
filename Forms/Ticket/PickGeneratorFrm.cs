@@ -147,6 +147,7 @@ namespace LottoDataManager.Forms
             DisplayGenerators(new RandomPredictionDrawResults(this.lotteryDataServices));
             DisplayGenerators(new RandomPredictionSDCARegression(this.lotteryDataServices));
             DisplayGenerators(new RandomPredictionSDCARegressionInBetween(this.lotteryDataServices));
+            DisplayGenerators(new LottoCountMatchPredictionFastTreeRegression(this.lotteryDataServices));
         }
         private void DisplayGenerators(SequenceGenerator seqGen)
         {

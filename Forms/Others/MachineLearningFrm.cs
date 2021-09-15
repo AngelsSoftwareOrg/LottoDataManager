@@ -30,37 +30,23 @@ namespace LottoDataManager.Forms
         private LotteryDataServices lotteryDataServices;
         private FastTreeTrainer machineLearningModelBuilderFastTree;
         private SDCARegressionTrainer machineLearningModelBuilderSDCARegression;
-        private readonly static String DATASET_SDCA = "DataSetSDCA";
-        private readonly static String DATASET_FAST_TREE = "DataSetFastTree";
-        private readonly static String DATASET_LOTTO_COUNT_MATCH = "DataSetLottoCountMatch";
         private List<TrainerProcessorAbstract> trainerProcessorAbstractList;
-
-
 
         public MachineLearningFrm(LotteryDataServices lotteryDataServices)
         {
             InitializeComponent();
-
-            //Debugging
-            //if (lotteryDataServices == null)
-            //    lotteryDataServices = new LotteryDataServices(new Game642());
-            //end debugging
-
 
             this.lotteryDataServices = lotteryDataServices;
             this.machineLearningModelBuilderFastTree = new FastTreeTrainer();
             this.machineLearningModelBuilderSDCARegression = new SDCARegressionTrainer();
             this.trainerProcessorAbstractList = new List<TrainerProcessorAbstract>();
 
-            //trainerProcessorAbstractList.Add(new FastTreeTrainerDataIntake(this.lotteryDataServices));
-            //trainerProcessorAbstractList.Add(new SDCARegressionTrainerDataIntake(this.lotteryDataServices));
+            trainerProcessorAbstractList.Add(new FastTreeTrainerDataIntake(this.lotteryDataServices));
+            trainerProcessorAbstractList.Add(new SDCARegressionTrainerDataIntake(this.lotteryDataServices));
             trainerProcessorAbstractList.Add(new LottoMatchCountTrainerDataIntake(this.lotteryDataServices));
-            
 
             machineLearningModelBuilderFastTree.ProcessingStatus += MachineLearningModelBuilder_ProcessingStatus;
             machineLearningModelBuilderSDCARegression.ProcessingStatus += MachineLearningModelBuilder_ProcessingStatus;
-
-
             log(ResourcesUtils.GetMessage("mac_lrn_log_13"));
         }
         private void MachineLearningModelBuilder_ProcessingStatus(object sender, string e)
@@ -84,23 +70,14 @@ namespace LottoDataManager.Forms
                 IsUpdateStarted(true);
                 log(ResourcesUtils.GetMessage("mac_lrn_log_6"));
                 log(ResourcesUtils.GetMessage("mac_lrn_log_11"));
-                //ConsumeFastTreeTrainerModel();
-                
                 foreach(TrainerProcessorAbstract trainer in trainerProcessorAbstractList)
                 {
-                    trainer.TrainerProcessorProcessingStatus += Trainer_TrainerProcessorProcessingStatus;
+                    if (IsProcessingStop()) break; ;
+                    trainer.TrainerProcessorProcessingStatus += Trainer_TrainerProcessorProcessingStatus; //bind
                     trainer.StartUpdate();
+                    trainer.TrainerProcessorProcessingStatus -= Trainer_TrainerProcessorProcessingStatus; //unbind
                 }
                 
-                if(IsProcessingStop()) return;
-/*                log(ResourcesUtils.GetMessage("mac_lrn_log_6"));
-                log(ResourcesUtils.GetMessage("mac_lrn_log_12"));
-                ConsumeSDCATrainerModel();
-                if (IsProcessingStop()) return;
-                log(ResourcesUtils.GetMessage("mac_lrn_log_6"));
-                log(ResourcesUtils.GetMessage("mac_lrn_log_12"));
-                ConsumeLottoCountMatchTrainerModel();
-                log(ResourcesUtils.GetMessage("mac_lrn_log_6"));*/
                 if (!isUpdateProcessingStarted) log(ResourcesUtils.GetMessage("mac_lrn_log_14"));
                 IsUpdateStarted(false);
             });
@@ -115,114 +92,12 @@ namespace LottoDataManager.Forms
         {
             if (!isUpdateProcessingStarted)
             {
-                log(ResourcesUtils.GetMessage("mac_lrn_log_14"));
                 IsUpdateStarted(false);
                 return true; ;
             }
             return false;
         }
-        private void ConsumeFastTreeTrainerModel()
-        {
-            String headers = "draw_date,num1,num2,num3,num4,num5,num6,game_cd,RESULT\r\n";
-            CommonTrainerModelDrawResults(DATASET_FAST_TREE, headers);
-        }
-        private void ConsumeSDCATrainerModel()
-        {
-            String headers = "draw_date,num1,num2,num3,num4,num5,num6,PREDICT,winners,game_cd\r\n";
-            CommonTrainerModelDrawResults(DATASET_SDCA, headers);
-        }
-        private void ConsumeLottoCountMatchTrainerModel()
-        {
-            String headers = "game_cd,num1,num2,num3,num4,num5,num6,match_cntr\n";
-            CommonTrainerModelDrawResults(DATASET_LOTTO_COUNT_MATCH, headers);
-        }
-        internal void CommonTrainerModelDrawResults(String dataSetType, String headers)
-        {
-            if (!isUpdateProcessingStarted) return;
 
-            log(ResourcesUtils.GetMessage("mac_lrn_log_1"));
-            String fileName = FileUtils.GetCSVTempFilePathName();
-
-            log(ResourcesUtils.GetMessage("mac_lrn_log_2") + fileName + "\r\n");
-            using (FileStream fs = File.Create(fileName))
-            {
-                byte[] info = new UTF8Encoding(true).GetBytes(headers);
-                fs.Write(info, 0, info.Length);
-
-                foreach (Lottery lottery in this.lotteryDataServices.GetLotteries())
-                {
-                    log(ResourcesUtils.GetMessage("mac_lrn_log_3") + lottery.GetDescription());
-
-                    DateTime startingDateTime = DateTimeConverterUtils.GetYear2011();
-                    while (true)
-                    {
-                        List<LotteryDrawResult> lotteryDrawResults = GetDataSets(dataSetType, lottery.GetGameMode(), startingDateTime);
-                        if (lotteryDrawResults.Count > 0) log(ResourcesUtils.GetMessage("mac_lrn_log_4") + lotteryDrawResults.Count);
-
-                        int ctrEvent = 0;
-                        foreach (LotteryDrawResult result in lotteryDrawResults)
-                        {
-                            String content = result.GetSCDARegressionModelDataIntake() + "\r\n";
-                            fs.Write(Encoding.UTF8.GetBytes(content), 0, content.Length);
-                            if (startingDateTime.CompareTo(result.GetDrawDate()) < 0)
-                            {
-                                startingDateTime = result.GetDrawDate();
-                            }
-                            if (ctrEvent++ % 500 == 0) Application.DoEvents();
-                            if (!isUpdateProcessingStarted) break;
-                        }
-
-                        if (lotteryDrawResults.Count <= 0) break;
-                        Application.DoEvents();
-                        if (!isUpdateProcessingStarted) break;
-                    }
-                    log(ResourcesUtils.GetMessage("mac_lrn_log_5"));
-                    log(ResourcesUtils.GetMessage("mac_lrn_log_6"));
-                    fs.Flush();
-                }
-            }
-            CommonCreateModel(dataSetType, fileName);
-        }
-        private void CommonCreateModel(String dataSetType, String fileName)
-        {
-            try
-            {
-                if (!isUpdateProcessingStarted) return;
-                log(ResourcesUtils.GetMessage("mac_lrn_log_7") + "\r\n\r\n");
-                if (DATASET_SDCA.Equals(dataSetType, StringComparison.OrdinalIgnoreCase))
-                {
-                    machineLearningModelBuilderSDCARegression.CreateModel(fileName);
-                }
-                else if (DATASET_FAST_TREE.Equals(dataSetType, StringComparison.OrdinalIgnoreCase))
-                {
-                    machineLearningModelBuilderFastTree.CreateModel(fileName);
-                }
-                else if (DATASET_LOTTO_COUNT_MATCH.Equals(dataSetType, StringComparison.OrdinalIgnoreCase))
-                {
-                    machineLearningModelBuilderFastTree.CreateModel(fileName);
-                }
-                log(ResourcesUtils.GetMessage("mac_lrn_log_6"));
-                log(ResourcesUtils.GetMessage("mac_lrn_log_8") + fileName + "\r\n\r\n");
-                if (fileName.Contains(FileUtils.TEMP_FILE_MARKED)) File.Delete(fileName);
-                log(ResourcesUtils.GetMessage("mac_lrn_log_6"));
-                log(ResourcesUtils.GetMessage("mac_lrn_log_9") + "\r\n\r\n");
-            }
-            catch (Exception e)
-            {
-                log(e.StackTrace);
-            }
-        }
-        private List<LotteryDrawResult> GetDataSets(String dataSetType, GameMode gameMode, DateTime startingDateTime)
-        {
-            if (DATASET_SDCA.Equals(dataSetType, StringComparison.OrdinalIgnoreCase))
-            {
-                return lotteryDataServices.GetSDCAMLDataSet(gameMode, startingDateTime);
-            }else if(DATASET_FAST_TREE.Equals(dataSetType, StringComparison.OrdinalIgnoreCase))
-            {
-                return lotteryDataServices.GetFastTreeMLDataSet(gameMode, startingDateTime);
-            }
-            return null;
-        }
         private void log(String msg)
         {
             // InvokeRequired required compares the thread ID of the

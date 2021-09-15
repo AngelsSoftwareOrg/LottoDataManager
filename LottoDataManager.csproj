@@ -167,6 +167,7 @@
     <Compile Include="Includes\Classes\Generator\AbstractSequenceGenerator.cs" />
     <Compile Include="Includes\Classes\Generator\GeneratorParamType.cs" />
     <Compile Include="Includes\Classes\Generator\GeneratorType.cs" />
+    <Compile Include="Includes\Classes\Generator\Types\LottoCountMatchPredictionFastTreeRegression.cs" />
     <Compile Include="Includes\Classes\Generator\Types\NumberNotYetPickUpGenerator.cs" />
     <Compile Include="Includes\Classes\Generator\SequenceGeneratorParamFieldsFormFactory.cs" />
     <Compile Include="Includes\Classes\Generator\SequenceGenerator.cs" />
