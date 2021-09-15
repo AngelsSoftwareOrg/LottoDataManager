@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LottoDataManager.Includes.Classes.Generator;
 using LottoDataManager.Includes.Database.DAO;
 using LottoDataManager.Includes.Database.DAO.Impl;
 using LottoDataManager.Includes.Database.DAO.Interface;
@@ -261,6 +262,12 @@ namespace LottoDataManager.Includes.Classes
                 throw new Exception(ResourcesUtils.GetMessage("lott_seq_gen_msg1"));
             }
             this.lotterySeqGenDao.UpdateDescription(updatedModel);
+        }
+        public void InsertLotterySequenceGenerator(LotterySequenceGenerator insertModel)
+        {
+            LotterySequenceGenerator genModel = lotterySeqGenDao.GetSeqGeneratorByCode(insertModel.GetSeqGenCode());
+            if (genModel != null) return;
+            this.lotterySeqGenDao.InsertSequenceGenerator(insertModel);
         }
         public List<LotteryDrawResult> GetLatestLotteryResult(int howManyDraws)
         {

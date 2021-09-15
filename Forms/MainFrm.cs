@@ -24,6 +24,7 @@ using LottoDataManager.Includes.Utilities;
 using AngelsRepositoryLib;
 using LottoDataManager.Forms.Others;
 using LottoDataManager.Includes.Classes.Extensions;
+using LottoDataManager.Includes.Classes.Updates;
 
 namespace LottoDataManager
 {
@@ -42,15 +43,16 @@ namespace LottoDataManager
         private String LOG_STATUS_MODULE_NAME_WINNING_BETS;
         private String LOG_STATUS_MODULE_NAME_DRAWN_RESULT;
         private String LOG_STATUS_MODULE_NAME_CLIPBOARD_COPY;
+        private String LOG_STATUS_MODULE_NAME_APP_UPDATE;
         private int processingLogStatusCtr = 0;
         private int dashboardContentIndention = 3;
+        private ApplicationUpdateProcessor applicationUpdateProcessor;
 
         public MainForm()
         {
             InitializeComponent();
             this.lotteryDetails = GameFactory.GetPreviousOpenGameInstance();
             this.processingStatusLogFrm = new ProcessingStatusLogFrm();
-
             this.Text = String.Format("{0} - {1}", ResourcesUtils.GetMessage("mainf_title"), AppSettings.GetAppVersionWithPrefix());
             this.label1.Text = ResourcesUtils.GetMessage("mainf_labels_1");
             this.label3.Text = ResourcesUtils.GetMessage("mainf_labels_2");
@@ -105,6 +107,7 @@ namespace LottoDataManager
             this.LOG_STATUS_MODULE_NAME_WINNING_BETS = ResourcesUtils.GetMessage("mainf_labels_54");
             this.LOG_STATUS_MODULE_NAME_DRAWN_RESULT = ResourcesUtils.GetMessage("mainf_labels_55");
             this.LOG_STATUS_MODULE_NAME_CLIPBOARD_COPY = ResourcesUtils.GetMessage("mainf_labels_56");
+            this.LOG_STATUS_MODULE_NAME_APP_UPDATE = ResourcesUtils.GetMessage("mainf_labels_58");
 
             AddProcessingStatusLogs(LOG_STATUS_MODULE_NAME_WEBSCRAP, ResourcesUtils.GetMessage("mainf_labels_5"));
             dashboardContentIndention = ResourcesUtils.DashboardReportGroupedContentIndention;
@@ -112,6 +115,9 @@ namespace LottoDataManager
             GenerateLotteriesGameMenu();
             InitializesFormContent();
             RefreshSubscription();
+            this.applicationUpdateProcessor = ApplicationUpdateProcessor.GetInstance();
+            this.applicationUpdateProcessor.PatchingProcessingLogs += ApplicationUpdateProcessor_PatchingProcessingLogs;
+            this.HandleCreated += MainForm_HandleCreated;
         }
 
         private void RefreshSubscription()
@@ -862,11 +868,14 @@ namespace LottoDataManager
             paddedBounds.Offset(1, yOffset);
             TextRenderer.DrawText(e.Graphics, page.Text, font, paddedBounds, fontColor);
         }
-
-
-
-
-
+        private void ApplicationUpdateProcessor_PatchingProcessingLogs(object sender, string e)
+        {
+            processingStatusLogFrm.AddStatusLogs(this.LOG_STATUS_MODULE_NAME_APP_UPDATE, e);
+        }
+        private void MainForm_HandleCreated(object sender, EventArgs e)
+        {
+            this.applicationUpdateProcessor.StartUpdate(lotteryDataServices);
+        }
 
         #endregion
 

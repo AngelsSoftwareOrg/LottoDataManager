@@ -14,9 +14,10 @@ namespace LottoDataManager.Forms
     public partial class ProcessingStatusLogFrm : Form
     {
         private readonly int PROCESS_LOGS_MAXIMUM_LINE_CONTENT = ResourcesUtils.ProcessLogsMaximumLineContent;
-
+        private List<String[]> statusLogsDelayed;
         public ProcessingStatusLogFrm()
         {
+            this.statusLogsDelayed = new List<string[]>();
             InitializeComponent();
             ClearLogs();
             FormSetup();
@@ -28,7 +29,9 @@ namespace LottoDataManager.Forms
             this.Text = ResourcesUtils.GetMessage("procs_stat_log_frm_msg_1");
             this.btnExit.Text = ResourcesUtils.GetMessage("common_btn_exit");
             this.btnClear.Text = ResourcesUtils.GetMessage("common_btn_clear");
+            this.HandleCreated += ProcessingStatusLogFrm_HandleCreated;
         }
+
         private void ProcessingStatusLogFrm_Load(object sender, EventArgs e)
         {
             richtbLogs.SelectionStart = 0;
@@ -39,9 +42,26 @@ namespace LottoDataManager.Forms
 
         #region Logging Functions
 
+        private void ProcessingStatusLogFrm_HandleCreated(object sender, EventArgs e)
+        {
+            foreach(String[] logsEntry in statusLogsDelayed)
+            {
+                AddStatusLogsDisplayOnTextBox(logsEntry[0], logsEntry[1], logsEntry[2]);
+            }
+            statusLogsDelayed.Clear();
+        }
+
         public void AddStatusLogs(String moduleName, String logs)
         {
-            AddRichtextMessage(DateTimeConverterUtils.GetDateTimeNowStandardFormat() + " : ", Color.Yellow);
+            this.statusLogsDelayed.Add(new String[] { 
+                                    DateTimeConverterUtils.GetDateTimeNowStandardFormat(), 
+                                    moduleName, 
+                                    logs});
+        }
+
+        public void AddStatusLogsDisplayOnTextBox(String dateTimeStr, String moduleName, String logs)
+        {
+            AddRichtextMessage(dateTimeStr + " : ", Color.Yellow);
             AddRichtextMessage(moduleName + " : ", Color.LightBlue);
             AddRichtextMessage(logs, Color.White);
             richtbLogs.AppendText(Environment.NewLine);

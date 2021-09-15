@@ -306,6 +306,7 @@
     <Compile Include="Includes\Classes\Scraping\LottoWebScraperEvent.cs" />
     <Compile Include="Includes\Classes\Scraping\LottoWebScrapingStages.cs" />
     <Compile Include="Includes\Classes\Scraping\WebLottoScraperFactory.cs" />
+    <Compile Include="Includes\Classes\Updates\ApplicationUpdateProcessor.cs" />
     <Compile Include="Includes\Classes\UserSettings.cs" />
     <Compile Include="Includes\Database\DAO\Impl\AppVersioningDaoImpl.cs" />
     <Compile Include="Includes\Database\DAO\Impl\LotteryBetDaoImpl.cs" />

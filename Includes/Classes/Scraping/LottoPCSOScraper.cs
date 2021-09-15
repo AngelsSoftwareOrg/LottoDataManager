@@ -179,6 +179,7 @@ namespace LottoDataManager.Includes.Classes.Scraping
 
         private void RaiseEvent(LottoWebScrapingStages stage, int progress = 0, String addedInfo="")
         {
+            if (WebScrapingStatus == null) return;
             lottoWebScraperEvent.LottoWebScrapingStage = stage;
             lottoWebScraperEvent.GameMode = currentLotteryDetailsProcess.GameMode;
             lottoWebScraperEvent.Progress = progress;
