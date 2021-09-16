@@ -59,6 +59,8 @@ namespace LottoDataManager.Includes.Classes.Reports
             TriggerLogs(ResourcesUtils.GetMessage("drpt_lot_trigger_logs_15"));
             dashboardReportList.AddRange(GetLatestDrawResultsPerLotteryGame());
             TriggerLogs(ResourcesUtils.GetMessage("drpt_lot_trigger_logs_16"));
+            dashboardReportList.AddRange(GetLatestDrawResultsJackpotPerLotteryGame());
+            TriggerLogs(ResourcesUtils.GetMessage("drpt_lot_trigger_logs_17"));
             return dashboardReportList;
         }
         public List<DashboardReportGroup> GetDashboardReportInGroup()
@@ -402,6 +404,26 @@ namespace LottoDataManager.Includes.Classes.Reports
                                                 ((int)diffWithToday.TotalDays).ToString());
                 DashboardReportItemSetup itm = GenModel(key, value);
                 itm.GroupKeyName = ResourcesUtils.GetMessage("drpt_lot_draw_group_lbl");
+                itm.ReportItemDecoration.IsHyperLink = true;
+                itm.DashboardReportItemAction = DashboardReportItemActions.OPEN_LOTTERY_GAME;
+                itm.Tag = lottery.GetGameMode();
+                itemsList.Add(itm);
+            }
+            return itemsList;
+        }
+        private List<DashboardReportItemSetup> GetLatestDrawResultsJackpotPerLotteryGame()
+        {
+            List<DashboardReportItemSetup> itemsList = new List<DashboardReportItemSetup>();
+            List<LotteryDrawResult> latestDrawResults = LotteryDataServices.GetLatestDrawResults();
+            List<Lottery> lotteriesGameList = LotteryDataServices.GetLotteries();
+
+            foreach (LotteryDrawResult draw in latestDrawResults)
+            {
+                Lottery lottery = lotteriesGameList.Find((lotteryObj) => (int)lotteryObj.GetGameMode() == draw.GetGameCode());
+                String key = lottery.GetDescription();
+                String value = draw.GetJackpotAmtFormatted();
+                DashboardReportItemSetup itm = GenModel(key, value);
+                itm.GroupKeyName = ResourcesUtils.GetMessage("drpt_lot_draw_jackpot_lbl");
                 itm.ReportItemDecoration.IsHyperLink = true;
                 itm.DashboardReportItemAction = DashboardReportItemActions.OPEN_LOTTERY_GAME;
                 itm.Tag = lottery.GetGameMode();

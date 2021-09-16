@@ -296,7 +296,7 @@ namespace LottoDataManager.Includes.Classes
             List<LotteryDrawResult> drList = new List<LotteryDrawResult>();
             foreach(int gmcd in gameCd)
             {
-                drList.Add(lotteryDrawResultDao.GetLatestDrawResults(gmcd));
+                drList.Add(lotteryDrawResultDao.GetLatestDrawResult(gmcd));
             }
             return drList;
         }

@@ -26,8 +26,7 @@ namespace LottoDataManager.Forms
         private LotteryTicketPanel lotteryTicketPanel;
         private LotteryAppConfiguration lotteryAppConfiguration;
         private String NODE_NAME_OPTION_CONFIG = "nodeConfig";
-
-        public object ResourcesUtil { get; private set; }
+        private bool isSourceDatabaseChange;
 
         public LotterySettingsFrm(LotteryDataServices lotteryDataServices)
         {
@@ -122,6 +121,7 @@ namespace LottoDataManager.Forms
         }
         private void LotterySettingsFrm_Load(object sender, EventArgs e)
         {
+            this.isSourceDatabaseChange = false;
             HideAllTabsOnTabControl(mainTabControl);
             SetDefaultSelectedSetting();
         }
@@ -627,6 +627,8 @@ namespace LottoDataManager.Forms
             try
             {
                 if (!IsLotteryConfigFieldsValid()) return;
+                this.isSourceDatabaseChange = !lotteryAppConfiguration.DBSourcePath.Equals(txtConfigDBSource.Text, 
+                                   StringComparison.OrdinalIgnoreCase);
                 lotteryAppConfiguration.DBSourcePath = txtConfigDBSource.Text;
                 lotteryAppConfiguration.MLModelPath = txtConfigFolderML.Text;
                 lotteryAppConfiguration.SaveConfigFile();
@@ -675,6 +677,8 @@ namespace LottoDataManager.Forms
             this.mainMenuTreeView.Nodes.Clear();
             this.mainMenuTreeView.Nodes.Add(configNode);
         }
+        public bool IsSourceDatabaseChange { get => isSourceDatabaseChange; }
+
         #endregion
 
 

@@ -394,7 +394,7 @@ namespace LottoDataManager
         }
         private void DashboardReport_DashboardReportingEvents(object sender, DashboardReportEvent e)
         {
-            processingStatusLogFrm.AddStatusLogs(e.ModuleName,e.ReportLogs);
+            AddProcessingStatusLogs(e.ModuleName,e.ReportLogs);
         }
         #endregion
 
@@ -468,7 +468,6 @@ namespace LottoDataManager
             processingLogStatusCtr++;
             processingStatusLogFrm.AddStatusLogs(moduleName, logs);
             UpdateProcessingStatusLogsLabel();
-            Application.DoEvents();
         }
         private void toolStripProcessingLogs_Click(object sender, EventArgs e)
         {
@@ -765,6 +764,7 @@ namespace LottoDataManager
         {
             LotterySettingsFrm settings = new LotterySettingsFrm(lotteryDataServices);
             settings.ShowDialog(this);
+            if(settings.IsSourceDatabaseChange) DoApplicationUpdate();
             RefreshBets();
         }
         private void checkWinningBetsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -870,9 +870,14 @@ namespace LottoDataManager
         }
         private void ApplicationUpdateProcessor_PatchingProcessingLogs(object sender, string e)
         {
-            processingStatusLogFrm.AddStatusLogs(this.LOG_STATUS_MODULE_NAME_APP_UPDATE, e);
+            AddProcessingStatusLogs(this.LOG_STATUS_MODULE_NAME_APP_UPDATE, e);
         }
         private void MainForm_HandleCreated(object sender, EventArgs e)
+        {
+            DoApplicationUpdate();
+        }
+
+        private void DoApplicationUpdate()
         {
             this.applicationUpdateProcessor.StartUpdate(lotteryDataServices);
         }

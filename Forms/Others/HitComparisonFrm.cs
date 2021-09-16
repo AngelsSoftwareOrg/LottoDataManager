@@ -20,13 +20,6 @@ namespace LottoDataManager.Forms.Others
         {
             InitializeComponent();
             this.lotteryDataServices = lotteryDataServices;
-
-            //Debugging
-            //#if DEBUG
-            //if(lotteryDataServices==null)
-            //   this.lotteryDataServices = new LotteryDataServices(new Game642());
-            //#endif
-            //end debugging
         }
 
         #region BET LISTVIEW
@@ -125,7 +118,6 @@ namespace LottoDataManager.Forms.Others
         #endregion
 
         #region MAIN FORM
-
         private void HitComparisonFrm_Load(object sender, EventArgs e)
         {
             SetupFormLabels();
@@ -258,11 +250,7 @@ namespace LottoDataManager.Forms.Others
         }
         #endregion
 
-
         #region PUBLIC FUNCTIONS
-        //List<LotteryBet>
-
-
         public List<LotteryBet> UserDefinedLotteryBets
         {
             set
@@ -274,7 +262,31 @@ namespace LottoDataManager.Forms.Others
         {
             userDefinedLotteryBets = null;
         }
+        public bool LotteryBetsCheckboxes
+        {
+            get
+            {
+                return objListVwBet.CheckBoxes;
+            }
+            set
+            {
+                objListVwBet.CheckBoxes = value;
+            }
+        }
+        public List<LotteryBet> GetCheckedLotteryBets
+        {
+            get
+            {
+                if (!LotteryBetsCheckboxes) return null;
+                List<LotteryBet> bets = new List<LotteryBet>();
+                foreach(OLVListItem item in objListVwBet.CheckedItems)
+                {
+                    LotteryBetSetup bet = (LotteryBetSetup)item.RowObject;
+                    bets.Add(bet);
+                }
+                return bets;
+            }
+        }
         #endregion
-
     }
 }

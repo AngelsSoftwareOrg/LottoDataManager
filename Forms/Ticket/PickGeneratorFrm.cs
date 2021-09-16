@@ -375,8 +375,28 @@ namespace LottoDataManager.Forms
                 arrBet.Add(item);
             }
             hitComparisonFrm.UserDefinedLotteryBets = arrBet;
+            hitComparisonFrm.LotteryBetsCheckboxes = true;
             hitComparisonFrm.ShowDialog(this);
+            AutoCheckSelectedBetsFromHitComparisonForm(hitComparisonFrm.GetCheckedLotteryBets);
             hitComparisonFrm.Dispose();
+        }
+
+        private void AutoCheckSelectedBetsFromHitComparisonForm(List<LotteryBet> selectedLotteryBets)
+        {
+            LotteryBet seqGenVisibleItem = null;
+            foreach (LotteryBet bet in selectedLotteryBets)
+            {
+                foreach (LotteryBet seqGen in objLvGenSeq.Objects)
+                {
+                    if(seqGen.GetGNUFormat().Equals(bet.GetGNUFormat(), StringComparison.OrdinalIgnoreCase))
+                    {
+                        objLvGenSeq.CheckObject(seqGen);
+                        seqGenVisibleItem = seqGen;
+                    }
+                }
+            }
+            //ensure last item check is visible/auto scroll
+            if (seqGenVisibleItem != null) objLvGenSeq.EnsureModelVisible(seqGenVisibleItem);
         }
     }
 }

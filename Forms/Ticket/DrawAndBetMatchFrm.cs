@@ -36,7 +36,8 @@ namespace LottoDataManager.Forms
         }
         private void SetupForms()
         {
-            this.Text = ResourcesUtils.GetMessage("dabm_form_msg_1");
+            this.Text = String.Format(ResourcesUtils.GetMessage("dabm_form_msg_1"),
+                    this.lotteryDataServices.LotteryDetails.Description);
             this.groupBoxDrawResult.Text = ResourcesUtils.GetMessage("dabm_form_msg_2");
             this.groupBoxYourBet.Text = ResourcesUtils.GetMessage("dabm_form_msg_3");
             this.label1.Text = ResourcesUtils.GetMessage("dabm_form_msg_4");

@@ -68,11 +68,9 @@ namespace LottoDataManager.Includes.Database.DAO
                 using (OleDbDataReader reader = command.ExecuteReader())
                 {
                     if (!reader.HasRows) return lotteryDrawResult;
-                    lotteryDrawResult = new LotteryDrawResultSetup();
                     while (reader.Read())
                     {
                         return GetLotteryDrawResultSetup(reader, gameMode);
-                        
                     }
                 }
             }
@@ -99,7 +97,7 @@ namespace LottoDataManager.Includes.Database.DAO
             }
             return results;
         }
-        public LotteryDrawResult GetLatestDrawResults(int gameCd)
+        public LotteryDrawResult GetLatestDrawResult(int gameCd)
         {
             using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
             using (OleDbCommand command = new OleDbCommand())
