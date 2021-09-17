@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Lotto Data Manager"
-#define MyAppVersion "1.0.0.3"
+#define MyAppVersion "1.0.0.6"
 #define MyAppPublisher "AngelsSoftwareOrg"
 #define MyAppURL "https://github.com/AngelsSoftwareOrg"
 #define MyAppExeName "LottoDataManager.exe"
@@ -11,7 +11,7 @@
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-AppId={{18CCDA2B-411E-475D-87D6-3E4577070C7F}
+AppId={{5EEAB061-7D35-4292-981C-C2A3DEC189A1}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 ;AppVerName={#MyAppName} {#MyAppVersion}
