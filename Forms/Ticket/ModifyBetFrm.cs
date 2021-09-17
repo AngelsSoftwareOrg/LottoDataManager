@@ -23,6 +23,7 @@ namespace LottoDataManager.Forms
         private readonly String MODIFIED_TAG = "modified";
         private List<LotteryOutlet> lotteryOutletList;
         private List<LotterySequenceGenerator> lotterySequenceGeneratorList;
+        private bool hasDataUpdates = false;
 
         public ModifyBetFrm(LotteryDataServices lotteryDataServices)
         {
@@ -315,6 +316,7 @@ namespace LottoDataManager.Forms
                         toolStripStatusLbl.Text = String.Format(ResourcesUtils.GetMessage("modfy_bets_msg_13"), lotBet.GetSimpleContentDetails());
                         toolStripProgBar.Value = ConverterUtils.GetPercentageFloored(++ctr, totalCheckedObjects);
                         this.lotteryDataServices.SaveLotteryBetChange(lotBet);
+                        hasDataUpdates = true;
                         Application.DoEvents();
                     }
                     FillUpBetList();
@@ -331,6 +333,10 @@ namespace LottoDataManager.Forms
                 toolStripProgBar.Value = 0;
                 toolStripProgBar.Visible = false;
             }
+        }
+        public bool HasDataUpdates
+        {
+            get { return hasDataUpdates;  }
         }
         #endregion
 

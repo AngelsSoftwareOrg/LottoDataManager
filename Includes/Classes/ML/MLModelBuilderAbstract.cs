@@ -13,12 +13,12 @@ namespace LottoDataManager.Includes.Classes.ML
     public abstract class MLModelBuilderAbstract
     {
         public event EventHandler<String> ProcessingStatus;
-
+        public abstract void CreateModel(String mlDataSetsPath);
         protected void InvokeProcessingStatus(String statusMessage)
         {
+            if (ProcessingStatus == null) return;
             ProcessingStatus.Invoke(this, statusMessage);
         }
-
         public void PrintRegressionFoldsAverageMetrics(IEnumerable<TrainCatalogBase.CrossValidationResult<RegressionMetrics>> crossValidationResults)
         {
             var L1 = crossValidationResults.Select(r => r.Metrics.MeanAbsoluteError);
@@ -57,7 +57,6 @@ namespace LottoDataManager.Includes.Classes.ML
                 InvokeProcessingStatus(s.ToString());
             }
         }
-
         public string GetAbsolutePath(string relativePath)
         {
             FileInfo _dataRoot = new FileInfo(typeof(Program).Assembly.Location);
@@ -76,7 +75,7 @@ namespace LottoDataManager.Includes.Classes.ML
                 InvokeProcessingStatus(s.ToString());
             }
         }
-        public ITransformer TrainModel(MLContext mlContext, IDataView trainingDataView, IEstimator<ITransformer> trainingPipeline)
+        public ITransformer RetrainModel(MLContext mlContext, IDataView trainingDataView, IEstimator<ITransformer> trainingPipeline)
         {
             using (StringWriter s = new StringWriter())
             {

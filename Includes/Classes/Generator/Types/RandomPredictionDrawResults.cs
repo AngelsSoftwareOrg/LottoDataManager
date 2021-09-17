@@ -46,8 +46,8 @@ namespace LottoDataManager.Includes.Classes.Generator.Types
 
             foreach(LotteryDrawResult lotDraw in lotteryDrawResults)
             {
-                ModelInputFastTree sampleData = lotDraw.GetModelInput();
-                var predictionResult = ConsumeModelFastTree.Predict(sampleData);
+                FastTreeInputModel sampleData = lotDraw.GetFastTreeInputModel();
+                var predictionResult = FastTreePredictor.Predict(sampleData);
 
                 //Console.WriteLine(String.Format("Data: {0}, {1},{2},{3},{4},{5},{6},{7},{8} ", sampleData.Draw_date,
                 //    sampleData.Num1, sampleData.Num2, sampleData.Num3, sampleData.Num4, sampleData.Num5, sampleData.Num6,
@@ -55,7 +55,8 @@ namespace LottoDataManager.Includes.Classes.Generator.Types
 
                 float tmpScore = predictionResult.Score;
                 if (tmpScore <= 0) tmpScore = (tmpScore * -1) + 1;
-                if (int.Parse(tmpScore.ToString("G20").Substring(0, 1)) >= selectedCoefficient)
+
+                if (int.Parse((tmpScore * 1000).ToString("G20").Substring(0, 1)) >= selectedCoefficient)
                 {
                     int[] x = ConvertAndFillSequence(predictionResult.Score);
                     if (IsUniqueSequence(results, x)) results.Add(x);

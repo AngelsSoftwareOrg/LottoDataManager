@@ -17,8 +17,12 @@ namespace LottoDataManager.Includes.Model.Details.Setup
         private bool claimStatus;
         private int outletCd;
         private String outletDesc;
+        private List<int> actualWinningNumbers;
 
-        public LotteryWinningBetSetup() : base(){}
+        public LotteryWinningBetSetup() : base()
+        {
+            this.actualWinningNumbers = new List<int>();
+        }
         public long LotteryBetId { get => lotteryBetId; set => lotteryBetId = value; }
         public double WinningAmount { get => winningAmount; set => winningAmount = value; }
         public bool ClaimStatus { get => claimStatus; set => claimStatus = value; }
@@ -26,7 +30,20 @@ namespace LottoDataManager.Includes.Model.Details.Setup
         public string OutletDesc { get => outletDesc; set => outletDesc = value; }
         public DateTime TargetDrawDate { get => targetDrawDate; set => targetDrawDate = value; }
         public long ID { get => id; set => id = value; }
+        public void AddWinningNumber(int num)
+        {
+            if (num <= 0) return;
+            this.actualWinningNumbers.Add(num);
+        }
+        public void ClearWinningsNumbers()
+        {
+            this.actualWinningNumbers.Clear();
+        }
 
+        public bool IsWinningNum(int num)
+        {
+            return this.actualWinningNumbers.Contains(num);
+        }
         public long GetLotteryBetId()
         {
             return LotteryBetId;

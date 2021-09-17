@@ -22,8 +22,9 @@ using LottoDataManager.Includes.Model.Reports;
 using LottoDataManager.Includes.Model.Structs;
 using LottoDataManager.Includes.Utilities;
 using AngelsRepositoryLib;
-using LottoDataManager.Forms.Ticket;
+using LottoDataManager.Forms.Others;
 using LottoDataManager.Includes.Classes.Extensions;
+using LottoDataManager.Includes.Classes.Updates;
 
 namespace LottoDataManager
 {
@@ -41,14 +42,17 @@ namespace LottoDataManager
         private String LOG_STATUS_MODULE_NAME_FIELD_DETAILS;
         private String LOG_STATUS_MODULE_NAME_WINNING_BETS;
         private String LOG_STATUS_MODULE_NAME_DRAWN_RESULT;
+        private String LOG_STATUS_MODULE_NAME_CLIPBOARD_COPY;
+        private String LOG_STATUS_MODULE_NAME_APP_UPDATE;
         private int processingLogStatusCtr = 0;
+        private int dashboardContentIndention = 3;
+        private ApplicationUpdateProcessor applicationUpdateProcessor;
 
         public MainForm()
         {
             InitializeComponent();
             this.lotteryDetails = GameFactory.GetPreviousOpenGameInstance();
             this.processingStatusLogFrm = new ProcessingStatusLogFrm();
-
             this.Text = String.Format("{0} - {1}", ResourcesUtils.GetMessage("mainf_title"), AppSettings.GetAppVersionWithPrefix());
             this.label1.Text = ResourcesUtils.GetMessage("mainf_labels_1");
             this.label3.Text = ResourcesUtils.GetMessage("mainf_labels_2");
@@ -56,7 +60,6 @@ namespace LottoDataManager
             this.label5.Text = ResourcesUtils.GetMessage("mainf_labels_4");
             
             this.toolStripProcessingLogs.Text = ResourcesUtils.GetMessage("mainf_labels_46");
-            this.tabPage1.Text = ResourcesUtils.GetMessage("mainf_labels_6");
             this.groupBox1.Text = ResourcesUtils.GetMessage("mainf_labels_7");
             this.groupBox2.Text = ResourcesUtils.GetMessage("mainf_labels_8");
             this.label2.Text = ResourcesUtils.GetMessage("mainf_labels_9");
@@ -103,13 +106,20 @@ namespace LottoDataManager
             this.LOG_STATUS_MODULE_NAME_FIELD_DETAILS = ResourcesUtils.GetMessage("mainf_labels_53");
             this.LOG_STATUS_MODULE_NAME_WINNING_BETS = ResourcesUtils.GetMessage("mainf_labels_54");
             this.LOG_STATUS_MODULE_NAME_DRAWN_RESULT = ResourcesUtils.GetMessage("mainf_labels_55");
-            AddProcessingStatusLogs(LOG_STATUS_MODULE_NAME_WEBSCRAP, ResourcesUtils.GetMessage("mainf_labels_5"));
+            this.LOG_STATUS_MODULE_NAME_CLIPBOARD_COPY = ResourcesUtils.GetMessage("mainf_labels_56");
+            this.LOG_STATUS_MODULE_NAME_APP_UPDATE = ResourcesUtils.GetMessage("mainf_labels_58");
 
+            AddProcessingStatusLogs(LOG_STATUS_MODULE_NAME_WEBSCRAP, ResourcesUtils.GetMessage("mainf_labels_5"));
+            dashboardContentIndention = ResourcesUtils.DashboardReportGroupedContentIndention;
             ReinitateLotteryServices();
             GenerateLotteriesGameMenu();
             InitializesFormContent();
             RefreshSubscription();
+            this.applicationUpdateProcessor = ApplicationUpdateProcessor.GetInstance();
+            this.applicationUpdateProcessor.PatchingProcessingLogs += ApplicationUpdateProcessor_PatchingProcessingLogs;
+            this.HandleCreated += MainForm_HandleCreated;
         }
+
         private void RefreshSubscription()
         {
             this.lottoWebScraper.WebScrapingStatus += LottoWebScraper_WebScrapingStatus;
@@ -120,6 +130,7 @@ namespace LottoDataManager
             this.lotteryDataServices = new LotteryDataServices(this.lotteryDetails);
             this.lotteryDataWorker = new LotteryDataWorker();
             this.dashboardReport = new DashboardReport(this.lotteryDataServices);
+            this.dashboardReport.DashboardReportingEvents += DashboardReport_DashboardReportingEvents;
         }
         private void ClearAllForms()
         {
@@ -127,7 +138,7 @@ namespace LottoDataManager
             lblLifetimeWinnins.Text = "";
             lblNextDrawDate.Text = "";
             lblWinningsThisMonth.Text = "";
-            listViewOtherDetails.Items.Clear();
+            objLVDashboard.SetObjects(null);
             objectLstVwLatestBet.SetObjects(null);
             objListVwWinningNum.SetObjects(null);
         }
@@ -173,6 +184,32 @@ namespace LottoDataManager
                 this.olvColWinStamp.AspectToStringConverter = delegate (object rowObject) {
                     return String.Empty;
                 };
+
+                //DASHBOARD TAB GROUP
+                this.olvdbDesc.AspectGetter = delegate (object rowObject) {
+                    if (rowObject == null) return 0;
+                    DashboardReportItem g = (DashboardReportItem)rowObject;
+                    return g.GetDescription();
+                };
+                this.olvdbValue.AspectGetter = delegate (object rowObject) {
+                    if (rowObject == null) return 0;
+                    DashboardReportItem g = (DashboardReportItem)rowObject;
+                    return g.GetValue();
+                };
+                this.olvdbDesc.GroupKeyGetter = delegate (object rowObject) {
+                    if (rowObject == null) return 0;
+                    DashboardReportItem g = (DashboardReportItem)rowObject;
+                    return g.GetGroupKeyName();
+                };
+                this.olvdbDesc.GroupFormatter = (/*OLVGroup*/ group, /*GroupingParameters*/ parms) =>
+                {
+                    if (group.Items.Count > 0)
+                    {
+                        DashboardReportItem item = (DashboardReportItem) group.Items[0].RowObject;
+                        group.Task = item.GetGroupTaskLabel();
+                    }
+                };
+                
 
                 this.Enabled = false;
                 ClearAllForms();
@@ -238,17 +275,6 @@ namespace LottoDataManager
                 MessageBox.Show(e.Message);
             }
         }
-        private void RefreshDrawResultListViewGridContent()
-        {
-            this.olvColBetDrawDate.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
-            this.olvColBetNum1.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
-            this.olvColBetNum2.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
-            this.olvColBetNum3.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
-            this.olvColBetNum4.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
-            this.olvColBetNum5.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
-            this.olvColBetNum6.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
-            this.olvColBetResult.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
-        }
         private void RefreshFieldDetails()
         {
             //Game642 Mode
@@ -279,33 +305,49 @@ namespace LottoDataManager
             this.olvColumnTargetFilter = tmpOLVColumns.ToArray();
             return this.olvColumnTargetFilter;
         }
-        private void RefreshDashboardReport()
+        #endregion
+
+        #region "Tab Dashboard Group List View"
+        private void RefreshDashboardGroupReport()
         {
-            listViewOtherDetails.BeginUpdate();
-            listViewOtherDetails.Items.Clear();
-            foreach (DashboardReportItem dpitm in dashboardReport.GetDashboardReport())
-            {
-                ListViewItem itm = new ListViewItem(dpitm.GetDescription());
-                itm.SubItems.Add(dpitm.GetValue());
-                itm.Tag = dpitm;
-                if (dpitm.IsHighlight()) itm.BackColor = dpitm.GetHighlightColor();
-                if (dpitm.GetFontColor() != Color.Black) itm.ForeColor = dpitm.GetFontColor();
-                listViewOtherDetails.Items.Add(itm);
-            }
-            listViewOtherDetails.EndUpdate();
+            this.objLVDashboard.SetObjects(dashboardReport.GetDashboardReport());
+            this.olvdbDesc.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
+            this.olvdbValue.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
-        private void listViewOtherDetails_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void objLVDashboard_FormatRow(object sender, FormatRowEventArgs e)
         {
-            ListViewHitTestInfo info = listViewOtherDetails.HitTest(e.X, e.Y);
+            if (e == null) return;
+            DashboardReportItem item = (DashboardReportItem)e.Model;
+            if (item.GetReportItemDecoration().IsHighlightColor)
+            {
+                e.Item.BackColor = item.GetReportItemDecoration().HighlightColor;
+            }
+            e.UseCellFormatEvents = true;
+        }
+        private void objLVDashboard_FormatCell(object sender, FormatCellEventArgs e)
+        {
+            if (e == null) return;
+            DashboardReportItem item = (DashboardReportItem)e.Model;
+            if (e.SubItem.ForeColor != item.GetReportItemDecoration().FontColor){
+                e.SubItem.ForeColor = item.GetReportItemDecoration().FontColor;
+            }
+
+            //indention on dashboard report grouped 
+            e.Item.Text = "  ".PadLeft(dashboardContentIndention) + e.Item.Text;
+        }
+        private void objLVDashboard_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+
+            ListViewHitTestInfo info = objLVDashboard.HitTest(e.X, e.Y);
             ListViewItem item = info.Item;
 
-            if (item == null)
+            if (objLVDashboard.SelectedItems.Count > 1)
             {
-                this.listViewOtherDetails.SelectedItems.Clear();
+                this.objLVDashboard.SelectedItems.Clear();
                 return;
             }
 
-            DashboardReportItem rptItem = (DashboardReportItem)item.Tag;
+            DashboardReportItem rptItem = (DashboardReportItem)objLVDashboard.SelectedItem.RowObject;
             if (rptItem.GetDashboardReportItemActions() != DashboardReportItemActions.NONE)
             {
                 ActionableDashboardReportItem(rptItem);
@@ -316,9 +358,44 @@ namespace LottoDataManager
             if (rptItem.GetDashboardReportItemActions() == DashboardReportItemActions.OPEN_CLAIM_FORM)
             {
                 ShowModifyClaimStatus();
+            } 
+            else if (rptItem.GetDashboardReportItemActions() == DashboardReportItemActions.OPEN_LOTTERY_GAME)
+            {
+                GameMode gameMode = (GameMode) rptItem.GetTag();
+                OpenLotteryGame(gameMode);
             }
         }
-
+        private void objLVDashboard_GroupTaskClicked(object sender, GroupTaskClickedEventArgs e)
+        {
+            if (e.Group.Items.Count > 0)
+            {
+                DashboardReportItem item = (DashboardReportItem)e.Group.Items[0].RowObject;
+                ActionableDashboardReportItem(item);
+            }
+        }
+        private void objLVDashboard_IsHyperlink(object sender, IsHyperlinkEventArgs e)
+        {
+            if (e.Model == null) return;
+            DashboardReportItem item = (DashboardReportItem)e.Model;
+            if (!item.GetReportItemDecoration().IsHyperLink)
+            {
+                e.IsHyperlink = false;
+                e.Url = null;
+            }
+        }
+        private void objLVDashboard_HyperlinkClicked(object sender, HyperlinkClickedEventArgs e)
+        {
+            if (e.Model == null) return;
+            DashboardReportItem item = (DashboardReportItem)e.Model;
+            if (item.GetReportItemDecoration().IsHyperLink)
+            {
+                ActionableDashboardReportItem(item);
+            }
+        }
+        private void DashboardReport_DashboardReportingEvents(object sender, DashboardReportEvent e)
+        {
+            AddProcessingStatusLogs(e.ModuleName,e.ReportLogs);
+        }
         #endregion
 
         #region "Draw Result"
@@ -371,6 +448,17 @@ namespace LottoDataManager
             this.objectLstVwLatestBet.SelectedForeColor = Color.Black;
             this.objectLstVwLatestBet.Refresh();
         }
+        private void objListVwWinningNum_FormatRow(object sender, FormatRowEventArgs e)
+        {
+            if (e.Model == null) return;
+            LotteryDrawResult result = (LotteryDrawResult)e.Model;
+            if(result.GetWinners() > 0)
+            {
+                e.Item.BackColor = Color.GreenYellow;
+                e.Item.ForeColor = Color.Black;
+            }
+        }
+
         #endregion
 
         #region "Status Strip"
@@ -380,7 +468,6 @@ namespace LottoDataManager
             processingLogStatusCtr++;
             processingStatusLogFrm.AddStatusLogs(moduleName, logs);
             UpdateProcessingStatusLogsLabel();
-            Application.DoEvents();
         }
         private void toolStripProcessingLogs_Click(object sender, EventArgs e)
         {
@@ -415,7 +502,7 @@ namespace LottoDataManager
         {
             RefreshFieldDetails();
             RefreshBetListViewGridContent();
-            RefreshDashboardReport();
+            RefreshDashboardGroupReport();
             Application.DoEvents();
         }
         private void linkFilterGoBet_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -437,7 +524,6 @@ namespace LottoDataManager
         private void CheckWinningBets()
         {
             lotteryDataWorker.ProcessCheckingForWinningBets(this.lotteryDetails.GameMode);
-            RefreshBets();
         }
         private void LotteryDataWorker_LotteryDataWorkerProcessingStatus(object sender, LotteryDataWorkerEvent e)
         {
@@ -456,8 +542,8 @@ namespace LottoDataManager
         {
             AddBetFrm betForm = new AddBetFrm(this.lotteryDataServices);
             betForm.ShowDialog(this);
+            if (betForm.HasDataUpdates) RefreshBets();
             betForm.Dispose();
-            RefreshBets();
         }
         private void compareDrawResultAndBetToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -469,13 +555,27 @@ namespace LottoDataManager
         }
         private void copySelectedAsLinearCSVToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            StringBuilder sb = new StringBuilder();
-            foreach (LotteryBet bet in objectLstVwLatestBet.SelectedObjects)
+            try
             {
-                if (sb.Length > 0) sb.Append(",");
-                sb.Append(bet.GetGNUFormat());
+                StringBuilder sb = new StringBuilder();
+                foreach (LotteryBet bet in objectLstVwLatestBet.SelectedObjects)
+                {
+                    if (sb.Length > 0) sb.Append(",");
+                    sb.Append(bet.GetGNUFormat());
+                }
+                if (sb.Length > 0)
+                {
+                    Clipboard.SetDataObject(
+                        sb.ToString(), // Text to store in clipboard
+                        false,         // Do not keep after our application exits
+                        10,            // Retry 10 times
+                        100);          // 100 ms delay between retries
+                }
             }
-            if (sb.Length > 0) Clipboard.SetText(sb.ToString());
+            catch (Exception ex)
+            {
+                AddProcessingStatusLogs(LOG_STATUS_MODULE_NAME_CLIPBOARD_COPY, ResourcesUtils.GetMessage("mainf_labels_57", ex.Message));
+            }
         }
         private void objectLstVwLatestBet_DoubleClick(object sender, EventArgs e)
         {
@@ -539,10 +639,13 @@ namespace LottoDataManager
             if (e.LottoWebScrapingStage == LottoWebScrapingStages.FINISH)
             {
                 toolStripBtnDownloadResults.Enabled = true;
-                RefreshWinningNumbersGridContent();
-                RefreshBets();
+                if (e.NewRecordsCount > 0)
+                {
+                    CheckWinningBets();
+                    RefreshWinningNumbersGridContent();
+                    RefreshBets();
+                }
             }
-            Application.DoEvents();
         }
         #endregion
 
@@ -564,16 +667,20 @@ namespace LottoDataManager
                 ClearAllForms();
                 ToolStripMenuItem lottoGameMenu = (ToolStripMenuItem)sender;
                 Lottery lottery = (Lottery)lottoGameMenu.Tag;
-                this.lotteryDetails = new LotteryDetails(lottery.GetGameMode());
-                ReinitateLotteryServices();
-                Application.DoEvents();
-                InitializesFormContent();
-                this.lotteryDataServices.SaveLastOpenedLottery();
+                OpenLotteryGame(lottery.GetGameMode());
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+        private void OpenLotteryGame(GameMode gameMode)
+        {
+            this.lotteryDetails = new LotteryDetails(gameMode);
+            ReinitateLotteryServices();
+            Application.DoEvents();
+            InitializesFormContent();
+            this.lotteryDataServices.SaveLastOpenedLottery();
         }
         private void checkLotteryUpdatesToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -595,8 +702,8 @@ namespace LottoDataManager
         {
             ModifyBetFrm bet = new ModifyBetFrm(lotteryDataServices);
             bet.ShowDialog();
+            if(bet.HasDataUpdates) RefreshBets();
             bet.Dispose();
-            RefreshBets();
         }
         private void editClaimStatusToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -614,8 +721,8 @@ namespace LottoDataManager
         {
             ModifyClaimsFrm m = new ModifyClaimsFrm(this.lotteryDataServices);
             m.ShowDialog();
+            if (m.IsClaimsHaveDataUpdates) RefreshBets();
             m.Dispose();
-            RefreshBets();
         }
         private void seqGenToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -657,6 +764,7 @@ namespace LottoDataManager
         {
             LotterySettingsFrm settings = new LotterySettingsFrm(lotteryDataServices);
             settings.ShowDialog(this);
+            if(settings.IsSourceDatabaseChange) DoApplicationUpdate();
             RefreshBets();
         }
         private void checkWinningBetsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -678,6 +786,8 @@ namespace LottoDataManager
                 }
             }
             m.ShowDialog(this);
+            if (m.HasDataUpdates) RefreshBets();
+            m.Dispose();
         }
         private void toolStripBtnMoveDrawDate_Click(object sender, EventArgs e)
         {
@@ -758,6 +868,20 @@ namespace LottoDataManager
             paddedBounds.Offset(1, yOffset);
             TextRenderer.DrawText(e.Graphics, page.Text, font, paddedBounds, fontColor);
         }
+        private void ApplicationUpdateProcessor_PatchingProcessingLogs(object sender, string e)
+        {
+            AddProcessingStatusLogs(this.LOG_STATUS_MODULE_NAME_APP_UPDATE, e);
+        }
+        private void MainForm_HandleCreated(object sender, EventArgs e)
+        {
+            DoApplicationUpdate();
+        }
+
+        private void DoApplicationUpdate()
+        {
+            this.applicationUpdateProcessor.StartUpdate(lotteryDataServices);
+        }
+
         #endregion
 
     }

@@ -9,6 +9,7 @@ namespace LottoDataManager.Includes.Model.Structs
     public enum DashboardReportItemActions
     {
         OPEN_CLAIM_FORM,
+        OPEN_LOTTERY_GAME,
         NONE
     }
 }

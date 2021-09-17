@@ -117,6 +117,8 @@ namespace LottoDataManager.Forms
             this.objectListViewWinningBets.TabIndex = 0;
             this.objectListViewWinningBets.UseCompatibleStateImageBehavior = false;
             this.objectListViewWinningBets.View = System.Windows.Forms.View.Details;
+            this.objectListViewWinningBets.FormatCell += new System.EventHandler<BrightIdeasSoftware.FormatCellEventArgs>(this.objectListViewWinningBets_FormatCell);
+            this.objectListViewWinningBets.FormatRow += new System.EventHandler<BrightIdeasSoftware.FormatRowEventArgs>(this.objectListViewWinningBets_FormatRow);
             this.objectListViewWinningBets.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.objectListViewBets_ItemChecked);
             // 
             // olvColChkbox
@@ -193,7 +195,7 @@ namespace LottoDataManager.Forms
             this.checkAllToolStripMenuItem,
             this.uncheckAllToolStripMenuItem});
             this.ctxMenuLvBet.Name = "ctxMenuLvBet";
-            this.ctxMenuLvBet.Size = new System.Drawing.Size(219, 162);
+            this.ctxMenuLvBet.Size = new System.Drawing.Size(219, 134);
             // 
             // refreshToolStripMenuItem
             // 

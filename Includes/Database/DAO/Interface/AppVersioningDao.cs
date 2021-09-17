@@ -10,5 +10,7 @@ namespace LottoDataManager.Includes.Database.DAO.Interface
     public interface AppVersioningDao
     {
         AppVersioning GetLatestVersion();
+        AppVersioning GetVersion(AppVersioning appVersion);
+        int InsertAppVersioning(AppVersioning appVersion);
     }
 }

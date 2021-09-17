@@ -58,9 +58,9 @@ namespace LottoDataManager
             this.mainLeftTabControl = new System.Windows.Forms.TabControl();
             this.tabDashboard = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.listViewOtherDetails = new System.Windows.Forms.ListView();
-            this.colProperties = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.colValue = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.objLVDashboard = new BrightIdeasSoftware.ObjectListView();
+            this.olvdbDesc = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvdbValue = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblWinningsThisMonth = new System.Windows.Forms.Label();
             this.lblLifetimeWinnins = new System.Windows.Forms.Label();
@@ -70,8 +70,7 @@ namespace LottoDataManager
             this.label3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.lblNextDrawDate = new System.Windows.Forms.Label();
-            this.tabControlRight = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.splitContainerWinningAndBet = new System.Windows.Forms.SplitContainer();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.objectLstVwLatestBet = new BrightIdeasSoftware.FastObjectListView();
@@ -144,9 +143,9 @@ namespace LottoDataManager
             this.mainLeftTabControl.SuspendLayout();
             this.tabDashboard.SuspendLayout();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.objLVDashboard)).BeginInit();
             this.panel1.SuspendLayout();
-            this.tabControlRight.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerWinningAndBet)).BeginInit();
             this.splitContainerWinningAndBet.Panel1.SuspendLayout();
             this.splitContainerWinningAndBet.Panel2.SuspendLayout();
@@ -174,7 +173,7 @@ namespace LottoDataManager
             this.othersToolStripMenuItem});
             this.mainMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.mainMenuStrip.Name = "mainMenuStrip";
-            this.mainMenuStrip.Size = new System.Drawing.Size(1233, 28);
+            this.mainMenuStrip.Size = new System.Drawing.Size(1233, 30);
             this.mainMenuStrip.TabIndex = 0;
             this.mainMenuStrip.Text = "mainMenuStrip";
             // 
@@ -184,7 +183,7 @@ namespace LottoDataManager
             this.openLotteryToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 26);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // openLotteryToolStripMenuItem
@@ -211,7 +210,7 @@ namespace LottoDataManager
             this.modifyClaimStatusToolStripMenuItem,
             this.moveDrawDateToolStripMenuItem1});
             this.ticketToolStripMenuItem.Name = "ticketToolStripMenuItem";
-            this.ticketToolStripMenuItem.Size = new System.Drawing.Size(62, 24);
+            this.ticketToolStripMenuItem.Size = new System.Drawing.Size(62, 26);
             this.ticketToolStripMenuItem.Text = "Ticket";
             // 
             // seqGenToolStripMenuItem
@@ -259,7 +258,7 @@ namespace LottoDataManager
             this.reportsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lossProfitToolStripMenuItem});
             this.reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
-            this.reportsToolStripMenuItem.Size = new System.Drawing.Size(74, 24);
+            this.reportsToolStripMenuItem.Size = new System.Drawing.Size(74, 26);
             this.reportsToolStripMenuItem.Text = "Reports";
             // 
             // lossProfitToolStripMenuItem
@@ -275,7 +274,7 @@ namespace LottoDataManager
             this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lotterySettingToolStripMenuItem});
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(76, 24);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(76, 26);
             this.settingsToolStripMenuItem.Text = "Settings";
             // 
             // lotterySettingToolStripMenuItem
@@ -296,7 +295,7 @@ namespace LottoDataManager
             this.aboutToolStripMenuItem1,
             this.updatesToolStripMenuItem});
             this.othersToolStripMenuItem.Name = "othersToolStripMenuItem";
-            this.othersToolStripMenuItem.Size = new System.Drawing.Size(66, 24);
+            this.othersToolStripMenuItem.Size = new System.Drawing.Size(66, 26);
             this.othersToolStripMenuItem.Text = "Others";
             // 
             // checkWinningBetsToolStripMenuItem
@@ -372,7 +371,7 @@ namespace LottoDataManager
             // 
             this.mainSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mainSplitContainer.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            this.mainSplitContainer.Location = new System.Drawing.Point(0, 28);
+            this.mainSplitContainer.Location = new System.Drawing.Point(0, 30);
             this.mainSplitContainer.Name = "mainSplitContainer";
             // 
             // mainSplitContainer.Panel1
@@ -381,10 +380,10 @@ namespace LottoDataManager
             // 
             // mainSplitContainer.Panel2
             // 
-            this.mainSplitContainer.Panel2.Controls.Add(this.tabControlRight);
+            this.mainSplitContainer.Panel2.Controls.Add(this.panel3);
             this.mainSplitContainer.Panel2.Controls.Add(this.toolStripBetsAndResults);
-            this.mainSplitContainer.Size = new System.Drawing.Size(1233, 528);
-            this.mainSplitContainer.SplitterDistance = 330;
+            this.mainSplitContainer.Size = new System.Drawing.Size(1233, 526);
+            this.mainSplitContainer.SplitterDistance = 500;
             this.mainSplitContainer.TabIndex = 2;
             // 
             // mainLeftTabControl
@@ -394,7 +393,7 @@ namespace LottoDataManager
             this.mainLeftTabControl.Location = new System.Drawing.Point(0, 0);
             this.mainLeftTabControl.Name = "mainLeftTabControl";
             this.mainLeftTabControl.SelectedIndex = 0;
-            this.mainLeftTabControl.Size = new System.Drawing.Size(330, 528);
+            this.mainLeftTabControl.Size = new System.Drawing.Size(500, 526);
             this.mainLeftTabControl.TabIndex = 0;
             // 
             // tabDashboard
@@ -404,47 +403,61 @@ namespace LottoDataManager
             this.tabDashboard.Location = new System.Drawing.Point(4, 25);
             this.tabDashboard.Name = "tabDashboard";
             this.tabDashboard.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDashboard.Size = new System.Drawing.Size(322, 499);
+            this.tabDashboard.Size = new System.Drawing.Size(492, 497);
             this.tabDashboard.TabIndex = 0;
             this.tabDashboard.Text = "Dashboard";
             this.tabDashboard.UseVisualStyleBackColor = true;
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.listViewOtherDetails);
+            this.panel2.Controls.Add(this.objLVDashboard);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(3, 117);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(316, 379);
+            this.panel2.Size = new System.Drawing.Size(486, 377);
             this.panel2.TabIndex = 11;
             // 
-            // listViewOtherDetails
+            // objLVDashboard
             // 
-            this.listViewOtherDetails.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.colProperties,
-            this.colValue});
-            this.listViewOtherDetails.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listViewOtherDetails.FullRowSelect = true;
-            this.listViewOtherDetails.GridLines = true;
-            this.listViewOtherDetails.HideSelection = false;
-            this.listViewOtherDetails.Location = new System.Drawing.Point(0, 0);
-            this.listViewOtherDetails.MultiSelect = false;
-            this.listViewOtherDetails.Name = "listViewOtherDetails";
-            this.listViewOtherDetails.Size = new System.Drawing.Size(316, 379);
-            this.listViewOtherDetails.TabIndex = 0;
-            this.listViewOtherDetails.UseCompatibleStateImageBehavior = false;
-            this.listViewOtherDetails.View = System.Windows.Forms.View.Details;
-            this.listViewOtherDetails.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listViewOtherDetails_MouseDoubleClick);
+            this.objLVDashboard.AllColumns.Add(this.olvdbDesc);
+            this.objLVDashboard.AllColumns.Add(this.olvdbValue);
+            this.objLVDashboard.CellEditUseWholeCell = false;
+            this.objLVDashboard.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.olvdbDesc,
+            this.olvdbValue});
+            this.objLVDashboard.Cursor = System.Windows.Forms.Cursors.Default;
+            this.objLVDashboard.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.objLVDashboard.FullRowSelect = true;
+            this.objLVDashboard.GridLines = true;
+            this.objLVDashboard.GroupWithItemCountFormat = "";
+            this.objLVDashboard.GroupWithItemCountSingularFormat = "";
+            this.objLVDashboard.HideSelection = false;
+            this.objLVDashboard.Location = new System.Drawing.Point(0, 0);
+            this.objLVDashboard.MultiSelect = false;
+            this.objLVDashboard.Name = "objLVDashboard";
+            this.objLVDashboard.Size = new System.Drawing.Size(486, 377);
+            this.objLVDashboard.SortGroupItemsByPrimaryColumn = false;
+            this.objLVDashboard.TabIndex = 4;
+            this.objLVDashboard.UseCompatibleStateImageBehavior = false;
+            this.objLVDashboard.UseHyperlinks = true;
+            this.objLVDashboard.View = System.Windows.Forms.View.Details;
+            this.objLVDashboard.FormatCell += new System.EventHandler<BrightIdeasSoftware.FormatCellEventArgs>(this.objLVDashboard_FormatCell);
+            this.objLVDashboard.FormatRow += new System.EventHandler<BrightIdeasSoftware.FormatRowEventArgs>(this.objLVDashboard_FormatRow);
+            this.objLVDashboard.HyperlinkClicked += new System.EventHandler<BrightIdeasSoftware.HyperlinkClickedEventArgs>(this.objLVDashboard_HyperlinkClicked);
+            this.objLVDashboard.GroupTaskClicked += new System.EventHandler<BrightIdeasSoftware.GroupTaskClickedEventArgs>(this.objLVDashboard_GroupTaskClicked);
+            this.objLVDashboard.IsHyperlink += new System.EventHandler<BrightIdeasSoftware.IsHyperlinkEventArgs>(this.objLVDashboard_IsHyperlink);
+            this.objLVDashboard.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.objLVDashboard_MouseDoubleClick);
             // 
-            // colProperties
+            // olvdbDesc
             // 
-            this.colProperties.Text = "Property";
-            this.colProperties.Width = 197;
+            this.olvdbDesc.Text = "Description";
+            this.olvdbDesc.Width = 150;
             // 
-            // colValue
+            // olvdbValue
             // 
-            this.colValue.Text = "Value";
-            this.colValue.Width = 172;
+            this.olvdbValue.Hyperlink = true;
+            this.olvdbValue.Text = "Value";
+            this.olvdbValue.Width = 200;
             // 
             // panel1
             // 
@@ -459,7 +472,7 @@ namespace LottoDataManager
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(316, 114);
+            this.panel1.Size = new System.Drawing.Size(486, 114);
             this.panel1.TabIndex = 10;
             // 
             // lblWinningsThisMonth
@@ -542,33 +555,20 @@ namespace LottoDataManager
             this.lblNextDrawDate.TabIndex = 4;
             this.lblNextDrawDate.Text = "-----";
             // 
-            // tabControlRight
+            // panel3
             // 
-            this.tabControlRight.Controls.Add(this.tabPage1);
-            this.tabControlRight.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControlRight.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabControlRight.Location = new System.Drawing.Point(0, 37);
-            this.tabControlRight.Name = "tabControlRight";
-            this.tabControlRight.SelectedIndex = 0;
-            this.tabControlRight.Size = new System.Drawing.Size(899, 491);
-            this.tabControlRight.TabIndex = 0;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(this.splitContainerWinningAndBet);
-            this.tabPage1.Controls.Add(this.panel4);
-            this.tabPage1.Location = new System.Drawing.Point(4, 25);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(891, 462);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Numbers Crunching!!!";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.panel3.Controls.Add(this.splitContainerWinningAndBet);
+            this.panel3.Controls.Add(this.panel4);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel3.Location = new System.Drawing.Point(0, 37);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(729, 489);
+            this.panel3.TabIndex = 17;
             // 
             // splitContainerWinningAndBet
             // 
             this.splitContainerWinningAndBet.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainerWinningAndBet.Location = new System.Drawing.Point(3, 68);
+            this.splitContainerWinningAndBet.Location = new System.Drawing.Point(0, 65);
             this.splitContainerWinningAndBet.Name = "splitContainerWinningAndBet";
             // 
             // splitContainerWinningAndBet.Panel1
@@ -578,8 +578,8 @@ namespace LottoDataManager
             // splitContainerWinningAndBet.Panel2
             // 
             this.splitContainerWinningAndBet.Panel2.Controls.Add(this.groupBox2);
-            this.splitContainerWinningAndBet.Size = new System.Drawing.Size(885, 391);
-            this.splitContainerWinningAndBet.SplitterDistance = 350;
+            this.splitContainerWinningAndBet.Size = new System.Drawing.Size(729, 424);
+            this.splitContainerWinningAndBet.SplitterDistance = 268;
             this.splitContainerWinningAndBet.TabIndex = 12;
             // 
             // groupBox1
@@ -590,7 +590,7 @@ namespace LottoDataManager
             this.groupBox1.ForeColor = System.Drawing.Color.Green;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(350, 391);
+            this.groupBox1.Size = new System.Drawing.Size(268, 424);
             this.groupBox1.TabIndex = 20;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Latest List";
@@ -628,7 +628,7 @@ namespace LottoDataManager
             this.objectLstVwLatestBet.SelectedColumnTint = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.objectLstVwLatestBet.SelectedForeColor = System.Drawing.Color.White;
             this.objectLstVwLatestBet.ShowGroups = false;
-            this.objectLstVwLatestBet.Size = new System.Drawing.Size(344, 365);
+            this.objectLstVwLatestBet.Size = new System.Drawing.Size(262, 398);
             this.objectLstVwLatestBet.TabIndex = 12;
             this.objectLstVwLatestBet.UseCompatibleStateImageBehavior = false;
             this.objectLstVwLatestBet.View = System.Windows.Forms.View.Details;
@@ -782,7 +782,7 @@ namespace LottoDataManager
             this.groupBox2.ForeColor = System.Drawing.Color.Tomato;
             this.groupBox2.Location = new System.Drawing.Point(0, 0);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(531, 391);
+            this.groupBox2.Size = new System.Drawing.Size(457, 424);
             this.groupBox2.TabIndex = 20;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Draw Results List";
@@ -824,11 +824,12 @@ namespace LottoDataManager
             this.objListVwWinningNum.SelectedColumnTint = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.objListVwWinningNum.SelectedForeColor = System.Drawing.Color.White;
             this.objListVwWinningNum.ShowGroups = false;
-            this.objListVwWinningNum.Size = new System.Drawing.Size(525, 365);
+            this.objListVwWinningNum.Size = new System.Drawing.Size(451, 398);
             this.objListVwWinningNum.TabIndex = 2;
             this.objListVwWinningNum.UseCompatibleStateImageBehavior = false;
             this.objListVwWinningNum.View = System.Windows.Forms.View.Details;
             this.objListVwWinningNum.VirtualMode = true;
+            this.objListVwWinningNum.FormatRow += new System.EventHandler<BrightIdeasSoftware.FormatRowEventArgs>(this.objListVwWinningNum_FormatRow);
             this.objListVwWinningNum.SelectionChanged += new System.EventHandler(this.objListVwWinningNum_SelectionChanged);
             this.objListVwWinningNum.DoubleClick += new System.EventHandler(this.objListVwWinningNum_DoubleClick);
             this.objListVwWinningNum.KeyDown += new System.Windows.Forms.KeyEventHandler(this.objListVwWinningNum_KeyDown);
@@ -891,9 +892,9 @@ namespace LottoDataManager
             // 
             this.panel4.Controls.Add(this.tabControlFilter);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel4.Location = new System.Drawing.Point(3, 3);
+            this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(885, 65);
+            this.panel4.Size = new System.Drawing.Size(729, 65);
             this.panel4.TabIndex = 16;
             // 
             // tabControlFilter
@@ -906,7 +907,7 @@ namespace LottoDataManager
             this.tabControlFilter.Location = new System.Drawing.Point(0, 0);
             this.tabControlFilter.Name = "tabControlFilter";
             this.tabControlFilter.SelectedIndex = 0;
-            this.tabControlFilter.Size = new System.Drawing.Size(885, 65);
+            this.tabControlFilter.Size = new System.Drawing.Size(729, 65);
             this.tabControlFilter.TabIndex = 1;
             this.tabControlFilter.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControlFilter_DrawItem);
             // 
@@ -922,7 +923,7 @@ namespace LottoDataManager
             this.tabPageBetFilter.Location = new System.Drawing.Point(4, 29);
             this.tabPageBetFilter.Name = "tabPageBetFilter";
             this.tabPageBetFilter.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageBetFilter.Size = new System.Drawing.Size(877, 32);
+            this.tabPageBetFilter.Size = new System.Drawing.Size(721, 32);
             this.tabPageBetFilter.TabIndex = 0;
             this.tabPageBetFilter.Text = "Latest Bets Filter";
             this.tabPageBetFilter.UseVisualStyleBackColor = true;
@@ -988,7 +989,7 @@ namespace LottoDataManager
             this.tabPageDrawFilter.Location = new System.Drawing.Point(4, 29);
             this.tabPageDrawFilter.Name = "tabPageDrawFilter";
             this.tabPageDrawFilter.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageDrawFilter.Size = new System.Drawing.Size(877, 32);
+            this.tabPageDrawFilter.Size = new System.Drawing.Size(721, 32);
             this.tabPageDrawFilter.TabIndex = 1;
             this.tabPageDrawFilter.Text = "Draw Result List Filter";
             this.tabPageDrawFilter.UseVisualStyleBackColor = true;
@@ -1063,7 +1064,7 @@ namespace LottoDataManager
             this.toolStripSeparator6});
             this.toolStripBetsAndResults.Location = new System.Drawing.Point(0, 0);
             this.toolStripBetsAndResults.Name = "toolStripBetsAndResults";
-            this.toolStripBetsAndResults.Size = new System.Drawing.Size(899, 37);
+            this.toolStripBetsAndResults.Size = new System.Drawing.Size(729, 37);
             this.toolStripBetsAndResults.TabIndex = 15;
             this.toolStripBetsAndResults.Text = "toolStrip2";
             // 
@@ -1197,6 +1198,7 @@ namespace LottoDataManager
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Lotto Data Manager";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.mainMenuStrip.ResumeLayout(false);
             this.mainMenuStrip.PerformLayout();
@@ -1210,10 +1212,10 @@ namespace LottoDataManager
             this.mainLeftTabControl.ResumeLayout(false);
             this.tabDashboard.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.objLVDashboard)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.tabControlRight.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
             this.splitContainerWinningAndBet.Panel1.ResumeLayout(false);
             this.splitContainerWinningAndBet.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerWinningAndBet)).EndInit();
@@ -1253,14 +1255,9 @@ namespace LottoDataManager
         private System.Windows.Forms.ToolStripMenuItem seqGenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem reportsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem lossProfitToolStripMenuItem;
-        private System.Windows.Forms.TabControl tabControlRight;
-        private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabControl mainLeftTabControl;
         private System.Windows.Forms.TabPage tabDashboard;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.ListView listViewOtherDetails;
-        private System.Windows.Forms.ColumnHeader colProperties;
-        private System.Windows.Forms.ColumnHeader colValue;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lblWinningsThisMonth;
         private System.Windows.Forms.Label lblLifetimeWinnins;
@@ -1342,6 +1339,10 @@ namespace LottoDataManager
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.LinkLabel linkLabelFilterDraw;
         private System.Windows.Forms.DateTimePicker dateTimePickerDrawResult;
+        private BrightIdeasSoftware.ObjectListView objLVDashboard;
+        private BrightIdeasSoftware.OLVColumn olvdbDesc;
+        private BrightIdeasSoftware.OLVColumn olvdbValue;
+        private System.Windows.Forms.Panel panel3;
     }
 }
 

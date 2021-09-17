@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LottoDataManager.Includes.Classes.Generator;
 using LottoDataManager.Includes.Database.DAO;
 using LottoDataManager.Includes.Database.DAO.Impl;
 using LottoDataManager.Includes.Database.DAO.Interface;
@@ -98,11 +99,56 @@ namespace LottoDataManager.Includes.Classes
         }
         public DateTime GetNextDrawDate()
         {
-            return lotteryDataDerivation.GetNextDrawDate();
+            bool isPastCutoff = IsPastTicketSellingCutoffTime();
+            DateTime basisDate = DateTime.Now;
+            if (isPastCutoff) basisDate = basisDate.AddDays(1);
+            return lotteryDataDerivation.GetNextDrawDate(basisDate);
         }
         public void SaveLastOpenedLottery()
         {
             this.userSetting.SaveLastOpenedLottery(this.lotteryDetails.GameCode);
+        }
+        public void SaveTicketCutoffTime(DateTime newCutoffTime)
+        {
+            this.userSetting.SaveTicketCutoffTime(newCutoffTime);
+        }
+        public DateTime GetTicketCutoffTime(bool useDateToday=false)
+        {
+            if(useDateToday)
+            {
+                return this.userSetting.GetTicketCutoffTimeUsingCurrentDate();
+            }
+
+            return this.userSetting.GetTicketCutoffTime();
+        }
+        public int GetTicketCutoffNotifyTime()
+        {
+            return this.userSetting.GetTicketCutoffNotifyTime();
+        }
+        public void SaveTicketCutoffNotifyTime(int newValue)
+        {
+            this.userSetting.SaveTicketCutoffNotifyTime(newValue);
+        }
+        public bool IsUserToNotifyTicketCutoffIsNear()
+        {
+            int totalMinutesBeforeCutoff = GetTicketCutoffNotifyTime();
+            DateTime cutoffTime = GetTicketCutoffTime(true);
+
+            if (this.userSetting.IsPastTicketSellingCutoffTime(cutoffTime)) return false;
+
+            DateTime dateNow = DateTime.Now;
+            TimeSpan ts = cutoffTime - dateNow;
+
+            if (totalMinutesBeforeCutoff > ts.TotalMinutes) return true;
+            return false;
+        }
+        public String GetTicketCutOffTimeOnly()
+        {
+            return GetTicketCutoffTime().ToString(DateTimeConverterUtils.DT_TICKET_CUTOFF_TIME_FORMAT_TIME_ONLY_FOR_UI).ToUpper();
+        }
+        public bool IsPastTicketSellingCutoffTime()
+        {
+            return this.userSetting.IsPastTicketSellingCutoffTime(GetTicketCutoffTime(true));
         }
         public String GetNextDrawDateFormatted()
         {
@@ -118,6 +164,10 @@ namespace LottoDataManager.Includes.Classes
         public List<LotteryOutlet> GetLotteryOutlets()
         {
             return lotteryOutletDao.GetLotteryOutlets();
+        }
+        public LotteryOutlet GetDefaultLotteryOutlet()
+        {
+            return lotteryOutletDao.GetDefaultLotteryOutlet();
         }
         public void SaveLotteryBets(List<LotteryBet> lotteryBets)
         {
@@ -140,7 +190,6 @@ namespace LottoDataManager.Includes.Classes
             this.lotteryScheduleDao.RemoveLotterySchedule(lotterySchedule);
             return this.lotteryScheduleDao.InsertLotterySchedule(lotterySchedule);
         }
-
         public void DeleteLotteryBet(List<LotteryBet> lotteryBets)
         {
             foreach(LotteryBet lotteryBet in lotteryBets)
@@ -194,6 +243,14 @@ namespace LottoDataManager.Includes.Classes
         {
             return this.lotteryBetDao.GetLotteryBetsCurrentSeason(GameMode);
         }
+        public List<LotteryBet> GetLotterybetsQueued(GameMode gameMode)
+        {
+            return this.lotteryBetDao.GetLotterybetsQueued(gameMode);
+        }
+        public List<LotteryBet> GetLotteryBetsByMonthy(GameMode gameMode, int year, int month)
+        {
+            return this.lotteryBetDao.GetLotteryBetsByMonthy(gameMode, year, month);
+        }
         public List<LotterySequenceGenerator> GetAllSequenceGenerators()
         {
             return lotterySeqGenDao.GetAllSeqGenerators();
@@ -206,17 +263,42 @@ namespace LottoDataManager.Includes.Classes
             }
             this.lotterySeqGenDao.UpdateDescription(updatedModel);
         }
+        public void InsertLotterySequenceGenerator(LotterySequenceGenerator insertModel)
+        {
+            LotterySequenceGenerator genModel = lotterySeqGenDao.GetSeqGeneratorByCode(insertModel.GetSeqGenCode());
+            if (genModel != null) return;
+            this.lotterySeqGenDao.InsertSequenceGenerator(insertModel);
+        }
         public List<LotteryDrawResult> GetLatestLotteryResult(int howManyDraws)
         {
             return this.lotteryDrawResultDao.GetLatestLotteryResult(this.lotteryDetails.GameMode, howManyDraws);
         }
-        public List<LotteryDrawResult> GetMachineLearningDataSetFastTree(GameMode gameMode, DateTime startingDate)
+        public List<LotteryDrawResult> GetFastTreeMLDataSet(GameMode gameMode, DateTime startingDate)
         {
-            return this.lotteryDrawResultDao.GetMachineLearningDataSetFastTree(gameMode, startingDate);
+            return this.lotteryDrawResultDao.GetFastTreeMLDataSet(gameMode, startingDate);
         }
-        public List<LotteryDrawResult> GetMachineLearningDataSetSDCA(GameMode gameMode, DateTime startingDate)
+        public List<LotteryDrawResult> GetSDCAMLDataSet(GameMode gameMode, DateTime startingDate)
         {
-            return this.lotteryDrawResultDao.GetMachineLearningDataSetSDCA(gameMode, startingDate);
+            return this.lotteryDrawResultDao.GetSDCAMLDataSet(gameMode, startingDate);
+        }
+        public List<LotteryBet> GetLottoCountMatchMLDataset(GameMode gameMode, DateTime startingDate)
+        {
+            return this.lotteryBetDao.GetLottoCountMatchMLDataset(gameMode, startingDate);
+        }
+        /// <summary>
+        /// Get all latest draw dates available in each lottery games.
+        /// </summary>
+        /// <param name="gameCd">If null, then all lottery games will be extracted</param>
+        /// <returns></returns>
+        public List<LotteryDrawResult> GetLatestDrawResults(int[] gameCd = null)
+        {
+            if(gameCd == null) gameCd = GetLotteries().Select(x => (int)x.GetGameMode()).ToArray();
+            List<LotteryDrawResult> drList = new List<LotteryDrawResult>();
+            foreach(int gmcd in gameCd)
+            {
+                drList.Add(lotteryDrawResultDao.GetLatestDrawResult(gmcd));
+            }
+            return drList;
         }
         public void UpdateLotteryOutletDescription(LotteryOutlet updatedModel)
         {

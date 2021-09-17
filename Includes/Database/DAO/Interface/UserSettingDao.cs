@@ -12,5 +12,8 @@ namespace LottoDataManager.Includes.Database.DAO.Interface
         void SaveLastOpenedLottery(int game_cd);
         String GetMLDataSetDirectoryPath();
         void SaveMLDataSetDirectoryPath(String filePath);
+        int InsertSetting(String configName, String value);
+        void UpdateSetting(String configName, String value);
+        String GetSetting(String configName);
     }
 }

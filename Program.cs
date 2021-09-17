@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using LottoDataManager.Forms;
 using LottoDataManager.Forms.Reports;
-using LottoDataManager.Forms.Ticket;
+using LottoDataManager.Forms.Others;
 
 namespace LottoDataManager
 {

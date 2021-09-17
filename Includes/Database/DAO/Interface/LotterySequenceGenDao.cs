@@ -10,8 +10,10 @@ namespace LottoDataManager.Includes.Database.DAO.Interface
     public interface LotterySequenceGenDao
     {
         List<LotterySequenceGenerator> GetAllSeqGenerators();
-        LotterySequenceGenerator GetSeqGenerators(int seqGenId);
+        LotterySequenceGenerator GetSeqGenerator(int seqGenId);
+        LotterySequenceGenerator GetSeqGeneratorByCode(int seqGenCode);
         void UpdateDescription(LotterySequenceGenerator updatedModel);
         bool IsDescriptionExisting(String seqGenDescription);
+       int InsertSequenceGenerator(LotterySequenceGenerator seqGen);
     }
 }

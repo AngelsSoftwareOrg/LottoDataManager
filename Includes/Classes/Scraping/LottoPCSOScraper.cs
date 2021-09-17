@@ -25,6 +25,7 @@ namespace LottoDataManager.Includes.Classes.Scraping
         private LotteryDetails currentLotteryDetailsProcess;
         private DateTime sinceWhenToScrape;
         private readonly string webUrlToScrape = AppSettings.GetLottoScrapeSite;
+        private int newRecordsCount;
         
         public void StartScraping(List<LotteryDetails> lotteriesDetailsArr)
         {
@@ -129,6 +130,7 @@ namespace LottoDataManager.Includes.Classes.Scraping
                     LotteryDrawResult result = lotteryDao.GetLotteryDrawResultByDrawDate(lotteryDetails.GameMode, scrapeResult.GetDrawDate());
                     if (result == null && !scrapeResult.IsDrawResulSequenceEmpty())
                     {
+                        newRecordsCount++;
                         lotteryDao.InsertDrawDate(scrapeResult);
                     }
                     RaiseEvent(LottoWebScrapingStages.INSERT, ConverterUtils.GetPercentageFloored(countCtr++, lotteryDrawResultArr.Count), scrapeResult.GetExtractedDrawnResultDetails());
@@ -177,9 +179,11 @@ namespace LottoDataManager.Includes.Classes.Scraping
 
         private void RaiseEvent(LottoWebScrapingStages stage, int progress = 0, String addedInfo="")
         {
+            if (WebScrapingStatus == null) return;
             lottoWebScraperEvent.LottoWebScrapingStage = stage;
             lottoWebScraperEvent.GameMode = currentLotteryDetailsProcess.GameMode;
             lottoWebScraperEvent.Progress = progress;
+            lottoWebScraperEvent.NewRecordsCount = newRecordsCount;
 
             if (stage == LottoWebScrapingStages.INIT)
             {

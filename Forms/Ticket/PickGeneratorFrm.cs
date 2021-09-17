@@ -8,12 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
+using LottoDataManager.Forms.Others;
 using LottoDataManager.Includes.Classes;
 using LottoDataManager.Includes.Classes.Comparers;
 using LottoDataManager.Includes.Classes.Generator;
 using LottoDataManager.Includes.Classes.Generator.Types;
 using LottoDataManager.Includes.Model;
 using LottoDataManager.Includes.Model.Details;
+using LottoDataManager.Includes.Model.Details.Setup;
 using LottoDataManager.Includes.Utilities;
 
 namespace LottoDataManager.Forms
@@ -35,6 +37,9 @@ namespace LottoDataManager.Forms
 
         private void PickGeneratorFrm_Load(object sender, EventArgs e)
         {
+            this.Text = String.Format(ResourcesUtils.GetMessage("pick_grp_gen_form_title"),
+                this.lotteryDataServices.LotteryDetails.Description);
+            btnViewCompareHits.Text = ResourcesUtils.GetMessage("pick_btn_compare_hits");
             grpbxGenType.Text = ResourcesUtils.GetMessage("pick_grp_gen_type");
             grpbxParam.Text = ResourcesUtils.GetMessage("pick_grp_param");
             grpbxActions.Text = ResourcesUtils.GetMessage("pick_grp_actions");
@@ -45,7 +50,83 @@ namespace LottoDataManager.Forms
             btnAddSelected.Text = ResourcesUtils.GetMessage("pick_btn_place_bet");
             btnExit.Text = ResourcesUtils.GetMessage("common_btn_exit");
             linkUncheckAll.Text = ResourcesUtils.GetMessage("common_link_uncheck_all");
+            SetupObjectListView();
             EnlistGenerators();
+        }
+        private void SetupObjectListView()
+        {
+            this.olvSeq.AspectGetter = delegate (object rowObject)
+            {
+                LotteryBet lotteryBet = (LotteryBet)rowObject;
+                return lotteryBet.GetId();
+            };
+            this.olvSeq.AspectToStringConverter = delegate (object rowObject)
+            {
+                return String.Format(" {0}. ) ", rowObject.ToString());
+            };
+
+            this.olvNum1.AspectGetter = delegate (object rowObject)
+            {
+                LotteryBet lotteryBet = (LotteryBet)rowObject;
+                return (lotteryBet.GetNum1() == 0) ? "": lotteryBet.GetNum1().ToString();
+            };
+            this.olvNum2.AspectGetter = delegate (object rowObject)
+            {
+                LotteryBet lotteryBet = (LotteryBet)rowObject;
+                return (lotteryBet.GetNum2() == 0) ? "" : lotteryBet.GetNum2().ToString();
+            };
+            this.olvNum3.AspectGetter = delegate (object rowObject)
+            {
+                LotteryBet lotteryBet = (LotteryBet)rowObject;
+                return (lotteryBet.GetNum3() == 0) ? "" : lotteryBet.GetNum3().ToString();
+            };
+            this.olvNum4.AspectGetter = delegate (object rowObject)
+            {
+                LotteryBet lotteryBet = (LotteryBet)rowObject;
+                return (lotteryBet.GetNum4() == 0) ? "" : lotteryBet.GetNum4().ToString();
+            };
+            this.olvNum5.AspectGetter = delegate (object rowObject)
+            {
+                LotteryBet lotteryBet = (LotteryBet)rowObject;
+                return (lotteryBet.GetNum5() == 0) ? "" : lotteryBet.GetNum5().ToString();
+            };
+            this.olvNum6.AspectGetter = delegate (object rowObject)
+            {
+                LotteryBet lotteryBet = (LotteryBet)rowObject;
+                return (lotteryBet.GetNum6() == 0) ? "" : lotteryBet.GetNum6().ToString();
+            };
+        }
+        private void objLvGenSeq_SelectionChanged(object sender, EventArgs e)
+        {
+            if (this.objLvGenSeq.SelectedObjects.Count <= 0) return;
+            LotteryBet lotteryBet = (LotteryBet)objLvGenSeq.SelectedObjects[0];
+            TextMatchFilter filter = new TextMatchFilter(this.objLvGenSeq);
+            List<OLVColumn> tmpOLVColumns = new List<OLVColumn>();
+            tmpOLVColumns.Add(objLvGenSeq.GetColumn(1));
+            tmpOLVColumns.Add(objLvGenSeq.GetColumn(2));
+            tmpOLVColumns.Add(objLvGenSeq.GetColumn(3));
+            tmpOLVColumns.Add(objLvGenSeq.GetColumn(4));
+            tmpOLVColumns.Add(objLvGenSeq.GetColumn(5));
+            tmpOLVColumns.Add(objLvGenSeq.GetColumn(6));
+            filter.Columns = tmpOLVColumns.ToArray();
+
+            List<String> regex = new List<string>();
+            foreach (int n in lotteryBet.GetAllNumberSequenceSorted())
+            {
+                regex.Add("^" + n.ToString() + "$");
+            }
+            filter.RegexStrings = regex;
+
+            HighlightTextRenderer highlightTextRenderer = new HighlightTextRenderer(filter);
+            highlightTextRenderer.CornerRoundness = 1;
+            highlightTextRenderer.FramePen = new Pen(Color.Empty);
+            highlightTextRenderer.FillBrush = new SolidBrush(Color.LightBlue);
+            highlightTextRenderer.CellPadding = new Rectangle(0, 0, 0, 0);
+            highlightTextRenderer.Bounds = new Rectangle(2, 2, 2, 2);
+            this.objLvGenSeq.ModelFilter = filter;
+            this.objLvGenSeq.DefaultRenderer = highlightTextRenderer;
+            this.objLvGenSeq.SelectedForeColor = Color.Black;
+            this.objLvGenSeq.Refresh();
         }
         private void EnlistGenerators()
         {
@@ -66,6 +147,7 @@ namespace LottoDataManager.Forms
             DisplayGenerators(new RandomPredictionDrawResults(this.lotteryDataServices));
             DisplayGenerators(new RandomPredictionSDCARegression(this.lotteryDataServices));
             DisplayGenerators(new RandomPredictionSDCARegressionInBetween(this.lotteryDataServices));
+            DisplayGenerators(new LottoCountMatchPredictionFastTreeRegression(this.lotteryDataServices));
         }
         private void DisplayGenerators(SequenceGenerator seqGen)
         {
@@ -124,34 +206,32 @@ namespace LottoDataManager.Forms
         }
         private void DisplayGeneratedSequence(List<int[]> seqArr)
         {
-            lvGenSeq.BeginUpdate();
-            lvGenSeq.Items.Clear();
-            int ctr = 1;
-            foreach(int[] seq in seqArr)
+            List<LotteryBet> arrLottery = new List<LotteryBet>();
+            int ctrId = 0;
+            foreach (int[] seq in seqArr)
             {
-                ListViewItem item = new ListViewItem(String.Format(" {0}. ) ",ctr++));
-                for (int seqCtr=0; seqCtr < seq.Length; seqCtr++)
+                LotteryBetSetup bet = new LotteryBetSetup();
+                bet.Id = ++ctrId;
+                for (int seqCtr = 0; seqCtr < seq.Length; seqCtr++)
                 {
-                    item.SubItems.Add(seq[seqCtr].ToString());
+                    bet.FillNumberBySeq(seqCtr+1, seq[seqCtr]);
                 }
-                lvGenSeq.Items.Add(item);
+                arrLottery.Add(bet);
             }
-            lvGenSeq.Tag = lvGenType.SelectedObject;
-            lvGenSeq.EndUpdate();
+            objLvGenSeq.Tag = lvGenType.SelectedObject;
+            objLvGenSeq.SetObjects(arrLottery);
         }
         private void btnClearSel_Click(object sender, EventArgs e)
         {
             lvGenType.SelectedItems.Clear();
-            lvGenSeq.Items.Clear();
-            lvGenSeq.ListViewItemSorter = null;
-            lvGenSeq.Tag = null;
+            objLvGenSeq.SetObjects(null);
+            objLvGenSeq.Tag = null;
             ClearSequenceGenParametersValue();
         }
         private void ClearSequenceGenParametersValue()
         {
             tblPnlLayParams.Controls.Clear();
-            lvGenSeq.ListViewItemSorter = null;
-            lvGenSeq.Tag = null;
+            objLvGenSeq.Tag = null;
             foreach (SequenceGenerator seqGen in lvGenType.Objects)
             {
                 seqGen.ResetParamsValue();
@@ -220,7 +300,7 @@ namespace LottoDataManager.Forms
         }
         private void UncheckAllSequences()
         {
-            foreach (ListViewItem item in lvGenSeq.CheckedItems)
+            foreach (OLVListItem item in objLvGenSeq.CheckedItems)
             {
                 item.Checked = false;
             }
@@ -235,39 +315,32 @@ namespace LottoDataManager.Forms
         }
         private void AddChosenBets()
         {
-            List<ListViewItem> merge = new List<ListViewItem>();
-            foreach (ListViewItem item in lvGenSeq.CheckedItems)
+            List<LotteryBet> merge = new List<LotteryBet>();
+            foreach (LotteryBet item in objLvGenSeq.CheckedObjects)
             {
                 merge.Add(item);
             }
             AddBet(merge);
         }
-        private void AddBet(List<ListViewItem> listViewItems)
+        private void AddBet(List<LotteryBet> listViewItems)
         {
-            AddBetFrm bet = new AddBetFrm(this.lotteryDataServices);
-            StringBuilder sequence = new StringBuilder();
-            foreach (ListViewItem item in listViewItems)
-            {
-                for (int n = 0; n < item.SubItems.Count; n++)
+            using (AddBetFrm bet = new AddBetFrm(this.lotteryDataServices)) {
+                StringBuilder sequence = new StringBuilder();
+                foreach (LotteryBet item in listViewItems)
                 {
-                    if (n == 0) continue;
-                    if (sequence.Length > 0) sequence.Append("-");
-                    if(item.SubItems[n].Text.Length==1) sequence.Append("0");
-                    sequence.Append(item.SubItems[n].Text);
+                    bet.AddSequenceEntry(item.GetGNUFormat());
+                    sequence.Clear();
                 }
-                bet.AddSequenceEntry(sequence.ToString());
-                sequence.Clear();
-            }
 
-            if (lvGenSeq.Tag !=null) bet.SelectedSequenceGenerator = ((SequenceGenerator)lvGenSeq.Tag).GetSequenceGeneratorType();
-            Form refToMainForm = ClassReflectionUtil.GetMainFormObj(this, this.Owner);
-            if (refToMainForm == null) refToMainForm = this;
-            bet.ShowDialog(refToMainForm);
-            bet.Dispose();
+                if (objLvGenSeq.Tag !=null) bet.SelectedSequenceGenerator = ((SequenceGenerator)objLvGenSeq.Tag).GetSequenceGeneratorType();
+                Form refToMainForm = ClassReflectionUtil.GetMainFormObj(this, this.Owner);
+                if (refToMainForm == null) refToMainForm = this;
+                bet.ShowDialog(refToMainForm);
+            }
         }
-        private void checkToolStripMenuItem_Click(object sender, EventArgs e)
+        private void checkToolStripMenuItem_CheckSelected(object sender, EventArgs e)
         {
-            foreach(ListViewItem item in lvGenSeq.SelectedItems)
+             foreach (OLVListItem item in objLvGenSeq.SelectedItems)
             {
                 item.Checked = true;
             }
@@ -276,6 +349,54 @@ namespace LottoDataManager.Forms
         {
             UncheckAllSequences();
         }
+        private void PickGeneratorFrm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if(e.CloseReason == CloseReason.None)
+            {
+                e.Cancel = true;
+            }
+        }
+        private void btnViewCompareHits_Click(object sender, EventArgs e)
+        {
+            if (objLvGenSeq.Objects == null) return;
+            HitComparisonFrm hitComparisonFrm = new HitComparisonFrm(this.lotteryDataServices);
+            List<LotteryBet> arrBet = new List<LotteryBet>();
+            LotteryOutlet outlet = this.lotteryDataServices.GetDefaultLotteryOutlet();
 
+            foreach (LotteryBetSetup item in objLvGenSeq.Objects)
+            {
+                SequenceGenerator seqGentor = ((SequenceGenerator)objLvGenSeq.Tag);
+                LotterySequenceGeneratorSetup seqGen = new LotterySequenceGeneratorSetup();
+                seqGen.ID = seqGentor.GetSequenceGeneratorID();
+                seqGen.Description = seqGentor.GetDescription();
+                item.LotterySeqGen = seqGen;
+                item.LotteryOutlet = outlet;
+                item.TargetDrawDate = DateTime.Now;
+                arrBet.Add(item);
+            }
+            hitComparisonFrm.UserDefinedLotteryBets = arrBet;
+            hitComparisonFrm.LotteryBetsCheckboxes = true;
+            hitComparisonFrm.ShowDialog(this);
+            AutoCheckSelectedBetsFromHitComparisonForm(hitComparisonFrm.GetCheckedLotteryBets);
+            hitComparisonFrm.Dispose();
+        }
+
+        private void AutoCheckSelectedBetsFromHitComparisonForm(List<LotteryBet> selectedLotteryBets)
+        {
+            LotteryBet seqGenVisibleItem = null;
+            foreach (LotteryBet bet in selectedLotteryBets)
+            {
+                foreach (LotteryBet seqGen in objLvGenSeq.Objects)
+                {
+                    if(seqGen.GetGNUFormat().Equals(bet.GetGNUFormat(), StringComparison.OrdinalIgnoreCase))
+                    {
+                        objLvGenSeq.CheckObject(seqGen);
+                        seqGenVisibleItem = seqGen;
+                    }
+                }
+            }
+            //ensure last item check is visible/auto scroll
+            if (seqGenVisibleItem != null) objLvGenSeq.EnsureModelVisible(seqGenVisibleItem);
+        }
     }
 }

@@ -207,6 +207,15 @@ namespace LottoDataManager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 3.
+        /// </summary>
+        internal static string DASHBOARD_REPORT_GROUPED_CONTENT_INDENTION {
+            get {
+                return ResourceManager.GetString("DASHBOARD_REPORT_GROUPED_CONTENT_INDENTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to .accdb.
         /// </summary>
         internal static string DB_SOURCE_FILE_TYPE_EXTENSION {
