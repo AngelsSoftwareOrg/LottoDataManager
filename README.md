@@ -3,7 +3,8 @@
 
 ![Lotto Data Manager Official Splash Screen](https://i.imgur.com/XeQ8h9O.png)
 > By: **Ryan Seth Roldan**
-> Email: 8ifp3cx5q@relay.firefox.com
+
+>Email: 8ifp3cx5q@relay.firefox.com
 
 
 # Lotto Data Manager
