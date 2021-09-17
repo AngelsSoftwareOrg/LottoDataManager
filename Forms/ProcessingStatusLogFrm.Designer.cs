@@ -112,6 +112,7 @@ namespace LottoDataManager.Forms
             this.Name = "ProcessingStatusLogFrm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ProcessingStatusLogFrm";
+            this.Load += new System.EventHandler(this.ProcessingStatusLogFrm_Load);
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);

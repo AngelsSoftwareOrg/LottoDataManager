@@ -12,7 +12,7 @@ using LottoDataManager.Includes.Utilities;
 
 namespace LottoDataManager.Includes.Database.DAO.Impl
 {
-    public class LotterySequenceGenDaoImpl: LotterySequenceGenDao
+    public class LotterySequenceGenDaoImpl: LotteryDaoImplCommon, LotterySequenceGenDao
     {
         public static int MAX_LEN_DESCRIPTION = 255;
         private static LotterySequenceGenDaoImpl lotterySequenceGenDaoImpl;
@@ -42,13 +42,31 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
             }
             return lotterySeqGenList;
         }
-        public LotterySequenceGenerator GetSeqGenerators(int seqGenId)
+        public LotterySequenceGenerator GetSeqGenerator(int seqGenId)
         {
             LotterySequenceGeneratorSetup lotterySeqGen = null;
             using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
             using (OleDbCommand command = new OleDbCommand("SELECT * FROM lottery_seq_gen WHERE seqGenId = @seqGenId AND active = true", conn))
             {
                 command.Parameters.AddWithValue("@seqGenId", seqGenId);
+                conn.Open();
+                using (OleDbDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        lotterySeqGen = GetModel(reader);
+                    }
+                }
+            }
+            return lotterySeqGen;
+        }
+        public LotterySequenceGenerator GetSeqGeneratorByCode(int seqGenCode)
+        {
+            LotterySequenceGeneratorSetup lotterySeqGen = null;
+            using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
+            using (OleDbCommand command = new OleDbCommand("SELECT * FROM lottery_seq_gen WHERE seqgencd = @seqGenCode AND active = true", conn))
+            {
+                command.Parameters.AddWithValue("@seqGenCode", seqGenCode);
                 conn.Open();
                 using (OleDbDataReader reader = command.ExecuteReader())
                 {
@@ -110,6 +128,36 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                 }
             }
             return false;
+        } 
+        public int InsertSequenceGenerator(LotterySequenceGenerator seqGen)
+        {
+            int modified = 0;
+            using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
+            using (OleDbCommand command = new OleDbCommand())
+            {
+                command.CommandType = CommandType.Text;
+                command.CommandText = " INSERT INTO `lottery_seq_gen` (`seqgencd`, `description`, `active`) VALUES(@seqgencd, @desc, true); ";
+
+                command.Connection = conn;
+                command.Parameters.AddWithValue("@seqgencd", seqGen.GetSeqGenCode());
+                command.Parameters.AddWithValue("@desc", seqGen.GetDescription());
+
+                conn.Open();
+                OleDbTransaction transaction = conn.BeginTransaction();
+                command.Transaction = transaction;
+                int result = command.ExecuteNonQuery();
+                if (result < 0)
+                {
+                    transaction.Rollback();
+                    throw new Exception(ResourcesUtils.GetMessage("lot_dao_impl_msg13"));
+                }
+                else
+                {
+                    transaction.Commit();
+                    modified = base.GetLastInsertedID(command);
+                }
+            }
+            return modified;
         }
         private LotterySequenceGeneratorSetup GetModel(OleDbDataReader reader)
         {

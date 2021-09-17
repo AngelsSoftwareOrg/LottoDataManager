@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LottoDataManager.Includes.Classes.ML.FastTreeRegression;
 using LottoDataManager.Includes.Model.Details.Setup;
 using LottoDataManager.Includes.Utilities;
 
@@ -21,7 +22,6 @@ namespace LottoDataManager.Includes.Model.Details
         private LotteryOutlet lotteryOutlet;
         private LotterySequenceGenerator lotterySeqGen;
         private LotteryWinningBet lotteryWinningBet;
-
         public LotteryBetSetup(): base() {}
         public int GameCode { get => gameCode; set => gameCode = value; }
         public DateTime TargetDrawDate { get => targetDrawDate; set => targetDrawDate = value; }
@@ -33,7 +33,6 @@ namespace LottoDataManager.Includes.Model.Details
         public LotteryOutlet LotteryOutlet { get => lotteryOutlet; set => lotteryOutlet = value; }
         public LotterySequenceGenerator LotterySeqGen { get => lotterySeqGen; set => lotterySeqGen = value; }
         public LotteryWinningBet LotteryWinningBet { get => lotteryWinningBet; set => lotteryWinningBet = value; }
-
         public double GetBetAmount()
         {
             return BetAmount;
@@ -102,6 +101,26 @@ namespace LottoDataManager.Includes.Model.Details
         public LotteryWinningBet GetLotteryWinningBet()
         {
             return LotteryWinningBet;
+        }
+        public LottoMatchCountInputModel GetLottoMatchCountInputModel()
+        {
+            return new LottoMatchCountInputModel()
+            {
+                Match_cnt = MatchNumCount,
+                Num1 = GetNum1(),
+                Num2 = GetNum2(),
+                Num3 = GetNum3(),
+                Num4 = GetNum4(),
+                Num5 = GetNum5(),
+                Num6 = GetNum6(),
+                Game_cd = GetGameCode()
+            };
+        }
+        public string GetLottoMatchCountTrainerModelDataIntake()
+        {
+            //game_cd,num1,num2,num3,num4,num5,num6,match_cnt
+            return String.Format("{0},{1},{2},{3},{4},{5},{6},{7}",
+                    GameCode, Num1, Num2, Num3, Num4, Num5, Num6, MatchNumCount);
         }
     }
 }

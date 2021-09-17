@@ -1,5 +1,5 @@
 ﻿
-namespace LottoDataManager.Forms.Ticket
+namespace LottoDataManager.Forms.Others
 {
     partial class HitComparisonFrm
     {
@@ -41,6 +41,8 @@ namespace LottoDataManager.Forms.Ticket
             this.olvColBetN5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColBetN6 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColBetMatch = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColBetOutlet = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColBetSeqGen = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.objListVwDrawResult = new BrightIdeasSoftware.ObjectListView();
             this.olvColDrawResultDate = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColDrawN1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -65,8 +67,6 @@ namespace LottoDataManager.Forms.Ticket
             this.statusStripMain = new System.Windows.Forms.StatusStrip();
             this.toolStripProgBarRefresh = new System.Windows.Forms.ToolStripProgressBar();
             this.toolStripStatusLbl = new System.Windows.Forms.ToolStripStatusLabel();
-            this.olvColBetOutlet = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColBetSeqGen = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.panelMiddle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerMain)).BeginInit();
             this.splitContainerMain.Panel1.SuspendLayout();
@@ -186,6 +186,19 @@ namespace LottoDataManager.Forms.Ticket
             // 
             this.olvColBetMatch.Text = "Match";
             this.olvColBetMatch.Width = 120;
+            // 
+            // olvColBetOutlet
+            // 
+            this.olvColBetOutlet.Searchable = false;
+            this.olvColBetOutlet.Text = "Outlet";
+            this.olvColBetOutlet.Width = 250;
+            this.olvColBetOutlet.WordWrap = true;
+            // 
+            // olvColBetSeqGen
+            // 
+            this.olvColBetSeqGen.Searchable = false;
+            this.olvColBetSeqGen.Text = "Sequence Generator";
+            this.olvColBetSeqGen.Width = 700;
             // 
             // objListVwDrawResult
             // 
@@ -422,19 +435,6 @@ namespace LottoDataManager.Forms.Ticket
             this.toolStripStatusLbl.Text = "Sample Words";
             this.toolStripStatusLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // olvColBetOutlet
-            // 
-            this.olvColBetOutlet.Searchable = false;
-            this.olvColBetOutlet.Text = "Outlet";
-            this.olvColBetOutlet.Width = 250;
-            this.olvColBetOutlet.WordWrap = true;
-            // 
-            // olvColBetSeqGen
-            // 
-            this.olvColBetSeqGen.Searchable = false;
-            this.olvColBetSeqGen.Text = "Sequence Generator";
-            this.olvColBetSeqGen.Width = 700;
-            // 
             // HitComparisonFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -450,6 +450,7 @@ namespace LottoDataManager.Forms.Ticket
             this.Name = "HitComparisonFrm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Hit Comparison";
+            this.Load += new System.EventHandler(this.HitComparisonFrm_Load);
             this.panelMiddle.ResumeLayout(false);
             this.splitContainerMain.Panel1.ResumeLayout(false);
             this.splitContainerMain.Panel2.ResumeLayout(false);

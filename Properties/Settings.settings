@@ -24,7 +24,7 @@
       <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="version_release" Type="System.String" Scope="User">
-      <Value Profile="(Default)">4</Value>
+      <Value Profile="(Default)">6</Value>
     </Setting>
     <Setting Name="repository_name" Type="System.String" Scope="User">
       <Value Profile="(Default)">LottoDataManager</Value>

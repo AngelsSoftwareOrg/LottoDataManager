@@ -23,7 +23,7 @@ namespace LottoDataManager.Forms
         private LotterySchedule lotterySchedule;
         private List<long> autoSelectBetList;
         private DateTime autoSelectBetLowestDate;
-
+        private bool hasDataUpdate = false;
         public ModifyBetDateFrm(LotteryDataServices lotteryDataServices)
         {
             InitializeComponent();
@@ -68,7 +68,6 @@ namespace LottoDataManager.Forms
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
-            ClassReflectionUtil.RefreshMainFormBets(this);
         }
         private void btnSaveChanges_Click(object sender, EventArgs e)
         {
@@ -120,6 +119,7 @@ namespace LottoDataManager.Forms
                     else
                     {
                         this.lotteryDataServices.SaveLotteryBetChange(bet);
+                        hasDataUpdate = true;
                         log(String.Format(ResourcesUtils.GetMessage("mdd_form_validation_msg4"),
                             bet.GetTargetDrawDateFormatted(), bet.GetGNUFormat()));
                     }
@@ -162,6 +162,10 @@ namespace LottoDataManager.Forms
         {
             if (txtStatus.Text.Length > 0) txtStatus.AppendText("\r\n");
             txtStatus.AppendText(msg);
+        }
+        public bool HasDataUpdates
+        {
+            get { return hasDataUpdate; }
         }
         #endregion
 

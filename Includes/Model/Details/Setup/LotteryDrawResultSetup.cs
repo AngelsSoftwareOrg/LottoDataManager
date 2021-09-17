@@ -72,9 +72,9 @@ namespace LottoDataManager.Includes.Model.Details
         {
             return (this.Num1 <= 0 && this.Num2 <= 0 && this.Num3 <= 0 && this.Num4 <= 0 && this.Num5 <= 0 && this.Num6 <= 0);
         }
-        public ModelInputFastTree GetModelInput()
+        public FastTreeInputModel GetFastTreeInputModel()
         {
-            return new ModelInputFastTree()
+            return new FastTreeInputModel()
             {
                 Draw_date = GetDrawDateFormatted() + " 00:00:00.0",
                 Num1 = GetNum1(),
@@ -86,9 +86,9 @@ namespace LottoDataManager.Includes.Model.Details
                 Game_cd = GetGameCode()
             };
         }
-        public ModelInputSDCARegression GetModelInputSDCARegression()
+        public SDCARegressionInputModel GetSDCARegressionInputModel()
         {
-            return new ModelInputSDCARegression()
+            return new SDCARegressionInputModel()
             {
                 Draw_date = GetDrawDateFormatted() + " 00:00:00.0",
                 Num1 = GetNum1(),
@@ -119,7 +119,7 @@ namespace LottoDataManager.Includes.Model.Details
 #endif
         }
 
-        public String GetMachineLearningDataSetEntryFastTree()
+        public String GetFastTreeTrainerModelDataIntake()
         {
             //draw_date,num1,num2,num3,num4,num5,num6,game_cd,RESULT
             return String.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8}",
@@ -134,7 +134,7 @@ namespace LottoDataManager.Includes.Model.Details
                         Num6.ToString().PadLeft(2, char.Parse("0"))));
         }
 
-        public String GetMachineLearningDataSetEntrySDCA()
+        public String GetSCDARegressionModelDataIntake()
         {
             //draw_date,num1,num2,num3,num4,num5,num6,PREDICT,winners,game_cd
             return String.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9}",

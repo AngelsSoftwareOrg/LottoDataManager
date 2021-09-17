@@ -19,5 +19,6 @@ namespace LottoDataManager.Includes.Model.Details
         String GetTargetDrawDateFormatted();
         String GetTargetDrawDateLongFormat();
         String GetWinningAmountInCurrency();
+        bool IsWinningNum(int num);
     }
 }

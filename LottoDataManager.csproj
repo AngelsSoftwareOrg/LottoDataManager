@@ -48,6 +48,9 @@
     <Reference Include="Itenso.TimePeriod, Version=2.1.1.0, Culture=neutral, PublicKeyToken=8cb6db75b4e81486, processorArchitecture=MSIL">
       <HintPath>packages\TimePeriodLibrary.NET.2.1.1\lib\net46\Itenso.TimePeriod.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Bcl.AsyncInterfaces.5.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.ML, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.ML.1.5.5\lib\netstandard2.0\Microsoft.ML.dll</HintPath>
     </Reference>
@@ -55,9 +58,8 @@
       <HintPath>packages\Microsoft.ML.LightGbm.1.5.5\lib\netstandard2.0\Microsoft.ML.LightGbm.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
     </Reference>
     <Reference Include="System.Collections.NonGeneric, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.Collections.NonGeneric.4.3.0\lib\net46\System.Collections.NonGeneric.dll</HintPath>
@@ -66,11 +68,24 @@
     </Reference>
     <Reference Include="System.Core" />
     <Reference Include="System.Numerics" />
-    <Reference Include="System.Numerics.Vectors, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>packages\System.Numerics.Vectors.4.4.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Text.Encodings.Web, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Text.Encodings.Web.5.0.0\lib\net461\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Text.Json.5.0.0\lib\net461\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -167,6 +182,7 @@
     <Compile Include="Includes\Classes\Generator\AbstractSequenceGenerator.cs" />
     <Compile Include="Includes\Classes\Generator\GeneratorParamType.cs" />
     <Compile Include="Includes\Classes\Generator\GeneratorType.cs" />
+    <Compile Include="Includes\Classes\Generator\Types\LottoCountMatchPredictionFastTreeRegression.cs" />
     <Compile Include="Includes\Classes\Generator\Types\NumberNotYetPickUpGenerator.cs" />
     <Compile Include="Includes\Classes\Generator\SequenceGeneratorParamFieldsFormFactory.cs" />
     <Compile Include="Includes\Classes\Generator\SequenceGenerator.cs" />
@@ -192,20 +208,29 @@
     <Compile Include="Includes\Classes\LotteryDataWorker.cs" />
     <Compile Include="Includes\Classes\LotteryDataWorkerEvent.cs" />
     <Compile Include="Includes\Classes\LotteryDataWorkerEventStages.cs" />
-    <Compile Include="Includes\Classes\ML\FastTree\ConsumeModelFastTree.cs" />
-    <Compile Include="Includes\Classes\ML\FastTree\ModelInputFastTree.cs" />
-    <Compile Include="Includes\Classes\ML\FastTree\ModelOutputFastTree.cs" />
+    <Compile Include="Includes\Classes\ML\FastTreeRegression\LottoMatchCount\LottoMatchCountPredictor.cs" />
+    <Compile Include="Includes\Classes\ML\FastTreeRegression\LottoMatchCount\LottoMatchCountTrainer.cs" />
+    <Compile Include="Includes\Classes\ML\FastTreeRegression\LottoMatchCount\LottoMatchCountInputModel.cs" />
+    <Compile Include="Includes\Classes\ML\FastTreeRegression\LottoMatchCount\LottoMatchCountOutputModel.cs" />
+    <Compile Include="Includes\Classes\ML\FastTreeRegression\LottoMatchCount\LottoMatchCountTrainerDataIntake.cs" />
+    <Compile Include="Includes\Classes\ML\FastTree\FastTreePredictor.cs" />
+    <Compile Include="Includes\Classes\ML\FastTree\FastTreeInputModel.cs" />
+    <Compile Include="Includes\Classes\ML\FastTree\FastTreeOutputModel.cs" />
+    <Compile Include="Includes\Classes\ML\FastTree\FastTreeTrainerDataIntake.cs" />
     <Compile Include="Includes\Classes\ML\LightGbmRegression\ConsumeModelLightGbmRegression.cs" />
     <Compile Include="Includes\Classes\ML\LightGbmRegression\MachineLearningModelBuilderLightGbmRegression.cs" />
     <Compile Include="Includes\Classes\ML\LightGbmRegression\ModelInputLightGbmRegression.cs" />
     <Compile Include="Includes\Classes\ML\LightGbmRegression\ModelOutputLightGbmRegression.cs" />
-    <Compile Include="Includes\Classes\ML\FastTree\MachineLearningModelBuilderFastTree.cs" />
+    <Compile Include="Includes\Classes\ML\FastTree\FastTreeTrainer.cs" />
     <Compile Include="Includes\Classes\ML\MLModelAbstract.cs" />
     <Compile Include="Includes\Classes\ML\MLModelBuilderAbstract.cs" />
-    <Compile Include="Includes\Classes\ML\SDCARegression\ConsumeModelSDCARegression.cs" />
-    <Compile Include="Includes\Classes\ML\SDCARegression\MachineLearningModelBuilderSDCARegression.cs" />
-    <Compile Include="Includes\Classes\ML\SDCARegression\ModelInputSDCARegression.cs" />
-    <Compile Include="Includes\Classes\ML\SDCARegression\ModelOutputSDCARegression.cs" />
+    <Compile Include="Includes\Classes\ML\SDCARegression\SDCARegressionTrainerDataIntake.cs" />
+    <Compile Include="Includes\Classes\ML\SDCARegression\SDCARegressionPredictor.cs" />
+    <Compile Include="Includes\Classes\ML\SDCARegression\SDCARegressionTrainer.cs" />
+    <Compile Include="Includes\Classes\ML\SDCARegression\SDCARegressionInputModel.cs" />
+    <Compile Include="Includes\Classes\ML\SDCARegression\SDCARegressionOutputModel.cs" />
+    <Compile Include="Includes\Classes\ML\TrainerDataIntakeModel.cs" />
+    <Compile Include="Includes\Classes\ML\TrainerProcessor\TrainerProcessorAbstract.cs" />
     <Compile Include="Includes\Classes\Reports\DashboardReport.cs" />
     <Compile Include="Includes\Classes\Reports\ProfitAndLossReport.cs" />
     <Compile Include="Includes\Classes\Reports\ReportAbstract.cs" />
@@ -296,6 +321,7 @@
     <Compile Include="Includes\Classes\Scraping\LottoWebScraperEvent.cs" />
     <Compile Include="Includes\Classes\Scraping\LottoWebScrapingStages.cs" />
     <Compile Include="Includes\Classes\Scraping\WebLottoScraperFactory.cs" />
+    <Compile Include="Includes\Classes\Updates\ApplicationUpdateProcessor.cs" />
     <Compile Include="Includes\Classes\UserSettings.cs" />
     <Compile Include="Includes\Database\DAO\Impl\AppVersioningDaoImpl.cs" />
     <Compile Include="Includes\Database\DAO\Impl\LotteryBetDaoImpl.cs" />
@@ -320,9 +346,13 @@
     <Compile Include="Includes\Database\DAO\Interface\UserSettingDao.cs" />
     <Compile Include="Includes\Model\Details\AppVersioning.cs" />
     <Compile Include="Includes\Model\Details\LotterySequenceGenerator.cs" />
+    <Compile Include="Includes\Model\Details\Options\UserSettingsConfig.cs" />
     <Compile Include="Includes\Model\Details\Setup\AppVersioningSetup.cs" />
     <Compile Include="Includes\Model\Details\Setup\LotterySequenceGeneratorSetup.cs" />
+    <Compile Include="Includes\Model\Reports\DashboardReportEvent.cs" />
+    <Compile Include="Includes\Model\Reports\DashboardReportGroup.cs" />
     <Compile Include="Includes\Model\Reports\DashboardReportItem.cs" />
+    <Compile Include="Includes\Model\Reports\Setup\DashboardReportGroupSetup.cs" />
     <Compile Include="Includes\Model\Reports\Setup\DashboardReportItemSetup.cs" />
     <Compile Include="Includes\Model\Details\Lottery.cs" />
     <Compile Include="Includes\Model\Details\LotteryBet.cs" />
@@ -342,6 +372,7 @@
     <Compile Include="Includes\Model\Game\Game649.cs" />
     <Compile Include="Includes\Model\Game\Game645.cs" />
     <Compile Include="Includes\Model\Game\GameFactory.cs" />
+    <Compile Include="Includes\Model\Reports\Setup\ReportItemDecoration.cs" />
     <Compile Include="Includes\Model\Structs\DashboardReportItemActions.cs" />
     <Compile Include="Includes\Utilities\AppSettings.cs" />
     <Compile Include="Includes\Database\DAO\Interface\LotteryScheduleDao.cs" />

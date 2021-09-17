@@ -17,25 +17,24 @@ namespace LottoDataManager.Includes.Model.Details
             this.gameMode = gameMode;
             this.lotteryScheduleDao = LotteryScheduleDaoImpl.GetInstance();
         }
-        public DateTime GetNextDrawDate()
+        public DateTime GetNextDrawDate(DateTime basisDate)
         {
-            DateTime nextScheduledDate = DateTime.Now;
             LotterySchedule lotterySchedule = this.lotteryScheduleDao.GetLotterySchedule(gameMode);
             int breaker = 0;
             while (true)
             {
-                if (nextScheduledDate.DayOfWeek == DayOfWeek.Monday && lotterySchedule.IsMonday()) { break; }
-                else if (nextScheduledDate.DayOfWeek == DayOfWeek.Tuesday && lotterySchedule.IsTuesday()) { break; }
-                else if (nextScheduledDate.DayOfWeek == DayOfWeek.Wednesday && lotterySchedule.IsWednesday()) { break; }
-                else if (nextScheduledDate.DayOfWeek == DayOfWeek.Thursday && lotterySchedule.IsThursday()) { break; }
-                else if (nextScheduledDate.DayOfWeek == DayOfWeek.Friday && lotterySchedule.IsFriday()) { break; }
-                else if (nextScheduledDate.DayOfWeek == DayOfWeek.Saturday && lotterySchedule.IsSaturday()) { break; }
-                else if (nextScheduledDate.DayOfWeek == DayOfWeek.Sunday && lotterySchedule.IsSunday()) { break; }
+                if (basisDate.DayOfWeek == DayOfWeek.Monday && lotterySchedule.IsMonday()) { break; }
+                else if (basisDate.DayOfWeek == DayOfWeek.Tuesday && lotterySchedule.IsTuesday()) { break; }
+                else if (basisDate.DayOfWeek == DayOfWeek.Wednesday && lotterySchedule.IsWednesday()) { break; }
+                else if (basisDate.DayOfWeek == DayOfWeek.Thursday && lotterySchedule.IsThursday()) { break; }
+                else if (basisDate.DayOfWeek == DayOfWeek.Friday && lotterySchedule.IsFriday()) { break; }
+                else if (basisDate.DayOfWeek == DayOfWeek.Saturday && lotterySchedule.IsSaturday()) { break; }
+                else if (basisDate.DayOfWeek == DayOfWeek.Sunday && lotterySchedule.IsSunday()) { break; }
                 if (breaker > 1000) break;
                 breaker++;
-                nextScheduledDate = nextScheduledDate.AddDays(1);
+                basisDate = basisDate.AddDays(1);
             }
-            return nextScheduledDate;
+            return basisDate;
         }
     }
 }

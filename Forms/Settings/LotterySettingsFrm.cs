@@ -26,13 +26,13 @@ namespace LottoDataManager.Forms
         private LotteryTicketPanel lotteryTicketPanel;
         private LotteryAppConfiguration lotteryAppConfiguration;
         private String NODE_NAME_OPTION_CONFIG = "nodeConfig";
-
-        public object ResourcesUtil { get; private set; }
+        private bool isSourceDatabaseChange;
 
         public LotterySettingsFrm(LotteryDataServices lotteryDataServices)
         {
             InitializeComponent();
-            if(lotteryDataServices != null)
+
+            if (lotteryDataServices != null)
             {
                 this.lotteryDataServices = lotteryDataServices;
                 this.lotteryTicketPanel = this.lotteryDataServices.GetLotteryTicketPanel();
@@ -56,6 +56,10 @@ namespace LottoDataManager.Forms
             this.btnSaveModDesc.Text = ResourcesUtils.GetMessage("lott_app_config_msg4");
             this.btnSaveLotteryOutlet.Text = ResourcesUtils.GetMessage("lott_app_config_msg5");
             this.btnSeqGenSaveChanges.Text = ResourcesUtils.GetMessage("lott_app_config_msg6");
+            this.gbLottoBuyCutOff.Text = ResourcesUtils.GetMessage("lott_app_config_msg34");
+            this.lblCutoff.Text = ResourcesUtils.GetMessage("lott_app_config_msg35");
+            this.lblNotify.Text = ResourcesUtils.GetMessage("lott_app_config_msg36");
+            this.lblNotifyDesc.Text = ResourcesUtils.GetMessage("lott_app_config_msg37");
 
             foreach (TreeNode node in this.mainMenuTreeView.Nodes)
             {
@@ -77,6 +81,10 @@ namespace LottoDataManager.Forms
                 else if (node.Name.Equals("nodeLottoSched", StringComparison.OrdinalIgnoreCase))
                 {
                     node.Text = ResourcesUtils.GetMessage("lott_app_config_msg11");
+                }
+                else if (node.Name.Equals("nodeOthers", StringComparison.OrdinalIgnoreCase))
+                {
+                    node.Text = ResourcesUtils.GetMessage("lott_app_config_msg33");
                 }
             }
 
@@ -106,7 +114,6 @@ namespace LottoDataManager.Forms
             this.chkbLotSchedFri.Text = ResourcesUtils.GetMessage("lott_app_config_msg30");
             this.chkbLotSchedSat.Text = ResourcesUtils.GetMessage("lott_app_config_msg31");
             this.chkbLotSchedSun.Text = ResourcesUtils.GetMessage("lott_app_config_msg32");
-
         }
         private void btnExit_Click(object sender, EventArgs e)
         {
@@ -114,6 +121,7 @@ namespace LottoDataManager.Forms
         }
         private void LotterySettingsFrm_Load(object sender, EventArgs e)
         {
+            this.isSourceDatabaseChange = false;
             HideAllTabsOnTabControl(mainTabControl);
             SetDefaultSelectedSetting();
         }
@@ -167,9 +175,15 @@ namespace LottoDataManager.Forms
             }
             else if (node.Name.Equals(NODE_NAME_OPTION_CONFIG, StringComparison.OrdinalIgnoreCase))
             {
-                mainTabControl.TabPages.Add(lotteryConfig);
+                mainTabControl.TabPages.Add(lotteryConfigTabPage);
                 LoadLotteryConfig();
                 lotterySchedTabPage.Show();
+            }
+            else if (node.Name.Equals("nodeOthers", StringComparison.OrdinalIgnoreCase))
+            {
+                mainTabControl.TabPages.Add(lotteryOptionsTabPage);
+                LoadLotteryOptions();
+                lotteryOptionsTabPage.Show();
             }
         }
         #endregion
@@ -613,10 +627,33 @@ namespace LottoDataManager.Forms
             try
             {
                 if (!IsLotteryConfigFieldsValid()) return;
+                this.isSourceDatabaseChange = !lotteryAppConfiguration.DBSourcePath.Equals(txtConfigDBSource.Text, 
+                                   StringComparison.OrdinalIgnoreCase);
                 lotteryAppConfiguration.DBSourcePath = txtConfigDBSource.Text;
                 lotteryAppConfiguration.MLModelPath = txtConfigFolderML.Text;
                 lotteryAppConfiguration.SaveConfigFile();
                 MessageBox.Show(ResourcesUtils.GetMessage("lott_config_msg3"));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        #endregion
+
+        #region LOTTERY OPTIONS
+        private void LoadLotteryOptions()
+        {
+            dtCutoffTime.Value = this.lotteryDataServices.GetTicketCutoffTime();
+            numNotify.Value = this.lotteryDataServices.GetTicketCutoffNotifyTime();
+        }
+        private void btnSaveOtherOptions_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.lotteryDataServices.SaveTicketCutoffTime(dtCutoffTime.Value);
+                this.lotteryDataServices.SaveTicketCutoffNotifyTime((int)numNotify.Value);
+                MessageBox.Show(ResourcesUtils.GetMessage("lott_usr_settings_msg1"));
             }
             catch (Exception ex)
             {
@@ -640,6 +677,10 @@ namespace LottoDataManager.Forms
             this.mainMenuTreeView.Nodes.Clear();
             this.mainMenuTreeView.Nodes.Add(configNode);
         }
+        public bool IsSourceDatabaseChange { get => isSourceDatabaseChange; }
+
         #endregion
+
+
     }
 }
