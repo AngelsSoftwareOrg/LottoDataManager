@@ -394,6 +394,7 @@ namespace LottoDataManager.Includes.Classes.Reports
 
             foreach(LotteryDrawResult draw in latestDrawResults)
             {
+                if (draw == null) continue;
                 Lottery lottery = lotteriesGameList.Find((lotteryObj) => (int)lotteryObj.GetGameMode() == draw.GetGameCode());
                 DateTime today = DateTime.Now;
                 TimeSpan diffWithToday = today - draw.GetDrawDate();
@@ -419,6 +420,7 @@ namespace LottoDataManager.Includes.Classes.Reports
 
             foreach (LotteryDrawResult draw in latestDrawResults)
             {
+                if (draw == null) continue;
                 Lottery lottery = lotteriesGameList.Find((lotteryObj) => (int)lotteryObj.GetGameMode() == draw.GetGameCode());
                 String key = lottery.GetDescription();
                 String value = draw.GetJackpotAmtFormatted();
