@@ -765,7 +765,7 @@ namespace LottoDataManager
             LotterySettingsFrm settings = new LotterySettingsFrm(lotteryDataServices);
             settings.ShowDialog(this);
             if(settings.IsSourceDatabaseChange) DoApplicationUpdate();
-            RefreshBets();
+            SetBetsAndResultDefaultList();
         }
         private void checkWinningBetsToolStripMenuItem_Click(object sender, EventArgs e)
         {
