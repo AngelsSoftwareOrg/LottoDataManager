@@ -80,7 +80,7 @@ namespace LottoDataManager.Forms
             dtPickPreferredDate.Visible = false;
 
             //select default if no selection
-            if(cmbSeqGenType.SelectedItem == null) SelectedSequenceGenerator = GeneratorType.PERSONAL_PICK;
+            if (cmbSeqGenType.SelectedItem == null) SelectedSequenceGenerator = GeneratorType.PERSONAL_PICK;
         }
         private void RefreshSelectedDrawDate()
         {
@@ -105,6 +105,8 @@ namespace LottoDataManager.Forms
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
+            textBoxDelimitersInput.Text = String.Empty;
+            ClearTicketLayoutSelection();
             if (!this.hasDataBeenSave) return;
             ClassReflectionUtil.RefreshMainFormBets(this);
         }
@@ -409,6 +411,10 @@ namespace LottoDataManager.Forms
             lblSelectedNumber.Text = numSelected;
         }
         private void linkLblClrSelNum_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            ClearTicketLayoutSelection();
+        }
+        private void ClearTicketLayoutSelection()
         {
             selTcktPnlNum.Clear();
             AddSelectedTicketPanelNumber();

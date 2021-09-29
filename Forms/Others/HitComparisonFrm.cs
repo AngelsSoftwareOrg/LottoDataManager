@@ -202,13 +202,13 @@ namespace LottoDataManager.Forms.Others
             this.olvColDrawWinner.ImageGetter = delegate (object rowObject) {
                 if (rowObject == null) return 0;
                 LotteryDrawResult p = (LotteryDrawResult)rowObject;
-                if (p.GetWinners() <= 0) return 0;
+                if (p.GetWinnersCount() <= 0) return 0;
                 return ImageUtils.GetStarJackpotImage(5);
             };
             this.olvColDrawWinner.AspectGetter = delegate (object rowObject) {
                 if (rowObject == null) return 0;
                 LotteryDrawResult p = (LotteryDrawResult)rowObject;
-                return p.GetWinners();
+                return p.GetWinnersCount();
             };
             this.olvColDrawWinner.AspectToStringConverter = delegate (object rowObject) {
                 return String.Empty;

@@ -394,6 +394,7 @@ namespace LottoDataManager.Includes.Classes.Reports
 
             foreach(LotteryDrawResult draw in latestDrawResults)
             {
+                if (draw == null) continue;
                 Lottery lottery = lotteriesGameList.Find((lotteryObj) => (int)lotteryObj.GetGameMode() == draw.GetGameCode());
                 DateTime today = DateTime.Now;
                 TimeSpan diffWithToday = today - draw.GetDrawDate();
@@ -419,9 +420,13 @@ namespace LottoDataManager.Includes.Classes.Reports
 
             foreach (LotteryDrawResult draw in latestDrawResults)
             {
+                if (draw == null) continue;
                 Lottery lottery = lotteriesGameList.Find((lotteryObj) => (int)lotteryObj.GetGameMode() == draw.GetGameCode());
                 String key = lottery.GetDescription();
-                String value = draw.GetJackpotAmtFormatted();
+                String value = (draw.HasWinners()) ? 
+                    ResourcesUtils.GetMessage("drpt_lot_draw_jackpot_winners_lbl", 
+                        draw.GetJackpotAmtFormatted(), draw.GetWinnersCount().ToString()) : 
+                        draw.GetJackpotAmtFormatted();
                 DashboardReportItemSetup itm = GenModel(key, value);
                 itm.GroupKeyName = ResourcesUtils.GetMessage("drpt_lot_draw_jackpot_lbl");
                 itm.ReportItemDecoration.IsHyperLink = true;

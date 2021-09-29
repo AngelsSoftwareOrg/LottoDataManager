@@ -167,19 +167,19 @@ namespace LottoDataManager
                 {
                     if (rowObject == null) return 0;
                     LotteryDrawResult p = (LotteryDrawResult)rowObject;
-                    if (p.GetWinners() <= 0) return "0";
-                    return p.GetWinners();
+                    if (p.GetWinnersCount() <= 0) return "0";
+                    return p.GetWinnersCount();
                 };
                 this.olvColWinStamp.ImageGetter = delegate (object rowObject) {
                     if (rowObject == null) return 0;
                     LotteryDrawResult p = (LotteryDrawResult)rowObject;
-                    if (p.GetWinners() <= 0) return 0;
+                    if (p.GetWinnersCount() <= 0) return 0;
                     return ImageUtils.GetStarJackpotImage(5);
                 };
                 this.olvColWinStamp.AspectGetter = delegate (object rowObject) {
                     if (rowObject == null) return 0;
                     LotteryDrawResult p = (LotteryDrawResult)rowObject;
-                    return p.GetWinners();
+                    return p.GetWinnersCount();
                 };
                 this.olvColWinStamp.AspectToStringConverter = delegate (object rowObject) {
                     return String.Empty;
@@ -452,7 +452,7 @@ namespace LottoDataManager
         {
             if (e.Model == null) return;
             LotteryDrawResult result = (LotteryDrawResult)e.Model;
-            if(result.GetWinners() > 0)
+            if(result.GetWinnersCount() > 0)
             {
                 e.Item.BackColor = Color.GreenYellow;
                 e.Item.ForeColor = Color.Black;
@@ -554,6 +554,15 @@ namespace LottoDataManager
             objectLstVwLatestBet.SelectAll();
         }
         private void copySelectedAsLinearCSVToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ObjectLstVwLatestBetClipboardCopy();
+        }
+        private void objectLstVwLatestBet_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.C) ObjectLstVwLatestBetClipboardCopy();
+            if (e.Control && e.KeyCode == Keys.A) objectLstVwLatestBet.SelectAll();
+        }
+        private void ObjectLstVwLatestBetClipboardCopy()
         {
             try
             {
@@ -765,7 +774,7 @@ namespace LottoDataManager
             LotterySettingsFrm settings = new LotterySettingsFrm(lotteryDataServices);
             settings.ShowDialog(this);
             if(settings.IsSourceDatabaseChange) DoApplicationUpdate();
-            RefreshBets();
+            SetBetsAndResultDefaultList();
         }
         private void checkWinningBetsToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -845,6 +854,7 @@ namespace LottoDataManager
                 MessageBox.Show(ResourcesUtils.GetMessage("mainf_labels_45"));
             }
         }
+
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -876,12 +886,10 @@ namespace LottoDataManager
         {
             DoApplicationUpdate();
         }
-
         private void DoApplicationUpdate()
         {
             this.applicationUpdateProcessor.StartUpdate(lotteryDataServices);
         }
-
         #endregion
 
     }
