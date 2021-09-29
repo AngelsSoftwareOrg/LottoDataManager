@@ -12,11 +12,12 @@ namespace LottoDataManager.Includes.Model.Details
         long GetID();
         double GetJackpotAmt();
         String GetJackpotAmtFormatted();
-        int GetWinners();
+        int GetWinnersCount();
         bool IsWithinDrawResult(int numberToLookFor);
         bool IsDrawResulDetailsEmpty();
         void PutNumberSequence(String sequence);
         bool IsDrawResulSequenceEmpty();
+        bool HasWinners();
         FastTreeInputModel GetFastTreeInputModel();
         SDCARegressionInputModel GetSDCARegressionInputModel();
         String GetFastTreeTrainerModelDataIntake();

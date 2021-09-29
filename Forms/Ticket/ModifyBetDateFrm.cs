@@ -153,8 +153,16 @@ namespace LottoDataManager.Forms
             }
             else if (newDateTime.CompareTo(DateTime.Now.Date) == 0) //if the same
             {
-                log(ResourcesUtils.GetMessage("mdd_form_validation_msg6"));
-                return false;
+                if (lotteryDataServices.IsPastTicketSellingCutoffTime())
+                {
+                    DialogResult drPassCutOfftime = MessageBox.Show(ResourcesUtils.GetMessage("mdd_form_validation_msg8"),
+                        ResourcesUtils.GetMessage("mdd_form_others_mgs7"), MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
+                    if(drPassCutOfftime != DialogResult.OK)
+                    {
+                        log(ResourcesUtils.GetMessage("mdd_form_validation_msg6"));
+                        return false;
+                    }
+                }
             }
             return true;
         }

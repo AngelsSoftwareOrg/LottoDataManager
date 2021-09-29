@@ -254,10 +254,12 @@ namespace LottoDataManager.Forms
         private void DeleteLotteryBets()
         {
             if (objectListViewBets.CheckedObjects.Count <= 0) return;
+            DialogResult dr = DialogResult.Cancel;
             try
             {
-                DialogResult dr = MessageBox.Show(ResourcesUtils.GetMessage("modfy_bets_msg_7"),
-                         ResourcesUtils.GetMessage("modfy_bets_msg_8"), MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                dr = MessageBox.Show(ResourcesUtils.GetMessage("modfy_bets_msg_7"),
+                         ResourcesUtils.GetMessage("modfy_bets_msg_8"), MessageBoxButtons.OKCancel, 
+                         MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
                 if (dr == DialogResult.OK)
                 {
                     toolStripProgBar.Value = 0;
@@ -272,6 +274,7 @@ namespace LottoDataManager.Forms
                         this.lotteryDataServices.DeleteLotteryBet(lotBet);
                         Application.DoEvents();
                     }
+                    if (totalCheckedObjects > 0) hasDataUpdates = true;
                 }
             }
             catch (Exception ex)
@@ -283,7 +286,7 @@ namespace LottoDataManager.Forms
                 toolStripStatusLbl.Text = "";
                 toolStripProgBar.Value = 0;
                 toolStripProgBar.Visible = false;
-                FillUpBetList();
+                if (dr == DialogResult.OK) FillUpBetList();
             }
         }
         private void SaveLotteryBetsChanges()

@@ -121,7 +121,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
         }
         public void SaveLastOpenedLottery(int game_cd)
         {
-            UpdateSetting(game_cd.ToString(), UserSettingsConfig.CFG_LAST_OPENED_DIRECTORY);
+            UpdateSetting(UserSettingsConfig.CFG_LAST_OPENED_DIRECTORY, game_cd.ToString());
         }
         public String GetMLDataSetDirectoryPath()
         {
@@ -129,7 +129,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
         }
         public void SaveMLDataSetDirectoryPath(String filePath)
         {
-            UpdateSetting(filePath, UserSettingsConfig.CFG_ML_DATA_SET);
+            UpdateSetting(UserSettingsConfig.CFG_ML_DATA_SET, filePath);
         }
     }
 }
