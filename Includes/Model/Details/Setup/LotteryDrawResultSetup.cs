@@ -37,7 +37,7 @@ namespace LottoDataManager.Includes.Model.Details
         {
             return this.JackpotAmt;
         }
-        public int GetWinners()
+        public int GetWinnersCount()
         {
             return this.Winners;
         }
@@ -106,7 +106,6 @@ namespace LottoDataManager.Includes.Model.Details
                 DateTimeConverterUtils.ConvertToFormat(this.DrawDate, DateTimeConverterUtils.STANDARD_DATE_FORMAT), 
                 this.GetGNUFormat());
         }
-
         override
         public String ToString()
         {
@@ -118,7 +117,6 @@ namespace LottoDataManager.Includes.Model.Details
             return base.ToString();
 #endif
         }
-
         public String GetFastTreeTrainerModelDataIntake()
         {
             //draw_date,num1,num2,num3,num4,num5,num6,game_cd,RESULT
@@ -133,7 +131,6 @@ namespace LottoDataManager.Includes.Model.Details
                         Num5.ToString().PadLeft(2, char.Parse("0")),
                         Num6.ToString().PadLeft(2, char.Parse("0"))));
         }
-
         public String GetSCDARegressionModelDataIntake()
         {
             //draw_date,num1,num2,num3,num4,num5,num6,PREDICT,winners,game_cd
@@ -143,6 +140,9 @@ namespace LottoDataManager.Includes.Model.Details
                     (Num1 + Num2 + Num3 + Num4 + Num5 + Num6),
                     Winners, GameCode);
         }
-
+        public bool HasWinners()
+        {
+            return this.GetWinnersCount() > 0;
+        }
     }
 }

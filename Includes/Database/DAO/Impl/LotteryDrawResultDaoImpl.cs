@@ -207,7 +207,7 @@ namespace LottoDataManager.Includes.Database.DAO
                                       " VALUES (@draw_date,@jackpot_amt,@winners,@game_cd,@num1,@num2,@num3,@num4,@num5,@num6)";
                 command.Parameters.AddWithValue("@draw_date", lotteryDrawResult.GetDrawDate());
                 command.Parameters.AddWithValue("@jackpot_amt", lotteryDrawResult.GetJackpotAmt());
-                command.Parameters.AddWithValue("@winners", lotteryDrawResult.GetWinners());
+                command.Parameters.AddWithValue("@winners", lotteryDrawResult.GetWinnersCount());
                 command.Parameters.AddWithValue("@game_cd", lotteryDrawResult.GetGameCode());
                 command.Parameters.AddWithValue("@num1", lotteryDrawResult.GetNum1());
                 command.Parameters.AddWithValue("@num2", lotteryDrawResult.GetNum2());

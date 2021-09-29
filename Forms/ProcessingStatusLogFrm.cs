@@ -37,6 +37,7 @@ namespace LottoDataManager.Forms
             richtbLogs.SelectionStart = 0;
             richtbLogs.SelectionLength = 0;
             richtbLogs.ScrollToCaret();
+            richtbLogs.Refresh();
         }
         #endregion
 
@@ -44,9 +45,11 @@ namespace LottoDataManager.Forms
 
         private void ProcessingStatusLogFrm_HandleCreated(object sender, EventArgs e)
         {
+            int ctrRefresher = 0;
             foreach(String[] logsEntry in statusLogsDelayed)
             {
                 AddStatusLogsDisplayOnTextBox(logsEntry[0], logsEntry[1], logsEntry[2]);
+                if (ctrRefresher % 30 == 0) Application.DoEvents();
             }
             statusLogsDelayed.Clear();
         }
@@ -74,8 +77,6 @@ namespace LottoDataManager.Forms
             richtbLogs.SelectionColor = color;
             richtbLogs.AppendText(message);
             richtbLogs.SelectionColor = richtbLogs.ForeColor;
-            richtbLogs.ScrollToCaret();
-            richtbLogs.Refresh();
         }
         public void ClearLogs()
         {
