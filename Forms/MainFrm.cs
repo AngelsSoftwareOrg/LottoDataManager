@@ -578,7 +578,7 @@ namespace LottoDataManager
                         sb.ToString(), // Text to store in clipboard
                         false,         // Do not keep after our application exits
                         10,            // Retry 10 times
-                        100);          // 100 ms delay between retries
+                        200);          // 100 ms delay between retries
                 }
             }
             catch (Exception ex)
