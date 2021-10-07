@@ -1,5 +1,6 @@
 ﻿using System;
 using LottoDataManager.Includes.Classes.ML.FastTree;
+using LottoDataManager.Includes.Classes.ML.FastTreeTweedie.DrawResultWinCount;
 using LottoDataManager.Includes.Classes.ML.SDCARegression;
 
 namespace LottoDataManager.Includes.Model.Details
@@ -18,11 +19,14 @@ namespace LottoDataManager.Includes.Model.Details
         void PutNumberSequence(String sequence);
         bool IsDrawResulSequenceEmpty();
         bool HasWinners();
-        FastTreeInputModel GetFastTreeInputModel();
-        SDCARegressionInputModel GetSDCARegressionInputModel();
+        FastTreeInputModel GetFastTreeInputModel(bool dateTimeToday = false);
+        SDCARegressionInputModel GetSDCARegressionInputModel(bool dateTimeToday = false);
+        DrawResultWinCountInputModel GetDrawResultWinCountInputModel(bool dateTimeToday = false);
         String GetFastTreeTrainerModelDataIntake();
         String GetSCDARegressionModelDataIntake();
+        String GetDrawResultWinCountModelDataIntake();
         String GetGNUFormat();
         String GetExtractedDrawnResultDetails();
+
     }
 }

@@ -12,7 +12,7 @@ An application that let it be as your "Lotto Data Management Hub" with the follo
 1. Add your bet, including which outlet you buy your ticket, and the kind of number generator you use to your bet.
 2. With a single click, it will download the latest drawn result and jackpot amount.
 3. With a quick glance dashboard, it will let you know the nearest previous and next draw dates, your spending amount and more.
-4. Random Sequence Generator using Machine Learning (*~~this is totally a random number base on my silly interpretation of the Machine Learning results~~*)
+4. Random Sequence Generator using Machine Learning (*~~this is totally a random number base on my interpretation of the Machine Learning results~~*)
 5. Quick comparison between your selected bet and how its fare to the drawn result.
 6. Profit and Loss Report generation. 
 
@@ -50,6 +50,7 @@ By using the following Technologies
 # Installation
 From the right you, you may download the package installer.
 There would be a documentation attach on the package, please read it how to set it up.
+
 ![Location of the desktop app installer.](https://i.imgur.com/pm95OwT.png)
 
 # License

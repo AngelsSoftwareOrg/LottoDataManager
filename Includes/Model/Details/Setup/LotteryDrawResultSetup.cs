@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LottoDataManager.Includes.Classes.ML.FastTree;
+using LottoDataManager.Includes.Classes.ML.FastTreeTweedie.DrawResultWinCount;
 using LottoDataManager.Includes.Classes.ML.LightGbmRegression;
 using LottoDataManager.Includes.Classes.ML.SDCARegression;
 using LottoDataManager.Includes.Model.Details.Setup;
@@ -72,9 +73,9 @@ namespace LottoDataManager.Includes.Model.Details
         {
             return (this.Num1 <= 0 && this.Num2 <= 0 && this.Num3 <= 0 && this.Num4 <= 0 && this.Num5 <= 0 && this.Num6 <= 0);
         }
-        public FastTreeInputModel GetFastTreeInputModel()
+        public FastTreeInputModel GetFastTreeInputModel(bool dateTimeToday = false)
         {
-            return new FastTreeInputModel()
+            FastTreeInputModel model = new FastTreeInputModel()
             {
                 Draw_date = GetDrawDateFormatted() + " 00:00:00.0",
                 Num1 = GetNum1(),
@@ -85,10 +86,12 @@ namespace LottoDataManager.Includes.Model.Details
                 Num6 = GetNum6(),
                 Game_cd = GetGameCode()
             };
+            if (dateTimeToday) model.Draw_date = ConvertToDateTimeMLFormat(DateTime.Now);
+            return model;
         }
-        public SDCARegressionInputModel GetSDCARegressionInputModel()
+        public SDCARegressionInputModel GetSDCARegressionInputModel(bool dateTimeToday = false)
         {
-            return new SDCARegressionInputModel()
+            SDCARegressionInputModel model = new SDCARegressionInputModel()
             {
                 Draw_date = GetDrawDateFormatted() + " 00:00:00.0",
                 Num1 = GetNum1(),
@@ -99,7 +102,26 @@ namespace LottoDataManager.Includes.Model.Details
                 Num6 = GetNum6(),
                 Game_cd = GetGameCode()
             };
+            if (dateTimeToday) model.Draw_date = ConvertToDateTimeMLFormat(DateTime.Now);
+            return model;
         }
+        public DrawResultWinCountInputModel GetDrawResultWinCountInputModel(bool dateTimeToday = false)
+        {
+            DrawResultWinCountInputModel model = new DrawResultWinCountInputModel()
+                {
+                    Draw_date = GetDrawDateFormatted() + " 00:00:00.0",
+                    Num1 = GetNum1(),
+                    Num2 = GetNum2(),
+                    Num3 = GetNum3(),
+                    Num4 = GetNum4(),
+                    Num5 = GetNum5(),
+                    Num6 = GetNum6(),
+                    Game_cd = GetGameCode()
+                };
+            if (dateTimeToday) model.Draw_date = ConvertToDateTimeMLFormat(DateTime.Now);
+            return model;
+        }
+
         public String GetExtractedDrawnResultDetails()
         {
             return String.Format("{0}, {1}",
@@ -140,6 +162,16 @@ namespace LottoDataManager.Includes.Model.Details
                     (Num1 + Num2 + Num3 + Num4 + Num5 + Num6),
                     Winners, GameCode);
         }
+        public String GetDrawResultWinCountModelDataIntake()
+        {
+            //game_cd,draw_date,num1,num2,num3,num4,num5,num6,draw_result
+            return String.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8}",
+                    GameCode,
+                    DateTimeConverterUtils.ConvertToFormat(DrawDate, DateTimeConverterUtils.STANDARD_DATE_FORMAT_DFLT_TIME_ZERO),
+                    Num1, Num2, Num3, Num4, Num5, Num6,
+                    (Winners>0) ? 1: 0);
+        }
+
         public bool HasWinners()
         {
             return this.GetWinnersCount() > 0;
