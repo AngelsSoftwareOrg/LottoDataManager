@@ -109,7 +109,7 @@ namespace LottoDataManager.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("7")]
+        [global::System.Configuration.DefaultSettingValueAttribute("8")]
         public string version_release {
             get {
                 return ((string)(this["version_release"]));

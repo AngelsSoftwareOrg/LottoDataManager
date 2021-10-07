@@ -28,5 +28,6 @@ namespace LottoDataManager.Includes.Database.DAO
         List<LotteryDrawResult> GetFastTreeMLDataSet(GameMode gameMode, DateTime startingDate);
         List<LotteryDrawResult> GetSDCAMLDataSet(GameMode gameMode, DateTime startingDate);
         LotteryDrawResult GetLatestDrawResult(int gameCd);
+        List<LotteryDrawResult> GetDrawResultWinCountMLDataset(GameMode gameMode, DateTime startingDate);
     }
 }

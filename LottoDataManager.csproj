@@ -186,6 +186,7 @@
     <Compile Include="Includes\Classes\Generator\AbstractSequenceGenerator.cs" />
     <Compile Include="Includes\Classes\Generator\GeneratorParamType.cs" />
     <Compile Include="Includes\Classes\Generator\GeneratorType.cs" />
+    <Compile Include="Includes\Classes\Generator\Types\DrawResultWinCountFastTreeTweedieRandomGenerator.cs" />
     <Compile Include="Includes\Classes\Generator\Types\LottoCountMatchPredictionFastTreeRegression.cs" />
     <Compile Include="Includes\Classes\Generator\Types\NumberNotYetPickUpGenerator.cs" />
     <Compile Include="Includes\Classes\Generator\SequenceGeneratorParamFieldsFormFactory.cs" />
@@ -217,6 +218,11 @@
     <Compile Include="Includes\Classes\ML\FastTreeRegression\LottoMatchCount\LottoMatchCountInputModel.cs" />
     <Compile Include="Includes\Classes\ML\FastTreeRegression\LottoMatchCount\LottoMatchCountOutputModel.cs" />
     <Compile Include="Includes\Classes\ML\FastTreeRegression\LottoMatchCount\LottoMatchCountTrainerDataIntake.cs" />
+    <Compile Include="Includes\Classes\ML\FastTreeTweedie\DrawResultWinCount\DrawResultWinCountDataIntake.cs" />
+    <Compile Include="Includes\Classes\ML\FastTreeTweedie\DrawResultWinCount\DrawResultWinCountInputModel.cs" />
+    <Compile Include="Includes\Classes\ML\FastTreeTweedie\DrawResultWinCount\DrawResultWinCountOutputModel.cs" />
+    <Compile Include="Includes\Classes\ML\FastTreeTweedie\DrawResultWinCount\DrawResultWinCountPredictor.cs" />
+    <Compile Include="Includes\Classes\ML\FastTreeTweedie\DrawResultWinCount\DrawResultWinCountTrainer.cs" />
     <Compile Include="Includes\Classes\ML\FastTree\FastTreePredictor.cs" />
     <Compile Include="Includes\Classes\ML\FastTree\FastTreeInputModel.cs" />
     <Compile Include="Includes\Classes\ML\FastTree\FastTreeOutputModel.cs" />

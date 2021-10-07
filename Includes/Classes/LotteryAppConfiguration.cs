@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using LottoDataManager.Includes.Classes.ML.FastTree;
 using LottoDataManager.Includes.Classes.ML.FastTreeRegression;
+using LottoDataManager.Includes.Classes.ML.FastTreeTweedie.DrawResultWinCount;
 using LottoDataManager.Includes.Classes.ML.SDCARegression;
 using LottoDataManager.Includes.Database.DAO.Impl;
 using LottoDataManager.Includes.Database.DAO.Interface;
@@ -68,7 +69,8 @@ namespace LottoDataManager.Includes.Classes
         {
             if (FastTreePredictor.IsMLModelExisting(folderPath) &&
                 LottoMatchCountPredictor.IsMLModelExisting(folderPath) &&
-            SDCARegressionPredictor.IsMLModelExisting(folderPath)) return true;
+                DrawResultWinCountPredictor.IsMLModelExisting(folderPath) &&
+                SDCARegressionPredictor.IsMLModelExisting(folderPath)) return true;
             return false;
         }
         public String MLModelPath

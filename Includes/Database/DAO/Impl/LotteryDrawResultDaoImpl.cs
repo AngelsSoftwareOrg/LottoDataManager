@@ -558,5 +558,33 @@ namespace LottoDataManager.Includes.Database.DAO
             }
             return results;
         }
+        public List<LotteryDrawResult> GetDrawResultWinCountMLDataset(GameMode gameMode, DateTime startingDate)
+        {
+            List<LotteryDrawResult> results = new List<LotteryDrawResult>();
+            using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
+            using (OleDbCommand command = new OleDbCommand())
+            {
+                command.CommandType = CommandType.Text;
+                command.CommandText = " SELECT TOP 500 ID, jackpot_amt, `game_cd`, `draw_date`, " +
+                                      "         `num1` ,`num2`, num3, num4, num5, num6, " +
+                                      "         IIF(winners > 0, 1, 0) AS `winners` " +
+                                      "   FROM `draw_results` " +
+                                      "  WHERE game_cd = @game_cd " +
+                                      "    AND `draw_date` > CDATE(@startingDate) " +
+                                      "  ORDER BY `game_cd` ASC, `draw_date` ASC";
+                command.Parameters.AddWithValue("@game_cd", gameMode);
+                command.Parameters.AddWithValue("@startingDate", startingDate.Date.ToString());
+                command.Connection = conn;
+                conn.Open();
+                using (OleDbDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        results.Add(GetLotteryDrawResultSetup(reader, gameMode));
+                    }
+                }
+            }
+            return results;
+        }
     }
 }

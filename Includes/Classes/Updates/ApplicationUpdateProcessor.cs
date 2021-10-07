@@ -42,6 +42,7 @@ namespace LottoDataManager.Includes.Classes.Updates
                 //updates should be in sequence. If not, might be mess up
                 RaiseEvent(ResourcesUtils.GetMessage("app_ver_notify_0"));
                 UpdateFor1006();
+                UpdateFor1008();
                 RaiseEvent(ResourcesUtils.GetMessage("app_ver_notify_2"));
                 IsUpdateFinish = true;
             });
@@ -62,7 +63,7 @@ namespace LottoDataManager.Includes.Classes.Updates
             AppVersioning appVersionInDB = AppVersioningDaoObj.GetVersion(appVersion);
             if (appVersionInDB == null)
             {
-                RaiseEvent(ResourcesUtils.GetMessage("app_ver_notify_1"));
+                RaiseNewEntryEvent(appVersion);
                 LotterySequenceGeneratorSetup genModel = new LotterySequenceGeneratorSetup();
                 genModel.SeqGenCode = (int) GeneratorType.LOTTO_MATCH_COUNT_PREDICTION_FAST_TREE_REGRESSION;
                 genModel.Description = ResourcesUtils.GetMessage("app_ver_1006_pick_gen_desc");
@@ -71,8 +72,45 @@ namespace LottoDataManager.Includes.Classes.Updates
             }
             else
             {
-                RaiseEvent(ResourcesUtils.GetMessage("app_ver_notify_3"));
+                RaiseSkippedVersionEvent(appVersion);
             }
+        }
+
+        private void UpdateFor1008()
+        {
+            //version 1.0.0.8 update
+            AppVersioningSetup appVersion = new AppVersioningSetup()
+            {
+                Major = 1,
+                Minor = 0,
+                Patch = 0,
+                ReleaseVersion = "8",
+                DateTimeApplied = DateTime.Now,
+                Remarks = ResourcesUtils.GetMessage("app_ver_1008_remarks")
+            };
+            AppVersioning appVersionInDB = AppVersioningDaoObj.GetVersion(appVersion);
+            if (appVersionInDB == null)
+            {
+                RaiseNewEntryEvent(appVersion);
+                LotterySequenceGeneratorSetup genModel = new LotterySequenceGeneratorSetup();
+                genModel.SeqGenCode = (int)GeneratorType.DRAW_RESULT_WIN_COUNT_PREDICTION_FAST_TREE_REGRESSION;
+                genModel.Description = ResourcesUtils.GetMessage("app_ver_1008_pick_gen_desc");
+                lotteryDataServicesObj.InsertLotterySequenceGenerator(genModel);
+                AppVersioningDaoObj.InsertAppVersioning(appVersion);
+            }
+            else
+            {
+                RaiseSkippedVersionEvent(appVersion);
+            }
+        }
+
+        private void RaiseNewEntryEvent(AppVersioningSetup appVersion)
+        {
+            RaiseEvent(ResourcesUtils.GetMessage("app_ver_notify_1", appVersion.GetAppVersionLbl()));
+        }
+        private void RaiseSkippedVersionEvent(AppVersioningSetup appVersion)
+        {
+            RaiseEvent(ResourcesUtils.GetMessage("app_ver_notify_3", appVersion.GetAppVersionLbl()));
         }
         private void RaiseEvent(String processingMessage)
         {

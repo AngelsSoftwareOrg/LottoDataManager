@@ -285,6 +285,13 @@ namespace LottoDataManager.Includes.Classes
         {
             return this.lotteryBetDao.GetLottoCountMatchMLDataset(gameMode, startingDate);
         }
+        public List<LotteryDrawResult> GetDrawResultWinCountMLDataset(GameMode gameMode, DateTime startingDate)
+        {
+            return this.lotteryDrawResultDao.GetDrawResultWinCountMLDataset(gameMode, startingDate);
+        }
+
+
+
         /// <summary>
         /// Get all latest draw dates available in each lottery games.
         /// </summary>

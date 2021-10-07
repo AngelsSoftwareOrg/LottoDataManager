@@ -41,7 +41,7 @@ namespace LottoDataManager.Includes.Classes.Generator.Types
 
             foreach (LotteryDrawResult lotDraw in lotteryDrawResults)
             {
-                SDCARegressionInputModel sampleData = lotDraw.GetSDCARegressionInputModel();
+                SDCARegressionInputModel sampleData = lotDraw.GetSDCARegressionInputModel(true);
                 var predictionResult = SDCARegressionPredictor.Predict(sampleData);
 
                 //Console.WriteLine(String.Format("Data: {0}, {1},{2},{3},{4},{5},{6},{7},{8} ", sampleData.Draw_date,
