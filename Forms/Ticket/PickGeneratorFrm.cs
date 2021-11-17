@@ -236,6 +236,8 @@ namespace LottoDataManager.Forms
             objLvGenSeq.Tag = null;
             ClearSequenceGenParametersValue();
             statusLabel.Text = String.Empty;
+            this.objLvGenSeq.ModelFilter = null;
+            this.objLvGenSeq.DefaultRenderer = null;
         }
         private void ClearSequenceGenParametersValue()
         {
@@ -292,6 +294,8 @@ namespace LottoDataManager.Forms
                 btnClearSel.Enabled = false;
                 btnGenerate.Enabled = false;
                 btnStop.Visible = true;
+                this.objLvGenSeq.ModelFilter = null;
+                this.objLvGenSeq.DefaultRenderer = null;
             }
             else
             {
@@ -436,7 +440,6 @@ namespace LottoDataManager.Forms
             AutoCheckSelectedBetsFromHitComparisonForm(hitComparisonFrm.GetCheckedLotteryBets);
             hitComparisonFrm.Dispose();
         }
-
         private void AutoCheckSelectedBetsFromHitComparisonForm(List<LotteryBet> selectedLotteryBets)
         {
             LotteryBet seqGenVisibleItem = null;
@@ -454,7 +457,5 @@ namespace LottoDataManager.Forms
             //ensure last item check is visible/auto scroll
             if (seqGenVisibleItem != null) objLvGenSeq.EnsureModelVisible(seqGenVisibleItem);
         }
-
-
     }
 }
