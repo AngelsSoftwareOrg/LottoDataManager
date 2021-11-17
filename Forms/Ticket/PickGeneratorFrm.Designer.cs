@@ -34,13 +34,14 @@ namespace LottoDataManager.Forms
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PickGeneratorFrm));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.grpbxParam = new System.Windows.Forms.GroupBox();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.tblPnlLayParams = new System.Windows.Forms.TableLayoutPanel();
             this.grpbxGenType = new System.Windows.Forms.GroupBox();
             this.lvGenType = new BrightIdeasSoftware.ObjectListView();
             this.olvColDesc = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.grpbxParam = new System.Windows.Forms.GroupBox();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.tblPnlLayParams = new System.Windows.Forms.TableLayoutPanel();
             this.grpbxActions = new System.Windows.Forms.GroupBox();
+            this.btnStop = new System.Windows.Forms.Button();
             this.btnClearSel = new System.Windows.Forms.Button();
             this.btnGenerate = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -62,17 +63,20 @@ namespace LottoDataManager.Forms
             this.linkUncheckAll = new System.Windows.Forms.LinkLabel();
             this.btnAddSelected = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.panel1.SuspendLayout();
-            this.grpbxParam.SuspendLayout();
-            this.panel3.SuspendLayout();
             this.grpbxGenType.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lvGenType)).BeginInit();
+            this.grpbxParam.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.grpbxActions.SuspendLayout();
             this.panel2.SuspendLayout();
             this.grpbxOutput.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.objLvGenSeq)).BeginInit();
             this.ctxMenuBet.SuspendLayout();
             this.grpbxFinalActions.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -84,8 +88,52 @@ namespace LottoDataManager.Forms
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(580, 573);
+            this.panel1.Size = new System.Drawing.Size(580, 547);
             this.panel1.TabIndex = 0;
+            // 
+            // grpbxGenType
+            // 
+            this.grpbxGenType.Controls.Add(this.lvGenType);
+            this.grpbxGenType.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grpbxGenType.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.grpbxGenType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grpbxGenType.ForeColor = System.Drawing.Color.Navy;
+            this.grpbxGenType.Location = new System.Drawing.Point(0, 0);
+            this.grpbxGenType.Name = "grpbxGenType";
+            this.grpbxGenType.Size = new System.Drawing.Size(576, 238);
+            this.grpbxGenType.TabIndex = 0;
+            this.grpbxGenType.TabStop = false;
+            this.grpbxGenType.Text = "Step 1. Choose Generator Type";
+            // 
+            // lvGenType
+            // 
+            this.lvGenType.AllColumns.Add(this.olvColDesc);
+            this.lvGenType.CellEditUseWholeCell = false;
+            this.lvGenType.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.olvColDesc});
+            this.lvGenType.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lvGenType.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lvGenType.FullRowSelect = true;
+            this.lvGenType.GridLines = true;
+            this.lvGenType.HasCollapsibleGroups = false;
+            this.lvGenType.HideSelection = false;
+            this.lvGenType.Location = new System.Drawing.Point(3, 20);
+            this.lvGenType.MultiSelect = false;
+            this.lvGenType.Name = "lvGenType";
+            this.lvGenType.ShowGroups = false;
+            this.lvGenType.Size = new System.Drawing.Size(570, 215);
+            this.lvGenType.Sorting = System.Windows.Forms.SortOrder.Ascending;
+            this.lvGenType.TabIndex = 0;
+            this.lvGenType.UseCompatibleStateImageBehavior = false;
+            this.lvGenType.View = System.Windows.Forms.View.Details;
+            this.lvGenType.SelectionChanged += new System.EventHandler(this.lvGenType_SelectionChanged);
+            // 
+            // olvColDesc
+            // 
+            this.olvColDesc.AspectName = "GetDescription";
+            this.olvColDesc.Groupable = false;
+            this.olvColDesc.Text = "Description";
+            this.olvColDesc.Width = 600;
             // 
             // grpbxParam
             // 
@@ -93,7 +141,7 @@ namespace LottoDataManager.Forms
             this.grpbxParam.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.grpbxParam.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpbxParam.ForeColor = System.Drawing.Color.Navy;
-            this.grpbxParam.Location = new System.Drawing.Point(0, 264);
+            this.grpbxParam.Location = new System.Drawing.Point(0, 238);
             this.grpbxParam.Name = "grpbxParam";
             this.grpbxParam.Size = new System.Drawing.Size(576, 205);
             this.grpbxParam.TabIndex = 1;
@@ -127,63 +175,36 @@ namespace LottoDataManager.Forms
             this.tblPnlLayParams.Size = new System.Drawing.Size(570, 182);
             this.tblPnlLayParams.TabIndex = 0;
             // 
-            // grpbxGenType
-            // 
-            this.grpbxGenType.Controls.Add(this.lvGenType);
-            this.grpbxGenType.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grpbxGenType.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.grpbxGenType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpbxGenType.ForeColor = System.Drawing.Color.Navy;
-            this.grpbxGenType.Location = new System.Drawing.Point(0, 0);
-            this.grpbxGenType.Name = "grpbxGenType";
-            this.grpbxGenType.Size = new System.Drawing.Size(576, 264);
-            this.grpbxGenType.TabIndex = 0;
-            this.grpbxGenType.TabStop = false;
-            this.grpbxGenType.Text = "Step 1. Choose Generator Type";
-            // 
-            // lvGenType
-            // 
-            this.lvGenType.AllColumns.Add(this.olvColDesc);
-            this.lvGenType.CellEditUseWholeCell = false;
-            this.lvGenType.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.olvColDesc});
-            this.lvGenType.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lvGenType.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lvGenType.FullRowSelect = true;
-            this.lvGenType.GridLines = true;
-            this.lvGenType.HasCollapsibleGroups = false;
-            this.lvGenType.HideSelection = false;
-            this.lvGenType.Location = new System.Drawing.Point(3, 20);
-            this.lvGenType.MultiSelect = false;
-            this.lvGenType.Name = "lvGenType";
-            this.lvGenType.ShowGroups = false;
-            this.lvGenType.Size = new System.Drawing.Size(570, 241);
-            this.lvGenType.Sorting = System.Windows.Forms.SortOrder.Ascending;
-            this.lvGenType.TabIndex = 0;
-            this.lvGenType.UseCompatibleStateImageBehavior = false;
-            this.lvGenType.View = System.Windows.Forms.View.Details;
-            this.lvGenType.SelectionChanged += new System.EventHandler(this.lvGenType_SelectionChanged);
-            // 
-            // olvColDesc
-            // 
-            this.olvColDesc.AspectName = "GetDescription";
-            this.olvColDesc.Groupable = false;
-            this.olvColDesc.Text = "Description";
-            this.olvColDesc.Width = 600;
-            // 
             // grpbxActions
             // 
+            this.grpbxActions.Controls.Add(this.btnStop);
             this.grpbxActions.Controls.Add(this.btnClearSel);
             this.grpbxActions.Controls.Add(this.btnGenerate);
             this.grpbxActions.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.grpbxActions.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpbxActions.ForeColor = System.Drawing.Color.Navy;
-            this.grpbxActions.Location = new System.Drawing.Point(0, 469);
+            this.grpbxActions.Location = new System.Drawing.Point(0, 443);
             this.grpbxActions.Name = "grpbxActions";
             this.grpbxActions.Size = new System.Drawing.Size(576, 100);
             this.grpbxActions.TabIndex = 2;
             this.grpbxActions.TabStop = false;
             this.grpbxActions.Text = "Step 3: Actions";
+            // 
+            // btnStop
+            // 
+            this.btnStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnStop.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnStop.Image = global::LottoDataManager.Properties.Resources.stop_20;
+            this.btnStop.Location = new System.Drawing.Point(474, 23);
+            this.btnStop.Name = "btnStop";
+            this.btnStop.Size = new System.Drawing.Size(96, 67);
+            this.btnStop.TabIndex = 2;
+            this.btnStop.Text = "Stop";
+            this.btnStop.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnStop.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnStop.UseVisualStyleBackColor = true;
+            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
             // 
             // btnClearSel
             // 
@@ -191,7 +212,7 @@ namespace LottoDataManager.Forms
             this.btnClearSel.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClearSel.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnClearSel.Image = global::LottoDataManager.Properties.Resources.erase_32px;
-            this.btnClearSel.Location = new System.Drawing.Point(231, 23);
+            this.btnClearSel.Location = new System.Drawing.Point(4, 23);
             this.btnClearSel.Name = "btnClearSel";
             this.btnClearSel.Size = new System.Drawing.Size(181, 67);
             this.btnClearSel.TabIndex = 1;
@@ -207,9 +228,9 @@ namespace LottoDataManager.Forms
             this.btnGenerate.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGenerate.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnGenerate.Image = global::LottoDataManager.Properties.Resources.Star5_32x;
-            this.btnGenerate.Location = new System.Drawing.Point(419, 23);
+            this.btnGenerate.Location = new System.Drawing.Point(192, 23);
             this.btnGenerate.Name = "btnGenerate";
-            this.btnGenerate.Size = new System.Drawing.Size(143, 67);
+            this.btnGenerate.Size = new System.Drawing.Size(156, 67);
             this.btnGenerate.TabIndex = 0;
             this.btnGenerate.Text = "Generate";
             this.btnGenerate.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -225,7 +246,7 @@ namespace LottoDataManager.Forms
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(580, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(597, 573);
+            this.panel2.Size = new System.Drawing.Size(597, 547);
             this.panel2.TabIndex = 1;
             // 
             // grpbxOutput
@@ -236,7 +257,7 @@ namespace LottoDataManager.Forms
             this.grpbxOutput.ForeColor = System.Drawing.Color.Navy;
             this.grpbxOutput.Location = new System.Drawing.Point(0, 0);
             this.grpbxOutput.Name = "grpbxOutput";
-            this.grpbxOutput.Size = new System.Drawing.Size(593, 439);
+            this.grpbxOutput.Size = new System.Drawing.Size(593, 413);
             this.grpbxOutput.TabIndex = 0;
             this.grpbxOutput.TabStop = false;
             this.grpbxOutput.Text = "Step 4: Output";
@@ -273,7 +294,7 @@ namespace LottoDataManager.Forms
             this.objLvGenSeq.SelectedColumnTint = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.objLvGenSeq.SelectedForeColor = System.Drawing.Color.White;
             this.objLvGenSeq.ShowGroups = false;
-            this.objLvGenSeq.Size = new System.Drawing.Size(587, 416);
+            this.objLvGenSeq.Size = new System.Drawing.Size(587, 390);
             this.objLvGenSeq.TabIndex = 1;
             this.objLvGenSeq.UseCompatibleStateImageBehavior = false;
             this.objLvGenSeq.View = System.Windows.Forms.View.Details;
@@ -350,7 +371,7 @@ namespace LottoDataManager.Forms
             this.grpbxFinalActions.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.grpbxFinalActions.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpbxFinalActions.ForeColor = System.Drawing.Color.Navy;
-            this.grpbxFinalActions.Location = new System.Drawing.Point(0, 439);
+            this.grpbxFinalActions.Location = new System.Drawing.Point(0, 413);
             this.grpbxFinalActions.Name = "grpbxFinalActions";
             this.grpbxFinalActions.Size = new System.Drawing.Size(593, 130);
             this.grpbxFinalActions.TabIndex = 1;
@@ -419,6 +440,23 @@ namespace LottoDataManager.Forms
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.statusLabel});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 547);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(1177, 26);
+            this.statusStrip1.TabIndex = 2;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // statusLabel
+            // 
+            this.statusLabel.Name = "statusLabel";
+            this.statusLabel.Size = new System.Drawing.Size(115, 20);
+            this.statusLabel.Text = "Sample Content";
+            // 
             // PickGeneratorFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -427,6 +465,7 @@ namespace LottoDataManager.Forms
             this.ClientSize = new System.Drawing.Size(1177, 573);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.statusStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimizeBox = false;
             this.Name = "PickGeneratorFrm";
@@ -435,11 +474,11 @@ namespace LottoDataManager.Forms
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PickGeneratorFrm_FormClosing);
             this.Load += new System.EventHandler(this.PickGeneratorFrm_Load);
             this.panel1.ResumeLayout(false);
+            this.grpbxGenType.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.lvGenType)).EndInit();
             this.grpbxParam.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
-            this.grpbxGenType.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.lvGenType)).EndInit();
             this.grpbxActions.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.grpbxOutput.ResumeLayout(false);
@@ -447,7 +486,10 @@ namespace LottoDataManager.Forms
             this.ctxMenuBet.ResumeLayout(false);
             this.grpbxFinalActions.ResumeLayout(false);
             this.grpbxFinalActions.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -482,5 +524,8 @@ namespace LottoDataManager.Forms
         private OLVColumn olvNum4;
         private OLVColumn olvNum5;
         private OLVColumn olvNum6;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel statusLabel;
+        private System.Windows.Forms.Button btnStop;
     }
 }
