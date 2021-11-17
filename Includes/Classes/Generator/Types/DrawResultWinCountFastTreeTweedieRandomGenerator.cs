@@ -17,54 +17,62 @@ namespace LottoDataManager.Includes.Classes.Generator.Types
             this.Description = ResourcesUtils.GetMessage("pick_class_draw_result_win_count_match_desc");
             SequenceParams = new List<SequenceGeneratorParams>();
             SequenceParams.Add(new SequenceGeneratorParams()
-        {
-            GeneratorParamType = GeneratorParamType.COUNT,
+            {
+                GeneratorParamType = GeneratorParamType.COUNT,
                 Description = ResourcesUtils.GetMessage("pick_class_draw_result_win_count_match_lp_count"),
                 MaxCountValue = 99
             });
             SequenceParams.Add(new SequenceGeneratorParams()
-        {
-            GeneratorParamType = GeneratorParamType.COUNT,
+            {
+                GeneratorParamType = GeneratorParamType.COUNT,
                 Description = @ResourcesUtils.GetMessage("pick_class_draw_result_win_count_match_perc"),
                 MaxCountValue = 100
             });
         }
 
-    public bool AreParametersValueValid(out string errMessage)
-    {
-        return ValidateCountParamField(out errMessage, 0)
-                && ValidateCountParamField(out errMessage, 1);
-    }
-
-    public List<int[]> GenerateSequence()
-    {
-        int maximumPickCount = GetFieldParamValueForCount(0);
-        int matchPerc = GetFieldParamValueForCount(1);
-        int maxLoopBreaker = 10000;
-        int maxLoopCtr = 0;
-        List<int[]> results = new List<int[]>();
-        DrawResultWinCountInputModel sampleData;
-        LotteryDrawResultSetup lotteryDrawResult = new LotteryDrawResultSetup();
-        lotteryDrawResult.GameCode = lotteryDataServices.LotteryDetails.GameCode;
-        Random ran = new Random();
-
-        while (results.Count < maximumPickCount)
+        public bool AreParametersValueValid(out string errMessage)
         {
-            int[] randomSeq = LuckyPickGenerator(ran);
-            lotteryDrawResult.ResetSequenceToZero();
-            lotteryDrawResult.FillNumberBySeq(randomSeq);
-            sampleData = lotteryDrawResult.GetDrawResultWinCountInputModel(true);
-            DrawResultWinCountOutputModel output = DrawResultWinCountPredictor.Predict(sampleData);
-            int score = (int)(output.Score * 100);
-
-            if (score >= matchPerc)
-            {
-                Array.Sort(randomSeq);
-                results.Add(randomSeq);
-            }
-            if (maxLoopCtr++ > maxLoopBreaker) break;
+            return ValidateCountParamField(out errMessage, 0)
+                    && ValidateCountParamField(out errMessage, 1);
         }
-        return results;
+
+        public List<int[]> GenerateSequence()
+        {
+            StartPickGeneration();
+            int maximumPickCount = GetFieldParamValueForCount(0);
+            int matchPerc = GetFieldParamValueForCount(1);
+            int maxLoopBreaker = int.MaxValue-100;
+            int maxLoopCtr = 0;
+            List<int[]> results = new List<int[]>();
+            DrawResultWinCountInputModel sampleData;
+            LotteryDrawResultSetup lotteryDrawResult = new LotteryDrawResultSetup();
+            lotteryDrawResult.GameCode = lotteryDataServices.LotteryDetails.GameCode;
+            Random ran = new Random();
+
+            while (results.Count < maximumPickCount)
+            {
+                int[] randomSeq = LuckyPickGenerator(ran);
+                lotteryDrawResult.ResetSequenceToZero();
+                lotteryDrawResult.FillNumberBySeq(randomSeq);
+                sampleData = lotteryDrawResult.GetDrawResultWinCountInputModel(true);
+                DrawResultWinCountOutputModel output = DrawResultWinCountPredictor.Predict(sampleData);
+                int score = (int)(output.Score * 100);
+
+                PickGenerationProgressEvent.IncrementGenerationAttemptCount();
+
+                if (score >= matchPerc)
+                {
+                    Array.Sort(randomSeq);
+                    results.Add(randomSeq);
+                    PickGenerationProgressEvent.IncrementGeneratedPickCount();
+                }
+                if (!IsContinuePickGenerationProgress()) break;
+                if (maxLoopCtr++ > maxLoopBreaker) break;
+            }
+            RaisePickGenerationProgress();
+            StopPickGeneration();
+            return results;
+        }
     }
 }
-}
+

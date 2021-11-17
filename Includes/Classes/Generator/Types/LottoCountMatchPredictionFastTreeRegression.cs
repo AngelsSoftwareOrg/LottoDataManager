@@ -38,9 +38,10 @@ namespace LottoDataManager.Includes.Classes.Generator.Types
 
         public List<int[]> GenerateSequence()
         {
+            StartPickGeneration();
             int maximumPickCount = GetFieldParamValueForCount(0);
             int matchPerc = GetFieldParamValueForCount(1);
-            int maxLoopBreaker = 100000;
+            int maxLoopBreaker = int.MaxValue - 100;
             int maxLoopCtr = 0;
             List<int[]> results = new List<int[]>();
             LottoMatchCountInputModel sampleData;
@@ -56,11 +57,14 @@ namespace LottoDataManager.Includes.Classes.Generator.Types
                 sampleData = lotteryBet.GetLottoMatchCountInputModel();
                 LottoMatchCountOutputModel output = LottoMatchCountPredictor.Predict(sampleData);
                 int score = (int)(output.Score * 100);
+                PickGenerationProgressEvent.IncrementGenerationAttemptCount();
                 if (score >= matchPerc)
                 {
                     Array.Sort(randomSeq);
                     results.Add(randomSeq);
+                    PickGenerationProgressEvent.IncrementGeneratedPickCount();
                 }
+                if (!IsContinuePickGenerationProgress()) break;
                 if (maxLoopCtr++ > maxLoopBreaker) break;
             }
             return results;

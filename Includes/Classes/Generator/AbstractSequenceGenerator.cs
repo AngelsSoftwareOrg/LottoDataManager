@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LottoDataManager.Includes.Classes.Generator.PickGenerationProgress;
 using LottoDataManager.Includes.Model.Details;
 using LottoDataManager.Includes.Utilities;
 
 namespace LottoDataManager.Includes.Classes.Generator
 {
-    public abstract class AbstractSequenceGenerator
+    public abstract class AbstractSequenceGenerator: AbstractPickGenerationProgress
     {
         private String description;
         private List<SequenceGeneratorParams> sequenceParams;
@@ -17,9 +18,9 @@ namespace LottoDataManager.Includes.Classes.Generator
         protected LotteryTicketPanel lotteryTicketPanel;
         protected static int IN_BETWEEN_SUM_MIN = 104;
         protected static int IN_BETWEEN_SUM_MAX = 176;
-
+        
         private GeneratorType seqGeneratorType;
-        protected AbstractSequenceGenerator(LotteryDataServices lotteryDataServices)
+        protected AbstractSequenceGenerator(LotteryDataServices lotteryDataServices): base()
         {
             this.lotteryDataServices = lotteryDataServices;
             this.lotteryTicketPanel = this.lotteryDataServices.GetLotteryTicketPanel();
