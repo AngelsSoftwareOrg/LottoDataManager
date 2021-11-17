@@ -183,9 +183,11 @@
     <Compile Include="Includes\Classes\Comparers\ListviewIntSorter.cs" />
     <Compile Include="Includes\Classes\Comparers\ListviewTextSorter.cs" />
     <Compile Include="Includes\Classes\Extensions\ControlExtensions.cs" />
+    <Compile Include="Includes\Classes\Generator\PickGenerationProgress\AbstractPickGenerationProgress.cs" />
     <Compile Include="Includes\Classes\Generator\AbstractSequenceGenerator.cs" />
     <Compile Include="Includes\Classes\Generator\GeneratorParamType.cs" />
     <Compile Include="Includes\Classes\Generator\GeneratorType.cs" />
+    <Compile Include="Includes\Classes\Generator\PickGenerationProgress\PickGenerationProgressEvent.cs" />
     <Compile Include="Includes\Classes\Generator\Types\DrawResultWinCountFastTreeTweedieRandomGenerator.cs" />
     <Compile Include="Includes\Classes\Generator\Types\LottoCountMatchPredictionFastTreeRegression.cs" />
     <Compile Include="Includes\Classes\Generator\Types\NumberNotYetPickUpGenerator.cs" />

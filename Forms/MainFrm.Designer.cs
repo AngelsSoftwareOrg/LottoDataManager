@@ -616,6 +616,7 @@ namespace LottoDataManager
             this.olvColBetNum6,
             this.olvColBetResult});
             this.objectLstVwLatestBet.ContextMenuStrip = this.ctxMenuBet;
+            this.objectLstVwLatestBet.CopySelectionOnControlC = false;
             this.objectLstVwLatestBet.Cursor = System.Windows.Forms.Cursors.Default;
             this.objectLstVwLatestBet.Dock = System.Windows.Forms.DockStyle.Fill;
             this.objectLstVwLatestBet.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
