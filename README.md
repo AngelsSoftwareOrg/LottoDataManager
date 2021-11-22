@@ -47,6 +47,18 @@ By using the following Technologies
 7. [Inno Setup Compiler 6.12](https://jrsoftware.org/isinfo.php)
 
 
+# Data Source
+## *Philippine PCSO Lotto Result
+This program is scraping for Lotto Result data on [PCSO Website](https://www.pcso.gov.ph/SearchLottoResult.aspx) . 
+It automates putting the required parameters for querying and posting the data correctly and parse the resulting web page to scrape for Lotto Result. 
+
+
+## *GITHUB API for Application Updates
+When there's an available software updates, this application can determine thru connecting to GITHUB API for the latest release. It will parse the necessary data and compare with the application version to inform the user for the latest updates. 
+
+Connecting to API endpoint -> https://api.github.com/repos/xx/xx/releases/latest
+
+
 # Installation
 From the right you, you may download the package installer.
 There would be a documentation attach on the package, please read it how to set it up.
