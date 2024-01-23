@@ -59,6 +59,10 @@ namespace LottoDataManager.Includes.Classes.Reports
             TriggerLogs(ResourcesUtils.GetMessage("drpt_lot_trigger_logs_15"));
             dashboardReportList.AddRange(GetLatestDrawResultsPerLotteryGame());
             TriggerLogs(ResourcesUtils.GetMessage("drpt_lot_trigger_logs_16"));
+            dashboardReportList.AddRange(GetLatestDrawResultsJackpotPerLotteryGame());
+            TriggerLogs(ResourcesUtils.GetMessage("drpt_lot_trigger_logs_17"));
+            dashboardReportList.AddRange(GetLotteriesNextBetDrawDate());
+            TriggerLogs(ResourcesUtils.GetMessage("drpt_lot_trigger_logs_18"));
             return dashboardReportList;
         }
         public List<DashboardReportGroup> GetDashboardReportInGroup()
@@ -392,6 +396,7 @@ namespace LottoDataManager.Includes.Classes.Reports
 
             foreach(LotteryDrawResult draw in latestDrawResults)
             {
+                if (draw == null) continue;
                 Lottery lottery = lotteriesGameList.Find((lotteryObj) => (int)lotteryObj.GetGameMode() == draw.GetGameCode());
                 DateTime today = DateTime.Now;
                 TimeSpan diffWithToday = today - draw.GetDrawDate();
@@ -409,6 +414,65 @@ namespace LottoDataManager.Includes.Classes.Reports
             }
             return itemsList;
         }
+        private List<DashboardReportItemSetup> GetLatestDrawResultsJackpotPerLotteryGame()
+        {
+            List<DashboardReportItemSetup> itemsList = new List<DashboardReportItemSetup>();
+            List<LotteryDrawResult> latestDrawResults = LotteryDataServices.GetLatestDrawResults();
+            List<Lottery> lotteriesGameList = LotteryDataServices.GetLotteries();
+
+            foreach (LotteryDrawResult draw in latestDrawResults)
+            {
+                if (draw == null) continue;
+                Lottery lottery = lotteriesGameList.Find((lotteryObj) => (int)lotteryObj.GetGameMode() == draw.GetGameCode());
+                String valueLabel = "drpt_lot_draw_jackpot_winners_lbl";
+                if (draw.GetWinnersCount() > 1) valueLabel += "_plural";
+
+                String key = lottery.GetDescription();
+                String value = (draw.HasWinners()) ? 
+                    ResourcesUtils.GetMessage(valueLabel, 
+                        draw.GetJackpotAmtFormatted(), draw.GetWinnersCount().ToString()) : 
+                        draw.GetJackpotAmtFormatted();
+                DashboardReportItemSetup itm = GenModel(key, value);
+                itm.GroupKeyName = ResourcesUtils.GetMessage("drpt_lot_draw_jackpot_lbl");
+                itm.ReportItemDecoration.IsHyperLink = true;
+                itm.DashboardReportItemAction = DashboardReportItemActions.OPEN_LOTTERY_GAME;
+                itm.Tag = lottery.GetGameMode();
+                itemsList.Add(itm);
+            }
+            return itemsList;
+        }
+
+        private List<DashboardReportItemSetup> GetLotteriesNextBetDrawDate()
+        {
+            List<DashboardReportItemSetup> itemsList = new List<DashboardReportItemSetup>();
+            List<LotteryDrawResult> latestDrawResults = LotteryDataServices.GetLatestDrawResults();
+            List<Lottery> lotteriesGameList = LotteryDataServices.GetLotteries();
+
+            foreach(Lottery lottery in lotteriesGameList)
+            {
+                if (lottery == null) continue;
+                LotteryDataServices lotteryDataServicesTMP = new LotteryDataServices(new LotteryDetails(lottery.GetGameMode()));
+                String valueLabel = "drpt_lot_next_drawdate_per_lottery_value";
+                DateTime nextDrawDate = lotteryDataServicesTMP.GetNextDrawDate();
+                if (nextDrawDate.Date.CompareTo(DateTime.Now.Date) == 0) valueLabel += "_today";
+
+                String key = lottery.GetDescription();
+                String value = ResourcesUtils.GetMessage(valueLabel,
+                                DateTimeConverterUtils.ConvertToFormat(nextDrawDate,
+                                DateTimeConverterUtils.STANDARD_DATE_FORMAT_WITH_DAYOFWEEK));
+
+                DashboardReportItemSetup itm = GenModel(key, value);
+                itm.GroupKeyName = ResourcesUtils.GetMessage("drpt_lot_next_drawdate_per_lottery_lbl");
+                itm.ReportItemDecoration.IsHyperLink = true;
+                itm.DashboardReportItemAction = DashboardReportItemActions.OPEN_LOTTERY_GAME;
+                itm.Tag = lottery.GetGameMode();
+                itemsList.Add(itm);
+            }
+            return itemsList;
+        }
+
+
+
         public String ReportTitle
         {
             get

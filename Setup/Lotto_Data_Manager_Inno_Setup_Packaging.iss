@@ -2,16 +2,19 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Lotto Data Manager"
-#define MyAppVersion "1.0.0.3"
-#define MyAppPublisher "AngelsSoftwareOrg"
+#define MyAppVersion "1.0.0.6"
+#define MyAppPublisher "Angels Software Org"
 #define MyAppURL "https://github.com/AngelsSoftwareOrg"
 #define MyAppExeName "LottoDataManager.exe"
 #define InstallerName "lotto_data_manager"
+#define MyIconName "Clover_Icon.ico"
+#define MyIconPath "D:\Development\WorkSpace00002\LottoDataManager\"
+#define MyDesktopIcon MyIconPath + MyIconName
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-AppId={{18CCDA2B-411E-475D-87D6-3E4577070C7F}
+AppId={{B412770F-1131-403F-AF1B-25F552D42740}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 ;AppVerName={#MyAppName} {#MyAppVersion}
@@ -22,9 +25,11 @@ AppUpdatesURL={#MyAppURL}
 DefaultDirName={autopf}\{#MyAppName}
 DisableProgramGroupPage=yes
 ; Remove the following line to run in administrative install mode (install for all users.)
-PrivilegesRequired=lowest
+;PrivilegesRequired=lowest
 PrivilegesRequiredOverridesAllowed=dialog
 OutputBaseFilename={#InstallerName}_{#MyAppVersion}_setup
+SetupIconFile={#MyDesktopIcon}
+UninstallDisplayIcon={app}\{#MyIconName}
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
@@ -38,6 +43,7 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 [Files]
 Source: "D:\Development\WorkSpace00002\LottoDataManager\bin\Release\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
 Source: "D:\Development\WorkSpace00002\LottoDataManager\bin\Release\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "{#MyDesktopIcon}"; DestDir: "{app}"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]

@@ -12,6 +12,7 @@ using LottoDataManager.Includes.Classes;
 using LottoDataManager.Includes.Classes.ML;
 using LottoDataManager.Includes.Classes.ML.FastTree;
 using LottoDataManager.Includes.Classes.ML.FastTreeRegression.LottoMatchCount;
+using LottoDataManager.Includes.Classes.ML.FastTreeTweedie.DrawResultWinCount;
 using LottoDataManager.Includes.Classes.ML.SDCARegression;
 using LottoDataManager.Includes.Classes.ML.TrainerProcessor;
 using LottoDataManager.Includes.Model;
@@ -28,8 +29,6 @@ namespace LottoDataManager.Forms
         private delegate void StopRun();
         private bool isUpdateProcessingStarted = false;
         private LotteryDataServices lotteryDataServices;
-        private FastTreeTrainer machineLearningModelBuilderFastTree;
-        private SDCARegressionTrainer machineLearningModelBuilderSDCARegression;
         private List<TrainerProcessorAbstract> trainerProcessorAbstractList;
 
         public MachineLearningFrm(LotteryDataServices lotteryDataServices)
@@ -37,22 +36,12 @@ namespace LottoDataManager.Forms
             InitializeComponent();
 
             this.lotteryDataServices = lotteryDataServices;
-            this.machineLearningModelBuilderFastTree = new FastTreeTrainer();
-            this.machineLearningModelBuilderSDCARegression = new SDCARegressionTrainer();
             this.trainerProcessorAbstractList = new List<TrainerProcessorAbstract>();
-
             trainerProcessorAbstractList.Add(new FastTreeTrainerDataIntake(this.lotteryDataServices));
             trainerProcessorAbstractList.Add(new SDCARegressionTrainerDataIntake(this.lotteryDataServices));
             trainerProcessorAbstractList.Add(new LottoMatchCountTrainerDataIntake(this.lotteryDataServices));
-
-            machineLearningModelBuilderFastTree.ProcessingStatus += MachineLearningModelBuilder_ProcessingStatus;
-            machineLearningModelBuilderSDCARegression.ProcessingStatus += MachineLearningModelBuilder_ProcessingStatus;
+            trainerProcessorAbstractList.Add(new DrawResultWinCountDataIntake(this.lotteryDataServices));
             log(ResourcesUtils.GetMessage("mac_lrn_log_13"));
-        }
-        private void MachineLearningModelBuilder_ProcessingStatus(object sender, string e)
-        {
-            log(e);
-            Application.DoEvents();
         }
         private void btnExit_Click(object sender, EventArgs e)
         {

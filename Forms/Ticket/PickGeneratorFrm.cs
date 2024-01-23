@@ -12,6 +12,7 @@ using LottoDataManager.Forms.Others;
 using LottoDataManager.Includes.Classes;
 using LottoDataManager.Includes.Classes.Comparers;
 using LottoDataManager.Includes.Classes.Generator;
+using LottoDataManager.Includes.Classes.Generator.PickGenerationProgress;
 using LottoDataManager.Includes.Classes.Generator.Types;
 using LottoDataManager.Includes.Model;
 using LottoDataManager.Includes.Model.Details;
@@ -27,7 +28,8 @@ namespace LottoDataManager.Forms
         private LotteryDataServices lotteryDataServices;
         private LotteryTicketPanel lotteryTicketPanel;
         private SequenceGeneratorParamFieldsFormFactory seqFactory = SequenceGeneratorParamFieldsFormFactory.GetInstance();
-        
+        private String statusPickGenerationLabelCache;
+        private bool isPickGeneratorRunningStatus;
         public PickGeneratorFrm(LotteryDataServices lotteryDataServices)
         {
             InitializeComponent();
@@ -37,6 +39,7 @@ namespace LottoDataManager.Forms
 
         private void PickGeneratorFrm_Load(object sender, EventArgs e)
         {
+            statusLabel.Text = String.Empty;
             this.Text = String.Format(ResourcesUtils.GetMessage("pick_grp_gen_form_title"),
                 this.lotteryDataServices.LotteryDetails.Description);
             btnViewCompareHits.Text = ResourcesUtils.GetMessage("pick_btn_compare_hits");
@@ -50,6 +53,10 @@ namespace LottoDataManager.Forms
             btnAddSelected.Text = ResourcesUtils.GetMessage("pick_btn_place_bet");
             btnExit.Text = ResourcesUtils.GetMessage("common_btn_exit");
             linkUncheckAll.Text = ResourcesUtils.GetMessage("common_link_uncheck_all");
+            btnStop.Text = ResourcesUtils.GetMessage("common_btn_stop");
+            statusPickGenerationLabelCache = ResourcesUtils.GetMessage("pick_status_lbl_pick_generation");
+            btnStop.Visible = false;
+            isPickGeneratorRunningStatus = false;
             SetupObjectListView();
             EnlistGenerators();
         }
@@ -148,6 +155,7 @@ namespace LottoDataManager.Forms
             DisplayGenerators(new RandomPredictionSDCARegression(this.lotteryDataServices));
             DisplayGenerators(new RandomPredictionSDCARegressionInBetween(this.lotteryDataServices));
             DisplayGenerators(new LottoCountMatchPredictionFastTreeRegression(this.lotteryDataServices));
+            DisplayGenerators(new DrawResultWinCountFastTreeTweedieRandomGenerator(this.lotteryDataServices));
         }
         private void DisplayGenerators(SequenceGenerator seqGen)
         {
@@ -227,6 +235,9 @@ namespace LottoDataManager.Forms
             objLvGenSeq.SetObjects(null);
             objLvGenSeq.Tag = null;
             ClearSequenceGenParametersValue();
+            statusLabel.Text = String.Empty;
+            this.objLvGenSeq.ModelFilter = null;
+            this.objLvGenSeq.DefaultRenderer = null;
         }
         private void ClearSequenceGenParametersValue()
         {
@@ -242,13 +253,61 @@ namespace LottoDataManager.Forms
             if (lvGenType.SelectedObjects.Count > 0)
             {
                 SequenceGenerator seqGen = (SequenceGenerator)lvGenType.SelectedObject;
+                AbstractSequenceGenerator seqGenAbstract = (AbstractSequenceGenerator) seqGen;
+                seqGenAbstract.PickGenerationProgress += SeqGenAbstract_PickGenerationProgress;
+                isPickGeneratorRunningStatus = true;
                 String errMsg = "";
                 if(!seqGen.AreParametersValueValid(out errMsg))
                 {
                     MessageBox.Show(errMsg);
                     return;
                 }
+                ButtonAvailabilityWhilePicking(true);
                 DisplayGeneratedSequence(seqGen.GenerateSequence());
+            }
+            ButtonAvailabilityWhilePicking(false);
+        }
+        private void SeqGenAbstract_PickGenerationProgress(object sender, PickGenerationProgressEvent e)
+        {
+            if(isPickGeneratorRunningStatus == false)
+            {
+                SequenceGenerator seqGen = (SequenceGenerator)lvGenType.SelectedObject;
+                AbstractSequenceGenerator seqGenAbstract = (AbstractSequenceGenerator)seqGen;
+                if (seqGenAbstract == null) return;
+                seqGenAbstract.StopPickGeneration();
+            }
+            statusLabel.Text = String.Format(statusPickGenerationLabelCache, e.GeneratedPickCount, e.GenerationAttemptCount);
+            if (e.GenerationAttemptCount % 200 == 0) Application.DoEvents();
+        }
+        private void btnStop_Click(object sender, EventArgs e)
+        {
+            isPickGeneratorRunningStatus = false;
+        }
+        private void ButtonAvailabilityWhilePicking(bool isPicking)
+        {
+            if (isPicking)
+            {
+                addBetToolStripMenuItem.Enabled = false;
+                lvGenType.Enabled = false;
+                btnAddSelected.Enabled = false;
+                btnViewCompareHits.Enabled = false;
+                btnClearSel.Enabled = false;
+                btnGenerate.Enabled = false;
+                btnStop.Visible = true;
+                this.objLvGenSeq.ModelFilter = null;
+                this.objLvGenSeq.DefaultRenderer = null;
+            }
+            else
+            {
+                addBetToolStripMenuItem.Enabled = true;
+                lvGenType.Enabled = true;
+                btnAddSelected.Enabled = true;
+                btnViewCompareHits.Enabled = true;
+                btnClearSel.Enabled = true;
+                btnGenerate.Enabled = true;
+                btnStop.Visible = false;
+                isPickGeneratorRunningStatus = false;
+                statusLabel.Text = String.Empty;
             }
         }
         private void lvGenType_SelectionChanged(object sender, EventArgs e)
@@ -292,6 +351,7 @@ namespace LottoDataManager.Forms
         #endregion
         private void btnExit_Click(object sender, EventArgs e)
         {
+            this.btnStop_Click(sender, e);
             this.Close();
         }
         private void linkUncheckAll_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -375,8 +435,27 @@ namespace LottoDataManager.Forms
                 arrBet.Add(item);
             }
             hitComparisonFrm.UserDefinedLotteryBets = arrBet;
+            hitComparisonFrm.LotteryBetsCheckboxes = true;
             hitComparisonFrm.ShowDialog(this);
+            AutoCheckSelectedBetsFromHitComparisonForm(hitComparisonFrm.GetCheckedLotteryBets);
             hitComparisonFrm.Dispose();
+        }
+        private void AutoCheckSelectedBetsFromHitComparisonForm(List<LotteryBet> selectedLotteryBets)
+        {
+            LotteryBet seqGenVisibleItem = null;
+            foreach (LotteryBet bet in selectedLotteryBets)
+            {
+                foreach (LotteryBet seqGen in objLvGenSeq.Objects)
+                {
+                    if(seqGen.GetGNUFormat().Equals(bet.GetGNUFormat(), StringComparison.OrdinalIgnoreCase))
+                    {
+                        objLvGenSeq.CheckObject(seqGen);
+                        seqGenVisibleItem = seqGen;
+                    }
+                }
+            }
+            //ensure last item check is visible/auto scroll
+            if (seqGenVisibleItem != null) objLvGenSeq.EnsureModelVisible(seqGenVisibleItem);
         }
     }
 }

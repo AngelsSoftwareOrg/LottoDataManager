@@ -57,5 +57,10 @@ namespace LottoDataManager.Includes.Model.Details.Setup
         {
             return Remarks;
         }
+
+        public String GetAppVersionLbl()
+        {
+            return String.Format("v{0}.{1}.{2}.{3}", Major, Minor, Patch, ReleaseVersion);
+        }
     }
 }

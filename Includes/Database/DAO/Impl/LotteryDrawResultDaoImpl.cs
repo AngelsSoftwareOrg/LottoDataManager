@@ -68,11 +68,9 @@ namespace LottoDataManager.Includes.Database.DAO
                 using (OleDbDataReader reader = command.ExecuteReader())
                 {
                     if (!reader.HasRows) return lotteryDrawResult;
-                    lotteryDrawResult = new LotteryDrawResultSetup();
                     while (reader.Read())
                     {
                         return GetLotteryDrawResultSetup(reader, gameMode);
-                        
                     }
                 }
             }
@@ -99,7 +97,7 @@ namespace LottoDataManager.Includes.Database.DAO
             }
             return results;
         }
-        public LotteryDrawResult GetLatestDrawResults(int gameCd)
+        public LotteryDrawResult GetLatestDrawResult(int gameCd)
         {
             using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
             using (OleDbCommand command = new OleDbCommand())
@@ -209,7 +207,7 @@ namespace LottoDataManager.Includes.Database.DAO
                                       " VALUES (@draw_date,@jackpot_amt,@winners,@game_cd,@num1,@num2,@num3,@num4,@num5,@num6)";
                 command.Parameters.AddWithValue("@draw_date", lotteryDrawResult.GetDrawDate());
                 command.Parameters.AddWithValue("@jackpot_amt", lotteryDrawResult.GetJackpotAmt());
-                command.Parameters.AddWithValue("@winners", lotteryDrawResult.GetWinners());
+                command.Parameters.AddWithValue("@winners", lotteryDrawResult.GetWinnersCount());
                 command.Parameters.AddWithValue("@game_cd", lotteryDrawResult.GetGameCode());
                 command.Parameters.AddWithValue("@num1", lotteryDrawResult.GetNum1());
                 command.Parameters.AddWithValue("@num2", lotteryDrawResult.GetNum2());
@@ -546,6 +544,34 @@ namespace LottoDataManager.Includes.Database.DAO
                                         "  WHERE game_cd = @game_cd " +
                                         " 	 AND `draw_date` > CDATE(@startingDate) " +
                                         "  ORDER BY `draw_date` ASC ";
+                command.Parameters.AddWithValue("@game_cd", gameMode);
+                command.Parameters.AddWithValue("@startingDate", startingDate.Date.ToString());
+                command.Connection = conn;
+                conn.Open();
+                using (OleDbDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        results.Add(GetLotteryDrawResultSetup(reader, gameMode));
+                    }
+                }
+            }
+            return results;
+        }
+        public List<LotteryDrawResult> GetDrawResultWinCountMLDataset(GameMode gameMode, DateTime startingDate)
+        {
+            List<LotteryDrawResult> results = new List<LotteryDrawResult>();
+            using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
+            using (OleDbCommand command = new OleDbCommand())
+            {
+                command.CommandType = CommandType.Text;
+                command.CommandText = " SELECT TOP 500 ID, jackpot_amt, `game_cd`, `draw_date`, " +
+                                      "         `num1` ,`num2`, num3, num4, num5, num6, " +
+                                      "         IIF(winners > 0, 1, 0) AS `winners` " +
+                                      "   FROM `draw_results` " +
+                                      "  WHERE game_cd = @game_cd " +
+                                      "    AND `draw_date` > CDATE(@startingDate) " +
+                                      "  ORDER BY `game_cd` ASC, `draw_date` ASC";
                 command.Parameters.AddWithValue("@game_cd", gameMode);
                 command.Parameters.AddWithValue("@startingDate", startingDate.Date.ToString());
                 command.Connection = conn;

@@ -16,5 +16,6 @@ namespace LottoDataManager.Includes.Model.Details
         string GetReleaseCycle();
         string GetRemarks();
         DateTime GetDateTimeApplied();
+        string GetAppVersionLbl();
     }
 }

@@ -160,5 +160,9 @@ namespace LottoDataManager.Includes.Model.Details.Setup
                 Num5.ToString().PadLeft(2, char.Parse("0")),
                 Num6.ToString().PadLeft(2, char.Parse("0")));
         }
+        public String ConvertToDateTimeMLFormat(DateTime targetDate)
+        {
+            return DateTimeConverterUtils.ConvertToFormat(targetDate, DateTimeConverterUtils.STANDARD_DATE_FORMAT) + " 00:00:00.0";
+        }
     }
 }
