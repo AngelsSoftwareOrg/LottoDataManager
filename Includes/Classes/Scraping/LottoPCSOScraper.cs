@@ -100,13 +100,40 @@ namespace LottoDataManager.Includes.Classes.Scraping
             {
                 var encodedContent = new FormUrlEncodedContent(parameters);
                 CancellationTokenSource cancellationToken = new CancellationTokenSource();
-                HttpResponseMessage request = await httpClient.PostAsync(webUrlToScrape, encodedContent);
+                cancellationToken.CancelAfter(TimeSpan.FromMilliseconds(Timeout.Infinite));
+
+                HttpResponseMessage response = null;
+                httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:121.0) Gecko/20100101 Firefox/121.0");
+                httpClient.DefaultRequestHeaders.Add("Accept", "text/html");
+                httpClient.DefaultRequestHeaders.Add("Accept-Language", "en-US,en;q=0.5");
+                httpClient.DefaultRequestHeaders.Add("Accept-Encoding", "deflate");
+                httpClient.DefaultRequestHeaders.Add("Connection", "keep-alive");
+                httpClient.DefaultRequestHeaders.Add("Upgrade-Insecure-Requests", "1");
+                httpClient.DefaultRequestHeaders.Add("Sec-Fetch-Dest", "document");
+                httpClient.DefaultRequestHeaders.Add("Sec-Fetch-Mode", "navigate");
+                httpClient.DefaultRequestHeaders.Add("Sec-Fetch-Site", "none");
+                httpClient.DefaultRequestHeaders.Add("Sec-Fetch-User", "?1");
+                httpClient.DefaultRequestHeaders.Add("Pragma", "no-cache");
+                httpClient.DefaultRequestHeaders.Add("Cache-Control", "no-cache");
+                httpClient.DefaultRequestHeaders.Add("TE", "trailers");
+                
+                if (parameters.Count <=0)
+                {
+                    response = await httpClient.GetAsync(webUrlToScrape);
+                }
+                else
+                {
+                    response = await httpClient.PostAsync(webUrlToScrape, encodedContent);
+                }
+                response.EnsureSuccessStatusCode();
                 cancellationToken.Token.ThrowIfCancellationRequested();
-                Stream response = await request.Content.ReadAsStreamAsync();
-                cancellationToken.Token.ThrowIfCancellationRequested();
-                HtmlParser parser = new HtmlParser();
-                IHtmlDocument document = parser.ParseDocument(response);
-                return document;
+                using (var stream = response.Content.ReadAsStreamAsync().Result)
+                {
+                    cancellationToken.Token.ThrowIfCancellationRequested();
+                    HtmlParser parser = new HtmlParser();
+                    IHtmlDocument document = parser.ParseDocument(stream);
+                    return document;
+                }
             }
         }
 
@@ -115,7 +142,7 @@ namespace LottoDataManager.Includes.Classes.Scraping
             try
             {
                 RaiseEvent(LottoWebScrapingStages.CONNECTING);
-                IHtmlDocument documentForSession = await GetWebsiteDOMAsync(GenerateParameters(lotteryDetails));
+                IHtmlDocument documentForSession = await GetWebsiteDOMAsync(new Dictionary<string, string>());
                 RaiseEvent(LottoWebScrapingStages.SESSION_CREATION);
                 Dictionary<string, string> sessionParam = GetSessionBasedParameters(lotteryDetails, documentForSession);
                 RaiseEvent(LottoWebScrapingStages.SEARCHING_DATA);
