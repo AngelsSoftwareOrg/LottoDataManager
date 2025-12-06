@@ -33,7 +33,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
             {
                 command.CommandType = CommandType.Text;
                 command.CommandText = "SELECT * FROM lottery_winning_bet WHERE bet_id = @lotteryBetID AND active = true";
-                command.Parameters.AddWithValue("@lotteryBetID", lotteryBetID);
+                command.Parameters.Add("@lotteryBetID", OleDbType.BigInt).Value = lotteryBetID;
                 command.Connection = conn;
                 conn.Open();
                 using (OleDbDataReader reader = command.ExecuteReader())
@@ -68,18 +68,18 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
             {
                 
                 command.CommandType = CommandType.Text;
-                command.CommandText = " INSERT INTO lottery_winning_bet " +
-                                      "        (bet_id,         winning_amt, active, claim_status, num1,  num2,  num3,  num4,  num5,  num6)" +
-                                      " VALUES (@lotteryBetID,  @winningAmt, true,   @claimStatus, @num1, @num2, @num3, @num4, @num5, @num6)";
-                command.Parameters.AddWithValue("@lotteryBetID", lotteryWinningBet.GetLotteryBetId());
-                command.Parameters.AddWithValue("@winningAmt", lotteryWinningBet.GetWinningAmount());
-                command.Parameters.AddWithValue("@claimStatus", lotteryWinningBet.IsClaimed());
-                command.Parameters.AddWithValue("@num1", lotteryWinningBet.GetNum1());
-                command.Parameters.AddWithValue("@num2", lotteryWinningBet.GetNum2());
-                command.Parameters.AddWithValue("@num3", lotteryWinningBet.GetNum3());
-                command.Parameters.AddWithValue("@num4", lotteryWinningBet.GetNum4());
-                command.Parameters.AddWithValue("@num5", lotteryWinningBet.GetNum5());
-                command.Parameters.AddWithValue("@num6", lotteryWinningBet.GetNum6());
+                command.CommandText = "INSERT INTO lottery_winning_bet (bet_id, winning_amt, active, claim_status, num1, num2, num3, num4, num5, num6) " +
+                                      "VALUES (?,?,?,?,?,?,?,?,?,?)";
+                command.Parameters.Add("bet_id", OleDbType.Integer).Value      = (int) lotteryWinningBet.GetLotteryBetId(); // cast if schema is Int32
+                command.Parameters.Add("winning_amt", OleDbType.Double).Value = lotteryWinningBet.GetWinningAmount();
+                command.Parameters.Add("active", OleDbType.Boolean).Value      = true;
+                command.Parameters.Add("claim_status", OleDbType.Boolean).Value= lotteryWinningBet.IsClaimed();
+                command.Parameters.Add("num1", OleDbType.Integer).Value        = lotteryWinningBet.GetNum1();
+                command.Parameters.Add("num2", OleDbType.Integer).Value        = lotteryWinningBet.GetNum2();
+                command.Parameters.Add("num3", OleDbType.Integer).Value        = lotteryWinningBet.GetNum3();
+                command.Parameters.Add("num4", OleDbType.Integer).Value        = lotteryWinningBet.GetNum4();
+                command.Parameters.Add("num5", OleDbType.Integer).Value        = lotteryWinningBet.GetNum5();
+                command.Parameters.Add("num6", OleDbType.Integer).Value        = lotteryWinningBet.GetNum6();
                 command.Connection = conn;
                 conn.Open();
                 OleDbTransaction transaction = conn.BeginTransaction();
@@ -107,7 +107,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                                       " WHERE a.active = true " +
                                       "   AND b.game_cd = @game_cd " +
                                       "   AND a.claim_status = true";
-                command.Parameters.AddWithValue("@game_cd", (int) gameMode);
+                command.Parameters.Add("@game_cd", OleDbType.Integer).Value = (int)gameMode;
                 command.Connection = conn;
                 conn.Open();
                 using (OleDbDataReader reader = command.ExecuteReader())
@@ -141,7 +141,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                                       "   AND MONTH(target_draw_date) = MONTH(NOW()) " +
                                       "   AND YEAR(target_draw_date) = YEAR(NOW()) " + 
                                       "   AND a.claim_status = true";
-                command.Parameters.AddWithValue("@game_cd", (int)gameMode);
+                command.Parameters.Add("@game_cd", OleDbType.Integer).Value = (int)gameMode;
                 command.Connection = conn;
                 conn.Open();
                 using (OleDbDataReader reader = command.ExecuteReader())
@@ -168,7 +168,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                 command.CommandType = CommandType.Text;
                 command.CommandText = " UPDATE lottery_winning_bet SET active = 0 " +
                                       " WHERE ID = @id";
-                command.Parameters.AddWithValue("@id", OleDbType.BigInt).Value = (long)Id;
+                command.Parameters.Add("@id", OleDbType.BigInt).Value = (long)Id;
                 command.Connection = conn;
                 conn.Open();
                 OleDbTransaction transaction = conn.BeginTransaction();
@@ -191,7 +191,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                 command.CommandType = CommandType.Text;
                 command.CommandText = " UPDATE lottery_winning_bet SET active = 0 " +
                                       " WHERE bet_id = @id";
-                command.Parameters.AddWithValue("@bet_id", OleDbType.BigInt).Value = (long)betId;
+                command.Parameters.Add("@bet_id", OleDbType.BigInt).Value = (long)betId;
                 command.Connection = conn;
                 conn.Open();
                 OleDbTransaction transaction = conn.BeginTransaction();
@@ -239,8 +239,8 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                                       "   AND b.active = true " +
                                       //"   AND c.active = true " +
                                       "   AND b.winning_amt > 0";
-                command.Parameters.AddWithValue("@game_cd", (int)gameMode);
-                command.Parameters.AddWithValue("@sinceWhen", sinceWhen.Date.ToString());
+                command.Parameters.Add("@game_cd", OleDbType.Integer).Value = (int)gameMode  ;
+                command.Parameters.Add("@sinceWhen", OleDbType.Variant).Value = sinceWhen.Date.ToString();
                 command.Connection = conn;
                 conn.Open();
                 using (OleDbDataReader reader = command.ExecuteReader())
@@ -281,8 +281,8 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                 command.CommandType = CommandType.Text;
                 command.CommandText = " UPDATE lottery_winning_bet SET claim_status = @claim_status " +
                                       " WHERE ID = @id AND active = true";
-                command.Parameters.AddWithValue("@claim_status", winBet.IsClaimed());
-                command.Parameters.AddWithValue("@id", winBet.GetID());
+                command.Parameters.Add("@claim_status", OleDbType.Boolean).Value = winBet.IsClaimed();
+                command.Parameters.Add("@id", OleDbType.BigInt).Value = winBet.GetID();
                 command.Connection = conn;
                 conn.Open();
                 OleDbTransaction transaction = conn.BeginTransaction();
@@ -316,7 +316,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                                       "  WHERE a.game_cd = @game_cd " +
                                       "    AND a.active = true " +
                                       "    AND b.active = true ";
-                command.Parameters.AddWithValue("@game_cd", (int)gameMode);
+                command.Parameters.Add("@game_cd", OleDbType.Integer).Value = (int)gameMode;
                 command.Connection = conn;
                 conn.Open();
                 using (OleDbDataReader reader = command.ExecuteReader())
@@ -356,7 +356,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                                       "   AND a.active = true " +
                                       "   AND b.active = true " +
                                       "   AND b.winning_amt > 0";
-                command.Parameters.AddWithValue("@game_cd", (int)gameMode);
+                command.Parameters.Add("@game_cd", OleDbType.Integer).Value = (int)gameMode;
                 command.Connection = conn;
                 conn.Open();
                 using (OleDbDataReader reader = command.ExecuteReader())

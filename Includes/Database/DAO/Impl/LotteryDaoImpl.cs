@@ -33,7 +33,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
             {
                 command.CommandType = CommandType.Text;
                 command.CommandText = "SELECT * FROM lottery WHERE game_cd = @game_cd AND active = true;";
-                command.Parameters.AddWithValue("@game_cd", gameCode);
+                command.Parameters.Add("@game_cd", OleDbType.Integer).Value = gameCode;
                 command.Connection = conn;
                 conn.Open();
 

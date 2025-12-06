@@ -56,7 +56,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
             {
                 command.CommandType = CommandType.Text;
                 command.CommandText = "SELECT * FROM lottery_outlet WHERE outlet_cd = @outlet_cd AND active = true ORDER BY description ASC";
-                command.Parameters.AddWithValue("@outlet_cd", ResourcesUtils.LotteryOutletDefaultCode);
+                command.Parameters.Add("@outlet_cd", OleDbType.Integer).Value = ResourcesUtils.LotteryOutletDefaultCode;
                 command.Connection = conn;
                 conn.Open();
 
@@ -79,9 +79,9 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                 command.CommandType = CommandType.Text;
                 command.CommandText = " UPDATE lottery_outlet SET description = @description " +
                                       " WHERE ID = @id AND outlet_cd = @outlet_cd AND active = true";
-                command.Parameters.AddWithValue("@description", StringUtils.Truncate(updatedModel.GetDescription(), MAX_LEN_DESCRIPTION));
-                command.Parameters.AddWithValue("@id", updatedModel.GetId());
-                command.Parameters.AddWithValue("@outlet_cd", updatedModel.GetOutletCode());
+                command.Parameters.Add("@description", OleDbType.Variant).Value = StringUtils.Truncate(updatedModel.GetDescription(), MAX_LEN_DESCRIPTION);
+                command.Parameters.Add("@id", OleDbType.BigInt).Value = updatedModel.GetId();
+                command.Parameters.Add("@outlet_cd", OleDbType.Integer).Value = updatedModel.GetOutletCode();
                 command.Connection = conn;
                 conn.Open();
                 OleDbTransaction transaction = conn.BeginTransaction();
@@ -105,7 +105,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                 command.CommandText = "SELECT count(ID) AS [total] FROM lottery_bet " +
                                       " WHERE outlet_cd = @outlet_cd " +
                                       "   AND active = true ";
-                command.Parameters.AddWithValue("@outlet_cd", outletCd);
+                command.Parameters.Add("@outlet_cd", OleDbType.Integer).Value = outletCd;
                 command.Connection = conn;
                 conn.Open();
                 using (OleDbDataReader reader = command.ExecuteReader())
@@ -135,9 +135,9 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                 command.CommandText = " UPDATE lottery_outlet SET active = false " +
                                       "  WHERE ID = @id AND outlet_cd = @outlet_cd " +
                                       "    AND description = @outlet_desc AND active = true ";
-                command.Parameters.AddWithValue("@id", modelToRemove.GetId());
-                command.Parameters.AddWithValue("@outlet_cd", modelToRemove.GetOutletCode());
-                command.Parameters.AddWithValue("@outlet_desc", modelToRemove.GetDescription());
+                command.Parameters.Add("@id", OleDbType.Integer).Value = modelToRemove.GetId();
+                command.Parameters.Add("@outlet_cd", OleDbType.Integer).Value = modelToRemove.GetOutletCode();
+                command.Parameters.Add("@outlet_desc", OleDbType.Variant).Value = modelToRemove.GetDescription();
                 command.Connection = conn;
                 conn.Open();
                 OleDbTransaction transaction = conn.BeginTransaction();
@@ -161,7 +161,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                 command.CommandText = "SELECT count(ID) AS [total] FROM lottery_outlet " +
                                       " WHERE description = @outletDescription " +
                                       "   AND active = true ";
-                command.Parameters.AddWithValue("@outletDescription", outletDescription);
+                command.Parameters.Add("@outletDescription", OleDbType.Variant).Value = outletDescription;
                 command.Connection = conn;
                 conn.Open();
                 using (OleDbDataReader reader = command.ExecuteReader())
@@ -195,8 +195,8 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                 command.CommandType = CommandType.Text;
                 command.CommandText = " INSERT INTO `lottery_outlet` (`outlet_cd`, `description`, `active`) " +
                                       " VALUES(@nextOutletCode, @outletDescription, true)";
-                command.Parameters.AddWithValue("@nextOutletCode", nextOutletCode);
-                command.Parameters.AddWithValue("@outletDescription", StringUtils.Truncate(outletDescription, MAX_LEN_DESCRIPTION));
+                command.Parameters.Add("@nextOutletCode", OleDbType.Integer).Value = nextOutletCode;
+                command.Parameters.Add("@outletDescription", OleDbType.Variant).Value = StringUtils.Truncate(outletDescription, MAX_LEN_DESCRIPTION);
 
                 command.Connection = conn;
                 conn.Open();

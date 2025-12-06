@@ -31,7 +31,7 @@ namespace LottoDataManager.Includes.Database.DAO
             using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
             using (OleDbCommand command = new OleDbCommand("SELECT * FROM lottery_ticket_panel WHERE game_cd = ? AND active = true;", conn))
             {
-                command.Parameters.AddWithValue("game_cd", gameMode);
+                command.Parameters.Add("game_cd", OleDbType.Integer).Value = gameMode;
                 conn.Open();
                 using (OleDbDataReader reader = command.ExecuteReader())
                 {

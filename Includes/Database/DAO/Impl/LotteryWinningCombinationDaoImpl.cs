@@ -30,7 +30,7 @@ namespace LottoDataManager.Includes.Database.DAO
             using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
             using (OleDbCommand command = new OleDbCommand("SELECT * FROM lottery_winning_combination WHERE game_cd = ? AND active = true;", conn))
             {
-                command.Parameters.AddWithValue("game_cd", gameMode);
+                command.Parameters.Add("game_cd", OleDbType.Integer).Value = gameMode;
                 conn.Open();
                 using (OleDbDataReader reader = command.ExecuteReader())
                 {
@@ -50,8 +50,8 @@ namespace LottoDataManager.Includes.Database.DAO
                 command.CommandType = CommandType.Text;
                 command.CommandText = " UPDATE lottery_winning_combination SET active = false " +
                                       " WHERE ID = @id AND game_cd = @game_cd AND active = true";
-                command.Parameters.AddWithValue("@id", lwc.GetID());
-                command.Parameters.AddWithValue("@game_cd", lwc.GetGameMode());
+                command.Parameters.Add("@id", OleDbType.Integer).Value = lwc.GetID();
+                command.Parameters.Add("@game_cd", OleDbType.Integer).Value = lwc.GetGameMode();
                 command.Connection = conn;
                 conn.Open();
                 OleDbTransaction transaction = conn.BeginTransaction();
@@ -76,14 +76,14 @@ namespace LottoDataManager.Includes.Database.DAO
                 command.CommandText = " INSERT INTO `lottery_winning_combination` " +
                                       "          (`game_cd`, `active`, `match_0`, `match_1`, `match_2`, `match_3`, `match_4`, `match_5`, `match_6`) " +
                                       "  VALUES (@game_cd, true, @m0, @m1, @m2, @m3, @m4, @m5, @m6) ";
-                command.Parameters.AddWithValue("@game_cd", (int)lwc.GetGameMode());
-                command.Parameters.AddWithValue("@m0", lwc.GetMatch0());
-                command.Parameters.AddWithValue("@m1", lwc.GetMatch1());
-                command.Parameters.AddWithValue("@m2", lwc.GetMatch2());
-                command.Parameters.AddWithValue("@m3", lwc.GetMatch3());
-                command.Parameters.AddWithValue("@m4", lwc.GetMatch4());
-                command.Parameters.AddWithValue("@m5", lwc.GetMatch5());
-                command.Parameters.AddWithValue("@m6", lwc.GetMatch6());
+                command.Parameters.Add("@game_cd", OleDbType.Integer).Value = (int)lwc.GetGameMode();
+                command.Parameters.Add("@m0", OleDbType.Double).Value = lwc.GetMatch0();
+                command.Parameters.Add("@m1", OleDbType.Double).Value = lwc.GetMatch1();
+                command.Parameters.Add("@m2", OleDbType.Double).Value = lwc.GetMatch2();
+                command.Parameters.Add("@m3", OleDbType.Double).Value = lwc.GetMatch3();
+                command.Parameters.Add("@m4", OleDbType.Double).Value = lwc.GetMatch4();
+                command.Parameters.Add("@m5", OleDbType.Double).Value = lwc.GetMatch5();
+                command.Parameters.Add("@m6", OleDbType.Double).Value = lwc.GetMatch6();
                 command.Connection = conn;
                 conn.Open();
                 OleDbTransaction transaction = conn.BeginTransaction();

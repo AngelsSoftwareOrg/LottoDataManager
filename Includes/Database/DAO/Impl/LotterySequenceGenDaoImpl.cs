@@ -48,7 +48,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
             using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
             using (OleDbCommand command = new OleDbCommand("SELECT * FROM lottery_seq_gen WHERE seqGenId = @seqGenId AND active = true", conn))
             {
-                command.Parameters.AddWithValue("@seqGenId", seqGenId);
+                command.Parameters.Add("@seqGenId", OleDbType.Integer).Value = seqGenId;
                 conn.Open();
                 using (OleDbDataReader reader = command.ExecuteReader())
                 {
@@ -66,7 +66,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
             using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
             using (OleDbCommand command = new OleDbCommand("SELECT * FROM lottery_seq_gen WHERE seqgencd = @seqGenCode AND active = true", conn))
             {
-                command.Parameters.AddWithValue("@seqGenCode", seqGenCode);
+                command.Parameters.Add("@seqGenCode", OleDbType.Integer).Value = seqGenCode;
                 conn.Open();
                 using (OleDbDataReader reader = command.ExecuteReader())
                 {
@@ -86,9 +86,9 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                 command.CommandType = CommandType.Text;
                 command.CommandText = " UPDATE lottery_seq_gen SET description= @description " +
                                       " WHERE ID = @id AND seqgencd = @seqgencd AND active = true";
-                command.Parameters.AddWithValue("@description", StringUtils.Truncate(updatedModel.GetDescription(), MAX_LEN_DESCRIPTION));
-                command.Parameters.AddWithValue("@id", updatedModel.GetID());
-                command.Parameters.AddWithValue("@seqgencd", updatedModel.GetSeqGenCode());
+                command.Parameters.Add("@description", OleDbType.Variant).Value = StringUtils.Truncate(updatedModel.GetDescription(), MAX_LEN_DESCRIPTION);
+                command.Parameters.Add("@id", OleDbType.Integer).Value = updatedModel.GetID();
+                command.Parameters.Add("@seqgencd", OleDbType.Integer).Value = updatedModel.GetSeqGenCode();
                 command.Connection = conn;
                 conn.Open();
                 OleDbTransaction transaction = conn.BeginTransaction();
@@ -112,7 +112,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                 command.CommandText = "SELECT count(ID) AS [total] FROM lottery_seq_gen " +
                                       " WHERE description = @description " +
                                       "   AND active = true ";
-                command.Parameters.AddWithValue("@description", seqGenDescription);
+                command.Parameters.Add("@description", OleDbType.Variant).Value = seqGenDescription;
                 command.Connection = conn;
                 conn.Open();
                 using (OleDbDataReader reader = command.ExecuteReader())
@@ -139,8 +139,8 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                 command.CommandText = " INSERT INTO `lottery_seq_gen` (`seqgencd`, `description`, `active`) VALUES(@seqgencd, @desc, true); ";
 
                 command.Connection = conn;
-                command.Parameters.AddWithValue("@seqgencd", seqGen.GetSeqGenCode());
-                command.Parameters.AddWithValue("@desc", seqGen.GetDescription());
+                command.Parameters.Add("@seqgencd", OleDbType.Integer).Value = seqGen.GetSeqGenCode();
+                command.Parameters.Add("@desc", OleDbType.Variant).Value = seqGen.GetDescription();
 
                 conn.Open();
                 OleDbTransaction transaction = conn.BeginTransaction();

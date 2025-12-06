@@ -79,12 +79,12 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                                         "   	   WHERE a.target_draw_date = b.draw_date  " +
                                         "            AND a.game_cd = b.game_cd) IS NULL  " +
                                         "  ORDER BY a.target_draw_date DESC, a.ID DESC ";
-                command.Parameters.AddWithValue("@game_cd", OleDbType.Integer).Value = gameMode;
-                command.Parameters.AddWithValue("@sinceWhen", OleDbType.DBDate).Value = sinceWhen.Date.ToString();
-                command.Parameters.AddWithValue("@dateTo", OleDbType.DBDate).Value = dateTo.Date.ToString();
-                command.Parameters.AddWithValue("@game_cd", OleDbType.Integer).Value = gameMode;
-                command.Parameters.AddWithValue("@sinceWhen", OleDbType.DBDate).Value = sinceWhen.Date.ToString();
-                command.Parameters.AddWithValue("@dateTo", OleDbType.DBDate).Value = dateTo.Date.ToString();
+                command.Parameters.Add("@game_cd", OleDbType.Integer).Value = gameMode;
+                command.Parameters.Add("@sinceWhen", OleDbType.DBDate).Value = sinceWhen.Date.ToString();
+                command.Parameters.Add("@dateTo", OleDbType.DBDate).Value = dateTo.Date.ToString();
+                command.Parameters.Add("@game_cd", OleDbType.Integer).Value = gameMode;
+                command.Parameters.Add("@sinceWhen", OleDbType.DBDate).Value = sinceWhen.Date.ToString();
+                command.Parameters.Add("@dateTo", OleDbType.DBDate).Value = dateTo.Date.ToString();
                 command.Connection = conn;
                 conn.Open();
 
@@ -110,8 +110,8 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                                       "   AND target_draw_date = CDATE(@sinceWhen) " +
                                       "   AND active = true " +
                                       " ORDER BY target_draw_date DESC, ID DESC ";
-                command.Parameters.AddWithValue("@game_cd", OleDbType.Integer).Value = gameMode;
-                command.Parameters.AddWithValue("@sinceWhen", OleDbType.DBDate).Value = betDrawDate.Date.ToString();
+                command.Parameters.Add("@game_cd", OleDbType.Integer).Value = gameMode;
+                command.Parameters.Add("@sinceWhen", OleDbType.DBDate).Value = betDrawDate.Date.ToString();
                 command.Connection = conn;
                 conn.Open();
 
@@ -139,9 +139,9 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                                       "    AND MONTH(target_draw_date) = @month " +
                                       "    AND active = true " +
                                       "  ORDER BY target_draw_date DESC, ID DESC ";
-                command.Parameters.AddWithValue("@game_cd", OleDbType.Integer).Value = gameMode;
-                command.Parameters.AddWithValue("@year", year);
-                command.Parameters.AddWithValue("@month", month);
+                command.Parameters.Add("@game_cd", OleDbType.Integer).Value = gameMode;
+                command.Parameters.Add("@year", OleDbType.Integer).Value = year;
+                command.Parameters.Add("@month", OleDbType.Integer).Value = month;
                 command.Connection = conn;
                 conn.Open();
 
@@ -171,7 +171,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                                       "   AND b.active IS NULL " +
                                       "   AND a.game_cd = @game_cd " +
                                       " ORDER BY a.target_draw_date DESC, a.ID DESC  ";
-                command.Parameters.AddWithValue("@game_cd", gameMode);
+                command.Parameters.Add("@game_cd", OleDbType.Integer).Value = gameMode;
                 command.Connection = conn;
                 conn.Open();
 
@@ -193,8 +193,8 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                 command.CommandType = CommandType.Text;
                 command.CommandText = " UPDATE lottery_bet SET target_draw_date = CDATE(@new_target_draw_date) " +
                                       " WHERE ID = @id AND active = true";
-                command.Parameters.AddWithValue("@new_target_draw_date", OleDbType.DBDate).Value = newTargetDrawDate.ToString();
-                command.Parameters.AddWithValue("@id", OleDbType.BigInt).Value = (long)id;
+                command.Parameters.Add("@new_target_draw_date", OleDbType.DBDate).Value = newTargetDrawDate.ToString();
+                command.Parameters.Add("@id", OleDbType.BigInt).Value = (long)id;
                 command.Connection = conn;
                 conn.Open();
                 OleDbTransaction transaction = conn.BeginTransaction();
@@ -228,16 +228,16 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                                       " AND @num4 IN(num1, num2, num3, num4, num5, num6) " +
                                       " AND @num5 IN(num1, num2, num3, num4, num5, num6) " +
                                       " AND @num6 IN(num1, num2, num3, num4, num5, num6)) ";
-                command.Parameters.AddWithValue("@game_cd", lotteryBet.GetGameCode());
-                command.Parameters.AddWithValue("@draw_date", lotteryBet.GetTargetDrawDate().Date.ToString());
-                command.Parameters.AddWithValue("@outletCd", lotteryBet.GetOutletCode());
-                command.Parameters.AddWithValue("@seqgencd", lotteryBet.GetLotterySequenceGenerator().GetSeqGenCode());
-                command.Parameters.AddWithValue("@num1", lotteryBet.GetNum1());
-                command.Parameters.AddWithValue("@num2", lotteryBet.GetNum2());
-                command.Parameters.AddWithValue("@num3", lotteryBet.GetNum3());
-                command.Parameters.AddWithValue("@num4", lotteryBet.GetNum4());
-                command.Parameters.AddWithValue("@num5", lotteryBet.GetNum5());
-                command.Parameters.AddWithValue("@num6", lotteryBet.GetNum6());
+                command.Parameters.Add("@game_cd", OleDbType.Integer).Value = lotteryBet.GetGameCode();
+                command.Parameters.Add("@draw_date", OleDbType.Variant).Value = lotteryBet.GetTargetDrawDate().Date.ToString();
+                command.Parameters.Add("@outletCd", OleDbType.Integer).Value = lotteryBet.GetOutletCode();
+                command.Parameters.Add("@seqgencd", OleDbType.Integer).Value = lotteryBet.GetLotterySequenceGenerator().GetSeqGenCode();
+                command.Parameters.Add("@num1", OleDbType.Integer).Value = lotteryBet.GetNum1();
+                command.Parameters.Add("@num2", OleDbType.Integer).Value = lotteryBet.GetNum2();
+                command.Parameters.Add("@num3", OleDbType.Integer).Value = lotteryBet.GetNum3();
+                command.Parameters.Add("@num4", OleDbType.Integer).Value = lotteryBet.GetNum4();
+                command.Parameters.Add("@num5", OleDbType.Integer).Value = lotteryBet.GetNum5();
+                command.Parameters.Add("@num6", OleDbType.Integer).Value = lotteryBet.GetNum6();
                 command.Connection = conn;
                 conn.Open();
 
@@ -272,17 +272,17 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                 {
                     if (IsBetExisting(item)) continue;
                     command.Parameters.Clear();
-                    command.Parameters.AddWithValue("@game_cda", item.GetGameCode());
-                    command.Parameters.AddWithValue("@target_draw_datea", item.GetTargetDrawDate().Date.ToString());
-                    command.Parameters.AddWithValue("@bet_amta", item.GetBetAmount());
-                    command.Parameters.AddWithValue("@outlet_cda", item.GetOutletCode());
-                    command.Parameters.AddWithValue("@seqgencda", item.GetLotterySequenceGenerator().GetSeqGenCode());
-                    command.Parameters.AddWithValue("@num1a", item.GetNum1());
-                    command.Parameters.AddWithValue("@num2a", item.GetNum2());
-                    command.Parameters.AddWithValue("@num3a", item.GetNum3());
-                    command.Parameters.AddWithValue("@num4a", item.GetNum4());
-                    command.Parameters.AddWithValue("@num5a", item.GetNum5());
-                    command.Parameters.AddWithValue("@num6a", item.GetNum6());
+                    command.Parameters.Add("@game_cda", OleDbType.Integer).Value = item.GetGameCode();
+                    command.Parameters.Add("@target_draw_datea", OleDbType.DBDate).Value = item.GetTargetDrawDate().Date.ToString();
+                    command.Parameters.Add("@bet_amta", OleDbType.Double).Value = item.GetBetAmount();
+                    command.Parameters.Add("@outlet_cda", OleDbType.Integer).Value = item.GetOutletCode();
+                    command.Parameters.Add("@seqgencda", OleDbType.Integer).Value = item.GetLotterySequenceGenerator().GetSeqGenCode();
+                    command.Parameters.Add("@num1a", OleDbType.Integer).Value = item.GetNum1();
+                    command.Parameters.Add("@num2a", OleDbType.Integer).Value = item.GetNum2();
+                    command.Parameters.Add("@num3a", OleDbType.Integer).Value = item.GetNum3();
+                    command.Parameters.Add("@num4a", OleDbType.Integer).Value = item.GetNum4();
+                    command.Parameters.Add("@num5a", OleDbType.Integer).Value = item.GetNum5();
+                    command.Parameters.Add("@num6a", OleDbType.Integer).Value = item.GetNum6();
 
                     command.Transaction = transaction;
                     int result = command.ExecuteNonQuery();
@@ -315,17 +315,18 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                                       "         @bet_amta, 1, @outlet_cda, @seqgencda, " +
                                       "         @num1a, @num2a, @num3a, @num4a, @num5a, @num6a) ";
                 command.Connection = conn;
-                command.Parameters.AddWithValue("@game_cda", lotteryBet.GetGameCode());
-                command.Parameters.AddWithValue("@target_draw_datea", lotteryBet.GetTargetDrawDate().Date.ToString());
-                command.Parameters.AddWithValue("@bet_amta", lotteryBet.GetBetAmount());
-                command.Parameters.AddWithValue("@outlet_cda", lotteryBet.GetOutletCode());
-                command.Parameters.AddWithValue("@seqgencda", lotteryBet.GetLotterySequenceGenerator().GetSeqGenCode());
-                command.Parameters.AddWithValue("@num1a", lotteryBet.GetNum1());
-                command.Parameters.AddWithValue("@num2a", lotteryBet.GetNum2());
-                command.Parameters.AddWithValue("@num3a", lotteryBet.GetNum3());
-                command.Parameters.AddWithValue("@num4a", lotteryBet.GetNum4());
-                command.Parameters.AddWithValue("@num5a", lotteryBet.GetNum5());
-                command.Parameters.AddWithValue("@num6a", lotteryBet.GetNum6());
+                command.Parameters.Add("@game_cda", OleDbType.Integer).Value = lotteryBet.GetGameCode();
+                command.Parameters.Add("@target_draw_datea", OleDbType.DBDate).Value = lotteryBet.GetTargetDrawDate().Date.ToString();
+                command.Parameters.Add("@bet_amta", OleDbType.Double).Value = lotteryBet.GetBetAmount();
+                command.Parameters.Add("@outlet_cda", OleDbType.Integer).Value = lotteryBet.GetOutletCode();
+                command.Parameters.Add("@seqgencda", OleDbType.Integer).Value = lotteryBet.GetLotterySequenceGenerator().GetSeqGenCode();
+                command.Parameters.Add("@num1a", OleDbType.Integer).Value = lotteryBet.GetNum1();
+                command.Parameters.Add("@num2a", OleDbType.Integer).Value = lotteryBet.GetNum2();
+                command.Parameters.Add("@num3a", OleDbType.Integer).Value = lotteryBet.GetNum3();
+                command.Parameters.Add("@num4a", OleDbType.Integer).Value = lotteryBet.GetNum4();
+                command.Parameters.Add("@num5a", OleDbType.Integer).Value = lotteryBet.GetNum5();
+                command.Parameters.Add("@num6a", OleDbType.Integer).Value = lotteryBet.GetNum6();
+
                 conn.Open();
                 OleDbTransaction transaction = conn.BeginTransaction();
                 command.Transaction = transaction;
@@ -410,7 +411,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                 command.CommandType = CommandType.Text;
                 command.CommandText = " UPDATE lottery_bet SET active = 0 " +
                                       " WHERE ID = @id";
-                command.Parameters.AddWithValue("@id", OleDbType.BigInt).Value = (long)id;
+                command.Parameters.Add("@id", OleDbType.BigInt).Value = (long)id;
                 command.Connection = conn;
                 conn.Open();
                 OleDbTransaction transaction = conn.BeginTransaction();
@@ -436,9 +437,9 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                                       " WHERE active = true " +
                                       "   AND game_cd = @game_cd " +
                                       "  AND target_draw_date BETWEEN CDATE(@from) AND CDATE(@to) ";
-                command.Parameters.AddWithValue("@game_cd", (int)gameMode);
-                command.Parameters.AddWithValue("@from", dateFrom.Date.ToString());
-                command.Parameters.AddWithValue("@to", dateTo.Date.ToString());
+                command.Parameters.Add("@game_cd", OleDbType.Integer).Value = (int)gameMode;
+                command.Parameters.Add("@from", OleDbType.DBDate).Value = dateFrom.Date.ToString();
+                command.Parameters.Add("@to", OleDbType.DBDate).Value = dateTo.Date.ToString();
                 command.Connection = conn;
                 conn.Open();
                 using (OleDbDataReader reader = command.ExecuteReader())
@@ -467,7 +468,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                                       "  FROM lottery_bet " +
                                       " WHERE game_cd = @game_cd " +
                                       "   AND active = true";
-                command.Parameters.AddWithValue("@game_cd", (int)gameMode);
+                command.Parameters.Add("@game_cd", OleDbType.Integer).Value = (int)gameMode;
                 command.Connection = conn;
                 conn.Open();
                 using (OleDbDataReader reader = command.ExecuteReader())
@@ -502,7 +503,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                                      "    AND a.active = true " +
                                      "    AND b.active = true " +
                                      "    AND b.winning_amt > 0 ";
-                command.Parameters.AddWithValue("@game_cd", (int)gameMode);
+                command.Parameters.Add("@game_cd", OleDbType.Integer).Value = (int)gameMode;
                 command.Connection = conn;
                 conn.Open();
                 using (OleDbDataReader reader = command.ExecuteReader())
@@ -543,8 +544,8 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                                      "    AND b.winning_amt > 0 " +
                                      "    AND b.claim_status = @claim_status " +
                                      "  ORDER BY a.target_draw_date DESC, a.ID DESC ";
-                command.Parameters.AddWithValue("@game_cd", (int)gameMode);
-                command.Parameters.AddWithValue("@claim_status", isGetClaimedStatus);
+                command.Parameters.Add("@game_cd", OleDbType.Integer).Value = (int)gameMode;
+                command.Parameters.Add("@claim_status", OleDbType.Boolean).Value = isGetClaimedStatus;
                 command.Connection = conn;
                 conn.Open();
                 using (OleDbDataReader reader = command.ExecuteReader())
@@ -576,8 +577,8 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                                       "    AND a.active = true " +
                                       "    AND b.active = true " +
                                       "    AND a.seqgencd IN (@luckypick) ";
-                command.Parameters.AddWithValue("@game_cd", (int)gameMode);
-                command.Parameters.AddWithValue("@luckypick", (int)GeneratorType.LUCKY_PICK);
+                command.Parameters.Add("@game_cd", OleDbType.Integer).Value = (int)gameMode;
+                command.Parameters.Add("@luckypick", OleDbType.Integer).Value = (int)GeneratorType.LUCKY_PICK;
                 command.Connection = conn;
                 conn.Open();
                 using (OleDbDataReader reader = command.ExecuteReader())
@@ -609,7 +610,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                                       "        FROM lottery_bet " +
                                       "       WHERE active = true " +
                                       "         AND game_cd = @game_cd) a ";
-                command.Parameters.AddWithValue("@game_cd", (int)gameMode);
+                command.Parameters.Add("@game_cd", OleDbType.Integer).Value = (int)gameMode;
                 command.Connection = conn;
                 conn.Open();
                 using (OleDbDataReader reader = command.ExecuteReader())
@@ -641,7 +642,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                                       "        FROM lottery_bet " +
                                       "       WHERE active = true " +
                                       "         AND game_cd = @game_cd) a ";
-                command.Parameters.AddWithValue("@game_cd", (int)gameMode);
+                command.Parameters.Add("@game_cd", OleDbType.Integer).Value = (int)gameMode;
                 command.Connection = conn;
                 conn.Open();
                 using (OleDbDataReader reader = command.ExecuteReader())
@@ -677,7 +678,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                                       "   AND b.winning_amt > 0 " +
                                       " ORDER BY a.target_draw_date DESC ";
 
-                command.Parameters.AddWithValue("@game_cd", (int)gameMode);
+                command.Parameters.Add("@game_cd", OleDbType.Integer).Value = (int)gameMode;
                 command.Connection = conn;
                 conn.Open();
                 using (OleDbDataReader reader = command.ExecuteReader())
@@ -716,9 +717,10 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                                       "                           AND d.game_cd = @game_cd3 " +
                                       "                         ORDER BY d.draw_date DESC) " +
                                       "  ORDER BY a.draw_date ASC)";
-                command.Parameters.AddWithValue("@game_cd1", gameMode);
-                command.Parameters.AddWithValue("@game_cd2", gameMode);
-                command.Parameters.AddWithValue("@game_cd3", gameMode);
+
+                command.Parameters.Add("@game_cd1", OleDbType.Integer).Value = (int)gameMode;
+                command.Parameters.Add("@game_cd2", OleDbType.Integer).Value = (int)gameMode;
+                command.Parameters.Add("@game_cd3", OleDbType.Integer).Value = (int)gameMode;
                 command.Connection = conn;
                 conn.Open();
 
@@ -748,7 +750,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                                         "    AND b.`draw_date` = a.target_draw_date) IS NULL   " +
                                         "  ORDER BY a.target_draw_date ASC                     ";
 
-                command.Parameters.AddWithValue("@game_cd", (int) gameMode);
+                command.Parameters.Add("@game_cd", OleDbType.Integer).Value = (int)gameMode;
                 command.Connection = conn;
                 conn.Open();
 
@@ -786,8 +788,8 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                                       "  WHERE game_cd = @game_cd " +
                                       "    AND YEAR(target_draw_date) = @year " +
                                       "    AND active = true";
-                command.Parameters.AddWithValue("@game_cd", (int)gameMode);
-                command.Parameters.AddWithValue("@year", year);
+                command.Parameters.Add("@game_cd", OleDbType.Integer).Value = (int)gameMode;
+                command.Parameters.Add("@year", OleDbType.Integer).Value = year;
                 command.Connection = conn;
                 conn.Open();
                 using (OleDbDataReader reader = command.ExecuteReader())
@@ -922,8 +924,8 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                                       "   AND a.target_draw_date > CDATE(@startingDate) " +
                                       "   AND a.active = true   " +
                                       " ORDER BY a.game_cd ASC ";
-                command.Parameters.AddWithValue("@game_cd", gameMode);
-                command.Parameters.AddWithValue("@startingDate", startingDate.Date.ToString());
+                command.Parameters.Add("@game_cd", OleDbType.Integer).Value = gameMode;
+                command.Parameters.Add("@startingDate", OleDbType.DBDate).Value = startingDate.Date.ToString();
                 command.Connection = conn;
                 conn.Open();
 
