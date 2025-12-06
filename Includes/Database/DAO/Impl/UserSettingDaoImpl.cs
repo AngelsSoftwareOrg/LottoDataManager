@@ -30,7 +30,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
             {
                 command.CommandType = CommandType.Text;
                 command.CommandText = "SELECT ID, config_name, value FROM user_setting WHERE config_name = @last_opened_lottery";
-                command.Parameters.AddWithValue("@last_opened_lottery", UserSettingsConfig.CFG_LAST_OPENED_DIRECTORY);
+                command.Parameters.Add("@last_opened_lottery", OleDbType.Variant).Value = UserSettingsConfig.CFG_LAST_OPENED_DIRECTORY;
                 command.Connection = conn;
                 conn.Open();
                 using (OleDbDataReader reader = command.ExecuteReader())
@@ -53,8 +53,8 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
             {
                 command.CommandType = CommandType.Text;
                 command.CommandText = "UPDATE user_setting SET [value] = @value WHERE config_name = @configName";
-                command.Parameters.AddWithValue("@value", value);
-                command.Parameters.AddWithValue("@configName", configName);
+                command.Parameters.Add("@value", OleDbType.Variant).Value = value;
+                command.Parameters.Add("@configName", OleDbType.Variant).Value = configName;
                 command.Connection = conn;
                 conn.Open();
                 OleDbTransaction transaction = conn.BeginTransaction();
@@ -75,7 +75,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
             {
                 command.CommandType = CommandType.Text;
                 command.CommandText = "SELECT ID, config_name, value FROM user_setting WHERE config_name = @configName";
-                command.Parameters.AddWithValue("@configName", configName);
+                command.Parameters.Add("@configName", OleDbType.Variant).Value = configName;
                 command.Connection = conn;
                 conn.Open();
                 using (OleDbDataReader reader = command.ExecuteReader())
@@ -99,8 +99,8 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
             {
                 command.CommandType = CommandType.Text;
                 command.CommandText = " INSERT INTO user_setting (config_name, `value`) VALUES (@configName, @value) ";
-                command.Parameters.AddWithValue("@configName", configName);
-                command.Parameters.AddWithValue("@value", value);
+                command.Parameters.Add("@configName", OleDbType.Variant).Value = configName;
+                command.Parameters.Add("@value", OleDbType.Variant).Value = value;
                 command.Connection = conn;
                 conn.Open();
                 OleDbTransaction transaction = conn.BeginTransaction();

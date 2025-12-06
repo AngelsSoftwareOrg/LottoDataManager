@@ -28,7 +28,7 @@ namespace LottoDataManager.Includes.Database.DAO
         {
             using(OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
             using(OleDbCommand command = new OleDbCommand("SELECT * FROM lottery_schedule WHERE game_cd = ? AND active = true", conn)) {
-                command.Parameters.AddWithValue("game_cd", gameMode);
+                command.Parameters.Add("game_cd", OleDbType.Integer).Value = gameMode;
                 conn.Open();
                 using (OleDbDataReader reader = command.ExecuteReader())
                 {
@@ -48,8 +48,8 @@ namespace LottoDataManager.Includes.Database.DAO
                 command.CommandType = CommandType.Text;
                 command.CommandText = " UPDATE lottery_schedule SET active = false " +
                                       " WHERE ID = @id AND game_cd = @game_cd AND active = true";
-                command.Parameters.AddWithValue("@id", lsched.GetID());
-                command.Parameters.AddWithValue("@game_cd", (int) lsched.GetGameMode());
+                command.Parameters.Add("@id", OleDbType.Integer).Value = lsched.GetID();
+                command.Parameters.Add("@game_cd", OleDbType.Integer).Value = (int)lsched.GetGameMode();
                 command.Connection = conn;
                 conn.Open();
                 OleDbTransaction transaction = conn.BeginTransaction();
@@ -74,14 +74,14 @@ namespace LottoDataManager.Includes.Database.DAO
                                       "             (`game_cd`, `active`, `mon`, `tues`, `wed`, `thurs`, `fri`, `sat`, `sun`) " +
                                       "         VALUES " +
                                       "             (@game_cd, true, @isMon, @isTue, @isWed, @isThu, @isFri, @isSat, @isSun) ";
-                command.Parameters.AddWithValue("@game_cd", (int)lsched.GetGameMode());
-                command.Parameters.AddWithValue("@isMon", lsched.IsMonday());
-                command.Parameters.AddWithValue("@isTue", lsched.IsTuesday());
-                command.Parameters.AddWithValue("@isWed", lsched.IsWednesday());
-                command.Parameters.AddWithValue("@isThu", lsched.IsThursday());
-                command.Parameters.AddWithValue("@isFri", lsched.IsFriday());
-                command.Parameters.AddWithValue("@isSat", lsched.IsSaturday());
-                command.Parameters.AddWithValue("@isSun", lsched.IsSunday());
+                command.Parameters.Add("@game_cd", OleDbType.Integer).Value = (int)lsched.GetGameMode();
+                command.Parameters.Add("@isMon", OleDbType.Boolean).Value = lsched.IsMonday();
+                command.Parameters.Add("@isTue", OleDbType.Boolean).Value = lsched.IsTuesday();
+                command.Parameters.Add("@isWed", OleDbType.Boolean).Value = lsched.IsWednesday();
+                command.Parameters.Add("@isThu", OleDbType.Boolean).Value = lsched.IsThursday();
+                command.Parameters.Add("@isFri", OleDbType.Boolean).Value = lsched.IsFriday();
+                command.Parameters.Add("@isSat", OleDbType.Boolean).Value = lsched.IsSaturday();
+                command.Parameters.Add("@isSun", OleDbType.Boolean).Value = lsched.IsSunday();
                 command.Connection = conn;
                 conn.Open();
                 OleDbTransaction transaction = conn.BeginTransaction();
