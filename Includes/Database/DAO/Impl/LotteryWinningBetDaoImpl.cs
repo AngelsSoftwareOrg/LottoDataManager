@@ -33,7 +33,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
             {
                 command.CommandType = CommandType.Text;
                 command.CommandText = "SELECT * FROM lottery_winning_bet WHERE bet_id = @lotteryBetID AND active = true";
-                command.Parameters.Add("@lotteryBetID", OleDbType.BigInt).Value = lotteryBetID;
+                command.Parameters.Add("@lotteryBetID", OleDbType.Integer).Value = lotteryBetID;
                 command.Connection = conn;
                 conn.Open();
                 using (OleDbDataReader reader = command.ExecuteReader())
@@ -168,7 +168,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                 command.CommandType = CommandType.Text;
                 command.CommandText = " UPDATE lottery_winning_bet SET active = 0 " +
                                       " WHERE ID = @id";
-                command.Parameters.Add("@id", OleDbType.BigInt).Value = (long)Id;
+                command.Parameters.Add("@id", OleDbType.Integer).Value = (long)Id;
                 command.Connection = conn;
                 conn.Open();
                 OleDbTransaction transaction = conn.BeginTransaction();
@@ -191,7 +191,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                 command.CommandType = CommandType.Text;
                 command.CommandText = " UPDATE lottery_winning_bet SET active = 0 " +
                                       " WHERE bet_id = @id";
-                command.Parameters.Add("@bet_id", OleDbType.BigInt).Value = (long)betId;
+                command.Parameters.Add("@bet_id", OleDbType.Integer).Value = betId;
                 command.Connection = conn;
                 conn.Open();
                 OleDbTransaction transaction = conn.BeginTransaction();
@@ -282,7 +282,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                 command.CommandText = " UPDATE lottery_winning_bet SET claim_status = @claim_status " +
                                       " WHERE ID = @id AND active = true";
                 command.Parameters.Add("@claim_status", OleDbType.Boolean).Value = winBet.IsClaimed();
-                command.Parameters.Add("@id", OleDbType.BigInt).Value = winBet.GetID();
+                command.Parameters.Add("@id", OleDbType.Integer).Value = winBet.GetID();
                 command.Connection = conn;
                 conn.Open();
                 OleDbTransaction transaction = conn.BeginTransaction();

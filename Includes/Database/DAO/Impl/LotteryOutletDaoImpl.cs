@@ -80,7 +80,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                 command.CommandText = " UPDATE lottery_outlet SET description = @description " +
                                       " WHERE ID = @id AND outlet_cd = @outlet_cd AND active = true";
                 command.Parameters.Add("@description", OleDbType.Variant).Value = StringUtils.Truncate(updatedModel.GetDescription(), MAX_LEN_DESCRIPTION);
-                command.Parameters.Add("@id", OleDbType.BigInt).Value = updatedModel.GetId();
+                command.Parameters.Add("@id", OleDbType.Integer).Value = updatedModel.GetId();
                 command.Parameters.Add("@outlet_cd", OleDbType.Integer).Value = updatedModel.GetOutletCode();
                 command.Connection = conn;
                 conn.Open();

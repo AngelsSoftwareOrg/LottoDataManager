@@ -328,22 +328,19 @@ namespace LottoDataManager.Includes.Classes.Reports
             LotteryDetails lotteryDetails = LotteryDataServices.LotteryDetails;
             foreach (Lottery lottery in LotteryDataServices.GetLotteries())
             {
-                if(lotteryDetails.GameMode != lottery.GetGameMode())
+                List<LotteryBet> lotteryBetList = LotteryDataServices.GetLotterybetsQueued(lottery.GetGameMode());
+                if (lotteryBetList.Count <= 0) continue;
+                foreach(LotteryBet bet in lotteryBetList)
                 {
-                    List<LotteryBet> lotteryBetList = LotteryDataServices.GetLotterybetsQueued(lottery.GetGameMode());
-                    if (lotteryBetList.Count <= 0) continue;
-                    foreach(LotteryBet bet in lotteryBetList)
-                    {
-                        String key = DateTimeConverterUtils.ConvertToFormat(bet.GetTargetDrawDate(), DateTimeConverterUtils.STANDARD_DATE_FORMAT_WITH_DAYOFWEEK);
-                        String value = bet.GetGNUFormat();
-                        DashboardReportItemSetup dshSetup = GenModel(key, value);
-                        dshSetup.DashboardReportItemAction = DashboardReportItemActions.OPEN_LOTTERY_GAME;
-                        dshSetup.Tag = lottery.GetGameMode();
-                        dshSetup.GroupTaskLabel = ResourcesUtils.GetMessage("drpt_lot_bet_group_lbl_task");
-                        dshSetup.GroupKeyName = ResourcesUtils.GetMessage("drpt_lot_bet_group_lbl", lottery.GetDescription(), lotteryBetList.Count.ToString());
-                        dshSetup.ReportItemDecoration.IsHyperLink = true;
-                        itemsList.Add(dshSetup);
-                    }
+                    String key = DateTimeConverterUtils.ConvertToFormat(bet.GetTargetDrawDate(), DateTimeConverterUtils.STANDARD_DATE_FORMAT_WITH_DAYOFWEEK);
+                    String value = bet.GetGNUFormat();
+                    DashboardReportItemSetup dshSetup = GenModel(key, value);
+                    dshSetup.DashboardReportItemAction = DashboardReportItemActions.OPEN_LOTTERY_GAME;
+                    dshSetup.Tag = lottery.GetGameMode();
+                    dshSetup.GroupTaskLabel = ResourcesUtils.GetMessage("drpt_lot_bet_group_lbl_task");
+                    dshSetup.GroupKeyName = ResourcesUtils.GetMessage("drpt_lot_bet_group_lbl", lottery.GetDescription(), lotteryBetList.Count.ToString());
+                    dshSetup.ReportItemDecoration.IsHyperLink = true;
+                    itemsList.Add(dshSetup);
                 }
             }
             return itemsList;

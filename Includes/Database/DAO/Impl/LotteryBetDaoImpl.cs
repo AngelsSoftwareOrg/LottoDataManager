@@ -194,7 +194,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                 command.CommandText = " UPDATE lottery_bet SET target_draw_date = CDATE(@new_target_draw_date) " +
                                       " WHERE ID = @id AND active = true";
                 command.Parameters.Add("@new_target_draw_date", OleDbType.DBDate).Value = newTargetDrawDate.ToString();
-                command.Parameters.Add("@id", OleDbType.BigInt).Value = (long)id;
+                command.Parameters.Add("@id", OleDbType.Integer).Value = (long)id;
                 command.Connection = conn;
                 conn.Open();
                 OleDbTransaction transaction = conn.BeginTransaction();
@@ -411,7 +411,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                 command.CommandType = CommandType.Text;
                 command.CommandText = " UPDATE lottery_bet SET active = 0 " +
                                       " WHERE ID = @id";
-                command.Parameters.Add("@id", OleDbType.BigInt).Value = (long)id;
+                command.Parameters.Add("@id", OleDbType.Integer).Value = id;
                 command.Connection = conn;
                 conn.Open();
                 OleDbTransaction transaction = conn.BeginTransaction();
