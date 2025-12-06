@@ -11,9 +11,7 @@ namespace LottoDataManager.Includes.Classes.Reports.Templates
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
     public partial class IndividualGameHTMLReportView : IndividualGameHTMLReportViewBase
     {
-        public virtual string TransformText() { return ""; }
 
-        public virtual void Initialize() { }
     }
 
     #region Base class
