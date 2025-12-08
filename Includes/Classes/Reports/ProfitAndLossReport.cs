@@ -42,7 +42,7 @@ namespace LottoDataManager.Includes.Classes.Reports
             this.claimDetailsList = new Dictionary<string, object>();
             this.earliestBetTimeYouMade = DateTime.Now;
             this.latestBetTimeYouMade = DateTime.Now;
-            this.whenWasLastTimeYouWon = DateTimeConverterUtils.GetYear2011();
+            this.whenWasLastTimeYouWon = DateTimeConverterUtils.GetYear2015();
             this.timesWonPerBetCombinationDict = new Dictionary<string, object>();
             this.allBetsInTabularMode = new List<double[]>();
             this.allBetsInTabularModeDaysOfWeek = new List<String[]>();

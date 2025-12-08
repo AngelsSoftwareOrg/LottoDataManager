@@ -202,12 +202,12 @@ namespace LottoDataManager.Includes.Classes.Generator
                 errMessage = ResourcesUtils.GetMessage("pick_class_validate_date_from_1");
                 return false;
             }
-            else if (dateFrom.Date.CompareTo(DateTimeConverterUtils.GetYear2011().Date) < 0)
+            else if (dateFrom.Date.CompareTo(DateTimeConverterUtils.GetYear2015().Date) < 0)
             {
                 errMessage = ResourcesUtils.GetMessage("pick_class_validate_date_from_2");
                 return false;
             }
-            else if (dateTo.Date.CompareTo(DateTimeConverterUtils.GetYear2011().Date) < 0)
+            else if (dateTo.Date.CompareTo(DateTimeConverterUtils.GetYear2015().Date) < 0)
             {
                 errMessage = ResourcesUtils.GetMessage("pick_class_validate_date_to_1");
                 return false;
@@ -281,12 +281,12 @@ namespace LottoDataManager.Includes.Classes.Generator
                     errMessage = ResourcesUtils.GetMessage("pick_class_validate_date_from_1");
                     return false;
                 }
-                else if (dtFromDate.Date.CompareTo(DateTimeConverterUtils.GetYear2011().Date) < 0)
+                else if (dtFromDate.Date.CompareTo(DateTimeConverterUtils.GetYear2015().Date) < 0)
                 {
                     errMessage = ResourcesUtils.GetMessage("pick_class_validate_date_from_2");
                     return false;
                 }
-                else if (dtToDate.Date.CompareTo(DateTimeConverterUtils.GetYear2011().Date) < 0)
+                else if (dtToDate.Date.CompareTo(DateTimeConverterUtils.GetYear2015().Date) < 0)
                 {
                     errMessage = ResourcesUtils.GetMessage("pick_class_validate_date_to_1");
                     return false;

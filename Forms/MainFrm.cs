@@ -58,7 +58,7 @@ namespace LottoDataManager
             this.label3.Text = ResourcesUtils.GetMessage("mainf_labels_2");
             this.label4.Text = ResourcesUtils.GetMessage("mainf_labels_3");
             this.label5.Text = ResourcesUtils.GetMessage("mainf_labels_4");
-            
+
             this.toolStripProcessingLogs.Text = ResourcesUtils.GetMessage("mainf_labels_46");
             this.groupBox1.Text = ResourcesUtils.GetMessage("mainf_labels_7");
             this.groupBox2.Text = ResourcesUtils.GetMessage("mainf_labels_8");
@@ -149,18 +149,21 @@ namespace LottoDataManager
                 Application.ApplicationExit += new EventHandler(this.OnApplicationExit);
                 this.lotteryDataWorker.LotteryDataWorkerProcessingStatus += LotteryDataWorker_LotteryDataWorkerProcessingStatus;
 
-                this.olvColBetResult.ImageGetter = delegate (object rowObject) {
+                this.olvColBetResult.ImageGetter = delegate (object rowObject)
+                {
                     if (rowObject == null) return 0;
                     LotteryBet p = (LotteryBet)rowObject;
                     if (p.GetMatchNumCount() <= 0) return 0;
                     return ImageUtils.GetStarWonImage(p.GetMatchNumCount());
                 };
-                this.olvColBetResult.AspectGetter = delegate (object rowObject) {
+                this.olvColBetResult.AspectGetter = delegate (object rowObject)
+                {
                     if (rowObject == null) return 0;
                     LotteryBet p = (LotteryBet)rowObject;
                     return p.GetMatchNumCount();
                 };
-                this.olvColBetResult.AspectToStringConverter = delegate (object rowObject) {
+                this.olvColBetResult.AspectToStringConverter = delegate (object rowObject)
+                {
                     return String.Empty;
                 };
                 this.olvColWinners.AspectGetter = delegate (object rowObject)
@@ -170,33 +173,39 @@ namespace LottoDataManager
                     if (p.GetWinnersCount() <= 0) return "0";
                     return p.GetWinnersCount();
                 };
-                this.olvColWinStamp.ImageGetter = delegate (object rowObject) {
+                this.olvColWinStamp.ImageGetter = delegate (object rowObject)
+                {
                     if (rowObject == null) return 0;
                     LotteryDrawResult p = (LotteryDrawResult)rowObject;
                     if (p.GetWinnersCount() <= 0) return 0;
                     return ImageUtils.GetStarJackpotImage(5);
                 };
-                this.olvColWinStamp.AspectGetter = delegate (object rowObject) {
+                this.olvColWinStamp.AspectGetter = delegate (object rowObject)
+                {
                     if (rowObject == null) return 0;
                     LotteryDrawResult p = (LotteryDrawResult)rowObject;
                     return p.GetWinnersCount();
                 };
-                this.olvColWinStamp.AspectToStringConverter = delegate (object rowObject) {
+                this.olvColWinStamp.AspectToStringConverter = delegate (object rowObject)
+                {
                     return String.Empty;
                 };
 
                 //DASHBOARD TAB GROUP
-                this.olvdbDesc.AspectGetter = delegate (object rowObject) {
+                this.olvdbDesc.AspectGetter = delegate (object rowObject)
+                {
                     if (rowObject == null) return 0;
                     DashboardReportItem g = (DashboardReportItem)rowObject;
                     return g.GetDescription();
                 };
-                this.olvdbValue.AspectGetter = delegate (object rowObject) {
+                this.olvdbValue.AspectGetter = delegate (object rowObject)
+                {
                     if (rowObject == null) return 0;
                     DashboardReportItem g = (DashboardReportItem)rowObject;
                     return g.GetValue();
                 };
-                this.olvdbDesc.GroupKeyGetter = delegate (object rowObject) {
+                this.olvdbDesc.GroupKeyGetter = delegate (object rowObject)
+                {
                     if (rowObject == null) return 0;
                     DashboardReportItem g = (DashboardReportItem)rowObject;
                     return g.GetGroupKeyName();
@@ -205,11 +214,11 @@ namespace LottoDataManager
                 {
                     if (group.Items.Count > 0)
                     {
-                        DashboardReportItem item = (DashboardReportItem) group.Items[0].RowObject;
+                        DashboardReportItem item = (DashboardReportItem)group.Items[0].RowObject;
                         group.Task = item.GetGroupTaskLabel();
                     }
                 };
-                
+
 
                 this.Enabled = false;
                 ClearAllForms();
@@ -328,7 +337,8 @@ namespace LottoDataManager
         {
             if (e == null) return;
             DashboardReportItem item = (DashboardReportItem)e.Model;
-            if (e.SubItem.ForeColor != item.GetReportItemDecoration().FontColor){
+            if (e.SubItem.ForeColor != item.GetReportItemDecoration().FontColor)
+            {
                 e.SubItem.ForeColor = item.GetReportItemDecoration().FontColor;
             }
 
@@ -358,10 +368,10 @@ namespace LottoDataManager
             if (rptItem.GetDashboardReportItemActions() == DashboardReportItemActions.OPEN_CLAIM_FORM)
             {
                 ShowModifyClaimStatus();
-            } 
+            }
             else if (rptItem.GetDashboardReportItemActions() == DashboardReportItemActions.OPEN_LOTTERY_GAME)
             {
-                GameMode gameMode = (GameMode) rptItem.GetTag();
+                GameMode gameMode = (GameMode)rptItem.GetTag();
                 OpenLotteryGame(gameMode);
             }
         }
@@ -394,7 +404,7 @@ namespace LottoDataManager
         }
         private void DashboardReport_DashboardReportingEvents(object sender, DashboardReportEvent e)
         {
-            AddProcessingStatusLogs(e.ModuleName,e.ReportLogs);
+            AddProcessingStatusLogs(e.ModuleName, e.ReportLogs);
         }
         #endregion
 
@@ -452,7 +462,7 @@ namespace LottoDataManager
         {
             if (e.Model == null) return;
             LotteryDrawResult result = (LotteryDrawResult)e.Model;
-            if(result.GetWinnersCount() > 0)
+            if (result.GetWinnersCount() > 0)
             {
                 e.Item.BackColor = Color.GreenYellow;
                 e.Item.ForeColor = Color.Black;
@@ -477,13 +487,21 @@ namespace LottoDataManager
         }
         private void UpdateProcessingStatusLogsLabel()
         {
-            if (processingLogStatusCtr > 0)
+            try
             {
-                this.toolStripProcessingLogs.Text = String.Format("({0})* {1}",
-                processingLogStatusCtr, ResourcesUtils.GetMessage("mainf_labels_46"));
-                return;
+                if (processingLogStatusCtr > 0)
+                {
+                    this.toolStripProcessingLogs.Text = String.Format("({0})* {1}",
+                    processingLogStatusCtr, ResourcesUtils.GetMessage("mainf_labels_46"));
+                    return;
+                }
+                this.toolStripProcessingLogs.Text = ResourcesUtils.GetMessage("mainf_labels_46");
             }
-            this.toolStripProcessingLogs.Text = ResourcesUtils.GetMessage("mainf_labels_46");
+            catch (Exception e)
+            {
+                //ignore cross thread if duplicate application instance has been opened
+            }
+
         }
         #endregion
 
@@ -628,6 +646,7 @@ namespace LottoDataManager
             try
             {
                 toolStripBtnDownloadResults.Enabled = false;
+                toolStripBtnDownloadAllResults.Enabled = false;
                 AddProcessingStatusLogs(LOG_STATUS_MODULE_NAME_DRAWN_RESULT, ResourcesUtils.GetMessage("mainf_labels_44"));
                 Application.DoEvents();
                 List<LotteryDetails> lotteryArr = new List<LotteryDetails>();
@@ -637,9 +656,11 @@ namespace LottoDataManager
             catch (Exception ex)
             {
                 toolStripBtnDownloadResults.Enabled = true;
+                toolStripBtnDownloadAllResults.Enabled = true;
                 MessageBox.Show(ex.Message);
                 Application.DoEvents();
             }
+
         }
 
         private void toolStripBtnDownloadAllResults_Click(object sender, EventArgs e)
@@ -647,6 +668,7 @@ namespace LottoDataManager
             try
             {
                 toolStripBtnDownloadResults.Enabled = false;
+                toolStripBtnDownloadAllResults.Enabled = false;
                 AddProcessingStatusLogs(LOG_STATUS_MODULE_NAME_DRAWN_RESULT, ResourcesUtils.GetMessage("mainf_labels_44"));
                 Application.DoEvents();
                 lottoWebScraper.StartScrapingAllGames();
@@ -654,6 +676,7 @@ namespace LottoDataManager
             catch (Exception ex)
             {
                 toolStripBtnDownloadResults.Enabled = true;
+                toolStripBtnDownloadAllResults.Enabled = true;
                 MessageBox.Show(ex.Message);
                 Application.DoEvents();
             }
@@ -666,6 +689,7 @@ namespace LottoDataManager
             if (e.LottoWebScrapingStage == LottoWebScrapingStages.FINISH)
             {
                 toolStripBtnDownloadResults.Enabled = true;
+                toolStripBtnDownloadAllResults.Enabled = true;
                 if (e.NewRecordsCount > 0)
                 {
                     CheckWinningBets();
@@ -729,7 +753,7 @@ namespace LottoDataManager
         {
             ModifyBetFrm bet = new ModifyBetFrm(lotteryDataServices);
             bet.ShowDialog();
-            if(bet.HasDataUpdates) RefreshBets();
+            if (bet.HasDataUpdates) RefreshBets();
             bet.Dispose();
         }
         private void editClaimStatusToolStripMenuItem_Click(object sender, EventArgs e)
@@ -791,7 +815,7 @@ namespace LottoDataManager
         {
             LotterySettingsFrm settings = new LotterySettingsFrm(lotteryDataServices);
             settings.ShowDialog(this);
-            if(settings.IsSourceDatabaseChange) DoApplicationUpdate();
+            if (settings.IsSourceDatabaseChange) DoApplicationUpdate();
             SetBetsAndResultDefaultList();
         }
         private void checkWinningBetsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -858,6 +882,33 @@ namespace LottoDataManager
             HitComparisonFrm hitFrm = new HitComparisonFrm(this.lotteryDataServices);
             hitFrm.ShowDialog();
         }
+        private void toolStripBtnCopyLatestBets_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DateTime latestBetDate = lotteryDataServices.GetLatestBetDate(this.lotteryDetails.GameMode);
+                List<LotteryBet> latestBets = lotteryDataServices.GetLottoBetsByDrawDate(latestBetDate);
+
+                StringBuilder sb = new StringBuilder();
+                foreach (LotteryBet bet in latestBets)
+                {
+                    if (sb.Length > 0) sb.Append(",");
+                    sb.Append(bet.GetGNUFormat());
+                }
+                if (sb.Length > 0)
+                {
+                    Clipboard.SetDataObject(
+                        sb.ToString(), // Text to store in clipboard
+                        false,         // Do not keep after our application exits
+                        10,            // Retry 10 times
+                        200);          // 100 ms delay between retries
+                }
+            }
+            catch (Exception ex)
+            {
+                AddProcessingStatusLogs(LOG_STATUS_MODULE_NAME_CLIPBOARD_COPY, ResourcesUtils.GetMessage("mainf_labels_57", ex.Message));
+            }
+        }
         #endregion
 
         #region "Main Form"
@@ -888,7 +939,7 @@ namespace LottoDataManager
             Color fontColor = e.Index == 0 ? Color.Green : Color.Tomato;
             e.Graphics.FillRectangle(new SolidBrush(Color.Transparent), e.Bounds);
 
-            Font font = new System.Drawing.Font("Microsoft Sans Serif", 9F, 
+            Font font = new System.Drawing.Font("Microsoft Sans Serif", 9F,
                 FontStyle.Bold, GraphicsUnit.Point, ((byte)(0)));
 
             Rectangle paddedBounds = e.Bounds;
@@ -909,8 +960,8 @@ namespace LottoDataManager
             this.applicationUpdateProcessor.StartUpdate(lotteryDataServices);
         }
 
-        #endregion
 
+        #endregion
 
     }
 }

@@ -133,8 +133,9 @@ namespace LottoDataManager
             this.toolStripBtnHitCompare = new System.Windows.Forms.ToolStripButton();
             this.toolStripBtnWinBets = new System.Windows.Forms.ToolStripButton();
             this.toolStripBtnDownloadResults = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripBtnDownloadAllResults = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripBtnCopyLatestBets = new System.Windows.Forms.ToolStripButton();
             this.mainMenuStrip.SuspendLayout();
             this.mainStatusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mainSplitContainer)).BeginInit();
@@ -1065,7 +1066,8 @@ namespace LottoDataManager
             this.toolStripBtnWinBets,
             this.toolStripBtnDownloadResults,
             this.toolStripBtnDownloadAllResults,
-            this.toolStripSeparator6});
+            this.toolStripSeparator6,
+            this.toolStripBtnCopyLatestBets});
             this.toolStripBetsAndResults.Location = new System.Drawing.Point(0, 0);
             this.toolStripBetsAndResults.Name = "toolStripBetsAndResults";
             this.toolStripBetsAndResults.Size = new System.Drawing.Size(729, 37);
@@ -1183,11 +1185,6 @@ namespace LottoDataManager
             this.toolStripBtnDownloadResults.ToolTipText = "Download Draw Results";
             this.toolStripBtnDownloadResults.Click += new System.EventHandler(this.toolStripBtnDownloadResults_Click);
             // 
-            // toolStripSeparator6
-            // 
-            this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 37);
-            // 
             // toolStripBtnDownloadAllResults
             // 
             this.toolStripBtnDownloadAllResults.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -1197,6 +1194,21 @@ namespace LottoDataManager
             this.toolStripBtnDownloadAllResults.Size = new System.Drawing.Size(34, 34);
             this.toolStripBtnDownloadAllResults.Text = "Download All Draw Results (All Games)";
             this.toolStripBtnDownloadAllResults.Click += new System.EventHandler(this.toolStripBtnDownloadAllResults_Click);
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 37);
+            // 
+            // toolStripBtnCopyLatestBets
+            // 
+            this.toolStripBtnCopyLatestBets.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripBtnCopyLatestBets.Image = ((System.Drawing.Image)(resources.GetObject("toolStripBtnCopyLatestBets.Image")));
+            this.toolStripBtnCopyLatestBets.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripBtnCopyLatestBets.Name = "toolStripBtnCopyLatestBets";
+            this.toolStripBtnCopyLatestBets.Size = new System.Drawing.Size(34, 34);
+            this.toolStripBtnCopyLatestBets.Text = "Copy latest bets to Clipboard";
+            this.toolStripBtnCopyLatestBets.Click += new System.EventHandler(this.toolStripBtnCopyLatestBets_Click);
             // 
             // MainForm
             // 
@@ -1358,6 +1370,7 @@ namespace LottoDataManager
         private BrightIdeasSoftware.OLVColumn olvdbValue;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.ToolStripButton toolStripBtnDownloadAllResults;
+        private System.Windows.Forms.ToolStripButton toolStripBtnCopyLatestBets;
     }
 }
 

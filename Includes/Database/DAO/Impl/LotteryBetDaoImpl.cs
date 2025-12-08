@@ -695,7 +695,7 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
                     }
                 }
             }
-            return DateTimeConverterUtils.GetYear2011();
+            return DateTimeConverterUtils.GetYear2015();
         }
         public List<LotteryBet> GetLotteryBetsCurrentSeason(GameMode gameMode)
         {
@@ -939,5 +939,37 @@ namespace LottoDataManager.Includes.Database.DAO.Impl
             }
             return lotteryBet;
         }
+
+        public DateTime GetLatestBetDate(GameMode gameMode)
+        {
+            using (OleDbConnection conn = DatabaseConnectionFactory.GetDataSource())
+            using (OleDbCommand command = new OleDbCommand())
+            {
+                command.CommandType = CommandType.Text;
+                command.CommandText = @"
+                        SELECT TOP 1 target_draw_date
+                          FROM lottery_bet 
+                         WHERE game_cd = @game_cd
+                           AND active = true
+                         ORDER BY target_draw_date DESC
+                    ";
+                command.Parameters.Add("@game_cd", OleDbType.Integer).Value = (int)gameMode;
+                command.Connection = conn;
+                conn.Open();
+
+                using (OleDbDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            return DateTime.Parse(reader["target_draw_date"].ToString());
+                        }
+                    }
+                }
+            }
+            return DateTimeConverterUtils.GetYear2015();
+        }
+
     }
 }
