@@ -41,7 +41,7 @@ namespace LottoDataManager.Includes.Classes.Reports
         private GameMode GameMode { get { return this.lotteryDetails.GameMode; } }
         public double GetTotalMoneyBetted()
         {
-            return lotteryBetDao.GetTotalAmountBetted(GameMode, DateTimeConverterUtils.GetYear2011(), DateTime.Now);
+            return lotteryBetDao.GetTotalAmountBetted(GameMode, DateTimeConverterUtils.GetYear2015(), DateTime.Now);
         }
         public double GetTotalMoneyBettedLastYear()
         {

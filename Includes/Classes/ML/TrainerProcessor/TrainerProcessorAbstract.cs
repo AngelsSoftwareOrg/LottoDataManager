@@ -54,7 +54,7 @@ namespace LottoDataManager.Includes.Classes.ML.TrainerProcessor
                 {
                     log(ResourcesUtils.GetMessage("mac_lrn_log_3") + lottery.GetDescription());
 
-                    DateTime startingDateTime = DateTimeConverterUtils.GetYear2011();
+                    DateTime startingDateTime = DateTimeConverterUtils.GetYear2015();
                     while (true)
                     {
                         intakeModel.GameMode = lottery.GetGameMode();

@@ -146,7 +146,7 @@ namespace LottoDataManager.Forms
                     lotterySchedule.DrawDateEvery()));
                 return false;
             }
-            else if (newDateTime.CompareTo(DateTimeConverterUtils.GetYear2011())<0) //if earlier
+            else if (newDateTime.CompareTo(DateTimeConverterUtils.GetYear2015())<0) //if earlier
             {
                 log(ResourcesUtils.GetMessage("mdd_form_validation_msg5"));
                 return false;

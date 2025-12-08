@@ -55,7 +55,7 @@ namespace LottoDataManager.Includes.Classes.Generator
         private DateTimePicker GetDateTime(SequenceGeneratorParams seqParam, int addDays)
         {
             DateTimePicker dtPicker = new DateTimePicker();
-            dtPicker.MinDate = DateTimeConverterUtils.GetYear2011();
+            dtPicker.MinDate = DateTimeConverterUtils.GetYear2015();
             dtPicker.Tag = seqParam;
             dtPicker.ValueChanged += DtPicker_ValueChanged;
             dtPicker.Value = DateTime.Now.AddDays(addDays);

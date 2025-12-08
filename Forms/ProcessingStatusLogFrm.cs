@@ -8,16 +8,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using LottoDataManager.Includes.Utilities;
+using System.Collections.Concurrent;
 
 namespace LottoDataManager.Forms
 {
     public partial class ProcessingStatusLogFrm : Form
     {
         private readonly int PROCESS_LOGS_MAXIMUM_LINE_CONTENT = ResourcesUtils.ProcessLogsMaximumLineContent;
-        private List<String[]> statusLogsDelayed;
+        private ConcurrentQueue<string[]> statusLogsDelayed = new ConcurrentQueue<string[]>();
         public ProcessingStatusLogFrm()
         {
-            this.statusLogsDelayed = new List<string[]>();
             InitializeComponent();
             ClearLogs();
             FormSetup();
@@ -45,21 +45,22 @@ namespace LottoDataManager.Forms
 
         private void ProcessingStatusLogFrm_HandleCreated(object sender, EventArgs e)
         {
-            int ctrRefresher = 0;
-            foreach(String[] logsEntry in statusLogsDelayed)
+                int ctrRefresher = 0;
+            while (statusLogsDelayed.TryDequeue(out var logsEntry))
             {
                 AddStatusLogsDisplayOnTextBox(logsEntry[0], logsEntry[1], logsEntry[2]);
                 if (ctrRefresher % 30 == 0) Application.DoEvents();
+                ctrRefresher++;
             }
-            statusLogsDelayed.Clear();
         }
 
-        public void AddStatusLogs(String moduleName, String logs)
+        public void AddStatusLogs(string moduleName, string logs)
         {
-            this.statusLogsDelayed.Add(new String[] { 
-                                    DateTimeConverterUtils.GetDateTimeNowStandardFormat(), 
-                                    moduleName, 
-                                    logs});
+            statusLogsDelayed.Enqueue(new[] {
+                DateTimeConverterUtils.GetDateTimeNowStandardFormat(),
+                moduleName,
+                logs
+            });
         }
 
         public void AddStatusLogsDisplayOnTextBox(String dateTimeStr, String moduleName, String logs)

@@ -251,7 +251,7 @@ namespace LottoDataManager.Includes.Classes.Reports
             double[] resultLastYear = this.reportDataServices.GetMonthlySpending(lastyear);
             double[] resultThisYear = this.reportDataServices.GetMonthlySpending(thisyear);
 
-            DateTime sampleDate = DateTimeConverterUtils.GetYear2011();
+            DateTime sampleDate = DateTimeConverterUtils.GetYear2015();
             int dataOrder = 97;
             //monthly
             for (int ctr = 0; ctr < resultLastYear.Length - 1; ctr++)

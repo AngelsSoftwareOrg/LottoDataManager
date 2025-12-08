@@ -182,7 +182,7 @@ namespace LottoDataManager.Includes.Database.DAO
                     }
                 }
             }
-            return DateTimeConverterUtils.GetYear2011();
+            return DateTimeConverterUtils.GetYear2015();
         }
         public void InsertDrawDate(LotteryDrawResult lotteryDrawResult)
         {
@@ -241,7 +241,7 @@ namespace LottoDataManager.Includes.Database.DAO
                     }
                 }
             }
-            return DateTimeConverterUtils.GetYear2011();
+            return DateTimeConverterUtils.GetYear2015();
         }
         public List<int> GetTopDrawnDigitResults(GameMode gameMode)
         {

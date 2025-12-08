@@ -76,6 +76,12 @@ namespace LottoDataManager.Includes.Classes
 
             return lotteryBetDao.GetDashboardLatestBets(GameMode, sinceWhen, dateTo);
         }
+
+        public DateTime GetLatestBetDate(GameMode gameMode)
+        {
+            return lotteryBetDao.GetLatestBetDate(gameMode);
+        }
+
         public List<LotteryBet> GetLottoBetsByDrawDate(DateTime betDrawDate)
         {
             return lotteryBetDao.GetLotteryBets(GameMode, betDrawDate);

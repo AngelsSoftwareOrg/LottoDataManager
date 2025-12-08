@@ -12,6 +12,8 @@ namespace LottoDataManager.Includes.Model.Structs
         Mode_645=2,
         Mode_649=3,
         Mode_655=4,
-        Mode_658=5
+        Mode_658=5,
+        ALL=0,
+        UNKNOWN=-1
     }
 }
