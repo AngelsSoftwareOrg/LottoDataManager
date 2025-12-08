@@ -11,5 +11,6 @@ namespace LottoDataManager.Includes.Classes.Scraping
     {
         event EventHandler<LottoWebScraperEvent> WebScrapingStatus;
         void StartScraping(List<LotteryDetails> lotteriesDetailsArr);
+        void StartScrapingAllGames();
     }
 }

@@ -641,6 +641,24 @@ namespace LottoDataManager
                 Application.DoEvents();
             }
         }
+
+        private void toolStripBtnDownloadAllResults_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                toolStripBtnDownloadResults.Enabled = false;
+                AddProcessingStatusLogs(LOG_STATUS_MODULE_NAME_DRAWN_RESULT, ResourcesUtils.GetMessage("mainf_labels_44"));
+                Application.DoEvents();
+                lottoWebScraper.StartScrapingAllGames();
+            }
+            catch (Exception ex)
+            {
+                toolStripBtnDownloadResults.Enabled = true;
+                MessageBox.Show(ex.Message);
+                Application.DoEvents();
+            }
+        }
+
         private void LottoWebScraper_WebScrapingStatus(object sender, LottoWebScraperEvent e)
         {
             AddProcessingStatusLogs(LOG_STATUS_MODULE_NAME_WEBSCRAP, e.CustomStatusMessage);
@@ -890,7 +908,9 @@ namespace LottoDataManager
         {
             this.applicationUpdateProcessor.StartUpdate(lotteryDataServices);
         }
+
         #endregion
+
 
     }
 }

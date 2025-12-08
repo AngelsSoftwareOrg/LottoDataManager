@@ -334,6 +334,7 @@
     <Compile Include="Includes\Database\DAO\Impl\LotteryWinningCombinationDaoImpl.cs" />
     <Compile Include="Includes\Database\DAO\Interface\TestingDatabaseSourceFileDao.cs" />
     <Compile Include="Includes\Database\DAO\Interface\UserSettingDao.cs" />
+    <Compile Include="Includes\Helpers\EnumConverter.cs" />
     <Compile Include="Includes\Model\Details\AppVersioning.cs" />
     <Compile Include="Includes\Model\Details\LotterySequenceGenerator.cs" />
     <Compile Include="Includes\Model\Details\Options\UserSettingsConfig.cs" />
@@ -535,6 +536,10 @@
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>IndividualGameHtmlReport.cs</LastGenOutput>
     </Content>
+    <Content Include="Resources\Icons\Toolbars\Available_Updates_32px.png" />
+    <Content Include="Resources\Icons\Toolbars\Download_Progress_32.png" />
+    <Content Include="Resources\Icons\Toolbars\Download_Progress_all_32.png" />
+    <Content Include="Resources\Icons\Toolbars\Winner_32.png" />
     <None Include="Resources\Icons\uncheck_32px.png" />
     <None Include="Resources\Icons\check_32px.png" />
     <None Include="Resources\Icons\uncheckall_32px.png" />
